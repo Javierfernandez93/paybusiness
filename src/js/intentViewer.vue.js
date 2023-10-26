@@ -50,7 +50,7 @@ const IntentViewer = {
     },
     template : `
         <div class="row d-flex justify-content-center">
-           <div class="col-12 col-xl-8">
+           <div class="col-12">
                 <div class="card bg-transparent shadow-none mb-3">
                     <div class="row">
                         <div class="col-12 col-xl">

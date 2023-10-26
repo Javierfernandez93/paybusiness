@@ -7,7 +7,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if($data['sign_code'])
 {
-    if($remote_pel_sign_id = (new Evox\RemotePelSign)->getRemotePelSignIdByCode($data['sign_code']))
+    if($remote_pel_sign_id = (new Unlimited\RemotePelSign)->getRemotePelSignIdByCode($data['sign_code']))
     {
         $data["remote_pel_sign_id"] = $remote_pel_sign_id;
         $data["s"] = 1;

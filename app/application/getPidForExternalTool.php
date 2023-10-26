@@ -4,13 +4,13 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['link'])
     {    
-        $data['link_access'] = Evox\ExternalLoginRouter::LOGIN_FOR_TOOL."?".http_build_query(array_merge([
+        $data['link_access'] = Unlimited\ExternalLoginRouter::LOGIN_FOR_TOOL."?".http_build_query(array_merge([
             'link' => $data['link'],
         ],$UserLogin->getPid()));
         

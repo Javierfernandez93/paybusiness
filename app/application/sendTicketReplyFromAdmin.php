@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -16,7 +16,7 @@ if($UserSupport->logged === true)
             {
                 $data['user_support_id'] = $UserSupport->getId();
                 
-                if(Evox\ItemPerTicket::saveItem($data))
+                if(Unlimited\ItemPerTicket::saveItem($data))
                 {
                     $data['s'] = 1;
                     $data['r'] = 'DATA_OK';

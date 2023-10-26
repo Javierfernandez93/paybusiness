@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    $Course = new Evox\Course;
+    $Course = new Unlimited\Course;
     $Course->connection()->stmtQuery("SET NAMES utf8mb4");
 
     if($courses = $Course->getList())
@@ -27,12 +27,12 @@ if($UserLogin->logged === true)
 
 function filter(array $courses = null,int $user_login_id = null) : array
 {
-    $BuyPerUser = new Evox\BuyPerUser;
+    $BuyPerUser = new Unlimited\BuyPerUser;
 
     return array_filter($courses,function($course) use($BuyPerUser,$user_login_id) {
         $aviable = true;
         
-        if($course['target'] != Evox\Course::ALL)
+        if($course['target'] != Unlimited\Course::ALL)
         {    
             $aviable = $BuyPerUser->hasPackageBuy($user_login_id,$course['target']);
         }
@@ -43,8 +43,8 @@ function filter(array $courses = null,int $user_login_id = null) : array
 
 function format(array $courses = null,int $user_login_id = null) : array
 {	
-    $SessionTakeByUserPerCourse = new Evox\SessionTakeByUserPerCourse;
-    $UserEnrolledInCourse = new Evox\UserEnrolledInCourse;
+    $SessionTakeByUserPerCourse = new Unlimited\SessionTakeByUserPerCourse;
+    $UserEnrolledInCourse = new Unlimited\UserEnrolledInCourse;
     
 	return array_map(function ($course) use($SessionTakeByUserPerCourse,$UserEnrolledInCourse,$user_login_id) {
         $course['isEnrolled'] = $UserEnrolledInCourse->isEnrolled($course['course_id'],$user_login_id);

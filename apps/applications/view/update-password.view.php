@@ -3,7 +3,7 @@
 </h3>
 
 <h3>
-    Recientemente hemos pedido que actualices tu contraseña en Evox
+    Recientemente hemos pedido que actualices tu contraseña en Unlimited
 </h3>
 
 <h3>
@@ -11,4 +11,4 @@
 </h3>
     
 
-<h3>Evox</h3>
+<h3>Unlimited</h3>

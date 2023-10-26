@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    $LicencePerUser = new Evox\LicencePerUser;
+    $LicencePerUser = new Unlimited\LicencePerUser;
 
     if($LicencePerUser->isActiveSoonToExpire($UserLogin->company_id) || !$LicencePerUser->hasLicence($UserLogin->company_id))
     {

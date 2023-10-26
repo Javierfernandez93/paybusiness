@@ -31,7 +31,7 @@ const ReferralsViewer = {
         sendWhatsApp(name,whatsapp,phone_code) {
             whatsapp = phone_code + whatsapp
             
-            window.open(whatsapp.sendWhatsApp(`*Hola ${name}*, vi que te registraste en Evox y aún no has comprado tu cuenta ¿Tienes alguna duda?`))
+            window.open(whatsapp.sendWhatsApp(`*Hola ${name}*, vi que te registraste en Unlimited y aún no has comprado tu cuenta ¿Tienes alguna duda?`))
         },
         showInfo(names) {
             

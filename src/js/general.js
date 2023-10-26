@@ -826,7 +826,7 @@ String.prototype.isVideo = function()
 
 String.prototype.getFullLanding = function() 
 {
-    return `https://www.soyevox.com/${this}`
+    return `https://www.unlimited.com/${this}`
 }
 
 function replaceFullRoute(string) 

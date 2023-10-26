@@ -12,9 +12,9 @@ class PayPal {
     const CLIENT_ID = ""; 
     const CLIENT_SECRET = "";
 
-    const RETURN_URL = "https://www.soyevox.com/apps/paypal/";
-    const CANCEL_URL = "https://www.soyevox.com/apps/backoffice";
-    const URL = "https://www.soyevox.com/apps/admin/subcore/application/validate_buy.php";
+    const RETURN_URL = "https://www.unlimited.com/apps/paypal/";
+    const CANCEL_URL = "https://www.unlimited.com/apps/backoffice";
+    const URL = "https://www.unlimited.com/apps/admin/subcore/application/validate_buy.php";
     
     const MODE = 'live'; // 'live', 'sandbox'
     

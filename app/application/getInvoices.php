@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($invoices = (new Evox\BuyPerUser)->getAll($UserLogin->company_id))
+    if($invoices = (new Unlimited\BuyPerUser)->getAll($UserLogin->company_id))
     {
         $data['invoices'] = format($invoices);
         $data['s'] = 1;
@@ -25,7 +25,7 @@ if($UserLogin->logged === true)
 function format(array $invoices = null) : array 
 {    
     return array_map(function($invoice) {
-        $invoice = Evox\BuyPerUser::_unformatData($invoice);
+        $invoice = Unlimited\BuyPerUser::_unformatData($invoice);
 
         return $invoice;
     },$invoices);

@@ -1,29 +1,16 @@
 import { Translator } from '../../src/js/translator.module.js?v=2.3.3'   
-
-import { ProfitViewer } from '../../src/js/profitViewer.vue.js?v=2.3.3'
-import { NoticeViewer } from '../../src/js/noticeViewer.vue.js?v=2.3.3'
-import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.3.3'
-
-import { BannertopViewer } from '../../src/js/bannertopViewer.vue.js?v=2.3.3'
-import { WidgetlandingViewer } from '../../src/js/widgetlandingViewer.vue.js?v=2.3.3'
-import { WidgethewalletViewer } from '../../src/js/widgethewalletViewer.vue.js?v=2.3.3'
-import { WidgettelegramViewer } from '../../src/js/WidgettelegramViewer.vue.js?v=2.3.3'
-
-import { ConferenceViewer } from '../../src/js/conferenceViewer.vue.js?v=2.3.3'
-import { TradingaccountViewer } from '../../src/js/tradingaccountViewer.vue.js?v=2.3.3'
-import { NotificationViewer } from '../../src/js/notificationViewer.vue.js?v=2.3.3'
-
-/* features */
-import { WidgetbottelegramViewer } from '../../src/js/widgetbottelegramViewer.vue.js?v=2.3.3'
-import { WidgetinfoViewer } from '../../src/js/widgetinfoViewer.vue.js?v=2.3.3'
-import { WidgetnetworkViewer } from '../../src/js/widgetnetworkViewer.vue.js?v=2.3.3'
-import { WidgainsViewer } from '../../src/js/widgainsViewer.vue.js?v=2.3.3'
-import { WidgetforexViewer } from '../../src/js/widgetforexViewer.vue.js?v=2.3.3'
-import { ChatViewer } from '../../src/js/chatViewer.vue.js?v=2.3.3'
+import { LastsignedwidgetViewer } from '../../src/js/LastsignedwidgetViewer.vue.js?v=2.3.3'   
+import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.3.3'   
+import { RangewidgetViewer } from '../../src/js/rangewidgetViewer.vue.js?v=2.3.3'   
+import { PaybusinesswidgetViewer } from '../../src/js/paybusinesswidgetViewer.vue.js?v=2.3.3'   
+import { NextlevelwidgetViewer } from '../../src/js/nextlevelwidgetViewer.vue.js?v=2.3.3'   
+import { LandingViewer } from '../../src/js/landingViewer.vue.js?v=2.3.3'   
+import { MembershipwidgetViewer } from '../../src/js/membershipwidgetViewer.vue.js?v=2.3.3'   
+import { ProfitViewer } from '../../src/js/profitViewer.vue.js?v=2.3.3'   
 
 Vue.createApp({
     components : { 
-        ProfitViewer, NoticeViewer, WidgethewalletViewer, WidgetlandingViewer, ConferenceViewer, TradingaccountViewer, NotificationViewer, WidgettelegramViewer, WidgetbottelegramViewer, WidgetinfoViewer, WidgetnetworkViewer ,WidgainsViewer, WidgetforexViewer, ChatViewer, FlyerViewer
+        ProfitViewer, FlyerViewer, LastsignedwidgetViewer, RangewidgetViewer, PaybusinesswidgetViewer, NextlevelwidgetViewer, LandingViewer, MembershipwidgetViewer
     },
     data() {
         return {

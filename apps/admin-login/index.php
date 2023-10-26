@@ -2,7 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true) {
 	HCStudio\Util::redirectTo('../../apps/admin/');

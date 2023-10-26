@@ -4,20 +4,20 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     $data['day'] = date("Y-m-d");
 
-    $GainPerBroker = new Evox\GainPerBroker;
-    $ProfitPerUser = new Evox\ProfitPerUser;
-    $CapitalPerBroker = new Evox\CapitalPerBroker;
+    $GainPerBroker = new Unlimited\GainPerBroker;
+    $ProfitPerUser = new Unlimited\ProfitPerUser;
+    $CapitalPerBroker = new Unlimited\CapitalPerBroker;
     
     getBrokersChartData($data,$CapitalPerBroker);
     
-    $TransactionPerWallet = new Evox\TransactionPerWallet;
-    $WithdrawPerUser = new Evox\WithdrawPerUser;
+    $TransactionPerWallet = new Unlimited\TransactionPerWallet;
+    $WithdrawPerUser = new Unlimited\WithdrawPerUser;
 
     $pendingWithdraws = $WithdrawPerUser->getCountPending();
 
@@ -49,10 +49,10 @@ if($UserSupport->logged === true)
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
 }
 
-function getBrokersChartData(array &$data = null,Evox\CapitalPerBroker $CapitalPerBroker = null)
+function getBrokersChartData(array &$data = null,Unlimited\CapitalPerBroker $CapitalPerBroker = null)
 {
-    $Broker = new Evox\Broker;
-    $GainPerBroker = new Evox\GainPerBroker;
+    $Broker = new Unlimited\Broker;
+    $GainPerBroker = new Unlimited\GainPerBroker;
     
     if($data['brokers'] = $Broker->getActive())
     {

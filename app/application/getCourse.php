@@ -4,13 +4,13 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['course_id'])
     {
-        $Course = new Evox\Course;
+        $Course = new Unlimited\Course;
         $Course->connection()->stmtQuery("SET NAMES utf8mb4");
 
         $data['user_login_id'] = $UserLogin->company_id;

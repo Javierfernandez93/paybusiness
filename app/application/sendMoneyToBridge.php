@@ -4,31 +4,31 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($UserSupport->hasPermission('send_bridge_money'))
     {
-        $BuyPerBridge = new Evox\BuyPerBridge;
+        $BuyPerBridge = new Unlimited\BuyPerBridge;
         
         if($BuyPerBridge->isAviableToSendMoneyToBridge($data['buy_per_bridge_id']))
         {
-            $data['amountToSend'] = Evox\BuyPerBridge::getPartialFunds([
+            $data['amountToSend'] = Unlimited\BuyPerBridge::getPartialFunds([
                 'amount' => $data['amountReal'],
                 'catalog_bridge_buy_type_id' => $data['catalog_bridge_buy_type_id']
             ]);
 
             if(sendPayout([
-                'payout_id' => Evox\BuyPerBridge::getPayoutId([
+                'payout_id' => Unlimited\BuyPerBridge::getPayoutId([
                     'buy_per_bridge_id' => $data['buy_per_bridge_id'],
                     'catalog_bridge_buy_type_id' => $data['catalog_bridge_buy_type_id']
                 ]),
                 'amount' => $data['amountToSend'],
-                'address' => Evox\BuyPerBridge::BRIDGE_WALLET,
+                'address' => Unlimited\BuyPerBridge::BRIDGE_WALLET,
                 'user_login_id' => 1
             ])) {
-                if(Evox\BuyPerBridge::setAsProcessing($data['buy_per_bridge_id']))
+                if(Unlimited\BuyPerBridge::setAsProcessing($data['buy_per_bridge_id']))
                 {
                     $data["s"] = 1;
                     $data["r"] = "DATA_OK";
@@ -48,7 +48,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'data' => $data,
             'unix_date' => time(),
-        ],Evox\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';
@@ -68,9 +68,9 @@ function sendPayout(array $data = null)
 		'payout_id' => $data['payout_id'],
 		'amount' => $data['amount'],
 		'address' => $data['address'],
-		'whatsapp' => (new Evox\UserContact)->getWhatsApp($data['user_login_id']),
-		'name' => (new Evox\UserData)->getName($data['user_login_id']),
-		'email' => (new Evox\UserLogin)->getEmail($data['user_login_id'])
+		'whatsapp' => (new Unlimited\UserContact)->getWhatsApp($data['user_login_id']),
+		'name' => (new Unlimited\UserData)->getName($data['user_login_id']),
+		'email' => (new Unlimited\UserLogin)->getEmail($data['user_login_id'])
 	]);
 
 	if ($response['status'] ?? false == JFStudio\CapitalPayments::STATUS_200) {

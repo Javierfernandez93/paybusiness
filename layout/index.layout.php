@@ -4,20 +4,20 @@
     <meta charset="utf-8" />
     <title>{{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | evox trading platform" name="author" />
-    <meta content="evox trading platform" name="description" />
+    <meta content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Unlimited trading platform" name="author" />
+    <meta content="Unlimited trading platform" name="description" />
 
     <meta name="theme-color" content="#2D2250">
 
-    <meta name="keywords" content="trading, cripto, evox">
+    <meta name="keywords" content="trading, cripto, Unlimited">
     <meta name="robots" value="index, follow">
 
     <meta name="googlebot" content="index, follow">
     <meta name="googlebot-news" content="index, follow">
 
-    <meta property="og:site_name" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | evox trading platform">
-    <meta property="og:title" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | evox trading platform" />
-    <meta property="og:description" content="evox trading platform" />
+    <meta property="og:site_name" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Unlimited trading platform">
+    <meta property="og:title" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Unlimited trading platform" />
+    <meta property="og:description" content="Unlimited trading platform" />
     <meta property="og:image" itemprop="image" content="<?php echo HCStudio\Connection::getMainPath() ?>/src/img/logo.png">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="300">
@@ -48,7 +48,7 @@
 </head>
 
 <body>
-    <div class="bg-gradient-evox" style="height: 0.3rem;">
+    <div class="bg-gradient-Unlimited" style="height: 0.3rem;">
     </div>
     
     <div class="position-fixed z-index-2 bg-special w-100" id="navbar">
@@ -83,7 +83,7 @@
                         <div class="col-12 col-xl-6 text-white">
                             <div class="fs-3 opacity-50">AYUDA</div>
                             <div class="my-2">Contacta un asesor</div>
-                            <div class="lead text-md opacity-50">Copyright © 2023 Evox todos los derechos reservados</div>
+                            <div class="lead text-md opacity-50">Copyright © 2023 Unlimited todos los derechos reservados</div>
                         </div>
                         <div class="col-12 col-xl-6 text-end">
                             <div class="row justify-content-end">
@@ -95,17 +95,17 @@
                                             </a>
                                         </div>
                                         <div class="col">
-                                            <a href="https://www.facebook.com/evoxcommunity" target="_blank" title="telegram">
+                                            <a href="https://www.facebook.com/Unlimitedcommunity" target="_blank" title="telegram">
                                                 <i class="bi text-white opacity-50 fs-3 bi-facebook"></i>
                                             </a>
                                         </div>
                                         <div class="col">
-                                            <a href="https://www.tiktok.com/@evoxcommunity" target="_blank" title="telegram">
+                                            <a href="https://www.tiktok.com/@Unlimitedcommunity" target="_blank" title="telegram">
                                                 <i class="bi text-white opacity-50 fs-3 bi-tiktok"></i>
                                             </a>
                                         </div>
                                         <div class="col">
-                                            <a href="https://www.instagram.com/evoxcommunity/ target="_blank" title="telegram">
+                                            <a href="https://www.instagram.com/Unlimitedcommunity/ target="_blank" title="telegram">
                                                 <i class="bi text-white opacity-50 fs-3 bi-instagram"></i>
                                             </a>
                                         </div>
@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <div>
-                                <img src="../../src/img/evox-logo-footer.png" alt="evox logo footer" title="evox logo footer"/>
+                                <img src="../../src/img/Unlimited-logo-footer.png" alt="Unlimited logo footer" title="Unlimited logo footer"/>
                             </div>
                             
                         </div>

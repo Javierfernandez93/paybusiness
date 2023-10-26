@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    if($signals = (new Evox\TradingSignal)->getAll())
+    if($signals = (new Unlimited\TradingSignal)->getAll())
     {
         $data['signals'] = $signals;
         $data['s'] = 1;

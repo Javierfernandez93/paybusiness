@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-	$CatalogPaymentMethod = new Evox\CatalogPaymentMethod;
+	$CatalogPaymentMethod = new Unlimited\CatalogPaymentMethod;
 	
 	if($CatalogPaymentMethod->loadWhere("catalog_payment_method_id = ? AND status != ?",[$data['catalog_payment_method_id'],-1]))
 	{

@@ -121,7 +121,7 @@ const AddintentViewer = {
     },
     template : `
         <div class="row d-flex justify-content-center">
-           <div class="col-12 col-xl-8">
+           <div class="col-12">
                 <div class="card mb-3">
                     <div class="input-group input-group-lg input-group-merge">
                         <input 

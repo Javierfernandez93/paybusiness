@@ -4,13 +4,13 @@ require_once TO_ROOT. '/system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['campaign_email_id'])
     {
-        $CampaignEmail = new Evox\CampaignEmail;
+        $CampaignEmail = new Unlimited\CampaignEmail;
         $CampaignEmail->connection()->stmtQuery("SET NAMES utf8mb4");
         
         if($campaign = $CampaignEmail->get($data['campaign_email_id']))

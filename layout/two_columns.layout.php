@@ -4,8 +4,8 @@
         <meta charset="utf-8" />
         <title>{{title}}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta content="Evox" name="description" />
-        <meta content="Evox" name="author" />
+        <meta content="Unlimited" name="description" />
+        <meta content="Unlimited" name="author" />
         <link rel="icon" type="image/x-icon" href="../../src/img/favicon.png">
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -17,12 +17,12 @@
         <link href="../../src/css/nucleo-svg.css" rel="stylesheet" />
         <link href="../../src/css/animate.css" rel="stylesheet" />
         
-        <link href="../../src/css/general.css?t=1" rel="stylesheet" type="text/css">
         <link id="pagestyle" href="../../src/css/soft-ui-dashboard.css?v=1.3.1" rel="stylesheet" />
+        <link href="../../src/css/general.css?t=1" rel="stylesheet" type="text/css">
         {{css_scripts}}
     </head>
     <body class="bg-light-dark">
-        <div class="bg-gradient-evox header-evox-signature" style="height: 0.3rem;">
+        <div class="bg-gradient-Unlimited header-Unlimited-signature" style="height: 0.3rem;">
         </div>
         
         {{content}}
@@ -39,7 +39,7 @@
         {{js_scripts}}
 
         <footer class="fixed-bottom d-none w-100 text-center py-3 fw-semibold">
-            © <script> document.write(new Date().getFullYear()) </script>, made with <i class="fa fa-heart"></i> by <a href="https://www.soyevox.com/" class="font-weight-bold" target="_blank">Evox</a> for a better web.
+            © <script> document.write(new Date().getFullYear()) </script>, made with <i class="bi bi-heart"></i> by <a href="https://www.unlimited.com/" class="font-weight-bold" target="_blank"><?php echo Unlimited\SystemVar::_getValue('company_name'); ?></a> for a better web.
         </footer>
     </body>
 </html>

@@ -121,7 +121,7 @@ const AcademygainsViewer = {
                         <div class="row w-100 text-center">
                             <div class="col-12">
                                 <div class="text-start">
-                                    <img src="../../src/img/logo-evox-marketing.png" class="img-fluid mb-3" alt="academy" title="academy"/>
+                                    <img src="../../src/img/logo-Unlimited-marketing.png" class="img-fluid mb-3" alt="academy" title="academy"/>
                                     <div class="h4 fw-semibold text-white">
                                         Genera comisiones hoy mismo
                                     </div>

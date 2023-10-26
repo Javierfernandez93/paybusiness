@@ -17,7 +17,7 @@ $Layout->setScript([
 ]);
 
 $Layout->setVar([
-	'UserLogin' => new Evox\UserLogin,
+	'UserLogin' => new Unlimited\UserLogin,
 	'Translator' => $Translator
 ]);
 $Layout();

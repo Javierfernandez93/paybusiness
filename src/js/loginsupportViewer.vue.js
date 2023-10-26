@@ -51,8 +51,8 @@ const LoginsupportViewer = {
         <div class="card shadow-lg border-radius-2xl animate__animated animate__bounceInDown">
             <div class="card-header">
                 <div class="row justify-content-center">
-                    <div class="col-4 col-xl-6">
-                        <img src="../../src/img/logo.svg" alt="logo" class="img-fluid"/>
+                    <div class="col-2">
+                        <img src="../../src/img/logo.svg" alt="logo" class="w-100"/>
                     </div>
                 </div>
             </div>
@@ -92,7 +92,7 @@ const LoginsupportViewer = {
                 <button 
                 :disabled="!userComplete" 
                 @click="doLogin"
-                class="btn btn-primary w-100 btn-block btn-lg badge-pill mb-0" type="button">Ingresar soyevox.com</button>
+                class="btn btn-primary shadow-none w-100 btn-block btn-lg badge-pill mb-0" type="button">Ingresar a Unlimited</button>
             </div>
         </div>        
     `

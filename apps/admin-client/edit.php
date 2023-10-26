@@ -5,7 +5,7 @@ require_once TO_ROOT . "/system/core.php";
 $Layout = JFStudio\Layout::getInstance();
 $Layout->init(" » Editar cliente","edit","admin","",TO_ROOT."/");
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === false) {
 	HCStudio\Util::redirectTo('../../apps/admin-login/');

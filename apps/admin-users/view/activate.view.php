@@ -53,7 +53,7 @@
         </div>
     </div>
     <div class="row">
-       <div class="col-12 col-xl-8">
+       <div class="col-12">
             <div class="card">
                 <div class="card-header pb-0 px-3">
                     <div class="row">

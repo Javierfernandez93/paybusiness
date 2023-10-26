@@ -16,11 +16,11 @@ if($data["password"] ?? false)
     
     if($Token->checkToken($token))
     {    
-        $UserLogin = new Evox\UserLogin(false,false);
+        $UserLogin = new Unlimited\UserLogin(false,false);
 
         if($UserLogin->isUniqueMail($Token->params['email']) === false)
         {
-            $UserLogin = new Evox\UserLogin;
+            $UserLogin = new Unlimited\UserLogin;
 
             if($UserLogin->isUniqueMail($Token->params['email']) === false)
             {

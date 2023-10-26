@@ -22,7 +22,6 @@ class Router {
     const StoreNetwork = 46;
     const StoreMarketing = 47;
     const Invoices = 48;
-    const Academy = 49;
     const WithdrawMethods = 51;
     const GainsReport = 52;
     const WalletProcess = 53;
@@ -65,7 +64,7 @@ class Router {
     const MarketingGains = 110;
     const BridgeFunds = 111;
     const BridgeFundsGains = 112;
-    const EvoxSynthetics = 113;
+    const UnlimitedSynthetics = 113;
     const CopySynthetics = 114;
     const BridgeFundsAccounts = 115;
     const BridgeMarkets = 116;
@@ -78,9 +77,9 @@ class Router {
     const MarketingCreate = 126;
     const SignExma = 130;
     const Conference = 132;
-    const EvoxMentory = 133;
-    const EvoxMarketing = 134;
-    const EvoxAcademy = 135;
+    const UnlimitedMentory = 133;
+    const UnlimitedMarketing = 134;
+    const Academy = 135;
     const Exma = 136;
     const Ati = 137;
     const Dummie = 138;
@@ -130,6 +129,7 @@ class Router {
     const DummieTrading = 131;
     const AdminAti = 141;
     const AdminAcademy = 142;
+    const AdminConfig = 143;
 
     static function getName(int $route = null)
     {
@@ -145,7 +145,7 @@ class Router {
             self::Plans => 'Planes',
             self::Notifications => 'Notifications',
             self::TradingView => 'Resultados del broker',
-            self::Wallet => 'Billetera Evox',
+            self::Wallet => 'Billetera Unlimited',
             self::Calculator => 'Calculadora',
             self::AddFunds => 'Añadir fondos',
             self::AdminDash => 'Home',
@@ -226,11 +226,11 @@ class Router {
             self::SplitManager => 'Split Manager',
             self::Hosts => 'Hosts',
             self::Multilevel => 'Multilevel',
-            self::Products => 'Productos Evox',
+            self::Products => 'Productos Unlimited',
             self::BridgeFunds => 'Ver tipos de cuentas',
             self::BridgeFundsAccounts => 'Mis cuentas',
             self::BridgeFundsGains => 'Ganancias',
-            self::EvoxSynthetics => 'Academia',
+            self::UnlimitedSynthetics => 'Academia',
             self::CopySynthetics => 'Copy sintéticos',
             self::BridgeMarkets => 'Bridge Markets',
             self::AutoTrading => 'Trading automático',
@@ -249,9 +249,9 @@ class Router {
             self::AdminBridgeUserAccount => 'Cuentas bridge',
             self::DummieTrading => 'DummieTrading',
             self::Conference => 'Próximas clases',
-            self::EvoxMentory => 'EvoxMentory',
-            self::EvoxMarketing => 'EvoxMarketing',
-            self::EvoxAcademy => 'EvoxAcademy',
+            self::UnlimitedMentory => 'UnlimitedMentory',
+            self::UnlimitedMarketing => 'UnlimitedMarketing',
+            self::Academy => 'Academy',
             self::Exma => 'Exma',
             self::Ati => 'Ati',
             self::Dummie => 'Dummie',
@@ -259,6 +259,7 @@ class Router {
             self::PammyTrading => 'PammyTrading',
             self::AdminAcademy => 'Academia',
             self::AdminAti => 'Ati',
+            self::AdminConfig => 'Configuración',
             default => 'Sin nombre'
         };
     }

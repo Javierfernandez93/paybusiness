@@ -15,7 +15,7 @@ const CopysyntheticsViewer = {
         <div class="row justify-content-center">
             <div class="col-12 col-xl-5 text-center">
                 <div class="mb-5">
-                    <img src="../../src/img/evox-synthetics-logo.png" alt="evox-synthetics" title="evox-synthetics" class="img-fluid"/>
+                    <img src="../../src/img/Unlimited-synthetics-logo.png" alt="Unlimited-synthetics" title="Unlimited-synthetics" class="img-fluid"/>
                 </div>
                 
                 <h3>Solicitud Operación Trading Sintéticos</h3>
@@ -28,14 +28,14 @@ const CopysyntheticsViewer = {
                     <p class="lead fw-semibold text-dark">Crea tu cuenta en nuestro broker recomendado <b>DERIV</b> y realiza tu primer depósito</p>
 
                     <div class="d-grid">
-                        <a href="https://t.me/evoXvirtualbot" class="btn btn-primary btn-lg shadow-none mb-0"><i class="bi me-2 bi-arrow-right-circle-fill"></i> Ir a www.deriv.com</a>
+                        <a href="https://t.me/Unlimitedvirtualbot" class="btn btn-primary btn-lg shadow-none mb-0"><i class="bi me-2 bi-arrow-right-circle-fill"></i> Ir a www.deriv.com</a>
                     </div>
                 </div>
                 <div>
                     <p class="lead fw-semibold text-dark">En caso de requerir ayuda puedes usar nuestro chat bot</p>
 
                     <div class="justify-content-center">
-                        <a href="https://backoffice.evox.com.co/dashboard/evoxSynthetics/copySynthetics#:~:text=En%20caso%20de%20requerir%20ayuda%20puedes%20usar%20nuestro%20chat%20bot" class="btn btn-info btn-lg shadow-none px-4 mb-3"><i class="bi fs-4 bi-telegram"></i></a>
+                        <a href="https://backoffice.Unlimited.com.co/dashboard/UnlimitedSynthetics/copySynthetics#:~:text=En%20caso%20de%20requerir%20ayuda%20puedes%20usar%20nuestro%20chat%20bot" class="btn btn-info btn-lg shadow-none px-4 mb-3"><i class="bi fs-4 bi-telegram"></i></a>
                     </div>
 
                     <h4>

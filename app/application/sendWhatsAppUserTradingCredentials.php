@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['user_trading_account_id'])
     {
-        if(Evox\UserTradingAccount::sendCredentials($data))
+        if(Unlimited\UserTradingAccount::sendCredentials($data))
         {
             $data["s"] = 1;
             $data["r"] = "DATA_OK";

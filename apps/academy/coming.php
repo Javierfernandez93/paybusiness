@@ -2,7 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === false) {
 	HCStudio\Util::redirectTo(TO_ROOT."/apps/login/");
@@ -12,7 +12,7 @@ $UserLogin->checkRedirection();
 
 $Layout = JFStudio\Layout::getInstance();
 
-$route = JFStudio\Router::EvoxAcademy;
+$route = JFStudio\Router::Academy;
 $Layout->init(JFStudio\Router::getName($route),'coming',"backoffice",'',TO_ROOT.'/');
 
 $Layout->setScriptPath(TO_ROOT . '/src/');

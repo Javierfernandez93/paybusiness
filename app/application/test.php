@@ -8,12 +8,12 @@ sendWhatsApp(1);
 
 function sendWhatsApp(int $user_login_id = null) : bool
 {
-    return Evox\ApiWhatsApp::sendWhatsAppMessage([
-        'message' => Evox\ApiWhatsAppMessages::getWelcomeMessage(),
+    return Unlimited\ApiWhatsApp::sendWhatsAppMessage([
+        'message' => Unlimited\ApiWhatsAppMessages::getWelcomeMessage(),
         'image' => null,
         'contact' => [
-            "phone" => (new Evox\UserContact)->getWhatsApp($user_login_id),
-            "name" => (new Evox\UserData)->getName($user_login_id)
+            "phone" => (new Unlimited\UserContact)->getWhatsApp($user_login_id),
+            "name" => (new Unlimited\UserData)->getName($user_login_id)
         ]
     ]);
 }

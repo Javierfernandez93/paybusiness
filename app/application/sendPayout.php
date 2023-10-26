@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -16,7 +16,7 @@ if($UserSupport->logged === true)
             'address' => $data['wallet'],
             'user_login_id' => $data['user_login_id']
         ])) {
-            if(Evox\WithdrawPerUser::setAsProcessingForPayout($data['withdraw_per_user_id']))
+            if(Unlimited\WithdrawPerUser::setAsProcessingForPayout($data['withdraw_per_user_id']))
             {
                 $data["s"] = 1;
                 $data["r"] = "DATA_OK";
@@ -32,7 +32,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'withdraw_per_user_id' => $data['withdraw_per_user_id'],
             'unix_date' => time(),
-        ],Evox\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';
@@ -53,9 +53,9 @@ function sendPayout(array $data = null)
 		'payout_id' => $data['withdraw_per_user_id'],
 		'amount' => $data['amount'],
 		'address' => $data['address'],
-		'whatsapp' => (new Evox\UserContact)->getWhatsApp($data['user_login_id']),
-		'name' => (new Evox\UserData)->getName($data['user_login_id']),
-		'email' => (new Evox\UserLogin)->getEmail($data['user_login_id'])
+		'whatsapp' => (new Unlimited\UserContact)->getWhatsApp($data['user_login_id']),
+		'name' => (new Unlimited\UserData)->getName($data['user_login_id']),
+		'email' => (new Unlimited\UserLogin)->getEmail($data['user_login_id'])
 	]);
 
 	if ($response['status'] ?? false == JFStudio\CapitalPayments::STATUS_200) {

@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if(true)
 {
-    $CatalogPlan = new Evox\CatalogPlan;
+    $CatalogPlan = new Unlimited\CatalogPlan;
 
     if($plans = $CatalogPlan->getAll())
     {

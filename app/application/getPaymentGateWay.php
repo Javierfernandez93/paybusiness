@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
     if($data['buy_per_user_id'])
 	{
-		if($wallet = Evox\PaymentGateway::load($data['buy_per_user_id']))
+		if($wallet = Unlimited\PaymentGateway::load($data['buy_per_user_id']))
 		{
 			$data['wallet'] = $wallet;
             $data['s'] = 1;

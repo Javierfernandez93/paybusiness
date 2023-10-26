@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($campaigns = (new Evox\CampaignBannerPerUser)->getAll($UserLogin->company_id))
+    if($campaigns = (new Unlimited\CampaignBannerPerUser)->getAll($UserLogin->company_id))
     {
         $data['campaigns'] = format($campaigns);
         $data['r'] = 'DATA_OK';
@@ -24,9 +24,9 @@ if($UserLogin->logged === true)
 
 function format(array $campaigns = null) : array
 {
-    $ClickPerBanner = new Evox\ClickPerBanner;
-    $PrintPerBanner = new Evox\PrintPerBanner;
-    $BannerPerCampaign = new Evox\BannerPerCampaign;
+    $ClickPerBanner = new Unlimited\ClickPerBanner;
+    $PrintPerBanner = new Unlimited\PrintPerBanner;
+    $BannerPerCampaign = new Unlimited\BannerPerCampaign;
     
     return array_map(function (array $campaign) use($PrintPerBanner,$ClickPerBanner,$BannerPerCampaign){
         $campaign['prints'] = 0;

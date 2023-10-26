@@ -107,7 +107,7 @@ const ApistatsViewer = {
     },
     template : `
         <div class="row animation-fall-down" style="--delay:1.5s">
-           <div class="col-12 col-xl-8">
+           <div class="col-12">
                 <div class="card">
                     <div class="card-header pb-3 mb-3 border-bottom">   
                         <div v-if="stats" class="row">   

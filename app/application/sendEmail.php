@@ -4,7 +4,7 @@ require_once TO_ROOT. '/system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -12,21 +12,21 @@ if($UserSupport->logged === true)
     {
         if($data['campaign_email_id'])
         {
-            $CampaignEmail = new Evox\CampaignEmail;
+            $CampaignEmail = new Unlimited\CampaignEmail;
             $CampaignEmail->connection()->stmtQuery("SET NAMES utf8mb4");
             
             if($campaign = $CampaignEmail->get($data['campaign_email_id']))
             {
-                $names = 'Socio Evox';
+                $names = 'Socio Unlimited';
 
-                if($company_id = (new Evox\UserLogin)->getCompanyIdByMail($data['email']))
+                if($company_id = (new Unlimited\UserLogin)->getCompanyIdByMail($data['email']))
                 {
-                    $names = (new Evox\UserData)->getNames($company_id);
+                    $names = (new Unlimited\UserData)->getNames($company_id);
                 }
 
                 if(sendEmail($data['email'],$campaign['title'],$campaign['content'],$names))
                 {
-                    if(Evox\EmailPerCampaign::addEmailRecord($company_id,$data['email'],$campaign['campaign_email_id']))
+                    if(Unlimited\EmailPerCampaign::addEmailRecord($company_id,$data['email'],$campaign['campaign_email_id']))
                     {
                         $data['s'] = 1;
                         $data['r'] = 'DATA_OK';
@@ -70,7 +70,7 @@ function sendEmail(string $email = null,string $subject = null,$content = null,s
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Evox\CatalogMailController::init(1);
+            $CatalogMailController = Unlimited\CatalogMailController::init(1);
 
             $content = $Layout->replaceTags([
                'names' => ucwords($names)

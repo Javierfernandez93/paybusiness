@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
     if($data['buy_per_user_id'])
 	{
-        $BuyPerUser = new Evox\BuyPerUser;
+        $BuyPerUser = new Unlimited\BuyPerUser;
 
 		if($BuyPerUser->loadWhere('buy_per_user_id = ?',$data['buy_per_user_id']))
 		{

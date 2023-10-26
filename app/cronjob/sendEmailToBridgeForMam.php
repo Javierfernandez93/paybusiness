@@ -4,17 +4,17 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($buys = (new Evox\BuyPerMam)->getAllForMailSend())
+    if($buys = (new Unlimited\BuyPerMam)->getAllForMailSend())
     {
         foreach($buys as $buy)
         {
             if(sendEmail($buy))
             {
-                Evox\BuyPerMam::setAsMailSent($buy['buy_per_bridge_id']);
+                Unlimited\BuyPerMam::setAsMailSent($buy['buy_per_bridge_id']);
             }
         }
     } else {
@@ -42,7 +42,7 @@ function sendEmail(array $data = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Evox\CatalogMailController::init(1);
+            $CatalogMailController = Unlimited\CatalogMailController::init(1);
 
             $Layout->setVar($data);
 
@@ -57,7 +57,7 @@ function sendEmail(array $data = null) : bool
             $mail->Port = $CatalogMailController->port; 
 
             //Recipients
-            $mail->setFrom('support@soyevox.com', 'Evox Support');
+            $mail->setFrom('support@unlimited.com', 'Unlimited Support');
             $mail->addAddress('javier.fernandez.pa93@gmail.com', 'BridgeFunds');     
 
             //Content

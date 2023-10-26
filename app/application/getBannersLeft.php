@@ -4,15 +4,15 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id))
     {
-        $PrintPerBanner = new Evox\PrintPerBanner;
+        $PrintPerBanner = new Unlimited\PrintPerBanner;
         
-        $data['banners'][] = $PrintPerBanner->getNextBanner($UserLogin->company_id,Evox\CatalogBanner::BOTTOM_LEFT);
+        $data['banners'][] = $PrintPerBanner->getNextBanner($UserLogin->company_id,Unlimited\CatalogBanner::BOTTOM_LEFT);
         $data['r'] = 'DATA_OK';
         $data['s'] = 1;
     } else {

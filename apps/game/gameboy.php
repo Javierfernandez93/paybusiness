@@ -2,13 +2,13 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === false) {
 	HCStudio\Util::redirectTo(TO_ROOT."/apps/login/");
 }
 
-if(!(new Evox\BuyPerUser)->hasPackageBuy($UserLogin->company_id,9)) 
+if(!(new Unlimited\BuyPerUser)->hasPackageBuy($UserLogin->company_id,9)) 
 {
 	HCStudio\Util::redirectTo(TO_ROOT."/apps/backoffice/");
 }

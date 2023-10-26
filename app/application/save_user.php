@@ -4,13 +4,13 @@ require_once TO_ROOT. '/system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['user']['email'])
     {
-        $UserLogin = new Evox\UserLogin(false,false);
+        $UserLogin = new Unlimited\UserLogin(false,false);
 
         if($UserLogin->isUniqueMail($data['user']['email']))
         {
@@ -63,28 +63,28 @@ if($UserSupport->logged === true)
 
 function sendPush(string $user_login_id = null,string $message = null,int $catalog_notification_id = null) : bool
 {
-    return Evox\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
+    return Unlimited\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
 }
 
 function sendPushUser(string $user_login_id = null,string $names = null) : bool
 {
-    return sendPush($user_login_id,"Bienvenido a bordo {$names}, estamos felices de que te hayas registrado en Evox",Evox\CatalogNotification::ACCOUNT);
+    return sendPush($user_login_id,"Bienvenido a bordo {$names}, estamos felices de que te hayas registrado en Unlimited",Unlimited\CatalogNotification::ACCOUNT);
 }
 
 function sendPushSponsor(string $user_login_id = null,string $names = null) : bool
 {
-    return sendPush($user_login_id,"Felicitaciones, {$names} se unió a tu grupo de referidos",Evox\CatalogNotification::REFERRAL);
+    return sendPush($user_login_id,"Felicitaciones, {$names} se unió a tu grupo de referidos",Unlimited\CatalogNotification::REFERRAL);
 }
 
 function sendEmailSponsor(string $user_login_id = null,string $names = null) : bool
 {
     if(isset($user_login_id,$names) === true)
     {
-        $UserLogin = new Evox\UserLogin;
+        $UserLogin = new Unlimited\UserLogin;
 
         if($email = $UserLogin->getEmail($user_login_id))
         {
-            return sendEmail($email,$names,'Nuevo afiliado en Evox','partnerWelcome');
+            return sendEmail($email,$names,'Nuevo afiliado en Unlimited','partnerWelcome');
         }
     }
 
@@ -118,7 +118,7 @@ function sendEmail(string $email = null,string $names = null,string $subject = n
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Evox\CatalogMailController::init(1);
+            $CatalogMailController = Unlimited\CatalogMailController::init(1);
 
             $Layout->setVar([
                 "email" => $email,

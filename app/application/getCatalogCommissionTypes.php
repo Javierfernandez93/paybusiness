@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($catalog_commission_types = (new Evox\CatalogCommissionType)->getAll())
+    if($catalog_commission_types = (new Unlimited\CatalogCommissionType)->getAll())
     {
         $data["catalog_commission_types"] = $catalog_commission_types;
         $data["s"] = 1;

@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-	$CatalogCurrency = new Evox\CatalogCurrency;
+	$CatalogCurrency = new Unlimited\CatalogCurrency;
 	
 	if($CatalogCurrency->loadWhere("catalog_currency_id = ? AND status = ?",[$data['catalog_currency_id'],1]))
 	{

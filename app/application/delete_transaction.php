@@ -4,25 +4,25 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['transaction_per_wallet_id'])
     {
-        $TransactionPerWallet = new Evox\TransactionPerWallet;
+        $TransactionPerWallet = new Unlimited\TransactionPerWallet;
         
         if($TransactionPerWallet->loadWhere('transaction_per_wallet_id = ?',$data['transaction_per_wallet_id']))
         {
-            $TransactionPerWallet->status = Evox\TransactionPerWallet::DELETED;
+            $TransactionPerWallet->status = Unlimited\TransactionPerWallet::DELETED;
 
             if($TransactionPerWallet->save())
             {
-                $UserWallet = new Evox\UserWallet;
+                $UserWallet = new Unlimited\UserWallet;
 
                 if($user_login_id = $UserWallet->getCompanyId($TransactionPerWallet->user_wallet_id))
                 {
-                    $UserPlan = new Evox\UserPlan;
+                    $UserPlan = new Unlimited\UserPlan;
 
                     if($UserPlan->setPlan($user_login_id))
                     {

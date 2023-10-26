@@ -346,7 +346,7 @@ const ApicustomersViewer = {
                                             <div>
                                                 <span class="badge text-secondary text-xs p-0">USDT.TRC20</span>
                                             </div>
-                                            <a class="text-primary text-decoration-underline" :href="customer.address.getTronScanAddress('Hi im getting in touch from Evox')" target="_blank">
+                                            <a class="text-primary text-decoration-underline" :href="customer.address.getTronScanAddress('Hi im getting in touch from Unlimited')" target="_blank">
                                                 {{customer.address}}
                                             </a>
                                         </div>

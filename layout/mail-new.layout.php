@@ -508,7 +508,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="logo" style="text-align: left;">
-                                            <h1><a href="">Evox</a></h1>
+                                            <h1><a href="">Unlimited</a></h1>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -561,7 +561,7 @@
                                                         <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
                                                             <h3 class="heading">Información de contacto</h3>
                                                             <ul>
-                                                                <li><span class="text">support@evox.com.co</span></li>
+                                                                <li><span class="text">support@Unlimited.com.co</span></li>
                                                                 <li><span class="text">+57 317 6448832</span></li>
                                                             </ul>
                                                         </td>
@@ -576,10 +576,10 @@
                                                         <td style="text-align: left; padding-left: 10px;">
                                                             <h3 class="heading">Links</h3>
                                                             <ul>
-                                                                <li><a href="https://www.soyevox.com/">Inicio</a></li>
-                                                                <li><a href="https://www.soyevox.com/apps/login/">Ingresar a tu cuenta</a></li>
-                                                                <li><a href="https://www.soyevox.com/apps/signup/">Registro</a></li>
-                                                                <li><a href="https://www.soyevox.com/apps/login/forgotPassword">Recuperar contraseña</a></li>
+                                                                <li><a href="https://www.unlimited.com/">Inicio</a></li>
+                                                                <li><a href="https://www.unlimited.com/apps/login/">Ingresar a tu cuenta</a></li>
+                                                                <li><a href="https://www.unlimited.com/apps/signup/">Registro</a></li>
+                                                                <li><a href="https://www.unlimited.com/apps/login/forgotPassword">Recuperar contraseña</a></li>
                                                             </ul>
                                                         </td>
                                                     </tr>

@@ -4,8 +4,8 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
-$UserSupport = new Evox\UserSupport;
+$UserLogin = new Unlimited\UserLogin;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserLogin->logged === false || $UserSupport->logged === true)
 {
@@ -13,12 +13,12 @@ if($UserLogin->logged === false || $UserSupport->logged === true)
     
     if($data['referral_user_login_id'])
     {
-        $UserData = new Evox\UserData;
+        $UserData = new Unlimited\UserData;
         
         if($referral = $UserLogin->getProfile($data['referral_user_login_id']))
         {
             $data['referral'] = $referral;
-            $data['commission'] = (new Evox\UserReferral)->getCommission($data['user_login_id']);
+            $data['commission'] = (new Unlimited\UserReferral)->getCommission($data['user_login_id']);
 
             $data["s"] = 1;
             $data["r"] = "DATA_OK";

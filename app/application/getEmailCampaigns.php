@@ -4,11 +4,11 @@ require_once TO_ROOT. '/system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    if($campaigns = (new Evox\CampaignEmail)->getAll())
+    if($campaigns = (new Unlimited\CampaignEmail)->getAll())
     {
         $data['campaigns'] = $campaigns;
         $data['s'] = 1;

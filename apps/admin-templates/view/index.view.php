@@ -1,7 +1,7 @@
 <div class="page-title-box">
     <div class="container-fluid">
         <div class="row d-flex justify-content-center">
-           <div class="col-12 col-xl-8">
+           <div class="col-12">
                  <div class="row align-items-center">
                     <div class="col-12 col-xl">
                          <div class="page-title">
@@ -24,7 +24,7 @@
 <div class="container-fluid">
     <div class="page-content-wrapper">
         <div class="row d-flex justify-content-center">
-           <div class="col-12 col-xl-8">
+           <div class="col-12">
                 <div id="response"></div>
             </div>
         </div>

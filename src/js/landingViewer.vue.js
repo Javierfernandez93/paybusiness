@@ -22,36 +22,48 @@ const LandingViewer = {
                 }
             })
         },
-        copyToClipBoard : function(text) {
+        copyToClipBoard(text) {
             navigator.clipboard.writeText(text).then(() => {
                 this.$refs.landing.innerText = 'Copiada'
             });
         },
-        sendByWhatsapp : function(landing) {
+        sendByWhatsapp(landing) {
             window.open(`*¡Hola!* quiero invitarte a un *proyecto increíble* que te permite *ganar dinero* por el *entretenimiento* ¡regístrate ya! ${landing}`.getWhatsappLink())
         },
-    },
-    updated() {
     },
     mounted() 
     {   
         this.getReferralLanding()
     },
     template : `
-        <div class="card f-zoom-element shadow-none border bg-primary-soft mb-3">
-            <div class="card-body">
+        <div class="card shadow-none border">
+            <div class="card-body text-center">
                 <div class="row align-items-center">
                     <div class="col-12 col-xl">
-                        <div>
-                            Link de referido
+                        <div class="text-dark fw-semibold">
+                            Enlace De Referidos
                         </div>
-                        <div class="h4">
+                        <div class="text-xs text-secondary">
                             {{landing.getFullLanding()}}
                         </div>
                     </div>
-                    <div class="col-12 col-xl-auto">
-                        <button @click="copyToClipBoard(landing.getFullLanding())" ref="landing" class="btn shadow-none mb-0 me-2 btn-primary">Copiar link</button>
-                        <button @click="sendByWhatsapp(landing.getFullLanding())" class="btn shadow-none mb-0 btn-success">Envíar por WhatsApp</button>
+                </div>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-12 col-xl-6">
+                        <div class="d-flex">
+                            <button @click="copyToClipBoard(landing.getFullLanding())" ref="landing" class="btn mb-0 text-success shadow-none">
+                                <div><i class="bi fs-2 bi-copy"></i></div>
+                                Copiar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-6">
+                        <div class="d-flex">
+                            <button @click="sendByWhatsapp(landing.getFullLanding())" class="btn mb-0 text-success shadow-none">
+                                <div><i class="bi fs-2 bi-send-fill"></i></div>
+                                Envíar
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

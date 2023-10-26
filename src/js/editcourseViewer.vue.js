@@ -192,7 +192,7 @@ const EditcourseViewer = {
         <div class="row">
             <div class="col-12">
                 <div class="d-flex row justify-content-center">
-                    <div class="col-12 col-xl-8">
+                    <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row pb-3 align-items-center">
@@ -215,7 +215,7 @@ const EditcourseViewer = {
                                 </div>
 
                                 <div class="row mb-3">
-                                    <div class="col-12 col-xl-8">
+                                    <div class="col-12">
                                         <div class="form-floating">
                                             <input v-model="course.title" :class="course.title ? 'is-valid' : ''" @keydown.enter.exact.prevent="$refs.duration.focus()" type="text" autofocus class="form-control" ref="title" placeholder="name@example.com">
                                             <label for="title">

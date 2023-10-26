@@ -79,7 +79,7 @@ const AdminemailaddViewer = {
     },
     template : `
         <div class="row mb-3">
-           <div class="col-12 col-xl-8">
+           <div class="col-12">
                 <div class="card">
                     <div class="card-body">
                         <label>Título</label>

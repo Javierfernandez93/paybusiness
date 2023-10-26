@@ -8,17 +8,17 @@ if($data['path'])
 {
     if($data['landing'])
     {
-        if($landing = (new Evox\Landing)->getLandingByPath($data['path']))
+        if($landing = (new Unlimited\Landing)->getLandingByPath($data['path']))
         {
-            if($user_login_id = (new Evox\UserAccount)->getIdByLanding($data['landing']))
+            if($user_login_id = (new Unlimited\UserAccount)->getIdByLanding($data['landing']))
             {
                 $data['userData'] = [
                     'landing' => $data['landing'],
-                    'whatsApp' => (new Evox\UserContact)->getWhatsApp($user_login_id),
-                    'names' => (new Evox\UserData)->getNames($user_login_id),
+                    'whatsApp' => (new Unlimited\UserContact)->getWhatsApp($user_login_id),
+                    'names' => (new Unlimited\UserData)->getNames($user_login_id),
                 ];
                 
-                $landing['content'] = Evox\Parser::doParser($landing['content'],$data['userData']);
+                $landing['content'] = Unlimited\Parser::doParser($landing['content'],$data['userData']);
             }
 
             $data['landing'] = $landing;

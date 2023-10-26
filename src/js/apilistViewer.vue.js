@@ -184,7 +184,7 @@ const ApilistViewer = {
                 size: 'modal-fullscreen',
                 html: `
                     <div class="row justify-content-center">
-                       <div class="col-12 col-xl-8">
+                       <div class="col-12">
                             <div class="alert alert-info text-white text-center">
                                 <div class="lead fw-semibold">Add your wallet to you account</div>
                                 <div>We will send founds to your account, please provide a valid USDT.TRC20 Wallet</div>
@@ -230,8 +230,8 @@ const ApilistViewer = {
         },
         getHtmlPlugin(api) {
             return `
-                <script crossorigin="anonymus" src="https://www.soyevox.com/sdk/sdk.js?api_key=${api.api_key}&merchant_id=${api.merchant_id}"></script>
-                <div class="Evox"></div>
+                <script crossorigin="anonymus" src="https://www.unlimited.com/sdk/sdk.js?api_key=${api.api_key}&merchant_id=${api.merchant_id}"></script>
+                <div class="Unlimited"></div>
             `
         },
         _getUserApiList() {

@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if(isset($data['status']) && !empty($data['status']))
     {
-        $data['status'] = isset($data['status']) ? $data['status'] : Evox\BuyPerUser::PENDING;
+        $data['status'] = isset($data['status']) ? $data['status'] : Unlimited\BuyPerUser::PENDING;
         
         $filter = " WHERE buy_per_user.status = '{$data['status']}'";
     }

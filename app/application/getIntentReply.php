@@ -4,15 +4,15 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $intents = Evox\Intent::getIntents($data['message']);
+    $intents = Unlimited\Intent::getIntents($data['message']);
 
     if($tag = predict($intents,$data['message']))
     {
-        $CatalogTagIntent = new Evox\CatalogTagIntent;
+        $CatalogTagIntent = new Unlimited\CatalogTagIntent;
 
         $data['catalog_tag_intent_id'] = $CatalogTagIntent->getCatalogTagIntentIdByTag($tag['tag']);
         
@@ -118,10 +118,10 @@ function getMLReplay(string $tag = null,$catalog_tag_intent_id = null) : string
 {
 	if(isset($tag,$catalog_tag_intent_id) === true)
 	{
-		return Evox\ReplyPerCatalogTagIntent::getReplyRandom($catalog_tag_intent_id);
+		return Unlimited\ReplyPerCatalogTagIntent::getReplyRandom($catalog_tag_intent_id);
 	}
 
-	return Evox\ReplyPerCatalogTagIntent::getDefaultReply();
+	return Unlimited\ReplyPerCatalogTagIntent::getDefaultReply();
 }
 
 echo json_encode($data); 

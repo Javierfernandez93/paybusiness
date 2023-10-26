@@ -4,7 +4,7 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
@@ -14,7 +14,7 @@ if($UserLogin->logged === true)
         {
             if($data['description'])
             {
-                $CampaignBannerPerUser = new Evox\CampaignBannerPerUser;
+                $CampaignBannerPerUser = new Unlimited\CampaignBannerPerUser;
                 
                 if($CampaignBannerPerUser->loadWhere('campaign_banner_per_user_id = ?',$data['campaign_banner_per_user_id']))
                 {

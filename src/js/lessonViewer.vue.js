@@ -185,31 +185,29 @@ const LessonViewer = {
     },
     template : `
         <div v-if="course" class="row align-items-top">
-            <div class="col-12"
-                :class="fullMode ? 'mb-3' : 'col-xl-8'">
+            <div class="col-12 animation-fall-down" style="--delay:200ms" :class="fullMode ? 'mb-3' : 'col-xl-8'">
                 <div class="card shadow-blur blur overflow-hidden border-radius-xl mb-3 mb-xl-0">
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <span class="fw-semibold mb-n2 text-xs text-secondary">
-                                    {{course.title}}
-                                </span>
-                                <div v-if="course.session" class="h3 text-primary">
+                                <div v-if="course.session" class="h3 text-secondary fw-semibold">
+                                    <span v-if="course.session.sessionTaked" class="me-2"><i class="bi bi-check-circle"></i></span>
+
                                     {{course.session.title}}
                                 </div>
                             </div>
                             <div class="col-12 col-xl-auto" v-if="course.session.aviable">
-                                <button v-if="!course.session.sessionTaked"  @click="nextSesssion($event.target)" class="btn btn-primary me-2">
+                                <button v-if="!course.session.sessionTaked"  @click="nextSesssion($event.target)" class="btn btn-outline-secondary me-2">
                                     Terminé este módulo
                                 </button>
-                                <button @click="fullMode = !fullMode" class="btn btn-secondary">
+                                <button @click="fullMode = !fullMode" class="btn btn-outline-secondary">
                                     <span v-text="fullMode ? 'Pantalla normal' : 'Pantalla completa'">
                                     </span>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div v-if="course.session" class="card-body">
+                    <div v-if="course.session" class="card-body bg-white p-0">
                         <div v-if="course.session.aviable">
                             <div v-if="course.session.catalog_multimedia_id == CATALOG_MULTIMEDIA.TEXT">
                                 TEXT
@@ -251,69 +249,59 @@ const LessonViewer = {
                                 </div>
 
                                 <div class="d-flex justify-content-end">
-                                    <button :disabled="!comment.comment" @click="commentCourse" class="btn mb-0 mt-3 btn-primary">Guardar comentario</button>
+                                    <button :disabled="!comment.comment" @click="commentCourse" class="btn mb-0 mt-3 btn-secondary">Guardar comentario</button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div v-else class="text-center">
-                        <div class="text-secondary">
-                            ¡Gracias! Comentaste este curso
-                        </div>
+                    <div v-else class="text-center text-secondary sans card-body bg-white">
+                        ¡Gracias! Comentaste este curso
                     </div>
 
-                    <div v-if="!course.hasRank" class="text-center">
+                    <div v-if="!course.hasRank" class="text-center card-body bg-white">
                         <h4>¿Te ha gustado este curso?</h4>
 
                         <button @click="rankCourse(SENTIMENT.POSITIVE)" class="btn btn-success me-2"><i class="bi bi-hand-thumbs-up-fill"></i></button>
                         <button @click="rankCourse(SENTIMENT.NEGATIVE)" class="btn btn-danger"><i class="bi bi-hand-thumbs-down-fill"></i></button>
                     </div>
-                    <div v-else class="text-center py-3">
-                        <div class="text-secondary">
-                            ¡Gracias! Rankeaste este curso
-                        </div>
+                    <div v-else class="text-center py-3 text-secondary sans card-body bg-white">
+                        ¡Gracias! Rankeaste este curso
                     </div>
                 </div>
             </div>
-            <div v-if="sessions" class="col-12 col-xl-4">
-                <div class="card shadow-blur blur overflow-scroll border-radius-xl" style="max-height:50rem">
+            <div v-if="sessions" class="col-12 col-xl-4 animation-fall-down" style="--delay:500ms">
+                <div class="card bg-transparent shadow-blur blur overflow-scroll border-radius-xl" style="max-height:50rem">
                     <div class="card-header bg-transparent">
                         <div class="row align-items-center">
-                            <div class="col h5 mb-0">
-                                Lecciones del curso
+                            <div class="col h4 mb-0 fw-semibold">
+                                {{course.title}}
+
                                 <div class="text-xs text-secondary">
                                     {{progress.taked}} de {{progress.total}}
                                 </div>
                             </div>
-                            <div class="col-auto">
-                                <span class="badge border-secondary border text-secondary text-xxs">
-                                    Total {{sessions.length}}
-                                </span>
+                        </div>
+                        <div class="progress progress-sm mt-2" style="height:1rem">
+                            <div class="progress-bar" role="progressbar" style="height:1rem" :style="{'width': progress.percentage+'%'}" aria-valuenow="29" aria-valuemin="0" aria-valuemax="100">
+                                {{progress.percentage}}%
                             </div>
                         </div>
                     </div>
-                    <div class="progress progress-sm">
-                        <div class="progress-bar" role="progressbar" :style="{'width': progress.percentage+'%'}" aria-valuenow="29" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
 
-                    <ul class="list-group list-group-flush" 
-                        v-if="course.session">
-                        <li v-for="session in sessions" class="list-group-item py-3 list-group-item-action cursor-pointer"
-                            :class="course.session.session_per_course_id == session.session_per_course_id ? 'bg-gradient-primary': 'bg-transparent'">
+                    <ul class="list-group list-group-flush" v-if="course.session">
+                        <li v-for="session in sessions" class="list-group-item py-3 list-group-item-action cursor-pointer" :class="course.session.session_per_course_id == session.session_per_course_id ? 'bg-gradient-primary': 'bg-transparent'">
                             <div @click="selectSession(session)" class="row align-items-center">
                                 <div class="col-auto">
-                                    <span class="badge fs-5 border"
-                                        :class="course.session.session_per_course_id == session.session_per_course_id ? 'text-white border-white': 'text-primary border-primary'"
-                                        ><i class="bi bi-collection-play"></i></span>
+                                    <span class="badge fs-5 border" :class="course.session.session_per_course_id == session.session_per_course_id ? 'text-white border-white': 'text-secondary border-secondary'"><i class="bi bi-collection-play"></i></span>
                                 </div>
                                 <div class="col">
                                     <div v-if="session.order_number > 0" class="fs-6 fw-semibold">
-                                        <span class="badge p-0" :class="course.session.session_per_course_id == session.session_per_course_id ? 'border-white text-white': 'border-primary text-primary'">Módulo {{session.order_number}}</span>
+                                        <span class="badge p-0" :class="course.session.session_per_course_id == session.session_per_course_id ? 'border-white text-white': 'border-secondary text-secondary'">Módulo {{session.order_number}}</span>
                                         
                                         <span v-if="!session.aviable" class="badge border text-xxs ms-2" :class="course.session.session_per_course_id == session.session_per_course_id ? 'border-white text-white': 'border-warning text-warning'">Próximamente</span>
                                     </div>
-                                    <div class="h3" :class="course.session.session_per_course_id == session.session_per_course_id ? 'text-white': ''">
-                                        <span v-if="session.sessionTaked" class="text-success">
+                                    <div class="h4 fw-semibold" :class="course.session.session_per_course_id == session.session_per_course_id ? 'text-white': ''">
+                                        <span v-if="session.sessionTaked" class="me-2">
                                             <i class="bi bi-check-circle"></i>
                                         </span>
 

@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getVarFromPGS();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -40,7 +40,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'transaction' => json_encode(['address'=>$data['address'],'amount'=>$data['amount']]),
             'unix_date' => time(),
-        ],Evox\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';

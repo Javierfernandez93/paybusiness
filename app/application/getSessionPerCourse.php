@@ -4,13 +4,13 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['session_take_by_user_per_course_id'])
     {
-        $SessionTakeByUserPerCourse = new Evox\SessionTakeByUserPerCourse;
+        $SessionTakeByUserPerCourse = new Unlimited\SessionTakeByUserPerCourse;
         
         if($SessionTakeByUserPerCourse->isAviableCourse($data['session_take_by_user_per_course_id'],$UserLogin->company_id))
         {

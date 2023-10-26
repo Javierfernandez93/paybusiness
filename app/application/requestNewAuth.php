@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -12,7 +12,7 @@ if($UserLogin->logged === true)
     {
         $data['user_login_id'] = $UserLogin->company_id;
 
-        if($token = Evox\AuthorizationPerUser::requestNewAuth($data))
+        if($token = Unlimited\AuthorizationPerUser::requestNewAuth($data))
         {
             $data['token'] = $token;
             $data['s'] = 1;
@@ -26,7 +26,7 @@ if($UserLogin->logged === true)
         $data['r'] = 'NOT_DOCUMENTATION_ID';
     }	   
 } else {
-    $data['status'] = Evox\UserApiCodes::INVALID_CREDENTIALS;
+    $data['status'] = Unlimited\UserApiCodes::INVALID_CREDENTIALS;
 }
 
 echo json_encode(HCStudio\Util::compressDataForPhone($data));

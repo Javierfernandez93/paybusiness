@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if($data['landing'])
 {
-    $UserLogin = new Evox\UserLogin(false,false);
+    $UserLogin = new Unlimited\UserLogin(false,false);
     
     if($UserLogin->isUniqueLanding($data['landing']))
     {

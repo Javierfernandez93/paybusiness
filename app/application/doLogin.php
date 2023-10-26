@@ -15,7 +15,7 @@ if($data["email"])
 {
 	if($data["password"])
 	{		
-		$UserLogin = new Evox\UserLogin;
+		$UserLogin = new Unlimited\UserLogin;
 
 		if($UserLogin->logged === true)
 		{
@@ -30,7 +30,7 @@ if($data["email"])
 
 			$data['user_login_id'] = $UserLogin->company_id;
 
-			if(Evox\WhatsAppSessionPerUser::setSavesession($data))
+			if(Unlimited\WhatsAppSessionPerUser::setSavesession($data))
 			{
 				$data["s"] = 1;
 				$data["r"] = "LOGGED_OK";

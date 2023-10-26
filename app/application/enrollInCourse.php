@@ -4,13 +4,13 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['course_id'])
     {
-        if(Evox\UserEnrolledInCourse::enrollInCourse($data['course_id'],$UserLogin->company_id))
+        if(Unlimited\UserEnrolledInCourse::enrollInCourse($data['course_id'],$UserLogin->company_id))
         {
             $data['r'] = 'DATA_OK';
             $data['s'] = 1;

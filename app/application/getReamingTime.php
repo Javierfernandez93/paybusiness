@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($licence = (new Evox\LicencePerUser)->getLicenceActive($UserLogin->company_id))
+    if($licence = (new Unlimited\LicencePerUser)->getLicenceActive($UserLogin->company_id))
     {
         if($reamingTime = HCStudio\Util::unixDiff(time(),strtotime("+30 days",$licence['active_date'])))
         {

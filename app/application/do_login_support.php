@@ -14,13 +14,13 @@ if($data["email"])
 {
 	if($data["password"])
 	{		
-		$UserSupport = new Evox\UserSupport;
+		$UserSupport = new Unlimited\UserSupport;
 
 		if($UserSupport->logged === true)
 		{
 			if(filter_var($data['rememberMe'], FILTER_VALIDATE_BOOLEAN) == true)
 			{
-				JFStudio\Cookie::set(Evox\UserSupport::PID_NAME,$UserSupport->getPid());
+				JFStudio\Cookie::set(Unlimited\UserSupport::PID_NAME,$UserSupport->getPid());
 			}
 
 			$data["s"] = 1;

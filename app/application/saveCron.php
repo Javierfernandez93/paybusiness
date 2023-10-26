@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['cron_id'])
     {
-        $Cron = new Evox\Cron;
+        $Cron = new Unlimited\Cron;
         
         if($Cron->loadWhere('cron_id = ?',$data['cron_id']))
         {

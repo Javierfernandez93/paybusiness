@@ -166,7 +166,7 @@ const Landing4Viewer = {
                     <div class="col-12">
                         <div class="fs-1" style="font-family font-size: 27px; font-weight: 800;">CURSO DE MARKETING AUTOMATIZADO</div>
                         <div class="row justify-content-center">
-                            <div class="col-10 col-xl-4"> <img src="https://www.soyevox.com/src/img/logo-horizontal-white.svg" class="img-fluid"> </div>
+                            <div class="col-10 col-xl-4"> <img src="https://www.unlimited.com/src/img/logo-horizontal-white.svg" class="img-fluid"> </div>
                         </div>
                     </div>
                 </div>
@@ -205,7 +205,7 @@ const Landing4Viewer = {
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                    <div class="col-12 col-xl-8 text-center text-white mb-3">
+                    <div class="col-12 text-center text-white mb-3">
                         <div class="fw-bold fs-1 mb-3 element-followed">El 31 de octubre Cúcuta y el mundo temblarán</div>
                         <div class="mb-3"> <button @click="onlineAccess(user.referral.phone)" class="btn w-100 text-uppercase btn-danger shadow-lg px-4 rounded-pill fs-4">¡Quiero mi acceso ONLINE!</button> </div>
                         <div> <button @click="presentialAccess(user.referral.phone)" class="btn w-100 text-uppercase btn-danger text-white shadow-lg px-4 rounded-pill fs-4">¡Vivo en Cucúta y Quiero mi entrada!</button> </div>

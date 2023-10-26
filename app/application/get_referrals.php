@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($referrals = (new Evox\UserReferral)->getReferrals($UserLogin->company_id))
+    if($referrals = (new Unlimited\UserReferral)->getReferrals($UserLogin->company_id))
     {
         $data['referrals'] = formatData($referrals,$UserLogin->company_id);
         $data["s"] = 1;
@@ -23,9 +23,9 @@ if($UserLogin->logged === true)
 }
 
 function formatData(array $referrals = null,int $user_login_id = null) : array {
-    $Exercise = new Evox\Exercise;
-    $CommissionPerUser = new Evox\CommissionPerUser;
-    $UserTradingAccount = new Evox\UserTradingAccount;
+    $Exercise = new Unlimited\Exercise;
+    $CommissionPerUser = new Unlimited\CommissionPerUser;
+    $UserTradingAccount = new Unlimited\UserTradingAccount;
     $Country = new World\Country;
     
     return array_map(function($referral) use($Country,$Exercise,$UserTradingAccount,$CommissionPerUser,$user_login_id) {
@@ -35,10 +35,10 @@ function formatData(array $referrals = null,int $user_login_id = null) : array {
         $referral['hasDemo'] = false;
         $referral['hasAccount'] = false;
 
-        if($hasDemo = $Exercise->hasExerciseStatus($referral['user_login_id'],"'".Evox\Exercise::WAITING."','".Evox\Exercise::IN_PROGRESS."'"))
+        if($hasDemo = $Exercise->hasExerciseStatus($referral['user_login_id'],"'".Unlimited\Exercise::WAITING."','".Unlimited\Exercise::IN_PROGRESS."'"))
         {
             $referral['hasDemo'] = $hasDemo;
-        } else if($hasAccount = $UserTradingAccount->hasAccountStatus($referral['user_login_id'],"'".Evox\UserTradingAccount::WAITING."','".Evox\UserTradingAccount::IN_PROGRESS."'"))
+        } else if($hasAccount = $UserTradingAccount->hasAccountStatus($referral['user_login_id'],"'".Unlimited\UserTradingAccount::WAITING."','".Unlimited\UserTradingAccount::IN_PROGRESS."'"))
         {
             $referral['hasAccount'] = $hasAccount;
         }

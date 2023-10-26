@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {	
-    if($response = Evox\UserTradingAccount::sendWhatsAppActivation($data))
+    if($response = Unlimited\UserTradingAccount::sendWhatsAppActivation($data))
     {
         $data['wa_api'] = $response;
         $data['r'] = 'DATA_OK';

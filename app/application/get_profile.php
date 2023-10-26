@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -27,16 +27,16 @@ if($UserLogin->logged === true)
         'referral' => $UserLogin->getReferral(),
     ];
 
-    if($paymentMethod = (new Evox\PaymentMethodPerUser)->_get($UserLogin->company_id))
+    if($paymentMethod = (new Unlimited\PaymentMethodPerUser)->_get($UserLogin->company_id))
     {
-        $data['user'] = array_merge($data['user'], (new Evox\PaymentMethodPerUser)->_get($UserLogin->company_id));
+        $data['user'] = array_merge($data['user'], (new Unlimited\PaymentMethodPerUser)->_get($UserLogin->company_id));
     }
 
     $Country = new World\Country;
 
     if($data['include_witdraw_methods'] ?? false)
     {
-        $data['withdraw_methods'] = (new Evox\WithdrawMethodPerUser)->getAll($UserLogin->company_id);
+        $data['withdraw_methods'] = (new Unlimited\WithdrawMethodPerUser)->getAll($UserLogin->company_id);
     }
 
     if($data['include_countries'] ?? false)

@@ -16,10 +16,10 @@ const WidgetbottelegramViewer = {
     template : `
         <div class="row justify-content-center align-items-center">
             <div class="col-12 col-xl-7 align-items-center">
-                <h3>{{translator.words.evox_bot_telegram}}</h3>
+                <h3>{{translator.words.Unlimited_bot_telegram}}</h3>
                 <p class="lead">{{translator.words.join_to_our_telegram_bot}}</p>
                 <div class="d-grid">
-                    <a href="https://t.me/evoXvirtualbot" class="btn btn-primary btn-lg mb-0 shadow-none">
+                    <a href="https://t.me/Unlimitedvirtualbot" class="btn btn-primary btn-lg mb-0 shadow-none">
                         {{translator.words.join_to_channel}}
                     </a>
                 </div>

@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -16,9 +16,9 @@ if($UserSupport->logged === true)
             {
                 if($data['url'])
                 {
-                    if(Evox\UserTradingAccount::add($data))
+                    if(Unlimited\UserTradingAccount::add($data))
                     {
-                        if(Evox\Exercise::setExerciseAs($data['exercise_id'],$data['status']))
+                        if(Unlimited\Exercise::setExerciseAs($data['exercise_id'],$data['status']))
                         {
                             $data["s"] = 1;
                             $data["r"] = "DATA_OK";

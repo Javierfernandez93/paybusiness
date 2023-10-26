@@ -31,7 +31,7 @@ function sendEmail(array $data = null,string $file_path = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Evox\CatalogMailController::init(1);
+            $CatalogMailController = Unlimited\CatalogMailController::init(1);
 
             $Layout->setVar([
                 "names" => $data['names'],
@@ -54,7 +54,7 @@ function sendEmail(array $data = null,string $file_path = null) : bool
             
             $mail->AddAddress('javier.fernandez.pa93@gmail.com', 'Javier');
             $mail->AddAddress('support@exma-trading.com', 'Exma Support');
-            $mail->AddAddress('admin@soyevox.com', 'Admin Evox');
+            $mail->AddAddress('admin@unlimited.com', 'Admin Unlimited');
 
             $mail->AddAttachment($file_path, "Aof-{$data['investor']['number']}");
 

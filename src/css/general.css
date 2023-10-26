@@ -1,109 +1,60 @@
-@font-face {
-    font-family: 'PoppinsRegular';
-    src: url('../../src/fonts/Poppins/Poppins-Regular.ttf');
-}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200&display=swap");
 
-@font-face {
-    font-family: 'PoppinsBold';
-    src: url('../../src/fonts/Poppins/Poppins-Bold.ttf');
-}
-
-@font-face {
-    font-family: 'PoppinsBlack';
-    src: url('../../src/fonts/Poppins/Poppins-Black.ttf');
-}
-
-@font-face {
-    font-family: 'PoppinsLight';
-    src: url('../../src/fonts/Poppins/Poppins-Light.ttf');
+:root {
+  --bg-primary: #0281f4;
+  --bs-btn-disabled: #b3daff;
+  --bs-focus-input-border-color: #b3daff;
+  --bs-focus-input-shadow-color: #b3daff;
+  --bg-light: #e7f0fa;
+  --bg-success: #00da79;
+  --bg-warning: #ff87a1;
 }
 
 body {
-    font-family: 'PoppinsRegular';
-    overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
 }
 
-.fw-bold {
-    font-family: 'PoppinsBlack';
+.sans {
+  font-family: "Source Sans 3", sans-serif;
 }
-.fw-sembold {
-    font-family: 'PoppinsBold';
+.bg-primary {
+    background-color: var(--bg-primary) !important;
 }
-.fw-light {
-    font-family: 'PoppinsLight';
+.btn-primary {
+  background-color: var(--bg-primary);
+  border-color: var(--bg-primary);
+  color: white;
 }
-
-.floating-nav li,
-.floating-nav h6,
-.floating-nav a {
-    color: white !important;
-}
-.bg-cover {
-    background-size: cover;
-}
-.c-pointer {
-    cursor: pointer;
-}
-.table-responsive {
-    min-height: 250px;
-}
-.select-anidable 
-{
-    position: absolute;
-    top: calc(50% - 1rem);
-    right: 0.5rem;
-    padding: 0.5rem !important;
-    width: 7rem !important;
-    height: auto !important;
-}
-.icon-floating-top
-{
-    position: relative;
-    top: -3rem;
-}    
-.bg-gradient-special
-{
-    background-image: linear-gradient(310deg, #e95c58 0%, #db5497 100%);
-    
-    
-}
-.box-position {
-    height: 200px;
+.form-control:focus {
+  border-color: var(--bs-focus-input-border-color);
+  box-shadow: 0 0 0 2px var(--bs-focus-input-shadow-color);
 }
 
-.f-zoom-element-sm,
-.f-zoom-element-xl,
-.f-zoom-element,
-.f-zoom-element-sm:hover .f-zoom-element:hover {
-  transition: all ease 200ms;
+.btn.disabled,
+.btn:disabled,
+fieldset:disabled .btn {
+  background-color: var(--bs-btn-disabled);
 }
 
-.f-zoom-element-sm:hover {
-  z-index: 10;
-  transform: scale(1.02);
-  box-shadow: 0 12px 12px rgba(0, 0, 0, 0.05);
+.bg-light {
+  background-color: var(--bg-light) !important;
 }
 
-.f-zoom-element:hover {
-  z-index: 10;
-  transform: scale(1.05);
-  box-shadow: 0 12px 12px rgba(0, 0, 0, 0.05);
-}
-.f-zoom-element-xl:hover {
-  z-index: 10;
-  transform: scale(2);
-  box-shadow: 0 12px 12px rgba(0, 0, 0, 0.05);
+.navbar-vertical.bg-white .navbar-nav .nav-link.active {
+  background-color: var(--bg-primary);
+  color: #fff;
+  border-radius: 0.5rem;
 }
 
-
-.nav-link:before
-{
-    display: none;
+.navbar-vertical .navbar-brand-img,
+.navbar-vertical .navbar-brand > img {
+  max-height: none !important;
 }
 
-.bg-gradient-purple {
-    background-image: linear-gradient(310deg,#231a5d,#9e3fd9);
-}
-iframe.skiptranslate {
-    display: none;
+/* flyers */
+.flyer-container img {
+  height: 14.5rem;
+  object-fit: cover;
+  object-position: center;
 }

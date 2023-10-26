@@ -108,7 +108,7 @@ const PanelViewer = {
         },
         init() {
             this.getApiCredentials().then(()=>{
-                this.getProyectInfo('Evox').then(proyect => {
+                this.getProyectInfo('Unlimited').then(proyect => {
                     this.proyect = proyect
                     this.initCharts()
                 })
@@ -147,7 +147,7 @@ const PanelViewer = {
         configureService() {
             return new Promise((resolve) => {
                 this.getApiCredentials().then(()=>{
-                    this.Api.getPackagesList({apiFilter:{name:'Evox'}},(response)=>{
+                    this.Api.getPackagesList({apiFilter:{name:'Unlimited'}},(response)=>{
 
                         if(response.s == 1)
                         {

@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>{{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Evox | Trading profesional" name="author" />
+    <meta content="Unlimited | Trading profesional" name="author" />
     <meta content="Herramientas deTrading profesional" name="description" />
 
     <meta name="theme-color" content="#2D2250">   
@@ -12,17 +12,17 @@
     <meta name="keywords" content="marketing digital,Trading profesional, herramientas, potenciar negocio, realidad, whatsappsender">
     <meta name="robots" value="index, follow">
 
-    <meta property="og:site_name" content="Evox | Trading profesional">
-    <meta property="og:title" content="Evox | Trading profesional" />
+    <meta property="og:site_name" content="Unlimited | Trading profesional">
+    <meta property="og:title" content="Unlimited | Trading profesional" />
     <meta property="og:description" content="Herramientas deTrading profesional" />
-    <meta property="og:image" itemprop="image" content="https://www.soyevox.com/src/img/logo.png">
+    <meta property="og:image" itemprop="image" content="https://www.unlimited.com/src/img/logo.png">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="300">
     <meta property="og:image:height" content="300">
 
     <meta property="og:type" content="website" />
     <meta property="og:updated_time" content="1664070388" />
-    <meta property="og:url" content="http://www.soyevox.com">
+    <meta property="og:url" content="http://www.unlimited.com">
 
     <!-- Size of image. Any size up to 300. Anything above 300px will not work in WhatsApp -->
 

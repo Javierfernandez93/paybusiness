@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($timezones = (new Evox\CatalogTimezone)->getAll())
+    if($timezones = (new Unlimited\CatalogTimezone)->getAll())
     {
         $data["timezones"] = $timezones;
         $data["s"] = 1;

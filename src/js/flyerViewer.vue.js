@@ -1,6 +1,6 @@
 const FlyerViewer = {
     name : 'flyer-viewer',
-    props : ['image'],
+    props : ['image','image2'],
     data() {
         return {
         }
@@ -11,9 +11,12 @@ const FlyerViewer = {
         
     },
     template : `
-        <div class="row justify-content-center mb-5">
-           <div class="col-12 col-xl-8">
-                <img :src="image" class="img-fluid rounded border border-light">
+        <div class="flyer-container gx-0 row justify-content-center mb-5">
+           <div class="col-6">
+                <img :src="image" class="img-fluid">
+            </div>
+           <div class="col-6">
+                <img :src="image2" class="img-fluid">
             </div>
         </div>
     `,

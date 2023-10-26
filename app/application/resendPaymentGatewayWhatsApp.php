@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if ($UserLogin->logged === true) 
 {
-    if ((new Evox\UserApi)->sendInvoiceWhatsApp([
+    if ((new Unlimited\UserApi)->sendInvoiceWhatsApp([
         'whatsApp' => $data['whatsapp'],
         'name' => $data['name'],
         'invoice_id' => $data['invoice_id'],

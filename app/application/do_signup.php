@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if($data['email'])
 {
-    $UserLogin = new Evox\UserLogin;
+    $UserLogin = new Unlimited\UserLogin;
 
     if($UserLogin->isUniqueMail($data['email']))
     {
@@ -14,7 +14,7 @@ if($data['email'])
         {
             if($user_login_id = $UserLogin->doSignup($data))
             {
-                $secret = Evox\UserLogin::updateSecret($data['email']);
+                $secret = Unlimited\UserLogin::updateSecret($data['email']);
 
                 if(sendEmailUser([
                     'email' => $data['email'],
@@ -74,43 +74,43 @@ if($data['email'])
 
 function sendWhatsApp(int $user_login_id = null) : bool
 {
-    return Evox\ApiWhatsApp::sendWhatsAppMessage([
-        'message' => Evox\ApiWhatsAppMessages::getWelcomeMessage(),
+    return Unlimited\ApiWhatsApp::sendWhatsAppMessage([
+        'message' => Unlimited\ApiWhatsAppMessages::getWelcomeMessage(),
         'image' => null,
         'contact' => [
-            "phone" => (new Evox\UserContact)->getWhatsApp($user_login_id),
-            "name" => (new Evox\UserData)->getName($user_login_id)
+            "phone" => (new Unlimited\UserContact)->getWhatsApp($user_login_id),
+            "name" => (new Unlimited\UserData)->getName($user_login_id)
         ]
     ]);
 }
 
 function sendPush(string $user_login_id = null,string $message = null,int $catalog_notification_id = null) : bool
 {
-    return Evox\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
+    return Unlimited\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
 }
 
 function sendPushUser(string $user_login_id = null,string $names = null) : bool
 {
-    return sendPush($user_login_id,"Bienvenido a bordo {$names}, estamos felices de que te hayas registrado en Evox",Evox\CatalogNotification::ACCOUNT);
+    return sendPush($user_login_id,"Bienvenido a bordo {$names}, estamos felices de que te hayas registrado en Unlimited",Unlimited\CatalogNotification::ACCOUNT);
 }
 
 function sendPushSponsor(string $user_login_id = null,string $names = null) : bool
 {
-    return sendPush($user_login_id,"Felicitaciones, {$names} se unió a tu grupo de referidos",Evox\CatalogNotification::REFERRAL);
+    return sendPush($user_login_id,"Felicitaciones, {$names} se unió a tu grupo de referidos",Unlimited\CatalogNotification::REFERRAL);
 }
 
 function sendEmailSponsor(array $data = null) : bool
 {
     if(isset($datanames) === true)
     {
-        $UserLogin = new Evox\UserLogin;
+        $UserLogin = new Unlimited\UserLogin;
 
         if($email = $UserLogin->getEmail($data['user_login_id']))
         {
             return sendEmail([
                 'email' => $email,
-                'names' => (new Evox\UserData)->getNames($data['user_login_id']),
-                'subject' => 'Nuevo afiliado en Evox',
+                'names' => (new Unlimited\UserData)->getNames($data['user_login_id']),
+                'subject' => 'Nuevo afiliado en Unlimited',
                 'view' => 'partnerWelcome'
             ]);
         }
@@ -126,7 +126,7 @@ function sendEmailUser(array $data = null) : bool
         return sendEmail([
             ...$data,
             ...[
-                'subject' => 'Bienvenido a Evox, activa tu cuenta',
+                'subject' => 'Bienvenido a Unlimited, activa tu cuenta',
                 'view' => 'welcome'
             ]
         ]);
@@ -150,7 +150,7 @@ function sendEmail(array $data = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Evox\CatalogMailController::init(1);
+            $CatalogMailController = Unlimited\CatalogMailController::init(1);
 
             $Layout->setVar($data);
 

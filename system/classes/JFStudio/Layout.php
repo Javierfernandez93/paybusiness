@@ -27,11 +27,11 @@ class Layout
 	public $virtual_view= null;
 	public $view_root = null;
 	public $content_virtual_view = null;
-	public $pretitle = 'Evox - ';
+	public $pretitle = 'Unlimited - ';
 	public $modules = [];
 	private static $instance;
 	
-	const PROYECT_NAME = 'Evox';
+	const PROYECT_NAME = 'Unlimited';
 
 	public static function getInstance()
  	{

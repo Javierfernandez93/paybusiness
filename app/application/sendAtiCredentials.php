@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -14,7 +14,7 @@ if($UserSupport->logged === true)
     
         if(!isset($data['email']))
         {
-            $data['email'] = (new Evox\UserLogin(false,false))->getEmail($data['user_login_id']);
+            $data['email'] = (new Unlimited\UserLogin(false,false))->getEmail($data['user_login_id']);
         }
 
         if(sendEmail($data))   
@@ -29,7 +29,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'data' => $data,
             'unix_date' => time(),
-        ],Evox\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';
@@ -55,7 +55,7 @@ function sendEmail(array $data = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Evox\CatalogMailController::init(1);
+            $CatalogMailController = Unlimited\CatalogMailController::init(1);
 
             $Layout->setVar($data);
 
@@ -73,7 +73,7 @@ function sendEmail(array $data = null) : bool
             $mail->setFrom($CatalogMailController->mail, $CatalogMailController->sender);
             
             $mail->AddAddress('javier.fernandez.pa93@gmail.com', 'Javier');
-            $mail->AddAddress($data['email'], 'EvoxUser');
+            $mail->AddAddress($data['email'], 'UnlimitedUser');
 
             //Content
             $mail->isHTML(true);                                  

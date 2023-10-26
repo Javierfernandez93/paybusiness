@@ -4,13 +4,13 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($data['package_id'] = Evox\Package::getMonthlyPackage($UserLogin->company_id))
+    if($data['package_id'] = Unlimited\Package::getMonthlyPackage($UserLogin->company_id))
     {
-        $Package = new Evox\Package;
+        $Package = new Unlimited\Package;
         
         if($Package->loadWhere("package_id = ? AND status = ?",[$data['package_id'],JFStudio\Constants::AVIABLE]))
         {

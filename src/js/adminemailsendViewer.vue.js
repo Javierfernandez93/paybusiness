@@ -122,7 +122,7 @@ const AdminemailsendViewer = {
                     </div>
                 </div>
                 <div class="row">
-                   <div class="col-12 col-xl-8">
+                   <div class="col-12">
                         <div class="row">
                             <div class="col fs-5 fw-sembold">
                                 {{campaign.title}}

@@ -16,7 +16,7 @@ const DummieViewer = {
     },
     template : `
         <div class="row justify-content-center">
-            <div class="col-12 col-xl-8 text-center">
+            <div class="col-12 text-center">
                 <div class="row justify-content-center mb-3">
                     <div class="col-12 col-xl-4 text-center">
                         <img src="../../src/img/logo-dummietrading-dark.svg" class="w-100 my-3" alt="dummie" title="dummie"/>

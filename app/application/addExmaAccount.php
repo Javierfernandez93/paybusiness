@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if(Evox\UserBridgeAccount::add([
+    if(Unlimited\UserBridgeAccount::add([
         'user_login_id' => $UserLogin->company_id,
-        'catalog_broker_id' => Evox\CatalogBroker::EXMA,
+        'catalog_broker_id' => Unlimited\CatalogBroker::EXMA,
         'account' => $data['account'],
     ]))
     {

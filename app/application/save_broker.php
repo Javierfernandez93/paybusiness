@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $Broker = new Evox\Broker;
+    $Broker = new Unlimited\Broker;
     $Broker->name = $data['name'];
     $Broker->fee = $data['fee'];
     $Broker->create_date = time();
@@ -17,7 +17,7 @@ if($UserSupport->logged === true)
     {
         if($data['capital'])
         {
-            if(Evox\CapitalPerBroker::addCapital($Broker->getId(),$data['capital']))
+            if(Unlimited\CapitalPerBroker::addCapital($Broker->getId(),$data['capital']))
             {
                 $data['capital_saved'] = true;
             }
@@ -25,7 +25,7 @@ if($UserSupport->logged === true)
 
         if($data['gain'])
         {
-            if(Evox\GainPerBroker::addGain($Broker->getId(),$data['gain']))
+            if(Unlimited\GainPerBroker::addGain($Broker->getId(),$data['gain']))
             {
                 $data['gain_saved'] = true;
             }

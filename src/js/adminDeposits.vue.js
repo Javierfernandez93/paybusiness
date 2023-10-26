@@ -63,7 +63,7 @@ Vue.createApp({
             })
         },
         deleteTransaction: function (transaction_per_wallet_id) {
-            soyevox.com = alertCtrl.create({
+            unlimited.com = alertCtrl.create({
                 title: "Alert",
                 subTitle: "¿Estás seguro de eliminar éste fondeo?. Se recalculará el plan del usuario",
                 buttons: [

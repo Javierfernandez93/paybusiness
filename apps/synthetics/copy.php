@@ -2,11 +2,11 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 
 if($UserLogin->logged === false) {
-	Evox\UserLogin::redirectTo(JFStudio\Router::getName($route));
+	Unlimited\UserLogin::redirectTo(JFStudio\Router::getName($route));
 }
 
 $UserLogin->checkRedirection();

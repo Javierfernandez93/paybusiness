@@ -234,7 +234,7 @@ const StoreitemsViewer = {
                 <button @click="getPackages(CATALOG_PACKAGE_TYPE.FUND,CATALOG_BROKER.BRIDGE)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.FUND ? 'active' : ''" class="nav-link" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Bridge Funds</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button @click="getPackages(CATALOG_PACKAGE_TYPE.MARKETING)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.MARKETING ? 'active' : ''" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Evox Marketing</button>
+                <button @click="getPackages(CATALOG_PACKAGE_TYPE.MARKETING)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.MARKETING ? 'active' : ''" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Unlimited Marketing</button>
             </li>
             <li class="nav-item d-none" role="presentation">
                 <button @click="getPackages(CATALOG_PACKAGE_TYPE.MAM,CATALOG_BROKER.BRIDGE)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.MAM ? 'active' : ''" class="nav-link" id="pills-synthetics-tab" data-bs-toggle="pill" data-bs-target="#pills-synthetics" type="button" role="tab" aria-controls="pills-synthetics" aria-selected="false">Cuenta MAM</button>

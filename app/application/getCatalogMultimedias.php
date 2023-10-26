@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {	
-    $data['catalog_multimedias'] = (new Evox\CatalogMultimedia)->getAll();
+    $data['catalog_multimedias'] = (new Unlimited\CatalogMultimedia)->getAll();
     $data['r'] = 'DATA_OK';
     $data['s'] = 1;
 } else {

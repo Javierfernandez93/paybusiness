@@ -8,7 +8,7 @@ if($UserLogin->logged === true)
 {	
     if($data['intent_chat_id'])
     {
-        $IntentChat = new Evox\IntentChat;
+        $IntentChat = new Unlimited\IntentChat;
 
         if($IntentChat->loadWhere('intent_chat_id = ?',$data['intent_chat_id']))
         {

@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($classes = (new Evox\VideoClass)->getAllByCatalog(Evox\CatalogVideoClass::ACADEMY_COMING))
+    if($classes = (new Unlimited\VideoClass)->getAllByCatalog(Unlimited\CatalogVideoClass::ACADEMY_COMING))
     {
         $data['classes'] = $classes;
         $data['s'] = 1;

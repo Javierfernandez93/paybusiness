@@ -6,7 +6,7 @@ use HCStudio\Util;
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === false) {
 	HCStudio\Util::redirectTo('../../apps/login/');
@@ -38,7 +38,7 @@ $Layout->setScript([
 $Layout->setVar([
 	"documentation_id" => Util::getVarFromPGS('did') ? Util::getVarFromPGS('did') : 1,
 	"UserLogin" => $UserLogin,
-	"documentations" => (new Evox\Documentation)->getAllTitles(),
+	"documentations" => (new Unlimited\Documentation)->getAllTitles(),
 	"route" => $route,
 ]);
 $Layout();

@@ -704,6 +704,14 @@ class User extends Http {
     rankCourse(data, callback) {
         return this.call('../../app/application/rankCourse.php', data, callback);
     }
+    /* lastSigned */
+    getLastSigned(data, callback) {
+        return this.call('../../app/application/getLastSigned.php', data, callback);
+    }
+    /* range */
+    getCurrentRange(data, callback) {
+        return this.call('../../app/application/getCurrentRange.php', data, callback);
+    }
 }
 
 export { User }

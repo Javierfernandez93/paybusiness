@@ -14,7 +14,7 @@ const BackofficetopViewer = {
     },
     template : `
         <div class="row justify-content-center mb-5">
-           <div class="col-12 col-xl-8">
+           <div class="col-12">
                 <div @click="openLinkBanner(Banner.getLinkBanner(1))" class="card overflow-hidden cursor-pointer">
                     <img :src="Banner.getSourceBanner(1)"/>
 

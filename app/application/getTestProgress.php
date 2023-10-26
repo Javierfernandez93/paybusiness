@@ -4,13 +4,13 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-	if($progress = (new Evox\Exercise)->getCurrentExercise($UserLogin->company_id))
+	if($progress = (new Unlimited\Exercise)->getCurrentExercise($UserLogin->company_id))
     {
-        $data['status'] = (new Evox\Exercise)->_getStatus($UserLogin->company_id);
+        $data['status'] = (new Unlimited\Exercise)->_getStatus($UserLogin->company_id);
         $data['progress'] = $progress;
         $data['r'] = 'DATA_OK';
 	    $data['s'] = 1;

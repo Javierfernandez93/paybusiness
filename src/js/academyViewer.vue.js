@@ -71,7 +71,7 @@ const AcademyViewer = {
                 <div class="row justify-content-center align-items-center">
                     <div class="col-12 col-xl-6">
                         <span class="badge bg-primary">total cursos {{coursesAux.length}}</span>
-                        <h3>Cursos grabados</h3>
+                        <h4>Cursos de Business Academy</h4>
                     </div>
                     <div class="col-12 col-xl-6">
                         <input v-model="query" type="text" class="form-control" placeholder="Buscar curso por nombre"/>

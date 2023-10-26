@@ -4,21 +4,21 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $CatalogPlan = new Evox\CatalogPlan;
+    $CatalogPlan = new Unlimited\CatalogPlan;
 
     if($data['transaction_requirement_per_user_id'])
     {
-        $TransactionRequirementPerUser = new Evox\TransactionRequirementPerUser;
+        $TransactionRequirementPerUser = new Unlimited\TransactionRequirementPerUser;
         
         if($TransactionRequirementPerUser->isAviableToReactive($data['transaction_requirement_per_user_id']))
         {
             if($TransactionRequirementPerUser->loadWhere('transaction_requirement_per_user_id = ?',$data['transaction_requirement_per_user_id']))
             {
-                $TransactionRequirementPerUser->status = Evox\TransactionRequirementPerUser::PENDING;
+                $TransactionRequirementPerUser->status = Unlimited\TransactionRequirementPerUser::PENDING;
 
                 if($TransactionRequirementPerUser->save())
                 {

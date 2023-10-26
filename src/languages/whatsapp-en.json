@@ -1,10 +1,10 @@
 {
   "welcome" : [
-      "😁 Hello *{{name}}*, congratulations to join to *Evox*.\n\n👉 Learn more about us here:\nzuum.link/BienvenidoEvox",
-      "🥳 Thanks for joining to *Evox*, *{{name}}*.\n\n👉 Learn more about us here:\nzuum.link/BienvenidoEvox",
-      "😎 *{{name}}* congratulations, you're now signed in *Evox*.\n\n👉 Learn more about us:\n zuum.link/BienvenidoEvox",
-      "👏🏻 Great *{{name}}* you're now signed in *Evox*.\n\n👉 Learn more about us here:\nzuum.link/BienvenidoEvox",
-      "👋🏻 Amazing *{{name}}* welcome to *Evox*.\n\n👉 Learn more about us:\nzuum.link/BienvenidoEvox"
+      "😁 Hello *{{name}}*, congratulations to join to *Unlimited*.\n\n👉 Learn more about us here:\nzuum.link/BienvenidoUnlimited",
+      "🥳 Thanks for joining to *Unlimited*, *{{name}}*.\n\n👉 Learn more about us here:\nzuum.link/BienvenidoUnlimited",
+      "😎 *{{name}}* congratulations, you're now signed in *Unlimited*.\n\n👉 Learn more about us:\n zuum.link/BienvenidoUnlimited",
+      "👏🏻 Great *{{name}}* you're now signed in *Unlimited*.\n\n👉 Learn more about us here:\nzuum.link/BienvenidoUnlimited",
+      "👋🏻 Amazing *{{name}}* welcome to *Unlimited*.\n\n👉 Learn more about us:\nzuum.link/BienvenidoUnlimited"
   ],
   "incomplete_invoice" : [
       "🧾 Hello *{{name}}* por paga el monto restante de $ {{amount}} USDT.TRC20 de la factura *{{extra}}*:\n\n👉 {{url}}\n\nEs importante para que tu pago se acrédite",

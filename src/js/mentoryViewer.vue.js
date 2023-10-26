@@ -16,14 +16,14 @@ const MentoryViewer = {
         <div class="row align-items-top">
             <div class="col-12 col-xl-6">
                 <div class="row justify-content-start">
-                    <div class="col-12 col-xl-8">
+                    <div class="col-12">
                         
                     </div>
                 </div>
                 <div class="card rounded-normal card-body bg-secondary text-white">
                     <div class="lead">
                         <div class="mb-3">
-                            Descubre <strong>EvoxMentory</strong>, un servicio para <strong>desarrollar tu mentailidad</strong>, hábitos de <strong>éxito</strong> y <strong>liderazgo</strong>. 
+                            Descubre <strong>UnlimitedMentory</strong>, un servicio para <strong>desarrollar tu mentailidad</strong>, hábitos de <strong>éxito</strong> y <strong>liderazgo</strong>. 
                         </div>
                         <div>
                             Aprende a construir comunidades y tener un <b>impacto positivo en la vida de otros</b>

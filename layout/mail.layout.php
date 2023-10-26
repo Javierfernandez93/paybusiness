@@ -198,7 +198,7 @@
             padding: 0 !important;
             height: 100% !important;
             width: 100% !important;
-            background: #ffff;
+            background: #f1f1f1;
         }
 
         /* What it does: Stops email clients resizing small text. */
@@ -304,7 +304,7 @@
         }
 
         .bg_light {
-            background: #fff;
+            background: #f7fafa;
         }
 
         .bg_black {
@@ -390,7 +390,7 @@
         }
 
         .logo h1 a {
-            color: #333;
+            color: #3c37ff;
             font-size: 24px;
             font-weight: 700;
             font-family: 'Work Sans', sans-serif;
@@ -464,7 +464,7 @@
         /*FOOTER*/
 
         .footer {
-            border-top: 1px solid rgba(0, 0, 0, .0);
+            border-top: 1px solid rgba(0, 0, 0, .05);
             color: rgba(0, 0, 0, .5);
         }
 
@@ -493,8 +493,8 @@
     <meta name="robots" content="noindex, follow">
 </head>
 
-<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #ffff;">
-    <center style="width: 100%; background-color: #ffff;">
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f1f1f1;">
+    <center style="width: 100%; background-color: #f1f1f1;">
         <div style="display: none; font-size: 1px;max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
             &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
         </div>
@@ -508,7 +508,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="logo" style="text-align: left;">
-                                            <h1><a href="">Evox</a></h1>
+                                            <h1><a href="">IAM</a></h1>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -548,7 +548,7 @@
                                                     <tr>
                                                         <td style="text-align: left; padding-right: 10px;">
                                                             <h3 class="heading">Nosotros</h3>
-                                                            <p>Somos una comunidad gratuita dedicada al crecimiento financiero y personal.</p>
+                                                            <p>Somos una empresa de venta de productos a base de aceite y derivados.</p>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -561,8 +561,8 @@
                                                         <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
                                                             <h3 class="heading">Información de contacto</h3>
                                                             <ul>
-                                                                <li><span class="text">support@evox.com.co</span></li>
-                                                                <li><span class="text">+57 317 6448832</span></li>
+                                                                <li><span class="text">contacto@iam.com.mx</span></li>
+                                                                <li><span class="text">+521 33 1736 1196</span></li>
                                                             </ul>
                                                         </td>
                                                     </tr>
@@ -576,10 +576,10 @@
                                                         <td style="text-align: left; padding-left: 10px;">
                                                             <h3 class="heading">Links</h3>
                                                             <ul>
-                                                                <li><a href="https://www.soyevox.com/">Inicio</a></li>
-                                                                <li><a href="https://www.soyevox.com/apps/login/">Ingresar a tu cuenta</a></li>
-                                                                <li><a href="https://www.soyevox.com/apps/signup/">Registro</a></li>
-                                                                <li><a href="https://www.soyevox.com/apps/login/forgotPassword">Recuperar contraseña</a></li>
+                                                                <li><a href="https://www.iam.com.mx/">Inicio</a></li>
+                                                                <li><a href="https://www.iam.com.mx/apps/login/">Ingresar a tu cuenta</a></li>
+                                                                <li><a href="https://www.iam.com.mx/apps/signup/">Registro</a></li>
+                                                                <li><a href="https://www.iam.com.mx/apps/login/forgotPassword">Recuperar contraseña</a></li>
                                                             </ul>
                                                         </td>
                                                     </tr>
@@ -609,7 +609,7 @@
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.asnc=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PLRSX34');</script>
     <!-- End Google Tag Manager -->

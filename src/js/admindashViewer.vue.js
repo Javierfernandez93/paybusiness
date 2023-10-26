@@ -124,7 +124,7 @@ const AdmindashViewer = {
     },
     template : `
         <div class="row">
-           <div class="col-12 col-xl-8">
+           <div class="col-12">
                 <div class="card">
                     <div class="card-header pb-3 mb-3 border-bottom">   
                         <div v-if="stats" class="row">   

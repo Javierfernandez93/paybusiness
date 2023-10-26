@@ -1,0 +1,12 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+
+Header set Access-Control-Allow-Origin "*"
+
+RewriteRule ^([a-zA-Z0-9]+)$ apps/landing/?landing=$1
+
+Options -Indexes
+
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]

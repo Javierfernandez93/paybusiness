@@ -68,8 +68,8 @@ const AcademyinfoViewer = {
         <div class="row align-items-top">
             <div class="col-12 col-xl-6">
                 <div class="row justify-content-start">
-                    <div class="col-12 col-xl-8">
-                        <img src="../../src/img/evox-academy.png" alt="EvoxAcademy" title="EvoxAcademy" class="w-100"/>
+                    <div class="col-12">
+                        <img src="../../src/img/Unlimited-academy.png" alt="Academy" title="Academy" class="w-100"/>
                     </div>
                 </div>
                 <div class="card rounded-normal card-body bg-secondary text-white">
@@ -88,13 +88,13 @@ const AcademyinfoViewer = {
                     <iframe class="rounded shadow-xl" width="560" height="315" src="https://www.youtube.com/embed/bcmYoWVtP4A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <div class="my-3 text-center">
-                    <p class="lead fw-semibold text-dark">Únete al canal de Evox Academy y accede a clases en vivo y operativa de Índices sintéticos.</p>
+                    <p class="lead fw-semibold text-dark">Únete al canal de Unlimited Academy y accede a clases en vivo y operativa de Índices sintéticos.</p>
 
                     <div class="d-grid">
                         <button class="btn btn-primary btn-lg shadow-none mb-3"><i class="bi me-2 bi-telegram"></i>Unirse al canal</button>
                     </div>
 
-                    <p class="lead fw-semibold text-dark">Únete al canal de Evox y disfruta de las predicciones del mercado de nuestros mentores.</p>
+                    <p class="lead fw-semibold text-dark">Únete al canal de Unlimited y disfruta de las predicciones del mercado de nuestros mentores.</p>
                     <div class="d-grid">
                         <button class="btn btn-primary btn-lg shadow-none mb-0"><i class="bi me-2 bi-telegram"></i> Canal de señales de forex</button>
                     </div>

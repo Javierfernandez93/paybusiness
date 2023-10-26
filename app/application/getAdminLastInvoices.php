@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {   
-    if($lastInvoices = (new Evox\PaymentGateway)->getAdminLastInvoices())
+    if($lastInvoices = (new Unlimited\PaymentGateway)->getAdminLastInvoices())
     {   
         $data['lastInvoices'] = $lastInvoices;
         $data['s'] = 1;

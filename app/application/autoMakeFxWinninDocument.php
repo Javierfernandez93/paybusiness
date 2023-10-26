@@ -7,7 +7,7 @@ use setasign\Fpdi\Fpdi;
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {       
@@ -62,18 +62,18 @@ function createLpoaDocument(array $data = null)
     $pdf = new FPDI();
 
     $pdf->AddPage(); 
-    $pdf->setSourceFile(Evox\Lpoa::getSourceTemplate(TO_ROOT,$data['sponsor']['lpoa'])); 
+    $pdf->setSourceFile(Unlimited\Lpoa::getSourceTemplate(TO_ROOT,$data['sponsor']['lpoa'])); 
     $tplIdx = $pdf->importPage(1); 
     $pdf->useTemplate($tplIdx); 
 
     $pdf->SetFont('Arial', '', '11'); 
     $pdf->SetTextColor(0,0,0);
 
-    $titleCords = Evox\Lpoa::getCoords('title');
+    $titleCords = Unlimited\Lpoa::getCoords('title');
     $pdf->SetXY($titleCords['x'], $titleCords['y']);
     $pdf->Write(0, properText($data['title']) . ' ' . properText($data['names']));
 
-    $investorNumberCords = Evox\Lpoa::getCoords('investorNumber');
+    $investorNumberCords = Unlimited\Lpoa::getCoords('investorNumber');
     $pdf->SetXY($investorNumberCords['x'], $investorNumberCords['y']);
     $pdf->Write(0, $data['investor']['number']);
 
@@ -85,7 +85,7 @@ function createLpoaDocument(array $data = null)
         $offset = 50;
     }
 
-    $monthCords = Evox\Lpoa::getCoords('month');
+    $monthCords = Unlimited\Lpoa::getCoords('month');
     $pdf->SetXY($monthCords['x']+$offset, $monthCords['y']);
     $pdf->Write(0, 'x');
 
@@ -96,7 +96,7 @@ function createLpoaDocument(array $data = null)
         $offset = 15;
     }
 
-    $percentageCords = Evox\Lpoa::getCoords('percentage');
+    $percentageCords = Unlimited\Lpoa::getCoords('percentage');
     $pdf->SetXY($percentageCords['x']+$offset, $percentageCords['y']);
     $pdf->Write(0, 'x');
 
@@ -105,21 +105,21 @@ function createLpoaDocument(array $data = null)
     $pdf->SetFont('Arial', '', '8'); 
     $pdf->SetTextColor(0,0,0);
 
-    $namesCords = Evox\Lpoa::getCoords('names');
+    $namesCords = Unlimited\Lpoa::getCoords('names');
     $pdf->SetXY($namesCords['x'], $namesCords['y']);
     $pdf->Write(0, properText($data['names']));
 
-    $currentDateCords = Evox\Lpoa::getCoords('currentDate');
+    $currentDateCords = Unlimited\Lpoa::getCoords('currentDate');
     $pdf->SetXY($currentDateCords['x'], $currentDateCords['y']);
     $pdf->Write(0, $data['currentDate']);
     
-    $signatureCords = Evox\Lpoa::getCoords('signature');
+    $signatureCords = Unlimited\Lpoa::getCoords('signature');
     $pdf->Image($data['signature'], $signatureCords['x'], $signatureCords['y'], 40);
 
 
-    $path = Evox\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']);
+    $path = Unlimited\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']);
 
-    $pdf->Output(Evox\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']), 'F');
+    $pdf->Output(Unlimited\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']), 'F');
     
     return $path;
 }

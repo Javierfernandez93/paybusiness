@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -14,7 +14,7 @@ if($UserLogin->logged === true)
 
         if($network = $UserLogin->getNetworkChild($data['company_id']))
         {
-            if($balance = Evox\UserBridgeAccount::getNetworkBalance($network))
+            if($balance = Unlimited\UserBridgeAccount::getNetworkBalance($network))
             {
                 $data["balance"] = $balance;
                 $data["s"] = 1;

@@ -4,13 +4,13 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     $data['user_support_id'] = $UserSupport->getId();
 
-    if($course_id = Evox\Course::addCourse($data))
+    if($course_id = Unlimited\Course::addCourse($data))
 	{
         $data['r'] = 'SAVE_COURSE';
         $data['s'] = 1;

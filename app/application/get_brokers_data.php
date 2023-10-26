@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $TradingPerformance = new Evox\TradingPerformance;
+    $TradingPerformance = new Unlimited\TradingPerformance;
 
     if($performances = $TradingPerformance->getAllPerformancesByDays())
     {

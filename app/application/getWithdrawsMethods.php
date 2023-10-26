@@ -4,12 +4,12 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
     $data['fee'] = BlockChain\Transaction::WITHDRAW_FEE;
-    $data['withdrawMethods'] = format((new Evox\WithdrawMethodPerUser)->getAll($UserLogin->company_id));
+    $data['withdrawMethods'] = format((new Unlimited\WithdrawMethodPerUser)->getAll($UserLogin->company_id));
     $data["s"] = 1;
     $data["r"] = "LOGGED_OK";
 } else {
@@ -18,7 +18,7 @@ if($UserLogin->logged === true)
 }
 
 function format(array $withdrawMethods = null) : array {
-    $CatalogCurrency = new Evox\CatalogCurrency;
+    $CatalogCurrency = new Unlimited\CatalogCurrency;
 
     return array_map(function($withdrawMethod) use ($CatalogCurrency) {
         $withdrawMethod['catalog_currency'] = $CatalogCurrency->getFullCurrency($withdrawMethod['catalog_currency_id']);

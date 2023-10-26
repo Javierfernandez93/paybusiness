@@ -100,7 +100,7 @@ const LoginViewer = {
                                     Hora de actualizarse
                                 </div>
                                 <div class="">
-                                    Hemos enviado un correo a <b>${this.user.email}</b> con las instrucciones para que actualices tu contraseña y puedas acceder a Evox
+                                    Hemos enviado un correo a <b>${this.user.email}</b> con las instrucciones para que actualices tu contraseña y puedas acceder a Unlimited
                                 </div>
                                 <div class="text-xs mt-3">
                                     <stong>Importante</stong>
@@ -144,8 +144,12 @@ const LoginViewer = {
 
         <div class="p-3 bg-transparent text-start cards-plain bg-white animation-fall-down" style="--delay: 0.8s">
             <div class="card bg-transparent shadow-none">
-                <div class="card-header pb-0 bg-transparent">
-                    <img src="../../src/img/logo.svg" title="logo" alt="logo" class="w-50"/>
+                <div class="card-header pb-0 bg-transparent text-center">
+                    <div class="row justify-content-center">
+                        <div class="col-6 col-md-6 col-xl-3">
+                            <img src="../../src/img/logo.svg" title="logo" alt="logo" class="w-100"/>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-header text-center bg-transparent">
@@ -153,7 +157,7 @@ const LoginViewer = {
                 </div>
             </div>
 
-            <div class="card rounded-normal">
+            <div class="card shadow-none bg-transparent">
                 <div class="card-body">
                     <form role="form">
                         <div class="form-floating mb-3">

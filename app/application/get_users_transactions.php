@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $WithdrawPerUser = new Evox\WithdrawPerUser;
+    $WithdrawPerUser = new Unlimited\WithdrawPerUser;
     
     $data['status'] = $data['status'] ?? 1;
 

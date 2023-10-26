@@ -485,7 +485,7 @@ const AdmintradingViewer = {
                     </div>
                     <div v-if="currentUser" class="modal-body">
                         <div class="row align-items-center vh-100 justify-content-center">
-                            <div class="col-12 col-xl-8">
+                            <div class="col-12">
                                 <div class="alert mb-3 text-white fw-semibold alert-info">
                                     <strong>Aviso</strong>
                                     Puedes copiar la información dando clic en el botón a un lado del valor de la configuración

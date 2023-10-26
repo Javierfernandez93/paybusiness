@@ -17,11 +17,11 @@
         <link href="../../src/css/nucleo-svg.css" rel="stylesheet" />
         <link href="../../src/css/animate.css" rel="stylesheet" />
         
-        <link href="../../src/css/general.css" rel="stylesheet" type="text/css">
         <link id="pagestyle" href="../../src/css/soft-ui-dashboard.css?v=1.3.1" rel="stylesheet" />
+        <link href="../../src/css/general.css?v=1-3-1" rel="stylesheet" type="text/css">
         {{css_scripts}}
     </head>
-    <body class="bg-gradient-primary">
+    <body class="bg-primary">
         
         {{content}}
         
@@ -34,7 +34,7 @@
         {{js_scripts}}
 
         <footer class="fixed-bottom w-100 text-center py-3 fw-semibold text-white">
-            © <script> document.write(new Date().getFullYear()) </script>, made with <i class="fa fa-heart"></i> by <a href="<?php echo HCStudio\Connection::getMainPath(); ?>" class="font-weight-bold text-white" target="_blank"><?php echo JFStudio\Layout::PROYECT_NAME; ?></a> for a better web.
+            © <script> document.write(new Date().getFullYear()) </script>, made with <i class="bi bi-heart"></i> by <a href="<?php echo HCStudio\Connection::getMainPath(); ?>" class="font-weight-bold text-white" target="_blank"><?php echo JFStudio\Layout::PROYECT_NAME; ?></a> for a better web.
         </footer>
     </body>
 </html>

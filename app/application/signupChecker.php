@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if(Evox\ExternalLogin::signupChecker($UserLogin->email,Evox\ExternalLoginRouter::ZUUM_SIGNUP_CHECKER))
+    if(Unlimited\ExternalLogin::signupChecker($UserLogin->email,Unlimited\ExternalLoginRouter::ZUUM_SIGNUP_CHECKER))
     {
         $data['r'] = 'DATA_OK';
         $data['s'] = 1;

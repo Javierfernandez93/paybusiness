@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($landings = (new Evox\CatalogLanding)->getAll())
+    if($landings = (new Unlimited\CatalogLanding)->getAll())
     {
         $data['active'] =  $UserLogin->isActive();
         $data['landings'] = format(_filter($landings,$UserLogin->company_id),$UserLogin->company_id);
@@ -39,8 +39,8 @@ function _filter(array $landings = null,int $user_login_id = null) : array {
 }
 
 function format(array $landings = null,int $user_login_id = null) : array {
-    $LandingPerUser = new Evox\LandingPerUser;
-    $VisitPerLanding = new Evox\VisitPerLanding;
+    $LandingPerUser = new Unlimited\LandingPerUser;
+    $VisitPerLanding = new Unlimited\VisitPerLanding;
 
     return array_map(function($landing) use($LandingPerUser,$VisitPerLanding,$user_login_id) {
         $landing['error'] = null;

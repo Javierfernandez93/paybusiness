@@ -4,15 +4,15 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($UserSupport->hasPermission('list_mam'))
     {
-        $data['status'] = $data['status'] ?? Evox\BuyPerBridge::PENDING;
+        $data['status'] = $data['status'] ?? Unlimited\BuyPerBridge::PENDING;
 
-        if($buys = (new Evox\BuyPerBridge)->getAll($data['status']))
+        if($buys = (new Unlimited\BuyPerBridge)->getAll($data['status']))
         {
             $data['buys'] = $buys;
             $data['s'] = 1;

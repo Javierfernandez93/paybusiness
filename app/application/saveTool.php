@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $Tool = new Evox\Tool;
+    $Tool = new Unlimited\Tool;
 
     $Tool->title = $data['title'];
     $Tool->description = $data['description'];

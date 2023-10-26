@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getVarFromPGS();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -14,20 +14,20 @@ if($UserSupport->logged === true)
         {
             if($data['amount'])
             {
-                if(!(new Evox\GainPerUser)->hasGainOnWeek($data['user_login_id']))
+                if(!(new Unlimited\GainPerUser)->hasGainOnWeek($data['user_login_id']))
                 {
                     $day = date("Y-m-d");
                     $message = "Profit por Trading del día {$day}";
 
                     if($transaction_per_wallet_id = send($data['user_login_id'],$data['amount'],$message))
                     {
-                        if(Evox\GainPerUser::add([
+                        if(Unlimited\GainPerUser::add([
                             'user_login_id' => $data['user_login_id'],
                             'amount' => $data['amount'],
                             'transaction_per_wallet_id' => $transaction_per_wallet_id
                         ]))
                         {
-                            if(Evox\NotificationPerUser::push($data['user_login_id'],$message,Evox\CatalogNotification::GAINS,""))
+                            if(Unlimited\NotificationPerUser::push($data['user_login_id'],$message,Unlimited\CatalogNotification::GAINS,""))
                             {
                                 $data['push_sent'] = true;
                             }
@@ -58,7 +58,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'transaction' => json_encode(['address'=>$data['address'],'amount'=>$data['amount']]),
             'unix_date' => time(),
-        ],Evox\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';

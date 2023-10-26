@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-	$StoragePerUser = new Evox\StoragePerUser;
+	$StoragePerUser = new Unlimited\StoragePerUser;
 
 	if($data['path'] = $StoragePerUser->getStoragePerUserId($UserLogin->company_id))
 	{
@@ -18,7 +18,7 @@ if($UserLogin->logged === true)
 		}
 
 
-		$data['max_size'] = HCStudio\Util::formatSizeUnits(Evox\StoragePerUser::DEFAULT_DISK_SIZE);
+		$data['max_size'] = HCStudio\Util::formatSizeUnits(Unlimited\StoragePerUser::DEFAULT_DISK_SIZE);
 		$data['size'] = HCStudio\Util::formatSizeUnits($StoragePerUser->getDiskUsed($data['full_path']));
         $data['percentaje'] = $StoragePerUser->getPercentajeDiskUsed($data['full_path']);
 		$data['r'] = 'DATA_OK';

@@ -8,7 +8,7 @@ if($route === false) {
 	HCStudio\Util::redirectTo(TO_ROOT."/apps/home/not_found");
 }
 
-$VCardPerUser = new Evox\VCardPerUser;
+$VCardPerUser = new Unlimited\VCardPerUser;
 
 if($VCardPerUser->loadWhere("route = ?",$route) == false)
 {
@@ -17,16 +17,16 @@ if($VCardPerUser->loadWhere("route = ?",$route) == false)
 
 $Layout = JFStudio\Layout::getInstance();
 
-$Layout->init("VCard",Evox\VCardPerUser::getViewPathFile($VCardPerUser->getId()),"view","",TO_ROOT."/",TO_ROOT."/".Evox\VCardPerUser::getViewPath($VCardPerUser->getId()));
+$Layout->init("VCard",Unlimited\VCardPerUser::getViewPathFile($VCardPerUser->getId()),"view","",TO_ROOT."/",TO_ROOT."/".Unlimited\VCardPerUser::getViewPath($VCardPerUser->getId()));
 
 $Layout->setScriptPath(HCStudio\Connection::getMainPath() . '/src/');
 $Layout->setScript(
-	array_merge(['vcarduser.vue.js'],(new Evox\Template)->getScripts($VCardPerUser->template_id))
+	array_merge(['vcarduser.vue.js'],(new Unlimited\Template)->getScripts($VCardPerUser->template_id))
 );
 
-Evox\VisitPerVCard::addVisit($VCardPerUser->getId());
+Unlimited\VisitPerVCard::addVisit($VCardPerUser->getId());
 
-$TagPerVCard = new Evox\TagPerVCard;
+$TagPerVCard = new Unlimited\TagPerVCard;
 
 if($tags = $TagPerVCard->getAll($VCardPerUser->getId()))
 {
@@ -34,7 +34,7 @@ if($tags = $TagPerVCard->getAll($VCardPerUser->getId()))
 }
 
 $Layout->setVar([
-	'MetaPerSheet' => new Evox\MetaPerSheet,
+	'MetaPerSheet' => new Unlimited\MetaPerSheet,
 	'Proyect' => $Proyect,
 	'vcard_per_user_id' => $VCardPerUser->getId(),
 ]);

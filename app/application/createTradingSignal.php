@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -14,7 +14,7 @@ if($UserSupport->logged === true)
         {
             if(createTradingSignal($data['message']) === true)
             {
-                if(Evox\TradingSignal::add([
+                if(Unlimited\TradingSignal::add([
                     'user_support_id' => $UserSupport->getId(),
                     'message' => $data['message']
                 ]))
@@ -37,7 +37,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'message' => $data['message'],
             'unix_date' => time(),
-        ],Evox\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';

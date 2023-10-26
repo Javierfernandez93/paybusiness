@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $data["crons"] = format((new Evox\Cron)->getAll());
+    $data["crons"] = format((new Unlimited\Cron)->getAll());
     $data["s"] = 1;
     $data["r"] = "DATA_OK";
 } else {

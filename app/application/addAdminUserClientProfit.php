@@ -5,7 +5,7 @@ require_once TO_ROOT . "/vendor/autoload.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {    
@@ -16,7 +16,7 @@ if($UserSupport->logged === true)
             if($data['user']['profit'] > 0)
             {
 
-                $UserBridgeAccount = new Evox\UserBridgeAccount;
+                $UserBridgeAccount = new Unlimited\UserBridgeAccount;
 
                 if($data['user']['first_name'])
                 {
@@ -27,16 +27,16 @@ if($UserSupport->logged === true)
                         {
                             if(isset($data['user']['balance']) && !empty($data['user']['balance']))
                             {
-                                Evox\UserBridgeAccount::updateBalance($user_bridge_account_id,$data['user']['balance']);
+                                Unlimited\UserBridgeAccount::updateBalance($user_bridge_account_id,$data['user']['balance']);
                             }
                             
-                            if(!(new Evox\GainPerClient)->exist($user_bridge_account_id))
+                            if(!(new Unlimited\GainPerClient)->exist($user_bridge_account_id))
                             {
-                                if($gain_per_client_id = Evox\GainPerClient::add([
+                                if($gain_per_client_id = Unlimited\GainPerClient::add([
                                     'user_bridge_account_id' => $user_bridge_account_id,
                                     'profit' => $data['user']['profit']
                                 ])) {
-                                    if(Evox\CommissionPerUser::addMamCommission([
+                                    if(Unlimited\CommissionPerUser::addMamCommission([
                                         'profit' => $data['user']['profit'],
                                         'user_login_id' => $data['user_login_id'],
                                         'gain_per_client_id' => $gain_per_client_id

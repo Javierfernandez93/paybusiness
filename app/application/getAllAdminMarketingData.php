@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($UserSupport->hasPermission('list_marketing'))
     {
-        if($marketingData = (new Evox\MarketingFieldPerUser)->getAllPendingTypesAdmin($data['company_id'] ?? false))
+        if($marketingData = (new Unlimited\MarketingFieldPerUser)->getAllPendingTypesAdmin($data['company_id'] ?? false))
         {
             $data["marketingData"] = $marketingData;
             $data["s"] = 1;

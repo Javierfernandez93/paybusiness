@@ -161,10 +161,14 @@ const SignupViewer = {
     template: `
         <div class="card bg-transparent text-start shadow-none animation-fall-down" style="--delay:0.6s">
             <div class="card-header pb-0 bg-transparent">
-                <img src="../../src/img/logo.svg" title="logo" alt="logo" class="w-50"/>
+                <div class="row justify-content-center">
+                    <div class="col-3 col-xl-3">
+                        <img src="../../src/img/logo.svg" title="logo" alt="logo" class="w-100"/>
+                    </div>
+                </div>
             </div>
             <div class="card-header pb-0 text-left bg-transparent">
-                <p class="lead fs-3 text-dark"><span v-html="Translator.words.welcome_Evox"></span></p>
+                <p class="lead fs-3 text-dark text-center sans"><span v-html="Translator.words.welcome_unlimited"></span></p>
                 <div
                     v-if="user.referral.user_login_id" class="fs-4 fw-sembold">
                     <div class="text-secondary">Referido por <span class="fw-semibold text-primary">{{user.referral.names}}</span></div>
@@ -269,7 +273,7 @@ const SignupViewer = {
                 </div>
 
                 <button :disabled="!userComplete || loading" class="btn btn-primary shadow-none btn-lg w-100 mt-4 mb-0" @click="doSignup" id="button">
-                    <span v-if="!loading">
+                    <span v-if="!loading" class="text-center">
                         {{Translator.words.join_now}}
                     </span>
                     <span v-else>

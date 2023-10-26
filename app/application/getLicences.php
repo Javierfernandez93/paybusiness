@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($licences = (new Evox\LicencePerUser)->_getAll($UserLogin->company_id))
+    if($licences = (new Unlimited\LicencePerUser)->_getAll($UserLogin->company_id))
     {
         $data['licences'] = formatData($licences);
         $data['r'] = 'DATA_OK';
@@ -23,8 +23,8 @@ if($UserLogin->logged === true)
 }
 
 function formatData(array $licences = null) : array {
-    $UserAddress = new Evox\UserAddress;
-    $UserContact = new Evox\UserContact;
+    $UserAddress = new Unlimited\UserAddress;
+    $UserContact = new Unlimited\UserContact;
     $Country = new World\Country;
     
     return array_map(function($licence) use($Country,$UserAddress,$UserContact) {

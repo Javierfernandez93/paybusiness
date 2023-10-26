@@ -41,7 +41,7 @@ function processIPN(array $data = null)
 
 function saveIPN(array $data = null)
 {
-  $Ipn = new Evox\Ipn;
+  $Ipn = new Unlimited\Ipn;
   $Ipn->data = json_encode($data);
   $Ipn->create_date = time();
   $Ipn->status = 1;
@@ -57,7 +57,7 @@ function validateBuy(array $data = null)
         'user' => HCStudio\Util::USERNAME,
         'password' => HCStudio\Util::PASSWORD,
         'invoice_id' => $data['invoice_id'],
-        'catalog_validation_method_id' => Evox\CatalogValidationMethod::CAPITALPAYMENTS_IPN,
+        'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::CAPITALPAYMENTS_IPN,
         'ipn_data' => json_encode($data),
     ]);
     
@@ -73,8 +73,8 @@ function deleteBuy(array $data = null)
         'user' => HCStudio\Util::USERNAME,
         'password' => HCStudio\Util::PASSWORD,
         'invoice_id' => $data['order_id'],
-        'status' => Evox\BuyPerUser::EXPIRED,
-        'catalog_validation_method_id' => Evox\CatalogValidationMethod::CAPITALPAYMENTS_IPN,
+        'status' => Unlimited\BuyPerUser::EXPIRED,
+        'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::CAPITALPAYMENTS_IPN,
         'ipn_data' => json_encode($data),
     ]);
 
@@ -83,14 +83,14 @@ function deleteBuy(array $data = null)
 
 function setPayoutAsDone(array $data = null)
 {
-    if(Evox\BuyPerBridge::isBuyPerBridgePayoutId($data['payout_id']))
+    if(Unlimited\BuyPerBridge::isBuyPerBridgePayoutId($data['payout_id']))
     {   
-        Evox\BuyPerBridge::setAsBridgePaid([
-            'buy_per_bridge_id' => Evox\BuyPerBridge::getSanitizedId($data['payout_id']),
+        Unlimited\BuyPerBridge::setAsBridgePaid([
+            'buy_per_bridge_id' => Unlimited\BuyPerBridge::getSanitizedId($data['payout_id']),
             'tx_id' => $data['tx_id'],
         ]);
     } else {
-        Evox\WithdrawPerUser::setAsDepositedForPayout([
+        Unlimited\WithdrawPerUser::setAsDepositedForPayout([
             'withdraw_per_user_id' => $data['payout_id'],
             'tx_id' => $data['tx_id']
         ]);

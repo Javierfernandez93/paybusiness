@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['exercise_id'])
     {
-        if(Evox\Exercise::sendCredentials($data))
+        if(Unlimited\Exercise::sendCredentials($data))
         {
             $data["s"] = 1;
             $data["r"] = "DATA_OK";

@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if($data["email"])
 {
-    $UserLogin = new Evox\UserLogin;
+    $UserLogin = new Unlimited\UserLogin;
 
     if($UserLogin->isUniqueMail($data['email']) === false)
     {
@@ -59,7 +59,7 @@ function sendEmail(string $email = null,string $token = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Evox\CatalogMailController::init(1);        
+            $CatalogMailController = Unlimited\CatalogMailController::init(1);        
 
             $Layout->setVar([
                 "email" => $email,
@@ -80,7 +80,7 @@ function sendEmail(string $email = null,string $token = null) : bool
 
             //Recipients
             $mail->setFrom($CatalogMailController->mail, $CatalogMailController->sender);
-            $mail->addAddress($email, 'Evox User');     
+            $mail->addAddress($email, 'Unlimited User');     
 
             //Content
             $mail->isHTML(true);                                

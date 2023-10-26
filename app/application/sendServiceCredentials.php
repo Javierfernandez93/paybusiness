@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {	
@@ -30,8 +30,8 @@ if($UserSupport->logged === true)
 
 function sendWhatsApp(array $data = null) 
 {
-    return Evox\ApiWhatsApp::sendWhatsAppMessage([
-        'message' => Evox\ApiWhatsAppMessages::getIptvSetUpMessage(),
+    return Unlimited\ApiWhatsApp::sendWhatsAppMessage([
+        'message' => Unlimited\ApiWhatsAppMessages::getIptvSetUpMessage(),
         'image' => null,
         'contact' => [
             "phone" => $data['whatsapp'],

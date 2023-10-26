@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if(Evox\ViewPerMovie::add($UserLogin->company_id,$data['movie_id']))
+    if(Unlimited\ViewPerMovie::add($UserLogin->company_id,$data['movie_id']))
     {
         $data['r'] = 'DATA_OK';
         $data['s'] = 1;

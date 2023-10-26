@@ -6,8 +6,8 @@ $landing = HCStudio\Util::getVarFromPGS('landing');
 
 if($landing)
 {
-	if($user_login_id = (new Evox\UserAccount)->getIdByLanding($landing))
+	if($user_login_id = (new Unlimited\UserAccount)->getIdByLanding($landing))
 	{
-		HCStudio\Util::redirectTo(Evox\UserLogin::_getLanding($user_login_id));
+		HCStudio\Util::redirectTo(Unlimited\UserLogin::_getLanding($user_login_id));
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 
 use BlockChain\Wallet;
-use Evox\UserData;
+use Unlimited\UserData;
 
  define("TO_ROOT", "../../");
 
@@ -9,7 +9,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -68,7 +68,7 @@ function getTransactionData($lastTransaction = null,string $public_key) : array
     if($user_login_id = (new BlockChain\Wallet)->getUserIdByPublicKey($output->address))
     {
 
-        $names = (new Evox\UserData)->getNames($user_login_id);
+        $names = (new Unlimited\UserData)->getNames($user_login_id);
     }
 
     return [

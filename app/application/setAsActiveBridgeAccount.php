@@ -4,15 +4,15 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getVarFromPGS();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['user_bridge_account_id'])
     {
-        if(Evox\UserBridgeAccount::setAs([
+        if(Unlimited\UserBridgeAccount::setAs([
             'user_bridge_account_id' => $data['user_bridge_account_id'],
-            'status' => Evox\UserBridgeAccount::ACTIVE
+            'status' => Unlimited\UserBridgeAccount::ACTIVE
         ]))
         {
             $data['r'] = 'DATA_OK';

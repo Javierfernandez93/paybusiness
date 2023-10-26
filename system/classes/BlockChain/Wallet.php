@@ -8,7 +8,7 @@ use HCStudio\Token;
 
 use BlockChain\Transaction;
 
-use Evox\ShortUrl;
+use Unlimited\ShortUrl;
 
 use JFStudio\Constants;
 
@@ -25,7 +25,7 @@ class Wallet extends Orm
 	const EWALLET_FORMAT = 'secp256k1';
 
 	/* LINKING */
-	const MAIN_URL = 'soyevox.com/';
+	const MAIN_URL = 'unlimited.com/';
     const PROTOCOL = 'https://';
     const EWALLET_URL = 'apps/ewallet/send?address=';
     const EWALLET_CHECKOUT_URL = 'apps/ewallet/checkout';

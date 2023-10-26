@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if($data["sponsor_id"])
 {	
-	$UserData = new Evox\UserData;
+	$UserData = new Unlimited\UserData;
 
 	if(is_numeric($data["sponsor_id"]))
 	{

@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 if($UserLogin->logged === true)
 {	
-	if((new Evox\IntentChat)->add($data))
+	if((new Unlimited\IntentChat)->add($data))
 	{
         $data['s'] = 1;
         $data['r'] = 'DATA_OK';

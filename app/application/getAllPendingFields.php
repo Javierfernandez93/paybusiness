@@ -4,15 +4,15 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $BuyPerUser = new Evox\BuyPerUser;
+    $BuyPerUser = new Unlimited\BuyPerUser;
 
-    if($BuyPerUser->hasPackageBuy($UserLogin->company_id,Evox\Package::MARKETING_BASIC) || $BuyPerUser->hasPackageBuy($UserLogin->company_id,Evox\Package::MARKETING_PRO))
+    if($BuyPerUser->hasPackageBuy($UserLogin->company_id,Unlimited\Package::MARKETING_BASIC) || $BuyPerUser->hasPackageBuy($UserLogin->company_id,Unlimited\Package::MARKETING_PRO))
     {
-        if($marketingFields = (new Evox\MarketingFieldPerUser)->getAllPendingTypes($UserLogin->company_id))
+        if($marketingFields = (new Unlimited\MarketingFieldPerUser)->getAllPendingTypes($UserLogin->company_id))
         {
             $data["marketingFields"] = $marketingFields;
             $data["s"] = 1;

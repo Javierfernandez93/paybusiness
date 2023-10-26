@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if(true)
 {	
-    if($campaigns = (new Evox\WhatsappCampaign)->getAll())
+    if($campaigns = (new Unlimited\WhatsappCampaign)->getAll())
     {
         $data['campaigns'] = $campaigns;
         $data['r'] = 'DATA_OK';

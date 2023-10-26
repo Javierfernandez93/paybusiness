@@ -9,12 +9,12 @@ $returnData = Array();
 
 
 $returnData['buy_per_user_login'] = HCStudio\Util::getVarFromPGS('buy_per_user_login');
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
 	if($returnData["buy_per_user_login"]){
-		$BuyPerUser = new Evox\BuyPerUser();
+		$BuyPerUser = new Unlimited\BuyPerUser();
 
 		$BuyPerUser->setId($returnData["buy_per_user_login"]);
 

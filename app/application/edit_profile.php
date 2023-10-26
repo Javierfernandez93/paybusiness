@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -53,7 +53,7 @@ if($UserLogin->logged === true)
 
 function updateUserData($data = null,$company_id = null)
 {
-    $UserData = new Evox\UserData;   
+    $UserData = new Unlimited\UserData;   
         
     if($UserData->loadWhere("user_login_id = ?",$company_id))
     {
@@ -67,7 +67,7 @@ function updateUserData($data = null,$company_id = null)
 
 function updateUserContact($data = null,$company_id = null)
 {
-    $UserContact = new Evox\UserContact;   
+    $UserContact = new Unlimited\UserContact;   
         
     if($UserContact->loadWhere("user_login_id = ?",$company_id))
     {
@@ -80,7 +80,7 @@ function updateUserContact($data = null,$company_id = null)
 
 function updateUserAccount($data = null,$company_id = null)
 {
-    $UserAccount = new Evox\UserAccount;   
+    $UserAccount = new Unlimited\UserAccount;   
         
     if($UserAccount->loadWhere("user_login_id = ?",$company_id))
     {
@@ -102,7 +102,7 @@ function updateUserAccount($data = null,$company_id = null)
 
 function updateUserAddress($data = null,$company_id = null)
 {
-    $UserAddress = new Evox\UserAddress;   
+    $UserAddress = new Unlimited\UserAddress;   
         
     if($UserAddress->loadWhere("user_login_id = ?",$company_id))
     {
@@ -117,7 +117,7 @@ function updateUserAddress($data = null,$company_id = null)
 
 function updatePaymentMethodPerUser($data = null,$company_id = null)
 {
-    $PaymentMethodPerUser = new Evox\PaymentMethodPerUser;   
+    $PaymentMethodPerUser = new Unlimited\PaymentMethodPerUser;   
         
     if(!$PaymentMethodPerUser->loadWhere("user_login_id = ?",$company_id))
     {

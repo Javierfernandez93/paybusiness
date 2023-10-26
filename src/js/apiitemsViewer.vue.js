@@ -53,7 +53,7 @@ const ApiitemsViewer = {
         },
         getHtmlPlugin(url,encode) {
             const html = `
-                <a href="${url}" target="_blank"><img src="https://www.soyevox.com/src/img/buy-now.svg" alt="Evox Quick payments" style="width:10rem;"></a>
+                <a href="${url}" target="_blank"><img src="https://www.unlimited.com/src/img/buy-now.svg" alt="Unlimited Quick payments" style="width:10rem;"></a>
             `
             return encode ? html.replace(/</g, "&lt;").replace(/>/g, "&gt;") : html
         },
@@ -96,7 +96,7 @@ const ApiitemsViewer = {
                 title: "Button's integration",
                 html: `
                     <div class="row justify-content-center">
-                       <div class="col-12 col-xl-8">
+                       <div class="col-12">
                             <div class="card">
                                 <ul class="list-group">
                                     <li class="list-group-item">
@@ -114,7 +114,7 @@ const ApiitemsViewer = {
                                                 </div>
                                             </div>
                                             <div class="col-12 col-xl-2">
-                                                <a href="`+item.short_url.url+`" target="_blank"><img src="https://www.soyevox.com/src/img/buy-now.svg" alt="Evox Quick payments" style="width:10rem;"></a>
+                                                <a href="`+item.short_url.url+`" target="_blank"><img src="https://www.unlimited.com/src/img/buy-now.svg" alt="Unlimited Quick payments" style="width:10rem;"></a>
                                             </div>
                                         </div>
                                     </li>
@@ -249,7 +249,7 @@ const ApiitemsViewer = {
                     </div>
                 </div>
                 <div v-for="(item,index) in items" class="row mb-3 pb-3">
-                   <div class="col-12 col-xl-8">
+                   <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row align-items-center">

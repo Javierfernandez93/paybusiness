@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($credits = (new Evox\CreditPerUser)->getCreditsAmount($UserLogin->company_id))
+    if($credits = (new Unlimited\CreditPerUser)->getCreditsAmount($UserLogin->company_id))
     {
         $data['credits'] = $credits;
         $data['r'] = 'DATA_OK';

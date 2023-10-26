@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {   
-    if($commissions = (new Evox\CommissionPerUser)->getAll($UserLogin->company_id))
+    if($commissions = (new Unlimited\CommissionPerUser)->getAll($UserLogin->company_id))
     {
         $data['commissions'] = $commissions;
         $data["s"] = 1;

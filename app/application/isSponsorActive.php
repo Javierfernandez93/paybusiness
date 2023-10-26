@@ -8,11 +8,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $data['active'] = (new Evox\LicencePerUser)->isActiveSomeTime((new Evox\UserReferral)->getReferralId($UserLogin->company_id));
+    $data['active'] = (new Unlimited\LicencePerUser)->isActiveSomeTime((new Unlimited\UserReferral)->getReferralId($UserLogin->company_id));
     $data["s"] = 1;
 	$data["r"] = "DATA_OK";
 } else {

@@ -8,7 +8,7 @@ if($data['secret'])
 {
     if($data['email'])
     {
-        $UserLogin = new Evox\UserLogin(false,false);
+        $UserLogin = new Unlimited\UserLogin(false,false);
     
         if($UserLogin->isValidSecretForValidateEmail($data['secret'],$data['email']))
         {

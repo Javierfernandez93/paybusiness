@@ -68,7 +68,7 @@ const AdminsignalsViewer = {
                 size: 'modal-fullscreen',
                 html: `
                     <div class="row justify-content-center">
-                       <div class="col-12 col-xl-8">
+                       <div class="col-12">
                             <div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" value="🔵" name="signal" id="forex">

@@ -4,7 +4,7 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
@@ -18,7 +18,7 @@ if($UserLogin->logged === true)
                 'format' => $Wallet->format,
                 'totalReceived' => $Wallet->format,
                 'totalSent' => $Wallet->format,
-                'link' => (new Evox\ShortUrl)->getLink($Wallet),
+                'link' => (new Unlimited\ShortUrl)->getLink($Wallet),
                 'transactions' => BlockChain\BlockChain::getCountTransactions($Wallet->getId()),
             ];
 

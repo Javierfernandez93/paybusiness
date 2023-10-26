@@ -62,7 +62,7 @@ const StorepaymentmethodsViewer = {
     },
     template : `
         <div v-if="catalogPaymentMethods" class="row justify-content-center">
-           <div class="col-12 col-xl-8">
+           <div class="col-12">
                 <ul class="list-group">
                     <li v-for="catalogPaymentMethod in catalogPaymentMethods" class="list-group-item list-group-item-action f-zoom-element-sm">
                         <div class="row align-items-center cursor-pointer py-3">

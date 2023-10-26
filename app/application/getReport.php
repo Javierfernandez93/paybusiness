@@ -4,12 +4,12 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $ProfitPerUser = new Evox\ProfitPerUser;
-    $TransactionPerWallet = new Evox\TransactionPerWallet;
+    $ProfitPerUser = new Unlimited\ProfitPerUser;
+    $TransactionPerWallet = new Unlimited\TransactionPerWallet;
 
     $data['first_day'] = strtotime("2022-06-10 00:00:00");
     
@@ -42,7 +42,7 @@ if($UserSupport->logged === true)
 function format(array $deposits = null) : array 
 {
     $sum = 0;
-    $ProfitPerUser = new Evox\ProfitPerUser;
+    $ProfitPerUser = new Unlimited\ProfitPerUser;
 
     foreach($deposits as $key => $deposit) 
     {

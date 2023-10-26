@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
@@ -15,9 +15,9 @@ if($UserLogin->logged === true)
         $filter = " AND commission_per_user.catalog_commission_type_id IN ({$data['catalog_commission_type_id']})";
     }
 
-    if($commissions = (new Evox\CommissionPerUser)->getAll($UserLogin->company_id,$filter))
+    if($commissions = (new Unlimited\CommissionPerUser)->getAll($UserLogin->company_id,$filter))
     {
-        $data['active'] = (new Evox\BuyPerUser)->isActive($UserLogin->company_id);
+        $data['active'] = (new Unlimited\BuyPerUser)->isActive($UserLogin->company_id);
         $data['commissions'] = $commissions;
         $data['r'] = 'DATA_OK';
         $data['s'] = 1;

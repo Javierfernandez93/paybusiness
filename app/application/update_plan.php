@@ -4,15 +4,15 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $CatalogPlan = new Evox\CatalogPlan;
+    $CatalogPlan = new Unlimited\CatalogPlan;
     
     if($CatalogPlan->isAviableProfit($data['catalog_plan_id'],$data['additional_profit'],$data['sponsor_profit']))
     {
-        $UserWallet = new Evox\UserWallet;
+        $UserWallet = new Unlimited\UserWallet;
                 
         if($UserWallet->getSafeWallet($data['user_login_id']))
         {   
@@ -20,13 +20,13 @@ if($UserSupport->logged === true)
 
             if($data['deposit'] > 0)
             {
-                if($UserWallet->doTransaction($data['deposit'],Evox\Transaction::DEPOSIT,null,null,false))
+                if($UserWallet->doTransaction($data['deposit'],Unlimited\Transaction::DEPOSIT,null,null,false))
                 {
                     $data["transaction_done"] = true;
                 }
             }
 
-            $UserPlan = new Evox\UserPlan;
+            $UserPlan = new Unlimited\UserPlan;
 
             if($UserPlan->setPlan($UserWallet->user_login_id,$data['additional_profit'],$data['sponsor_profit']))
             {   
@@ -41,7 +41,7 @@ if($UserSupport->logged === true)
             $data['s'] = 0;
         }
     } else {
-        $data['MAX_PROFIT'] = Evox\CatalogPlan::MAX_PROFIT;
+        $data['MAX_PROFIT'] = Unlimited\CatalogPlan::MAX_PROFIT;
         $data['r'] = "PROFIT_EXCEDS_MAX_LIMIT";
         $data['s'] = 0;
     }

@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    if($tickets = (new Evox\TicketPerUser)->getAllFromUsers())
+    if($tickets = (new Unlimited\TicketPerUser)->getAllFromUsers())
     {
         $data['tickets'] = $tickets;
         $data['s'] = 1;

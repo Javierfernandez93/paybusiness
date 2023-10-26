@@ -4,9 +4,9 @@ namespace Jcart;
 
 use HCStudio\Session;
 
-use Evox\Package;
-use Evox\Product;
-use Evox\CatalogPaymentMethod;
+use Unlimited\Package;
+use Unlimited\Product;
+use Unlimited\CatalogPaymentMethod;
 
 use HCStudio\Util;
 use HCStudio\Token;

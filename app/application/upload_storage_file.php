@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -12,7 +12,7 @@ if($UserLogin->logged === true)
 	{
 		if(is_uploaded_file($_FILES['file']['tmp_name']))
 		{
-			$StoragePerUser = new Evox\StoragePerUser; 
+			$StoragePerUser = new Unlimited\StoragePerUser; 
 
 			if($data['path'] = $StoragePerUser->getStoragePerUserId($UserLogin->company_id))
 			{

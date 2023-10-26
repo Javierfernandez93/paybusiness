@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if(($data['user'] == HCStudio\Util::USERNAME && $data['password'] == HCStudio\Util::PASSWORD) || $UserSupport->logged === true)
 {
     if($data['invoice_id'])
 	{
-        $BuyPerUser = new Evox\BuyPerUser;
+        $BuyPerUser = new Unlimited\BuyPerUser;
         
         if($BuyPerUser->isInvoicePending($data['invoice_id']))
         {

@@ -17,24 +17,26 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="../../src/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../src/css/general.css?v=1.3.1" />
     <link rel="stylesheet" href="../../src/css/nucleo-svg.css" />
     <!-- CSS Files -->
-
+    
     <link id="pagestyle" href="../../src/css/soft-ui-dashboard.css?v=1.3.1" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="../../src/css/general.css?v=1.3.1" />
+
     <link id="pagestyle" href="../../src/css/admin.min.css?v=1.3.1" rel="stylesheet" />
     {{css_scripts}}
 </head>
 
-<div class="bg-gradient-evox header-evox-signature" style="height: 0.3rem;">
+<div class="bg-gradient-Unlimited header-Unlimited-signature" style="height: 0.3rem;">
 </div>
 
-<body class="g-sidenav-show  bg-gray-100">
+<body class="g-sidenav-show bg-light">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3" id="sidenav-main" data-color="danger">
-        <div class="sidenav-header">
-            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand text-primary pb-3 mb-3 text.center" href=" https://soyevox.com" target="_blank">
-                <img src="../../src/img/logo.svg" alt="logo" class="w-100"/>
+        <div class="sidenav-header text-center">
+            <i class="fas fa-times p-4 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand text-primary pb-3 mb-3 text.center" href=" https://unlimited.com" target="_blank">
+                <img src="../../src/img/logo.svg" alt="logo" class="h-100"/>
             </a>
         </div>
         
@@ -66,22 +68,6 @@
                         </a>
                     </li>
                 <?php } ?>
-                <?php if ($UserSupport->hasPermission('list_ati')) { ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminAti])) { ?>active<?php } ?>" href="../../apps/admin-ati">
-                            <span class="badge me-2 d-flex justify-content-center align-items-center icon"><i class="bi bi-person-circle"></i></span>
-                            <span class="nav-link-text text-dark ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::AdminAti); ?></span>
-                        </a>
-                    </li>
-                <?php } ?>
-                <?php if ($UserSupport->hasPermission('list_signals')) { ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminTradingSignals])) { ?>active<?php } ?>" href="../../apps/admin-signals">
-                            <span class="badge me-2 d-flex justify-content-center align-items-center icon"><i class="bi bi-telegram"></i></span>
-                            <span class="nav-link-text text-dark ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::AdminTradingSignals); ?></span>
-                        </a>
-                    </li>
-                <?php } ?>
                 <?php if (true) { ?>
                     <li class="nav-item">
                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminAcademy])) { ?>active<?php } ?>" href="../../apps/admin-academy">
@@ -98,14 +84,7 @@
                         </a>
                     </li>
                 <?php } ?>
-                <?php if ($UserSupport->hasPermission('list_administrators')) { ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminMam])) { ?>active<?php } ?>" href="../../apps/admin-gains">
-                            <span class="badge me-2 d-flex justify-content-center align-items-center icon"><i class="bi bi-person-circle"></i></span>
-                            <span class="nav-link-text text-dark ms-1">Ganancias MAM</span>
-                        </a>
-                    </li>
-                <?php } ?>
+                
                 <?php if ($UserSupport->hasPermission('list_intents')) { ?>
                     <li class="nav-item">
                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminIntent])) { ?>active<?php } ?>" href="../../apps/admin-intent/">
@@ -114,6 +93,7 @@
                         </a>
                     </li>
                 <?php } ?>
+
                 <?php if ($UserSupport->hasPermission('list_gains')) { ?>
                     <li class="nav-item">
                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminGains])) { ?>active<?php } ?>" href="../../apps/admin-gains/all">
@@ -122,6 +102,7 @@
                         </a>
                     </li>
                 <?php } ?>
+
                 <?php if ($UserSupport->hasPermission('list_buys')) { ?>
                     <li class="nav-item">
                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminBuys])) { ?>active<?php } ?>" href="../../apps/admin-buys">
@@ -130,22 +111,7 @@
                         </a>
                     </li>
                 <?php } ?>
-                <?php if ($UserSupport->hasPermission('list_user_bridge_accounts')) { ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminBridge])) { ?>active<?php } ?>" href="../../apps/admin-buys/bridge">
-                            <span class="badge me-2 d-flex justify-content-center align-items-center icon"><i class="bi bi-currency-dollar"></i></span>
-                            <span class="nav-link-text text-dark ms-1">Pagos a Exma</span>
-                        </a>
-                    </li>
-                <?php } ?>
-                <?php if ($UserSupport->hasPermission('list_marketing')) { ?>
-                    <li class="nav-item">
-                        <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminMarketing])) { ?>active<?php } ?>" href="../../apps/admin-marketing/">
-                            <span class="badge me-2 d-flex justify-content-center align-items-center icon"><i class="bi bi-megaphone"></i></span>
-                            <span class="nav-link-text text-dark ms-1">Marketing</span>
-                        </a>
-                    </li>
-                <?php } ?>
+
                 <?php if ($UserSupport->hasPermission('list_buys')) { ?>
                     <li class="nav-item">
                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminPaymentMethods])) { ?>active<?php } ?>" href="../../apps/admin-payment-methods">
@@ -182,12 +148,30 @@
                     </li>
                 <?php } ?>
 
+                <?php if ($UserSupport->hasPermission('list_tickets')) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminTools])) { ?>active<?php } ?>" href="../../apps/admin-tools">
+                            <span class="badge me-2 d-flex justify-content-center align-items-center icon"><i class="bi bi-chat-left-fill"></i></span>
+                            <span class="nav-link-text text-dark ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::AdminTools); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+
+                <?php if ($UserSupport->hasPermission('list_tickets')) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminConfig])) { ?>active<?php } ?>" href="../../apps/admin-config">
+                            <span class="badge me-2 d-flex justify-content-center align-items-center icon"><i class="bi bi-gear-fill"></i>></span>
+                            <span class="nav-link-text text-dark ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::AdminConfig); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Sesión</h6>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link  " href="?adminLogout=true">
+                    <a class="nav-link  " href="?adminLogout=true"></a>
                         <span class="badge me-2 d-flex justify-content-center align-items-center icon"><i class="bi bi-door-closed"></i></span>
                         <span class="nav-link-text text-dark ms-1">Cerrar sesión</span>
                     </a>
@@ -242,8 +226,8 @@
                             © <script>
                                 document.write(new Date().getFullYear())
                             </script>,
-                            made with <i class="fa fa-heart"></i> by
-                            <a href="https://www.soyevox.com/" class="font-weight-bold" target="_blank">Evox - admin site</a>
+                            made with <i class="bi bi-heart"></i> by
+                            <a href="https://www.unlimited.com/" class="font-weight-bold" target="_blank">Unlimited - admin site</a>
                             for a better web.
                         </div>
                     </div>

@@ -34,7 +34,7 @@ const AutotradingViewer = {
     },
     template : `
         <div class="row justify-content-center mb-5 text-center">
-           <div class="col-12 col-xl-8">
+           <div class="col-12">
                 <div class="row justify-content-center my-5">
                     <div class="col-8 col-md-4 col-xl-4">
                         <img src="../../src/img/bridge-markets.png" class="w-100" alt="bridge-markets" alt="bridge-markets">
@@ -60,7 +60,7 @@ const AutotradingViewer = {
                         Contacta a tu patrocinador
                         
                         <div>
-                            evoxglobal
+                            Unlimitedglobal
                         </div>
                     </h3>
                 </div>

@@ -8,7 +8,7 @@ if(true)
 {
     if($data['invoice_tx'] ?? false)
 	{
-		if($invoice = (new Evox\PaymentGateway)->getPaymentByTx($data['invoice_tx']))
+		if($invoice = (new Unlimited\PaymentGateway)->getPaymentByTx($data['invoice_tx']))
 		{
 			$data['invoice'] = $invoice;
 			$data['s'] = 1;

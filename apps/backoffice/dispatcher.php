@@ -6,7 +6,7 @@ $link = HCStudio\Util::getVarFromPGS('link');
 
 if($link)
 {
-	if((new Evox\ShortUrl)->existCode($link)) {
-		Evox\ShortUrl::redirectToUrlByCode($link);
+	if((new Unlimited\ShortUrl)->existCode($link)) {
+		Unlimited\ShortUrl::redirectToUrlByCode($link);
 	}
 }

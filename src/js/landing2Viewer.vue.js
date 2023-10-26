@@ -133,18 +133,18 @@ const Landing2Viewer = {
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
                 <span class="fs-4">
-                    <img src="https://www.soyevox.com/src/img/logo-horizontal-dark-letters.svg" width="222px" alt="logo">
+                    <img src="https://www.unlimited.com/src/img/logo-horizontal-dark-letters.svg" width="222px" alt="logo">
                 </span>
             </a>
 
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">INICIO</a></li>
-                <li class="nav-item"><a href="https://www.soyevox.com/apps/login" class="nav-link">Iniciar sesión</a></li>
+                <li class="nav-item"><a href="https://www.unlimited.com/apps/login" class="nav-link">Iniciar sesión</a></li>
             </ul>
             </header>
         </div>
 
-        <section class="section-1 cover position-relative" style="background-image: url('https://www.soyevox.com/src/img/landing-1.jpg')">
+        <section class="section-1 cover position-relative" style="background-image: url('https://www.unlimited.com/src/img/landing-1.jpg')">
             <div class="row align-items-center bg-gradient-warning position-relative text-center fs-3 fw-semibold text-white py-3" style="z-index:1">
                 <div class="col-12">
                     Empieza a ganar dinero por internet y mejora tus finanzas
@@ -247,24 +247,24 @@ const Landing2Viewer = {
                 <div class="container text-center">
                     <div class="row">
                         <div class="col-xl-12">
-                            <div class="fw-semibold text-dark fs-2">¿Qué es Evox?</div>
+                            <div class="fw-semibold text-dark fs-2">¿Qué es Unlimited?</div>
                         </div>
                     </div>
                     <div class="row py-5">
                         <div class="col-xl-4">
                             <div class="fw-semibold text-dark fs-4">Nuestra misión</div>    
-                            <img src="https://www.soyevox.com/src/img/landing-1-section-0-1.jpg" class="img-fluid" alt="imagen1">
+                            <img src="https://www.unlimited.com/src/img/landing-1-section-0-1.jpg" class="img-fluid" alt="imagen1">
                             
                             <div class="text-dark fs-5">Ayudamos a los emprendedores novatos a iniciar un negocio rentable, vendiendo productos digitales por internet</div>
                         </div>
                         <div class="col-xl-4">
                             <div class="fw-semibold text-dark fs-4">¿Qué enseñamos?</div>
-                            <img src="https://www.soyevox.com/src/img/landing-1-section-0-2.jpg" class="img-fluid" alt="imagen2">
+                            <img src="https://www.unlimited.com/src/img/landing-1-section-0-2.jpg" class="img-fluid" alt="imagen2">
                             <div class="text-dark fs-5">Enseñamos las habilidades necesarias para vender productos digitales por internet: marketing digital, ventas online, tráfico web y conversiones</div>
                         </div>
                         <div class="col-xl-4">
                             <div class="fw-semibold text-dark fs-4">¿Cómo enseñamos?</div>
-                            <img src="https://www.soyevox.com/src/img/landing-1-section-0-3.jpg" class="img-fluid" alt="imagen3">
+                            <img src="https://www.unlimited.com/src/img/landing-1-section-0-3.jpg" class="img-fluid" alt="imagen3">
                             <div class="text-dark fs-5">Tenemos una academia donde ofrecemos cursos online que enseñan paso a paso y desde cero, cómo convertirte en súper afiliado o productor exitoso</div>
                         </div>
                     </div>
@@ -281,7 +281,7 @@ const Landing2Viewer = {
                 <div class="container">
                     <div class="row text-center">
                         <div class="col-xl-12">
-                            <div class="fw-semibold text-white text-decoration-underline fs-1">¿Para quién es Evox?</div>
+                            <div class="fw-semibold text-white text-decoration-underline fs-1">¿Para quién es Unlimited?</div>
                         </div>
                     </div>
                     <div class="row py-5">
@@ -402,7 +402,7 @@ const Landing2Viewer = {
                 <div class="container">
                     <div class="row text-center">
                         <div class="col-xl-12">
-                            <div class="fw-semibold fs-1">¿Qué te ofrece Evox?</div>
+                            <div class="fw-semibold fs-1">¿Qué te ofrece Unlimited?</div>
                         </div>
                     </div>
                     <div class="row py-5">
@@ -420,7 +420,7 @@ const Landing2Viewer = {
                             </div>
                             <div class="row mb-3 align-items-center">
                                 <div class="col-12">
-                                    <img src="https://www.soyevox.com/src/img/landing-1-section-1-1.jpg" class="img-fluid" style="height:22rem" alt="imagen4">
+                                    <img src="https://www.unlimited.com/src/img/landing-1-section-1-1.jpg" class="img-fluid" style="height:22rem" alt="imagen4">
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -443,7 +443,7 @@ const Landing2Viewer = {
                             </div>
                             <div class="row mb-3 align-items-center">
                                 <div class="col-12">
-                                    <img src="https://www.soyevox.com/src/img/landing-1-section-1-2.jpg" class="img-fluid" style="height:22rem" alt="imagen5">
+                                    <img src="https://www.unlimited.com/src/img/landing-1-section-1-2.jpg" class="img-fluid" style="height:22rem" alt="imagen5">
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -459,7 +459,7 @@ const Landing2Viewer = {
 
         <div v-if="user.referral.phone" class="position-fixed top-50 end-0 translate-middle-y pe-4" style="z-index:10">
             <div class="mb-3">
-                <a :href="user.referral.phone.getWhatsAppFromText('¡Hola! me gustaría tener más información de Evox')" target="_blank" class="btn btn-success rounded-circle shadow-lg">
+                <a :href="user.referral.phone.getWhatsAppFromText('¡Hola! me gustaría tener más información de Unlimited')" target="_blank" class="btn btn-success rounded-circle shadow-lg">
                     <i class="bi bi-whatsapp display-1"></i>
                 </a>
             </div>

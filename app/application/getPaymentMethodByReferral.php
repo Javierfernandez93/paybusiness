@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($paymentMethod = (new Evox\PaymentMethodPerUser)->_get($UserLogin->getReferralId()))
+    if($paymentMethod = (new Unlimited\PaymentMethodPerUser)->_get($UserLogin->getReferralId()))
     {
         $data['paymentMethod'] = $paymentMethod;
         $data['s'] = 1;

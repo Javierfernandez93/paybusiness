@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -17,18 +17,18 @@ if($UserLogin->logged === true)
 		{
 			if($BuyPerUser = saveBuy($Cart,$UserLogin))
 			{	
-				if(Evox\Product::hasProductWithSku($Cart->getItems(),Evox\Product::MAM_SKU))
+				if(Unlimited\Product::hasProductWithSku($Cart->getItems(),Unlimited\Product::MAM_SKU))
 				{
-					Evox\BuyPerBridge::add([
+					Unlimited\BuyPerBridge::add([
 						'user_bridge_account_id' => $data['user_bridge_account_id'],
 						'buy_per_user_id' => $BuyPerUser->getId(),
-						'catalog_bridge_buy_type_id' => Evox\CatalogBridgeBuyType::MAM
+						'catalog_bridge_buy_type_id' => Unlimited\CatalogBridgeBuyType::MAM
 					]);
-				} else if(Evox\Package::hasPackageWithSku($Cart->getItems(),Evox\Package::BRIDGE_FUNDS)) {
-					Evox\BuyPerBridge::add([
+				} else if(Unlimited\Package::hasPackageWithSku($Cart->getItems(),Unlimited\Package::BRIDGE_FUNDS)) {
+					Unlimited\BuyPerBridge::add([
 						'user_bridge_account_id' => $data['user_bridge_account_id'],
 						'buy_per_user_id' => $BuyPerUser->getId(),
-						'catalog_bridge_buy_type_id' => Evox\CatalogBridgeBuyType::BRIDGE_FUNDS
+						'catalog_bridge_buy_type_id' => Unlimited\CatalogBridgeBuyType::BRIDGE_FUNDS
 					]);
 				}
 				
@@ -71,23 +71,23 @@ if($UserLogin->logged === true)
 	$data['r'] = 'INVALID_CREDENTIALS';
 }
 
-function createTransaction(Evox\BuyPerUser $BuyPerUser = null,Evox\UserLogin $UserLogin = null)
+function createTransaction(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
 {
-	if($BuyPerUser->catalog_payment_method_id == Evox\CatalogPaymentMethod::COINPAYMENTS)
+	if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::COINPAYMENTS)
 	{
 		return createTransactionFromCoinPayments($BuyPerUser,$UserLogin);
-	} else if($BuyPerUser->catalog_payment_method_id == Evox\CatalogPaymentMethod::EWALLET) {
+	} else if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::EWALLET) {
 		return createTransactionFromEwallet($BuyPerUser,$UserLogin);
-	} else if($BuyPerUser->catalog_payment_method_id == Evox\CatalogPaymentMethod::PAYPAL) {
+	} else if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::PAYPAL) {
 		return createTransactionPayPal($BuyPerUser,$UserLogin);
-	} else if($BuyPerUser->catalog_payment_method_id == Evox\CatalogPaymentMethod::AIRTM) {
+	} else if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::AIRTM) {
 		return createTransactionAirtm($BuyPerUser,$UserLogin);
-	} else if($BuyPerUser->catalog_payment_method_id == Evox\CatalogPaymentMethod::CAPITALPAYMENTS) {
+	} else if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::CAPITALPAYMENTS) {
 		return createTransactionCapitalPayments($BuyPerUser,$UserLogin);
 	}
 }
 
-function createTransactionCapitalPayments(Evox\BuyPerUser $BuyPerUser = null,Evox\UserLogin $UserLogin = null)
+function createTransactionCapitalPayments(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
 {
     require_once TO_ROOT .'/vendor/autoload.php';
 
@@ -97,9 +97,9 @@ function createTransactionCapitalPayments(Evox\BuyPerUser $BuyPerUser = null,Evo
 		'amount' => $BuyPerUser->amount,
 		'invoice_id' => $BuyPerUser->invoice_id,
 		'unique_id' => $BuyPerUser->user_login_id,
-		'whatsapp' => (new Evox\UserContact)->getWhatsApp($BuyPerUser->user_login_id),
-		'name' => (new Evox\UserData)->getName($BuyPerUser->user_login_id),
-		'email' => (new Evox\UserLogin)->getEmail($BuyPerUser->user_login_id)
+		'whatsapp' => (new Unlimited\UserContact)->getWhatsApp($BuyPerUser->user_login_id),
+		'name' => (new Unlimited\UserData)->getName($BuyPerUser->user_login_id),
+		'email' => (new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id)
 	]);
 
 	if(isset($response['status']))
@@ -113,19 +113,19 @@ function createTransactionCapitalPayments(Evox\BuyPerUser $BuyPerUser = null,Evo
 	return false;
 }
 
-function createTransactionAirtm(Evox\BuyPerUser $BuyPerUser = null,Evox\UserLogin $UserLogin = null)
+function createTransactionAirtm(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
 {
 	return [
 		'amount' => $BuyPerUser->amount,
 		'txn_id' => $BuyPerUser->invoice_id,
 		'email' => JFStudio\Airtm::CUSTOMER_EMAIL,
 		'unix_time' => time(),
-		// 'checkout_url' => "http://localhost:8888/Evox/apps/airtm/process".$UserLogin->getPidQuery()."&txn_id={$BuyPerUser->invoice_id}"
-		'checkout_url' => "https://www.soyevox.com/apps/airtm/process".$UserLogin->getPidQuery()."&txn_id={$BuyPerUser->invoice_id}"
+		// 'checkout_url' => "http://localhost:8888/Unlimited/apps/airtm/process".$UserLogin->getPidQuery()."&txn_id={$BuyPerUser->invoice_id}"
+		'checkout_url' => "https://www.unlimited.com/apps/airtm/process".$UserLogin->getPidQuery()."&txn_id={$BuyPerUser->invoice_id}"
 	];
 }
 
-function createTransactionFromEwallet(Evox\BuyPerUser $BuyPerUser = null,Evox\UserLogin $UserLogin = null)
+function createTransactionFromEwallet(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
 {
 	return [
 		'amount' => $BuyPerUser->amount,
@@ -135,7 +135,7 @@ function createTransactionFromEwallet(Evox\BuyPerUser $BuyPerUser = null,Evox\Us
 	];
 }
 
-function createTransactionFromCoinPayments(Evox\BuyPerUser $BuyPerUser = null,Evox\UserLogin $UserLogin = null)
+function createTransactionFromCoinPayments(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
 {
 	try {
 		require_once TO_ROOT .'/vendor2/autoload.php';
@@ -152,7 +152,7 @@ function createTransactionFromCoinPayments(Evox\BuyPerUser $BuyPerUser = null,Ev
 			'custom' => $BuyPerUser->invoice_id,
 			'item_number' => $BuyPerUser->invoice_id,
 			'address' => '', // leave blank send to follow your settings on the Coin Settings page
-			'ipn_url' => 'https://www.soyevox.com/app/cronjob/ipn_coinpayments.php',
+			'ipn_url' => 'https://www.unlimited.com/app/cronjob/ipn_coinpayments.php',
 		];
 						
 		$result = $CoinpaymentsAPI->CreateCustomTransaction($req);
@@ -169,7 +169,7 @@ function createTransactionFromCoinPayments(Evox\BuyPerUser $BuyPerUser = null,Ev
 	}	
 }
 
-function createTransactionPayPal(Evox\BuyPerUser $BuyPerUser = null,Evox\UserLogin $UserLogin = null)
+function createTransactionPayPal(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
 {
 	require_once TO_ROOT . "/system/vendor/autoload.php";
 
@@ -225,7 +225,7 @@ function createTransactionPayPal(Evox\BuyPerUser $BuyPerUser = null,Evox\UserLog
 
 function saveBuy($Cart = null,$UserLogin = null)
 {
-	$BuyPerUser = new Evox\BuyPerUser;
+	$BuyPerUser = new Unlimited\BuyPerUser;
 	$BuyPerUser->user_login_id = $UserLogin->company_id;
 	$BuyPerUser->fee = $Cart->getVar('fee');
 	$BuyPerUser->item = $Cart->getFormatedItems();
@@ -234,7 +234,7 @@ function saveBuy($Cart = null,$UserLogin = null)
 	$BuyPerUser->invoice_id = $Cart->_instance_id;
 	$BuyPerUser->shipping = 0;
 	$BuyPerUser->catalog_payment_method_id = $Cart->getVar('catalog_payment_method_id');
-	$BuyPerUser->catalog_currency_id = $Cart->getVar('catalog_currency_id') ? $Cart->getVar('catalog_currency_id') : Evox\CatalogCurrency::USD;
+	$BuyPerUser->catalog_currency_id = $Cart->getVar('catalog_currency_id') ? $Cart->getVar('catalog_currency_id') : Unlimited\CatalogCurrency::USD;
 	$BuyPerUser->amount = $Cart->getTotalAmount(null,null,['fee'=>false]);
 	$BuyPerUser->create_date = time();
 

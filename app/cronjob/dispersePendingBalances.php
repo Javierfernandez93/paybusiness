@@ -4,15 +4,15 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getVarFromPGS();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 $data['PHP_AUTH_USER'] = $data['PHP_AUTH_USER'] ?? false;
 $data['PHP_AUTH_PW'] = $data['PHP_AUTH_PW'] ?? false;
 
 if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] == HCStudio\Util::PASSWORD) || $UserSupport->logged === true)
 {
-    $CommissionPerUser = new Evox\CommissionPerUser;
-    $BuyPerUser = new Evox\BuyPerUser;
+    $CommissionPerUser = new Unlimited\CommissionPerUser;
+    $BuyPerUser = new Unlimited\BuyPerUser;
     
     $dispertions = [];
     
@@ -31,7 +31,7 @@ if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ==
 
                     $CommissionPerUser::setCommissionAsDispersed($commission['commission_per_user_id'],$transaction_per_wallet_id);
     
-                    sendPush($commission['user_login_id'],"Hemos dispersado $ ".number_format($commission['amount'],2)." USD a tu ewallet.",Evox\CatalogNotification::GAINS);
+                    sendPush($commission['user_login_id'],"Hemos dispersado $ ".number_format($commission['amount'],2)." USD a tu ewallet.",Unlimited\CatalogNotification::GAINS);
                 }
             }
         }
@@ -47,7 +47,7 @@ if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ==
 
 function sendPush(string $user_login_id = null,string $message = null,int $catalog_notification_id = null) : bool
 {
-    return Evox\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
+    return Unlimited\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
 }
 
 function send(int $user_login_id = null,float $amountToSend = null,string $message = null)

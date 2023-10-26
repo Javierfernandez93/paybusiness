@@ -4,36 +4,36 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
     if($data['invoice_id'])
 	{
-        if((new Evox\LicencePerUser)->hasAviableLicences($UserLogin->company_id))
+        if((new Unlimited\LicencePerUser)->hasAviableLicences($UserLogin->company_id))
         {
-            $BuyPerUser = new Evox\BuyPerUser;
+            $BuyPerUser = new Unlimited\BuyPerUser;
             
             if($BuyPerUser->isInvoicePending($data['invoice_id']))
             {
                 if($BuyPerUser->loadWhere('invoice_id = ?',$data['invoice_id']))
                 {	
-                    if(Evox\BuyPerUser::processPayment($BuyPerUser->getId()))
+                    if(Unlimited\BuyPerUser::processPayment($BuyPerUser->getId()))
                     {
-                        $BuyPerUser->catalog_validation_method_id = Evox\CatalogValidationMethod::INTERNAL_USER;
+                        $BuyPerUser->catalog_validation_method_id = Unlimited\CatalogValidationMethod::INTERNAL_USER;
                         // $BuyPerUser->ipn_data = $data['ipn_data'] ? $data['ipn_data'] : '';
                         $BuyPerUser->approved_date = time();
                         $BuyPerUser->user_support_id = $data['user_support_id'] ? $data['user_support_id'] : $BuyPerUser->user_support_id;
-                        $BuyPerUser->status = Evox\BuyPerUser::VALIDATED;
+                        $BuyPerUser->status = Unlimited\BuyPerUser::VALIDATED;
     
                         if($BuyPerUser->save())
                         {
-                            if(Evox\LicencePerUser::assignLicence($UserLogin->company_id,$BuyPerUser->user_login_id))
+                            if(Unlimited\LicencePerUser::assignLicence($UserLogin->company_id,$BuyPerUser->user_login_id))
                             {
                                 $data['licenceReleased'] = true;
                             }
 
-                            // if(sendEmail((new Evox\UserLogin)->getEmail($BuyPerUser->user_login_id),$BuyPerUser->invoice_id))
+                            // if(sendEmail((new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),$BuyPerUser->invoice_id))
                             // {
                             //     $data['mail_sent'] = true;
                             // }
@@ -85,7 +85,7 @@ function sendEmail(string $email = null,string $invoice_id = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Evox\CatalogMailController::init(1);
+            $CatalogMailController = Unlimited\CatalogMailController::init(1);
 
             $Layout->setVar([
                 "invoice_id" => $invoice_id,
@@ -109,7 +109,7 @@ function sendEmail(string $email = null,string $invoice_id = null) : bool
             //Content
             $mail->isHTML(true);                                  
             $mail->CharSet = 'UTF-8';
-            $mail->Subject = 'Bienvenido a Evox';
+            $mail->Subject = 'Bienvenido a Unlimited';
             $mail->Body = $Layout->getHtml();
             $mail->AltBody = strip_tags($Layout->getHtml());
 

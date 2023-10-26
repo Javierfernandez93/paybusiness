@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if($data["mail"]){
 
-	$UserLogin = new Evox\UserLogin;
+	$UserLogin = new Unlimited\UserLogin;
 
 	if($UserLogin->isUniqueMail($data["mail"]))
 	{

@@ -2,7 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true) {
     HCStudio\Util::redirectTo(TO_ROOT."/apps/backoffice/");
@@ -20,6 +20,7 @@ $Layout->setScript([
 ]);
 
 $Layout->setVar([
-	'UserLogin' => $UserLogin
+	'UserLogin' => $UserLogin,
+    'company_name' => Unlimited\SystemVar::_getValue('company_name')
 ]);
 $Layout();

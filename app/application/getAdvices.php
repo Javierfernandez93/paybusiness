@@ -4,7 +4,7 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if(true)
 {	
@@ -23,8 +23,8 @@ if(true)
     shuffle($advices);
 
     $advices[] = [
-        'transactions' => (new Evox\TransactionPerWallet('blockchain'))->getCount(),
-        'advice_type' => Evox\AdviceType::TRANSACTIONS,
+        'transactions' => (new Unlimited\TransactionPerWallet('blockchain'))->getCount(),
+        'advice_type' => Unlimited\AdviceType::TRANSACTIONS,
         'showed' => false
     ];
     

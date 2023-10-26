@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -12,7 +12,7 @@ if($UserSupport->logged === true)
     {
         if($data['user_bridge_account_id'])
         {
-            if(Evox\UserBridgeAccount::updateBasicInfo($data))
+            if(Unlimited\UserBridgeAccount::updateBasicInfo($data))
             {
                 $data["s"] = 1;
                 $data["r"] = "DATA_OK";
@@ -28,7 +28,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'data' => $data['user_bridge_account_id'],
             'unix_date' => time(),
-        ],Evox\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';

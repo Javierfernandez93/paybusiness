@@ -14,7 +14,7 @@ if($data["email"])
 {
 	if($data["password"])
 	{		
-		$UserLogin = new Evox\UserLogin;
+		$UserLogin = new Unlimited\UserLogin;
 
 		if(!$UserLogin->needToUpdatePassword($data["email"]))
 		{
@@ -28,7 +28,7 @@ if($data["email"])
 		
 					if(filter_var($data['rememberMe'], FILTER_VALIDATE_BOOLEAN) == true)
 					{
-						JFStudio\Cookie::set(Evox\UserLogin::PID_NAME,$UserLogin->getPid());
+						JFStudio\Cookie::set(Unlimited\UserLogin::PID_NAME,$UserLogin->getPid());
 					}
 					
 					$data["data"] = $data;
@@ -37,7 +37,7 @@ if($data["email"])
 				} else {
 					$UserLogin->logout(false);
 
-					if($secret = Evox\UserLogin::updateSecret($data['email']))
+					if($secret = Unlimited\UserLogin::updateSecret($data['email']))
 					{
 						if(sendEmailToVerify($data['email'],$secret))
 						{
@@ -62,7 +62,7 @@ if($data["email"])
 		} else {
 			$UserLogin->logout(false);
 
-			if($secret = Evox\UserLogin::updateSecret($data['email']))
+			if($secret = Unlimited\UserLogin::updateSecret($data['email']))
 			{
 				if(sendEmailToUpdatePassword($data['email'],$secret))
 				{
@@ -101,7 +101,7 @@ function sendEmailToUpdatePassword(string $email = null,string $secret = null) :
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Evox\CatalogMailController::init(1);
+            $CatalogMailController = Unlimited\CatalogMailController::init(1);
 
             $Layout->setVar([
                 "email" => $email,
@@ -120,7 +120,7 @@ function sendEmailToUpdatePassword(string $email = null,string $secret = null) :
 
             //Recipients
             $mail->setFrom($CatalogMailController->mail, $CatalogMailController->sender);
-            $mail->addAddress($email, 'Usuario Evox');     
+            $mail->addAddress($email, 'Usuario Unlimited');     
 
             //Content
             $mail->isHTML(true);                                  
@@ -153,7 +153,7 @@ function sendEmailToVerify(string $email = null,string $secret = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Evox\CatalogMailController::init(1);
+            $CatalogMailController = Unlimited\CatalogMailController::init(1);
 
             $Layout->setVar([
                 "email" => $email,
@@ -172,7 +172,7 @@ function sendEmailToVerify(string $email = null,string $secret = null) : bool
 
             //Recipients
             $mail->setFrom($CatalogMailController->mail, $CatalogMailController->sender);
-            $mail->addAddress($email, 'Usuario Evox');     
+            $mail->addAddress($email, 'Usuario Unlimited');     
 
             //Content
             $mail->isHTML(true);                                  

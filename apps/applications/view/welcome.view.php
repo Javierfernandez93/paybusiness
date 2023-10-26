@@ -1,4 +1,4 @@
-<img src="https://www.soyevox.com/src/img/mail.jpg" alt="image" style="width:100%" title="image" />
+<img src="https://www.unlimited.com/src/img/mail.jpg" alt="image" style="width:100%" title="image" />
 
 <h2>¡Hola! <b><?php echo $names; ?></b></h2>
 
@@ -17,6 +17,6 @@
 
 <h3>
     <b>
-        Gracias de parte del equipo de Evox
+        Gracias de parte del equipo de <?php echo Unlimited\SystemVar::_getValue("company_name");?>
     </b>
 </h3>

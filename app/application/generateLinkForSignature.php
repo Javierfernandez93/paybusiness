@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if(true)
 {
-    if($sign_code = Evox\RemotePelSign::generateSignCode())
+    if($sign_code = Unlimited\RemotePelSign::generateSignCode())
     {
         $data["sign_code"] = $sign_code;
         $data["url"] = HCStudio\Connection::getMainPath()."/apps/lpoa/sign?s=".$sign_code;

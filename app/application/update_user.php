@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -53,7 +53,7 @@ if($UserSupport->logged === true)
 
 function updateUserData($data = null) : bool
 {
-    $UserData = new Evox\UserData;   
+    $UserData = new Unlimited\UserData;   
         
     if($UserData->loadWhere("user_login_id = ?",$data['user_login_id']))
     {
@@ -67,7 +67,7 @@ function updateUserData($data = null) : bool
 
 function updateUserContact($data = null) : bool
 {
-    $UserContact = new Evox\UserContact;   
+    $UserContact = new Unlimited\UserContact;   
         
     if($UserContact->loadWhere("user_login_id = ?",$data['user_login_id']))
     {
@@ -82,7 +82,7 @@ function updateUserContact($data = null) : bool
 
 function updateUserAccount($data = null) : bool
 {
-    $UserAccount = new Evox\UserAccount;   
+    $UserAccount = new Unlimited\UserAccount;   
         
     if($UserAccount->loadWhere("user_login_id = ?",$data['user_login_id']))
     {
@@ -96,7 +96,7 @@ function updateUserAccount($data = null) : bool
 
 function updateUserAddress($data = null) : bool
 {
-    $UserAddress = new Evox\UserAddress;   
+    $UserAddress = new Unlimited\UserAddress;   
         
     if($UserAddress->loadWhere("user_login_id = ?",$data['user_login_id']))
     {
@@ -110,7 +110,7 @@ function updateUserAddress($data = null) : bool
 
 function updateUserLogin($data = null) : bool
 {
-    $UserLogin = new Evox\UserLogin(false,false);   
+    $UserLogin = new Unlimited\UserLogin(false,false);   
         
     if($UserLogin->loadWhere("user_login_id = ?",$data['user_login_id']))
     {
@@ -126,7 +126,7 @@ function updateUserLogin($data = null) : bool
 
 function updateUserReferral($data = null) : bool
 {
-    $UserReferral = new Evox\UserReferral;   
+    $UserReferral = new Unlimited\UserReferral;   
         
     if($UserReferral->loadWhere("user_login_id = ?",$data['user_login_id']))
     {

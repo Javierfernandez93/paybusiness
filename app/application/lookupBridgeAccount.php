@@ -4,19 +4,19 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getVarFromPGS();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['user_bridge_account_id'])
     {     
-        $UserBridgeAccount = new Evox\UserBridgeAccount;
+        $UserBridgeAccount = new Unlimited\UserBridgeAccount;
         
         if($account = $UserBridgeAccount->getPending($data['user_bridge_account_id']))
         {
-            $ApiEvox = new Evox\ApiEvox;
+            $ApiUnlimited = new Unlimited\ApiUnlimited;
 
-            if($response = $ApiEvox->signupUser([
+            if($response = $ApiUnlimited->signupUser([
                 'firstname' => $account['first_name'],
                 'lastname' => $account['last_name'],
                 'address' => $account['address'],
@@ -35,9 +35,9 @@ if($UserSupport->logged === true)
             {
                 if($response['s'] == 1)
                 {
-                    if(Evox\UserBridgeAccount::setAccount($account['user_bridge_account_id'],$response['account']))
+                    if(Unlimited\UserBridgeAccount::setAccount($account['user_bridge_account_id'],$response['account']))
                     {
-                        if(sendPush($account['user_login_id'],'Hemos dado tu cuenta en Bridge funds',Evox\CatalogNotification::ACCOUNT))
+                        if(sendPush($account['user_login_id'],'Hemos dado tu cuenta en Bridge funds',Unlimited\CatalogNotification::ACCOUNT))
                         {
                             $data['push_sent'] = true;
                         }
@@ -71,7 +71,7 @@ if($UserSupport->logged === true)
 
 function sendPush(string $user_login_id = null,string $message = null,int $catalog_notification_id = null) : bool
 {
-    return Evox\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
+    return Unlimited\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
 }
 
 echo json_encode(HCStudio\Util::compressDataForPhone($data)); 

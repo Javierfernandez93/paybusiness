@@ -4,12 +4,12 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {	
-    $data['catalog_courses'] = (new Evox\CatalogCourse)->getAll();
-    $data['catalog_currencies'] = format((new Evox\CatalogCurrency)->getAll());
+    $data['catalog_courses'] = (new Unlimited\CatalogCourse)->getAll();
+    $data['catalog_currencies'] = format((new Unlimited\CatalogCurrency)->getAll());
     $data['r'] = 'DATA_OK';
     $data['s'] = 1;
 } else {

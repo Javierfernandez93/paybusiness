@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($banners = (new Evox\CatalogBanner)->getAll())
+    if($banners = (new Unlimited\CatalogBanner)->getAll())
     {
         $data['banners'] = format($banners,$data['campaign_banner_per_user_id']);
         $data['r'] = 'DATA_OK';
@@ -24,7 +24,7 @@ if($UserLogin->logged === true)
 
 function format(array $catalogBanners = null,int $campaign_banner_per_user_id = null) : array
 {
-    $BannerPerCampaign = new Evox\BannerPerCampaign;
+    $BannerPerCampaign = new Unlimited\BannerPerCampaign;
 
     return array_map(function($catalogBanner) use($BannerPerCampaign,$campaign_banner_per_user_id){
 

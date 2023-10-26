@@ -5,4 +5,4 @@
 <h3>Número de cuenta de trading: <b><?php echo $account;?></b></h3>
 <h3>Tipo de servicio o producto deseado: MAM <b><?php echo $type;?></b></h3>
     
-<h3>Atentamente el equipo Evox</h3>
+<h3>Atentamente el equipo Unlimited</h3>

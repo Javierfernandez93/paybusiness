@@ -179,7 +179,7 @@ const AutofxwinningViewer = {
     },
     mounted() 
     {   
-        const landing = getLastUrlPart() ? getLastUrlPart() : 'evox'
+        const landing = getLastUrlPart() ? getLastUrlPart() : 'Unlimited'
 
         this.getSponsorFxWinning(landing).then((response)=>{
             this.user.sponsor = response.sponsor

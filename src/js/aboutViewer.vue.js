@@ -36,7 +36,7 @@ const AboutViewer = {
                     </div>
                     <div class="col-12 col-xl-4">
                         <h3>Marzo 2023</h3>
-                        <p>Se inician los trabajos en el desarrollo de Evox</p>
+                        <p>Se inician los trabajos en el desarrollo de Unlimited</p>
                     </div>
                     <div class="col-12 col-xl-4">
                         <h3>Abril 2023</h3>

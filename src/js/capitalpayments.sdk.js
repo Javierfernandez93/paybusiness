@@ -1,4 +1,4 @@
-class Evox {
+class Unlimited {
     constructor() {
         this.view = VIEWS.ITEMS
         this.logged = false
@@ -225,15 +225,15 @@ class Evox {
     }
     process(){
         window.addEventListener("load", (event) => {
-            let Evox = document.getElementsByClassName('Evox')[0]
+            let Unlimited = document.getElementsByClassName('Unlimited')[0]
 
-            if(Evox)
+            if(Unlimited)
             {
                 if(this.getView() == VIEWS.ITEMS)
                 {
-                    this.getViewItems(Evox)
+                    this.getViewItems(Unlimited)
                 } else if(this.getView() == VIEWS.CHECKOUT) {
-                    this.getViewCheckout(Evox)
+                    this.getViewCheckout(Unlimited)
                 }
             }
         })

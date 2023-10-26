@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $TransactionRequirementPerUser = new Evox\TransactionRequirementPerUser;
+    $TransactionRequirementPerUser = new Unlimited\TransactionRequirementPerUser;
 
-    if(in_array($data['status'],[Evox\TransactionRequirementPerUser::PENDING,Evox\TransactionRequirementPerUser::EXPIRED,Evox\TransactionRequirementPerUser::VALIDATED,Evox\TransactionRequirementPerUser::DELETED]))
+    if(in_array($data['status'],[Unlimited\TransactionRequirementPerUser::PENDING,Unlimited\TransactionRequirementPerUser::EXPIRED,Unlimited\TransactionRequirementPerUser::VALIDATED,Unlimited\TransactionRequirementPerUser::DELETED]))
     {
         $data['filter'] = " WHERE transaction_requirement_per_user.status = '".$data['status']."'";
     }

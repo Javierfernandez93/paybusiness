@@ -4,15 +4,15 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {	
     if($data['client_id'])
     {
-        if(Evox\ServicePerClient::setUpService($data))
+        if(Unlimited\ServicePerClient::setUpService($data))
         {
-            $data['status'] = Evox\ServicePerClient::IN_USE;
+            $data['status'] = Unlimited\ServicePerClient::IN_USE;
             $data['active_date'] = time();
             $data['r'] = 'DATA_OK';
             $data['s'] = 1;

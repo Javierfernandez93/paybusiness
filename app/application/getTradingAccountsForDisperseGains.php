@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    if($users = (new Evox\UserTradingAccount)->_getAllForDisperseGains())
+    if($users = (new Unlimited\UserTradingAccount)->_getAllForDisperseGains())
     {
         $data["users"] = $users;
         $data["s"] = 1;

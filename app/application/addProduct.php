@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-	$Product = new Evox\Product;
+	$Product = new Unlimited\Product;
 
 	if($Product->loadWhere("product_id = ? AND status = ?",[$data['product_id'],JFStudio\Constants::AVIABLE]))
 	{

@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -19,7 +19,7 @@ if($UserLogin->logged === true)
                 'items' => $Cart->getItems(),
                 'amount' => $Cart->getTotalAmount(),
                 'shipping' => $Cart->getVar('shipping'),
-                'payment_method' => (new Evox\CatalogPaymentMethod)->getFeePaymentMethod($Cart->getVar('catalog_payment_method_id'))
+                'payment_method' => (new Unlimited\CatalogPaymentMethod)->getFeePaymentMethod($Cart->getVar('catalog_payment_method_id'))
             ];
             $data['r'] = 'DATA_OK';
             $data['s'] = 1;

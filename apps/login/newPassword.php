@@ -2,7 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true) {
     HCStudio\Util::redirectTo(TO_ROOT."/apps/backoffice/");
@@ -16,7 +16,7 @@ $Layout->init(JFStudio\Router::getName($route),'newPassword',"one_columns",'',TO
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
     'login.css',
-    'newPassword.vue.js'
+    'newpassword.vue.js'
 ]);
 
 $Layout->setVar([

@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $UserWallet = new Evox\UserWallet;
+    $UserWallet = new Unlimited\UserWallet;
     
     if($UserWallet->getSafeWallet(($data['user_login_id'])))
     {

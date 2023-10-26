@@ -5,7 +5,7 @@ require_once TO_ROOT . "/vendor/autoload.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {    
@@ -16,7 +16,7 @@ if($UserSupport->logged === true)
     $spreadsheet = $spreadsheet->getActiveSheet();
     $data_array = $spreadsheet->toArray();
  
-    if($users = Evox\UserSupport::sanitizeUserDataForImport($data_array))
+    if($users = Unlimited\UserSupport::sanitizeUserDataForImport($data_array))
     {
         $data["users"] = $users;
         $data["s"] = 1;

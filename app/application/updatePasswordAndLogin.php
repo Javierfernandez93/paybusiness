@@ -10,7 +10,7 @@ if($data['password'])
     {
         if($data['email'])
         {
-            $UserLogin = new Evox\UserLogin(false,false);
+            $UserLogin = new Unlimited\UserLogin(false,false);
         
             if($UserLogin->updatePassword([
                 'secret' => $data['secret'],

@@ -115,7 +115,7 @@ const EwalletViewer = {
             <div class="col-12 col-md-6 col-xl-5 mb-xl-0 mb-4">
                 <div class="card rounded-normal overflow-hidden shadow-xl">
                     <div
-                        class="bg-gradient-evox overflow-hidden position-relative border-radius-xl"
+                        class="bg-gradient-Unlimited overflow-hidden position-relative border-radius-xl"
                         >
                         <span class="mask bg-gradient-dark"></span>
                         <div class="card-body position-relative z-index-1 p-3">
@@ -124,7 +124,7 @@ const EwalletViewer = {
                                     <i class="fas fa-wifi text-white p-2" aria-hidden="true"></i>
                                 </div>
                                 <div class="col-auto">
-                                    <img src="../../src/img/logo-white.svg" style="width:107px">
+                                    <img src="../../src/img/logo-white.svg" style="height:2rem">
                                 </div>
                             </div>
                             
@@ -193,7 +193,7 @@ const EwalletViewer = {
                 </div>
                 <div class="alert alert-danger border-0 text-white alert-dismissible fade show" role="alert">
                     <strong>Aviso</strong> 
-                    La dirección o llave pública preeviamente señalada es única y exclusivamente para uso interno en Evox. No envíes ni recibas crypto fuera de Evox.</strong>
+                    La dirección o llave pública preeviamente señalada es única y exclusivamente para uso interno en Unlimited. No envíes ni recibas crypto fuera de Unlimited.</strong>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <div class="alert alert-success border-0 text-white alert-dismissible fade show" role="alert">
@@ -237,7 +237,7 @@ const EwalletViewer = {
                 </table>
             </div>
             <div class="col-xl-4 mt-3">
-                <div class="card bg-transparent shadow-none overflow-hidden border-radius-xl">
+                <div class="card overflow-hidden">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-auto">
@@ -286,7 +286,7 @@ const EwalletViewer = {
                 </div>
             </div>
             <div class="col-xl-4 mt-3">
-                <div class="card bg-transparent shadow-none overflow-hidden border-radius-xl">
+                <div class="card overflow-hidden">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-auto">
@@ -332,7 +332,7 @@ const EwalletViewer = {
                 </div>
             </div>
             <div class="col-xl-4 mt-3">
-                <div class="card shadow-none bg-transparent overflow-hidden border-radius-xl bg-soft-secondary">
+                <div class="card">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-auto">

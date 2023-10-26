@@ -5,7 +5,7 @@ class Translate extends Cookie {
         super();
 
         this.translations = {}
-        this.TAG_LANGUAGE = 'lang:Evox'
+        this.TAG_LANGUAGE = 'lang:Unlimited'
         this.DEFAULT_LANGUAGE = 'es'
 
         if(!this.hasLanguage())

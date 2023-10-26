@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -12,15 +12,15 @@ if($UserLogin->logged === true)
     {
         if($data['ammount'])
         {
-            $UserWallet = new Evox\UserWallet;
+            $UserWallet = new Unlimited\UserWallet;
             
             if($UserWallet->getSafeWallet($UserLogin->company_id))
             {
                 if($data["balance"] <= $UserWallet->getBalance())
                 {
-                    if($UserWallet->doTransaction($data['ammount'],Evox\Transaction::WITHDRAW,null,$data['catalog_withdraw_method_id']))
+                    if($UserWallet->doTransaction($data['ammount'],Unlimited\Transaction::WITHDRAW,null,$data['catalog_withdraw_method_id']))
                     {
-                        $UserPlan = new Evox\UserPlan;
+                        $UserPlan = new Unlimited\UserPlan;
                         
                         if($UserPlan->setPlan($UserWallet->user_login_id))
                         {

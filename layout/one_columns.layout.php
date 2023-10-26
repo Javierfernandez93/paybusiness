@@ -38,7 +38,7 @@
         {{js_scripts}}
 
         <footer class="fixed-bottom w-100 text-end p-3 fw-semibold">
-            © <script> document.write(new Date().getFullYear()) </script>, made with <i class="fa fa-heart"></i> by <a href="<?php echo HCStudio\Connection::getMainPath(); ?>/" class="font-weight-bold text-primary" target="_blank"><?php echo JFStudio\Layout::PROYECT_NAME; ?></a> for a better web.
+            © <script> document.write(new Date().getFullYear()) </script>, made with <i class="bi bi-heart"></i> by <a href="<?php echo HCStudio\Connection::getMainPath(); ?>/" class="font-weight-bold text-primary" target="_blank"><?php echo JFStudio\Layout::PROYECT_NAME; ?></a> for a better web.
         </footer>
     </body>
 </html>

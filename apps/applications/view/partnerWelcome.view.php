@@ -10,6 +10,6 @@
 
 <h3>
     <b>
-        Gracias de parte del equipo de Evox
+        Gracias de parte del equipo de <?php echo Unlimited\SystemVar::_getValue("company_name");?>
     </b>
 </h3>

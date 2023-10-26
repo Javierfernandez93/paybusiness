@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $CatalogPriority = new Evox\CatalogPriority;
+    $CatalogPriority = new Unlimited\CatalogPriority;
 
     if($catalog_priorities = $CatalogPriority->getAll())
     {

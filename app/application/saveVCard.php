@@ -4,15 +4,15 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['template_id'])
     {
-        $VCardPerUser = new Evox\VCardPerUser;
+        $VCardPerUser = new Unlimited\VCardPerUser;
         $VCardPerUser->user_login_id = $UserLogin->company_id;
-        $VCardPerUser->title = Evox\VCardPerUser::DEFAULT_VCARD_NAME;
+        $VCardPerUser->title = Unlimited\VCardPerUser::DEFAULT_VCARD_NAME;
         $VCardPerUser->template_id = $data['template_id'];
         $VCardPerUser->create_date = time();
         

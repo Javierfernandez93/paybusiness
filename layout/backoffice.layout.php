@@ -18,361 +18,108 @@
     <link rel="stylesheet" href="../../src/css/nucleo-icons.css" />
     <link rel="stylesheet" href="../../src/css/nucleo-svg.css" />
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     
     <link rel="preconnect" href="https://fonts.gloogleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap" rel="stylesheet">
 
     <link href="../../src/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../src/css/z-loader.css" />
-    <link rel="stylesheet" href="../../src/css/general.css?v=1.2.8" />
+    
     <link rel="stylesheet" href="../../src/css/nucleo-svg.css" />
     <!-- CSS Files -->
 
     <link id="pagestyle" href="../../src/css/soft-ui-dashboard.css?v=1.2.8" rel="stylesheet" />
 </head>
 
-<div class="bg-gradient-evox header-evox-signature" style="height: 0.3rem;">
+<div class="bg-gradient-Unlimited header-Unlimited-signature" style="height: 0.3rem;">
 </div>
 
-<body class="g-sidenav-show bg-white">
-    <aside class="sidenav navbar navbar-vertical navbar-expand-xs fixed-start" id="sidenav-main">
-        <div class="sidenav-header">
+<body class="g-sidenav-show bg-light">
+    <aside class="sidenav navbar navbar-vertical shadow-none navbar-expand-xs bg-white fixed-start" id="sidenav-main">
+        <div class="sidenav-header p-4">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-            <a class="navbar-brand" href="<?php echo HCStudio\Connection::getMainPath(); ?>" target="_blank">
-                <img src="../../src/img/logo-lg.svg" alt="logo" title="logo" class="w-100"/>
+            
+            <a class="navbar-brand text-center" href="<?php echo HCStudio\Connection::getMainPath(); ?>" target="_blank">
+                <img src="../../src/img/logo-lg.svg" alt="logo" title="logo" class="w-50"/>
             </a>
         </div>
         
-        <div class="collapse navbar-collapse w-auto h-auto ms-3" id="sidenav-collapse-main">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <div class="card rounded-0 border border-3 shadow-none">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 col-xl-auto">
-                                    <div class="avatar avatar-md">
-                                        <img src="<?php echo $UserLogin->getProfileImage();?>" class="avatar avatar-md rounded-circle">
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl">
-                                    <div class="fw-semibold text-truncate text-dark">
-                                        <?php echo $UserLogin->_data['user_data']['names'];?>
-                                    </div>
-                                    <div class="fw-semibold text-truncate text-primary my-2">
-                                        <?php echo $UserLogin->_data['user_account']['landing'];?>
-                                    </div>
-                                    <div class="text-secondary cursor-pointer text-xs">
-                                        <a href="../../apps/backoffice/profile">
-                                            Editar perfil
-                                        </a>
-                                    </div>
-                                    <div class="text-danger cursor-pointer mt-3 text-xs">
-                                        <a href="../../apps/backoffice?logout=true">
-                                            Cerrar sesión
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+        <div class="collapse navbar-collapse w-auto h-auto" id="sidenav-collapse-main">
+            <ul class="navbar-nav container">
                 <?php if ($UserLogin->logged) { ?>
-                    <div class="bg-light-dark mt-5">
+                    <div class=" mt-5">
                         <li class="nav-item">
                             <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Backoffice])) { ?>active<?php } ?>" href="../../apps/backoffice">
-                                <i class="bi d-none bi-cup-fill"></i>
-                                <span class="nav-link-text ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::Backoffice); ?></span>
+                                <i class="bi bi-house"></i>
+                                <span class="nav-link-text ms-1">Dashboard</span>
                             </a>
-                        </li>
-
-
-
-                    
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#profilePages" class="nav-link collapsed <?php if (in_array($route,[JFStudio\Router::Profile,JFStudio\Router::Referrals,JFStudio\Router::Invoices,JFStudio\Router::Multilevel,JFStudio\Router::Gains,JFStudio\Router::Wallet,JFStudio\Router::Gains,JFStudio\Router::Profile,JFStudio\Router::Notifications])) { ?>active<?php } ?>" aria-controls="profilePages" role="button" aria-expanded="false">
-                                <i class="bi d-none bi-person-circle"></i>
-                                <span class="nav-link-text ms-1">Perfil</span>
-                            </a>
-                            <div class="collapse" id="profilePages">
-                                <ul class="nav ms-4">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/multilevel">
-                                            <span class="sidenav-normal"> Mi equipo </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/multilevel/directs">
-                                            <span class="sidenav-normal"> Rangos </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/store/invoices">
-                                            <span class="sidenav-normal"> Mis compras </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/gains">
-                                            <span class="sidenav-normal"> Mis ganancias </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/wallet">
-                                            <span class="sidenav-normal">Billetera Evox</span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/backoffice/profile">
-                                            <span class="sidenav-normal"> Ajustes de cuenta </span>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/backoffice/notifications">
-                                            <span class="sidenav-normal">Notificaciones</span>
-                                        </a>
-                                    </li>
-
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/backoffice/?logout=true">
-                                            <span class="sidenav-normal"> Salir </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#profileAcademy" class="nav-link collapsed <?php if (in_array($route,[JFStudio\Router::MarketingGains,JFStudio\Router::AcademyLesson,JFStudio\Router::EvoxMarketing,JFStudio\Router::MarketingCreate])) { ?>active<?php } ?>" aria-controls="profileAcademy" role="button" aria-expanded="false">
-                                <i class="bi d-none bi-megaphone-fill"></i>
-                                <span class="nav-link-text ms-1">Evox Marketing</span>
-                            </a>
-                            <div class="collapse" id="profileAcademy">
-                                <ul class="nav ms-4">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/marketing/">
-                                            <span class="sidenav-normal"> Información </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item d-none">
-                                        <a class="nav-link text-dark" href="../../apps/academy/gains">
-                                            <span class="sidenav-normal"> Ganancias </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link text-dark" href="../../apps/academy/create">
-                                            <span class="sidenav-normal"> Crear </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#evoxAcademy" class="nav-link collapsed <?php if (in_array($route,[JFStudio\Router::EvoxAcademy,JFStudio\Router::Courses])) { ?>active<?php } ?>" aria-controls="evoxAcademy" role="button" aria-expanded="false">
-                                <i class="bi d-none bi-cart"></i>
-                                <span class="nav-link-text ms-1">Evox Academy</span>
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Profile])) { ?>active<?php } ?>" href="../../apps/backoffice/profile">
+                                <i class="bi bi-person-circle"></i>
+                                <span class="nav-link-text ms-1">Profile</span>
                             </a>
-                            <div class="collapse" id="evoxAcademy">
-                                <ul class="nav ms-4">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/academy/info">
-                                            <span class="sidenav-normal"> Información </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link text-dark" href="../../apps/academy/">
-                                            <span class="sidenav-normal"> Cursos grabados </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link text-dark" href="../../apps/academy/coming">
-                                            <span class="sidenav-normal"> Próximas clases </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item d-none">
-                                        <a class="nav-link text-dark" href="../../apps/academy/create">
-                                            <span class="sidenav-normal"> Calendario semanal </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link text-dark" href="../../apps/academy/record">
-                                            <span class="sidenav-normal"> Clases grabadas </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
-                        
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#evoxMentory" class="nav-link collapsed <?php if (in_array($route,[JFStudio\Router::EvoxMentory])) { ?>active<?php } ?>" aria-controls="evoxMentory" role="button" aria-expanded="false">
-                                <i class="bi d-none bi-cart"></i>
-                                <span class="nav-link-text ms-1">Evox Mentory</span>
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Wallet])) { ?>active<?php } ?>" href="../../apps/ewallet">
+                                <i class="bi bi-wallet2"></i>
+                                <span class="nav-link-text ms-1">My Wallet</span>
                             </a>
-                            <div class="collapse" id="evoxMentory">
-                                <ul class="nav ms-4">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/mentory/">
-                                            <span class="sidenav-normal"> Información </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link text-dark" href="../../apps/mentory/events?cvcid=3">
-                                            <span class="sidenav-normal"> Próximas eventos </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link text-dark" href="../../apps/mentory/events?cvcid=4">
-                                            <span class="sidenav-normal"> Eventos anteriores </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
-
-
-
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#mamp" class="nav-link collapsed <?php if (in_array($route,[JFStudio\Router::Exma,JFStudio\Router::PammyTrading])) { ?>active<?php } ?>" aria-controls="mamp" role="button" aria-expanded="false">
-                            <i class="bi d-none bi-people"></i>
-                                <span class="nav-link-text ms-1">Trading automático</span>
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Store,JFStudio\Router::Products])) { ?>active<?php } ?>" href="../../apps/store/package">
+                                <i class="bi bi-cart4"></i>
+                                <span class="nav-link-text ms-1">Buy</span>
                             </a>
-                            <div class="collapse" id="mamp">
-                                <ul class="nav ms-4">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/exma">
-                                            <span class="sidenav-normal"> Cuenta PAMM Exma Trading </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/dummie/pammy">
-                                            <span class="sidenav-normal text-wrap"> Cuenta PAMM Multibroker DummieTrading </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item d-none">
-                                        <a class="nav-link text-dark" href="../../apps/trading">
-                                            <span class="sidenav-normal"> Mis productos </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </li>
-
                         <li class="nav-item">
-                            <a data-bs-toggle="collapse" href="#semiauto" class="nav-link collapsed <?php if (in_array($route,[JFStudio\Router::Dummie,JFStudio\Router::Ati,JFStudio\Router::DummieTrading,JFStudio\Router::DummieTrading])) { ?>active<?php } ?>" aria-controls="semiauto" role="button" aria-expanded="false">
-                            <i class="bi d-none bi-people"></i>
-                                <span class="nav-link-text ms-1">Trading semi automático</span>
-                            </a>
-                            <div class="collapse" id="semiauto">
-                                <ul class="nav ms-4">
-                                    <?php if($UserLogin->hasUserAti()) { ?>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" href="../../apps/ati/account">
-                                                <span class="sidenav-normal"> Cuenta ATI </span>
-                                            </a>
-                                        </li>
-                                    <?php } ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/ati">
-                                            <span class="sidenav-normal"> ATI </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/calculator-ati">
-                                            <span class="sidenav-normal"> Calculadora ATI </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <!-- <a class="nav-link text-dark" href="../../apps/store/package?cptid=7"> -->
-                                        <a class="nav-link text-dark" href="../../apps/trading/dummie">
-                                            <span class="sidenav-normal"> DummieTrading </span>
-                                        </a>
-                                    </li>
-
-                                    <?php if($UserLogin->hasUserDummie()) { ?>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" href="../../apps/dummie/account">
-                                                <span class="sidenav-normal"> Cuenta DummieTrading </span>
-                                            </a>
-                                        </li>
-                                    <?php } ?>
-                                    
-                                    <li class="nav-item d-none">
-                                        <a class="nav-link text-dark" href="../../apps/trading">
-                                            <span class="sidenav-normal"> Mis productos </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        
-
-                        <li class="nav-item d-none">
-                            <a data-bs-toggle="collapse" href="#procducts" class="nav-link collapsed <?php if (in_array($route,[JFStudio\Router::Products,JFStudio\Router::Invoices])) { ?>active<?php } ?>" aria-controls="procducts" role="button" aria-expanded="false">
-                                <i class="bi d-none bi-megaphone-fill"></i>
-                                <span class="nav-link-text ms-1">Productos</span>
-                            </a>
-                            <div class="collapse" id="procducts">
-                                <ul class="nav ms-4">
-                                    <li class="nav-item ">
-                                        <a class="nav-link text-dark" href="../../apps/store/package">
-                                            <span class="sidenav-normal"> Comprar </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item d-none">
-                            <a data-bs-toggle="collapse" href="#bridgeFunds" class="nav-link collapsed <?php if (in_array($route,[JFStudio\Router::BridgeFunds,JFStudio\Router::BridgeFundsGains])) { ?>active<?php } ?>" aria-controls="bridgeFunds" role="button" aria-expanded="false">
-                                <i class="bi d-none bi-rocket-fill"></i>
-                                <span class="nav-link-text ms-1">Brigde Funds</span>
-                            </a>
-                            <div class="collapse" id="bridgeFunds">
-                                <ul class="nav ms-4">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-dark" href="../../apps/funds">
-                                            <span class="sidenav-normal"> <?php echo JFStudio\Router::getName(JFStudio\Router::BridgeFunds); ?> </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item d-none">
-                                        <a class="nav-link text-dark" href="../../apps/funds/accounts">
-                                            <span class="sidenav-normal"> <?php echo JFStudio\Router::getName(JFStudio\Router::BridgeFundsAccounts); ?> </span>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link text-dark" href="../../apps/funds/gains">
-                                            <span class="sidenav-normal"> <?php echo JFStudio\Router::getName(JFStudio\Router::BridgeFundsGains); ?> </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-
-                        <li class="nav-item d-none">
-                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::BridgeMarkets])) { ?>active<?php } ?>" href="../../apps/markets">
-                                <i class="bi d-none bi-bar-chart-fill"></i>
-                                <span class="nav-link-text ms-1">Brigde Markets</span>
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Store])) { ?>active<?php } ?>" href="../../apps/ewallet">
+                                <i class="bi bi-currency-dollar"></i>
+                                <span class="nav-link-text ms-1">Bonus</span>
                             </a>
                         </li>
-
-
-                        <li class="nav-item d-none">
-                            <a class="nav-link <?php if (in_array($route,[JFStudio\Router::Community])) { ?>active<?php } ?>" href="../../apps/backoffice/community">
-                                <i class="bi d-none bi-hearts"></i>
-                                <span class="nav-link-text ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::Community); ?></span>
-                            </a>
-                        </li>
-                        
-                        
                         <li class="nav-item">
-                            <a class="nav-link <?php if (in_array($route,[JFStudio\Router::Help])) { ?>active<?php } ?>" href="../../apps/ticket/">
-                                <i class="bi d-none bi-chat-left-heart-fill"></i>
-                                <span class="nav-link-text ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::Help); ?></span>
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Store])) { ?>active<?php } ?>" href="../../apps/ewallet">
+                                <i class="bi bi-people"></i>
+                                <span class="nav-link-text ms-1">Team</span>
                             </a>
                         </li>
-                    
+                        <li class="nav-item">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Academy,JFStudio\Router::AcademyLesson])) { ?>active<?php } ?>" href="../../apps/academy">
+                                <i class="bi bi-mortarboard"></i>
+                                <span class="nav-link-text ms-1">Business Academy</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Tools])) { ?>active<?php } ?>" href="../../apps/ewallet">
+                                <i class="bi bi-gear"></i>
+                                <span class="nav-link-text ms-1">Tools</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Help])) { ?>active<?php } ?>" href="../../apps/ewallet">
+                                <i class="bi bi-headset"></i>
+                                <span class="nav-link-text ms-1">Customer Service</span>
+                            </a>
+                        </li>
                     </div>
                 <?php } ?>
             </ul>
+            <div class="container mt-5">
+                <div class="card card-body bg-dark">
+                    <div class="mb-3">
+                        <div class="text-white h3">
+                            Noticias 
+                        </div>
+                        <div class="lead text-xs text-white">
+                            Noticia actual en este backoffice
+                        </div>
+                    </div>
+                    <button class="btn btn-primary mb-0 shadow-none">
+                        Más información 
+                    </button>
+                </div>
+            </div>
         </div>
     </aside>
     
@@ -389,16 +136,14 @@
                         </div>
                         <ul class="navbar-nav justify-content-end">
                             <li class="nav-item dropdown pe-3 d-flex align-items-center">
-                                <a href="../../apps/backoffice/notifications" class="nav-link p-0 text-body" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-bell cursor-pointer" aria-hidden="true"></i>
+                                <a href="../../apps/backoffice/notifications" class="nav-link p-0 text-body">
+                                    <i class="fa fa-bell cursor-pointer lead" aria-hidden="true"></i>
                                 </a>
                             </li>
                             <li class="nav-item dropdown pe-3 d-flex align-items-center">
-                                <i class="bi bi-globe-americas"></i>
-                                <select class="form-select border-0 pe-5" aria-label="Default select example">
-                                    <option selected>ES</option>
-                                    <option>EN</option>
-                                </select>
+                                <a href="../../apps/backoffice/?logout=true" class="nav-link p-0 text-body">
+                                    <i class="bi bi-box-arrow-right lead"></i>
+                                </a>
                             </li>
                             <li class="nav-item d-xl-none ps-3 pe-0 d-flex align-items-center">
                                 <a href="javascript:;" class="nav-link  p-0">
@@ -417,7 +162,7 @@
             </div>
         </nav>
         
-        <div class="container bg-light-soft" style="margin-top:0.635rem">
+        <div class="" style="margin-top:0.635rem">
             {{content}}
         </div>
     
@@ -429,7 +174,7 @@
                             © <script>
                                 document.write(new Date().getFullYear())
                             </script>,
-                            made with <i class="fa fa-heart"></i> by
+                            made with <i class="bi bi-heart"></i> by
                             <a href="<?php echo HCStudio\Connection::getMainPath(); ?>/" class="font-weight-bold" target="_blank"><?php echo JFStudio\Layout::PROYECT_NAME; ?></a>
                             for a better web.
                         </div>
@@ -476,7 +221,7 @@
     <script src="../../src/js/buttons.js" type="text/javascript"></script>
     <script src="../../src/js/soft-ui-dashboard.min.js?v=2.3.3"></script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
-    
+    <link rel="stylesheet" href="../../src/css/general.css?v=1.2.8" />
     
     <script src="../../src/js/vue.js?v=2.3.3" type="text/javascript"></script>
     <!-- <script src="../../src/js/translate.module.js?v=2.3.3" type="module"></script>

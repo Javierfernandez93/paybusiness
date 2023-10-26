@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 $data = $data["data"];
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($data["use_login"]["email"])
 {
@@ -29,14 +29,14 @@ if($data["use_login"]["email"])
 
 				if($UserLogin->save())
 				{
-					$UserData = new Evox\UserData;
+					$UserData = new Unlimited\UserData;
 					$UserData->cargarArray($data["use_data"]);
 					$UserData->user_login_id=$user_login_id;
 					$UserLogin->fillFields($UserData);
 
 					if($UserData->save())
 					{
-						$UserAddrees = new Evox\UserAddress;
+						$UserAddrees = new Unlimited\UserAddress;
 						
 						$Country = new World\Country;
 						
@@ -47,14 +47,14 @@ if($data["use_login"]["email"])
 
 						if($UserAddrees->save())
 						{
-							$UserContact = new Evox\UserContact;
+							$UserContact = new Unlimited\UserContact;
 							$UserContact->cargarArray($data["user_contact"]);
 							$UserContact->user_login_id = $user_login_id;		
 							$UserLogin->fillFields($UserContact);			
 
 							if($UserContact->save())
 							{
-								$UserAccount = new Evox\UserAccount;									
+								$UserAccount = new Unlimited\UserAccount;									
 								
 								if($data['user_account']["sponsor_id"])
 								{
@@ -74,13 +74,13 @@ if($data["use_login"]["email"])
 								
 								if($UserAccount->save())
 								{
-									$UserBank = new Evox\UserBank();
+									$UserBank = new Unlimited\UserBank();
 									$UserBank->user_login_id = $user_login_id;	
 									$UserLogin->fillFields($UserBank);							
 									
 									if($UserBank->save())
 									{
-										$UserSetting = new Evox\UserSetting();
+										$UserSetting = new Unlimited\UserSetting();
 										$UserSetting->user_login_id = $user_login_id;	
 										$UserLogin->fillFields($UserSetting);							
 										
@@ -193,7 +193,7 @@ function saveNotification($message = null,$company_id = null)
 {
 	if(isset($message,$company_id) === true)
 	{
-		$NotificationPerUser = new Evox\NotificationPerUser;
+		$NotificationPerUser = new Unlimited\NotificationPerUser;
 		$NotificationPerUser->company_id = $company_id;
 		$NotificationPerUser->catalog_notification_id = 2;
 		$NotificationPerUser->message = $message;

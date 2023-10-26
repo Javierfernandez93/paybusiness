@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
@@ -26,22 +26,22 @@ if($UserLogin->logged === true)
                                 {   
                                     $data['user_login_id'] = $UserLogin->company_id;
 
-                                    $UserBridgeAccount = new Evox\UserBridgeAccount;
+                                    $UserBridgeAccount = new Unlimited\UserBridgeAccount;
 
                                     // if(!$UserBridgeAccount->exist($data['phone_number']))
                                     if(true)
                                     {   
-                                        if($user_bridge_account_id = Evox\UserBridgeAccount::add([
+                                        if($user_bridge_account_id = Unlimited\UserBridgeAccount::add([
                                             ...$data,
                                             ...[
-                                                'status' => Evox\UserBridgeAccount::PENDING,
-                                                'catalog_broker_id'=> (new Evox\CatalogBroker)->getBrokerByName('Exma'),
+                                                'status' => Unlimited\UserBridgeAccount::PENDING,
+                                                'catalog_broker_id'=> (new Unlimited\CatalogBroker)->getBrokerByName('Exma'),
                                             ]
                                         ]))
                                         {
-                                            $ApiEvox = new Evox\ApiEvox;
+                                            $ApiUnlimited = new Unlimited\ApiUnlimited;
                                             
-                                            if($response = $ApiEvox->signupUserExma([
+                                            if($response = $ApiUnlimited->signupUserExma([
                                                 'firstname' => $data['first_name'],
                                                 'lastname' => $data['last_name'],
                                                 'address' => $data['address'],
@@ -73,7 +73,7 @@ if($UserLogin->logged === true)
                                                 {
                                                     $data['account'] = $response['account'];
 
-                                                    if(Evox\UserBridgeAccount::attachAccount([
+                                                    if(Unlimited\UserBridgeAccount::attachAccount([
                                                         'user_bridge_account_id' => $user_bridge_account_id,
                                                         'account' => $data['account']
                                                     ]))

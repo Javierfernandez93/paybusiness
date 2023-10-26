@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -14,9 +14,9 @@ if($UserSupport->logged === true)
         {
             if($data['video'])
             {
-                if(!(new Evox\Landing)->existPath($data['path']))
+                if(!(new Unlimited\Landing)->existPath($data['path']))
                 {
-                    if(Evox\Landing::add($data))
+                    if(Unlimited\Landing::add($data))
                     {
                         $data["s"] = 1;
                         $data["r"] = "DATA_OK";

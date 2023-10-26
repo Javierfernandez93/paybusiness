@@ -15,7 +15,7 @@ const SyntheticsViewer = {
         <div class="row justify-content-center">
             <div class="col-12 col-xl-5 text-center">
                 <div class="mb-5">
-                    <img src="../../src/img/evox-synthetics-logo.png" alt="evox-synthetics" title="evox-synthetics" class="img-fluid"/>
+                    <img src="../../src/img/Unlimited-synthetics-logo.png" alt="Unlimited-synthetics" title="Unlimited-synthetics" class="img-fluid"/>
                 </div>
 
                 <div class="mb-5">
@@ -26,7 +26,7 @@ const SyntheticsViewer = {
                     </div>
                 </div>
                 <div>
-                    <p class="lead fw-semibold text-dark">Únete al canal de Evox Academy y accede a clases en vivo y operativa de Índices sintéticos.</p>
+                    <p class="lead fw-semibold text-dark">Únete al canal de Unlimited Academy y accede a clases en vivo y operativa de Índices sintéticos.</p>
 
                     <div class="d-grid">
                         <button class="btn btn-primary btn-lg shadow-none mb-3"><i class="bi me-2 bi-telegram"></i>Unirse al canal</button>

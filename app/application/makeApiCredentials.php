@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($apiCredential = (new Evox\ApiCredential)->generateApis($UserLogin->company_id))
+    if($apiCredential = (new Unlimited\ApiCredential)->generateApis($UserLogin->company_id))
     {
         $data['s'] = 1;
         $data['r'] = 'DATA_OK';

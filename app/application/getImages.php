@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($images = (new Evox\Image)->getAll())
+    if($images = (new Unlimited\Image)->getAll())
     {
         $data['images'] = format($images);
         $data['r'] = 'DATA_OK';

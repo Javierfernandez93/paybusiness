@@ -4,11 +4,11 @@ require_once TO_ROOT. '/system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Evox\UserSupport;
+$UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $CatalogPermission = new Evox\CatalogPermission;
+    $CatalogPermission = new Unlimited\CatalogPermission;
     
     if(!$CatalogPermission->exist($data['permission']))
     {

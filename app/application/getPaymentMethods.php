@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -12,10 +12,10 @@ if($UserLogin->logged === true)
 
 	if($data['filter_wallet'] ?? null)
 	{
-		$filter .= " AND catalog_payment_method.catalog_payment_method_id != '".Evox\CatalogPaymentMethod::EWALLET."'";
+		$filter .= " AND catalog_payment_method.catalog_payment_method_id != '".Unlimited\CatalogPaymentMethod::EWALLET."'";
 	}
 
-	if($catalogPaymentMethods = (new Evox\CatalogPaymentMethod)->getAll($filter))
+	if($catalogPaymentMethods = (new Unlimited\CatalogPaymentMethod)->getAll($filter))
 	{
         $data['catalogPaymentMethods'] = format($catalogPaymentMethods);
         $data['s'] = 1;
@@ -31,7 +31,7 @@ if($UserLogin->logged === true)
 
 function format(array $catalogPaymentMethods = null) : array 
 {
-	$CatalogCurrency = new Evox\CatalogCurrency;
+	$CatalogCurrency = new Unlimited\CatalogCurrency;
 
 	return array_map(function($catalogPaymentMethod) use($CatalogCurrency) {
 		if($catalogPaymentMethod['catalog_currency_ids'])

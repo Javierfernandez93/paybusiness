@@ -45,7 +45,7 @@
                         © <script>
                             document.write(new Date().getFullYear())
                         </script>,
-                        made with <i class="fa fa-heart"></i> by
+                        made with <i class="bi bi-heart"></i> by
                         <a href="<?php echo HCStudio\Connection::getMainPath(); ?>" class="font-weight-bold text-white" target="_blank"><?php echo JFStudio\Layout::PROYECT_NAME; ?></a>
                         for a better web.
                     </div>

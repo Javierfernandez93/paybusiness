@@ -4,19 +4,19 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
     if($data['landing'])
     {
-        $data['catalog_broker_id'] = isset($data['catalog_broker_id']) ? $data['catalog_broker_id'] : Evox\CatalogBroker::BRIDGE;
+        $data['catalog_broker_id'] = isset($data['catalog_broker_id']) ? $data['catalog_broker_id'] : Unlimited\CatalogBroker::BRIDGE;
         
-        if($account = (new Evox\UserBridgeAccount)->get($UserLogin->company_id,$data['catalog_broker_id']))
+        if($account = (new Unlimited\UserBridgeAccount)->get($UserLogin->company_id,$data['catalog_broker_id']))
         {
-            if($landing = (new Evox\LandingPerUser)->getUserLanding(strtolower($data['landing'])))
+            if($landing = (new Unlimited\LandingPerUser)->getUserLanding(strtolower($data['landing'])))
             {
-                if($sponsor = (new Evox\UserLogin(false,false))->getUser($landing['user_login_id']))
+                if($sponsor = (new Unlimited\UserLogin(false,false))->getUser($landing['user_login_id']))
                 {
                     $data["account"] = $account;
                     $data["sponsor"] = array_merge($sponsor,$landing);

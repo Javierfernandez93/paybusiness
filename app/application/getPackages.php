@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Evox\UserLogin;
+$UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
     $filter = "AND package.catalog_package_type_id = '{$data['catalog_package_type_id']}'";
 
-    if($packages = (new Evox\Package)->getAllWithProducts($filter))
+    if($packages = (new Unlimited\Package)->getAllWithProducts($filter))
     {
         $data['packages'] = $packages;
         $data["s"] = 1;
