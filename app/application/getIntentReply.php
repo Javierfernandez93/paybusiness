@@ -18,9 +18,17 @@ if($UserLogin->logged === true)
         
         if($CatalogTagIntent->hasResponse($data['catalog_tag_intent_id']))
         {
+			$balance = 0;
+
+			if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id))
+			{
+				$balance = $Wallet->getBalance();
+			}
+
 			$systemVariables = (new Unlimited\SystemVar)->getAllPair();
 			$userVars = [
 				'names' => $UserLogin->_data['user_data']['names'],
+				'balance' => $balance,
 				'landing' => HCStudio\Connection::getMainPath()."/".$UserLogin->getReferralLanding(),
 			];
 
