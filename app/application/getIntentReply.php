@@ -18,7 +18,14 @@ if($UserLogin->logged === true)
         
         if($CatalogTagIntent->hasResponse($data['catalog_tag_intent_id']))
         {
-            $data['response'] = getMLReplay($tag['tag'],$data['catalog_tag_intent_id']);
+			$systemVariables = (new Unlimited\SystemVar)->getAllPair();
+			$userVars = [
+				'names' => $UserLogin->_data['user_data']['names'],
+			];
+
+			$vars = array_merge($userVars,$systemVariables);
+
+            $data['response'] = Unlimited\Parser::doParser(getMLReplay($tag['tag'],$data['catalog_tag_intent_id']),$vars);
         }
 
 		$data['tag'] = $tag['tag'];

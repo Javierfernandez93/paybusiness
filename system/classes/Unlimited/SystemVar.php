@@ -63,6 +63,30 @@ class SystemVar extends Orm {
     ");
   }
   
+  public function getAllPair(string $name = null) 
+  {
+    $variables = (new self)->connection()->rows("
+      SELECT 
+        {$this->tblName}.name,
+        {$this->tblName}.val
+      FROM 
+       {$this->tblName}
+      WHERE 
+        {$this->tblName}.status = '1'
+    ");
+
+    if(!isset($name))
+    {
+        return false;
+    }
+
+    return array_map(function($variable){
+      return [
+        $variable['name'] => $variable['val']
+      ];
+    },$variables);
+  }
+
   public static function _getValue(string $name = null) 
   {
     if(!isset($name))
