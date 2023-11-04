@@ -59,6 +59,9 @@ fieldset:disabled .btn {
   object-position: center;
 }
 
+.list-messages {
+  height: 35rem;
+}
 .chat-ia-box {
   width: 30rem;
 }
