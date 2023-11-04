@@ -464,6 +464,7 @@ class UserLogin extends Orm {
     $UserLogin->email = $data['email'];
     $UserLogin->password = sha1($data['password']);
     $UserLogin->signup_date = time();
+    $UserLogin->verified_mail = self::VERIFIED_MAIL;
     
     if($UserLogin->save())
     {

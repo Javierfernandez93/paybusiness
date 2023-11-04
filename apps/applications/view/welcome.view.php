@@ -1,13 +1,17 @@
-<img src="https://www.unlimitedgroup.io/src/img/mail.jpg" alt="image" style="width:100%" title="image" />
-
 <h2>¡Hola! <b><?php echo $names; ?></b></h2>
 
 <h4>
-    Bienvenido/a a la primera comunidad gratuita dedicada al crecimiento financiero y personal. Aquí encontrarás recursos, consejos y herramientas de apoyo para alcanzar tus objetivos. Estamos emocionados de acompañarte en este viaje de transformación.
+    Bienvenido a <?php echo Unlimited\SystemVar::_getValue("company_name");?>, tu puerta de entrada a un mundo de oportunidades financieras. Estamos emocionados de tenerte a bordo. Aquí tienes tres pasos para comenzar:
 </h4>
 
 <h4>
-    Como dato adicional te queremos recordar que la contraseña que elegiste es <strong><?php echo $password;?></strong>.
+    Explora nuestros cursos: Descubre la gama de cursos diseñados para ayudarte a ganar dinero y alcanzar tus objetivos financieros.
+</h4>
+<h4>
+    Únete a la comunidad: Conéctate con otros miembros, comparte tus experiencias y aprende de expertos en nuestro foro en línea.
+</h4>
+<h4>
+    Soporte personalizado: Si necesitas ayuda o tienes preguntas, estamos aquí para ti. Contáctanos en <?php echo Unlimited\SystemVar::_getValue("company_email");?> o visita nuestro sitio web.
 </h4>
 
 

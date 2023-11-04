@@ -82,11 +82,12 @@ const SignupViewer = {
 
                 if(response.s == 1)
                 {
-                    alertInfo({
-                        icon:'<i class="bi bi-ui-checks"></i>',
-                        message: 'Hemos enviado un correo para que actives tu cuenta',
-                        _class:'bg-gradient-success text-white'
-                    })
+                    window.location.href = `../../apps/backoffice`
+                    // alertInfo({
+                    //     icon:'<i class="bi bi-ui-checks"></i>',
+                    //     message: 'Hemos enviado un correo para que actives tu cuenta',
+                    //     _class:'bg-gradient-success text-white'
+                    // })
                 } else if(response.r == "MAIL_ALREADY_EXISTS") {
                     this.feedback = 'El correo proporcionado ya existe'
                 } else if(response.r == "USER_NAME_EXIST") {
@@ -99,7 +100,6 @@ const SignupViewer = {
             self.$refs.landing.classList.remove('is-invalid')
             self.feedback = null
             self.User.checkUserName({landing:self.user.user_account.landing}, (response) => {
-                console.log(response)
                 if (response.s == 1) 
                 {
                     self.$refs.landing.classList.add('is-valid')
