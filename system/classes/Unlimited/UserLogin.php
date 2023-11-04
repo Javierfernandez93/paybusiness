@@ -607,7 +607,6 @@ class UserLogin extends Orm {
                 {$this->tblName}.email,
                 {$this->tblName}.user_login_id,
                 user_contact.phone,
-                user_referral.commission,
                 user_address.country_id,
                 user_data.names,
                 user_account.image
