@@ -75,7 +75,8 @@ class SystemVar extends Orm {
         {$this->tblName}.status = '1'
     ");
 
-    if(!isset($name))
+
+    if(!isset($variables))
     {
         return false;
     }
