@@ -115,7 +115,7 @@ const EwalletViewer = {
             <div class="col-12 col-md-6 col-xl-5 mb-xl-0 mb-4">
                 <div class="card rounded-normal overflow-hidden shadow-xl">
                     <div
-                        class="bg-gradient-Unlimited overflow-hidden position-relative border-radius-xl"
+                        class="bg-gradient-primary overflow-hidden position-relative border-radius-xl"
                         >
                         <span class="mask bg-gradient-dark"></span>
                         <div class="card-body position-relative z-index-1 p-3">

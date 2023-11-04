@@ -28,7 +28,7 @@
     {{css_scripts}}
 </head>
 
-<div class="bg-gradient-Unlimited header-Unlimited-signature" style="height: 0.3rem;">
+<div class="bg-gradient-primary header-Unlimited-signature" style="height: 0.3rem;">
 </div>
 
 <body class="g-sidenav-show bg-light">

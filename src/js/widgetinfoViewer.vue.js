@@ -10,7 +10,7 @@ const WidgetinfoViewer = {
     {   
     },
     template : `
-        <div class="card bg-gradient-Unlimited rounded-normal shadow">
+        <div class="card bg-gradient-primary rounded-normal shadow">
             <div class="card-body p-0">
                 <div class="row align-items-center">
                     <div class="col-12 col-xl p-5">

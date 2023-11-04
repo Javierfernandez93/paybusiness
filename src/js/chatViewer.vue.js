@@ -131,7 +131,7 @@ const ChatViewer = {
                         <ul class="list-group list-group-flush">
                             <li v-for="message in messages" class="list-group-item border-0 py-3 animation-fall-down" style="--delay: 500ms;">
                                 <div class="d-flex" :class="message.sender == SENDER.BOT ? 'justify-content-start' : 'justify-content-end'">                                
-                                    <div class="rounded-normal p-3" :class="message.sender == SENDER.BOT ? 'bg-light text-start text-dark' : 'bg-gradient-Unlimited text-end fw-semibold text-white'">
+                                    <div class="rounded-normal p-3" :class="message.sender == SENDER.BOT ? 'bg-light text-start text-dark' : 'bg-gradient-primary text-end fw-semibold text-white'">
                                         <span class="text-message" v-html="message.message">
                                         </span>
                                     </div>

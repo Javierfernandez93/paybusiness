@@ -48,7 +48,7 @@
 </head>
 
 <body>
-    <div class="bg-gradient-Unlimited" style="height: 0.3rem;">
+    <div class="bg-gradient-primary" style="height: 0.3rem;">
     </div>
     
     <div class="position-fixed z-index-2 bg-special w-100" id="navbar">

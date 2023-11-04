@@ -22,7 +22,7 @@
         {{css_scripts}}
     </head>
     <body class="bg-light-dark">
-        <div class="bg-gradient-Unlimited header-Unlimited-signature" style="height: 0.3rem;">
+        <div class="bg-gradient-primary header-Unlimited-signature" style="height: 0.3rem;">
         </div>
         
         {{content}}
