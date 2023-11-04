@@ -21,7 +21,7 @@ if($UserLogin->logged === true)
 			$systemVariables = (new Unlimited\SystemVar)->getAllPair();
 			$userVars = [
 				'names' => $UserLogin->_data['user_data']['names'],
-				'landing' =>  $UserLogin->getReferralLanding(),
+				'landing' => HCStudio\Connection::getMainPath()."/".$UserLogin->getReferralLanding(),
 			];
 
 			$vars = array_merge($userVars,$systemVariables);
