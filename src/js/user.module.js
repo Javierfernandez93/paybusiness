@@ -636,6 +636,9 @@ class User extends Http {
     getIntentReply(data, callback) {
         return this.call('../../app/application/getIntentReply.php', data, callback, null, null);
     }
+    getBotName(data, callback) {
+        return this.call('../../app/application/getBotName.php', data, callback, null, null);
+    }
     getChatIaFirstMessage(data, callback) {
         return this.call('../../app/application/getChatIaFirstMessage.php', data, callback, null, null);
     }

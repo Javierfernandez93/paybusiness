@@ -188,6 +188,10 @@
         </footer>
     </main>
 
+    <div id="chatApp">
+        <chat-viewer></chat-viewer>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     
     <!--   Core JS Files   -->
@@ -221,7 +225,7 @@
     
     <script src="../../src/js/vue.js?v=2.3.3" type="text/javascript"></script>
     <script src="../../src/js/top.vue.js?v=2.3.3" type="module"></script>
-    <script src="../../src/js/main.vue.js?v=2.3.3" type="module"></script>
+    <script src="../../src/js/chat.vue.js?v=2.3.3" type="module"></script>
     <!-- <script src="../../src/js/translate.module.js?v=2.3.3" type="module"></script>
     
     <script src="../../src/js/translateInit.vue.js?v=2.3.3" type="module"></script> -->

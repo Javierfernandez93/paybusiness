@@ -58,3 +58,7 @@ fieldset:disabled .btn {
   object-fit: cover;
   object-position: center;
 }
+
+.chat-ia-box {
+  width: 30rem;
+}

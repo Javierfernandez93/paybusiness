@@ -8,33 +8,18 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $items = [
-        [
-            'message' => '¿Cómo compro una cuenta MAM?'
-        ],
-        [
-            'message' => '¿Cómo fondeo mi cuenta MAM?'
-        ],
-        [
-            'message' => '¿Donde veo mis comisiones?'
-        ],
-        [
-            'message' => '¿Donde esta mi billetera Unlimited?'
-        ],
-        [
-            'message' => '¿Quién es mi patrocinador?'
-        ],
-        [
-            'message' => '¿Qué es Bridge Markets?'
-        ]
-    ];
+    $items = array_map(function($value){
+        return ["message"=>$value];
+    },explode(",",Unlimited\SystemVar::_getValue("quick_questions")));
 
     shuffle($items);
     array_values($items);
     array_slice($items,0,5);
 
     $data['message'] = [
-        'message' => 'Bienvenido, por favor escribe una pregunta o selecciona un tema de ayuda rápida',
+        'message' => Unlimited\Parser::doParser(Unlimited\SystemVar::_getValue("welcome_message"),[
+            "company_name" => Unlimited\SystemVar::_getValue("company_name"),
+        ]),
         'items' => $items
     ];
     $data['r'] = 'DATA_OK';

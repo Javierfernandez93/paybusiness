@@ -5,6 +5,7 @@ const ChatViewer = {
     data() {
         return {
             User: new User,
+            bot_name: '',
             SENDER : {
                 USER : 1,
                 BOT : 2,
@@ -95,9 +96,18 @@ const ChatViewer = {
                 })
             })
         },
+        getBotName() {
+            this.User.getBotName({},(response)=>{
+                if(response.s == 1)
+                {
+                    this.bot_name = response.bot_name
+                }
+            })
+        },
     },
     mounted() 
     {   
+        this.getBotName()
         this.getChatIaFirstMessage()
     },
     template : `
@@ -110,7 +120,7 @@ const ChatViewer = {
                                 <img src="../../src/img/user/user.png" class="avatar avatar" alt="bot" title="bot"/>
                             </div>
                             <div class="col fs-5 fw-sembold text-primary">
-                                Sophie
+                                {{bot_name}}
                             </div>
                             <div class="col-auto">
                                 <button @click="open = !open"  class="btn btn-sm px-3 btn-outline-danger shadow-none mb-0"><i class="bi fs-5 bi-x"></i></button>
@@ -154,7 +164,7 @@ const ChatViewer = {
                 </div>
             </div>
             <div v-else>
-                <div @click="open = !open" class="py-3 px-4 zoom cursor-pointer bg-gradient-Unlimited shadow rounded-normal text-white">
+                <div @click="open = !open" class="py-3 px-4 zoom cursor-pointer bg-gradient-primary shadow rounded text-white">
                     Necesitas ayuda
                 </div>
             </div>
