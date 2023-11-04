@@ -561,7 +561,7 @@
                                                         <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
                                                             <h3 class="heading">Información de contacto</h3>
                                                             <ul>
-                                                                <li><span class="text">support@Unlimited.com.co</span></li>
+                                                                <li><span class="text">support@unlimitedgroup.io.co</span></li>
                                                                 <li><span class="text">+57 317 6448832</span></li>
                                                             </ul>
                                                         </td>
@@ -576,10 +576,10 @@
                                                         <td style="text-align: left; padding-left: 10px;">
                                                             <h3 class="heading">Links</h3>
                                                             <ul>
-                                                                <li><a href="https://www.unlimited.com/">Inicio</a></li>
-                                                                <li><a href="https://www.unlimited.com/apps/login/">Ingresar a tu cuenta</a></li>
-                                                                <li><a href="https://www.unlimited.com/apps/signup/">Registro</a></li>
-                                                                <li><a href="https://www.unlimited.com/apps/login/forgotPassword">Recuperar contraseña</a></li>
+                                                                <li><a href="https://www.unlimitedgroup.io/">Inicio</a></li>
+                                                                <li><a href="https://www.unlimitedgroup.io/apps/login/">Ingresar a tu cuenta</a></li>
+                                                                <li><a href="https://www.unlimitedgroup.io/apps/signup/">Registro</a></li>
+                                                                <li><a href="https://www.unlimitedgroup.io/apps/login/forgotPassword">Recuperar contraseña</a></li>
                                                             </ul>
                                                         </td>
                                                     </tr>

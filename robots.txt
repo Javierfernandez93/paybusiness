@@ -6,4 +6,4 @@ Disallow: /apps/admin
 User-agent: *
 Allow: /
 
-Sitemap: https://www.unlimited.com/sitemap.xml
+Sitemap: https://www.unlimitedgroup.io/sitemap.xml

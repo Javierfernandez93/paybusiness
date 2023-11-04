@@ -63,7 +63,7 @@ Vue.createApp({
             })
         },
         deleteTransaction: function (transaction_per_wallet_id) {
-            unlimited.com = alertCtrl.create({
+            unlimitedgroup.io = alertCtrl.create({
                 title: "Alert",
                 subTitle: "¿Estás seguro de eliminar éste fondeo?. Se recalculará el plan del usuario",
                 buttons: [

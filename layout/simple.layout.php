@@ -15,14 +15,14 @@
     <meta property="og:site_name" content="Unlimited | Trading profesional">
     <meta property="og:title" content="Unlimited | Trading profesional" />
     <meta property="og:description" content="Herramientas deTrading profesional" />
-    <meta property="og:image" itemprop="image" content="https://www.unlimited.com/src/img/logo.png">
+    <meta property="og:image" itemprop="image" content="https://www.unlimitedgroup.io/src/img/logo.png">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="300">
     <meta property="og:image:height" content="300">
 
     <meta property="og:type" content="website" />
     <meta property="og:updated_time" content="1664070388" />
-    <meta property="og:url" content="http://www.unlimited.com">
+    <meta property="og:url" content="http://www.unlimitedgroup.io">
 
     <!-- Size of image. Any size up to 300. Anything above 300px will not work in WhatsApp -->
 

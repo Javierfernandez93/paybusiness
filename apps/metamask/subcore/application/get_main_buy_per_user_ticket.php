@@ -260,8 +260,8 @@ function getPayPalForm($MainBuyPerUser = null,$main_buy_per_user = null,$company
 	$transaction->setAmount($amount);
 	
     $redirectUrls = new \PayPal\Api\RedirectUrls;
-	$redirectUrls->setReturnUrl("https://www.unlimited.com/apps/paypal/index.php")
-	    ->setCancelUrl("https://www.unlimited.com/apps/paypal/index.php");
+	$redirectUrls->setReturnUrl("https://www.unlimitedgroup.io/apps/paypal/index.php")
+	    ->setCancelUrl("https://www.unlimitedgroup.io/apps/paypal/index.php");
 
 	$payment = new \PayPal\Api\Payment;
 

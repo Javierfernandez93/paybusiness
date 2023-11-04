@@ -45,7 +45,7 @@ const TeamselectorViewer = {
     template : `
         <div v-if="users" class="card mb-3">
             <div class="card-header h4">
-                Pendientes
+                Usuarios pendientes por colocar en tu red
             </div>
             <ul class="list-group list-group-flush">
                 <li v-for="user in users" class="list-group-item">

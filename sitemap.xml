@@ -4,19 +4,19 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 	<url>
-	  <loc>https://www.unlimited.com/apps/home/</loc>
+	  <loc>https://www.unlimitedgroup.io/apps/home/</loc>
 	  <lastmod>2023-06-24T15:16:23+00:00</lastmod>
 	</url>
 	<url>
-	  <loc>https://www.unlimited.com/apps/login/</loc>
+	  <loc>https://www.unlimitedgroup.io/apps/login/</loc>
 	  <lastmod>2023-06-24T15:16:23+00:00</lastmod>
 	</url>
 	<url>
-	  <loc>https://www.unlimited.com/apps/signup/</loc>
+	  <loc>https://www.unlimitedgroup.io/apps/signup/</loc>
 	  <lastmod>2023-06-24T15:16:23+00:00</lastmod>
 	</url>
 	<url>
-	  <loc>https://www.unlimited.com/apps/launch/</loc>
+	  <loc>https://www.unlimitedgroup.io/apps/launch/</loc>
 	  <lastmod>2023-06-24T15:16:23+00:00</lastmod>
 	</url>
 </urlset>

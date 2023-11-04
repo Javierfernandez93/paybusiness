@@ -14,6 +14,8 @@ const RangewidgetViewer = {
                 if(response.s == 1)
                 {
                     this.members = response.members
+                } else {
+                    this.members = false
                 }
             })
         },
@@ -23,7 +25,7 @@ const RangewidgetViewer = {
         this.getLastMembers()
     },
     template : `
-        <div class="card shadow-none border">
+        <div v-if="members" class="card shadow-none border">
             <div class="card-header">
                 <div class="row">
                     <div class="col-12 col-xl">
@@ -60,6 +62,29 @@ const RangewidgetViewer = {
                         </div>
                     </li>
                 </ul>
+            </div>
+        </div>
+        <div v-else-if="members == false" class="card shadow-none overflow-hidden border">
+            <div class="mask bg-dark d-flex justify-content-center align-items-center text-center text-white z-index-1">
+                <div class="row">
+                    <div class="col-12">
+                        <div><i class="bi h1 text-white bi-lock-fill"></i></div>
+                        Comienza a invitar a personas a Unlimited
+                    </div>
+                </div>
+            </div>
+            <div class="card-body py-5">
+                <div class="row">
+                    <div class="col-12 col-xl">
+                        Rango Actual
+                    </div>
+                    <div class="col-12 col-xl-auto">
+                        Contador de Miembros
+                    </div>
+                    <div class="col-12 col-xl-auto">
+                        <i class="bi bi-check-circle-fill text-success"></i>
+                    </div>
+                </div>
             </div>
         </div>
     `,

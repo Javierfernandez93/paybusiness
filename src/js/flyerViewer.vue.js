@@ -23,7 +23,7 @@ const FlyerViewer = {
         this.getBanners()
     },
     template : `
-        <div class="flyer-container gx-0 row justify-content-center mb-5">
+        <div class="flyer-container gx-0 row justify-content-center mb-5 flyer-container gx-0 row rounded overflow-hidden">
            <div @click="goToEvent(banner)" v-for="banner in banners" class="col-6 cursor-pointer">
                 <img :src="banner.image" class="img-fluid">
             </div>

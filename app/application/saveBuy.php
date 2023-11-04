@@ -106,7 +106,7 @@ function createTransactionAirtm(Unlimited\BuyPerUser $BuyPerUser = null,Unlimite
 		'email' => JFStudio\Airtm::CUSTOMER_EMAIL,
 		'unix_time' => time(),
 		// 'checkout_url' => "http://localhost:8888/Unlimited/apps/airtm/process".$UserLogin->getPidQuery()."&txn_id={$BuyPerUser->invoice_id}"
-		'checkout_url' => "https://www.unlimited.com/apps/airtm/process".$UserLogin->getPidQuery()."&txn_id={$BuyPerUser->invoice_id}"
+		'checkout_url' => "https://www.unlimitedgroup.io/apps/airtm/process".$UserLogin->getPidQuery()."&txn_id={$BuyPerUser->invoice_id}"
 	];
 }
 
@@ -138,7 +138,7 @@ function createTransactionFromCoinPayments(Unlimited\BuyPerUser $BuyPerUser = nu
 			'custom' => $BuyPerUser->invoice_id,
 			'item_number' => $BuyPerUser->invoice_id,
 			'address' => '', // leave blank send to follow your settings on the Coin Settings page
-			'ipn_url' => 'https://www.unlimited.com/app/cronjob/ipn_coinpayments.php',
+			'ipn_url' => 'https://www.unlimitedgroup.io/app/cronjob/ipn_coinpayments.php',
 		];
 						
 		$result = $CoinpaymentsAPI->CreateCustomTransaction($req);

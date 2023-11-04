@@ -115,7 +115,7 @@ Vue.createApp({
             });
         },
         deleteDeposit: function (transaction_requirement_per_user_id) {
-            unlimited.com = alertCtrl.create({
+            unlimitedgroup.io = alertCtrl.create({
                 title: "Alert",
                 subTitle: "¿Estás seguro de eliminar éste depósito?",
                 buttons: [
@@ -144,7 +144,7 @@ Vue.createApp({
            
         },
         reactiveDeposit: function (transaction_requirement_per_user_id) {
-            unlimited.com = alertCtrl.create({
+            unlimitedgroup.io = alertCtrl.create({
                 title: "Alert",
                 subTitle: "¿Estás seguro de reactivar éste depósito?",
                 buttons: [

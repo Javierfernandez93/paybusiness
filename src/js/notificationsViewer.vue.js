@@ -28,36 +28,38 @@ const NotificationsViewer = {
         this.getNotifications()
     },
     template : `
-        <div v-if="notifications">
-            <div class="card bg-transparent shadow-none mb-3">
-                <div class="card-header bg-transparent">
-                    <span class="badge text-secondary p-0">total {{notifications.length}}</span>
-                    <div class="fs-4 fw-semibold text-primary">
-                        Notificaciones 
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-6">
+                <div v-if="notifications" class="card">
+                    <div class="card-header">
+                        <span class="badge text-secondary p-0">total {{notifications.length}}</span>
+                        <div class="fs-4 fw-semibold text-primary">
+                            Notificaciones 
+                        </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="timeline timeline-one-side">
-                        <div 
-                            v-for="notification in notifications"
-                            class="timeline-block mb-3">
-                            <div class="align-items-center">
-                                <span class="timeline-step">
-                                    <i v-html="notification.extra"></i>
-                                </span>
-                                <div class="timeline-content">
-                                    <div class="fw-semibold text-dark small">{{notification.kind}} <span class="badge bg-light text-secondary small">{{notification.create_date}}</span></div>
-                                    <div>{{notification.message}}</div>
+                    <div class="card-body">
+                        <div class="timeline timeline-one-side">
+                            <div 
+                                v-for="notification in notifications"
+                                class="timeline-block mb-3">
+                                <div class="align-items-center">
+                                    <span class="timeline-step">
+                                        <i v-html="notification.extra"></i>
+                                    </span>
+                                    <div class="timeline-content">
+                                        <div class="fw-semibold text-dark small">{{notification.kind}} <span class="badge bg-light text-secondary small">{{notification.create_date}}</span></div>
+                                        <div>{{notification.message}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div v-else-if="notifications == false">
-            <div class="alert alert-secondary text-center text-white">
-                No tienes Notifications aún. Vuelve más tarde
+                <div v-else-if="notifications == false">
+                    <div class="alert alert-secondary text-center text-white">
+                        No tienes Notifications aún. Vuelve más tarde
+                    </div>
+                </div>
             </div>
         </div>
     `

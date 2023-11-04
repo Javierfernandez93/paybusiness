@@ -13,7 +13,7 @@ if(true)
       [
         'ID' => '1',
         'User ID' => 'UnlimitedGroup',
-        'Email' => 'financial@Unlimited.com.co',
+        'Email' => 'financial@unlimitedgroup.io.co',
         'Name' => 'Unlimited Group',
         'Phone' => '(+34) 604104435',
         'Country' => 'Colombia',
@@ -23,7 +23,7 @@ if(true)
       [
         'ID' => '2',
         'User ID' => 'UnlimitedGroup2',
-        'Email' => 'financial2@Unlimited.com.co',
+        'Email' => 'financial2@unlimitedgroup.io.co',
         'Name' => 'Unlimited Group',
         'Phone' => '(+34) 604104435',
         'Country' => 'Colombia',
@@ -33,7 +33,7 @@ if(true)
       [
         'ID' => '3',
         'User ID' => 'UnlimitedGroup3',
-        'Email' => 'financial3@Unlimited.com.co',
+        'Email' => 'financial3@unlimitedgroup.io.co',
         'Name' => 'Unlimited Group',
         'Phone' => '(+34) 604104435',
         'Country' => 'Colombia',

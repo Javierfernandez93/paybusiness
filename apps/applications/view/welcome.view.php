@@ -1,4 +1,4 @@
-<img src="https://www.unlimited.com/src/img/mail.jpg" alt="image" style="width:100%" title="image" />
+<img src="https://www.unlimitedgroup.io/src/img/mail.jpg" alt="image" style="width:100%" title="image" />
 
 <h2>¡Hola! <b><?php echo $names; ?></b></h2>
 
