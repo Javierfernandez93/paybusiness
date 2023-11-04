@@ -12,23 +12,18 @@ if($UserSupport->logged === true)
 
     if($data['notice_id'])
     {
-        if($Notice->loadWhere("notice_id= ?",$data['notice_id']))
-        {
-            $Notice->title = $data['title'];
-            $Notice->description = $data['description'] ? $data['description'] : $Notice->description;
-            $Notice->start_date = $data['start_date'] ? strtotime($data['start_date']) : $Notice->start_date;
-            $Notice->end_date = $data['end_date'] ? strtotime($data['end_date']) : $Notice->end_date;
-            $Notice->catalog_notice_id = $data['catalog_notice_id'];
-            $Notice->catalog_priority_id = $data['catalog_priority_id'];
-
-            if($Notice->save())
-            {
-                $data["s"] = 1;
-                $data["r"] = "DATA_OK";
-            } else {
-                $data["s"] = 0;
-                $data["r"] = "NOT_CATALOG_NOTICES";
-            }
+        if(Unlimited\Notice::addOrUpdate([
+            'notice_id' => $data['notice_id'],
+            'title' => $data['title'],
+            'preview' => $data['preview'] ? $data['preview'] : $Notice->preview,
+            'description' => $data['description'] ? $data['description'] : $Notice->description,
+            'start_date' => $data['start_date'] ? strtotime($data['start_date']) : $Notice->start_date,
+            'end_date' => $data['end_date'] ? strtotime($data['end_date']) : $Notice->end_date,
+            'catalog_notice_id' => $data['catalog_notice_id'],
+            'catalog_priority_id' => $data['catalog_priority_id'],
+        ])){
+            $data["s"] = 1;
+            $data["r"] = "DATA_OK";
         } else {
             $data["s"] = 0;
             $data["r"] = "NOT_NOTICE_ID";

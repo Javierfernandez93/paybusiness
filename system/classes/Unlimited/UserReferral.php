@@ -5,18 +5,38 @@ namespace Unlimited;
 use HCStudio\Orm;
 use JFStudio\Constants;
 
-use Unlimited\UserDataa;
-
 class UserReferral extends Orm {
   protected $tblName  = 'user_referral';
 
   const WAITING_FOR_PAYMENT = 0;
   const DEFAULT_COMMISSION = 30;
+  const LEFT = 0;
+  const RIGHT = 1;
   
   public function __construct() {
     parent::__construct();
   }
   
+  public static function appendReferral(array $data = null) 
+  {
+    $UserReferral = new self;
+    
+    if($UserReferral->loadWhere("user_login_id = ? AND status = ?",[$data['user_login_id'],1]))
+    {
+      return false;
+    }
+    
+    $UserReferral->loadWhere("user_login_id = ? AND status = ?",[$data['user_login_id'],0]);
+
+    $UserReferral->user_login_id = $data['user_login_id'];
+    $UserReferral->referral_id = $data['referral_id'];
+    $UserReferral->side = $data['side'];
+    $UserReferral->create_date = time();
+    $UserReferral->status = 1;
+    
+    return $UserReferral->save();
+  }
+
   public static function updateReferral(int $user_login_id = null,int $referral_id = 0) 
   {
     if(isset($user_login_id,$referral_id) === true)
@@ -249,6 +269,34 @@ class UserReferral extends Orm {
       return $this->connection()->column($sql);
     }
   }
+
+  public function getLastMembers(int $sponsor_id = null) 
+  {
+    if(isset($sponsor_id) === true) 
+    {
+      $sql = "SELECT 
+                {$this->tblName}.user_login_id,
+                user_account.image,
+                user_data.names
+              FROM 
+                {$this->tblName} 
+              LEFT JOIN 
+                user_data 
+              ON 
+                user_data.user_login_id = {$this->tblName}.user_login_id
+              LEFT JOIN 
+                user_account 
+              ON 
+              user_account.user_login_id = {$this->tblName}.user_login_id
+              WHERE 
+                {$this->tblName}.sponsor_id = '{$sponsor_id}' 
+              AND 
+                {$this->tblName}.status = '1'
+              ";
+
+      return $this->connection()->rows($sql);
+    }
+  }
   
   public function getReferral(int $user_login_id = null) 
   {
@@ -373,5 +421,32 @@ class UserReferral extends Orm {
     }
 
     return $result;
+  }
+
+  public function getLastMembersCountries(int $sponsor_id = null) 
+  {
+    if(isset($sponsor_id) === true) 
+    {
+      $sql = "SELECT 
+                {$this->tblName}.user_login_id,
+                user_address.country_id
+              FROM 
+                {$this->tblName} 
+              LEFT JOIN 
+                user_address 
+              ON 
+                user_address.user_login_id = {$this->tblName}.user_login_id
+              LEFT JOIN 
+                user_account 
+              ON 
+              user_account.user_login_id = {$this->tblName}.user_login_id
+              WHERE 
+                {$this->tblName}.sponsor_id = '{$sponsor_id}' 
+              AND 
+                {$this->tblName}.status = '1'
+              ";
+
+      return $this->connection()->rows($sql);
+    }
   }
 }

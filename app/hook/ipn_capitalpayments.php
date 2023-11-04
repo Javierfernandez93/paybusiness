@@ -2,8 +2,9 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$api_key = JFStudio\CapitalPayments::API_KEY;
-$ipn_secret = JFStudio\CapitalPayments::IPN_SECRET;
+
+$api_key = Unlimited\SystemVar::_getValue("api_key");
+$ipn_secret = Unlimited\SystemVar::_getValue("ipn_secret");
 
 if (!isset($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_USER'])) {
     echo json_encode(['error'=>"No api_key authentication sent"]);die;

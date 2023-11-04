@@ -12,14 +12,8 @@ class CatalogPackageType extends Orm {
 	public static $DEPOSIT = 1;
 	public static $CASH = 2;
 
-	const BRIDGE_FUNDS = 1;
-	const MARKETING = 2;
-	const SYNTHETICS = 3;
-	const MAM = 4;
-	const EXMA = 5;
-	const PAMMY = 6;
-	const DUMMIE_TRADING = 7;
-	const ATI = 8;
+	const PAY_BUSINESS = 1;
+	const PAY_ACADEMY = 2;
 
 	public function __construct() {
 		parent::__construct();

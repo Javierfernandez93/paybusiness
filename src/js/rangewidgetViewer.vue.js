@@ -5,22 +5,22 @@ const RangewidgetViewer = {
     data() {
         return {
             User: new User,
-            range : null
+            members : null
         }
     },
     methods: {
-        getCurrentRange() {
-            this.User.getCurrentRange({},(response)=>{
+        getLastMembers() {
+            this.User.getLastMembers({},(response)=>{
                 if(response.s == 1)
                 {
-                    this.range = this.range
+                    this.members = response.members
                 }
             })
         },
     },
     mounted() 
     {   
-        this.getCurrentRange()
+        this.getLastMembers()
     },
     template : `
         <div class="card shadow-none border">
@@ -38,23 +38,28 @@ const RangewidgetViewer = {
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">
-                    <div class="col-12 col-xl-auto">
-                        <div class="avatar avatar">
-                            <img src="" class="avatar" title="user" alt="user"/>
+                <ul class="list-group list-group-flush">
+                    <li v-for="member in members" class="list-group-item">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-xl-auto">
+                                <div class="avatar avatar">
+                                    <img :src="member.image" class="avatar" title="user" alt="user"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl">
+                                <div class="lead">{{member.names}}</div>
+                                <div class="text-xs">ID {{member.user_login_id}}</div>
+                            </div>
+                            <div class="col-12 col-xl-auto">
+                                <span class="badge text-secondary p-0">Saldo historíco</span>    
+                            </div>
+                            <div class="col-12 col-xl-auto">
+                                <span v-if="member.active" class="badge bg-success">Calificado</span>    
+                                <span v-else class="badge bg-secondary">No calificado</span>    
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-xl">
-                        <div>Alejandro serrano</div>
-                        <div>ID</div>
-                    </div>
-                    <div class="col-12 col-xl-auto">
-                        <span class="badge p-0">Saldo historíco</span>    
-                    </div>
-                    <div class="col-12 col-xl-auto">
-                        <span class="badge bg-success">Calificado</span>    
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
         </div>
     `,

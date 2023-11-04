@@ -19,8 +19,9 @@ use Unlimited\UserPlan;
 use Unlimited\Exercise;
 use Unlimited\UserBridgeAccount;
 use Unlimited\UserTradingAccount;
+use Unlimited\ProductPermission;
+use Unlimited\MembershipPerUser;
 use Unlimited\TransactionRequirementPerUser;
-use SendGrid\Response;
 
 class UserLogin extends Orm {
   protected $tblName  = 'user_login';
@@ -37,6 +38,7 @@ class UserLogin extends Orm {
   private $field_session = 'email';
   private $_field_type = 'email';
   
+  public $temporal_permissions = [];
 
   /* constants */
   const SECRET_LENGHT = 22;
@@ -1259,5 +1261,293 @@ class UserLogin extends Orm {
         return self::DUMMIE_TRADING_LOGIN_URL."?".http_build_query($token);
       }
     }
+  }
+
+  public function hasProductPermission(string $code = null)
+  {
+    if (!$this->getId() || !isset($code)) {
+      return false;
+    }
+
+    return $this->_hasProductPermission($code,$this->company_id);
+  }
+  
+  public function _hasProductPermission(string $code = null,int $user_login_id = null)
+  {
+    if (!isset($user_login_id)) {
+      return false;
+    }
+    
+    $product_id = (new Product)->getIdByCode($code);
+
+    if(!isset($this->temporal_permissions[$product_id]))
+    {
+      $hasPermission = ProductPermission::hasPermission([
+        'product_id' => (new Product)->getIdByCode($code),
+        'user_login_id' => $user_login_id
+      ]);
+
+      $this->temporal_permissions[$product_id] = $hasPermission;
+    }
+    
+    return $this->temporal_permissions[$product_id];
+  }
+  
+  public function getBinaryTree()
+  {
+    if (!$this->getId()) {
+      return false;
+    }
+
+    return $this->_getBinaryTree($this->company_id);
+  }
+ 
+  
+  public function getTeamPending()
+  {
+    if (!$this->getId()) {
+      return false;
+    }
+
+    $users = (new UserReferral)->findAll("referral_id = ? AND status = ?",[$this->company_id,0]);
+
+    if(!$users)
+    {
+      return false;
+    }
+
+    $UserData = new UserData;
+
+    return array_map(function($user) use($UserData){
+      $user['names'] = $UserData->getNames($user['user_login_id']);
+      return $user;
+    },$users);
+  }
+ 
+  public function insertReferralOnSide(array $data = null)
+  {
+    if(in_array($data['side'],[UserReferral::LEFT,UserReferral::RIGHT])) 
+    {
+      $node = $this->getNode($this->company_id,$data['side']);
+
+      if(!$node)
+      {
+        return UserReferral::appendReferral([
+          'side' => $data['side'],
+          'user_login_id' => $data['user_login_id'],
+          'referral_id' => $this->company_id,
+        ]);
+      }
+      
+      $network = $this->getNetworkChild($node['user_login_id']);
+      
+      if(!$network)
+      {
+        return UserReferral::appendReferral([
+          'side' => UserReferral::LEFT,
+          'user_login_id' => $data['user_login_id'],
+          'referral_id' => $node['user_login_id'],
+        ]);
+      } else if(isset($network[0]) && sizeof($network[0]) == 1) {
+        return UserReferral::appendReferral([
+          'side' => UserReferral::RIGHT,
+          'user_login_id' => $data['user_login_id'],
+          'referral_id' => $node['user_login_id'],
+        ]);
+      }
+      
+      foreach($network as $level)
+      {
+        foreach($level as $user_login_id)
+        {
+          $team = $this->_getBinaryTree($user_login_id);
+
+          if(!$team)
+          {
+            UserReferral::appendReferral([
+              'side' => UserReferral::LEFT,
+              'user_login_id' => $data['user_login_id'],
+              'referral_id' => $user_login_id,
+            ]);
+
+          } else if(sizeof($team) == 1) {
+            UserReferral::appendReferral([
+              'side' => UserReferral::RIGHT,
+              'user_login_id' => $data['user_login_id'],
+              'referral_id' => $user_login_id,
+            ]);
+          }
+        }
+      }
+    }
+  }
+
+  public function _getBinaryTree(int $referral_id = null)
+  {
+    if (!isset($referral_id)) {
+      return false;
+    }
+
+    return $this->connection()->rows("SELECT 
+        user_referral.user_login_id,
+        user_account.image,
+        user_data.names
+      FROM
+        user_referral
+      LEFT JOIN 
+        user_data
+      ON 
+        user_data.user_login_id = user_referral.user_login_id
+      LEFT JOIN 
+        user_account
+      ON 
+        user_account.user_login_id = user_referral.user_login_id
+      WHERE
+        user_referral.referral_id = '{$referral_id}'
+      AND 
+        user_referral.status = '1'
+      ORDER BY 
+        user_referral.side
+      ASC 
+    ");
+  }
+  
+  public function getNode(int $referral_id = null,int $side = null)
+  {
+    if (!isset($referral_id)) {
+      return false;
+    }
+
+    return $this->connection()->row("SELECT 
+        user_referral.user_login_id,
+        user_referral.side,
+        user_account.image,
+        user_data.names
+      FROM
+        user_referral
+      LEFT JOIN 
+        user_data
+      ON 
+        user_data.user_login_id = user_referral.user_login_id
+      LEFT JOIN 
+        user_account
+      ON 
+        user_account.user_login_id = user_referral.user_login_id
+      WHERE
+        user_referral.referral_id = '{$referral_id}'
+      AND 
+        user_referral.side = '{$side}'
+      AND 
+        user_referral.status = '1'
+      ORDER BY 
+        user_referral.side
+      ASC 
+    ");
+  }
+
+  public function getCurrentMembership()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    return (new MembershipPerUser)->getCurrentMembership($this->company_id);
+  }
+
+  public function getLastMembers()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    $members = (new UserReferral)->getLastMembers($this->company_id);
+
+    if(!$members) 
+    {
+      return false;
+    }
+
+    return array_map(function($member){
+      $member['active'] = $this->_hasProductPermission(Product::PAY_BUSINESS,$member['user_login_id']);
+      return $member;
+    },$members);
+  }
+  
+  public function getIncome()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    $members = (new UserReferral)->getLastMembers($this->company_id);
+
+    if(!$members) 
+    {
+      return false;
+    }
+
+    return array_map(function($member){
+      $member['active'] = $this->_hasProductPermission(Product::PAY_BUSINESS,$member['user_login_id']);
+      return $member;
+    },$members);
+  }
+  
+  public function getTopCountries()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    $members = (new UserReferral)->getLastMembersCountries($this->company_id);
+
+    if(!$members) 
+    {
+      return false;
+    }
+
+    $members = array_map(function($member){
+      $member['active'] = $this->_hasProductPermission(Product::PAY_BUSINESS,$member['user_login_id']);
+      return $member;
+    },$members);
+
+    $_members = [];
+
+    foreach($members as $member)
+    {
+      if(!isset($_members[$member['country_id']]['country_id']))
+      {
+        $_members[$member['country_id']]['country_id'] = $member['country_id'];
+      }
+
+      if(!isset($_members[$member['country_id']]['inactives']))
+      {
+        $_members[$member['country_id']]['inactives'] = 0;
+      }
+
+      if(!isset($_members[$member['country_id']]['actives']))
+      {
+        $_members[$member['country_id']]['actives'] = 0;
+      }
+
+      if($member['active'])
+      {
+        $_members[$member['country_id']]['actives'] += 1;
+      } else {
+        $_members[$member['country_id']]['inactives'] += 1;
+      }
+      
+      $_members[$member['country_id']]['total'] =  $_members[$member['country_id']]['inactives'] +  $_members[$member['country_id']]['actives'];
+    }
+    
+    $Country = new Country;
+
+    return array_map(function($member) use($Country) {
+      $member['country'] = $Country->getCountryNameAndInternet($member['country_id']);
+      return $member;
+    },array_values($_members));
   }
 }

@@ -47,11 +47,20 @@
                             </select>
                         </div>
                     </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label>Previo</label>
+                            <textarea :class="notice.preview ? 'is-valid' : ''" v-model="notice.preview" ref="preview" class="form-control">
+                            </textarea>
+                        </div>
+                    </div>
+
 
                     <div class="mb-3">
                         <label>Descripción</label>
 
-                        <div id="editor">
+                        <div id="editor" style="height: 400px;">
                             <div v-html="notice.description">
                             </div>
                         </div>

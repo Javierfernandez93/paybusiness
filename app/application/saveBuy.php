@@ -17,21 +17,6 @@ if($UserLogin->logged === true)
 		{
 			if($BuyPerUser = saveBuy($Cart,$UserLogin))
 			{	
-				if(Unlimited\Product::hasProductWithSku($Cart->getItems(),Unlimited\Product::MAM_SKU))
-				{
-					Unlimited\BuyPerBridge::add([
-						'user_bridge_account_id' => $data['user_bridge_account_id'],
-						'buy_per_user_id' => $BuyPerUser->getId(),
-						'catalog_bridge_buy_type_id' => Unlimited\CatalogBridgeBuyType::MAM
-					]);
-				} else if(Unlimited\Package::hasPackageWithSku($Cart->getItems(),Unlimited\Package::BRIDGE_FUNDS)) {
-					Unlimited\BuyPerBridge::add([
-						'user_bridge_account_id' => $data['user_bridge_account_id'],
-						'buy_per_user_id' => $BuyPerUser->getId(),
-						'catalog_bridge_buy_type_id' => Unlimited\CatalogBridgeBuyType::BRIDGE_FUNDS
-					]);
-				}
-				
 				$data['buy_per_user_id'] = $BuyPerUser->getId();
 				$data['user_login_id'] = $UserLogin->getId();
 				$data['invoice_id'] = $BuyPerUser->invoice_id;
@@ -91,7 +76,7 @@ function createTransactionCapitalPayments(Unlimited\BuyPerUser $BuyPerUser = nul
 {
     require_once TO_ROOT .'/vendor/autoload.php';
 
-	$Sdk = new \CapitalPayments\Sdk\Sdk(JFStudio\CapitalPayments::API_KEY,JFStudio\CapitalPayments::API_SECRET);
+	$Sdk = new \CapitalPayments\Sdk\Sdk(Unlimited\SystemVar::_getValue("api_key"),Unlimited\SystemVar::_getValue("api_secret"));
 
 	$response = $Sdk->createInvoice([
 		'amount' => $BuyPerUser->amount,
@@ -139,6 +124,7 @@ function createTransactionFromCoinPayments(Unlimited\BuyPerUser $BuyPerUser = nu
 {
 	try {
 		require_once TO_ROOT .'/vendor2/autoload.php';
+
 
 		$CoinpaymentsAPI = new CoinpaymentsAPI(JFStudio\CoinPayments::PRIVATE_KEY, JFStudio\CoinPayments::PUBLIC_KEY, 'json');
 

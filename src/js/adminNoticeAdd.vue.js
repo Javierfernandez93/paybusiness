@@ -1,16 +1,15 @@
 import { UserSupport } from '../../src/js/userSupport.module.js?v=2.3.3'
 
 Vue.createApp({
-    components : {
-    },
     data() {
         return {
-            UserSupport : null,
+            UserSupport : new UserSupport,
             noticeComplete : false,
             catalog_priorities : {},
             catalog_notices : {},
             notice : {
                 title: null,
+                preview: null,
                 description: null,
                 catalog_notice_id: 2,
                 catalog_priority_id: 1,
@@ -55,7 +54,7 @@ Vue.createApp({
         },
     },
     methods: {
-        saveNotice: function()
+        saveNotice()
         {
             this.UserSupport.saveNotice(this.notice,(response)=>{
                 if(response.s == 1)
@@ -64,7 +63,7 @@ Vue.createApp({
                 }
             })
         },
-        getCatalogNotices: function()
+        getCatalogNotices()
         {
             this.UserSupport.getCatalogNotices({},(response)=>{
                 if(response.s == 1)
@@ -73,7 +72,7 @@ Vue.createApp({
                 }
             })
         },
-        initEditor: function()
+        initEditor()
         {
             var toolbarOptions = [
                 ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -107,7 +106,7 @@ Vue.createApp({
                 this.notice.description = this.editor.root.innerHTML
             });
         },
-        getCatalogPriorities: function()
+        getCatalogPriorities()
         {
             return new Promise((resolve) => {
                 this.UserSupport.getCatalogPriorities({},(response)=>{
@@ -123,8 +122,6 @@ Vue.createApp({
     },
     mounted() 
     {
-        this.UserSupport = new UserSupport
-
         this.getCatalogPriorities().then(()=>{
             this.getCatalogNotices()
             this.initEditor()

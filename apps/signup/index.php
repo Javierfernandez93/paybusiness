@@ -22,6 +22,6 @@ $Layout->setScript([
 
 $Layout->setVar([
 	'UserLogin' => $UserLogin,
-	'Country' => (new World\Country)
+	'company_name' => Unlimited\SystemVar::_getValue('company_name')
 ]);
 $Layout();

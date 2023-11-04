@@ -8,34 +8,72 @@ $UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    if($data['withdraw_per_user_id'])
+    if($UserSupport->hasPermission('delete_commission') === true) 
     {
-        $WithdrawPerUser = new Unlimited\WithdrawPerUser;
-        
-        if($WithdrawPerUser->loadWhere('withdraw_per_user_id = ?',$data['withdraw_per_user_id']))
+        if($data['withdraw_per_user_id'])
         {
-            $data['status'] = Unlimited\WithdrawPerUser::DELETED;
-            $WithdrawPerUser->status = $data['status'];
-        
-            if($WithdrawPerUser->save())
+            $WithdrawPerUser = new Unlimited\WithdrawPerUser;
+            
+            if($WithdrawPerUser->loadWhere('withdraw_per_user_id = ?',$data['withdraw_per_user_id']))
             {
-                $data["s"] = 1;
-                $data["r"] = "DATA_OK";
+                if(recoverMoney([
+                    'user_login_id' => $WithdrawPerUser->user_login_id,
+                    'totalAmount' => $data['totalAmount']
+                ]))
+                {
+                    $data['status'] = Unlimited\WithdrawPerUser::DELETED;
+
+                    $WithdrawPerUser->status = $data['status'];
+                
+                    if($WithdrawPerUser->save())
+                    {
+                        $data["s"] = 1;
+                        $data["r"] = "DATA_OK";
+                    } else {
+                        $data["s"] = 0;
+                        $data["r"] = "NOT_SAVE";
+                    }
+                } else {
+                    $data["s"] = 0;
+                    $data["r"] = "NOT_RECOVER";
+                }
             } else {
                 $data["s"] = 0;
-                $data["r"] = "NOT_SAVE";
+                $data["r"] = "NOT_WITHDRAW_PER_USER";
             }
         } else {
             $data["s"] = 0;
-            $data["r"] = "NOT_WITHDRAW_PER_USER";
+            $data["r"] = "NOT_WITHDRAW_PER_USER_ID";
         }
     } else {
-        $data["s"] = 0;
-        $data["r"] = "NOT_WITHDRAW_PER_USER_ID";
+        $UserSupport->addLog([
+            'withdraw_per_user_id' => $data['withdraw_per_user_id'],
+            'unix_date' => time(),
+        ],Wise\LogType::INVALID_TRANSACTION_PERMISSION);
+
+        $data['s'] = 0;
+        $data['r'] = 'INVALID_PERMISSION';
     }
 } else {
 	$data["s"] = 0;
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
+}
+
+
+function recoverMoney(array $data = null) 
+{
+    if($ReceiverWallet = BlockChain\Wallet::getWallet($data['user_login_id']))
+    {
+        if($data['totalAmount'])
+        {
+            $Wallet = BlockChain\Wallet::getWallet(BlockChain\Wallet::MAIN_EWALLET);
+
+            if($transaction_per_wallet_id = $Wallet->createTransaction($ReceiverWallet->public_key,$data['totalAmount'],BlockChain\Transaction::prepareData(['@optMessage'=>'Devolución']),true))
+            {
+                return $transaction_per_wallet_id;
+            } 
+        } 
+    } 
 }
 
 echo json_encode(HCStudio\Util::compressDataForPhone($data)); 

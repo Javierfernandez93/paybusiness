@@ -103,12 +103,36 @@ const AdmintransactionsViewer = {
             });
         },
         deleteWithdraw(transaction) {
-            this.UserSupport.deleteWithdraw({withdraw_per_user_id:transaction.withdraw_per_user_id},(response)=>{
-                if(response.s == 1)
-                {
-                    transaction.status = response.status
-                }
+            console.log(transaction)
+            let alert = alertCtrl.create({
+                title: "Alert",
+                subTitle: `
+                    <div class="text-center">¿Estás seguro de eliminar esta esta transacción?</div>
+                    <div class="text-center mt-3">Regresaremos <b>$ ${transaction.amount} USD </b> a la billetera de <b>${transaction.names}</b></div>`,
+                buttons: [
+                    {
+                        text: "Sí",
+                        class: 'btn-success',
+                        role: "cancel",
+                        handler: (data) => {
+                            this.UserSupport.deleteWithdraw({withdraw_per_user_id:transaction.withdraw_per_user_id},(response)=>{
+                                if(response.s == 1)
+                                {
+                                    transaction.status = response.status
+                                }
+                            })
+                        },
+                    },
+                    {
+                        text: "Cancel",
+                        role: "cancel",
+                        handler: (data) => {
+                        },
+                    },
+                ],
             })
+
+            alertCtrl.present(alert.modal)  
         },
         getUsersTransactions() {
             this.transactions = null
@@ -132,10 +156,10 @@ const AdmintransactionsViewer = {
             <div class="card-header pb-0">
                 <div class="row align-items-center">
                     <div class="col-12 col-xl">
-                        <div class="fs-4 fw-sembold text-primary">Transacciones</div>
+                        <div class="fs-4 fw-sembold text-primary">Pagar comisiones</div>
                     </div>
                     <div class="col-12 col-xl-auto">
-                        <div><span v-if="transactions" class="badge text-secondary">Total de transacciones {{transactions.length}}</span></div>
+                        <div><span v-if="transactions" class="badge text-secondary">Total de comisiones {{transactions.length}}</span></div>
                     </div>
                 </div>
             </div>
@@ -262,7 +286,7 @@ const AdmintransactionsViewer = {
                                     v-if="status == 1"
                                     class="align-middle text-center text-sm">
                                     <div class="dropdown">
-                                        <button class="btn btn-outline-primary btn-sm px-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button class="btn btn-outline-primary btn-sm mb-0 px-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         
                                         </button>
                                         <ul class="dropdown-menu shadow">
@@ -281,7 +305,7 @@ const AdmintransactionsViewer = {
                         </tbody>
                     </table>
                 </div>
-                <div v-else class="card-body">
+                <div v-else-if="transactions == false" class="card-body">
                     <div class="alert alert-light mb-0 fw-semibold text-center">
                         <strong>Aviso</strong>
                         <div>No tenemos transacciones aún</div>

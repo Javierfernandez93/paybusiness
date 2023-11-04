@@ -145,6 +145,9 @@ class User extends Http {
     getNoticesList(data, callback) {
         return this.call('../../app/application/get_notices_list.php', data, callback);
     }
+    getLastNoticesShort(data, callback) {
+        return this.call('../../app/application/getLastNoticesShort.php', data, callback);
+    }
     getCampaigns(data, callback) {
         return this.call('../../app/application/getCampaigns.php', data, callback);
     }
@@ -711,6 +714,35 @@ class User extends Http {
     /* range */
     getCurrentRange(data, callback) {
         return this.call('../../app/application/getCurrentRange.php', data, callback);
+    }
+    /* productPermissions */
+    getProductPermissions(data, callback) {
+        return this.call('../../app/application/getProductPermissions.php', data, callback);
+    }
+    /* BT */
+    getBinaryTree(data, callback) {
+        return this.call('../../app/application/getBinaryTree.php', data, callback);
+    }
+    getMainBinaryTree(data, callback) {
+        return this.call('../../app/application/getMainBinaryTree.php', data, callback);
+    }
+    getTeamPending(data, callback) {
+        return this.call('../../app/application/getTeamPending.php', data, callback);
+    }
+    setReferralInPosition(data, callback) {
+        return this.call('../../app/application/setReferralInPosition.php', data, callback);
+    }
+    getCurrentMembership(data, callback) {
+        return this.call('../../app/application/getCurrentMembership.php', data, callback);
+    }
+    getLastMembers(data, callback) {
+        return this.call('../../app/application/getLastMembers.php', data, callback);
+    }
+    getTopCountries(data, callback) {
+        return this.call('../../app/application/getTopCountries.php', data, callback);
+    }
+    getIncome(data, callback) {
+        return this.call('../../app/application/getIncome.php', data, callback);
     }
 }
 

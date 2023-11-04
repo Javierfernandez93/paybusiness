@@ -1,22 +1,31 @@
+import { User } from '../../src/js/user.module.js';
+
 const FlyerViewer = {
     name : 'flyer-viewer',
     props : ['image','image2'],
     data() {
         return {
+            User : new User,
+            banners: null,
         }
     },
     methods: {
+        goToEvent(banner) {
+            window.open(banner.link)
+        },
+        getBanners() {
+            this.User.getBanners({},(response)=>{
+                this.banners = response.banners
+            })
+        }
     },
     mounted() {
-        
+        this.getBanners()
     },
     template : `
         <div class="flyer-container gx-0 row justify-content-center mb-5">
-           <div class="col-6">
-                <img :src="image" class="img-fluid">
-            </div>
-           <div class="col-6">
-                <img :src="image2" class="img-fluid">
+           <div @click="goToEvent(banner)" v-for="banner in banners" class="col-6 cursor-pointer">
+                <img :src="banner.image" class="img-fluid">
             </div>
         </div>
     `,

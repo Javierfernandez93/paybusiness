@@ -19,9 +19,6 @@
 namespace HCStudio;
 
 use Exception;
-use HCStudio\Sesssion;
-use JFStudio\Client;
-use HCStudio\Token;
 
 #! Simple Object Relational Mapper
 abstract class Orm
@@ -236,9 +233,28 @@ abstract class Orm
 	}
 
 	#
-	public function cargarArray($array = false)
+	public function cargarArray(array $array = null)
 	{
-		if($array) foreach ($array as $k => $v) $this->{$k} = $v;
+		if(!isset($array)) 
+		{
+			return false;
+		}
+
+		if(isset($array[$this->tblPrimary]))
+		{
+			$this->setId($array[$this->tblPrimary]);
+		}
+		
+		foreach ($array as $k => $v) {
+			$this->{$k} = $v;
+		}
+	}
+
+	public function loadArray(array $array = null)
+	{
+		$this->cargarArray($array);
+
+		return $this;
 	}
 
 	public function saveNew()
@@ -368,5 +384,109 @@ abstract class Orm
 	public static function sqlHelperOR(array $fields)
 	{
 		return str_replace(',', ' OR', self::sqlHelper($fields));
+	}
+	
+	public function updateField(string $field = null,int|string|float $value = null) 
+	{
+		if(!$this->getId())
+		{
+			return false;
+		}
+
+		$this->{$field} = $value;
+
+		return $this->save();
+	}
+
+	public function updateStatus(string|int $status = null) 
+	{
+		return $this->updateField("status",$status);
+	}
+
+	public function active() 
+	{
+		return $this->updateField("status",'1');
+	}
+	
+	public function unActive() 
+	{
+		return $this->updateField("status",'0');
+	}
+	
+	public function delete() 
+	{
+		return $this->updateField("status",'-1');
+	}
+
+	public function touch() : bool
+	{
+		if(!isset($this->create_date))
+		{
+			return false;
+		}
+
+		$this->create_date = time();
+	
+		return $this->save();
+	}
+
+	public function find(int $id = null) 
+	{
+		return $this->where("{$this->tblName}_id",'=',$id);
+	}
+
+	public function whereRaw(string $query = null) 
+	{
+		if($data = $this->db->row($query, null))
+		{
+			foreach($data as $k => $v) $this->tblFields[$k] = $v;
+
+			return $this;
+		}
+
+		return false;	
+	}
+
+	public function where(string $field = null,string $comparation = null,string|float|int $value = null) 
+	{
+		return $this->whereRaw("SELECT * FROM {$this->tblName} WHERE {$this->tblName}.{$field} {$comparation} '{$value}' LIMIT 1");
+	}
+	
+	public function allByOrdered(string $where = null,array|string|int|float $binds = null,array $fields = null,array $orderBy = null) : array|bool
+	{
+		return $this->findAll($where,$binds,null,['field'=>'create_date','order'=>'desc']);
+	}
+
+	public function findAll(string $where = null,array|string|int|float $binds = null,array $fields = null,array $orderBy = null) : array|bool
+	{
+		$fields = isset($fields) ? implode(',',$fields) : implode(",",array_keys($this->getFields()));
+
+		$query = "SELECT {$fields} FROM {$this->tblName} WHERE {$where}";
+
+		if(isset($orderBy))
+		{
+			$query .= " ORDER BY {$orderBy['field']} ".strtoupper($orderBy['order']);
+		}
+
+		if($data = $this->db->rows($query, $binds))
+		{
+			return $data;
+		}
+
+		return false;
+	}
+	
+	public function findRow(string $where = null,array|string|int|float $binds = null,array $fields = null) : array|bool
+	{
+		$fields = isset($fields) ? implode(',',$fields) : implode(",",array_keys($this->getFields()));
+
+		$query = "SELECT {$fields} FROM {$this->tblName} WHERE {$where}";
+
+		if($data = $this->db->row($query, $binds))
+		{
+			return $data;
+		}
+
+		return false;
 	}
 }

@@ -1,12 +1,12 @@
 <div class="container-fluid py-4" id="app">
-    <div class="card">
+    <div class="card mb-3">
         <div class="card-header">
             <div class="row">
                 <div class="col-12 col-xl">
                     <div class="fw-semibold text-primary fs-4">Editar administrador</div>
                 </div>
                 <div class="col-12 col-xl-auto">
-                    <button ref="button" type="submit" class="btn btn-primary shadwo-none mb-0" @click="editAdministrator">Editar</button>
+                    <button ref="button" type="submit" class="btn btn-dark shadow-none mb-0" @click="editAdministrator">Editar</button>
                 </div>
             </div>
         </div>

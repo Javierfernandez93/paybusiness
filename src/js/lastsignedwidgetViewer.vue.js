@@ -5,6 +5,7 @@ const LastsignedwidgetViewer = {
     data() {
         return {
             User : new User,
+            busy : false,
             current : null,
             TIME : 3500,
             interval : null,
@@ -28,7 +29,9 @@ const LastsignedwidgetViewer = {
             },this.TIME)
         },
         getLastSigned() {
+            this.busy = true
             this.User.getLastSigned({},(response)=>{
+                this.busy = false
                 if(response.s == 1)
                 {
                     this.users = response.users
@@ -43,8 +46,13 @@ const LastsignedwidgetViewer = {
         this.getLastSigned()
     },
     template : `
-        <div class="card shadow-none bg-transparent mb-3">
-            <div class="card-body text-center text-center">
+        <div class="card shadow-none bg-transparent">
+            <div v-if="busy" class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <div v-if="users">
+                <div class="sans text-secondary">Bienvenidos a Unlimited</div>
+                
                 <div class="h4">
                     <img :src="user.country_id.getCoutryImage()" class="me-2" title="flag" alt="flag" style="width:2rem"/>
                     {{user.names}}

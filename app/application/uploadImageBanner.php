@@ -4,9 +4,9 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserSupport = new Unlimited\UserSupport;
 
-if($UserLogin->logged === true)
+if($UserSupport->logged === true)
 {
     if(!empty($_FILES))
 	{
@@ -41,9 +41,9 @@ if($UserLogin->logged === true)
 
 function uploadUserImage(int $company_id = null,string $image = null) : bool 
 {
-	$UserAccount = new Unlimited\UserAccount;
+	$UserAccount = new DummieTrading\UserAccount;
 	
-	if($UserAccount->loadWhere("user_login_id = ?",$company_id))
+	if($UserAccount->cargarDonde("user_login_id = ?",$company_id))
 	{
 		$UserAccount->image = $image;
 		

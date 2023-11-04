@@ -1260,3 +1260,15 @@ String.prototype.isValidVimeoUrl = function() {
 String.prototype.isValidYoutubeUrl = function() {
   return this.includes("youtube.com");
 }
+
+String.prototype.removeHtmlTags = function() {
+  return this.replace(/(<([^>]+)>)/gi, "");
+}
+
+String.prototype.getShortTextFromHtml = function() {
+  return this.removeHtmlTags()
+}
+
+String.prototype.getFirstName = function() {
+  return this.split(" ")[0]
+}

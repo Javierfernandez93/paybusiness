@@ -23,9 +23,8 @@ const AdminacademyViewer = {
     methods: {
         filterData() {
             this.courses = this.coursesAux
-
             this.courses = this.courses.filter((course) => {
-                return course.title.toLowerCase().includes(this.query.toLowerCase()) || course.price.toLowerCase().includes(this.query.toLowerCase())
+                return course.title.toLowerCase().includes(this.query.toLowerCase()) || course.price.toString().includes(this.query)
             })
         },
         toggleGrid()

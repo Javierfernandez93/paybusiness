@@ -8,9 +8,6 @@ const WithdrawmethodsViewer = {
             withdrawMethods : ''
         }
     },
-    watch : {
-
-    },
     methods: {
         toggleEditing: function (withdrawMethod) {
             withdrawMethod.editing = !withdrawMethod.editing
@@ -33,8 +30,6 @@ const WithdrawmethodsViewer = {
                 }
             })
         },
-    },
-    updated() {
     },
     mounted() 
     {       

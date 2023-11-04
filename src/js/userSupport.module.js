@@ -500,6 +500,9 @@ class UserSupport extends Http {
     uploadCoverCourse(data, progress, callback) {
         return this.callFile('../../app/application/uploadCoverCourse.php', data, callback, progress);
     }
+    uploadImageBanner(data, progress, callback) {
+        return this.callFile('../../app/application/uploadImageBanner.php', data, callback, progress);
+    }
     getCatalogCampaigns(data, callback) {
         return this.call('../../app/application/getCatalogCampaigns.php', data, callback);
     }
@@ -508,6 +511,18 @@ class UserSupport extends Http {
     }
     getCoruseForEdit(data, callback) {
         return this.call('../../app/application/getCoruseForEdit.php', data, callback);
+    }
+    getSystemVars(data, callback) {
+        return this.call('../../app/application/getSystemVars.php', data, callback);
+    }
+    saveSystemVar(data, callback) {
+        return this.call('../../app/application/saveSystemVar.php', data, callback);
+    }
+    getBanners(data, callback) {
+        return this.call('../../app/application/getBanners.php', data, callback);
+    }
+    saveBanner(data, callback) {
+        return this.call('../../app/application/saveBanner.php', data, callback);
     }
 }
 

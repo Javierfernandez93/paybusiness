@@ -5,47 +5,48 @@ const MembershipwidgetViewer = {
     data() {
         return {
             User : new User,
-            landing : null,
-            hasLandingConfigurated : null,
+            productPermissions : null,
         }
     },
-    watch : {
-        
-    },
     methods: {
-        getReferralLanding() {
-            this.User.getReferralLanding({},(response)=>{
+        getProductPermissions() {
+            this.User.getProductPermissions({},(response)=>{
                 if(response.s == 1)
                 {
-                    this.landing = response.landing
-                    this.hasLandingConfigurated = response.hasLandingConfigurated
+                    this.productPermissions = response.productPermissions
                 }
             })
-        },
-        copyToClipBoard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                this.$refs.landing.innerText = 'Copiada'
-            });
-        },
-        sendByWhatsapp(landing) {
-            window.open(`*¡Hola!* quiero invitarte a un *proyecto increíble* que te permite *ganar dinero* por el *entretenimiento* ¡regístrate ya! ${landing}`.getWhatsappLink())
         },
     },
     mounted() 
     {   
-        this.getReferralLanding()
+        this.getProductPermissions()
     },
     template : `
-        <div class="card shadow-none border">
+        <div v-if="productPermissions" class="card shadow-none border">
             <div class="card-body text-center text-center">
                 <div class="lead fw-semibold text-dark mb-3">
                     Membresía
                 </div>
                 <div class="mb-2">
-                    <span class="badge bg-success text-uppercase">Pay Business</span>
+                    <span v-if="productPermissions.pay_business" class="badge bg-success text-uppercase">
+                            <i class="bi bi-check"></i>
+                        Pay Business
+                    </span>
+                    <span v-else class="badge bg-danger text-uppercase">
+                        <i class="bi bi-x"></i>
+                        Pay Business
+                    </span>
                 </div>
                 <div>
-                    <span class="badge bg-danger text-uppercase">Pay Academy</span>
+                    <span v-if="productPermissions.academy" class="badge bg-success text-uppercase">
+                        <i class="bi bi-check"></i>
+                        Pay Academy
+                    </span>
+                    <span v-else class="badge bg-danger text-uppercase">
+                        <i class="bi bi-x"></i>
+                        Pay Academy
+                    </span>
                 </div>
             </div>
         </div>

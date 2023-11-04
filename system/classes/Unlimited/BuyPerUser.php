@@ -14,8 +14,6 @@ use Unlimited\CatalogCommission;
 use Unlimited\Product;
 use Unlimited\AdviceType;
 use Unlimited\LicencePerUser;
-use Unlimited\Exercise;
-use Unlimited\CatalogCommissionType;
 use Unlimited\BuyPerBridge;
 use Unlimited\CatalogCurrency;
 use Unlimited\CatalogNotification;
@@ -61,13 +59,19 @@ class BuyPerUser extends Orm {
     
 		foreach ($items as $item)
 		{
-      if($item['type'] == self::PACKAGE)
+      if(isset($item['type']))
       {
-        $_item = (new Package)->getPackage($item['id']);
-        $_item['catalog_commission'] = CatalogCommission::unformatCommission(json_decode($_item['catalog_commission_ids'],true));
-
-      } else if($item['type'] == self::PRODUCT) {
-        $_item = (new Product)->getProduct($item['id']);
+        if($item['type'] == self::PACKAGE)
+        {
+          $_item = (new Package)->getPackage($item['id']);
+          
+          if(isset($_item['catalog_commission_ids']))
+          {
+            $_item['catalog_commission'] = CatalogCommission::unformatCommission(json_decode($_item['catalog_commission_ids'],true));
+          }
+        } else if($item['type'] == self::PRODUCT) {
+          $_item = (new Product)->getProduct($item['id']);
+        }
       }
 
       if($_item)
@@ -371,6 +375,55 @@ class BuyPerUser extends Orm {
     return $package_id;
   }
 
+  public static function addProductPermissions(array $data = null) 
+  {
+    if(!isset($data) && is_array($data))
+    {
+      return false;
+    }
+
+    foreach($data['items'] as $item)
+    {
+      if(isset($item['products']))
+      {
+        foreach($item['products'] as $product) 
+        {
+          if(isset($product['product']))
+          {
+            ProductPermission::add([
+              'user_login_id' => $data['user_login_id'],
+              'product_id' => $product['product_id'],
+              'create_date' => time(),
+              'end_date' => strtotime("+{$product['product']['day']} days"),
+            ]);
+          }
+        }
+      }
+    }
+  }
+
+  public static function addMembership(array $data = null) 
+  {
+    if(!isset($data['items']))
+    {
+      return false;
+    }
+
+    foreach($data['items'] as $item)
+    {
+      if($item['type'] == 'package')
+      {
+        if($item['id'] == Package::PAY_BUSINESS)
+        {
+          MembershipPerUser::add([
+            'package_id' => $item['id'],
+            'user_login_id' => $data['user_login_id'],
+          ]);
+        }
+      }
+    }
+  }
+
   public static function processPayment(int $buy_per_user_id = null,bool $sendCommissions = null) : bool
   {
     if(isset($buy_per_user_id) === true)
@@ -381,34 +434,23 @@ class BuyPerUser extends Orm {
       {
         $data = $BuyPerUser->unformatData();
         
-        if(Product::hasProductWithSku($data['items'],Product::MAM_SKU))
-        {
-          BuyPerBridge::setAsPaid($BuyPerUser->getId());
-        } else if(Package::hasPackageWithSku($data['items'],CatalogPackageType::BRIDGE_FUNDS)) {
-          BuyPerBridge::setAsPaid($BuyPerUser->getId());
-        } else if(Package::hasPackageWithSku($data['items'],CatalogPackageType::MARKETING)) {
-          MarketingFieldPerUser::add($data);
-        } else if(Package::hasPackageWithSku($data['items'],CatalogPackageType::ATI)) {
-          UserAti::add(['user_login_id'=>$BuyPerUser->user_login_id]);
-        } else if(Package::hasPackageWithSku($data['items'],CatalogPackageType::DUMMIE_TRADING)) {
-          $package_id = self::getPackageId($data['items']);
-
-          UserLogin::signOnDummieTrading([
-            'buy_per_user_id' => $BuyPerUser->getId(),
-            'package_id' => $package_id,
-            'user_login_id' => $BuyPerUser->user_login_id
-          ]);
-        }
-
         if($sendCommissions)
         {
           if(self::hasCommission($data['items']))
           {
             CommissionPerUser::saveCommissionsByItems($data['items'],$BuyPerUser->user_login_id,$BuyPerUser->getId());
-          } else if(self::hasCommissionMam($data['items'])) {
-            CommissionPerUser::addFundMamCommission($data['items'],$BuyPerUser->user_login_id,$BuyPerUser->getId());
-          }
+          } 
         }
+
+        self::addProductPermissions([
+          'items' => $data['items'],
+          'user_login_id' => $BuyPerUser->user_login_id,
+        ]);
+
+        self::addMembership([
+          'items' => $data['items'],
+          'user_login_id' => $BuyPerUser->user_login_id,
+        ]);
         
         if(self::hasFunds($data['items']))
         {

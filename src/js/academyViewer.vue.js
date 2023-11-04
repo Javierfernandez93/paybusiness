@@ -89,8 +89,7 @@ const AcademyViewer = {
                             <div class="row position-relative" style="z-index:2">
                                 <div class="col">
                                     <div>
-                                        <span class="badge fw-semibold border mb-3"
-                                        :class="course.catalog_course_type_id != CATALOG_COURSE_TYPE.STANDAR ? 'bg-danger text-white border-danger' :'text-light border-light'">
+                                        <span class="badge sans fw-semibold border mb-3" :class="course.catalog_course_type_id != CATALOG_COURSE_TYPE.STANDAR ? 'bg-danger text-white border-danger' :'bg-light text-dark'">
                                             <span v-if="course.catalog_course_type_id != CATALOG_COURSE_TYPE.STANDAR"><i class="bi bi-star-fill"></i></span>
                                             Academia {{course.type}}
                                         </span>
@@ -108,10 +107,10 @@ const AcademyViewer = {
                                             </div>
                                             <div v-else>
                                                 <div v-if="course.hasLessonTaked">
-                                                    <button @click="goToSessions(course.course_id)" class="btn btn-success mb-0">Continuar</button>
+                                                    <button @click="goToSessions(course.course_id)" class="btn btn-success shadow-none mb-0">Continuar</button>
                                                 </div>
                                                 <div v-else>
-                                                    <button @click="goToSessions(course.course_id)" class="btn btn-primary mb-0">Iniciar</button>
+                                                    <button @click="goToSessions(course.course_id)" class="btn btn-primary shadow-none mb-0">Iniciar</button>
                                                 </div>
                                             </div>
                                         </div>

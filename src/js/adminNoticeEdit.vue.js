@@ -58,7 +58,7 @@ Vue.createApp({
         },
     },
     methods: {
-        updateNotice: function()
+        updateNotice()
         {
             this.UserSupport.updateNotice(this.notice,(response)=>{
                 if(response.s == 1)
@@ -67,7 +67,7 @@ Vue.createApp({
                 }
             })
         },
-        getNotice: function(notice_id)
+        getNotice(notice_id)
         {
             return new Promise((resolve)=>{
                 this.UserSupport.getNotice({notice_id:notice_id},(response)=>{
@@ -81,7 +81,7 @@ Vue.createApp({
                 })
             })
         },
-        getCatalogNotices: function()
+        getCatalogNotices()
         {
             return new Promise((resolve) => {
                 this.UserSupport.getCatalogNotices({},(response)=>{
@@ -94,7 +94,7 @@ Vue.createApp({
                 })
             })
         },
-        initEditor: function()
+        initEditor()
         {
             var toolbarOptions = [
                 ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
@@ -128,7 +128,7 @@ Vue.createApp({
                 this.notice.description = this.editor.root.innerHTML
             });
         },
-        getCatalogPriorities: function()
+        getCatalogPriorities()
         {
             return new Promise((resolve) => {
                 this.UserSupport.getCatalogPriorities({},(response)=>{

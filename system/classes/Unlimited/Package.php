@@ -12,31 +12,11 @@ use Unlimited\BuyPerUser;
 class Package extends Orm {
 	protected $tblName = 'package';
 	
-	const INITIAL_PACKAGE = 1;
-	const MONTHLY_PACKAGE = 5;
-	const BRIDGE_FUNDS = 1;
-	const MARKETING_BASIC = 2;
-	const MARKETING_PRO = 3;
-	const DUMMIE_TRADING_1_MONTH = 223;
-	const DUMMIE_TRADING_6_MONTH = 224;
-	const DUMMIE_TRADING_12_MONTH = 225;
+	const PAY_BUSINESS = 1;
+	const PAY_ACADEMY = 2;
 
 	public function __construct() {
 		parent::__construct();
-	}
-
-	public static function transporter(int $package_id = null) : int
-	{
-		if($package_id == self::DUMMIE_TRADING_1_MONTH)
-		{
-			return 1;
-		} else if($package_id == self::DUMMIE_TRADING_6_MONTH) {
-			return 2;
-		} else if($package_id == self::DUMMIE_TRADING_12_MONTH) {
-			return 3;
-		}
-
-		return 0;
 	}
 
 	public static function hasPackageWithSku(array $items = null,string $catalog_package_type_id = null) : bool

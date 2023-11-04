@@ -18,6 +18,14 @@ class Notice extends Orm {
     parent::__construct();
   }
   
+  public static function addOrUpdate(array $data = null) : bool
+  {
+    $Notice = new self;
+    $Notice->loadArray($data);
+    
+    return $Notice->save();
+  }
+
   public function getAll() 
   {
     $sql = "SELECT

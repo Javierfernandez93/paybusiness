@@ -61,13 +61,13 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Wallet])) { ?>active<?php } ?>" href="../../apps/ewallet">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Wallet,JFStudio\Router::WithdrawMethods])) { ?>active<?php } ?>" href="../../apps/ewallet">
                                 <i class="bi bi-wallet2"></i>
                                 <span class="nav-link-text ms-1">My Wallet</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Store,JFStudio\Router::Products])) { ?>active<?php } ?>" href="../../apps/store/package">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Store,JFStudio\Router::Products,JFStudio\Router::WalletProcess])) { ?>active<?php } ?>" href="../../apps/store/package">
                                 <i class="bi bi-cart4"></i>
                                 <span class="nav-link-text ms-1">Buy</span>
                             </a>
@@ -79,25 +79,29 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Store])) { ?>active<?php } ?>" href="../../apps/ewallet">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Team])) { ?>active<?php } ?>" href="../../apps/team">
                                 <i class="bi bi-people"></i>
                                 <span class="nav-link-text ms-1">Team</span>
                             </a>
                         </li>
+
+                        <?php if($UserLogin->hasProductPermission(Unlimited\Product::ACADEMY)) { ?>
+                            <li class="nav-item">
+                                <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Academy,JFStudio\Router::AcademyLesson])) { ?>active<?php } ?>" href="../../apps/academy">
+                                    <i class="bi bi-mortarboard"></i>
+                                    <span class="nav-link-text ms-1">Business Academy</span>
+                                </a>
+                            </li>
+                        <?php } ?>
+                        
                         <li class="nav-item">
-                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Academy,JFStudio\Router::AcademyLesson])) { ?>active<?php } ?>" href="../../apps/academy">
-                                <i class="bi bi-mortarboard"></i>
-                                <span class="nav-link-text ms-1">Business Academy</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Tools])) { ?>active<?php } ?>" href="../../apps/ewallet">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Tools])) { ?>active<?php } ?>" href="../../apps/backoffice/tools">
                                 <i class="bi bi-gear"></i>
                                 <span class="nav-link-text ms-1">Tools</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Help])) { ?>active<?php } ?>" href="../../apps/ewallet">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Help])) { ?>active<?php } ?>" href="../../apps/ticket/">
                                 <i class="bi bi-headset"></i>
                                 <span class="nav-link-text ms-1">Customer Service</span>
                             </a>
@@ -105,20 +109,9 @@
                     </div>
                 <?php } ?>
             </ul>
-            <div class="container mt-5">
-                <div class="card card-body bg-dark">
-                    <div class="mb-3">
-                        <div class="text-white h3">
-                            Noticias 
-                        </div>
-                        <div class="lead text-xs text-white">
-                            Noticia actual en este backoffice
-                        </div>
-                    </div>
-                    <button class="btn btn-primary mb-0 shadow-none">
-                        Más información 
-                    </button>
-                </div>
+
+            <div id="mainApp">
+                <noticewidget-viewer></noticewidget-viewer>
             </div>
         </div>
     </aside>
@@ -128,6 +121,9 @@
             <div class="container py-2">
                 <nav aria-label="breadcrumb">
                     <h6 class="fs-4 font-weight-bolder ms-2"></h6>
+                    <div id="topApp">
+                        <lastsignedwidget-viewer></lastsignedwidget-viewer>
+                    </div>
                 </nav>
                 <?php if ($UserLogin->logged) { ?>
                     <div class="collapse navbar-collapse me-md-0 me-sm-4 mt-sm-0 mt-2" id="navbar">
@@ -162,7 +158,7 @@
             </div>
         </nav>
         
-        <div class="" style="margin-top:0.635rem">
+        <div class="animation-fall-down" style="--delay:250ms;margin-top:0.635rem">
             {{content}}
         </div>
     
@@ -224,6 +220,8 @@
     <link rel="stylesheet" href="../../src/css/general.css?v=1.2.8" />
     
     <script src="../../src/js/vue.js?v=2.3.3" type="text/javascript"></script>
+    <script src="../../src/js/top.vue.js?v=2.3.3" type="module"></script>
+    <script src="../../src/js/main.vue.js?v=2.3.3" type="module"></script>
     <!-- <script src="../../src/js/translate.module.js?v=2.3.3" type="module"></script>
     
     <script src="../../src/js/translateInit.vue.js?v=2.3.3" type="module"></script> -->

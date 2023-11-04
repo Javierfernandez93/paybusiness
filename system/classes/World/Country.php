@@ -78,6 +78,25 @@ class Country extends Orm {
 
 		return false;
 	}
+	
+	public function getCountryNameAndInternet($country_id = null)
+	{
+		if(isset($country_id) && !empty($country_id))
+		{
+			$sql = "SELECT 
+						{$this->tblName}.country,
+						{$this->tblName}.internet
+					FROM 
+						{$this->tblName}
+					WHERE	
+						{$this->tblName}.country_id = '{$country_id}'
+					";
+
+			return $this->connection()->row($sql);
+		}
+
+		return false;
+	}
 
 	public function getCountryNameAndPhoneArea($country_id = null)
 	{

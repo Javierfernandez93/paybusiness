@@ -12,7 +12,7 @@ $UserLogin->checkRedirection();
 
 $Layout = JFStudio\Layout::getInstance();
 
-$route = JFStudio\Router::AddBanner;
+$route = JFStudio\Router::RecoverPassword;
 $Layout->init(JFStudio\Router::getName($route),'addBanner',"backoffice",'',TO_ROOT.'/');
 
 $Layout->setScriptPath(TO_ROOT . '/src/');

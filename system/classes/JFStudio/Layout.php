@@ -3,6 +3,7 @@
 namespace JFStudio;
 
 use HCStudio\Connection;
+use Unlimited\SystemVar;
 
 class Layout
 {
@@ -27,7 +28,8 @@ class Layout
 	public $virtual_view= null;
 	public $view_root = null;
 	public $content_virtual_view = null;
-	public $pretitle = 'Unlimited - ';
+	public $page_title_join = ' - ';
+	public $page_title = ' Page ';
 	public $modules = [];
 	private static $instance;
 	
@@ -54,7 +56,9 @@ class Layout
 			$this->setScriptPath(Connection::getMainPath().'/src/');
 		}
 
-		$this->setPageName($this->pretitle.$page_name);
+		$this->page_title = SystemVar::_getValue("page_title");
+
+		$this->setPageName("{$this->page_title} {$this->page_title_join} {$page_name}");
 		$this->getPath();
 		$this->setLayout($layout);
 		$this->setView($view);
@@ -268,7 +272,7 @@ class Layout
 	public function setModule(string $name = null)
 	{
 		if(isset($name) === true) {
-			if(isset($this->modules["{{{$name}}}"]))
+			if(!isset($this->modules["{{{$name}}}"]))
 			{
 				$this->modules[] = "{{{$name}}}";
 			}

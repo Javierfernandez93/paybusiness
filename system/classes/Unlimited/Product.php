@@ -14,6 +14,10 @@ class Product extends Orm {
 	const REEL = 'REE';
 	const STORIES = 'STO';
 
+	/* product control */
+	const ACADEMY = 'academy';
+	const PAY_BUSINESS = 'pay_business';
+
 	public function __construct() {
 		parent::__construct();
 	}
@@ -128,6 +132,7 @@ class Product extends Orm {
 	{
 		$sql = "SELECT 
 					{$this->tblName}.{$this->tblName}_id,
+					{$this->tblName}.day,
 					{$this->tblName}.title,
 					{$this->tblName}.promo_price,
 					{$this->tblName}.price
@@ -243,6 +248,7 @@ class Product extends Orm {
 						{$this->tblName}.title,
 						{$this->tblName}.description,
 						{$this->tblName}.sku,
+						{$this->tblName}.day,
 						{$this->tblName}.amount
 					FROM 
 						{$this->tblName}
@@ -292,5 +298,22 @@ class Product extends Orm {
 				";
 		
 		return $this->connection()->field($sql);
+	}
+
+	public function getIdByCode(string $code = null)
+	{
+		if (!isset($code)) {
+			return false;
+		}
+
+		return $this->connection()->field("SELECT 
+				{$this->tblName}.{$this->tblName}_id
+			FROM 
+				{$this->tblName}
+			WHERE 
+				{$this->tblName}.code = '{$code}'
+			AND 
+				{$this->tblName}.status != '" . Constants::DELETE . "'
+		");
 	}
 }

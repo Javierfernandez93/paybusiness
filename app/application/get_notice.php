@@ -8,14 +8,11 @@ $UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    if($data['notice_id'])
+    if(isset($data['notice_id']))
     {
-        $Notice = new Unlimited\Notice;
-        
-        if($notice = $Notice->getNotice($data['notice_id']))
+        if($notice = (new Unlimited\Notice)->findRow("notice_id = ? AND status != ?",[$data['notice_id'],-1]))
         {
-            format($notice);
-            $data["notice"] = $notice;
+            $data["notice"] = format($notice);
             $data["s"] = 1;
             $data["r"] = "DATA_OK";
         } else {
@@ -31,7 +28,7 @@ if($UserSupport->logged === true)
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
 }
 
-function format(array &$notice = null)
+function format(array $notice = null)
 {
     if($notice['start_date'] != 0 && $notice['end_date'] != 0)
     {
@@ -39,6 +36,8 @@ function format(array &$notice = null)
         $notice['end_date'] = date("Y-m-d",$notice['end_date']);
         $notice['limit_dates'] = true;
     }
+
+    return $notice;
 }
 
 echo json_encode(HCStudio\Util::compressDataForPhone($data)); 

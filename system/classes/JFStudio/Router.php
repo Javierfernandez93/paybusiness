@@ -85,6 +85,7 @@ class Router {
     const Dummie = 138;
     const Aof = 139;
     const PammyTrading = 140;
+    const Team = 145;
     
     /* admin */
     const AdminUsers = 9;
@@ -130,6 +131,7 @@ class Router {
     const AdminAti = 141;
     const AdminAcademy = 142;
     const AdminConfig = 143;
+    const AdminBanner = 144;
 
     static function getName(int $route = null)
     {
@@ -260,6 +262,8 @@ class Router {
             self::AdminAcademy => 'Academia',
             self::AdminAti => 'Ati',
             self::AdminConfig => 'Configuración',
+            self::AdminBanner => 'Eventos',
+            self::Team => 'Team',
             default => 'Sin nombre'
         };
     }
