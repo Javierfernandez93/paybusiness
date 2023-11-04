@@ -54,26 +54,17 @@ const ToolsViewer = {
                     </div>
                 </div>
             </div>
-
+            
             <div class="row justify-content-center align-items-center">
                 <div v-for="tool in tools" class="col-12 col-xl-4 mb-3">
                     <div class="card shadow-xl overflow-hidden border-radius-2xl f-zoom-element-sm">
-                        <img :src="tool.image" class="cad-img-top"/>
-
-                        <div class="position-absolute top-0 row px-4 py-3">
-                            
-                            <span class="badge bg-primary">
-                                {{tool.tool}}
-                            </span>
-                        </div>
-
-                        <div class="mt-n6 row w-100 justify-content-end">
-                            <div class="col-12 col-xl-auto">
-                                <a class="btn btn-success me-1 " :href="tool.route" download>Descargar</a>
-                                <a class="btn btn-primary " :href="tool.route">Visualizar</a>
+                        <div class="card-header">
+                            <div class="justify-content-end">
+                                <span class="badge bg-primary">
+                                    {{tool.tool}}
+                                </span>
                             </div>
                         </div>
-
                         <div class="card-header">
                             <div class="fw-semibold text-dark">
                                 {{tool.title}}
@@ -84,7 +75,22 @@ const ToolsViewer = {
                                 </div>
                             </div>
 
-                            <span class="badge mt-3 text-xxs border border-primary text-primary">Subido por {{tool.names}} hace {{tool.create_date.timeSince()}}</span>
+                            <span class="badge text-xxs border border-primary text-primary">Subido por {{tool.names}} hace {{tool.create_date.timeSince()}}</span>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-12 col-xl-6">
+                                    <div class="d-grid">
+                                        <a class="btn mb-0 btn-success me-1 " :href="tool.route" download>Descargar</a>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-xl-6">
+                                    <div class="d-grid">
+                                        <a class="btn mb-0 btn-primary " :href="tool.route">Visualizar</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
