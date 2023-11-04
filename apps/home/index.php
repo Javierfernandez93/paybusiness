@@ -2,6 +2,8 @@
 
 require_once TO_ROOT . "/system/core.php";
 
+HCStudio\Util::redirectTo("../../apps/login");
+
 $Layout = JFStudio\Layout::getInstance();
 
 $route = JFStudio\Router::Home;
