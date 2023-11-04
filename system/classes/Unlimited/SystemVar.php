@@ -81,11 +81,14 @@ class SystemVar extends Orm {
         return false;
     }
 
-    return array_map(function($variable){
-      return [
-        $variable['name'] => $variable['val']
-      ];
-    },$variables);
+    $_variables = [];
+
+    foreach($variables as $variable)
+    {
+      $_variables[$variable['name']] = $variable['val'];
+    }
+
+    return $_variables;
   }
 
   public static function _getValue(string $name = null) 
