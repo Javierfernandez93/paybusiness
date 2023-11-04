@@ -18,7 +18,6 @@ if($UserLogin->logged === false || $UserSupport->logged === true)
         if($referral = $UserLogin->getProfile($data['referral_user_login_id']))
         {
             $data['referral'] = $referral;
-            $data['commission'] = (new Unlimited\UserReferral)->getCommission($data['user_login_id']);
 
             $data["s"] = 1;
             $data["r"] = "DATA_OK";
