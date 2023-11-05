@@ -158,7 +158,7 @@
             </div>
         </nav>
         
-        <div class="animation-fall-down" style="--delay:250ms;margin-top:0.635rem">
+        <div>
             {{content}}
         </div>
     
