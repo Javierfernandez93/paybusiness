@@ -59,6 +59,12 @@ fieldset:disabled .btn {
   object-position: center;
 }
 
+.list-messages a {
+  font-weight: 500;
+  text-decoration: underline;
+  color: var(--bg-primary);
+}
+
 .list-messages {
   height: 32rem;
 }
