@@ -188,11 +188,13 @@ const AddintentViewer = {
                             <ul class="list-group list-group-flush">
                                 <li v-for="reply_per_catalog_tag_intent in replys_per_catalog_tag_intent"
                                     class="list-group-item">
-                                    <input 
+                                    <textarea 
                                         @keydown.enter.exact.prevent="insertReplyPerCatalogTagIntent"
                                         v-model="reply_per_catalog_tag_intent.reply"
                                         :class="reply_per_catalog_tag_intent.reply ? 'is-valid' : ''"
                                         type="text" placeholder="Escribe aquí..." class="form-control border-0">
+                                        
+                                    </textarea>
                                 </li>
                             </ul>
                         </div>
