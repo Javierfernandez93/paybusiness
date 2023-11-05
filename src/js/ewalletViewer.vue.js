@@ -114,9 +114,7 @@ const EwalletViewer = {
         <div v-if="ewallet" class="row py-5">
             <div class="col-12 col-md-6 col-xl-5 mb-xl-0 mb-4">
                 <div class="card bg-transparent rounded overflow-hidden shadow-xl">
-                    <div
-                        class="bg-dark overflow-hidden position-relative border-radius-xl"
-                        >
+                    <div class="card-bg overflow-hidden position-relative border-radius-xl">
                         <span class="mask d-none bg-gradient-dark"></span>
                         <div class="card-body position-relative z-index-1 p-3">
                             <div class="row">
