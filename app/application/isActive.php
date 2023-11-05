@@ -8,7 +8,6 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $data['active'] = (new Unlimited\LicencePerUser)->isActive($UserLogin->company_id);
     $data['active'] = false;
     $data["s"] = 1;
 	$data["r"] = "DATA_OK";
