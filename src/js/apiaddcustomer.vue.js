@@ -1,4 +1,4 @@
-import { ApiaddcustomerViewer } from './apiaddcustomerViewer.vue.js?v=2.3.3'
+import { ApiaddcustomerViewer } from './apiaddcustomerViewer.vue.js?v=2.3.4'
 
 Vue.createApp({
     components : { 

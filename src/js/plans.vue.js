@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.3.3'   
+import { User } from '../../src/js/user.module.js?v=2.3.4'   
 
 Vue.createApp({
     components : { 

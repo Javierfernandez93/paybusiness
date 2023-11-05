@@ -1,4 +1,4 @@
-import { BannerleftViewer } from '../../src/js/bannerleftViewer.vue.js?v=2.3.3'
+import { BannerleftViewer } from '../../src/js/bannerleftViewer.vue.js?v=2.3.4'
 
 Vue.createApp({
     components: {

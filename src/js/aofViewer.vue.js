@@ -1,4 +1,4 @@
-import { Fxwinning } from './fxwinning.module.js?v=2.3.3'   
+import { Fxwinning } from './fxwinning.module.js?v=2.3.4'   
 
 const AofViewer = {
     name : 'aof-viewer',
