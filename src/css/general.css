@@ -60,7 +60,7 @@ fieldset:disabled .btn {
 }
 
 .list-messages a {
-  font-weight: 500;
+  font-weight: bolder;
   text-decoration: underline;
   color: var(--bg-primary);
 }
