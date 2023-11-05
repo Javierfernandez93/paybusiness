@@ -34,7 +34,7 @@ if($UserLogin->logged === true)
 
 			$vars = array_merge($userVars,$systemVariables);
 
-            $data['response'] = Unlimited\Parser::doParser(getMLReplay($tag['tag'],$data['catalog_tag_intent_id']),$vars);
+            $data['response'] = nl2br(Unlimited\Parser::doParser(getMLReplay($tag['tag'],$data['catalog_tag_intent_id']),$vars));
         }
 
 		$data['tag'] = $tag['tag'];
