@@ -2,7 +2,6 @@ import { User } from '../../src/js/user.module.js';
 
 const FlyerViewer = {
     name : 'flyer-viewer',
-    props : ['image','image2'],
     data() {
         return {
             User : new User,
