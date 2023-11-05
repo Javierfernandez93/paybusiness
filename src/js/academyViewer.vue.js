@@ -79,7 +79,7 @@ const AcademyViewer = {
                 </div>
             </div>
             <div class="col-12 col-xl-4" v-for="course in courses">
-                <div class="card rounded-normal card-cover mb-3 min-height-300 border-radius-2xl overflow-hidden" :style="{ 'background-image': 'url(' + course.image + ')'}" style="background-size:cover">
+                <div class="card rounded card-cover mb-3 min-height-300 border-radius-2xl overflow-hidden" :style="{ 'background-image': 'url(' + course.image + ')'}" style="background-size:cover">
                     <div class="card-body row align-items-end text-white">
                         <div class="col-12">
                             <span 

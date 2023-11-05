@@ -116,8 +116,8 @@ const AcademygainsViewer = {
         </div>
         <div v-else-if="commissions == false" class="row justify-content-center">
             <div class="col-11 col-xl-4">
-                <div class="card rounded-normal card-message-main text-center" style="background-image:url(../../src/img/marketing-banner.png)">
-                    <div class="card-body card-message d-flex align-items-center rounded-normal text-center">
+                <div class="card rounded card-message-main text-center" style="background-image:url(../../src/img/marketing-banner.png)">
+                    <div class="card-body card-message d-flex align-items-center rounded text-center">
                         <div class="row w-100 text-center">
                             <div class="col-12">
                                 <div class="text-start">

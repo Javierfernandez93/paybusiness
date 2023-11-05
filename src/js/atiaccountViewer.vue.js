@@ -186,7 +186,7 @@ const AtiaccountViewer = {
         </div>
         
         <div v-if="hasDerivAccount" class="text-center mt-3">
-            <div class="card card-body rounded-normal">
+            <div class="card card-body rounded">
                 <div class="h3">
                     Cuenta de Deriv registrada 
                 </div>
@@ -213,7 +213,7 @@ const AtiaccountViewer = {
                     - Datos de la cuenta
                 </div>
                 <div class="col-12 col-xl mb-3 mb-xl-0">
-                    <div class="card card-body p-4 rounded-normal">
+                    <div class="card card-body p-4 rounded">
                         <div>
                             <h3>Credenciales VPS</h3>   
                         </div>
@@ -305,22 +305,22 @@ const AtiaccountViewer = {
 
                     <div class="container row text-center justify-content-center">
                         <div class="col-12 col-xl mb-3 mb-xl-0">
-                            <div class="card card-body bg-transparent shadow-none rounded-normal">
+                            <div class="card card-body bg-transparent shadow-none rounded">
                                 <div class="lead text-dark fw-sembold">Ingresa al VPS</div>
                             </div>
                         </div>
                         <div class="col-12 col-xl mb-3 mb-xl-0">
-                            <div class="card card-body bg-transparent shadow-none rounded-normal">
+                            <div class="card card-body bg-transparent shadow-none rounded">
                                 <div class="lead text-dark fw-sembold">Ingresa al grupo de Telegram</div>
                             </div>
                         </div>
                         <div class="col-12 col-xl mb-3 mb-xl-0">
-                            <div class="card card-body bg-transparent shadow-none rounded-normal">
+                            <div class="card card-body bg-transparent shadow-none rounded">
                                 <div class="lead text-dark fw-sembold">Configura tu asistente</div>
                             </div>
                         </div>
                         <div class="col-12 col-xl mb-3 mb-xl-0">
-                            <div class="card card-body bg-transparent shadow-none rounded-normal">
+                            <div class="card card-body bg-transparent shadow-none rounded">
                                 <div class="lead text-dark fw-sembold">Comienza a operar</div>
                             </div>
                         </div>

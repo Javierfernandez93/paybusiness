@@ -112,7 +112,7 @@ const ChatViewer = {
     },
     template : `
         <div class="position-fixed end-0 bottom-0 mb-3 me-3 z-index-3">
-            <div v-if="open" class="card rounded-normal chat-ia-box">
+            <div v-if="open" class="card rounded chat-ia-box">
                 <div class="card-body">
                     <div class="card-header border-bottom">
                         <div class="row align-items-center">
@@ -131,7 +131,7 @@ const ChatViewer = {
                         <ul class="list-group list-group-flush">
                             <li v-for="message in messages" class="list-group-item border-0 py-3 animation-fall-down" style="--delay: 500ms;">
                                 <div class="d-flex" :class="message.sender == SENDER.BOT ? 'justify-content-start' : 'justify-content-end'">                                
-                                    <div class="rounded-normal p-3" :class="message.sender == SENDER.BOT ? 'bg-light text-start text-dark' : 'bg-gradient-primary text-end fw-semibold text-white'">
+                                    <div class="rounded p-3" :class="message.sender == SENDER.BOT ? 'bg-light text-start text-dark' : 'bg-primary text-end fw-semibold text-white'">
                                         <span class="text-message" v-html="message.message">
                                         </span>
                                     </div>
@@ -143,7 +143,7 @@ const ChatViewer = {
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="rounded-normal p-3" :class="message.sender == SENDER.BOT ? 'text-start' : 'text-end'" class="text-xs text-secondary">{{message.create_date.formatFullDate()}}</div>
+                                <div class="rounded p-3" :class="message.sender == SENDER.BOT ? 'text-start' : 'text-end'" class="text-xs text-secondary">{{message.create_date.formatFullDate()}}</div>
                                 
                                 <div class="text-xs text-center text-decoration-underline text-secondary cursor-pointer zoom" v-if="message.sender == SENDER.BOT" @click="sendMessageAuto('Hablar con un experto')">
                                     ¿No fue útil?
@@ -164,7 +164,7 @@ const ChatViewer = {
                 </div>
             </div>
             <div v-else>
-                <div @click="open = !open" class="py-3 px-4 zoom cursor-pointer bg-gradient-primary shadow rounded text-white">
+                <div @click="open = !open" class="py-3 px-4 zoom cursor-pointer bg-primary shadow rounded text-white">
                     Necesitas ayuda
                 </div>
             </div>

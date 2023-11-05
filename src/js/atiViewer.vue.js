@@ -30,7 +30,7 @@ const AtiViewer = {
                 <div class="lead mb-3">¡Descubre ATI de Unlimited, el <strong>Asistente de Trading Inteligente de bajo riesgo!</strong> analiza tu rentabilidad en índices sintéticos y genera ganancias hasta del 2% diario a un mínimo riesgo y con muy poca presencia tuya.</div>
                 <div class="lead mb-3">Aprovecha el poder de ATI, conviértelo en tu asistente personal de trading y alcanza tus metas financieras!</div>
 
-                <div class="card card-body bg-mesh rounded-normal">
+                <div class="card card-body bg-mesh rounded">
                     <div class="mb-3 text-center text-white">
                         <div class="h3 text-white">Recibes</div>
                         <div class="h4 text-white"><i class="bi text-white bi-check"></i> Licencia de uso</div>

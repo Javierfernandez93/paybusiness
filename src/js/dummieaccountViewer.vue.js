@@ -94,7 +94,7 @@ const DummieaccountViewer = {
     template : `        
         <div v-if="account" class="row justify-content-center mt-5">
             <div class="col-12 col-xl-6">
-                <div class="card card-body rounded-normal text-center">
+                <div class="card card-body rounded text-center">
                     <div class="h4 mb-3">
                         Ingresa a DummieTrading
                     </div>
@@ -108,7 +108,7 @@ const DummieaccountViewer = {
         </div>
         <div v-else-if="account == false" class="row justify-content-center mt-5">
             <div class="col-12 col-xl-6">
-                <div class="card card-body rounded-normal overflow-hidden text-center"  style="background-image:url(../../src/img/bg-colorfull.png)">
+                <div class="card card-body rounded overflow-hidden text-center"  style="background-image:url(../../src/img/bg-colorfull.png)">
                     <span class="mask"></span>
                     
                     <div class="position-relative z-index-1">

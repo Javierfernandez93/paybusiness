@@ -168,7 +168,7 @@ const DirectsViewer = {
                 <div class="col-12 col-xl">
                     <div class="row mb-3">
                         <div class="col-12">
-                            <div class="card p-5 bg-gradient-success rounded-normal card-body">
+                            <div class="card p-5 bg-gradient-success rounded card-body">
                                 <div class="row align-items-center">
                                     <div class="col-12 col-xl">
                                         <div class="h4 fw-sembold text-white">Volumen total</div>
@@ -184,7 +184,7 @@ const DirectsViewer = {
 
                     <div class="row mb-3">
                         <div class="col-12">
-                            <div class="card p-5 bg-mesh rounded-normal card-body">
+                            <div class="card p-5 bg-mesh rounded card-body">
                                 <div class="row align-items-center">
                                     <div class="col-12 col-xl">
                                         <div class="h4 fw-sembold text-white">Rango por alcanzar {{nextRange.title}}</div>
@@ -203,7 +203,7 @@ const DirectsViewer = {
                     </div>
                     <div class="d-none row mb-3">
                         <div class="col-12">
-                            <div class="card bg-mesh rounded-normal card-body">
+                            <div class="card bg-mesh rounded card-body">
                                 <div class="fs-4 fw-sembold text-white">Volumen total</div>
                                 <div class="lead fw-sembold text-light">$ {{total.volumen.numberFormat(2)}}</div>
                             </div>

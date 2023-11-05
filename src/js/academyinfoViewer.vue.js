@@ -72,7 +72,7 @@ const AcademyinfoViewer = {
                         <img src="../../src/img/Unlimited-academy.png" alt="Academy" title="Academy" class="w-100"/>
                     </div>
                 </div>
-                <div class="card rounded-normal card-body bg-secondary text-white">
+                <div class="card rounded card-body bg-secondary text-white">
                     <div class="lead">
                         <div class="mb-3">
                             <strong>Academia de trading gratuita</strong>, que te ofrece una amplia gamma de oportunidades para mejorar tus habilidades en los mercados financieros

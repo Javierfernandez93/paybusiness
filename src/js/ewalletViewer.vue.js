@@ -113,7 +113,7 @@ const EwalletViewer = {
     template : `
         <div v-if="ewallet" class="row py-5">
             <div class="col-12 col-md-6 col-xl-5 mb-xl-0 mb-4">
-                <div class="card rounded-normal overflow-hidden shadow-xl">
+                <div class="card rounded overflow-hidden shadow-xl">
                     <div
                         class="bg-gradient-primary overflow-hidden position-relative border-radius-xl"
                         >

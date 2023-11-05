@@ -28,7 +28,7 @@ if($UserLogin->logged === true)
 			$systemVariables = (new Unlimited\SystemVar)->getAllPair();
 			$userVars = [
 				'names' => $UserLogin->_data['user_data']['names'],
-				'balance' => $balance,
+				'balance' => number_format($balance,2),
 				'landing' => HCStudio\Connection::getMainPath()."/".$UserLogin->getReferralLanding(),
 			];
 

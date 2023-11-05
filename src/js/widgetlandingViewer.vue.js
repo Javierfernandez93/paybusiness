@@ -52,7 +52,7 @@ const WidgetlandingViewer = {
         <div>
             <h3>Mi link</h3>                
         </div>
-        <div v-if="landing" class="card rounded-normal bg-gray">
+        <div v-if="landing" class="card rounded bg-gray">
             <div class="card-body py-2">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-12 col-xl">

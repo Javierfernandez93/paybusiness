@@ -176,7 +176,7 @@ const StoreitemsViewer = {
 
         <div v-if="packages" class="row justify-content-center align-items-center">
             <div v-for="(package,index) in packages" class="col-12 col-xl-4 col-md-4">
-                <div class="card bg-primary rounded-normal animation-fall-down overflow-hidden mb-5" :style="{'--delay': (index+1)*0.3+'s'}">
+                <div class="card bg-primary rounded animation-fall-down overflow-hidden mb-5" :style="{'--delay': (index+1)*0.3+'s'}">
                     <div v-if="package.image">
                         <img class="card-img-top" :src="package.image" :alt="package.title">
                     </div>

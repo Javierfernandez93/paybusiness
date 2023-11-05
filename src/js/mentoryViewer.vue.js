@@ -20,7 +20,7 @@ const MentoryViewer = {
                         
                     </div>
                 </div>
-                <div class="card rounded-normal card-body bg-secondary text-white">
+                <div class="card rounded card-body bg-secondary text-white">
                     <div class="lead">
                         <div class="mb-3">
                             Descubre <strong>UnlimitedMentory</strong>, un servicio para <strong>desarrollar tu mentailidad</strong>, hábitos de <strong>éxito</strong> y <strong>liderazgo</strong>. 

@@ -22,7 +22,7 @@ const WidgetforexViewer = {
         </div>
         <div class="row">
             <div class="col-12 col-xl-6 mb-3">
-                <div class="card shadow rounded-normal">
+                <div class="card shadow rounded">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-12 col-xl-auto">
@@ -41,7 +41,7 @@ const WidgetforexViewer = {
                 </div>
             </div>
             <div class="col-12 col-xl-6 mb-3">
-                <div class="card shadow rounded-normal">
+                <div class="card shadow rounded">
                     <div class="card-body">
                         <div class="row align-items-center">
                             <div class="col-12 col-xl-auto">

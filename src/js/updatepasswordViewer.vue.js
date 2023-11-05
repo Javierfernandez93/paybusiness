@@ -117,7 +117,7 @@ const UpdatepasswordViewer = {
                         <i class="bi bi-check-circle"></i> Token valido
                     </div>
 
-                    <div class="card rounded-normal">
+                    <div class="card rounded">
                         <div class="card-body">
                             <form role="form">
                                 <div class="form-floating mb-3 position-relative">

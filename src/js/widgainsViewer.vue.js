@@ -29,7 +29,7 @@ const WidgainsViewer = {
         })
     },
     template : `
-        <div class="card bg-blue rounded-normal shadow">
+        <div class="card bg-blue rounded shadow">
             <div class="card-body p-0">
                 <div class="row align-items-center">
                     <div class="col-12 col-xl p-5">

@@ -44,7 +44,7 @@ const StoreinvoiceViewer = {
     template : `
         <div v-if="cart.buy_per_user" class="row justify-content-center">
             <div class="col-12 col-xl-5">
-                <div class="card rounded-normal overflow-hidden">
+                <div class="card rounded overflow-hidden">
                     <div v-if="cart.buy_per_user.catalog_payment_method">
                         <div class="card-header">
                             <div class="row">

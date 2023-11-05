@@ -53,7 +53,7 @@ const StorecheckoutViewer = {
     template : `
         <div v-if="cart.resume" class="row justify-content-center">
             <div class="col-12 col-xl-5">
-                <div v-if="cart.resume.items" class="card rounded-normal overflow-hidden border-radius-2xl">
+                <div v-if="cart.resume.items" class="card rounded overflow-hidden border-radius-2xl">
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item py-5 border-light">

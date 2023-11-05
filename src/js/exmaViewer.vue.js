@@ -18,7 +18,7 @@ const ExmaViewer = {
     template : `
         <div class="row justify-content-center">
             <div class="col-12 col-xl-6">
-                <div class="card rounded-normal">
+                <div class="card rounded">
                     <div class="card-header">
                         <div class="h4 mb-n2">Cuenta PAMM</div>
                         <div class="h2">Exma Trading</div>
@@ -108,7 +108,7 @@ const ExmaViewer = {
                 <h3>Cuentas auditadas</h3>
                 <div class="row justify-content-center align-items-center">
                     <div class="col-12">
-                        <div class="card card-body mb-3 rounded-normal">
+                        <div class="card card-body mb-3 rounded">
                             <div class="row justify-content-center align-items-center">
                                 <div class="col-12 col-xl-auto">
                                     <img src="../../src/img/fx.png" alt="fx" title="fx" class="img-fluid"/>
@@ -122,7 +122,7 @@ const ExmaViewer = {
                         </div>
                     </div>
                     <div class="col-12 d-none">
-                        <div class="card card-body mb-3 rounded-normal">
+                        <div class="card card-body mb-3 rounded">
                             <div class="row justify-content-center align-items-center">
                                 <div class="col-12 col-xl-auto">
                                     <img src="../../src/img/fx.png" alt="fx" title="fx" class="img-fluid"/>
