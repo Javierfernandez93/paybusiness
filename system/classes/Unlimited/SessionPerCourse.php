@@ -55,9 +55,10 @@ class SessionPerCourse extends Orm {
                     ON 
                         catalog_multimedia.catalog_multimedia_id = {$this->tblName}.catalog_multimedia_id
                     WHERE 
-                        {$this->tblName}.status = '1'
-                    AND
                         {$this->tblName}.course_id = '{$course_id}'
+                    AND
+                        {$this->tblName}.status = '1'
+                    GROUP BY {$this->tblName}.{$this->tblName}_id
                     ORDER BY 
                         {$this->tblName}.order_number 
                     ASC

@@ -74,3 +74,12 @@ fieldset:disabled .btn {
 .offcanvas-body .card {
   box-shadow: none !important;
 }
+
+.zoom-element,
+.zoom-element:hover {
+  transition: all ease 200ms;
+}
+.zoom-element:hover {
+  transform: scale(1.05);
+  box-shadow: 1rem 2rem 2rem rgba(0, 0, 0, 0.1);
+}

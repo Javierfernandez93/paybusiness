@@ -15,4 +15,5 @@ if($UserLogin->logged === true)
 	$data["s"] = 0;
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
 }
+
 echo json_encode($data);

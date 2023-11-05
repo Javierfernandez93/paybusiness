@@ -14,6 +14,7 @@ if($UserLogin->logged === true)
     if($courses = $Course->getList())
     {
         $data['courses'] = array_values(format(filter($courses,$UserLogin->company_id),$UserLogin->company_id));
+        $data['courses'] = Unlimited\Course::filterCoursesBlocked($data['courses'],$UserLogin->company_id);
         $data['r'] = 'DATA_OK';
         $data['s'] = 1;
     } else {
@@ -45,9 +46,15 @@ function format(array $courses = null,int $user_login_id = null) : array
 {	
     $SessionTakeByUserPerCourse = new Unlimited\SessionTakeByUserPerCourse;
     $UserEnrolledInCourse = new Unlimited\UserEnrolledInCourse;
+    $Course = new Unlimited\Course;
     
-	return array_map(function ($course) use($SessionTakeByUserPerCourse,$UserEnrolledInCourse,$user_login_id) {
+	return array_map(function ($course) use($SessionTakeByUserPerCourse,$UserEnrolledInCourse,$Course,$user_login_id) {
         $course['isEnrolled'] = $UserEnrolledInCourse->isEnrolled($course['course_id'],$user_login_id);
+        
+        if($course['attach_to_course_id'])
+        {
+            $course['attach_to_course'] = $Course->findField("course_id = ?",$course['attach_to_course_id'],"title");
+        }
 
         if($course['isEnrolled'])
         {

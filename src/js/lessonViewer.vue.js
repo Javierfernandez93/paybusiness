@@ -105,14 +105,29 @@ const LessonViewer = {
                 this.selectSession(this.getSession(nextOrder))
 
                 this.getProgress()
-
-                console.log(this.progress)
+            })
+        },
+        showCourseFinished(course) {
+            alertInfo({
+                icon:'<i class="bi bi-ui-checks"></i>',
+                size: 'modal-fullscreen',
+                message: `
+                    <div class="h3 text-white">¡Felicidades!</div>
+                    <div class="lead">Has terminado el curso</div>
+                    <div class="h1 text-white">${course.title}</div>
+                    <div class="mt-3"><a href="../../apps/academy/">Vuelve a tu academia</a></div>
+                `,
+                _class:'bg-gradient-success text-white'
             })
         },
         setSessionAsTaked(session) {
             return new Promise((resolve) => {
-                this.User.setSessionAsTaked({session_per_course_id:session.session_per_course_id}, (response) => {
+                this.User.setSessionAsTaked({session_per_course_id:session.session_per_course_id,course_id:this.course.course_id}, (response) => {
                     if (response.s == 1) {
+                        if(response.finished) {
+                            this.showCourseFinished(this.course)
+                        }
+
                         resolve(response.sessionTaked)
                     } else {
                         resolve(false)
@@ -185,14 +200,13 @@ const LessonViewer = {
     },
     template : `
         <div v-if="course" class="row align-items-top">
-            <div class="col-12 animation-fall-down" style="--delay:200ms" :class="fullMode ? 'mb-3' : 'col-xl-8'">
-                <div class="card shadow-blur blur overflow-hidden border-radius-xl mb-3 mb-xl-0">
+            <div class="col-12 order-1 animation-fall-down" style="--delay:200ms" :class="fullMode ? 'mb-3' : 'col-xl-8'">
+                <div class="card overflow-hidden mb-3">
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col">
-                                <div v-if="course.session" class="h3 text-secondary fw-semibold">
+                                <div v-if="course.session" class="h4 text-dark fw-semibold">
                                     <span v-if="course.session.sessionTaked" class="me-2"><i class="bi bi-check-circle"></i></span>
-
                                     {{course.session.title}}
                                 </div>
                             </div>
@@ -207,7 +221,7 @@ const LessonViewer = {
                             </div>
                         </div>
                     </div>
-                    <div v-if="course.session" class="card-body bg-white p-0">
+                    <div v-if="course.session" class="card-body bg-white">
                         <div v-if="course.session.aviable">
                             <div v-if="course.session.catalog_multimedia_id == CATALOG_MULTIMEDIA.TEXT">
                                 TEXT
@@ -231,8 +245,7 @@ const LessonViewer = {
                                 </div>
                             </div>
                             <div v-else-if="course.session.catalog_multimedia_id == CATALOG_MULTIMEDIA.HTML">
-                                <div v-html="course.session.course">
-                                </div>
+                                <div v-html="course.session.course"></div>
                             </div>
                         </div>
                         <div v-else class="fs-5 text-secondary fw-semibold text-center">
@@ -240,44 +253,58 @@ const LessonViewer = {
                             Esta lección estará disponible próximamente
                         </div>
                     </div>
-                    <div v-if="!course.hasComment" class="card card-body bg-transparent shadow-none">
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <div class="form-floating">
-                                    <textarea v-model="comment.comment" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
-                                    <label for="floatingTextarea2">Deja un comentario sobre este curso</label>
+                </div>
+                <div class="card overflow-hidden mb-3">
+                    <div v-if="!course.hasComment">
+                        <div class="card-header">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-12 col-xl">
+                                    <div class="lead sans fw-semibold">Deja tu comentario del curso</div>
                                 </div>
-
-                                <div class="d-flex justify-content-end">
-                                    <button :disabled="!comment.comment" @click="commentCourse" class="btn mb-0 mt-3 btn-secondary">Guardar comentario</button>
+                                <div class="col-12 col-xl-auto">
+                                    <button @click="course.viewComment = !course.viewComment" type="button" class="btn btn-primary mb-0 shadow-none"><i class="bi bi-chat-left-heart-fill"></i></button>
                                 </div>
                             </div>
                         </div>
+                        <div v-if="course.viewComment" class="card-body">
+                            <div class="form-floating">
+                                <textarea v-model="comment.comment" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                <label for="floatingTextarea2">Deja un comentario sobre este curso</label>
+                            </div>
+
+                            <div class="d-flex justify-content-end">
+                                <button :disabled="!comment.comment" @click="commentCourse" class="btn mb-0 mt-3 shadow-none btn-secondary">Guardar comentario</button>
+                            </div>
+                        </div>
                     </div>
-                    <div v-else class="text-center text-secondary sans card-body bg-white">
+                    <div v-else class="card-body text-center">
                         ¡Gracias! Comentaste este curso
                     </div>
+                </div>
 
-                    <div v-if="!course.hasRank" class="text-center card-body bg-white">
-                        <h4>¿Te ha gustado este curso?</h4>
+                <div class="card card-body">
+                    <div v-if="!course.hasRank" class="d-flex align-items-center justify-content-between">
+                        <div class="lead sans fw-semibold">¿Te ha gustado este curso?</div>
 
-                        <button @click="rankCourse(SENTIMENT.POSITIVE)" class="btn btn-success me-2"><i class="bi bi-hand-thumbs-up-fill"></i></button>
-                        <button @click="rankCourse(SENTIMENT.NEGATIVE)" class="btn btn-danger"><i class="bi bi-hand-thumbs-down-fill"></i></button>
+                        <div class="d-flex">
+                            <button @click="rankCourse(SENTIMENT.POSITIVE)" class="btn shadow-none mb-0 btn-success me-2"><i class="bi bi-hand-thumbs-up-fill"></i></button>
+                            <button @click="rankCourse(SENTIMENT.NEGATIVE)" class="btn shadow-none mb-0 btn-danger"><i class="bi bi-hand-thumbs-down-fill"></i></button>
+                        </div>
                     </div>
-                    <div v-else class="text-center py-3 text-secondary sans card-body bg-white">
+                    <div v-else class="text-center">
                         ¡Gracias! Rankeaste este curso
                     </div>
                 </div>
             </div>
             <div v-if="sessions" class="col-12 col-xl-4 animation-fall-down" style="--delay:500ms">
-                <div class="card bg-transparent shadow-blur blur overflow-scroll border-radius-xl" style="max-height:50rem">
+                <div class="card bg-transparent shadow-none overflow-scroll border-radius-xl" style="max-height:50rem">
                     <div class="card-header bg-transparent">
                         <div class="row align-items-center">
                             <div class="col h4 mb-0 fw-semibold">
                                 {{course.title}}
 
                                 <div class="text-xs text-secondary">
-                                    {{progress.taked}} de {{progress.total}}
+                                    {{progress.taked}} de {{progress.total}} modulos tomados
                                 </div>
                             </div>
                         </div>
@@ -289,7 +316,7 @@ const LessonViewer = {
                     </div>
 
                     <ul class="list-group list-group-flush" v-if="course.session">
-                        <li v-for="session in sessions" class="list-group-item py-3 list-group-item-action cursor-pointer" :class="course.session.session_per_course_id == session.session_per_course_id ? 'bg-gradient-primary': 'bg-transparent'">
+                        <li v-for="session in sessions" class="list-group-item rounded border-0 list-group-item-action cursor-pointer" :class="course.session.session_per_course_id == session.session_per_course_id ? 'bg-info': 'bg-transparent'">
                             <div @click="selectSession(session)" class="row align-items-center">
                                 <div class="col-auto">
                                     <span class="badge fs-5 border" :class="course.session.session_per_course_id == session.session_per_course_id ? 'text-white border-white': 'text-secondary border-secondary'"><i class="bi bi-collection-play"></i></span>

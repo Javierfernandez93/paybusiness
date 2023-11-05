@@ -13,11 +13,17 @@ class SessionTakeByUserPerCourse extends Orm {
 		parent::__construct();
 	}
 
-    public static function setSessionAsTaked(int $session_per_course_id = null,int $user_login_id = null) 
+    public static function setSessionAsTaked(array $data = null) 
     {
-        $SessionTakeByUserPerCourse = new SessionTakeByUserPerCourse;
-        $SessionTakeByUserPerCourse->session_per_course_id = $session_per_course_id;
-        $SessionTakeByUserPerCourse->user_login_id = $user_login_id;
+        if(!isset($data))
+        {
+            return false;
+        }
+
+        $SessionTakeByUserPerCourse = new self;
+        $SessionTakeByUserPerCourse->session_per_course_id = $data['session_per_course_id'];
+        $SessionTakeByUserPerCourse->course_id = $data['course_id'];
+        $SessionTakeByUserPerCourse->user_login_id = $data['user_login_id'];
         $SessionTakeByUserPerCourse->create_date = time();
     
         if($SessionTakeByUserPerCourse->save())

@@ -128,17 +128,26 @@ const AdminacademyViewer = {
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="row align-items-center">
+                            <div class="col-12 col-xl-auto">
+                                <div class="avatar">
+                                    <span class="avatar bg-dark">C</span>
+                                </div>
+                            </div>
                             <div class="col-12 col-xl">
                                 <div>
+                                    <span class="badge bg-secondary me-2">Creado hace {{course.create_date.timeSince()}}</span>
                                     <span v-if="course.status == 0" class="badge bg-secondary me-2">
                                         Despublicado
                                     </span>
                                     <span v-else-if="course.status == 1" class="badge bg-success me-2"> 
                                         Publicado
                                     </span>
-
-                                    <span class="badge bg-secondary me-2">Creado hace {{course.create_date.timeSince()}}</span>
-                                
+                                </div>
+                                <div class="h4 text-dark" @click="goToSheet(proyect.proyect_id)">
+                                    {{course.title}} 
+                                </div>
+                                <div>
+                                    
                                     <span v-if="course.price > 0" class="badge bg-gradient-success me-2">
                                         {{ course.currency }} $ {{ course.price.numberFormat(2) }}
                                     </span>
@@ -150,12 +159,6 @@ const AdminacademyViewer = {
                                     <span class="badge bg-warning">
                                         {{course.type}}
                                     </span>
-                                </div>
-                                <div
-                                    class="h3"
-                                    @click="goToSheet(proyect.proyect_id)">
-                                    <n class="font-bold text-dark fw-semibold">
-                                        {{course.title}} 
                                 </div>
                             </div>
                             <div class="col-auto">

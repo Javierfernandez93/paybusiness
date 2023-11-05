@@ -8,26 +8,43 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($data['session_per_course_id'])
+    if($data['course_id'])
     {
-        if(!(new Unlimited\SessionTakeByUserPerCourse)->isSessionTaked($data['session_per_course_id'],$UserLogin->company_id))
+        if($data['session_per_course_id'])
         {
-            if($sessionTaked = Unlimited\SessionTakeByUserPerCourse::setSessionAsTaked($data['session_per_course_id'],$UserLogin->company_id))
+            if(!(new Unlimited\SessionTakeByUserPerCourse)->isSessionTaked($data['session_per_course_id'],$UserLogin->company_id))
             {
-                $data['sessionTaked'] = $sessionTaked;
-                $data['r'] = 'DATA_OK';
-                $data['s'] = 1;
+                if($sessionTaked = Unlimited\SessionTakeByUserPerCourse::setSessionAsTaked([
+                        'session_per_course_id' => $data['session_per_course_id'],
+                        'course_id' => $data['course_id'],
+                        'user_login_id' => $UserLogin->company_id
+                ]))
+                {
+                    if(Unlimited\UserEnrolledInCourse::setAsEnd([
+                        'course_id' => $data['course_id'],
+                        'user_login_id' => $UserLogin->company_id
+                    ])) {
+                        $data['finished'] = true;
+                    }
+
+                    $data['sessionTaked'] = $sessionTaked;
+                    $data['r'] = 'DATA_OK';
+                    $data['s'] = 1;
+                } else {
+                    $data['r'] = 'NOT_SAVE_SESSION';
+                    $data['s'] = 0;
+                }   
             } else {
-                $data['r'] = 'NOT_SAVE_SESSION';
+                $data['r'] = 'ALREAD_TAKED';
                 $data['s'] = 0;
             }   
         } else {
-            $data['r'] = 'ALREAD_TAKED';
+            $data['r'] = 'NOT_SESSION_PER_COURSE_ID';
             $data['s'] = 0;
-        }   
+        }
     } else {
-        $data['r'] = 'DATA_OK';
-        $data['s'] = 1;
+        $data['r'] = 'NOT_COURSE_ID';
+        $data['s'] = 0;
     }
 } else {
 	$data['r'] = 'NOT_SESSION';

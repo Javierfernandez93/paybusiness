@@ -19,6 +19,38 @@ class Course extends Orm {
 		parent::__construct();
 	}
 
+	public static function filterCourseBlocked(array $course = null,int $user_login_id = null) : bool
+    {
+        if(!$course['attach_to_course_id'])
+        {
+            return false;
+        }
+
+        return !(new UserEnrolledInCourse)->isCourseFinished([
+            'course_id' => $course['attach_to_course_id'],
+            'user_login_id' => $user_login_id,
+        ]);
+    }
+
+	public static function filterCoursesBlocked(array $courses = null,int $user_login_id = null) : array
+    {
+        if(!isset($courses))
+        {
+            return false;
+        }
+
+        if(!isset($user_login_id))
+        {
+            return false;
+        }
+
+        return array_map(function($course) use($user_login_id){
+            $course['blocked'] = self::filterCourseBlocked($course,$user_login_id);
+
+            return $course;
+        },$courses);
+    }
+
 	public static function setState(array $data = null) : bool
     {
         $Course = new self;
@@ -84,6 +116,7 @@ class Course extends Orm {
                     {$this->tblName}.description,
                     {$this->tblName}.price,
                     {$this->tblName}.create_date,
+                    {$this->tblName}.attach_to_course_id,
                     {$this->tblName}.target,
                     {$this->tblName}.image,
                     catalog_course.name,
@@ -106,6 +139,7 @@ class Course extends Orm {
                     user_support.user_support_id = {$this->tblName}.user_support_id
                 WHERE 
                     {$this->tblName}.status = '".Constants::AVIABLE."'
+                GROUP BY {$this->tblName}.{$this->tblName}_id
                 ";
         
         return $this->connection()->rows($sql);

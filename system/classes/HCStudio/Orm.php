@@ -215,24 +215,6 @@ abstract class Orm
 	}
 
 	#
-	public static function contar()
-	{
-		return self::contarDonde('');
-	}
-
-	#
-	public static function contarDonde($where, $binds = null)
-	{
-		$class = get_called_class(); $obj = new $class;
-		$query = "SELECT count(*) FROM {$obj->tblName}" . ($binds ? " WHERE {$where}" : '');
-		$data = $obj->db->field($query, $binds);
-
-		if($data) return $data;
-
-		return 0;
-	}
-
-	#
 	public function cargarArray(array $array = null)
 	{
 		if(!isset($array)) 
@@ -255,6 +237,19 @@ abstract class Orm
 		$this->cargarArray($array);
 
 		return $this;
+	}
+
+	#
+	public static function contarDonde($where, $binds = null)
+	{
+		$class = get_called_class(); 
+		$obj = new $class;
+		$query = "SELECT count(*) FROM {$obj->tblName}" . ($binds ? " WHERE {$where}" : '');
+		$data = $obj->db->field($query, $binds);
+
+		if($data) return $data;
+
+		return 0;
 	}
 
 	public function saveNew()
@@ -483,6 +478,31 @@ abstract class Orm
 		$query = "SELECT {$fields} FROM {$this->tblName} WHERE {$where}";
 
 		if($data = $this->db->row($query, $binds))
+		{
+			return $data;
+		}
+
+		return false;
+	}
+
+	
+	public function countWhere(string $where = null,array|string|int|float $binds = null) : int|bool
+	{
+		$query = "SELECT COUNT({$this->tblPrimary}) as c FROM {$this->tblName} WHERE {$where}";
+
+		if($data = $this->db->field($query, $binds))
+		{
+			return $data;
+		}
+
+		return 0;
+	}
+
+	public function findField(string $where = null,array|string|int|float $binds = null,string $field = null) : string|bool
+	{
+		$query = "SELECT {$field} FROM {$this->tblName} WHERE {$where}";
+
+		if($data = $this->db->field($query, $binds))
 		{
 			return $data;
 		}
