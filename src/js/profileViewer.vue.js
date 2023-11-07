@@ -216,7 +216,7 @@ const ProfileViewer = {
                             <h3 class="mb-3">Perfil</h3>
                             <div class="row mb-3">
                                 <div class="col-12 col-md-6 col-xl-6">
-                                    <div class="form-floating mb-3">
+                                    <div class="form-floating d-none mb-3">
                                         <input type="text" class="form-control" readonly v-model="user.company_id" id="company_id" placeholder="">
                                         <label for="company_id">ID</label>
                                     </div>

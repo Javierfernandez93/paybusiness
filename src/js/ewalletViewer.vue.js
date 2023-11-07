@@ -161,7 +161,7 @@ const EwalletViewer = {
                                     </div>
                                 </div>
                                 <div class="ms-auto w-20 d-flex align-items-end justify-content-end">
-                                    <img class="w-60 mt-2" src="../../src/img/logos/mastercard.png" alt="logo" />
+                                    
                                 </div>
                             </div>
                         </div>

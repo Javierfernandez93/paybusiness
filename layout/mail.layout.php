@@ -542,19 +542,7 @@
                             <table>
                                 <tbody>
                                     <tr>
-                                        <td valign="top" width="33.333%" style="padding-top: 20px;">
-                                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
-                                                <tbody>
-                                                    <tr>
-                                                        <td style="text-align: left; padding-right: 10px;">
-                                                            <h3 class="heading">Nosotros</h3>
-                                                            <p>Somos una empresa de venta de productos a base de aceite y derivados.</p>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                        <td valign="top" width="33.333%" style="padding-top: 20px;">
+                                        <td valign="top" width="50%" style="padding-top: 20px;">
                                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                                 <tbody>
                                                     <tr>
@@ -569,7 +557,7 @@
                                                 </tbody>
                                             </table>
                                         </td>
-                                        <td valign="top" width="33.333%" style="padding-top: 20px;">
+                                        <td valign="top" width="50%" style="padding-top: 20px;">
                                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                                 <tbody>
                                                     <tr>
