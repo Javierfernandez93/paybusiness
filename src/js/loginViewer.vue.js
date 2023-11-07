@@ -142,7 +142,7 @@ const LoginViewer = {
             </div>
         </div>
 
-        <div class="p-3 bg-transparent text-start cards-plain bg-white animation-fall-down" style="--delay: 0.8s">
+        <div class="p-0 p-xl-3 bg-transparent text-start cards-plain bg-white animation-fall-down" style="--delay: 0.8s">
             <div class="card bg-transparent shadow-none">
                 <div class="card-header pb-0 bg-transparent text-center">
                     <div class="row justify-content-center">
