@@ -99,9 +99,13 @@ const UnilevelViewer = {
                 </table>
             </div>
         </div>
-        <div v-else-if="network == false" class="alert alert-info">
-            <div>Aún no tienes tu unilevel activo</div>
-            <div class="h4">Comienza invitando personas a Unlimited</div>
+        <div v-else-if="network == false" class="container">
+            <div class="alert alert-info text-center text-white">
+                <div>Aún no tienes tu unilevel activo</div>
+                <div class="h4 text-white">Comienza invitando personas a Unlimited</div>
+
+                <a href="../../apps/backoffice" class="btn mt-3 btn-outline-light">Ir a mi dashboard</a>
+            </div>
         </div>
     `,
 }

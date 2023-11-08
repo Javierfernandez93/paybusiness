@@ -1,3 +1,5 @@
+<img src="<?php echo HCStudio\Connection::getMainPath();?>/src/img/bg-mail.png" style="width: 100%;" alt="mail" title="mail"/>
+
 <h2>Hola <b><?php echo $names; ?></b> felices de tenerte con nosotros</h2>
 
 <h3>

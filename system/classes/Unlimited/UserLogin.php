@@ -48,6 +48,7 @@ class UserLogin extends Orm {
   const PID_NAME = 'pidUser';
   
   const CODE_LENGHT = 6;
+  const UNVERIFIED_MAIL = 0;
   const VERIFIED_MAIL = 1;
   
   const FREE = 0;
@@ -473,7 +474,7 @@ class UserLogin extends Orm {
     $UserLogin->code = self::getCode();
     $UserLogin->password = sha1($data['password']);
     $UserLogin->signup_date = time();
-    $UserLogin->verified_mail = self::VERIFIED_MAIL;
+    $UserLogin->verified_mail = self::UNVERIFIED_MAIL;
     
     if($UserLogin->save())
     {
@@ -483,6 +484,7 @@ class UserLogin extends Orm {
       {
         $UserData = new UserData;
         $UserData->user_login_id = $UserLogin->company_id;
+        $UserData->gender = isset($data['gender']) ? $data['gender'] : 'male';
         $UserData->names = trim($data['names']);
         
         if($UserData->save())
@@ -1372,6 +1374,7 @@ class UserLogin extends Orm {
 
     return array_map(function($user) use($UserData,$UserAccount){
       $user['names'] = $UserData->getNames($user['user_login_id']);
+      $user['verified'] = $this->findField("user_login_id = ?",$user['user_login_id'],"verified_mail");
       $user['image'] = $UserAccount->findField("user_login_id = ?",$user['user_login_id'],"image");
       
       return $user;

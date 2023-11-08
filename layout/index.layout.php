@@ -80,27 +80,27 @@
                         <div class="col-auto">
                             <div class="row justify-content-end">
                                 <div class="col">
-                                    <a href="" target="_blank" title="telegram">
+                                    <a href="<?php echo Unlimited\SystemVar::_getValue("social_telegram") ?>" target="_blank" title="telegram">
                                         <i class="bi text-primary opacity-50 fs-3 bi-telegram"></i>
                                     </a>
                                 </div>
                                 <div class="col">
-                                    <a href="" target="_blank" title="telegram">
+                                    <a href="<?php echo Unlimited\SystemVar::_getValue("social_facebook") ?>" target="_blank" title="telegram">
                                         <i class="bi text-primary opacity-50 fs-3 bi-facebook"></i>
                                     </a>
                                 </div>
                                 <div class="col">
-                                    <a href="" target="_blank" title="telegram">
+                                    <a href="<?php echo Unlimited\SystemVar::_getValue("social_tiktok") ?>" target="_blank" title="telegram">
                                         <i class="bi text-primary opacity-50 fs-3 bi-tiktok"></i>
                                     </a>
                                 </div>
                                 <div class="col">
-                                    <a href="" target="_blank" title="telegram">
+                                    <a href="<?php echo Unlimited\SystemVar::_getValue("social_instagram") ?>" target="_blank" title="telegram">
                                         <i class="bi text-primary opacity-50 fs-3 bi-instagram"></i>
                                     </a>
                                 </div>
                                 <div class="col">
-                                    <a href="" target="_blank" title="telegram">
+                                    <a href="<?php echo Unlimited\SystemVar::_getValue("social_youtube") ?>" target="_blank" title="telegram">
                                         <i class="bi text-primary opacity-50 fs-3 bi-youtube"></i>
                                     </a>
                                 </div>

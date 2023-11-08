@@ -11,6 +11,7 @@ const SignupViewer = {
                 email: null,
                 phone: null,
                 names: null,
+                gender: null,
                 country_id: 159, // loads by default México
                 passwordAgain: null,
                 password: null,
@@ -82,12 +83,12 @@ const SignupViewer = {
 
                 if(response.s == 1)
                 {
-                    window.location.href = `../../apps/backoffice`
-                    // alertInfo({
-                    //     icon:'<i class="bi bi-ui-checks"></i>',
-                    //     message: 'Hemos enviado un correo para que actives tu cuenta',
-                    //     _class:'bg-gradient-success text-white'
-                    // })
+                    // window.location.href = `../../apps/backoffice`
+                    alertInfo({
+                        icon:'<i class="bi bi-ui-checks"></i>',
+                        message: 'Hemos enviado un correo para que actives tu cuenta',
+                        _class:'bg-gradient-success text-white'
+                    })
                 } else if(response.r == "MAIL_ALREADY_EXISTS") {
                     this.feedback = 'El correo proporcionado ya existe'
                 } else if(response.r == "USER_NAME_EXIST") {
@@ -221,6 +222,18 @@ const SignupViewer = {
                         :class="isValidMail ? 'is-valid' : ''"
                         type="email" ref="email" id="email" v-model="user.email" class="form-control" @keydown.enter.exact.prevent="$refs.password.focus()" :placeholder="Translator.words.email" :aria-label="Translator.words.email" aria-describedby="basic-addon1">
                     <label for="email">{{Translator.words.email}}</label>
+                </div>
+
+                <div class="py-3">
+                    <div class="text-xs pb-2">Género</div>
+
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input v-model="user.gender" type="radio" value="male" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                        <label class="btn btn-outline-primary" for="btnradio1">Hombre</label>
+
+                        <input v-model="user.gender" type="radio" value="female" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                        <label class="btn btn-outline-primary" for="btnradio2">Mujer</label>
+                    </div>
                 </div>
 
                 <div class="form-floating mb-3 position-relative">

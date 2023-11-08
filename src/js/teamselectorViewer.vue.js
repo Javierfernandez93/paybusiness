@@ -58,11 +58,18 @@ const TeamselectorViewer = {
                         <div class="col-12 col-xl">
                             <div class="lead">
                                 {{user.names}}
+                                
                             </div>
                         </div>
                         <div class="col-12 col-xl-auto">
-                            <button @click="setReferralInPosition(user.user_login_id,SIDE.LEFT)" class="btn btn-primary shadow-none me-2 mb-0">Izquierda</button>
-                            <button @click="setReferralInPosition(user.user_login_id,SIDE.RIGHT)" class="btn btn-primary shadow-none mb-0">Derecha</button>
+                            <div v-if="!user.verified" class="text-xs text-secondary">
+                                <i class="bi bi-lock"></i>
+                                Es necesario que el miembro verifique su correo para que puedas colocarlo
+                            </div>
+                            <div v-else>
+                                <button @click="setReferralInPosition(user.user_login_id,SIDE.LEFT)" class="btn btn-primary shadow-none me-2 mb-0">Izquierda</button>
+                                <button @click="setReferralInPosition(user.user_login_id,SIDE.RIGHT)" class="btn btn-primary shadow-none mb-0">Derecha</button>
+                            </div>
                         </div>
                     </&div>
                 </li>
