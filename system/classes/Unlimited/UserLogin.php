@@ -892,6 +892,23 @@ class UserLogin extends Orm {
 
     return false;
   }
+  
+  public function getNetwork() : array|bool
+  {
+    if($this->logged === true)
+    {
+      $network = (new UserReferral)->getNetwork(-1,$this->company_id);
+
+      if(!$network)
+      {
+        return false;
+      }
+        
+      
+    }
+
+    return false;
+  }
 
   public function getNetworkChild(int $company_id = null) : array|bool
   {

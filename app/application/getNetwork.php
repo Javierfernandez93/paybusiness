@@ -8,8 +8,10 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($network = $UserLogin->getNetworkInfo())
+    if($network = $UserLogin->getNetwork())
     {
+        d($network);
+        
         $data['networkInfo'] = $network;
         $data['r'] = 'DATA_OK';
         $data['s'] = 1;

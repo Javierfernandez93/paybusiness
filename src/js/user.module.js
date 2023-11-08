@@ -760,6 +760,9 @@ class User extends Http {
     getKyCStatus(data, callback) {
         return this.call('../../app/application/getKyCStatus.php', data, callback);
     }
+    getNetwork(data, callback) {
+        return this.call('../../app/application/getNetwork.php', data, callback);
+    }
     sendKyCValidation(data, callback) {
         return this.call('../../app/application/sendKyCValidation.php', data, callback);
     }

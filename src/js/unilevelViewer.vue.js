@@ -5,23 +5,24 @@ const UnilevelViewer = {
     data() {
         return {
             User : new User,
-            banners: null,
+            network: null,
         }
     },
     methods: {
         goToEvent(banner) {
             window.open(banner.link)
         },
-        getBanners() {
-            this.User.getBanners({},(response)=>{
-                this.banners = response.banners
+        getNetwork() {
+            this.User.getNetwork({},(response)=>{
+                this.network = response.network
             })
         }
     },
     mounted() {
-        this.getBanners()
+        this.getNetwork()
     },
     template : `
+    {{network}}
         <h3>KYC</h3>
     `,
 }
