@@ -72,52 +72,39 @@
         {{content}}    
     </div>
 
-    <footer class="bg-dark py-5">
+    <footer class="bg-xdark py-5">
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-xl-10">
-                    <div class="row">
-                        <div class="col-12 col-xl-6 text-white">
-                            <div class="fs-3 opacity-50">AYUDA</div>
-                            <div class="my-2">Contacta un asesor</div>
-                            <div class="lead text-md opacity-50">Copyright © 2023 Unlimited todos los derechos reservados</div>
-                        </div>
-                        <div class="col-12 col-xl-6 text-end">
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
                             <div class="row justify-content-end">
-                                <div class="col-auto">
-                                    <div class="row justify-content-end">
-                                        <div class="col">
-                                            <a href="https://t.me/+0bHlDgNSnkxjMWIx" target="_blank" title="telegram">
-                                                <i class="bi text-white opacity-50 fs-3 bi-telegram"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="https://www.facebook.com/Unlimitedcommunity" target="_blank" title="telegram">
-                                                <i class="bi text-white opacity-50 fs-3 bi-facebook"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="https://www.tiktok.com/@Unlimitedcommunity" target="_blank" title="telegram">
-                                                <i class="bi text-white opacity-50 fs-3 bi-tiktok"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="https://www.instagram.com/Unlimitedcommunity/ target="_blank" title="telegram">
-                                                <i class="bi text-white opacity-50 fs-3 bi-instagram"></i>
-                                            </a>
-                                        </div>
-                                        <div class="col">
-                                            <a href="https://www.youtube.com/channel/UCXHyDHlBMU1vYPpdLFb_gyA" target="_blank" title="telegram">
-                                                <i class="bi text-white opacity-50 fs-3 bi-youtube"></i>
-                                            </a>
-                                        </div>
-                                    </div>
+                                <div class="col">
+                                    <a href="" target="_blank" title="telegram">
+                                        <i class="bi text-primary opacity-50 fs-3 bi-telegram"></i>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a href="" target="_blank" title="telegram">
+                                        <i class="bi text-primary opacity-50 fs-3 bi-facebook"></i>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a href="" target="_blank" title="telegram">
+                                        <i class="bi text-primary opacity-50 fs-3 bi-tiktok"></i>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a href="" target="_blank" title="telegram">
+                                        <i class="bi text-primary opacity-50 fs-3 bi-instagram"></i>
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <a href="" target="_blank" title="telegram">
+                                        <i class="bi text-primary opacity-50 fs-3 bi-youtube"></i>
+                                    </a>
                                 </div>
                             </div>
-                            <div>
-                                <img src="../../src/img/Unlimited-logo-footer.png" alt="Unlimited logo footer" title="Unlimited logo footer"/>
-                            </div>
-                            
                         </div>
                     </div>
                 </div>

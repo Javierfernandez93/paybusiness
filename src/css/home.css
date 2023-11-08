@@ -1,3 +1,77 @@
-#section-1 {
-    height: 100vh;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200&display=swap");
+
+:root {
+  --bs-primary: #d2a429;
+  --bg-xdark: #000000;
+}
+
+
+.text-dark {
+  color: var(--bg-xdark) !important;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+}
+
+.sans {
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.bg-xdark {
+  background-color: #000000;
+}
+.bg-primary {
+  background-color: var(--bs-primary) !important;
+}
+.text-primary {
+  color: var(--bs-primary) !important;
+}
+
+section {
+  scroll-snap-align: start;
+  max-height: -webkit-fill-available;
+}
+.section-1 {
+  background-image: url(../../src/img/home/section-1.png);
+}
+.section-1,
+.section-2,
+.section-3,
+.section-4,
+.section-end {
+  background-position: center;
+  background-size: cover;
+}
+.section-2 {
+    background-position: top;
+    background-image: url(../../src/img/home/section-2.png);
+}
+.section-3 {
+    background-position: top;
+    background-image: url(../../src/img/home/section-3.png);
+}
+.section-4 {
+    background-position: top;
+    background-image: url(../../src/img/home/section-4.png);
+}
+.section-end {
+    background-position: right;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(../../src/img/home/section-end.png);
+}
+.py-e-1 {
+    padding: 25rem 0;
+}
+
+.vh-50 {
+    height: 50vh;
+}
+.text-justify {
+    text-align: justify;
 }

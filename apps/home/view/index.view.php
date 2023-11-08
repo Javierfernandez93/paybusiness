@@ -1,3 +1,3 @@
-<div id="app">
+<div id="app" class="h-100">
     <home-viewer></home-viewer>
 </div>

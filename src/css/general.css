@@ -9,12 +9,15 @@
   --bg-light: #e7f0fa;
   --bg-success: #00da79;
   --bg-warning: #ff87a1;
+  --bg-dark: #000;
 }
 
 body {
   font-family: "Poppins", sans-serif;
 }
-
+.text-dark {
+  color: var(--bg-dark) !important;
+}
 .sans {
   font-family: "Source Sans 3", sans-serif;
 }
