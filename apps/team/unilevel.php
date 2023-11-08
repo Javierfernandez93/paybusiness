@@ -12,7 +12,7 @@ $UserLogin->checkRedirection();
 
 $Layout = JFStudio\Layout::getInstance();
 
-$route = JFStudio\Router::Unilevel;
+$route = JFStudio\Router::Team;
 $Layout->init(JFStudio\Router::getName($route),'unilevel',"backoffice",'',TO_ROOT.'/');
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
