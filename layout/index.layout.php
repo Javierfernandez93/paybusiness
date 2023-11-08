@@ -18,7 +18,7 @@
     <meta property="og:site_name" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Unlimited trading platform">
     <meta property="og:title" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Unlimited trading platform" />
     <meta property="og:description" content="Unlimited trading platform" />
-    <meta property="og:image" itemprop="image" content="<?php echo HCStudio\Connection::getMainPath() ?>/src/img/logo.png">
+    <meta property="og:image" itemprop="image" content="<?php echo HCStudio\Connection::getMainPath() ?>/src/img/logo-share.png">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="300">
     <meta property="og:image:height" content="300">
