@@ -1,17 +1,9 @@
 /* vue */ 
 import { ToolsViewer } from '../../src/js/toolsViewer.vue.js?v=2.3.4'
+import { UserflyerViewer } from '../../src/js/userflyerViewer.vue.js?v=2.3.4'
 
 Vue.createApp({
     components : { 
-        ToolsViewer
-    },
-    data() {
-        return {
-        }
-    },
-    methods: {
-    },
-    mounted() 
-    {
+        ToolsViewer, UserflyerViewer
     },
 }).mount('#app')

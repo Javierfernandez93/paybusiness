@@ -20,7 +20,8 @@ class UserReferral extends Orm {
   public static function appendReferral(array $data = null) 
   {
     $UserReferral = new self;
-    
+  
+
     if($UserReferral->loadWhere("user_login_id = ? AND status = ?",[$data['user_login_id'],1]))
     {
       return false;
@@ -449,4 +450,34 @@ class UserReferral extends Orm {
       return $this->connection()->rows($sql);
     }
   }
+
+  public function getLastInsertedBySponsorOnSide(int $sponsor_id = null,int $side = null) 
+  {
+    if(!isset($sponsor_id))
+    {
+      return false;
+    }
+    
+    if(!isset($side))
+    {
+      return false;
+    }
+
+    // d("
+    return $this->connection()->field("
+      SELECT 
+        user_referral.user_login_id 
+      FROM 
+        user_referral 
+      WHERE 
+        user_referral.sponsor_id = '{$sponsor_id}' 
+      AND 
+        user_referral.status = '1' 
+      ORDER BY 
+        user_referral.user_referral_id 
+      DESC 
+      LIMIT 1
+      ");
+  }
+  
 }

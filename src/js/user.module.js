@@ -747,6 +747,25 @@ class User extends Http {
     getIncome(data, callback) {
         return this.call('../../app/application/getIncome.php', data, callback);
     }
+    generateFlyer(data, callback) {
+        return this.call('../../app/application/generateFlyer.php', data, callback);
+    }
+    uploadImageProfileCut(data, callback) {
+        return this.call('../../app/application/uploadImageProfileCut.php', data, callback, null, null, 'POST');
+    }
+    /* kyc */
+    uploadKyCFile(data, progress, callback) {
+        return this.callFile('../../app/application/uploadKyCFile.php', data, callback, progress);
+    }
+    getKyCStatus(data, callback) {
+        return this.call('../../app/application/getKyCStatus.php', data, callback);
+    }
+    sendKyCValidation(data, callback) {
+        return this.call('../../app/application/sendKyCValidation.php', data, callback);
+    }
+    sendDni(data, callback) {
+        return this.call('../../app/application/sendDni.php', data, callback);
+    }
 }
 
 export { User }

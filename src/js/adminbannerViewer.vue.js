@@ -64,7 +64,7 @@ const AdminbannerViewer = {
                         <div class="text-secondary mb-3 text-xs">Dimensiones recomendadas 635x230px</div>                                     
                     </div>
                     <div class="row">                                        
-                        <div class="col-12 col-xl-8">  
+                        <div class="col-12 col-xl-8 position-relative">  
                             <div class="mb-3">                                        
                                 <img v-if="banner.image" :src="banner.image" class="img-thumbnail w-100" style="height:25rem;object-fit:cover"/>
 

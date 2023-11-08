@@ -22,6 +22,10 @@ class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
         array (
             'ZipStream\\' => 10,
         ),
+        'T' => 
+        array (
+            'Treinetic\\ImageArtist\\' => 22,
+        ),
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
@@ -61,6 +65,10 @@ class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
         'ZipStream\\' => 
         array (
             0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
+        ),
+        'Treinetic\\ImageArtist\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/treinetic/imageartist/src',
         ),
         'Psr\\SimpleCache\\' => 
         array (

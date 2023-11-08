@@ -17,6 +17,7 @@ $Layout->init(JFStudio\Router::getName($route),'profile',"backoffice",'',TO_ROOT
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
+	'croppr.*',
 	'jquery.mask.js',
 	'profile.css',
 	'profile.vue.js'

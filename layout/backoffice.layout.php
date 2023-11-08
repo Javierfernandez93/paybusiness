@@ -84,6 +84,13 @@
                                 <span class="nav-link-text ms-1">Team</span>
                             </a>
                         </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::KyC])) { ?>active<?php } ?>" href="../../apps/backoffice/kyc">
+                                <i class="bi bi-folder-fill"></i>
+                                <span class="nav-link-text ms-1">KyC</span>
+                            </a>
+                        </li>
 
                         <?php if($UserLogin->hasProductPermission(Unlimited\Product::ACADEMY)) { ?>
                             <li class="nav-item">
@@ -119,7 +126,7 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl">
             <div class="container py-2">
-                <nav aria-label="breadcrumb">
+                <nav aria-label="breadcrumb" class="w-100">
                     <h6 class="fs-4 font-weight-bolder ms-2"></h6>
                     <div id="topApp">
                         <lastsignedwidget-viewer></lastsignedwidget-viewer>

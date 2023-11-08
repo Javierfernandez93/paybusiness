@@ -5,8 +5,10 @@ const ProfileViewer = {
     data() {
         return {
             User: new User,
+            img: null,
             user: null,
             account : null,
+            cropper: null,
             countries : null,
             isAviableToChangePassword : false,
             timezones : null,
@@ -90,19 +92,49 @@ const ProfileViewer = {
                 })
             })
         },
-        getBridgeAccount() {
-            this.User.getBridgeAccount({},(response)=>{
-                if(response.s == 1)
-                {
-                    this.account = response.account
-                }
-            })
-        },
         checkFields() {
         },
         openFileManager() 
         {
             this.$refs.file.click()
+        },
+        blobToBase64(blob) 
+        {
+            var reader = new FileReader();
+            reader.readAsDataURL(blob); 
+            reader.onloadend = function() {
+              var base64data = reader.result;                
+              console.log(base64data);
+            }
+        },
+        cut() 
+        {
+            var canvas = this.cropper.getCroppedCanvas({
+                width: 512,
+                height: 512,
+            });
+            
+            let image = canvas.toDataURL();
+            
+            this.User.uploadImageProfileCut({image:image},(response)=>{
+                if(response.s == 1)
+                {
+                    this.user.image = response.target_path
+
+                    $(this.$refs.modal).modal('hide')
+                }
+            });
+        },
+        initCrop() 
+        {
+            setTimeout(()=>{
+                const image = document.getElementById('cropper');
+    
+                this.cropper = new Cropper(this.$refs.image, {
+                    aspectRatio: 1 / 1,
+                    viewMode: 3,
+                });
+            },100)
         },
         uploadFile() 
         {
@@ -117,6 +149,10 @@ const ProfileViewer = {
               if(response.s == 1)
               {
                   this.user.image = response.target_path
+                  
+                  $(this.$refs.modal).modal('show')
+
+                  this.initCrop()
               }
             });
         },
@@ -137,8 +173,6 @@ const ProfileViewer = {
                 this.$refs.landing.focus()
             },1000)
         }
-
-        this.getBridgeAccount()
 
         this.getProfile().then((response) => {
             this.getCatalogTimezones().then((timezones) => {
@@ -287,6 +321,26 @@ const ProfileViewer = {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" ref="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modificar foto de perfil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="img-container w-100">
+                            <img :src="user.image" ref="image" class="cropper-hidden w-100">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button @click="cut" type="button" class="btn btn-primary">Cortar imagen</button>
                     </div>
                 </div>
             </div>

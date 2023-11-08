@@ -2,6 +2,7 @@
 
 namespace Unlimited;
 
+use GPBMetadata\Google\Api\Usage;
 use JFStudio\Cookie;
 use JFStudio\Curl;
 
@@ -54,6 +55,7 @@ class UserLogin extends Orm {
 
   /* signup */
   const SIGNUP_DAYS = 124;
+  const USER_IMAGE_SIZE = 512;
   const REFERRAL_PATH = 'apps/signup/?uid=';
   
   // const DUMMIE_TRADING_URL = 'http://localhost:8888/dummytraderweb/app/application/do_signup';
@@ -1329,6 +1331,36 @@ class UserLogin extends Orm {
     if(in_array($data['side'],[UserReferral::LEFT,UserReferral::RIGHT])) 
     {
       $node = $this->getNode($this->company_id,$data['side']);
+      
+      if(!$node)
+      {
+        return UserReferral::appendReferral([
+          'side' => $data['side'],
+          'user_login_id' => $data['user_login_id'],
+          'referral_id' => $this->company_id,
+        ]);
+      }
+
+      $referral_id = (new UserReferral)->getLastInsertedBySponsorOnSide($node['user_login_id'],$data['side']);
+      
+      if(!$referral_id)
+      {
+        return false;
+      }
+      
+      return UserReferral::appendReferral([
+        'side' => $data['side'],
+        'user_login_id' => $data['user_login_id'],
+        'referral_id' => $referral_id,
+      ]);
+    }
+  }
+  
+  public function _insertReferralOnSide(array $data = null)
+  {
+    if(in_array($data['side'],[UserReferral::LEFT,UserReferral::RIGHT])) 
+    {
+      $node = $this->getNode($this->company_id,$data['side']);
 
       if(!$node)
       {
@@ -1495,6 +1527,86 @@ class UserLogin extends Orm {
     },$members);
   }
   
+  public function getKyc()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    $UserKyc = new UserKyc; 
+
+    $user_kyc = $UserKyc->findRow("user_login_id = ?",$this->company_id);
+
+    if(!$user_kyc)
+    {
+      $UserKyc->user_login_id = $this->company_id;
+      $UserKyc->create_date = time();
+      
+      if(!$UserKyc->save())
+      {
+        return false;
+      }
+      
+      return $UserKyc->attr();
+    }
+
+    return $user_kyc;
+  }
+
+  public function sendKyCValidation(array $data = null)
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+    
+    if(!isset($data))
+    {
+      return false;
+    }
+
+    $UserKyc = new UserKyc;
+    
+    if(!$UserKyc->loadWhere("user_login_id = ?",$this->company_id))
+    {
+      return false;
+    }
+
+    $UserKyc->document_front = $data['document_front'];
+    $UserKyc->document_back = $data['document_back'];
+    $UserKyc->selfie = $data['selfie'];
+    $UserKyc->status = UserKyc::PENDING;
+    
+    return $UserKyc->save();
+  }
+  
+  
+  public function sendDni(string $dni = null)
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+    
+    if(!isset($dni))
+    {
+      return false;
+    }
+
+    $UserKyc = new UserKyc;
+    
+    if(!$UserKyc->loadWhere("user_login_id = ?",$this->company_id))
+    {
+      return false;
+    }
+
+    $UserKyc->dni = $dni;
+    $UserKyc->status = UserKyc::PENDING;
+    
+    return $UserKyc->save();
+  }
+
   public function getTopCountries()
   {
     if(!$this->getId())

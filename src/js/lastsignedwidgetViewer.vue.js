@@ -9,7 +9,7 @@ const LastsignedwidgetViewer = {
             current : null,
             TIME : 3500,
             interval : null,
-            user : null,
+            _user : null,
             users : null
         }
     },
@@ -36,7 +36,7 @@ const LastsignedwidgetViewer = {
                 {
                     this.users = response.users
 
-                    this.getUserRandomInterval()
+                    // this.getUserRandomInterval()
                 }
             })
         },
@@ -51,12 +51,12 @@ const LastsignedwidgetViewer = {
                 <span class="visually-hidden">Loading...</span>
             </div>
             <div v-if="users">
-                <div class="sans text-secondary">Bienvenidos a Unlimited</div>
-                
-                <div class="h4">
-                    <img :src="user.country_id.getCoutryImage()" class="me-2" title="flag" alt="flag" style="width:2rem"/>
-                    {{user.names}}
-                </div>
+                <div class="sans text-secondary">El usuario más reciende de la compañía ingresó en </div>
+                <marquee class=>
+                    <span v-for="user in users" class="mx-5">
+                        <img :src="user.country_id.getCoutryImage()" class="me-2" title="flag" alt="flag" style="width:2rem"/> {{user.country}}
+                    </span>
+                </marquee>
             </div>
         </div>
     `,

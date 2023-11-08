@@ -41,10 +41,10 @@ const ToolsViewer = {
         this.getToolsList()
     },
     template : `
-        <div v-if="tools" class="container">
+        <div v-if="tools" class="container animation-fall-down" style="--delay:500ms">
             <div class="card mb-3 overflow-hidden">
                 <div class="card-header">
-                    <div class="row justify-content-center align-items-center">
+                    <div class="row align-items-center">
                         <div class="col-12 col-xl">
                             <div class="h3">Tools</div>
                         </div>
@@ -55,7 +55,7 @@ const ToolsViewer = {
                 </div>
             </div>
             
-            <div class="row justify-content-center align-items-center">
+            <div class="row align-items-center">
                 <div v-for="tool in tools" class="col-12 col-xl-4 mb-3">
                     <div class="card shadow-xl overflow-hidden border-radius-2xl f-zoom-element-sm">
                         <div class="card-header">

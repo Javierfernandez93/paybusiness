@@ -8,7 +8,7 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($users = $UserLogin->getLastSigned("LIMIT 50"))
+    if($users = $UserLogin->getLastSigned("LIMIT 100"))
     {
         $data['users'] = $users;
         $data['r'] = 'DATA_OK';
