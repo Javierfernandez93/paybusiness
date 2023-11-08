@@ -47,6 +47,7 @@ class UserLogin extends Orm {
   const DEFAULT_FIELD_SESSION = 'email';
   const PID_NAME = 'pidUser';
   
+  const CODE_LENGHT = 6;
   const VERIFIED_MAIL = 1;
   
   const FREE = 0;
@@ -460,10 +461,16 @@ class UserLogin extends Orm {
     return ($this->connection()->field($sql)) ? false : true;
   }
 
+  public static function getCode() 
+  {
+    return Token::__randomKey(self::CODE_LENGHT);
+  }
+
   public function doSignup(array $data = null) 
   {
     $UserLogin = new UserLogin(false,false);
     $UserLogin->email = $data['email'];
+    $UserLogin->code = self::getCode();
     $UserLogin->password = sha1($data['password']);
     $UserLogin->signup_date = time();
     $UserLogin->verified_mail = self::VERIFIED_MAIL;
@@ -819,34 +826,42 @@ class UserLogin extends Orm {
     }
   }
 
-  public function getData($company_id = false,$filter = '')  
+  public function getData(int $company_id = null)  
   {
-    if($company_id)
+    if(!isset($company_id))
     {
-      $sql = "SELECT
-                {$this->tblName}.company_id,
-                {$this->tblName}.names,
-                {$this->tblName}.last_login_date,
-                user_settings.background,
-                user_settings.personal_message,
-                user_settings.gender,
-                user_settings.country_id,
-                user_settings.image
-              FROM
-                {$this->tblName}
-              LEFT JOIN
-                user_settings
-              ON
-                user_settings.user_login_id = {$this->tblName}.company_id
-              WHERE
-                {$this->tblName}.company_id = {$company_id}
-              AND
-                {$this->tblName}.status = '1'
-                {$filter}";
-
-      return $this->connection()->row($sql);
+      return false;
     }
-    return false;
+
+    $sql = "SELECT
+              {$this->tblName}.user_login_id,
+              {$this->tblName}.signup_date,
+              {$this->tblName}.code,
+              {$this->tblName}.last_login_date,
+              user_data.names,
+              user_address.country_id,
+              user_account.image
+            FROM
+              {$this->tblName}
+            LEFT JOIN
+              user_account
+            ON
+              user_account.user_login_id = {$this->tblName}.company_id
+            LEFT JOIN
+              user_data
+            ON
+              user_data.user_login_id = {$this->tblName}.company_id
+            LEFT JOIN
+              user_address
+            ON
+              user_address.user_login_id = {$this->tblName}.company_id
+            WHERE
+              {$this->tblName}.company_id = {$company_id}
+            AND
+              {$this->tblName}.status = '1'
+            ";
+
+    return $this->connection()->row($sql);
   }
 
   public function getCompanyIdByMail(string $email = null) 
@@ -897,14 +912,30 @@ class UserLogin extends Orm {
   {
     if($this->logged === true)
     {
-      $network = (new UserReferral)->getNetwork(-1,$this->company_id);
+      $network = (new UserReferral)->getNetwork(2,$this->company_id);
 
       if(!$network)
       {
         return false;
       }
         
+      $UserData = new UserData;
+      $UserAccount = new UserAccount;
+
+      $_network = [];
+
+      foreach($network as $keyLevel => $level)
+      {
+        foreach($level as $key => $user_login_id)
+        {
+          $_network[$keyLevel][$key] = $this->getData($user_login_id);
+          $_network[$keyLevel][$key]['academy'] = $this->_hasProductPermission('academy',$user_login_id);
+          $_network[$keyLevel][$key]['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
+        }  
+      }
       
+
+      return $_network;
     }
 
     return false;

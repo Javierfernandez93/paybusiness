@@ -10,9 +10,7 @@ if($UserLogin->logged === true)
 {	
     if($network = $UserLogin->getNetwork())
     {
-        d($network);
-        
-        $data['networkInfo'] = $network;
+        $data['network'] = $network;
         $data['r'] = 'DATA_OK';
         $data['s'] = 1;
     } else {
