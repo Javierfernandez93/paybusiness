@@ -507,6 +507,7 @@ class UserLogin extends Orm {
               if(isset($data['referral']))
               {
                 $UserReferral = new UserReferral;
+                $UserReferral->sponsor_id = isset($data['referral']['user_login_id']) && !empty($data['referral']['user_login_id']) ? $data['referral']['user_login_id'] : 1;
                 $UserReferral->referral_id = isset($data['referral']['user_login_id']) && !empty($data['referral']['user_login_id']) ? $data['referral']['user_login_id'] : 1;
                 $UserReferral->user_login_id = $UserLogin->company_id;
                 $UserReferral->catalog_level_id = 0;
@@ -1311,17 +1312,20 @@ class UserLogin extends Orm {
       return false;
     }
 
-    $users = (new UserReferral)->findAll("referral_id = ? AND status = ?",[$this->company_id,0]);
+    $users = (new UserReferral)->findAll("sponsor_id = ? AND status = ?",[$this->company_id,0]);
 
     if(!$users)
     {
       return false;
     }
 
+    $UserAccount = new UserAccount;
     $UserData = new UserData;
 
-    return array_map(function($user) use($UserData){
+    return array_map(function($user) use($UserData,$UserAccount){
       $user['names'] = $UserData->getNames($user['user_login_id']);
+      $user['image'] = $UserAccount->findField("user_login_id = ?",$user['user_login_id'],"image");
+      
       return $user;
     },$users);
   }
@@ -1345,6 +1349,12 @@ class UserLogin extends Orm {
       
       if(!$referral_id)
       {
+        return UserReferral::appendReferral([
+          'side' => $data['side'],
+          'user_login_id' => $data['user_login_id'],
+          'referral_id' => $node['user_login_id'],
+        ]);
+
         return false;
       }
       

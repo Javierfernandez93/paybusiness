@@ -50,16 +50,21 @@ const TeamselectorViewer = {
             <ul class="list-group list-group-flush">
                 <li v-for="user in users" class="list-group-item">
                     <div class="row justify-content-center align-items-center">
+                        <div class="col-12 col-xl-auto">
+                            <div class="avatar">
+                                <img class="avatar" :src="user.image" alt="" title=""/>
+                            </div>
+                        </div>
                         <div class="col-12 col-xl">
-                            <div class="h4">
+                            <div class="lead">
                                 {{user.names}}
                             </div>
                         </div>
                         <div class="col-12 col-xl-auto">
-                            <button @click="setReferralInPosition(user.user_login_id,SIDE.LEFT)" class="btn btn-primary me-2 mb-0">Izquierda</button>
-                            <button @click="setReferralInPosition(user.user_login_id,SIDE.RIGHT)" class="btn btn-primary mb-0">Derecha</button>
+                            <button @click="setReferralInPosition(user.user_login_id,SIDE.LEFT)" class="btn btn-primary shadow-none me-2 mb-0">Izquierda</button>
+                            <button @click="setReferralInPosition(user.user_login_id,SIDE.RIGHT)" class="btn btn-primary shadow-none mb-0">Derecha</button>
                         </div>
-                    </div>
+                    </&div>
                 </li>
             </ul>
         </div>

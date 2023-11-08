@@ -17,6 +17,8 @@ $Layout->init(JFStudio\Router::getName($route),'tools',"backoffice",'',TO_ROOT.'
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
+	'html2canvas.js',
+	'flyer.css',
 	'tools.vue.js'
 ]);
 

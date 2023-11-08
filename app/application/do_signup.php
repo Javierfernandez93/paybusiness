@@ -46,8 +46,7 @@ if($data['email'])
                 //     $data['whatsapp_sent'] = true;
                 // }
 
-                // if($UserLogin->login($data['email'],sha1($data['password'])))
-                if(true)
+                if($UserLogin->login($data['email'],sha1($data['password'])))
                 {
                     $data['s'] = 1;
                     $data['r'] = 'LOGGED_OK';

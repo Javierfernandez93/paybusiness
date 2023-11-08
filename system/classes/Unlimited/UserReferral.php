@@ -4,6 +4,7 @@ namespace Unlimited;
 
 use HCStudio\Orm;
 use JFStudio\Constants;
+use Phpml\NeuralNetwork\Network;
 
 class UserReferral extends Orm {
   protected $tblName  = 'user_referral';
@@ -444,7 +445,7 @@ class UserReferral extends Orm {
               WHERE 
                 {$this->tblName}.sponsor_id = '{$sponsor_id}' 
               AND 
-                {$this->tblName}.status = '1'
+                {$this->tblName}.status != '-1'
               ";
 
       return $this->connection()->rows($sql);
@@ -463,6 +464,17 @@ class UserReferral extends Orm {
       return false;
     }
 
+    $network = $this->__getNetwork(-1,$sponsor_id,0,$side);
+
+    if(!$network)
+    {
+      return false;
+    }
+
+    $level = $network[sizeof($network)-1];
+
+    return $level[sizeof($level)-1];
+
     // d("
     return $this->connection()->field("
       SELECT 
@@ -472,12 +484,30 @@ class UserReferral extends Orm {
       WHERE 
         user_referral.sponsor_id = '{$sponsor_id}' 
       AND 
+        user_referral.side = '{$side}' 
+      AND 
         user_referral.status = '1' 
       ORDER BY 
         user_referral.user_referral_id 
       DESC 
       LIMIT 1
       ");
+  }
+  
+  public function __getNetwork(int $limit = -1 ,string $referral_id = null,int $count = 0,int $side = null) 
+  {
+    $result = [];
+        
+    $sql = "SELECT user_login_id FROM user_referral WHERE referral_id IN ({$referral_id}) AND side = '{$side}'";      
+
+    if (($count != $limit) && ($data = $this->connection()->column($sql))) {
+      $count++;
+      $join = join(",", $data);
+      $result = $this->getNetwork($limit, $join, $count);
+      $result = array_merge(array($data), $result);
+    }
+
+    return $result;
   }
   
 }

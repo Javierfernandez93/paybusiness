@@ -36,7 +36,7 @@ const LandingViewer = {
         this.getReferralLanding()
     },
     template : `
-        <div class="card shadow-none border">
+        <div v-if="landing" class="card shadow-none border">
             <div class="card-body text-center">
                 <div class="row align-items-center">
                     <div class="col-12 col-xl">

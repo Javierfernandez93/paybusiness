@@ -6,7 +6,7 @@ $UserLogin = new Unlimited\UserLogin;
 
 if(date("Y-m-d H:i:s") < '2023-11-08 19:00:00')
 {
-    HCStudio\Util::redirectTo("../../apps/home/countdown");
+    
 }
 
 if($UserLogin->logged === true) {
