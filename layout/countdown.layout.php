@@ -5,7 +5,7 @@
     <title>{{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Business Academy " name="author" />
-    <meta content="Unlimited trading platform" name="description" />
+    <meta content="Business Academy " name="description" />
 
     <meta name="theme-color" content="#2D2250">
 
@@ -17,7 +17,7 @@
 
     <meta property="og:site_name" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Business Academy ">
     <meta property="og:title" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Business Academy " />
-    <meta property="og:description" content="Unlimited trading platform" />
+    <meta property="og:description" content="Business Academy " />
     <meta property="og:image" itemprop="image" content="<?php echo HCStudio\Connection::getMainPath() ?>/src/img/logo-share.png">
     <meta property="og:image:type" content="image/jpeg">
     <meta property="og:image:width" content="300">
