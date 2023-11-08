@@ -48,10 +48,7 @@
 </head>
 
 <body>
-    <div class="bg-gradient-primary" style="height: 0.3rem;">
-    </div>
-    
-    <div class="position-fixed z-index-2 bg-special w-100" id="navbar">
+    <div class="d-none position-fixed z-index-2 bg-special w-100" id="navbar">
         <div class="container">
             <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between">
                 <a href="../../apps/home" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">

@@ -31,10 +31,10 @@
     <link id="pagestyle" href="../../src/css/soft-ui-dashboard.css?v=1.2.8" rel="stylesheet" />
 </head>
 
-<div class="bg-gradient-primary header-Unlimited-signature" style="height: 0.3rem;">
+<div class="bg-gradient-primary position-fixed top-0 w-100" style="height: 0.5rem;z-index:10000 !important">
 </div>
 
-<body class="g-sidenav-show bg-light">
+<body class="g-sidenav-show bg-light mt-3">
     <aside class="sidenav navbar navbar-vertical shadow-none navbar-expand-xs bg-white fixed-start" id="sidenav-main">
         <div class="sidenav-header p-4">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>

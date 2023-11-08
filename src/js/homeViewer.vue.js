@@ -56,6 +56,12 @@ const HomeViewer = {
         this.initScroll()
     },
     template : `
+        <section class="section-1">
+            <div class="container text-center">
+                <h3>CONVIERTETE EN TU PROYECTO MÁS IMPORTANTE</h3>
+                <h3>Se el cambio que quieres ver en el mundo</h3>
+            </div>
+        </section>
     `
 }
 

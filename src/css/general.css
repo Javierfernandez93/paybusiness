@@ -54,8 +54,8 @@ fieldset:disabled .btn {
 
 /* flyers */
 .flyer-container img {
-  height: 14.5rem;
-  object-fit: cover;
+  height: 100%;
+  object-fit: contain;
   object-position: center;
 }
 

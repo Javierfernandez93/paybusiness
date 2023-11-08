@@ -1,30 +1,3 @@
 #section-1 {
-    height: 500px;
-    background-size: cover;
-    background-position: center;
-    background-image: url(../../src/img/home-1.png);
-}
-#card-marketing {
-    background-size: contain;
-    background-position: right;
-    background-repeat: no-repeat;
-    background-image: url(../../src/img/card-1.png);
-}
-#card-bull {
-    background-size: contain;
-    background-position: right;
-    background-repeat: no-repeat;
-    background-image: url(../../src/img/card-3.png);
-}
-#card-synthetics {
-    background-size: contain;
-    background-position: right;
-    background-repeat: no-repeat;
-    background-image: url(../../src/img/card-5.png);
-}
-#card-mentory {
-    background-size: contain;
-    background-position: right;
-    background-repeat: no-repeat;
-    background-image: url(../../src/img/card-7.png);
+    height: 100vh;
 }

@@ -38,11 +38,11 @@ const UnilevelViewer = {
         this.getNetwork()
     },
     template : `
-        <div v-if="network" class="container animation-fall-down" style="--delay:500ms">
-            <div v-for="(level,levelIndex) in network" class="card mb-3">
+        <div v-if="network" class="container">
+            <div v-for="(level,levelIndex) in network" class="card mb-3 animation-fall-down" :style="{'--delay':(levelIndex+1)*250+'ms'}">
                 <div class="card-header">
                     <div class="row align-items-center">
-                        <div class="col-12 col-xl">
+                        <div class="col-12 col-xl h4">
                             Nivel
                             {{levelIndex+1}}
                         </div>    
@@ -52,7 +52,7 @@ const UnilevelViewer = {
                     </div>    
                 </div>    
 
-                <table class="table">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr class="text-center">
                             <th class="tex-xs text-uppercase text-secondary">ID</th>
@@ -65,12 +65,12 @@ const UnilevelViewer = {
                     </thead>
                     <tbody>
                         <tr v-for="user in level" class="text-center">
-                           <td>{{user.code}}</td>
-                           <td>{{user.names}}</td>
-                           <td>
+                           <td class="align-middle">{{user.code}}</td>
+                           <td class="align-middle">{{user.names}}</td>
+                           <td class="align-middle">
                             {{user.signup_date.formatFullDate()}}
                            </td>
-                           <td>
+                           <td class="align-middle">
                             <span v-if="user.last_login_date" class="badge bg-success">
                                 {{user.last_login_date.timeSince()}}
                             </span>
@@ -78,20 +78,20 @@ const UnilevelViewer = {
                                 Nunca
                             </span>
                            </td>
-                           <td>
+                           <td class="align-middle">
                             <span v-if="!user.pay_business" class="badge bg-secondary">
-                                <i class="bi bi-x"></i>
+                                <i class="bi h5 text-white bi-x"></i>
                             </span>
                             <span v-else class="badge bg-success">
-                                <i class="bi bi-check"></i>
+                                <i class="bi h5 text-white bi-check"></i>
                             </span>
                            </td>
-                           <td>
+                           <td class="align-middle">
                             <span v-if="!user.academy" class="badge bg-secondary">
-                                <i class="bi bi-x"></i>
+                                <i class="bi h5 text-white bi-x"></i>
                             </span>
                             <span v-else class="badge bg-success">
-                                <i class="bi bi-check"></i>
+                                <i class="bi h5 text-white bi-check"></i>
                             </span>
                            </td>
                         </tr>
