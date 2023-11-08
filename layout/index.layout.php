@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>{{title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Unlimited trading platform" name="author" />
+    <meta content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Unlimited academia Elite" name="author" />
     <meta content="Unlimited trading platform" name="description" />
 
     <meta name="theme-color" content="#2D2250">
@@ -15,8 +15,8 @@
     <meta name="googlebot" content="index, follow">
     <meta name="googlebot-news" content="index, follow">
 
-    <meta property="og:site_name" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Unlimited trading platform">
-    <meta property="og:title" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Unlimited trading platform" />
+    <meta property="og:site_name" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Unlimited academia Elite">
+    <meta property="og:title" content="<?php echo JFStudio\Layout::PROYECT_NAME; ?> | Unlimited academia Elite" />
     <meta property="og:description" content="Unlimited trading platform" />
     <meta property="og:image" itemprop="image" content="<?php echo HCStudio\Connection::getMainPath() ?>/src/img/logo-share.png">
     <meta property="og:image:type" content="image/jpeg">

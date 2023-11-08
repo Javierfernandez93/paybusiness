@@ -78,12 +78,28 @@
                                 <span class="nav-link-text ms-1">Bonus</span>
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Team])) { ?>active<?php } ?>" href="../../apps/team">
+                            <a data-bs-toggle="collapse" href="#profilePages" class="nav-link collapsed <?php if (in_array($route,[JFStudio\Router::Profile,JFStudio\Router::Referrals,JFStudio\Router::Invoices,JFStudio\Router::Multilevel,JFStudio\Router::Gains,JFStudio\Router::Wallet,JFStudio\Router::Gains,JFStudio\Router::Profile,JFStudio\Router::Notifications])) { ?>active<?php } ?>" aria-controls="profilePages" role="button" aria-expanded="false">
                                 <i class="bi bi-people"></i>
                                 <span class="nav-link-text ms-1">Team</span>
                             </a>
+                            <div class="collapse" id="profilePages">
+                                <ul class="nav ms-4">
+                                    <li class="nav-item">
+                                        <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Team])) { ?>active<?php } ?>" href="../../apps/team">
+                                            <i class="bi bi-people"></i>
+                                            <span class="nav-link-text ms-1">Binario</span>
+                                        </a>
+                                        <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Team])) { ?>active<?php } ?>" href="../../apps/team/unilevel">
+                                            <i class="bi bi-people"></i>
+                                            <span class="nav-link-text ms-1">Unilevel</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
+                        
                         
                         <li class="nav-item">
                             <a class="nav-link <?php if (in_array($route, [JFStudio\Router::KyC])) { ?>active<?php } ?>" href="../../apps/backoffice/kyc">
