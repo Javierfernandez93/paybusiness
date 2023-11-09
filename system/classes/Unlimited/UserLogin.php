@@ -931,6 +931,7 @@ class UserLogin extends Orm {
         foreach($level as $key => $user_login_id)
         {
           $_network[$keyLevel][$key] = $this->getData($user_login_id);
+
           $_network[$keyLevel][$key]['academy'] = $this->_hasProductPermission('academy',$user_login_id);
           $_network[$keyLevel][$key]['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
         }  
@@ -1333,17 +1334,17 @@ class UserLogin extends Orm {
     
     $product_id = (new Product)->getIdByCode($code);
 
-    if(!isset($this->temporal_permissions[$product_id]))
-    {
-      $hasPermission = ProductPermission::hasPermission([
+    // if(!isset($this->temporal_permissions[$product_id]))
+    // {
+      return ProductPermission::hasPermission([
         'product_id' => (new Product)->getIdByCode($code),
         'user_login_id' => $user_login_id
       ]);
 
-      $this->temporal_permissions[$product_id] = $hasPermission;
-    }
+    //   $this->temporal_permissions[$product_id] = $hasPermission;
+    // }
     
-    return $this->temporal_permissions[$product_id];
+    // return $this->temporal_permissions[$product_id];
   }
   
   public function getBinaryTree()
