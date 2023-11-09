@@ -1564,6 +1564,8 @@ class UserLogin extends Orm {
 
     return array_map(function($member){
       $member['active'] = $this->_hasProductPermission(Product::PAY_BUSINESS,$member['user_login_id']);
+      $member['code'] = $this->findField("user_login_id = ?",$member['user_login_id'],"code");
+      
       return $member;
     },$members);
   }

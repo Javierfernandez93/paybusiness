@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.3.4'   
+import { User } from '../../src/js/user.module.js?v=2.3.5'   
 
 const RangewidgetViewer = {
     name : 'rangewidget-viewer',
@@ -50,7 +50,7 @@ const RangewidgetViewer = {
                             </div>
                             <div class="col-12 col-xl">
                                 <div class="lead">{{member.names}}</div>
-                                <div class="text-xs">ID {{member.user_login_id}}</div>
+                                <div class="text-xs">ID {{member.code}}</div>
                             </div>
                             <div class="col-12 col-xl-auto">
                                 <span class="badge text-secondary p-0">Saldo historíco</span>    
