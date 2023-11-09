@@ -464,7 +464,7 @@ class UserLogin extends Orm {
 
   public static function getCode() 
   {
-    return Token::__randomKey(self::CODE_LENGHT);
+    return Token::randomNumber(self::CODE_LENGHT);
   }
 
   public function doSignup(array $data = null) 
