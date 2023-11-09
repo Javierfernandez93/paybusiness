@@ -133,7 +133,7 @@
                 <?php } ?>
             </ul>
 
-            <div id="mainApp">
+            <div id="noticeApp">
                 <noticewidget-viewer></noticewidget-viewer>
             </div>
         </div>
@@ -248,6 +248,7 @@
     
     <script src="../../src/js/vue.js?v=2.3.5" type="text/javascript"></script>
     <script src="../../src/js/top.vue.js?v=2.3.5" type="module"></script>
+    <script src="../../src/js/notice.vue.js?v=2.3.5" type="module"></script>
     <script src="../../src/js/chat.vue.js?v=2.3.5" type="module"></script>
     <!-- <script src="../../src/js/translate.module.js?v=2.3.5" type="module"></script>
     
