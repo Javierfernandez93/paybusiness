@@ -48,7 +48,7 @@ const DailyViewer = {
             };
 
             const config = {
-                type: "line",
+                type: "bar",
                 data: data,
                 options: {
                     tension: 0.5,
