@@ -114,9 +114,9 @@ const GainsViewer = {
     template : `
         <div class="row">
             <div class="col-12">
-                <div class="card">
+                <div class="card mb-3 overflow-hidden">
                     <div class="card-header">
-                        <div class="row mb-3 align-items-center">
+                        <div class="row align-items-center">
                             <div class="col">
                                 <div class="col-auto"><span class="badge bg-primary">Total {{commissions.length}}</span></div>
                                 <h4>Ganancias</h4>
@@ -177,24 +177,24 @@ const GainsViewer = {
                                             </span>    
                                             <u class="text-sm ms-2">Monto</u>
                                         </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estatus</th>
+                                        <th class="text-center c-pointer text-uppercase text-xxs text-primary font-weight-bolder opacity-7">
+                                            <u class="text-sm ms-2">Estatus</u>
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="commission in commissions" class="text-center">
                                         <td>
-                                            <p class="text-secondary mb-0">{{commission.title}}</p>
+                                            <span class="badge bg-primary">{{commission.title}}</span>
                                         </td>
-                                        <td>
-                                            <p class="text-secondary mb-0">{{commission.names}}</p>
+                                        <td class="text-dark fw-bold">
+                                            {{commission.names}}
                                         </td>
-                                        <td>
-                                            <p class="text-secondary mb-0">{{commission.create_date.formatDate()}}</p>
+                                        <td class="text-dark fw-bold">
+                                            {{commission.create_date.formatDate()}}
                                         </td>
-                                        <td>
-                                            <p class="fw-semibold">
-                                                $ {{commission.amount.numberFormat(2)}} {{commission.currency}}
-                                            </p>
+                                        <td class="text-dark fw-bold">
+                                            $ {{commission.amount.numberFormat(2)}} {{commission.currency}}
                                         </td>
                                         <td>
                                             <span v-if="commission.status == STATUS.PENDING" class="badge bg-warning">
@@ -210,8 +210,8 @@ const GainsViewer = {
                                     <tr class="text-center">
                                         <td></td>
                                         <td></td>
-                                        <td>Total</td>
-                                        <td><p class="fw-semibold">$ {{totals.amount.numberFormat(2)}}</p></td>
+                                        <td class="text-uppercase text-dark fw-bold">Total</td>
+                                        <td><p class="text-dark fw-bold">$ {{totals.amount.numberFormat(2)}}</p></td>
                                         <td></td>
                                         <td></td>
                                     </tr>
