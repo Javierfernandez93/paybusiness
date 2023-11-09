@@ -79,6 +79,13 @@ section {
 
 
 @media (max-width: 680px) {
+  .section-1,
+  .section-2,
+  .section-3,
+  .section-4,
+  .section-end {
+    background-attachment: fixed;
+  }
   .section-end {
     background: #000 !important;
   }
