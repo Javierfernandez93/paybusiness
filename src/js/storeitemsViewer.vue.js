@@ -221,7 +221,7 @@ const StoreitemsViewer = {
                             <span v-html="package.full_description"></span>
                         </div>
                         
-                        <div class="fs-2 fw-sembold text-white">$ {{package.amount.numberFormat(2)}}</div>
+                        <div class="h1 text-center text-white">$ {{package.amount.numberFormat(2)}}</div>
                     </div>
                     <div class="card-footer d-grid">
                         <button @click="addPackage(package)" class="btn btn-white btn-lg mb-0 shadow-none">Elegir</button>
