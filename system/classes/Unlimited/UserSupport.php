@@ -1420,4 +1420,51 @@ class UserSupport extends Orm {
 
     return $users;
   }
+
+  public function getKyCForAprobation(string $filter = null)
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    $users = (new UserKyc)->getKyCForAprobation($filter);
+
+    if(!$users)
+    {
+      return false;
+    }
+
+    return $users;
+  }
+  
+  public function approbeKyc(int $user_kyc_id = null)
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+    
+    if(!isset($user_kyc_id))
+    {
+      return false;
+    }
+
+    return UserKyc::approbeKyc($user_kyc_id);
+  }
+  
+  public function rejectKyc(array $data = null)
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    if(!isset($data))
+    {
+      return false;
+    }
+
+    return UserKyc::rejectKyc($data);
+  }
 }

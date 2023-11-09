@@ -6,6 +6,7 @@ use HCStudio\Orm;
 
 class UserKyc extends Orm {
   protected $tblName  = 'user_kyc';
+
   const NOT_UPLOADED = 0;
   const PENDING = 1;
   const INCOMPLETE =-1;
@@ -15,80 +16,71 @@ class UserKyc extends Orm {
     parent::__construct();
   }
   
-  public function getNames(int $user_login_id = null) 
+  public static function approbeKyc(int $user_kyc_id = null) : bool
   {
-    if(isset($user_login_id) === true)
+    if(!isset($user_kyc_id))
     {
-      $sql = "SELECT
-                LOWER(CONCAT_WS(' ',
-                  {$this->tblName}.names,
-                  {$this->tblName}.last_name,
-                  {$this->tblName}.sur_name
-                )) as names
-              FROM 
-                {$this->tblName}
-              WHERE 
-                {$this->tblName}.user_login_id = '{$user_login_id}'
-              ";
-              
-      return $this->connection()->field($sql);
+      return false;
     }
-  }
+
+    $UserKyc = new self;
     
-  public function getName(int $user_login_id = null) 
-  {
-    if(isset($user_login_id) === true)
+    if(!$UserKyc->loadWhere("user_kyc_id = ?",$user_kyc_id))
     {
-      $sql = "SELECT
-                {$this->tblName}.names
-              FROM 
-                {$this->tblName}
-              WHERE 
-                {$this->tblName}.user_login_id = '{$user_login_id}'
-              ";
-              
-      return $this->connection()->field($sql);
+      return false;
     }
 
-    return false;
+    $UserKyc->status = self::PASS;
+    $UserKyc->aprobation_date = time();
+    
+    return $UserKyc->save();
+  }
+  
+  public static function rejectKyc(array $data = null) : bool
+  {
+    if(!isset($data))
+    {
+      return false;
+    }
+
+    $UserKyc = new self;
+    
+    if(!$UserKyc->loadWhere("user_kyc_id = ?",$data['user_kyc_id']))
+    {
+      return false;
+    }
+
+    $UserKyc->feedback = $data['feedback'];
+    $UserKyc->status = self::INCOMPLETE;
+    
+    return $UserKyc->save();
   }
 
-  public function search($names = null,$filter = "") 
+  public function getKyCForAprobation(string $filter = null) : array|bool
   {
-    if(isset($names) === true && empty($names) === false)
+    if(!isset($filter))
     {
-      $sql = "SELECT
-                {$this->tblName}.user_login_id,
-                user_type.catalog_user_type_id,
-                LOWER(CONCAT_WS(' ',
-                  {$this->tblName}.names,
-                  {$this->tblName}.last_name,
-                  {$this->tblName}.sur_name
-                )) as names
-              FROM 
-                {$this->tblName}
-              LEFT JOIN 
-                client_per_seller
-              ON 
-                client_per_seller.user_login_id = {$this->tblName}.user_login_id
-              LEFT JOIN 
-                user_type
-              ON 
-                user_type.user_login_id = {$this->tblName}.user_login_id
-              WHERE 
-                (
-                    {$this->tblName}.names LIKE '%{$names}%'
-                  OR 
-                    CONCAT_WS(' ',{$this->tblName}.names,{$this->tblName}.last_name)  LIKE '%{$names}%'
-                  OR 
-                    CONCAT_WS(' ',{$this->tblName}.names,{$this->tblName}.last_name,{$this->tblName}.sur_name)  LIKE '%{$names}%'
-                )
-                {$filter}
-              ";
-      
-      return $this->connection()->rows($sql);
+      return false;
     }
 
-    return false;
+    return $this->connection()->rows("
+      SELECT
+        {$this->tblName}.{$this->tblName}_id,
+        {$this->tblName}.document_front,
+        {$this->tblName}.document_back,
+        {$this->tblName}.selfie,
+        {$this->tblName}.dni,
+        {$this->tblName}.feedback,
+        {$this->tblName}.status,
+        {$this->tblName}.create_date,
+        user_data.names
+      FROM 
+        {$this->tblName}
+      LEFT JOIN 
+        user_data 
+      ON 
+        user_data.user_login_id =  {$this->tblName}.user_login_id
+        {$filter}
+    ");
   }
 }

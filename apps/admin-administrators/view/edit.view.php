@@ -68,6 +68,13 @@
                     </li>
                 </ul>
             </div>
+            <div class="card-footer">
+                <div class="row justify-content-end">
+                    <div class="col-12 col-xl-auto">
+                        <button ref="button" type="submit" class="btn btn-dark shadow-none mb-0" @click="editAdministrator">Editar</button>
+                    </div>
+                </div>
+            </div>
         </div>
     <?php } ?>
 </div>

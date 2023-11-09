@@ -524,6 +524,16 @@ class UserSupport extends Http {
     saveBanner(data, callback) {
         return this.call('../../app/application/saveBanner.php', data, callback);
     }
+    /* kyc */
+    getKyCForAprobation(data, callback) {
+        return this.call('../../app/application/getKyCForAprobation.php', data, callback);
+    }
+    approbeKyc(data, callback) {
+        return this.call('../../app/application/approbeKyc.php', data, callback);
+    }
+    rejectKyc(data, callback) {
+        return this.call('../../app/application/rejectKyc.php', data, callback);
+    }
 }
 
 export { UserSupport }

@@ -173,6 +173,15 @@
                     </li>
                 <?php } ?>
 
+                <?php if ($UserSupport->hasPermission('list_kyc')) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?php if (in_array($route, [JFStudio\Router::KyC])) { ?>active<?php } ?>" href="../../apps/admin-kyc">
+                            <span class="badge me-2 d-flex justify-content-center align-items-center icon"><i class="bi bi-gear-fill"></i>></span>
+                            <span class="nav-link-text text-dark ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::KyC); ?></span>
+                        </a>
+                    </li>
+                <?php } ?>
+
                 <?php if ($UserSupport->hasPermission('list_config')) { ?>
                     <li class="nav-item">
                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminConfig])) { ?>active<?php } ?>" href="../../apps/admin-config">
