@@ -111,39 +111,39 @@ const HomeViewer = {
             <div class="d-flex align-items-bottom">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12 col-xl-4">
+                        <div class="col-12 col-xl-4 mb-5 mb-xl-0">
                             <div class="row justify-content-center align-items-center">
-                                <div class="col-12 col-xl-auto">
+                                <div class="col-auto">
                                     <div class="avatar avatar-xl">
                                         <span class="avatar avatar-xl h1 text-dark bg-primary">A</span>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xl">
+                                <div class="col">
                                     <div class="lead mb-n2 text-white">mamos la industrial del</div>
                                     <div class="h4 fw-bold text-white">NETWORK MARKETING</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-xl-4">
+                        <div class="col-12 col-xl-4 mb-5 mb-xl-0">
                             <div class="row justify-content-center align-items-center">
-                                <div class="col-12 col-xl-auto">
+                                <div class="col-auto">
                                     <div class="avatar avatar-xl">
                                         <span class="avatar avatar-xl h1 text-dark bg-primary">D</span>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xl">
+                                <div class="col">
                                     <div class="h3 mb-n2 text-white">ios en primer lugar</div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-xl-4">
+                        <div class="col-12 col-xl-4 mb-5 mb-xl-0">
                             <div class="row justify-content-center align-items-center">
-                                <div class="col-12 col-xl-auto">
+                                <div class="col-auto">
                                     <div class="avatar avatar-xl">
                                         <span class="avatar avatar-xl h1 text-dark bg-primary">N</span>
                                     </div>
                                 </div>
-                                <div class="col-12 col-xl">
+                                <div class="col">
                                     <div class="lead mb-n2 text-white">utrimos tu mentalidad con</div>
                                     <div style="letter-spacing:-1px" class="h5 fw-bold text-white">EDUCACIÓN QUE TE TRANSFORMA</div>
                                 </div>
@@ -167,34 +167,34 @@ const HomeViewer = {
                         <div class="text-primary h1 mb-3 text-uppercase">EL ABC DEL NEGOCIO</div>
 
                         <div class="row mb-5 justify-content-center align-items-center">
-                            <div class="col-12 col-xl-auto">
+                            <div class="col-auto">
                                 <div class="avatar avatar-xl">
                                     <span class="avatar avatar-xl h1 text-dark bg-primary">A</span>
                                 </div>
                             </div>
-                            <div class="col-12 col-xl">
+                            <div class="col">
                                 <div class="lead mb-n2 text-white">ates de empezar <b class="text-primary">SE CONSCIENTE</b> de donde estas,</div>
                                 <div style="letter-spacing:-1px" class="h5 fw-bold text-white">para donde te diriges y el vehículo al que estas subiendo.</div>
                             </div>
                         </div>
                         <div class="row mb-5 justify-content-center align-items-center">
-                            <div class="col-12 col-xl-auto">
+                            <div class="col-auto">
                                 <div class="avatar avatar-xl">
                                     <span class="avatar avatar-xl h1 text-dark bg-primary">B</span>
                                 </div>
                             </div>
-                            <div class="col-12 col-xl">
+                            <div class="col">
                                 <div class="lead mb-n2 text-white">usca convertirte en <b class="text-primary">TÚ MEJOR VERSIÓN</b> aprendiendo</div>
                                 <div style="letter-spacing:-1px" class="h5 fw-bold text-white">y descubriendo nuevas habilidades</div>
                             </div>
                         </div>
                         <div class="row mb-5 justify-content-center align-items-center">
-                            <div class="col-12 col-xl-auto">
+                            <div class="col-auto">
                                 <div class="avatar avatar-xl">
                                     <span class="avatar avatar-xl h1 text-dark bg-primary">C</span>
                                 </div>
                             </div>
-                            <div class="col-12 col-xl">
+                            <div class="col">
                                 <div class="lead mb-n2 text-white">onéctate a nuestro SISTEMA mínimo 5 años y tu</div>
                                 <div style="letter-spacing:-1px" class="h5 fw-bold text-white">éxito te lo garantizarás</div>
                             </div>

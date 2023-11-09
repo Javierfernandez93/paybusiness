@@ -72,8 +72,8 @@
                                 <span class="nav-link-text ms-1">Buy</span>
                             </a>
                         </li>
-                        <li class="nav-item d-none">
-                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Store])) { ?>active<?php } ?>" href="../../apps/ewallet">
+                        <li class="nav-item">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Store])) { ?>active<?php } ?>" href="../../apps/bonus">
                                 <i class="bi bi-currency-dollar"></i>
                                 <span class="nav-link-text ms-1">Bonus</span>
                             </a>
