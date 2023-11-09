@@ -73,7 +73,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Store])) { ?>active<?php } ?>" href="../../apps/gains">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Gains])) { ?>active<?php } ?>" href="../../apps/gains">
                                 <i class="bi bi-currency-dollar"></i>
                                 <span class="nav-link-text ms-1">Bonus</span>
                             </a>
