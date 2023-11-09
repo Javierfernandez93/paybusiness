@@ -32,6 +32,8 @@ const ToolsViewer = {
                 {
                     this.tools = response.tools
                     this.toolsAux = response.tools
+                } else {
+                    this.tools = false
                 }
             })
         }
@@ -96,7 +98,7 @@ const ToolsViewer = {
                 </div>
             </div>
         </div>
-        <div v-else>
+        <div v-else-if="tools == false">
             <div class="alert alert-light text-center">
                 Aún no tenemos herramientas. Vuelve más tarde
             </div>
