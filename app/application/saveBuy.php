@@ -21,7 +21,7 @@ if($UserLogin->logged === true)
 				$data['user_login_id'] = $UserLogin->getId();
 				$data['invoice_id'] = $BuyPerUser->invoice_id;
 
-				$Cart->delete();
+				// $Cart->delete();
 
 				if($checkout_data = createTransaction($BuyPerUser,$UserLogin))
 				{
@@ -78,11 +78,13 @@ function createTransactionCapitalPayments(Unlimited\BuyPerUser $BuyPerUser = nul
 
 	$Sdk = new \CapitalPayments\Sdk\Sdk(Unlimited\SystemVar::_getValue("api_key"),Unlimited\SystemVar::_getValue("api_secret"));
 
+	$whatsapp = (new Unlimited\UserContact)->getWhatsApp($BuyPerUser->user_login_id);
+
 	$response = $Sdk->createInvoice([
 		'amount' => $BuyPerUser->amount,
-		'invoice_id' => $BuyPerUser->invoice_id,
+		'invoice_id' => $BuyPerUser->invoice_id."b",
 		'unique_id' => $BuyPerUser->user_login_id,
-		'whatsapp' => (new Unlimited\UserContact)->getWhatsApp($BuyPerUser->user_login_id),
+		'whatsapp' => $whatsapp ? $whatsapp : '5213317361196',
 		'name' => (new Unlimited\UserData)->getName($BuyPerUser->user_login_id),
 		'email' => (new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id)
 	]);
