@@ -448,7 +448,7 @@
                         <a href="../../apps/signup">Pay Academy</a>
                     </h3>
                     <div class="content">
-                        <p>Phasellus lorem enim, luctus ut velit eget, convallis egestas eros. Sed ornare ligula eget tortor tempor, quis porta tellus dictum.</p>
+                        <p>Edúcate por tu libertad; aprovechando al máximo nuestras herramientas y nuestro modelo educativo, desarróllate en el área en el cual mejor te identifiques y/o aprovecha todo el conocimiento que tenemos para ti. Convierte tu vida en un instrumento de múltiples habilidades y ponle acción a la información (Conocimiento Aplicado)</p>
                     </div>
                     <div class="link">
                         <a href="../../apps/signup">
