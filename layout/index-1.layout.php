@@ -226,26 +226,18 @@
                     <div class="block-right">
                         <div class="chosen-lang m-r-25">
                             <select class="chosen-select">
-                                <option value="2" selected="">English</option>
-                                <option value="3">Germany</option>
-                                <option value="4">Italy</option>
+                                <option value="2" selected="">Español</option>
                             </select>
                         </div>
                         <ul class="horizontal-list">
                             <li class="social-item-1">
-                                <a class="fa fa-facebook"></a>
+                                <a href="<?php echo Unlimited\SystemVar::_getValue("social_facebook");?>" class="fa fa-facebook"></a>
                             </li>
                             <li class="social-item-1">
-                                <a class="fa fa-twitter"></a>
+                                <a href="<?php echo Unlimited\SystemVar::_getValue("social_instagram");?>" class="fa fa-instagram"></a>
                             </li>
                             <li class="social-item-1">
-                                <a class="fa fa-google-plus"></a>
-                            </li>
-                            <li class="social-item-1">
-                                <a class="fa fa-linkedin"></a>
-                            </li>
-                            <li class="social-item-1">
-                                <a class="fa fa-instagram"></a>
+                                <a href="<?php echo Unlimited\SystemVar::_getValue("social_youtube");?>" class="fa fa-youtube"></a>
                             </li>
                         </ul>
                     </div>
@@ -766,19 +758,13 @@
                                 <div class="social-list">
                                     <ul class="horizontal-list">
                                         <li class="social-item-2 social-item-1">
-                                            <a class="fa fa-facebook"></a>
+                                            <a href="<?php echo Unlimited\SystemVar::_getValue("social_facebook");?>" class="fa fa-facebook"></a>
                                         </li>
                                         <li class="social-item-2 social-item-1">
-                                            <a class="fa fa-twitter"></a>
+                                            <a href="<?php echo Unlimited\SystemVar::_getValue("social_youtube");?>"  class="fa fa-youtube"></a>
                                         </li>
                                         <li class="social-item-2 social-item-1">
-                                            <a class="fa fa-google-plus"></a>
-                                        </li>
-                                        <li class="social-item-2 social-item-1">
-                                            <a class="fa fa-linkedin"></a>
-                                        </li>
-                                        <li class="social-item-2 social-item-1">
-                                            <a class="fa fa-instagram"></a>
+                                            <a href="<?php echo Unlimited\SystemVar::_getValue("social_instagram");?>"  class="fa fa-instagram"></a>
                                         </li>
                                     </ul>
                                 </div>
