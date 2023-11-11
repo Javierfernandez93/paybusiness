@@ -10,8 +10,9 @@
                     <div class="position-relative z-index-1 h-100 align-items-center justify-content-center">
                         <div class="row h-100 d-flex justify-content-center align-items-center">
                             <div class="col-10 col-xl-10">
-                                <h2 style="--delay:899ms" class="animation-fall-down text-white sans">🚀 Unlimited es lo que buscas</h2>
-                                <div style="--delay:1200ms" class="animation-fall-down lead text-white">Únete a unlimited y explota tu potencial para hacer negocios</div>
+                                <h2 style="--delay:899ms" class="animation-fall-down text-white sans">TE ESTÁBAMOS ESPERANDO</h2>
+                                <div style="--delay:1200ms" class="animation-fall-down lead text-white">Te damos la bienvenida a Unlimited</div>
+                                <div style="--delay:1200ms" class="animation-fall-down lead text-white">Hoy inicias una aventura de aprendizaje y crecimiento</div>
                             </div>
                         </div>
                     </div>
