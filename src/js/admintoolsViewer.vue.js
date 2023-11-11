@@ -207,21 +207,20 @@ const AdmintoolsViewer = {
 
                                                 </button>
                                                 <ul class="dropdown-menu shadow">
-                                                    <?php if($UserSupport->hasPermission('edit_tool')) { ?>
-                                                        <li><button class="dropdown-item" @click="goToEdit(tool.tool_id)">Editar</button></li>
-                                                    <?php } ?>
-                                                    <?php if($UserSupport->hasPermission('publish_tool')) { ?>
-                                                        <li v-if="tool.status == '0'"><button class="dropdown-item" @click="publishTool(tool.tool_id)">Publicar herramienta</button></li>
-                                                    <?php } ?>
-                                                    <?php if($UserSupport->hasPermission('unpublish_tool')) { ?>
-                                                        <li v-if="tool.status == '1'"><button class="dropdown-item" @click="unpublishTool(tool.tool_id)">Despublicar herramienta</button></li>
-                                                    <?php } ?>
-                                                    <?php if($UserSupport->hasPermission('delete_tool')) { ?>
-                                                        <li>
-                                                            <hr class="dropdown-divider">
-                                                        </li>
-                                                        <li><button class="dropdown-item" @click="deleteTool(tool.tool_id)">Eliminar</button></li>
-                                                    <?php } ?>
+                                                    <li><button class="dropdown-item" @click="goToEdit(tool.tool_id)">Editar</button></li>
+                                                
+                                                
+                                                    <li v-if="tool.status == '0'"><button class="dropdown-item" @click="publishTool(tool.tool_id)">Publicar herramienta</button></li>
+                                                
+                                                
+                                                    <li v-if="tool.status == '1'"><button class="dropdown-item" @click="unpublishTool(tool.tool_id)">Despublicar herramienta</button></li>
+                                                
+                                                
+                                                    <li>
+                                                        <hr class="dropdown-divider">
+                                                    </li>
+                                                    <li><button class="dropdown-item" @click="deleteTool(tool.tool_id)">Eliminar</button></li>
+                                                
                                                 </ul>
                                             </div>
                                         </td>

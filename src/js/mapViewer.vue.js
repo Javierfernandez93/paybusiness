@@ -67,7 +67,7 @@ const MapViewer = {
         this.getTopCountries()
     },
     template : `
-        <div class="card">
+        <div class="card overflow-hidden">
             <div class="card-header h4">
                 Cuenta de usuarios por paises
             </div>
