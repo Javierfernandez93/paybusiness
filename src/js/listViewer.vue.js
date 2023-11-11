@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js';
+import { User } from '../../src/js/user.module.js?v=2.3.8';
 
 const ListViewer = {
     name : 'list-viewer',
@@ -66,7 +66,7 @@ const ListViewer = {
                                 <th class="tex-xs text-uppercase text-secondary">PayAcademy</th>
                             </tr>
                         </thead>
-                        
+
                         <tbody>
                             <tr v-for="user in level" class="text-center">
                             <td class="align-middle">{{user.code}}</td>
