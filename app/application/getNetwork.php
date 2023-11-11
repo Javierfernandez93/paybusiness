@@ -8,7 +8,9 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($network = $UserLogin->getNetwork())
+    $data['limit'] = isset($data['limit']) ? $data['limit'] : 2;
+    
+    if($network = $UserLogin->getNetwork($data['limit']))
     {
         $data['network'] = $network;
         $data['r'] = 'DATA_OK';

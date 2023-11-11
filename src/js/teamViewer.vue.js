@@ -19,6 +19,7 @@ const TeamViewer = {
                 {
                     this.user_login_id = response.user_login_id
 
+                    console.log(response)
 
                     setTimeout(()=>{
                         this.insertHtml(response.user_login_id,response.team)
@@ -71,7 +72,7 @@ const TeamViewer = {
     mounted() 
     {   
         let _this = this
-
+        
         this.getMainBinaryTree()
 
         window.getBinaryTree = function(user_login_id)
@@ -83,6 +84,7 @@ const TeamViewer = {
         <div v-if="busy" class="justify-content-center text-center py-5">
             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         </div>
+        
         <div v-if="user_login_id" :style="{width:width+'%'}" class="tree animation-fall-down" style="--delay:500ms" id="tree">
             <div :id="user_login_id"></div>
         </div>

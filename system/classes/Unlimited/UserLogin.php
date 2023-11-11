@@ -839,16 +839,22 @@ class UserLogin extends Orm {
               {$this->tblName}.user_login_id,
               {$this->tblName}.signup_date,
               {$this->tblName}.code,
+              {$this->tblName}.email,
               {$this->tblName}.last_login_date,
               user_data.names,
               user_address.country_id,
-              user_account.image
+              user_account.image,
+              user_contact.phone
             FROM
               {$this->tblName}
             LEFT JOIN
               user_account
             ON
               user_account.user_login_id = {$this->tblName}.company_id
+            LEFT JOIN
+              user_contact
+            ON
+              user_contact.user_login_id = {$this->tblName}.company_id
             LEFT JOIN
               user_data
             ON
@@ -910,11 +916,11 @@ class UserLogin extends Orm {
     return false;
   }
   
-  public function getNetwork() : array|bool
+  public function getNetwork(int $limit = 2) : array|bool
   {
     if($this->logged === true)
     {
-      $network = (new UserReferral)->getNetwork(2,$this->company_id);
+      $network = (new UserReferral)->getNetwork($limit,$this->company_id);
 
       if(!$network)
       {

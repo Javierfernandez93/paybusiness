@@ -87,12 +87,17 @@
                             <div class="collapse" id="profilePages">
                                 <ul class="nav ms-4">
                                     <li class="nav-item">
+
+                                        <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Team])) { ?>active<?php } ?>" href="../../apps/team/list">
+                                            <i class="bi bi-people"></i>
+                                            <span class="nav-link-text ms-1">Mi equipo</span>
+                                        </a>
                                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Team])) { ?>active<?php } ?>" href="../../apps/team">
-                                            <i class="bi bi-people d-none"></i>
+                                            <i class="bi bi-people"></i>
                                             <span class="nav-link-text ms-1">Binario</span>
                                         </a>
                                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Team])) { ?>active<?php } ?>" href="../../apps/team/unilevel">
-                                            <i class="bi bi-people d-none"></i>
+                                            <i class="bi bi-people"></i>
                                             <span class="nav-link-text ms-1">Unilevel</span>
                                         </a>
                                     </li>
