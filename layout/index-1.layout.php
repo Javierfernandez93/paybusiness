@@ -83,108 +83,33 @@
                             <a href="../../apps/home">Inicio</a>
                         </li>
                         <li>
-                            <a href="about-v3.html">Who we are</a>
-                        </li>
-                        <li class="drop">
-                            <a href="#">Services</a>
-                            <span class="arrow">
-                                <i></i>
-                            </span>
-                            <ul class="drop-menu bottom-right">
-                                <li class="drop">
-                                    <a href="#">Services List</a>
-                                    <ul class="drop-menu top-right">
-                                        <li>
-                                            <a href="services-v1.html">Services List v1</a>
-                                        </li>
-                                        <li>
-                                            <a href="services-v2.html">Services List v2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="drop">
-                                    <a href="#">Services Details</a>
-                                    <ul class="drop-menu top-right">
-                                        <li>
-                                            <a href="service-v1.html">Services Details v1</a>
-                                        </li>
-                                        <li>
-                                            <a href="service-v2.html">Services Details v2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <a href="#services">SERVICIOS</a>
                         </li>
                         <li>
-                            <a href="testinmonials.html">Testinmonials</a>
-                        </li>
-                        <li class="drop">
-                            <a href="#">Projects</a>
-                            <span class="arrow">
-                                <i></i>
-                            </span>
-                            <ul class="drop-menu bottom-right">
-                                <li>
-                                    <a href="portfolios.html">Projects List</a>
-                                </li>
-                                <li>
-                                    <a href="">Projects Details</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="drop">
-                            <a href="#">News</a>
-                            <span class="arrow">
-                                <i></i>
-                            </span>
-                            <ul class="drop-menu bottom-right">
-                                <li>
-                                    <a href="blogs.html">News List</a>
-                                </li>
-                                <li>
-                                    <a href="../../apps/signup">News Details</a>
-                                </li>
-                            </ul>
+                            <a href="#memberships">MEMBRESÍAS</a>
                         </li>
                         <li>
-                            <a href="contact.html">Contact Us</a>
+                            <a href="#academy">ACADEMIA DE NEGOCIOS </a>
                         </li>
-                        <li class="drop">
-                            <a href="#">Pages</a>
-                            <span class="arrow">
-                                <i></i>
-                            </span>
-                            <ul class="drop-menu bottom-right">
-                                <li>
-                                    <a href="about-v1.html">About Page v1</a>
-                                </li>
-                                <li>
-                                    <a href="about-v2.html">About Page v2</a>
-                                </li>
-                                <li>
-                                    <a href="about-v3.html">About Page v3</a>
-                                </li>
-                                <li>
-                                    <a href="about-history.html">About History</a>
-                                </li>
-                                <li>
-                                    <a href="about-partnerships.html">About Partnerships</a>
-                                </li>
-                                <li>
-                                    <a href="about-leadership.html">About Leadership</a>
-                                </li>
-                                <li>
-                                    <a href="about-teammember.html">About Teammember</a>
-                                </li>
-                                <li>
-                                    <a href="about-careers.html">About Careers</a>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="#our">FILOSOFÍA</a>
+                        </li>
+                        <li>
+                            <a href="#abc">El ABC</a>
+                        </li>
+                        <li>
+                            <a href="#rights">NUESTROS VALORES </a>
+                        </li>
+                        <li>
+                            <a href="#agents">AGENTES </a>
+                        </li>
+                        <li>
+                            <a href="#contact">CONTACTO</a>
                         </li>
                     </ul>
                 </div>
                 <div class="container-fluid">
-                    <div class="contact-widget contact-widget-1">
+                    <div class="contact-widget d-none contact-widget-1">
                         <div class="icon-box icon-box-1">
                             <div class="icon">
                                 <i class="icon_phone"></i>
