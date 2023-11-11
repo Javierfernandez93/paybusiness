@@ -174,7 +174,7 @@ const KycViewer = {
                     <div class="d-grid">
                         <button @click="sendDni" :disabled="!filled" type="button" class="btn btn-primary btn-lg shadow-none">
                             <div>¿Ya estábas verfificado?</div>
-                            Sube tu DNI
+                            Escríbenos tu DNI o tu ID anterior
                         </button>
                     </div>
                 </div>

@@ -84,12 +84,12 @@ const ToolsViewer = {
                             <div class="row">
                                 <div class="col-12 col-xl-6">
                                     <div class="d-grid">
-                                        <a class="btn mb-0 btn-success me-1 " :href="tool.route" download>Descargar</a>
+                                        <a class="btn shadow-none mb-3 btn-success me-0 mb-xl-0 me-xl-1" :href="tool.route" download>Descargar</a>
                                     </div>
                                 </div>
                                 <div class="col-12 col-xl-6">
                                     <div class="d-grid">
-                                        <a class="btn mb-0 btn-primary " :href="tool.route">Visualizar</a>
+                                        <a class="btn shadow-none mb-0 btn-primary " :href="tool.route">Visualizar</a>
                                     </div>
                                 </div>
                             </div>
