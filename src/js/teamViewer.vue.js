@@ -52,8 +52,13 @@ const TeamViewer = {
                                         <div class="avatar">
                                             <img class="avatar rounded-circle" src="${user.image}"/>
                                         </div>
+                                        
                                         <div class="text-uppercase fw-semibold sans mt-2">
                                             ${user.names.getFirstName()}
+                                        </div>
+                                        
+                                        <div class="fw-semibold mt-2">
+                                            ${user.code}
                                         </div>
 
                                         <div class="${!user.active ? 'd-none' : ''} position-absolute top-0 mt-2 me-2 end-0">

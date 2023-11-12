@@ -1490,10 +1490,15 @@ class UserLogin extends Orm {
 
     $users = $this->connection()->rows("SELECT 
         user_referral.user_login_id,
+        user_login.code,
         user_account.image,
         user_data.names
       FROM
         user_referral
+      LEFT JOIN 
+        user_login
+      ON 
+        user_login.user_login_id = user_referral.user_login_id
       LEFT JOIN 
         user_data
       ON 
