@@ -49,6 +49,9 @@
 .tree span:hover:before {
   display: none;
 }
+.tree span:hover .bi {
+  color: #fff !important;
+}
 .tree span:hover {
   transform: scale(1.15);
   color: #fff;

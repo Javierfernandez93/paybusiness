@@ -1,4 +1,4 @@
-import { KycViewer } from '../../src/js/kycViewer.vue.js?v=2.3.8'   
+import { KycViewer } from '../../src/js/kycViewer.vue.js?v=2.3.9'   
 
 Vue.createApp({
     components : { 

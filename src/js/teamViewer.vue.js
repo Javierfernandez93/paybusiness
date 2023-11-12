@@ -22,8 +22,8 @@ const TeamViewer = {
 
                     setTimeout(()=>{
                         this.insertHtml('0',[{
-                            image: "../../src/files/img/user/1699468785.png",
-                            names: "Edwin",
+                            image: response.profile.image,
+                            names: response.profile.names,
                             user_login_id:this.user_login_id
                         }])
                         
@@ -44,12 +44,16 @@ const TeamViewer = {
                         html += `
                             <li id="${user.user_login_id}" onclick="getBinaryTree(${user.user_login_id})">
                                 <a class="cursor-pointer">
-                                    <span class="sans text-xs shadow rounded-3 p-3 mx-3 fw-semibold">
+                                    <span class="sans text-xs shadow position-relative rounded-3 p-3 mx-3 fw-semibold">
                                         <div class="avatar">
                                             <img class="avatar rounded-circle" src="${user.image}"/>
                                         </div>
-                                        <div class="lead mt-2">
+                                        <div class="text-uppercase fw-semibold sans mt-2">
                                             ${user.names.getFirstName()}
+                                        </div>
+
+                                        <div class="position-absolute top-0 mt-2 me-2 end-0">
+                                            <i class="bi lead text-primary bi-check-circle-fill"></i>
                                         </div>
                                     </span>
                                 </a>
