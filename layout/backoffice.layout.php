@@ -89,15 +89,15 @@
                                     <li class="nav-item">
 
                                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Team])) { ?>active<?php } ?>" href="../../apps/team/list">
-                                            <i class="bi bi-people"></i>
+                                            
                                             <span class="nav-link-text ms-1">Mi equipo</span>
                                         </a>
                                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Team])) { ?>active<?php } ?>" href="../../apps/team">
-                                            <i class="bi bi-people"></i>
+                                            
                                             <span class="nav-link-text ms-1">Binario</span>
                                         </a>
                                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Team])) { ?>active<?php } ?>" href="../../apps/team/unilevel">
-                                            <i class="bi bi-people"></i>
+                                            
                                             <span class="nav-link-text ms-1">Unilevel</span>
                                         </a>
                                     </li>
@@ -228,10 +228,10 @@
     <script src="../../src/js/plugins/chartjs.min.js" type="text/javascript"></script>
     <script src="../../src/js/42d5adcbca.js" type="text/javascript"></script>
     
-    <script src="../../src/js/constants.js?v=2.4.2" type="text/javascript"></script>
-    <script src="../../src/js/alertCtrl.js?v=2.4.2" type="text/javascript"></script>
+    <script src="../../src/js/constants.js?v=2.4.3" type="text/javascript"></script>
+    <script src="../../src/js/alertCtrl.js?v=2.4.3" type="text/javascript"></script>
     <script src="../../src/js/jquery-3.5.1.min.js" type="text/javascript"></script>
-    <script src="../../src/js/general.js?v=2.4.2" type="text/javascript"></script>
+    <script src="../../src/js/general.js?v=2.4.3" type="text/javascript"></script>
     <!-- Github buttons -->
     
     <script>
@@ -247,21 +247,21 @@
 
     <!-- Github buttons -->
     <script src="../../src/js/buttons.js" type="text/javascript"></script>
-    <script src="../../src/js/soft-ui-dashboard.min.js?v=2.4.2"></script>
+    <script src="../../src/js/soft-ui-dashboard.min.js?v=2.4.3"></script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
     <link rel="stylesheet" href="../../src/css/general.css?v=1.2.8" />
     
-    <script src="../../src/js/vue.js?v=2.4.2" type="text/javascript"></script>
-    <script src="../../src/js/top.vue.js?v=2.4.2" type="module"></script>
-    <script src="../../src/js/notice.vue.js?v=2.4.2" type="module"></script>
-    <script src="../../src/js/chat.vue.js?v=2.4.2" type="module"></script>
-    <!-- <script src="../../src/js/translate.module.js?v=2.4.2" type="module"></script>
+    <script src="../../src/js/vue.js?v=2.4.3" type="text/javascript"></script>
+    <script src="../../src/js/top.vue.js?v=2.4.3" type="module"></script>
+    <script src="../../src/js/notice.vue.js?v=2.4.3" type="module"></script>
+    <script src="../../src/js/chat.vue.js?v=2.4.3" type="module"></script>
+    <!-- <script src="../../src/js/translate.module.js?v=2.4.3" type="module"></script>
     
-    <script src="../../src/js/translateInit.vue.js?v=2.4.2" type="module"></script> -->
+    <script src="../../src/js/translateInit.vue.js?v=2.4.3" type="module"></script> -->
     
     {{js_scripts}}
     {{css_scripts}}
 
-    <!-- <script src="../../src/js/translate.js?v=2.4.2" type="text/javascript"></script> -->
+    <!-- <script src="../../src/js/translate.js?v=2.4.3" type="text/javascript"></script> -->
 </body>
 </html>

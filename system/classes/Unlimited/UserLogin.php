@@ -1402,8 +1402,8 @@ class UserLogin extends Orm {
           'referral_id' => $this->company_id,
         ]);
       }
-
-      $referral_id = (new UserReferral)->getLastInsertedBySponsorOnSide($node['user_login_id'],$data['side']);
+      
+      $referral_id = (new UserReferral)->getLastInsertedBySponsorOnSide($this->company_id,$data['side']);
       
       if(!$referral_id)
       {

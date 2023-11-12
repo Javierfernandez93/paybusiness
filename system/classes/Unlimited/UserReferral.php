@@ -463,8 +463,8 @@ class UserReferral extends Orm {
     {
       return false;
     }
-
-    $network = $this->__getNetwork(-1,$sponsor_id,0,$side);
+    
+    $network = $this->getNetworkBinary(-1,$sponsor_id,0,$side);
 
     if(!$network)
     {
@@ -474,36 +474,34 @@ class UserReferral extends Orm {
     $level = $network[sizeof($network)-1];
 
     return $level[sizeof($level)-1];
-
-    // d("
-    return $this->connection()->field("
-      SELECT 
-        user_referral.user_login_id 
-      FROM 
-        user_referral 
-      WHERE 
-        user_referral.sponsor_id = '{$sponsor_id}' 
-      AND 
-        user_referral.side = '{$side}' 
-      AND 
-        user_referral.status = '1' 
-      ORDER BY 
-        user_referral.user_referral_id 
-      DESC 
-      LIMIT 1
-      ");
   }
   
-  public function __getNetwork(int $limit = -1 ,string $referral_id = null,int $count = 0,int $side = null) 
+  public function __getNetwork(int $limit = -1 ,string $referral_id = null,int $count = 0) 
   {
     $result = [];
         
-    $sql = "SELECT user_login_id FROM user_referral WHERE referral_id IN ({$referral_id}) AND side = '{$side}'";      
-
+    $sql = "SELECT user_login_id FROM user_referral WHERE referral_id IN ({$referral_id})";      
+    
     if (($count != $limit) && ($data = $this->connection()->column($sql))) {
       $count++;
       $join = join(",", $data);
       $result = $this->getNetwork($limit, $join, $count);
+      $result = array_merge(array($data), $result);
+    }
+
+    return $result;
+  }
+  
+  public function getNetworkBinary(int $limit = -1 ,string $referral_id = null,int $count = 0,int $side = null) 
+  {
+    $result = [];
+        
+    $sql = "SELECT user_login_id FROM user_referral WHERE referral_id IN ({$referral_id}) AND side = '{$side}' AND status = '1'";      
+
+    if (($count != $limit) && ($data = $this->connection()->column($sql))) {
+      $count++;
+      $join = join(",", $data);
+      $result = $this->getNetworkBinary($limit, $join, $count, $side);
       $result = array_merge(array($data), $result);
     }
 

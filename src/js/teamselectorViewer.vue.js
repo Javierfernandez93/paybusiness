@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.4.2'   
+import { User } from '../../src/js/user.module.js?v=2.4.3'   
 
 const TeamselectorViewer = {
     name : 'teamselector-viewer',
@@ -23,17 +23,11 @@ const TeamselectorViewer = {
                 }
             })
         },
-        setReferralInPosition(user_login_id,side) {
-            this.User.setReferralInPosition({user_login_id:user_login_id,side:side},(response)=>{
+        setReferralInPosition(user,side) {
+            this.User.setReferralInPosition({user_login_id:user.user_login_id,side:side},(response)=>{
                 if(response.s == 1)
                 {
-                    this.getTeamPending()
-
-                    alertInfo({
-                        icon:'<i class="bi bi-ui-checks"></i>',
-                        message: `Hemos colocado al usuario ya lo puedes ver en tu <a href="../../apps/team/">equipo</a>`,
-                        _class:'bg-gradient-success text-white'
-                    })
+                    user.setted = true
                 }
             })
         },
@@ -62,13 +56,18 @@ const TeamselectorViewer = {
                             </div>
                         </div>
                         <div class="col-12 col-md-12 col-xl-auto">
-                            <div v-if="!user.verified" class="text-xs text-secondary">
-                                <i class="bi bi-lock"></i>
-                                Es necesario que el miembro verifique su correo para que puedas colocarlo
+                            <div v-if="!user.setted">
+                                <div v-if="!user.verified" class="text-xs text-secondary">
+                                    <i class="bi bi-lock"></i>
+                                    Es necesario que el miembro verifique su correo para que puedas colocarlo
+                                </div>
+                                <div v-else>
+                                    <button @click="setReferralInPosition(user,SIDE.LEFT)" class="btn btn-primary shadow-none me-2 mb-0">Izquierda</button>
+                                    <button @click="setReferralInPosition(user,SIDE.RIGHT)" class="btn btn-primary shadow-none mb-0">Derecha</button>
+                                </div>
                             </div>
-                            <div v-else>
-                                <button @click="setReferralInPosition(user.user_login_id,SIDE.LEFT)" class="btn btn-primary shadow-none me-2 mb-0">Izquierda</button>
-                                <button @click="setReferralInPosition(user.user_login_id,SIDE.RIGHT)" class="btn btn-primary shadow-none mb-0">Derecha</button>
+                            <div v-else class="text-success">
+                                <i class="bi bi-check-circle-fill"></i> Posicionado
                             </div>
                         </div>
                     </&div>
