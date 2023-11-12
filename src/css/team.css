@@ -1,96 +1,94 @@
-/*Now the CSS*/
-* {margin: 0; padding: 0;}
+/* It's supposed to look like a tree diagram */
+.tree,
+.tree ul,
+.tree li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
 
 .tree {
-  height: auto;
+  margin: 0 0 1rem;
   text-align: center;
+}
+.tree,
+.tree ul {
+  display: table;
 }
 .tree ul {
-  padding-top: 20px;
-  position: relative;
-  transition: 0.5s;
+  width: 100%;
 }
 .tree li {
-  display: inline-table;
-  text-align: center;
-  list-style-type: none;
-  position: relative;
-  padding: 10px;
-  transition: 0.5s;
+  display: table-cell;
+  padding: 0.5rem 0;
+  vertical-align: top;
 }
-.tree li::before,
-.tree li::after {
+/* _________ */
+.tree li:before {
+  outline: solid 1px var(--bs-focus-input-border-color);
   content: "";
+  left: 0;
   position: absolute;
-  top: 0;
-  right: 50%;
-  border-top: 1px solid #ccc;
-  width: 51%;
-  height: 10px;
+  right: 0;
+  top: -1px;
 }
-.tree li::after {
-  right: auto;
+.tree li:first-child:before {
   left: 50%;
-  border-left: 1px solid #ccc;
 }
-.tree li:only-child::after,
-.tree li:only-child::before {
+.tree li:last-child:before {
+  right: 50%;
+}
+
+.tree span:before,
+.tree span:hover:before,
+.tree span,
+.tree span:hover {
+  transition: all ease 250ms;
+}
+.tree span:hover:before {
   display: none;
 }
-.tree li:only-child {
-  padding-top: 0;
+.tree span:hover {
+  transform: scale(1.15);
+  color: #fff;
+  background-color: var(--bg-primary) !important;
 }
-.tree li:first-child::before,
-.tree li:last-child::after {
-  border: 0 none;
-}
-.tree li:last-child::before {
-  border-right: 1px solid #ccc;
-  border-radius: 0 5px 0 0;
-  -webkit-border-radius: 0 5px 0 0;
-  -moz-border-radius: 0 5px 0 0;
-}
-.tree li:first-child::after {
-  border-radius: 5px 0 0 0;
-  -webkit-border-radius: 5px 0 0 0;
-  -moz-border-radius: 5px 0 0 0;
-}
-.tree ul ul::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  border-left: 1px solid #ccc;
-  width: 0;
-  height: 20px;
-}
-.tree li a {
+.tree code,
+.tree span {
   background-color: #fff;
-  box-shadow: 0 12px 12px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  display: inline-grid;
-  border-radius: 1rem;
-  text-decoration-line: none;
-  transition: 100ms all ease;
+  border-radius: 0.2rem;
+  display: inline-block;
+  margin: 0 0.2em 0.5em;
+  position: relative;
+  z-index: 10;
 }
-.tree li a img {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 10px !important;
-  border-radius: 100px;
-  margin: auto;
+
+.tree ul:before,
+.tree code:before,
+.tree span:before {
+  outline: solid 1px var(--bs-focus-input-border-color);
+  content: "";
+  height: 0.5rem;
+  left: 50%;
+  position: absolute;
+  z-index: 0;
 }
-/*Hover-Section*/
-.tree li a:hover,
-.tree li a:hover i,
-.tree li a:hover span,
-.tree li a:hover + ul li a {
-  background: #c8e4f8;
-  color: #000;
+.tree ul:before {
+  top: -0.5rem;
 }
-.tree li a:hover + ul li::after,
-.tree li a:hover + ul li::before,
-.tree li a:hover + ul::before,
-.tree li a:hover + ul ul::before {
-  border-color: #94a0b4;
+.tree code:before,
+.tree span:before {
+  top: -0.5rem;
+}
+
+/* The root node doesn't connect upwards */
+.tree > li {
+  margin-top: 0;
+}
+.tree > li:before,
+.tree > li:after,
+.tree > li > code:before,
+.tree > li > span:before {
+  outline: none;
 }

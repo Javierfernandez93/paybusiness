@@ -17,6 +17,9 @@ $Layout->init(JFStudio\Router::getName($route),'index',"backoffice",'',TO_ROOT.'
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
+	'jquery-1.11.1.min.js',
+	'jquery.orgchart.js',
+	'jquery.orgchart.css',
 	'team.css',
 	'team.vue.js',
 ]);

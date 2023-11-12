@@ -6,8 +6,9 @@ const TeamViewer = {
         return {
             User: new User,
             user_login_id : null,
+            dataSource: null,
             busy : false,
-            width : 100
+            width : 50
         }
     },
     methods: {
@@ -19,9 +20,13 @@ const TeamViewer = {
                 {
                     this.user_login_id = response.user_login_id
 
-                    console.log(response)
-
                     setTimeout(()=>{
+                        this.insertHtml('0',[{
+                            image: "../../src/files/img/user/1699468785.png",
+                            names: "Edwin",
+                            user_login_id:this.user_login_id
+                        }])
+                        
                         this.insertHtml(response.user_login_id,response.team)
                     },1000)
                 }
@@ -39,9 +44,13 @@ const TeamViewer = {
                         html += `
                             <li id="${user.user_login_id}" onclick="getBinaryTree(${user.user_login_id})">
                                 <a class="cursor-pointer">
-                                    <img src="${user.image}"/>
-                                    <span class="sans text-xs fw-semibold">
-                                        ${user.names.getFirstName()}
+                                    <span class="sans text-xs shadow rounded-3 p-3 mx-3 fw-semibold">
+                                        <div class="avatar">
+                                            <img class="avatar rounded-circle" src="${user.image}"/>
+                                        </div>
+                                        <div class="lead mt-2">
+                                            ${user.names.getFirstName()}
+                                        </div>
                                     </span>
                                 </a>
                             </li>
@@ -52,7 +61,9 @@ const TeamViewer = {
     
                     $(`#${user_login_id}`).append(html)
 
-                    this.scrollHorizontally(user_login_id)
+                    users.forEach(user => {
+                        $(`#${user.user_login_id}`).click()
+                    })
                 }
             }
         },
@@ -72,7 +83,7 @@ const TeamViewer = {
     mounted() 
     {   
         let _this = this
-        
+
         this.getMainBinaryTree()
 
         window.getBinaryTree = function(user_login_id)
@@ -85,8 +96,8 @@ const TeamViewer = {
             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         </div>
         
-        <div v-if="user_login_id" :style="{width:width+'%'}" class="tree animation-fall-down" style="--delay:500ms" id="tree">
-            <div :id="user_login_id"></div>
+        <div v-if="user_login_id" class="tree justify-content-center w-100 animation-fall-down" style="--delay:500ms" id="trees">
+            <div id="0"></div>
         </div>
     `,
 }
