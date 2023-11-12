@@ -8,40 +8,40 @@
     <teamselector-viewer class="animation-fall-down" style="--delay:450ms"></teamselector-viewer>
 
     <div class="row mb-3 justify-content-center align-items-center">
-        <div class="col-12 col-xl mb-3 mb-xl-0">
+        <div class="col-12 col-md mb-3 mb-md-0">
             <rangewidget-viewer class="animation-fall-down" style="--delay:500ms"></rangewidget-viewer>
         </div>
-        <div class="col-12 col-xl mb-3 mb-xl-0">
+        <div class="col-12 col-md mb-3 mb-md-0">
             <div class="row justify-content-center align-items-center">
-                <div class="col-12 col-xl mb-3 mb-xl-0">
+                <div class="col-12 col-md mb-3 mb-md-0">
                     <landing-viewer class="animation-fall-down" style="--delay:650ms"></landing-viewer>
                 </div>
-                <div class="col-12 col-xl mb-3 mb-xl-0">
+                <div class="col-12 col-md mb-3 mb-md-0">
                     <membershipwidget-viewer class="animation-fall-down" style="--delay:700ms"></membershipwidget-viewer>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row mb-0 mb-xl-3">
-        <div class="col-12 col-xl mb-3 mb-xl-0">
+    <div class="row mb-0 mb-md-3">
+        <div class="col-12 col-md mb-3 mb-md-0">
             <paybusinesswidget-viewer class="animation-fall-down" style="--delay:750ms"></paybusinesswidget-viewer>
         </div>
-        <div class="col-12 col-xl mb-3 mb-xl-0">
+        <div class="col-12 col-md mb-3 mb-md-0">
             <nextlevelwidget-viewer class="animation-fall-down" style="--delay:800ms"></nextlevelwidget-viewer>
         </div>
     </div>
 
-    <div class="row mb-0 mb-xl-3">
-        <div class="col-12 col-xl mb-3 mb-xl-0">
+    <div class="row mb-0 mb-md-3">
+        <div class="col-12 col-md mb-3 mb-md-0">
             <daily-viewer class="animation-fall-down" style="--delay:850ms"></daily-viewer>
         </div>
-        <div class="col-12 col-xl mb-3 mb-xl-0">
+        <div class="col-12 col-md mb-3 mb-md-0">
             <income-viewer class="animation-fall-down" style="--delay:900ms"></income-viewer>
         </div>
     </div>
 
-    <div class="row mb-0 mb-xl-3">
+    <div class="row mb-0 mb-md-3">
         <div class="col-12">
             <map-viewer class="animation-fall-down" style="--delay:950ms"></map-viewer>
         </div>
