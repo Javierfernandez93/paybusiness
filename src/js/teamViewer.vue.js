@@ -5,6 +5,7 @@ const TeamViewer = {
     data() {
         return {
             User: new User,
+            usersCalled : [],
             user_login_id : null,
             dataSource: null,
             busy : false,
@@ -12,6 +13,9 @@ const TeamViewer = {
         }
     },
     methods: {
+        isCalled(_user_login_id) {
+            return this.usersCalled.find((user) => user.user_login_id == _user_login_id)
+        },
         getMainBinaryTree() {
             this.busy = true
             this.User.getMainBinaryTree({},(response)=>{
@@ -76,12 +80,18 @@ const TeamViewer = {
             document.getElementById("tree").scrollLeft += 20;
         },
         getBinaryTree(user_login_id) {
-            this.User.getBinaryTree({user_login_id:user_login_id},(response)=>{
-                if(response.s == 1)
-                {
-                    this.insertHtml(user_login_id,response.team)
-                }
-            })
+
+            if(!this.isCalled(user_login_id))
+            {
+                this.usersCalled.push({user_login_id:user_login_id})
+
+                this.User.getBinaryTree({user_login_id:user_login_id},(response)=>{
+                    if(response.s == 1)
+                    {
+                        this.insertHtml(user_login_id,response.team)
+                    }
+                })
+            }
         },
     },
     mounted() 
