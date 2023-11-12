@@ -28,6 +28,7 @@ const TeamViewer = {
                         this.insertHtml('0',[{
                             image: response.profile.image,
                             names: response.profile.names,
+                            code: response.profile.code,
                             user_login_id:this.user_login_id
                         }])
                         
