@@ -14,6 +14,7 @@ if($UserLogin->logged === true)
         $data["profile"] = [
             'company_id' => $UserLogin->company_id,
             'email' => $UserLogin->email,
+            'code' => $UserLogin->_data['user_contact']['code'],
             'phone' => $UserLogin->_data['user_contact']['phone'],
             'names' => $UserLogin->_data['user_data']['names'],
             'image' => $UserLogin->_data['user_account']['image'] ? $UserLogin->_data['user_account']['image'] : HCStudio\Connection::getMainPath()."/src/img/user.png",
