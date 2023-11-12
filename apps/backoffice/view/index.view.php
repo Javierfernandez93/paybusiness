@@ -3,7 +3,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
 
 <div class="container pb-5" id="app">
-    <flyer-viewer></flyer-viewer>
+    <flyer-viewer class="d-none"></flyer-viewer>
 
     <teamselector-viewer class="animation-fall-down" style="--delay:450ms"></teamselector-viewer>
 
