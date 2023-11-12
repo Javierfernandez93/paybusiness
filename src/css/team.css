@@ -86,7 +86,7 @@
 }
 .tree code:before,
 .tree span:before {
-  top: -0.5rem;
+  top: -0.7rem;
 }
 
 /* The root node doesn't connect upwards */
@@ -98,4 +98,9 @@
 .tree > li > code:before,
 .tree > li > span:before {
   outline: none;
+}
+
+
+.tree a:hover + ul span {
+  background-color: var(--bs-focus-input-border-color) !important;
 }
