@@ -299,8 +299,6 @@ const AdminusersViewer = {
                                         <ul class="dropdown-menu shadow">
                                             <li><button class="dropdown-item" @click="goToEdit(user.user_login_id)">Editar</button></li>
                                             <li><button class="dropdown-item" @click="viewEwallet(user)">Ver e-wallet</button></li>
-                                            
-                                            <li><button class="dropdown-item" @click="goToBridgeAccounts(user.user_login_id)">Ver cuentas bridge</button></li>
                                             <li><button class="dropdown-item" @click="getInBackoffice(user.user_login_id)">Acceder a backoffice</button></li>
                                             <li><button class="dropdown-item" @click="deleteUser(user.user_login_id)">Eliminar</button></li>
                                         </ul>
