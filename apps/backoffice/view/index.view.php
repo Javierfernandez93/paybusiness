@@ -8,7 +8,7 @@
     <teamselector-viewer class="animation-fall-down" style="--delay:450ms"></teamselector-viewer>
 
     <div class="row mb-3 justify-content-center align-items-center">
-        <div class="col-12 col-xl mb-3 mb-md-0">
+        <div class="col-12 col-xl mb-3 mb-xl-0">
             <rangewidget-viewer class="animation-fall-down" style="--delay:500ms"></rangewidget-viewer>
         </div>
         <div class="col-12 col-xl mb-3 mb-md-0">
