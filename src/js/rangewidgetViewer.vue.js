@@ -28,13 +28,13 @@ const RangewidgetViewer = {
         <div v-if="members" class="card shadow-none border">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-12 col-md">
+                    <div class="col">
                         Rango Actual
                     </div>
-                    <div class="col-12 col-md-auto">
+                    <div class="col-auto">
                         Contador de Miembros
                     </div>
-                    <div class="col-12 col-md-auto">
+                    <div class="col-auto">
                         <i class="bi bi-check-circle-fill text-success"></i>
                     </div>
                 </div>
@@ -43,19 +43,19 @@ const RangewidgetViewer = {
                 <ul class="list-group list-group-flush">
                     <li v-for="member in members" class="list-group-item">
                         <div class="row align-items-center">
-                            <div class="col-12 col-md-auto">
+                            <div class="col-auto">
                                 <div class="avatar avatar">
                                     <img :src="member.image" class="avatar" title="user" alt="user"/>
                                 </div>
                             </div>
-                            <div class="col-12 col-md">
+                            <div class="col">
                                 <div class="lead">{{member.names}}</div>
                                 <div class="text-xs">ID {{member.code}}</div>
                             </div>
-                            <div class="col-12 col-md-auto">
+                            <div class="col-auto">
                                 <span class="badge text-secondary p-0">Saldo historíco</span>    
                             </div>
-                            <div class="col-12 col-md-auto">
+                            <div class="col-auto">
                                 <span v-if="member.active" class="badge bg-success">Calificado</span>    
                                 <span v-else class="badge bg-secondary">No calificado</span>    
                             </div>
@@ -75,13 +75,13 @@ const RangewidgetViewer = {
             </div>
             <div class="card-body py-5">
                 <div class="row">
-                    <div class="col-12 col-md">
+                    <div class="col">
                         Rango Actual
                     </div>
-                    <div class="col-12 col-md-auto">
+                    <div class="col-auto">
                         Contador de Miembros
                     </div>
-                    <div class="col-12 col-md-auto">
+                    <div class="col-auto">
                         <i class="bi bi-check-circle-fill text-success"></i>
                     </div>
                 </div>
