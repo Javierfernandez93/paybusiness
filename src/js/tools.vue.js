@@ -1,6 +1,6 @@
 /* vue */ 
-import { ToolsViewer } from '../../src/js/toolsViewer.vue.js?v=2.4.0'
-import { UserflyerViewer } from '../../src/js/userflyerViewer.vue.js?v=2.4.0'
+import { ToolsViewer } from '../../src/js/toolsViewer.vue.js?v=2.4.1'
+import { UserflyerViewer } from '../../src/js/userflyerViewer.vue.js?v=2.4.1'
 
 Vue.createApp({
     components : { 
