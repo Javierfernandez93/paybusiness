@@ -1488,7 +1488,7 @@ class UserLogin extends Orm {
       return false;
     }
 
-    return $this->connection()->rows("SELECT 
+    $users = $this->connection()->rows("SELECT 
         user_referral.user_login_id,
         user_account.image,
         user_data.names
@@ -1510,6 +1510,18 @@ class UserLogin extends Orm {
         user_referral.side
       ASC 
     ");
+
+    if(!$users)
+    {
+      return false;
+    }
+
+
+    return array_map(function($user){
+      $user['active'] = $this->_hasProductPermission('pay_business',$user['user_login_id']);      ;
+
+      return $user;
+    },$users);
   }
   
   public function getNode(int $referral_id = null,int $side = null)

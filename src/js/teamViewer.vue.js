@@ -52,8 +52,8 @@ const TeamViewer = {
                                             ${user.names.getFirstName()}
                                         </div>
 
-                                        <div class="position-absolute top-0 mt-2 me-2 end-0">
-                                            <i class="bi lead text-primary bi-check-circle-fill"></i>
+                                        <div class="${!user.active ? 'd-none' : ''} position-absolute top-0 mt-2 me-2 end-0">
+                                            <i class="bi lead text-success bi-check-circle-fill"></i>
                                         </div>
                                     </span>
                                 </a>
