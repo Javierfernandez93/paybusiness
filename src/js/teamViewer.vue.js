@@ -7,9 +7,12 @@ const TeamViewer = {
             User: new User,
             usersCalled : [],
             user_login_id : null,
+            SIDE: {
+                START: 0,
+                END: 0,
+            },
             dataSource: null,
-            busy : false,
-            width : 50
+            busy : false
         }
     },
     methods: {
@@ -20,70 +23,79 @@ const TeamViewer = {
             this.busy = true
             this.User.getMainBinaryTree({},(response)=>{
                 this.busy = false
-                if(response.s == 1)
-                {
-                    this.user_login_id = response.user_login_id
 
-                    setTimeout(()=>{
-                        this.insertHtml('0',[{
+                this.user_login_id = response.profile.user_login_id
+
+                setTimeout(()=>{
+                    this.insertHtml({
+                        user_login_id : '0',
+                        main : true,
+                        users : [{
                             image: response.profile.image,
                             names: response.profile.names,
                             code: response.profile.code,
                             user_login_id:this.user_login_id
-                        }])
-                        
-                        this.insertHtml(response.user_login_id,response.team)
-                    },1000)
-                }
+                        }]
+                    })
+                    
+                    if(response.s == 1)
+                    {
+                        this.insertHtml({user_login_id:response.user_login_id,users:response.team})
+                    }
+                },500)
             })
         },
-        insertHtml(user_login_id,users) {
-            if(users && user_login_id)
+        insertHtml(data) {
+            if(data)
             {
-                if(($(`#${user_login_id}`).find("li").length) == 0)
+                if(($(`#${data.user_login_id}`).find("li").length) == 0)
                 {
-                    this.width += 7
+                    if(data.users)
+                    {
+                        let html = '<ul>'
 
-                    let html = '<ul>'
-                    users.forEach(user => {
-                        html += `
-                            <li id="${user.user_login_id}" onclick="getBinaryTree(${user.user_login_id})">
-                                <a class="cursor-pointer">
-                                    <span class="sans text-xs shadow position-relative rounded-3 p-3 mx-3 fw-semibold">
-                                        <div class="avatar">
-                                            <img class="avatar rounded-circle" src="${user.image}"/>
-                                        </div>
-                                        
-                                        <div class="text-uppercase fw-semibold sans mt-2">
-                                            ${user.names.getFirstName()}
-                                        </div>
-                                        
-                                        <div class="fw-semibold mt-2">
-                                            ${user.code}
-                                        </div>
-
-                                        <div class="${!user.active ? 'd-none' : ''} position-absolute top-0 mt-2 me-2 end-0">
-                                            <i class="bi lead text-success bi-check-circle-fill"></i>
-                                        </div>
-                                    </span>
-                                </a>
-                            </li>
-                        `
-                    });
+                        data.users.forEach(user => {
+                            html += `
+                                <li id="${user.user_login_id}" onclick="getBinaryTree(${user.user_login_id})">
+                                    <a class="cursor-pointer">
+                                        <span class="sans text-xs shadow position-relative rounded-3 p-3 mx-3 fw-semibold">
+                                            <div class="avatar">
+                                                <img class="avatar rounded-circle" src="${user.image}"/>
+                                            </div>
+                                            
+                                            <div class="text-uppercase fw-semibold sans mt-2">
+                                                ${user.names.getFirstName()}
+                                            </div>
+                                            
+                                            <div class="fw-semibold mt-2">
+                                                ${user.code}
+                                            </div>
+                                            
+                                            <div class="${data.main ? 'd-none' : ''} fw-semibold mt-2">
+                                                <span class="badge bg-primary">
+                                                    ${user.side == this.SIDE.START? 'Izquierda' : 'Derecha'}
+                                                </span>
+                                            </div>
     
-                    html += '</ul>'
+                                            <div class="${!user.active ? 'd-none' : ''} position-absolute top-0 mt-2 me-2 end-0">
+                                                <i class="bi lead text-success bi-check-circle-fill"></i>
+                                            </div>
+                                        </span>
+                                    </a>
+                                </li>
+                            `
+                        });
+        
+                        html += '</ul>'
+        
+                        $(`#${data.user_login_id}`).append(html)
     
-                    $(`#${user_login_id}`).append(html)
-
-                    users.forEach(user => {
-                        $(`#${user.user_login_id}`).click()
-                    })
+                        data.users.forEach(user => {
+                            $(`#${user.user_login_id}`).click()
+                        })
+                    }
                 }
             }
-        },
-        scrollHorizontally(elementId)
-        {
-            document.getElementById("tree").scrollLeft += 20;
         },
         getBinaryTree(user_login_id) {
 
@@ -94,7 +106,7 @@ const TeamViewer = {
                 this.User.getBinaryTree({user_login_id:user_login_id},(response)=>{
                     if(response.s == 1)
                     {
-                        this.insertHtml(user_login_id,response.team)
+                        this.insertHtml({user_login_id:user_login_id,users:response.team})
                     }
                 })
             }

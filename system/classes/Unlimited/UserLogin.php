@@ -1490,6 +1490,7 @@ class UserLogin extends Orm {
 
     $users = $this->connection()->rows("SELECT 
         user_referral.user_login_id,
+        user_referral.side,
         user_login.code,
         user_account.image,
         user_data.names
@@ -1514,6 +1515,7 @@ class UserLogin extends Orm {
       ORDER BY 
         user_referral.side
       ASC 
+      LIMIT 2
     ");
 
     if(!$users)
