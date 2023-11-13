@@ -112,8 +112,8 @@ const ChatViewer = {
     },
     template : `
         <div class="position-fixed end-0 bottom-0 mb-5 me-5 z-index-3">
-            <div v-if="open" class="card rounded chat-ia-box shadow-xl">
-                <div class="card-header">
+            <div v-if="open" class="card rounded-badge chat-ia-box shadow-xl shadow-blur blur">
+                <div class="card-header bg-transparent">
                     <div class="row align-items-center">
                         <div class="col-auto rounded-circle">
                             <img src="../../src/img/user/user.png" class="avatar rounded-circle" alt="bot" title="bot"/>
@@ -128,19 +128,19 @@ const ChatViewer = {
                 </div>
                 <div class="card-body list-messages overflow-scroll" id="message_box">
                     <ul class="list-group list-group-flush">
-                        <li v-for="message in messages" class="list-group-item border-0 py-3 animation-fall-down" style="--delay: 500ms;">
+                        <li v-for="message in messages" class="list-group-item border-0 bg-transparent py-3 animation-fall-down" style="--delay: 500ms;">
                             <div class="d-flex" :class="message.sender == SENDER.BOT ? 'justify-content-start' : 'justify-content-end'">                                
                                 <span :class="message.sender == SENDER.BOT ? 'bg-dark' : 'bg-primary'" class="avatar badge mb-3" v-text="message.sender == SENDER.BOT ? bot_name.getFirstLetter() : 'Tú'">
                                 </span>
                             </div>                                
 
                             <div class="d-flex" :class="message.sender == SENDER.BOT ? 'justify-content-start' : 'justify-content-end'">                                
-                                <div class="rounded-badge p-4 openSans" :class="message.sender == SENDER.BOT ? 'bordesr shadow-xl text-start text-dark' : 'bg-primary text-end fw-semibold text-white'">
+                                <div class="rounded-badge bg-white p-4 openSans" :class="message.sender == SENDER.BOT ? 'bordesr shadow-xl text-start text-dark' : 'bg-primary text-end fw-semibold text-white'">
                                     <span class="text-message" v-html="message.message">
                                     </span>
 
                                     <ul v-if="message.items" class="list-group list-group-flush mt-3">
-                                        <li v-for="item in message.items" class="list-group-item border-0 cursor-pointer list-group-item-action" @click="sendMessageAuto(item.message)">
+                                        <li v-for="item in message.items" class="list-group-item border-0 bg-transparent cursor-pointer list-group-item-action" @click="sendMessageAuto(item.message)">
                                             <div class="row justify-content-center align-items-center">
                                                 <div class="col-12 col-xl-auto">
                                                     <i class="bi bi-lightning-charge-fill"></i>
@@ -175,7 +175,7 @@ const ChatViewer = {
                 </div>
             </div>
             <div v-else>
-                <div @click="open = !open" class="py-3 px-4 zoom cursor-pointer bg-primary shadow rounded text-white align-items-center">
+                <div @click="open = !open" class="py-3 px-4 border border-white border-3 rounded-pill zoom px-3 cursor-pointer bg-primary shadow-xl text-white align-items-center">
                     <i class="bi bi-chat-left"></i> ¡consigue ayuda aquí!
                 </div>
             </div>
