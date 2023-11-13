@@ -175,8 +175,8 @@ const ChatViewer = {
                 </div>
             </div>
             <div v-else>
-                <div @click="open = !open" class="py-3 px-4 border border-white border-3 rounded-pill zoom px-3 cursor-pointer bg-primary shadow-xl text-white align-items-center">
-                    <i class="bi bi-chat-left"></i> ¡consigue ayuda aquí!
+                <div @click="open = !open" class="py-3 px-4 border border-white border-5 rounded-pill zoom px-3 cursor-pointer bg-gradient-success shadow-xl text-white align-items-center">
+                    <i class="bi bi-chat-left me-3"></i> ¡consigue ayuda aquí!
                 </div>
             </div>
         </div>
