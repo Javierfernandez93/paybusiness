@@ -62,8 +62,10 @@ const TeamselectorViewer = {
                                     Es necesario que el miembro verifique su correo para que puedas colocarlo
                                 </div>
                                 <div v-else>
-                                    <button @click="setReferralInPosition(user,SIDE.LEFT)" class="btn btn-primary shadow-none me-2 mb-0">Izquierda</button>
-                                    <button @click="setReferralInPosition(user,SIDE.RIGHT)" class="btn btn-primary shadow-none mb-0">Derecha</button>
+                                    <div class="btn-group mb-0 shadow-none" role="group" aria-label="Basic example">
+                                        <button @click="setReferralInPosition(user,SIDE.LEFT)" type="button" class="btn btn-primary mb-0 shadow-none">Izquierda</button>
+                                        <button @click="setReferralInPosition(user,SIDE.RIGHT)" type="button" class="btn btn-dark mb-0 shadow-none">Derecha</button>
+                                    </div>
                                 </div>
                             </div>
                             <div v-else class="text-success">
