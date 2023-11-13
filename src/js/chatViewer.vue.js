@@ -111,61 +111,72 @@ const ChatViewer = {
         this.getChatIaFirstMessage()
     },
     template : `
-        <div class="position-fixed end-0 bottom-0 mb-3 me-3 z-index-3">
-            <div v-if="open" class="card rounded chat-ia-box">
-                <div class="card-body">
-                    <div class="card-header border-bottom">
-                        <div class="row align-items-center">
-                            <div class="col-auto rounded-circle">
-                                <img src="../../src/img/user/user.png" class="avatar avatar" alt="bot" title="bot"/>
-                            </div>
-                            <div class="col fs-5 fw-sembold text-primary">
-                                {{bot_name}}
-                            </div>
-                            <div class="col-auto">
-                                <button @click="open = !open"  class="btn btn-sm px-3 btn-outline-danger shadow-none mb-0"><i class="bi fs-5 bi-x"></i></button>
-                            </div>
+        <div class="position-fixed end-0 bottom-0 mb-5 me-5 z-index-3">
+            <div v-if="open" class="card rounded chat-ia-box shadow-xl">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-auto rounded-circle">
+                            <img src="../../src/img/user/user.png" class="avatar rounded-circle" alt="bot" title="bot"/>
+                        </div>
+                        <div class="col h4 text-dark">
+                            {{bot_name}}
+                        </div>
+                        <div class="col-auto">
+                            <button @click="open = !open"  class="btn btn-sm px-3 btn-light shadow-none mb-0"><i class="bi fs-5 bi-x"></i></button>
                         </div>
                     </div>
-                    <div class="card-body list-messages overflow-scroll" id="message_box">
-                        <ul class="list-group list-group-flush">
-                            <li v-for="message in messages" class="list-group-item border-0 py-3 animation-fall-down" style="--delay: 500ms;">
-                                <div class="d-flex" :class="message.sender == SENDER.BOT ? 'justify-content-start' : 'justify-content-end'">                                
-                                    <div class="rounded p-3" :class="message.sender == SENDER.BOT ? 'bg-light text-start text-dark' : 'bg-primary text-end fw-semibold text-white'">
-                                        <span class="text-message" v-html="message.message">
-                                        </span>
-                                    </div>
-                                </div>
-                                <div v-if="message.items" clas="py-3">
-                                    <ul class="list-group list-group-flush">
-                                        <li v-for="item in message.items" class="list-group-item text-decoration-underline fw-semibold text-primary text-cursor zoom" @click="sendMessageAuto(item.message)">
-                                            {{item.message}}
+                </div>
+                <div class="card-body list-messages overflow-scroll" id="message_box">
+                    <ul class="list-group list-group-flush">
+                        <li v-for="message in messages" class="list-group-item border-0 py-3 animation-fall-down" style="--delay: 500ms;">
+                            <div class="d-flex" :class="message.sender == SENDER.BOT ? 'justify-content-start' : 'justify-content-end'">                                
+                                <span :class="message.sender == SENDER.BOT ? 'bg-dark' : 'bg-primary'" class="avatar badge mb-3" v-text="message.sender == SENDER.BOT ? bot_name.getFirstLetter() : 'Tú'">
+                                </span>
+                            </div>                                
+
+                            <div class="d-flex" :class="message.sender == SENDER.BOT ? 'justify-content-start' : 'justify-content-end'">                                
+                                <div class="rounded-badge p-4 openSans" :class="message.sender == SENDER.BOT ? 'bordesr shadow-xl text-start text-dark' : 'bg-primary text-end fw-semibold text-white'">
+                                    <span class="text-message" v-html="message.message">
+                                    </span>
+
+                                    <ul v-if="message.items" class="list-group list-group-flush mt-3">
+                                        <li v-for="item in message.items" class="list-group-item border-0 cursor-pointer list-group-item-action" @click="sendMessageAuto(item.message)">
+                                            <div class="row justify-content-center align-items-center">
+                                                <div class="col-12 col-xl-auto">
+                                                    <i class="bi bi-lightning-charge-fill"></i>
+                                                </div>
+                                                <div class="col-12 col-xl text-primary">
+                                                    {{item.message}}
+                                                </div>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="rounded p-3" :class="message.sender == SENDER.BOT ? 'text-start' : 'text-end'" class="text-xs text-secondary">{{message.create_date.formatFullDate()}}</div>
-                                
-                                <div class="text-xs text-center text-decoration-underline text-secondary cursor-pointer zoom" v-if="message.sender == SENDER.BOT" @click="sendMessageAuto('Hablar con un experto')">
+                            </div>
+                            <div class="rounded p-3" :class="message.sender == SENDER.BOT ? 'text-start' : 'text-end'" class="text-xs text-secondary">{{message.create_date.formatFullDate()}}</div>
+                            
+                            <div class="d-flex justify-content-center">
+                                <div class="badge bg-primary cursor-pointer zoom" v-if="message.sender == SENDER.BOT" @click="sendMessageAuto('Hablar con un experto')">
                                     ¿No fue útil?
                                 </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row">
-                            <div class="col">
-                                <input @keypress.enter.exact="sendMessage" ref="message" type="text" v-model="message.message" :class="message.message ? 'is-valid' : 'is-invalid'" class="form-control"/>
                             </div>
-                            <div class="col-auto">
-                                <button @click="sendMessage" class="btn mb-0 shadow-none btn-primary">Send</button>
-                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col">
+                            <input @keypress.enter.exact="sendMessage" ref="message" type="text" v-model="message.message" :class="message.message ? 'is-valid' : 'is-invalid'" class="form-control"/>
+                        </div>
+                        <div class="col-auto">
+                            <button @click="sendMessage" class="btn mb-0 shadow-none btn-primary"><i class="bi bi-send-fill"></i></button>
                         </div>
                     </div>
                 </div>
             </div>
             <div v-else>
-                <div @click="open = !open" class="py-3 px-4 zoom cursor-pointer bg-primary shadow rounded text-white">
-                    Necesitas ayuda
+                <div @click="open = !open" class="py-3 px-4 zoom cursor-pointer bg-primary shadow rounded text-white align-items-center">
+                    <i class="bi bi-chat-left"></i> ¡consigue ayuda aquí!
                 </div>
             </div>
         </div>
