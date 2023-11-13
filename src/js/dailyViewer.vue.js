@@ -1,5 +1,6 @@
 import { User } from '../../src/js/user.module.js?v=2.4.4'   
 
+// incoming money for partnertship and unilevel plan
 const DailyViewer = {
     name : 'daily-viewer',
     data() {
@@ -15,10 +16,6 @@ const DailyViewer = {
                 if(response.s == 1)
                 {
                     this.initChart(response.income)
-                    // this.initChart([{
-                    //     month_name: 'Enero',
-                    //     total: '123',
-                    // }])
                 }
             })
         },

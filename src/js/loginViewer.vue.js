@@ -142,12 +142,12 @@ const LoginViewer = {
             </div>
         </div>
 
-        <div class="p-0 p-xl-3 bg-transparent text-start cards-plain bg-white animation-fall-down" style="--delay: 0.8s">
+        <div class="p-0 p-md-3 bg-transparent text-start cards-plain bg-white animation-fall-down" style="--delay: 0.8s">
             <div class="card bg-transparent shadow-none">
                 <div class="card-header pb-0 bg-transparent text-center">
                     <div class="row justify-content-center">
-                        <div class="col-6 col-md-6 col-xl-3">
-                            <img src="../../src/img/logo.svg" title="logo" alt="logo" class="w-100"/>
+                        <div class="col-6 col-md-2">
+                            <img src="../../src/img/logo.png" title="logo" alt="logo" class="w-100"/>
                         </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@ const LoginViewer = {
                 </div>
             </div>
             <div class="card-footer pt-0 px-lg-2 px-1 mt-3">
-                <p class="mb-4 text-sm mx-auto">
+                <p class="mb-4 text-sm mx-auto text-center">
                     {{Translator.words.dont_have_account_yet}}
                     <a href="../../apps/signup" class="text-info text-primary font-weight-bold">{{Translator.words.signup_here}}</a>
                 </p>

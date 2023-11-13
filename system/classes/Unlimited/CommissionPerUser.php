@@ -440,10 +440,10 @@ class CommissionPerUser extends Orm
 		}, $months);
 	}
 
-	public function _getProfitsByMonths(int $user_login_id = null)
+	public function _getProfitsByMonths(int $user_login_id = null,string $filter = null)
 	{
 		if (isset($user_login_id) === true) {
-			$commissions = $this->getProfitsByMonths($user_login_id);
+			$commissions = $this->getProfitsByMonths($user_login_id,$filter);
 
 			if(!$commissions)
 			{
@@ -456,7 +456,7 @@ class CommissionPerUser extends Orm
 		return false;
 	}
 
-	public function getProfitsByMonths(int $user_login_id = null)
+	public function getProfitsByMonths(int $user_login_id = null,string $filter = null)
 	{
 		if (isset($user_login_id) === true) {
 			$sql = "SELECT
@@ -472,6 +472,7 @@ class CommissionPerUser extends Orm
 					MONTH(FROM_UNIXTIME({$this->tblName}.create_date))
 				ORDER BY 
 					{$this->tblName}.create_date 
+					{$filter}
 				DESC
 				LIMIT 12
 				";

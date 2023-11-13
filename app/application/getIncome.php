@@ -10,7 +10,7 @@ if($UserLogin->logged === true)
 {
     $CommissionPerUser = new Unlimited\CommissionPerUser;
     
-    if($data['months'] = $CommissionPerUser->_getProfitsByMonths($UserLogin->company_id))
+    if($data['months'] = $CommissionPerUser->_getProfitsByMonths($UserLogin->company_id,""))
     {
         if($income = $CommissionPerUser->getAllProfitsByMonths($data['months'],$UserLogin->company_id))
         {
