@@ -9,10 +9,10 @@ const WithdrawmethodsViewer = {
         }
     },
     methods: {
-        toggleEditing: function (withdrawMethod) {
+        toggleEditing(withdrawMethod) {
             withdrawMethod.editing = !withdrawMethod.editing
         },
-        getWithdrawsMethods: function () {
+        getWithdrawsMethods() {
             return new Promise((resolve, reject) => {
                 this.User.getWithdrawsMethods({  }, (response) => {
                     if (response.s == 1) {
@@ -23,7 +23,7 @@ const WithdrawmethodsViewer = {
                 })
             })
         },
-        editWithdrawMethod: function (withdrawMethod) {
+        editWithdrawMethod(withdrawMethod) {
             this.User.editWithdrawMethod(withdrawMethod, (response) => {
                 if (response.s == 1) {
                     this.toggleEditing(withdrawMethod)
@@ -38,20 +38,18 @@ const WithdrawmethodsViewer = {
         }).catch((error) => { this.withdrawMethods = false })
     },
     template : `
-        <div class="card bg-transparent shadow-none mt-4 overflow-hidden border-radius-xl">
-            <div class="card-header bg-transparent">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <h6 class="mb-0">Método de retiro</h6>
-                    </div>
-                </div>
+        <div class="card mt-4 overflow-hidden">
+            <div class="card-header">
+                <div class="h4 fw-semibold">Método de retiro</div>
             </div>
+
+            
             <div class="card-body">
+                <div class="alert text-white bg-primary">
+                    Aquí puedes configurar tus métodos de retiro
+                </div>
                 <ul class="list-group list-group">
-                    <li
-                        v-for="withdrawMethod in withdrawMethods"
-                        class="list-group-item border-0">
-                        
+                    <li v-for="withdrawMethod in withdrawMethods" class="list-group-item border-0">
                         <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
                             <img class="w-10 me-3 mb-0" :src="withdrawMethod.image" alt="logo">
                             <div class="w-100">

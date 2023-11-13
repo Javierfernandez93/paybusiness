@@ -1,6 +1,5 @@
 import { User } from '../../src/js/user.module.js?v=2.4.4'   
 
-
 const MapViewer = {
     name : 'map-viewer',
     data() {
