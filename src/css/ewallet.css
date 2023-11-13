@@ -4,3 +4,9 @@
     background-size: cover;
     background-color: transparent;
 }
+#img-rotator {
+    transition: box-shadow .1s transform;
+}
+#img-rotator:hover {
+    box-shadow: 12px 12px 12px rgba(0, 0, 0, 0.4);
+}

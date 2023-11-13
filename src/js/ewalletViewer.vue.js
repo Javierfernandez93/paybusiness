@@ -113,8 +113,8 @@ const EwalletViewer = {
     template : `
         <div v-if="ewallet" class="row py-5">
             <div class="col-12 col-md-6 col-xl-5 mb-xl-0 mb-4">
-                <div class="card bg-transparent rounded overflow-hidden shadow-xl">
-                    <div class="card-bg overflow-hidden position-relative border-radius-xl">
+                <div id="img-rotator" class="card bg-transparent rounded overflow-hidden shadow-xl">
+                    <div id="" class="card-bg overflow-hidden position-relative border-radius-xl">
                         <span class="mask d-none bg-gradient-dark"></span>
                         <div class="card-body position-relative z-index-1 p-3">
                             <div class="row">
@@ -127,7 +127,7 @@ const EwalletViewer = {
                             </div>
                             
                             <div class="mt-4 mb-5">
-                                <h5 class="text-white text-uppercase pb-2">Balance</h5>
+                                <h5 class="text-white text-uppercase sans pb-2">Balance</h5>
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="text-white text-uppercase pb-2">$ {{ewallet.amount.numberFormat(2)}} USD </h5>
@@ -175,7 +175,7 @@ const EwalletViewer = {
                         <div class="row align-items-center">
                             <div class="col col-xl-10 text-start">
                                 <span class="badge text-secondary p-0">Dirección</span>
-                                <div>
+                                <div class="sans">
                                     {{ewallet.public_key}}
                                 </div>
                             </div>

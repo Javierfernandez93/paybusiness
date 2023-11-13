@@ -47,7 +47,7 @@ const UnilevelViewer = {
                     ¡Descubre la red que estás construyendo en Unlimited!
                 </div>
             </div>
-            <div v-if="network" class="container">
+            <div v-if="network">
                 <div v-for="(level,levelIndex) in network" class="card mb-3 animation-fall-down" :style="{'--delay':(levelIndex+1)*250+'ms'}">
                     <div class="card-header">
                         <div class="row align-items-center">
