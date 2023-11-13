@@ -916,6 +916,24 @@ class UserLogin extends Orm {
     return false;
   }
   
+  public function getNetworkCount(int $limit = 2) : int
+  {
+    $network = (new UserReferral)->getNetwork($limit,$this->company_id);
+    $members = 0;
+    
+    if(!$network)
+    {
+      return $members;
+    }
+
+    foreach($network as $level)
+    {
+      $members += sizeof($level);
+    }
+    
+    return $members;
+  }
+
   public function getNetwork(int $limit = 2) : array|bool
   {
     if($this->logged === true)

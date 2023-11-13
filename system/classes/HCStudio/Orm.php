@@ -452,11 +452,13 @@ abstract class Orm
 		return $this->findAll($where,$binds,null,['field'=>'create_date','order'=>'desc']);
 	}
 
-	public function findAll(string $where = null,array|string|int|float $binds = null,array $fields = null,array $orderBy = null) : array|bool
+	public function findAll(string $where = null,array|string|int|float $binds = null,array $fields = null,array $orderBy = null,string $limit = '') : array|bool
 	{
 		$fields = isset($fields) ? implode(',',$fields) : implode(",",array_keys($this->getFields()));
 
-		$query = "SELECT {$fields} FROM {$this->tblName} WHERE {$where}";
+		$limit = isset($limit) ? "LIMIT {$limit}" : '';
+
+		$query = "SELECT {$fields} FROM {$this->tblName} WHERE {$where} {$limit}";
 
 		if(isset($orderBy))
 		{

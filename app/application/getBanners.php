@@ -9,7 +9,7 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserSupport->logged === true || $UserLogin->logged === true)
 {	
-    if($banners = (new Unlimited\Banner)->findAll("status != ?",-1))
+    if($banners = (new Unlimited\Banner)->findAll("status != ?",-1,null,null,"1"))
     {
         $data['banners'] = $banners;
         $data['r'] = 'DATA_OK';

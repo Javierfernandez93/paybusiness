@@ -769,6 +769,9 @@ class User extends Http {
     sendDni(data, callback) {
         return this.call('../../app/application/sendDni.php', data, callback);
     }
+    getMemberCounter(data, callback) {
+        return this.call('../../app/application/getMemberCounter.php', data, callback);
+    }
 }
 
 export { User }

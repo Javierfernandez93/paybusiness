@@ -5,15 +5,17 @@ const RangewidgetViewer = {
     data() {
         return {
             User: new User,
-            members : null
+            members : 0,
+            profile : 0
         }
     },
     methods: {
-        getLastMembers() {
-            this.User.getLastMembers({},(response)=>{
+        getMemberCounter() {
+            this.User.getMemberCounter({},(response)=>{
                 if(response.s == 1)
                 {
                     this.members = response.members
+                    this.profile = response.profile
                 } else {
                     this.members = false
                 }
@@ -22,10 +24,10 @@ const RangewidgetViewer = {
     },
     mounted() 
     {   
-        this.getLastMembers()
+        this.getMemberCounter()
     },
     template : `
-        <div v-if="members" class="card shadow-none border">
+        <div v-if="profile" class="card shadow-none border">
             <div class="card-header">
                 <div class="row">
                     <div class="col">
@@ -41,22 +43,22 @@ const RangewidgetViewer = {
             </div>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
-                    <li v-for="member in members" class="list-group-item">
+                    <li class="list-group-item">
                         <div class="row align-items-center">
                             <div class="col-auto">
                                 <div class="avatar avatar">
-                                    <img :src="member.image" class="avatar" title="user" alt="user"/>
+                                    <img :src="profile.image" class="avatar rounded-circle border border-primary border-2" title="user" alt="user"/>
                                 </div>
                             </div>
                             <div class="col">
-                                <div class="lead">{{member.names}}</div>
-                                <div class="text-xs">ID {{member.code}}</div>
+                                <div class="lead sans">{{profile.names}}</div>
+                                <div class="text-xs fw-bold text-dark">ID {{profile.code}}</div>
                             </div>
                             <div class="col-auto">
-                                <span class="badge text-secondary p-0">Saldo historíco</span>    
+                                <span class="lead fw-semibold text-dark">{{members.numberFormat(0)}}</span>    
                             </div>
                             <div class="col-auto">
-                                <span v-if="member.active" class="badge bg-success">Calificado</span>    
+                                <span v-if="profile.active" class="badge bg-success">Calificado</span>    
                                 <span v-else class="badge bg-secondary">No calificado</span>    
                             </div>
                         </div>
