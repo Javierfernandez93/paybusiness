@@ -79,10 +79,10 @@ const ListViewer = {
 
                             <tbody>
                                 <tr v-for="user in level" class="text-center">
-                                <td class="align-middle">{{user.code}}</td>
+                                <td class="align-middle sans">{{user.code}}</td>
                                 <td class="align-middle">
                                     <div class="text-dark">{{user.names}}</div>
-                                    <div class="tex-tx">{{user.email}}</div>
+                                    <div class="text-secondary sans">{{user.email}}</div>
                                 </td>
                                 <td class="align-middle">{{user.phone}}</td>
                                 <td class="align-middle">
