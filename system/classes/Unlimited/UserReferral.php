@@ -369,11 +369,11 @@ class UserReferral extends Orm {
     return false;
   }
 
-  public function getNetwork(int $limit = -1 ,string $referral_id = null,int $count = 0) 
+  public function getNetwork(int $limit = -1 ,string $sponsor_id = null,int $count = 0) 
   {
     $result = [];
         
-    $sql = "SELECT user_login_id FROM user_referral WHERE referral_id IN ({$referral_id})";      
+    $sql = "SELECT user_login_id FROM user_referral WHERE sponsor_id IN ({$sponsor_id})";      
 
     if (($count != $limit) && ($data = $this->connection()->column($sql))) {
       $count++;

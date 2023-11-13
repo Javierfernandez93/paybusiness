@@ -945,9 +945,6 @@ class UserLogin extends Orm {
         return false;
       }
         
-      $UserData = new UserData;
-      $UserAccount = new UserAccount;
-
       $_network = [];
 
       foreach($network as $keyLevel => $level)
