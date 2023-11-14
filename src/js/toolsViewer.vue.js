@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.4.4'   
+import { User } from '../../src/js/user.module.js?v=2.4.5'   
 
 const ToolsViewer = {
     name : 'tools-viewer',
@@ -67,31 +67,25 @@ const ToolsViewer = {
                                 </span>
                             </div>
                         </div>
+
                         <div class="card-header">
                             <div class="fw-semibold text-dark">
                                 {{tool.title}}
                             </div>
                             <div v-if="tool.description">
-                                <div v-html="tool.description">
-        
-                                </div>
+                                <div v-html="tool.description"></div>
                             </div>
 
-                            <span class="badge text-xxs border border-primary text-primary">Subido por {{tool.names}} hace {{tool.create_date.timeSince()}}</span>
+                            <span class="badge text-xxs border border-primary text-primary">Subido por {{tool.names}}</span>
+                            <span class="badge text-xxs border border-primary text-primary">Hace {{tool.create_date.timeSince()}}</span>
                         </div>
 
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 col-xl-6">
-                                    <div class="d-grid">
-                                        <a class="btn shadow-none mb-3 btn-success me-0 mb-xl-0 me-xl-1" :href="tool.route" download>Descargar</a>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-xl-6">
-                                    <div class="d-grid">
-                                        <a class="btn shadow-none mb-0 btn-primary " :href="tool.route">Visualizar</a>
-                                    </div>
-                                </div>
+                            <div class="d-grid">
+                                <a class="btn shadow-none btn-success mb-3 mb-md-0" :href="tool.route" download>Descargar</a>
+                            </div>
+                            <div class="d-grid">
+                                <a class="btn shadow-none mb-0 btn-primary " :href="tool.route">Visualizar</a>
                             </div>
                         </div>
                     </div>

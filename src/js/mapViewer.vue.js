@@ -1,71 +1,92 @@
-import { User } from '../../src/js/user.module.js?v=2.4.4'   
+import { User } from "../../src/js/user.module.js?v=2.4.5";
 
 const MapViewer = {
-    name : 'map-viewer',
-    data() {
-        return {
-            User: new User,
-            members : null
+  name: "map-viewer",
+  data() {
+    return {
+      User: new User(),
+      members: null,
+    };
+  },
+  methods: {
+    getUsersByInternet(internet) {
+      let user = this.members.find((member) => {
+        return member.country.internet == internet;
+      });
+
+      return user != undefined ? user.total : 0;
+    },
+    getTopCountries() {
+      this.User.getTopCountries({}, (response) => {
+        if (response.s == 1) {
+          this.members = response.members;
         }
-    },
-    methods: {
-        getUsersByInternet(internet) {
-            let user = this.members.find((member)=>{
-                return member.country.internet == internet
-            })
 
-            return user != undefined ? user.total : 0
-        },
-        getTopCountries() {
-            this.User.getTopCountries({},(response)=>{
-                if(response.s == 1)
-                {
-                    this.members = response.members
-                }
+        let countries = {}
 
-                this.initMap()
-            })
-        },
-        initMap() {
-            let _this = this
-            var map = new jsVectorMap({
-                map: 'world',
-                selector: '#map',
-            
-                regionsSelectable: true,
-                markersSelectable: true,
-            
-                labels: {
-                    markers: {
-                    render: function (marker) {
-                        return marker.name
-                    }
-                    }
-                },
-                onRegionSelected: function (index, isSelected, selectedRegions) {
-                    console.log(index, isSelected, selectedRegions);
-                },
-                onRegionTooltipShow: function (event, tooltip, index) {
-                    let usersTotal = _this.getUsersByInternet(index)
-                    console.log(tooltip, index);
-                    tooltip.css({ backgroundColor: 'red' }).text(
-                        tooltip.text() + ` ${usersTotal} miembros`
-                    )
-                },
-                onMarkerSelected: function (code, isSelected, selectedMarkers) {
-                    console.log(code, isSelected, selectedMarkers);
-                },
-                onMarkerTooltipShow: function (event, tooltip, code) {
-                    tooltip.text(tooltip.text() + ' (Hello World (marker))')
-                },
-            })
-        },
+        response.members.map((member) => {
+            countries[member.country.internet] = 'usuario'
+        })
+
+        this.initMap(countries);
+      });
     },
-    mounted() 
-    { 
-        this.getTopCountries()
+    initMap(_countries) {
+      let _this = this;
+      var countries = {
+        scales: {
+            usuario: "#0281f4",
+        },
+        values: _countries
+      };
+
+      var map = new jsVectorMap({
+        map: "world",
+        selector: "#map",
+        series: {
+          regions: [
+            {
+              attribute: "fill",
+              scale: countries.scales,
+              values: countries.values,
+              legend: {
+                vertical: true,
+              },
+            },
+          ],
+        },
+        regionsSelectable: true,
+        markersSelectable: true,
+        labels: {
+          markers: {
+            render: function (marker) {
+              return marker.name;
+            },
+          },
+        },
+        onRegionSelected: function (index, isSelected, selectedRegions) {
+          console.log(index, isSelected, selectedRegions);
+        },
+        onRegionTooltipShow: function (event, tooltip, index) {
+          let usersTotal = _this.getUsersByInternet(index);
+          console.log(tooltip, index);
+          tooltip
+            .css({ backgroundColor: "red" })
+            .text(tooltip.text() + ` ${usersTotal} miembros`);
+        },
+        onMarkerSelected: function (code, isSelected, selectedMarkers) {
+          console.log(code, isSelected, selectedMarkers);
+        },
+        onMarkerTooltipShow: function (event, tooltip, code) {
+          tooltip.text(tooltip.text() + " (Hello World (marker))");
+        },
+      });
     },
-    template : `
+  },
+  mounted() {
+    this.getTopCountries();
+  },
+  template: `
         <div class="card overflow-hidden">
             <div class="card-header h4">
                 Cuenta de usuarios por paises
@@ -100,6 +121,6 @@ const MapViewer = {
         </div>
 
     `,
-}
+};
 
-export { MapViewer } 
+export { MapViewer };

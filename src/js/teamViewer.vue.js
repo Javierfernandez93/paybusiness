@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.4.4'   
+import { User } from '../../src/js/user.module.js?v=2.4.5'   
 
 const TeamViewer = {
     name : 'team-viewer',
@@ -34,7 +34,8 @@ const TeamViewer = {
                             image: response.profile.image,
                             names: response.profile.names,
                             code: response.profile.code,
-                            user_login_id:this.user_login_id
+                            user_login_id:this.user_login_id,
+                            toggled : false
                         }]
                     })
                     
@@ -64,7 +65,7 @@ const TeamViewer = {
                                             </div>
                                             
                                             <div class="text-uppercase fw-semibold sans mt-2">
-                                                ${user.names.getFirstName()}
+                                                ${user.landing}
                                             </div>
                                             
                                             <div class="fw-semibold mt-2">
@@ -76,6 +77,10 @@ const TeamViewer = {
                                                     ${user.side == this.SIDE.START? 'Izquierda' : 'Derecha'}
                                                 </span>
                                             </div>
+
+                                            <button class="btn btn-light mb-0 shadow-none" onclick="toggleChilds(${user.user_login_id})">
+                                                Ver/ocultar
+                                            </button>
     
                                             <div class="${!user.active ? 'd-none' : ''} position-absolute top-0 mt-2 me-2 end-0">
                                                 <i class="bi lead text-success bi-check-circle-fill"></i>
@@ -121,6 +126,12 @@ const TeamViewer = {
         window.getBinaryTree = function(user_login_id)
         {
             _this.getBinaryTree(user_login_id)
+        }
+    
+        window.toggleChilds = function(user_login_id)
+        {
+            $(`#${user_login_id}`).find("ul").toggleClass("d-none")
+            console.log(user_login_id)
         }
     },
     template : `

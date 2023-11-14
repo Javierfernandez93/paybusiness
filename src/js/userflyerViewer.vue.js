@@ -1,15 +1,17 @@
-import { User } from '../../src/js/user.module.js?v=2.4.4'   
+import { User } from '../../src/js/user.module.js?v=2.4.5'   
 
 const UserflyerViewer = {
     name : 'userflyer-viewer',
     data() {
         return {
             User: new User,
-            profile: null
+            profile: null,
+            mask : null
         }
     },
     methods: {
-        generateFlyer() {
+        generateFlyer(mask) {
+            this.mask = mask
             $(this.$refs.modal).modal('show')
             // this.User.generateFlyer({},(response)=>{
             //     if(response.s == 1)
@@ -49,7 +51,7 @@ const UserflyerViewer = {
                     </div>
                     <div class="modal-body">
                         <div class="mask-container position-relative justify-content-center align-items-center d-flex" ref="flyer">
-                            <img src="../../src/img/mask.png" class="position-absolute flyer-mask z-index-1"/>
+                            <img :src="mask" class="position-absolute flyer-mask z-index-1"/>
                             <img :src="profile.image" class="position-absolute flyer-target z-index-0"/>
 
                             <div class="text position-absolute z-index-2">{{profile.names}}</div>
@@ -57,7 +59,7 @@ const UserflyerViewer = {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button @click="downloadImage" type="button" class="btn btn-primary">Descargar Flyer</button>
+                        <button @click="downloadImage" type="button" class="btn btn-primary">Descargar Flyer de bienvenida</button>
                     </div>
                 </div>
             </div>
@@ -68,12 +70,12 @@ const UserflyerViewer = {
                 <span class="mask bg-primary"></span>
                 <div class="card-body position-relative z-index-1 h-100 p-3">
                     <h4 class="text-white font-weight-bolder mb-3">¿Ya tienes tu Flyer?</h4>
-                    <h6 class="text-white font-weight-bolder mb-3">¡Ya puedes generar tu flyer de bienvenida!</h6>
+                    <h6 class="text-white font-weight-bolder mb-3">¡Ya puedes generar tus flyers!</h6>
                     <p class="text-white mb-3">
                         Para generarlo da clic en generar flyer, ten en cuenta que debes de subir una imagen de perfil si no lo has hecho hazlo <a href="../../apps/backoffice/profile">Aquí</a>
                     </p>
-                    <button @click="generateFlyer" class="btn btn-round btn-outline-white mb-0">
-                        Generar flyer
+                    <button @click="generateFlyer('../../src/img/mask.png')" class="btn btn-round btn-outline-white mb-3">
+                        Descargar Flyer de bienvenida
                         <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                     </button>
                 </div>

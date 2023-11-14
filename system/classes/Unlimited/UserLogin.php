@@ -1507,6 +1507,7 @@ class UserLogin extends Orm {
         user_referral.user_login_id,
         user_referral.side,
         user_login.code,
+        user_account.landing,
         user_account.image,
         user_data.names
       FROM
