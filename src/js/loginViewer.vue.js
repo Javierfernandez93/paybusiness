@@ -146,7 +146,7 @@ const LoginViewer = {
             <div class="card bg-transparent shadow-none">
                 <div class="card-header pb-0 bg-transparent text-center">
                     <div class="row justify-content-center">
-                        <div class="col-6 col-md-2">
+                        <div class="col-4 col-xl-4 col-md-2">
                             <img src="../../src/img/logo.png" title="logo" alt="logo" class="w-100"/>
                         </div>
                     </div>
