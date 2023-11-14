@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.4.7'   
+import { User } from '../../src/js/user.module.js?v=2.4.8'   
 
 const NextlevelwidgetViewer = {
     name : 'nextlevelwidget-viewer',
@@ -48,7 +48,7 @@ const NextlevelwidgetViewer = {
             </div>
         </div>
         <div v-else-if="range == false" class="card shadow-none overflow-hidden border">
-            <div class="mask bg-dark d-flex justify-content-center align-items-center text-center text-white z-index-1">
+            <div class="mask bg-dark d-flex justify-content-center d-none align-items-center text-center text-white z-index-1">
                 <div class="row">
                     <div class="col-12">
                         <div><i class="bi h1 text-white bi-lock-fill"></i></div>
@@ -73,7 +73,7 @@ const NextlevelwidgetViewer = {
                     </div>
                 </div>
                 <div class="progress" style="height:1rem" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                    <div style="height:1rem" class="progress-bar bg-success" style="width: 25%">25%</div>
+                    <div style="height:1rem" class="progress-bar bg-success" style="width: 1%">1%</div>
                 </div>
             </div>
         </div>

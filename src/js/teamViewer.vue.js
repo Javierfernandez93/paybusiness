@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.4.7'   
+import { User } from '../../src/js/user.module.js?v=2.4.8'   
 
 const TeamViewer = {
     name : 'team-viewer',
@@ -37,6 +37,7 @@ const TeamViewer = {
                             image: response.profile.image,
                             names: response.profile.names,
                             code: response.profile.code,
+                            landing: response.profile.landing,
                             user_login_id:this.user_login_id,
                             toggled : false
                         }],

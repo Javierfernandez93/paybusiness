@@ -13,6 +13,7 @@ if($UserLogin->logged === true)
         'user_login_id' => $UserLogin->company_id,
         'active' => $UserLogin->hasProductPermission('pay_business'),
         'names' => $UserLogin->_data['user_data']['names'],
+        'landing' => $UserLogin->_data['user_account']['landing'],
         'image' => $UserLogin->_data['user_account']['image'] ? $UserLogin->_data['user_account']['image'] : HCStudio\Connection::getMainPath()."/src/img/user.png",
     ];
       

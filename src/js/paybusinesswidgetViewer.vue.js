@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.4.7'   
+import { User } from '../../src/js/user.module.js?v=2.4.8'   
 
 const PaybusinesswidgetViewer = {
     name : 'paybusinesswidget-viewer',
@@ -49,7 +49,7 @@ const PaybusinesswidgetViewer = {
             </div>
         </div>
         <div v-else-if="membership == false" class="card shadow-none overflow-hidden border">
-            <div class="mask bg-dark d-flex justify-content-center align-items-center text-center text-white z-index-1">
+            <div class="mask bg-dark d-flex d-none justify-content-center align-items-center text-center text-white z-index-1">
                 <div class="row">
                     <div class="col-12">
                         <div><i class="bi h1 text-white bi-lock-fill"></i></div>
