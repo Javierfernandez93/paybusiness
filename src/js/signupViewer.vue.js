@@ -139,7 +139,7 @@ const SignupViewer = {
             }
         },
         checkFields() {
-            this.userComplete = this.isValidMail && this.user.password && this.user.phone && this.user.names
+            this.userComplete = this.isValidMail && this.user.password && this.user.phone && this.user.names && this.user.country_id
         }
     },
     async mounted() {

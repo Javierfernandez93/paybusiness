@@ -21,7 +21,7 @@
         <link href="../../src/css/general.css?t=1" rel="stylesheet" type="text/css">
         {{css_scripts}}
     </head>
-    <body class="bg-light-dark">
+    <body class="bg-light">
         <div class="bg-gradient-primary header-Unlimited-signature" style="height: 0.3rem;">
         </div>
         
