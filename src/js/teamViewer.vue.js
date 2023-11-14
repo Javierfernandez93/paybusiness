@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.4.6'   
+import { User } from '../../src/js/user.module.js?v=2.4.7'   
 
 const TeamViewer = {
     name : 'team-viewer',
@@ -130,8 +130,8 @@ const TeamViewer = {
             
             $.each($("[data-landing]"),(key,element)=>{
                 let landing = $(element).text().trim()
-                
-                if(landing.toLowerCase().includes(query))
+
+                if(landing.toLowerCase().includes(query.toLowerCase()))
                 {
                     $(element).parent().addClass("hover");
                     
@@ -157,6 +157,17 @@ const TeamViewer = {
                 })
             }
         },1000),
+        scrollToSpan(user_login_id) {
+            console.log(user_login_id);
+
+            $(".hover").removeClass("hover");
+
+            $(`#${user_login_id}`).find("span").addClass("hover")
+
+            $('body, html').animate({
+                scrollTop: $(`#${user_login_id}`).parent().offset().top
+            }, 250);
+        }
     },
     mounted() 
     {   
@@ -179,32 +190,30 @@ const TeamViewer = {
             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         </div>
 
-        <div v-if="frontals" class="container mb-5">
-            <ul class="list-group">
-                <div v-for="frontal in frontals" class="list-group-item">
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-auto">
-                            <div class="avatar">
-                                <img :src="frontal.image" alt="imagen" title="imagen" class="avatar border border-primary rounded-circle"/> 
-                            </div>
-                        </div>
-                        <div class="col lead">
-                            <div class="text-xs">Último registro</div>
-                            <div>{{frontal.names}}</div>
-                        </div>
-                        <div class="col-auto">
-                            <span class="badge bg-primary">
-                                {{frontal.side == SIDE.START ? 'Izquierda' : 'Derecha'}}
-                            </span>
+        <div v-if="frontals" class="row justify-content-center mb-3">
+            <div class="col-12 col-xl-8">
+                <div class="row justify-content-center align-items-center">
+                    <div v-for="frontal in frontals" class="col">
+                        <div class="d-grid">
+                            <button @click="scrollToSpan(frontal.user_login_id)" class="btn btn-primary shadow-none">
+                                Último {{frontal.side == SIDE.START ? 'Izquierda' : 'Derecha'}}
+                            </button>
                         </div>
                     </div>
                 </div>
-            </ul>
+            </div>
         </div>
         
         <div class="row justify-content-center align-items-center mb-5">
             <div class="col-12 col-xl-6">
-                <input @keypress="filterData(this)" id="query" placeholder="Buscar por nombre o código..." class="form-control form-control-lg"/>
+                <div class="row align-items-center">
+                    <div class="col-12 col-xl">
+                        <input @keypress="filterData(this)" id="query" placeholder="Buscar por nombre o código..." class="form-control form-control-lg"/>
+                    </div>
+                    <div class="col-12 col-xl-auto">
+                        <button @click="filterData(this)" class="btn mb-0 shadow-none btn-primary">Buscar</button>
+                    </div>
+                </div>
             </div>
         </div>
         
