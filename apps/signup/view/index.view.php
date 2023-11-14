@@ -5,7 +5,7 @@
                 <div class="col-10 col-xl-6 order-1">
                     <signup-viewer></signup-viewer>
                 </div>
-                <div class="col-12 col-xl-6 bg-login position-relative overflow-hidden">
+                <div class="col-12 d-none d-xl-block col-xl-6 bg-login position-relative overflow-hidden">
                     <div class="mask bg-primary"></div>
                     <div class="position-relative z-index-1 h-100 align-items-center justify-content-center">
                         <div class="row h-100 d-flex justify-content-center align-items-center">
