@@ -25,7 +25,7 @@ const MapViewer = {
         let countries = {}
 
         response.members.map((member) => {
-            countries[member.country.internet] = 'usuario'
+            countries[member.country.internet] = 'UnlimitedTeam'
         })
 
         this.initMap(countries);
@@ -35,7 +35,7 @@ const MapViewer = {
       let _this = this;
       var countries = {
         scales: {
-            usuario: "#0281f4",
+            UnlimitedTeam: "#0281f4",
         },
         values: _countries
       };
