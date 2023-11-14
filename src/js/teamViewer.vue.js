@@ -160,6 +160,7 @@ const TeamViewer = {
         },1000),
         scrollToSpan(user_login_id) {
             console.log(user_login_id);
+            $("ul").removeClass("d-none")
 
             $(".hover").removeClass("hover");
 
