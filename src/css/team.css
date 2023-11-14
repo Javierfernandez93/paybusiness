@@ -52,8 +52,9 @@
 .tree span:hover .bi {
   color: #fff !important;
 }
+.tree span.hover,
 .tree span:hover {
-  transform: scale(1.15);
+  transform: scale(1.07);
   color: #fff;
   background-color: var(--bg-primary) !important;
   border-color: #fff;

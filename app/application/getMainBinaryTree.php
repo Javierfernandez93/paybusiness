@@ -15,10 +15,12 @@ if($UserLogin->logged === true)
         'names' => $UserLogin->_data['user_data']['names'],
         'image' => $UserLogin->_data['user_account']['image'] ? $UserLogin->_data['user_account']['image'] : HCStudio\Connection::getMainPath()."/src/img/user.png",
     ];
-
+      
     if($team = $UserLogin->getBinaryTree())
     {
+        $data['frontals'] = $UserLogin->getFrontalUsers();
         $data["team"] = $team;
+        // d($data);
         $data["s"] = 1;
         $data["r"] = "DATA_OK";
     } else {

@@ -1,15 +1,17 @@
-import { User } from '../../src/js/user.module.js?v=2.4.5'   
+import { User } from '../../src/js/user.module.js?v=2.4.6'   
 
 const TeamViewer = {
     name : 'team-viewer',
     data() {
         return {
             User: new User,
+            frontals : null,
+            query : null,
             usersCalled : [],
             user_login_id : null,
             SIDE: {
                 START: 0,
-                END: 0,
+                END: 1,
             },
             dataSource: null,
             busy : false
@@ -25,6 +27,7 @@ const TeamViewer = {
                 this.busy = false
 
                 this.user_login_id = response.profile.user_login_id
+                this.frontals = response.frontals
 
                 setTimeout(()=>{
                     this.insertHtml({
@@ -36,12 +39,17 @@ const TeamViewer = {
                             code: response.profile.code,
                             user_login_id:this.user_login_id,
                             toggled : false
-                        }]
+                        }],
+                        hide:false
                     })
                     
                     if(response.s == 1)
                     {
-                        this.insertHtml({user_login_id:response.user_login_id,users:response.team})
+                        this.insertHtml({
+                            user_login_id:response.user_login_id,
+                            users:response.team,
+                            hide:false
+                        })
                     }
                 },500)
             })
@@ -57,18 +65,18 @@ const TeamViewer = {
 
                         data.users.forEach(user => {
                             html += `
-                                <li id="${user.user_login_id}" onclick="getBinaryTree(${user.user_login_id})">
+                                <li id="${user.user_login_id}" class="user" onclick="getBinaryTree(${user.user_login_id})">
                                     <a class="cursor-pointer">
                                         <span class="sans text-xs shadow position-relative rounded-3 p-3 mx-3 fw-semibold">
                                             <div class="avatar">
                                                 <img class="avatar rounded-circle" src="${user.image}"/>
                                             </div>
                                             
-                                            <div class="text-uppercase fw-semibold sans mt-2">
+                                            <div data-landing="${user.landing}" class="text-uppercase fw-semibold sans mt-2">
                                                 ${user.landing}
                                             </div>
                                             
-                                            <div class="fw-semibold mt-2">
+                                            <div class="fw-semibold mt-2" data-code="${user.code}">
                                                 ${user.code}
                                             </div>
                                             
@@ -103,7 +111,6 @@ const TeamViewer = {
             }
         },
         getBinaryTree(user_login_id) {
-
             if(!this.isCalled(user_login_id))
             {
                 this.usersCalled.push({user_login_id:user_login_id})
@@ -111,11 +118,45 @@ const TeamViewer = {
                 this.User.getBinaryTree({user_login_id:user_login_id},(response)=>{
                     if(response.s == 1)
                     {
-                        this.insertHtml({user_login_id:user_login_id,users:response.team})
+                        this.insertHtml({user_login_id:user_login_id,users:response.team,hide:true})
                     }
                 })
             }
         },
+        filterData: _debounce((self) => {
+            let query = $("#query").val()
+            
+            $(".hover").removeClass("hover")
+            
+            $.each($("[data-landing]"),(key,element)=>{
+                let landing = $(element).text().trim()
+                
+                if(landing.toLowerCase().includes(query))
+                {
+                    $(element).parent().addClass("hover");
+                    
+                    $('body, html').animate({
+                        scrollTop: $(element).parent().offset().top
+                    }, 250);
+                }
+            })
+
+            if($(".hover").length == 0)
+            {
+                $.each($("[data-code]"),(key,element)=>{
+                    let code = $(element).text().trim()
+                    
+                    if(code.toString().includes(query))
+                    {
+                        $(element).parent().addClass("hover");
+                        
+                        $('body, html').animate({
+                            scrollTop: $(element).parent().offset().top
+                        }, 250);
+                    }
+                })
+            }
+        },1000),
     },
     mounted() 
     {   
@@ -131,15 +172,43 @@ const TeamViewer = {
         window.toggleChilds = function(user_login_id)
         {
             $(`#${user_login_id}`).find("ul").toggleClass("d-none")
-            console.log(user_login_id)
         }
     },
     template : `
         <div v-if="busy" class="justify-content-center text-center py-5">
             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
         </div>
+
+        <div v-if="frontals" class="container mb-5">
+            <ul class="list-group">
+                <div v-for="frontal in frontals" class="list-group-item">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-auto">
+                            <div class="avatar">
+                                <img :src="frontal.image" alt="imagen" title="imagen" class="avatar rounded-circle"/> 
+                            </div>
+                        </div>
+                        <div class="col lead">
+                            <div class="text-xs">Último registro</div>
+                            <div>{{frontal.names}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <span class="badge bg-primary">
+                                {{frontal.side == SIDE.START ? 'Izquierda' : 'Derecha'}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
         
-        <div v-if="user_login_id" class="tree justify-content-center w-100 animation-fall-down" style="--delay:500ms" id="trees">
+        <div class="row justify-content-center align-items-center mb-5">
+            <div class="col-12 col-xl-6">
+                <input @keypress="filterData(this)" id="query" placeholder="Buscar por nombre o código..." class="form-control form-control-lg"/>
+            </div>
+        </div>
+        
+        <div v-if="user_login_id" id="tree" class="tree justify-content-center w-100 animation-fall-down" style="--delay:500ms" id="trees">
             <div id="0"></div>
         </div>
     `,

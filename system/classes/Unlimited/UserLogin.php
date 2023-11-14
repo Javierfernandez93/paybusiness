@@ -1403,6 +1403,44 @@ class UserLogin extends Orm {
     },$users);
   }
  
+  public function getFrontalUsers()
+  {
+    $left = $this->getNode($this->company_id,UserReferral::LEFT);
+    $right = $this->getNode($this->company_id,UserReferral::RIGHT);
+
+    $UserData = new UserData;
+    $UserAccount = new UserAccount;
+    $users = [];
+
+    if($left)
+    {
+      $user_login_id = (new UserReferral)->getLastInsertedBySponsorOnSide($this->company_id,$left['side']);
+      
+      $users[] = [
+        'side' => UserReferral::LEFT,
+        'names' => $UserData->getNames($user_login_id),
+        'verified' => $this->findField("user_login_id = ?",$user_login_id,"verified_mail"),
+        'image' => $UserAccount->findField("user_login_id = ?",$user_login_id,"image"),
+        'user_login_id' => $user_login_id
+      ];
+    }
+    
+    if($right)
+    {
+      $user_login_id = (new UserReferral)->getLastInsertedBySponsorOnSide($this->company_id,$right['side']);
+
+      $users[] = [
+        'side' => UserReferral::RIGHT,
+        'names' => $UserData->getNames($user_login_id),
+        'verified' => $this->findField("user_login_id = ?",$user_login_id,"verified_mail"),
+        'image' => $UserAccount->findField("user_login_id = ?",$user_login_id,"image"),
+        'user_login_id' => $user_login_id
+      ];
+    }
+
+    return $users;
+  }
+
   public function insertReferralOnSide(array $data = null)
   {
     if(in_array($data['side'],[UserReferral::LEFT,UserReferral::RIGHT])) 
