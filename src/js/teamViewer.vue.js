@@ -69,7 +69,7 @@ const TeamViewer = {
                                     <a class="cursor-pointer">
                                         <span class="sans text-xs shadow position-relative rounded-3 p-3 mx-3 fw-semibold">
                                             <div class="avatar">
-                                                <img class="avatar rounded-circle" src="${user.image}"/>
+                                                <img class="avatar avatar-md border border-primary rounded-circle" src="${user.image}"/>
                                             </div>
                                             
                                             <div data-landing="${user.landing}" class="text-uppercase fw-semibold sans mt-2">
@@ -185,7 +185,7 @@ const TeamViewer = {
                     <div class="row justify-content-center align-items-center">
                         <div class="col-auto">
                             <div class="avatar">
-                                <img :src="frontal.image" alt="imagen" title="imagen" class="avatar rounded-circle"/> 
+                                <img :src="frontal.image" alt="imagen" title="imagen" class="avatar border border-primary rounded-circle"/> 
                             </div>
                         </div>
                         <div class="col lead">
