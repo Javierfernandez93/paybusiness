@@ -37,7 +37,7 @@ const LandingViewer = {
     },
     template : `
         <div v-if="landing" class="card shadow-none d-flex  card-height-special border">
-            <div class="d-flex align-items-center vh-xl-100 py-5 py-xl-0">
+            <div class="d-flex align-items-center vh-xl-100 py-5">
                 <div class="card-body text-center w-100">
                     <div class="row align-items-center">
                         <div class="col-12 col-md">
