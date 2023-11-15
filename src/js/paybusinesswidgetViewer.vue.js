@@ -60,7 +60,7 @@ const PaybusinesswidgetViewer = {
             <div class="card-body text-center position-relative z-index-0">
                 <div class="row mb-3">
                     <div class="col-12 col-xl">
-                        <h1 class="text-dark">Pay Business</h1>
+                        <h1 class="text-dark sans">Pay Business</h1>
                         <h3 class="text-secondary fw-semilight">Membresía 20 USDT</h3>
                     </div>
                 </div>

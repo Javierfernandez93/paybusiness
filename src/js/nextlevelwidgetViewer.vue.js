@@ -37,15 +37,15 @@ const NextlevelwidgetViewer = {
                         <div class="avatar avatar-xxl">
                             <img :src="ranges.current.image" alt="range" title="range" class="avatar avatar-xxl"/>
                         </div>
-                        <div class="text-xs text-dark">Rango actual</div>
-                        <div class="lead text-secondary">{{ranges.current.title}}</div>
+                        <div class="text-xs text-secondary">Rango actual</div>
+                        <div class="lead fw-semibold text-dark sans">{{ranges.current.title}}</div>
                     </div>
                     <div class="col-12 col-xl-auto text-end">
                         <div class="avatar avatar-xxl">
                             <img :src="ranges.next.image" alt="range" title="range" class="avatar avatar-xxl"/>
                         </div>
-                        <div class="text-xs text-dark">Próximo rango</div>
-                        <div class="lead fw-sembold text-dark text-secondary">{{ranges.next.title}}</div>
+                        <div class="text-xs text-secondary">Próximo rango</div>
+                        <div class="lead fw-semibold text-dark sans">{{ranges.next.title}}</div>
                     </div>
                 </div>
                 <div class="progress" style="height:1rem" role="progressbar" aria-label="Success example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
