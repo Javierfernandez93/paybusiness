@@ -76,7 +76,7 @@ const UnilevelViewer = {
                         <tbody>
                             <tr v-for="user in level" class="text-center">
                                 <td class="align-middle">{{user.code}}</td>
-                                <td class="align-middle">{{user.names}}</td>
+                                <td class="align-middle sans">{{user.names}}</td>
                                 <td class="align-middle">
                                     {{user.signup_date.formatFullDate()}}
                                 </td>
@@ -88,7 +88,7 @@ const UnilevelViewer = {
                                         Nunca
                                     </span>
                                 </td>
-                                <td class="align-middle">
+                                <td class="align-middle sans">
                                     {{user.sponsor.names}}
                                 </td>
                                 <td class="align-middle">

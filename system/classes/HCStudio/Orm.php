@@ -500,6 +500,18 @@ abstract class Orm
 		return 0;
 	}
 
+	public function sumWhere(string $where = null,array|string|int|float $binds = null,string $field = null) : int|bool
+	{
+		$query = "SELECT SUM({$this->tblName}.{$field}) as c FROM {$this->tblName} WHERE {$where}";
+
+		if($data = $this->db->field($query, $binds))
+		{
+			return $data;
+		}
+
+		return 0;
+	}
+
 	public function findField(string $where = null,array|string|int|float $binds = null,string $field = null) : string|bool
 	{
 		$query = "SELECT {$field} FROM {$this->tblName} WHERE {$where}";

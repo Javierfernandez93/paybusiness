@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.4.9'   
+import { User } from '../../src/js/user.module.js?v=2.5.0'   
 
 const RangewidgetViewer = {
     name : 'rangewidget-viewer',
@@ -6,6 +6,7 @@ const RangewidgetViewer = {
         return {
             User: new User,
             members : 0,
+            balance : 0,
             profile : 0
         }
     },
@@ -15,6 +16,7 @@ const RangewidgetViewer = {
                 if(response.s == 1)
                 {
                     this.members = response.members
+                    this.balance = response.balance
                     this.profile = response.profile
                 } else {
                     this.members = false
@@ -33,11 +35,15 @@ const RangewidgetViewer = {
                     <div class="col">
                         <img :src="profile.range.image" :alt="profile.range.title" :title="profile.range.title" class="avatar avatar-xxl"/>
                     </div>
-                    <div class="col-auto">
-                        Contador de Miembros
+                    <div class="col-auto text-end">
+                        <div class="text-secondary text-xs">Contador de miembros</div>
+                        <div class="sans">
+                            {{members.numberFormat(0)}}
+                        </div>
                     </div>
-                    <div v-if="profile.verified" class="col-auto">
-                        <i class="bi bi-check-circle-fill text-success"></i>
+                    <div class="col-auto">
+                        <i v-if="profile.verified" class="bi bi-check-circle-fill text-success"></i>
+                        <i v-else class="bi bi-x text-danger"></i>
                     </div>
                 </div>
             </div>
@@ -54,8 +60,9 @@ const RangewidgetViewer = {
                                 <div class="lead sans">{{profile.names}}</div>
                                 <div class="text-xs fw-bold text-dark">ID {{profile.code}}</div>
                             </div>
-                            <div class="col-auto">
-                                <span class="lead fw-semibold text-dark">{{members.numberFormat(0)}}</span>    
+                            <div class="col-auto text-end">
+                                <div class="text-secondary text-xs">Balance historico</div>
+                                <span class="lead fw-semibold text-dark sans">$ {{balance.numberFormat(2)}} USD</span>    
                             </div>
                             <div class="col-auto">
                                 <span v-if="profile.active" class="badge bg-success">Calificado</span>    

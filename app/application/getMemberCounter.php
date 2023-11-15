@@ -10,6 +10,8 @@ if($UserLogin->logged === true)
 {	
     $UserLogin->insertFirstRange();
 
+    $data['balance'] = (new Unlimited\CommissionPerUser)->sumWhere("user_login_id = ? AND status != ?",[$UserLogin->company_id,-1],"amount");
+
     $data["profile"] = [
         'code' => $UserLogin->code,
         'user_login_id' => $UserLogin->company_id,
