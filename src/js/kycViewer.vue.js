@@ -172,7 +172,7 @@ const KycViewer = {
                         <button @click="sendKyCValidation" :disabled="!filled" type="button" class="btn mb-0 btn-primary btn-lg shadow-none">Enviar para revisión</button>
                     </div>
                     <div class="d-grid">
-                        <button @click="sendDni" :disabled="!filled" type="button" class="btn btn-primary btn-lg shadow-none">
+                        <button @click="sendDni" type="button" class="btn btn-primary btn-lg shadow-none">
                             <div>¿Ya estábas verfificado?</div>
                             Escríbenos tu DNI o tu ID anterior
                         </button>

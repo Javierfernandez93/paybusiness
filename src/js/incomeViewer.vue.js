@@ -94,7 +94,7 @@ const IncomeViewer = {
     template : `
         <div class="card">
             <div class="card-header h4">
-                Income
+                Ingresos Bono Binario
             </div>
             <div class="card-body">
                 <canvas ref="myChart" id="myChart"></canvas>

@@ -89,7 +89,7 @@ const DailyViewer = {
     template : `
         <div class="card">
             <div class="card-header h4">
-                Daily
+                Ingresos Bono Directo y Uninivel 
             </div>
             <div class="card-body">
                 <canvas ref="myChartDaily" id="myChartDaily"></canvas>

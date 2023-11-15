@@ -1412,6 +1412,16 @@ class UserLogin extends Orm {
     },$users);
   }
  
+  public function isVerified()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    return $this->verified_mail;
+  }
+
   public function getFrontalUsers()
   {
     $left = $this->getNode($this->company_id,UserReferral::LEFT);

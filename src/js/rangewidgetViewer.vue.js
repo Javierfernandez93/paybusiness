@@ -36,7 +36,7 @@ const RangewidgetViewer = {
                     <div class="col-auto">
                         Contador de Miembros
                     </div>
-                    <div class="col-auto">
+                    <div v-if="profile.verified" class="col-auto">
                         <i class="bi bi-check-circle-fill text-success"></i>
                     </div>
                 </div>
