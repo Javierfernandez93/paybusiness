@@ -1,5 +1,5 @@
 /* vue */
-import { AddbannerViewer } from '../../src/js/addbannerViewer.vue.js?v=2.5.1'
+import { AddbannerViewer } from '../../src/js/addbannerViewer.vue.js?v=2.5.2'
 
 Vue.createApp({
     components: {

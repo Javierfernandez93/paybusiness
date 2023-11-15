@@ -1,4 +1,4 @@
-import { NotificationsViewer } from '../../src/js/notificationsViewer.vue.js?v=2.5.1'
+import { NotificationsViewer } from '../../src/js/notificationsViewer.vue.js?v=2.5.2'
 
 Vue.createApp({
     components : { 
