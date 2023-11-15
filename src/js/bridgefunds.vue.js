@@ -1,6 +1,6 @@
 /* vue */
-import { BridgefundsViewer } from '../../src/js/bridgefundsViewer.vue.js?v=2.5.2'
-import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.5.2'
+import { BridgefundsViewer } from '../../src/js/bridgefundsViewer.vue.js?v=2.5.3'
+import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.5.3'
 
 Vue.createApp({
     components: {

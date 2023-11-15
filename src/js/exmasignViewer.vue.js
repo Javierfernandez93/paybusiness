@@ -1,5 +1,5 @@
-import { User } from '../../src/js/user.module.js?v=2.5.2'   
-import { Translator } from '../../src/js/translator.module.js?v=2.5.2'   
+import { User } from '../../src/js/user.module.js?v=2.5.3'   
+import { Translator } from '../../src/js/translator.module.js?v=2.5.3'   
 
 const ExmasignViewer = {
     name : 'exmasign-viewer',

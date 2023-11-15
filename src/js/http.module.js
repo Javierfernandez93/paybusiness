@@ -1,4 +1,4 @@
-import { BoxLoader } from "../../src/js/boxloader.module.js?v=2.5.2";
+import { BoxLoader } from "../../src/js/boxloader.module.js?v=2.5.3";
 const GET = "GET",
   POST = "POST";
 class Http {
