@@ -24,7 +24,7 @@ const MembershipwidgetViewer = {
     },
     template : `
         <div v-if="productPermissions" class="card shadow-none card-height-special border">
-            <div class="d-flex align-items-center vh-xl-100 ">
+            <div class="d-flex align-items-center vh-xl-100 py-5 py-xl-0">
                 <div class="card-body text-center text-center">
                     <div class="lead fw-semibold text-dark mb-3">
                         Membresía

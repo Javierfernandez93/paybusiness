@@ -37,9 +37,8 @@ const LandingViewer = {
     },
     template : `
         <div v-if="landing" class="card shadow-none d-flex  card-height-special border">
-            <div class="d-flex align-items-center vh-xl-100">
+            <div class="d-flex align-items-center vh-xl-100 py-5 py-xl-0">
                 <div class="card-body text-center w-100">
-                    
                     <div class="row align-items-center">
                         <div class="col-12 col-md">
                             <div class="text-dark fw-semibold">
@@ -51,16 +50,16 @@ const LandingViewer = {
                         </div>
                     </div>
                     <div class="row justify-content-center align-items-center">
-                        <div class="col-12 col-md-6">
-                            <div class="d-flex">
+                        <div class="col-6 text-center">
+                            <div >
                                 <button @click="copyToClipBoard(landing.getFullLanding())" ref="landing" class="btn mb-0 text-success shadow-none">
                                     <div><i class="bi fs-2 bi-copy"></i></div>
                                     Copiar
                                 </button>
                             </div>
                         </div>
-                        <div class="col-12 col-md-6">
-                            <div class="d-flex">
+                        <div class="col-6 text-center">
+                            <div >
                                 <button @click="sendByWhatsapp(landing.getFullLanding())" class="btn mb-0 text-success shadow-none">
                                     <div><i class="bi fs-2 bi-send-fill"></i></div>
                                     Envíar
