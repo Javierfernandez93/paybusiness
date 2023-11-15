@@ -91,16 +91,30 @@ const UserflyerViewer = {
                 </div>
             </div>
         </div>
-        <div v-if="ranges" class="card animation-fall-down" style="--delay: 800ms">
+        <div class="card animation-fall-down mb-3" style="--delay: 800ms">
             <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../../assets/img/ivancik.jpg')">
                 <span class="mask bg-primary"></span>
                 <div class="card-body position-relative z-index-1 h-100 p-3">
-                    <h4 class="text-white font-weight-bolder mb-3">Flyer de Rango {{ranges.current.title}}</h4>
-                   
-                    <button @click="generateFlyer(ranges.current.mask)" class="btn btn-round btn-outline-white mb-3">
-                        Descargar Flyer de {{ranges.current.title}}
+                    <h4 class="text-white font-weight-bolder mb-3">Flyer de Lanzamiento de Negocios</h4>
+                    <button @click="generateFlyer('../../src/img/mask/1.png')" class="btn btn-round btn-outline-white mb-3">
+                        Descargar Flyer de Lanzamiento de Negocios
                         <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                     </button>
+                </div>
+            </div>
+        </div>
+        <div v-if="ranges">
+            <div v-if="ranges.current.catalog_range_id > 1" class="card animation-fall-down" style="--delay: 800ms">
+                <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../../assets/img/ivancik.jpg')">
+                    <span class="mask bg-primary"></span>
+                    <div class="card-body position-relative z-index-1 h-100 p-3">
+                        <h4 class="text-white font-weight-bolder mb-3">Flyer de Rango {{ranges.current.title}}</h4>
+                    
+                        <button @click="generateFlyer(ranges.current.mask)" class="btn btn-round btn-outline-white mb-3">
+                            Descargar Flyer de {{ranges.current.title}}
+                            <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
