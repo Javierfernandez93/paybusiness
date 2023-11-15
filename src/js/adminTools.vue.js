@@ -1,4 +1,4 @@
-import { AdmintoolsViewer } from '../../src/js/admintoolsViewer.vue.js?v=2.5.3'   
+import { AdmintoolsViewer } from '../../src/js/admintoolsViewer.vue.js?v=2.5.4'   
 
 Vue.createApp({
     components : { 

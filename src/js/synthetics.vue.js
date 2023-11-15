@@ -1,6 +1,6 @@
 /* vue */
-import { SyntheticsViewer } from '../../src/js/syntheticsViewer.vue.js?v=2.5.3'
-import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.5.3'
+import { SyntheticsViewer } from '../../src/js/syntheticsViewer.vue.js?v=2.5.4'
+import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.5.4'
 
 Vue.createApp({
     components: {

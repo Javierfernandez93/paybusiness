@@ -1,5 +1,5 @@
-import { SignupViewer } from '../../src/js/signupViewer.vue.js?v=2.5.3'   
-import { Translator } from '../../src/js/translator.module.js?v=2.5.3'   
+import { SignupViewer } from '../../src/js/signupViewer.vue.js?v=2.5.4'   
+import { Translator } from '../../src/js/translator.module.js?v=2.5.4'   
 
 Vue.createApp({
     components : { 

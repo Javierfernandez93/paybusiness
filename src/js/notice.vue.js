@@ -1,4 +1,4 @@
-import { NoticewidgetViewer } from '../../src/js/noticewidgetViewer.vue.js?v=2.5.3'   
+import { NoticewidgetViewer } from '../../src/js/noticewidgetViewer.vue.js?v=2.5.4'   
 
 Vue.createApp({
     components : { 

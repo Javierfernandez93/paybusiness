@@ -1,4 +1,4 @@
-import { AdmindashViewer } from '../../src/js/admindashViewer.vue.js?v=2.5.3'
+import { AdmindashViewer } from '../../src/js/admindashViewer.vue.js?v=2.5.4'
 
 Vue.createApp({
     components: { 

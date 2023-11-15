@@ -1,4 +1,4 @@
-import { User } from "../../src/js/user.module.js?v=2.5.3";
+import { User } from "../../src/js/user.module.js?v=2.5.4";
 
 const MapViewer = {
   name: "map-viewer",
@@ -20,15 +20,19 @@ const MapViewer = {
       this.User.getTopCountries({}, (response) => {
         if (response.s == 1) {
           this.members = response.members;
+          
+          let countries = {}
+  
+          response.members.map((member) => {
+              countries[member.country.internet] = 'UnlimitedTeam'
+          })
+
+          this.initMap(countries);
+        } else {
+          this.initMap([]);
         }
 
-        let countries = {}
 
-        response.members.map((member) => {
-            countries[member.country.internet] = 'UnlimitedTeam'
-        })
-
-        this.initMap(countries);
       });
     },
     initMap(_countries) {
