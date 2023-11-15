@@ -31,7 +31,7 @@ const RangewidgetViewer = {
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <img :src="profile.range.image" :alt="profile.range.title" :title="profile.range.title" class="avatar avatar-md"/>
+                        <img :src="profile.range.image" :alt="profile.range.title" :title="profile.range.title" class="avatar avatar-special"/>
                     </div>
                     <div class="col-auto">
                         Contador de Miembros
