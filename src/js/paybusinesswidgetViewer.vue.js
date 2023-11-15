@@ -36,7 +36,7 @@ const PaybusinesswidgetViewer = {
     },
     template : `
         <div v-if="membership" class="card shadow-none card-height-special border">
-            <div class="card-body text-center">
+            <div class="card-body text-center py-5">
                 <div class="row mb-3">
                     <div class="col-12 col-xl">
                         <h1 class="text-dark">Pay Business</h1>
@@ -57,7 +57,7 @@ const PaybusinesswidgetViewer = {
                     </div>
                 </div>
             </div>
-            <div class="card-body text-center position-relative z-index-0">
+            <div class="card-body py-5 text-center position-relative z-index-0">
                 <div class="row mb-3">
                     <div class="col-12 col-xl">
                         <h1 class="text-dark sans">Pay Business</h1>
