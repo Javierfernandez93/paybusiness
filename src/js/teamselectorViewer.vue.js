@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.4.8'   
+import { User } from '../../src/js/user.module.js?v=2.4.9'   
 
 const TeamselectorViewer = {
     name : 'teamselector-viewer',
@@ -24,12 +24,35 @@ const TeamselectorViewer = {
             })
         },
         setReferralInPosition(user,side) {
-            this.User.setReferralInPosition({user_login_id:user.user_login_id,side:side},(response)=>{
-                if(response.s == 1)
-                {
-                    user.setted = true
-                }
+            let alert = alertCtrl.create({
+                title: "Importante",
+                subTitle: `
+                    ¿Estás seguro de colocar a <b>${user.names}</b> a la extrema <b>${side ? 'Derecha' : 'Izquierda'}</b>?
+                `,
+                buttons: [
+                    {
+                        text: "Sí, colocar",
+                        class: 'btn-success',
+                        role: "cancel",
+                        handler: (data) => {
+                            this.User.setReferralInPosition({user_login_id:user.user_login_id,side:side},(response)=>{
+                                if(response.s == 1)
+                                {
+                                    user.setted = true
+                                }
+                            })
+                        },
+                    },
+                    {
+                        text: "Cancel",
+                        role: "cancel",
+                        handler: (data) => {
+                        },
+                    },
+                ],
             })
+
+            alertCtrl.present(alert.modal)  
         },
     },
     mounted() 
