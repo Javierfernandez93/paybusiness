@@ -8,7 +8,13 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    
+    $data['ranges'] = [
+		'current' => $UserLogin->getRange(),
+		'next' => $UserLogin->getNextRange()
+	];
+	
+    $data['r'] = 'DATA_OK';
+	$data['s'] = 1;
 } else {
 	$data['r'] = 'NOT_SESSION';
 	$data['s'] = 0;

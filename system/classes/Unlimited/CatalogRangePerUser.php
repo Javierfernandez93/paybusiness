@@ -83,6 +83,11 @@ class CatalogRangePerUser extends Orm {
         return $this->connection()->row("SELECT 
             {$this->tblName}.catalog_range_id,
             catalog_range.image,
+            catalog_range.volumen,
+            catalog_range.is_percentage,
+            catalog_range.amount,
+            catalog_range.start_volumen,
+            catalog_range.end_volumen,
             catalog_range.title
         FROM 
             {$this->tblName}

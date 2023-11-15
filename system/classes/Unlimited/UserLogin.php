@@ -611,6 +611,15 @@ class UserLogin extends Orm {
     }
   }
 
+  public function getNextRange() {
+    if(!$this->getId())
+    {
+      return false;
+    }
+    
+    return (new CatalogRangePerUser)->getNextRange($this->company_id);
+  }
+
   public function getRange() {
     if(!$this->getId())
     {

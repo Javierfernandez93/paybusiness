@@ -62,8 +62,10 @@ class CatalogRange extends Orm {
             $sql = "SELECT 
                         {$this->tblName}.{$this->tblName}_id,
                         {$this->tblName}.title,
+                        {$this->tblName}.image,
                         {$this->tblName}.volumen,
-                        {$this->tblName}.percentage,
+                        {$this->tblName}.is_percentage,
+						{$this->tblName}.amount,
                         {$this->tblName}.start_volumen,
                         {$this->tblName}.end_volumen
                     FROM 

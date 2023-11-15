@@ -5,7 +5,7 @@ const NextlevelwidgetViewer = {
     data() {
         return {
             User: new User,
-            range : null
+            ranges : null
         }
     },
     methods: {
@@ -13,9 +13,9 @@ const NextlevelwidgetViewer = {
             this.User.getCurrentRange({},(response)=>{
                 if(response.s == 1)
                 {
-                    this.range = response.range
+                    this.ranges = response.ranges
                 } else {
-                    this.range = false
+                    this.ranges = false
                 }
             })
         },
@@ -25,7 +25,7 @@ const NextlevelwidgetViewer = {
         this.getCurrentRange()
     },
     template : `
-        <div v-if="range" class="card shadow-none border">
+        <div v-if="ranges" class="card shadow-none border">
             <div class="card-body text-center">
                 <div class="row mb-3">
                     <div class="col-12 col-xl">
@@ -34,16 +34,22 @@ const NextlevelwidgetViewer = {
                 </div>
                 <div class="row mb-3">
                     <div class="col-12 col-xl text-start">
+                        <div class="avatar avatar-xxl">
+                            <img :src="ranges.current.image" alt="range" title="range" class="avatar avatar-xxl"/>
+                        </div>
                         <div class="text-xs text-dark">Rango actual</div>
-                        <div class="lead text-secondary">Membresía 20 USDT</div>
+                        <div class="lead text-secondary">{{ranges.current.title}}</div>
                     </div>
                     <div class="col-12 col-xl-auto text-end">
+                        <div class="avatar avatar-xxl">
+                            <img :src="ranges.next.image" alt="range" title="range" class="avatar avatar-xxl"/>
+                        </div>
                         <div class="text-xs text-dark">Próximo rango</div>
-                        <div class="lead text-secondary">Membresía 20 USDT</div>
+                        <div class="lead fw-sembold text-dark text-secondary">{{ranges.next.title}}</div>
                     </div>
                 </div>
-                <div class="progress" style="height:1rem" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-                    <div style="height:1rem" class="progress-bar bg-success" style="width: 25%">25%</div>
+                <div class="progress" style="height:1rem" role="progressbar" aria-label="Success example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <div style="height:1rem" class="progress-bar bg-success" style="width: 0%">0%</div>
                 </div>
             </div>
         </div>

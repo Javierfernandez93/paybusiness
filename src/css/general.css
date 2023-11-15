@@ -151,3 +151,7 @@ fieldset:disabled .btn {
   width: 6rem !important;
   height: 6rem !important;
 }
+.avatar-xxl {
+  width: 9rem !important;
+  height: 9rem !important;
+}
