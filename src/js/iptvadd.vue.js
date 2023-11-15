@@ -1,4 +1,4 @@
-import { IptvaddViewer } from './iptvaddViewer.vue.js?v=2.5.0'
+import { IptvaddViewer } from './iptvaddViewer.vue.js?v=2.5.1'
 
 Vue.createApp({
     components : { 

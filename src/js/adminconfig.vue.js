@@ -1,4 +1,4 @@
-import { AdminconfigViewer } from '../../src/js/adminconfigViewer.vue.js?v=2.5.0'
+import { AdminconfigViewer } from '../../src/js/adminconfigViewer.vue.js?v=2.5.1'
 
 Vue.createApp({
     components : { 
