@@ -158,3 +158,10 @@ fieldset:disabled .btn {
 .card-height-special {
   height: 280px;
 }
+
+@media (max-width: 680px) {
+  .avatar-xxl {
+    width: 3rem !important;
+    height: 3rem !important;
+  }
+}
