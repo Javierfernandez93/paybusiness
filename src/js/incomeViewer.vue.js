@@ -11,7 +11,7 @@ const IncomeViewer = {
     },
     methods: {
         getIncome() {
-            this.User.getIncome({},(response)=>{
+            this.User.getIncome({catalog_commission_id:[7]},(response)=>{
                 if(response.s == 1)
                 {
                     this.initChart(response.income)

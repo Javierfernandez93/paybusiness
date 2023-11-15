@@ -20,7 +20,6 @@ class MembershipPerUser extends Orm {
 		
 		$catalog_membership_id = (new CatalogMembership)->getCatalogMembershipId($data['package_id']);
 		
-		
 		if(!isset($catalog_membership_id))
 		{
 			return false;
@@ -32,7 +31,7 @@ class MembershipPerUser extends Orm {
 		{
 			return false;
 		}
-		d($catalog_membership_id);
+		
 		$MembershipPerUser->user_login_id = $data['user_login_id'];
 		$MembershipPerUser->catalog_membership_id = $catalog_membership_id;
 		$MembershipPerUser->create_date = time();

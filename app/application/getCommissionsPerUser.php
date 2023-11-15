@@ -8,6 +8,8 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {   
+    $data['active'] = $UserLogin->hasProductPermission('pay_business');    
+    
     if($commissions = (new Unlimited\CommissionPerUser)->getAll($UserLogin->company_id))
     {
         $data['commissions'] = $commissions;

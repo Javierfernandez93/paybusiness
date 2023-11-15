@@ -446,7 +446,7 @@ class BuyPerUser extends Orm {
           'items' => $data['items'],
           'user_login_id' => $BuyPerUser->user_login_id,
         ]);
-
+        
         self::addMembership([
           'items' => $data['items'],
           'user_login_id' => $BuyPerUser->user_login_id,

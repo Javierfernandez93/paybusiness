@@ -10,9 +10,17 @@ if($UserLogin->logged === true)
 {
     $CommissionPerUser = new Unlimited\CommissionPerUser;
     
-    if($data['months'] = $CommissionPerUser->_getProfitsByMonths($UserLogin->company_id,""))
+    $filter = '';
+
+    if(isset($data['catalog_commission_id']))
     {
-        if($income = $CommissionPerUser->getAllProfitsByMonths($data['months'],$UserLogin->company_id))
+        $data['catalog_commission_id'] = implode(",",$data['catalog_commission_id']);
+        $filter = "AND commission_per_user.catalog_commission_id IN ({$data['catalog_commission_id'] })";
+    }
+
+    if($data['months'] = $CommissionPerUser->_getProfitsByMonths($UserLogin->company_id,$filter))
+    {
+        if($income = $CommissionPerUser->getAllProfitsByMonths($data['months'],$UserLogin->company_id,$filter))
         {
             $data['income'] = $income;
             $data["s"] = 1;

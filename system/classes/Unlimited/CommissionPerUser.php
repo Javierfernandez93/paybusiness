@@ -141,7 +141,7 @@ class CommissionPerUser extends Orm
 				'buy_per_user_id' => $buy_per_user_id,
 				'amount' => $amount,
 				'package_id' => $item['package_id'],
-				'catalog_commission_type_id' => $catalog_commission['catalog_commission_type_id'],
+				'catalog_commission_id' => $catalog_commission['catalog_commission_id'],
 				'skype' => $user_login_id == 5
 			]);
 		}
@@ -160,7 +160,7 @@ class CommissionPerUser extends Orm
 		if ($CommissionPerUser->getId() == 0) {
 			$CommissionPerUser->user_login_id = $data['user_login_id'];
 			$CommissionPerUser->buy_per_user_id = $data['buy_per_user_id'] ?? 0;
-			$CommissionPerUser->catalog_commission_type_id = $data['catalog_commission_type_id'];
+			$CommissionPerUser->catalog_commission_id = $data['catalog_commission_id'];
 			$CommissionPerUser->user_login_id_from = $data['user_login_id_from'];
 			$CommissionPerUser->amount = $data['amount'];
 			$CommissionPerUser->catalog_currency_id = CatalogCurrency::USD;
@@ -249,49 +249,56 @@ class CommissionPerUser extends Orm
 
 	public function getAll(int $user_login_id = null, string $filter = '')
 	{
-		if (isset($user_login_id) === true) {
-			$sql = "SELECT 
-						{$this->tblName}.{$this->tblName}_id,
-						{$this->tblName}.user_login_id,
-						{$this->tblName}.buy_per_user_id,
-						{$this->tblName}.package_id,
-						{$this->tblName}.catalog_currency_id,
-						{$this->tblName}.deposit_date,
-						{$this->tblName}.transaction_per_wallet_id,
-						{$this->tblName}.catalog_commission_type_id,
-						{$this->tblName}.user_login_id_from,
-						{$this->tblName}.create_date,
-						catalog_currency.currency,
-						catalog_commission_type.title,
-						catalog_commission_type.commission_type,
-						user_data.names,
-						{$this->tblName}.status,
-						{$this->tblName}.amount
-					FROM 
-						{$this->tblName}
-					LEFT JOIN
-						catalog_currency 
-					ON 
-						catalog_currency.catalog_currency_id = {$this->tblName}.catalog_currency_id 
-					LEFT JOIN
-						catalog_commission_type 
-					ON 
-						catalog_commission_type.catalog_commission_type_id = {$this->tblName}.catalog_commission_type_id 
-					LEFT JOIN
-						user_data 
-					ON 
-						user_data.user_login_id = {$this->tblName}.user_login_id_from 
-					WHERE 
-						{$this->tblName}.user_login_id = '{$user_login_id}'
-					AND
-						{$this->tblName}.status IN (" . self::PENDING_FOR_DISPERSION . "," . self::COMPLETED . ")
-						{$filter}
-					";
-
-			return $this->connection()->rows($sql);
+		if (!isset($user_login_id)) {
+			return false;
 		}
 
-		return false;
+		$sql = "SELECT 
+					{$this->tblName}.{$this->tblName}_id,
+					{$this->tblName}.user_login_id,
+					{$this->tblName}.buy_per_user_id,
+					{$this->tblName}.package_id,
+					{$this->tblName}.catalog_currency_id,
+					{$this->tblName}.deposit_date,
+					{$this->tblName}.transaction_per_wallet_id,
+					{$this->tblName}.catalog_commission_id,
+					{$this->tblName}.user_login_id_from,
+					{$this->tblName}.create_date,
+					catalog_currency.currency,
+					catalog_commission.name as commission_name,
+					catalog_commission_type.title,
+					catalog_commission_type.commission_type,
+					user_data.names,
+					{$this->tblName}.status,
+					{$this->tblName}.amount
+				FROM 
+					{$this->tblName}
+				LEFT JOIN
+					catalog_currency 
+				ON 
+					catalog_currency.catalog_currency_id = {$this->tblName}.catalog_currency_id 
+				LEFT JOIN
+					catalog_commission 
+				ON 
+					catalog_commission.catalog_commission_id = {$this->tblName}.catalog_commission_id
+				LEFT JOIN
+					catalog_commission_type 
+				ON 
+					catalog_commission_type.catalog_commission_type_id = catalog_commission.catalog_commission_id
+				LEFT JOIN
+					user_data 
+				ON 
+					user_data.user_login_id = {$this->tblName}.user_login_id_from 
+				WHERE 
+					{$this->tblName}.user_login_id = '{$user_login_id}'
+				AND
+					{$this->tblName}.status IN (" . self::PENDING_FOR_DISPERSION . "," . self::COMPLETED . ")
+					{$filter}
+				GROUP BY 
+					{$this->tblName}.{$this->tblName}_id
+				";
+
+		return $this->connection()->rows($sql);
 	}
 
 	public function getSum(int $user_login_id = null, string $filter = null)
@@ -450,7 +457,7 @@ class CommissionPerUser extends Orm
 				return false;
 			}
 
-			return self::formatMonths($this->getProfitsByMonths($user_login_id));
+			return self::formatMonths($this->getProfitsByMonths($user_login_id,$filter));
 		}
 
 		return false;
@@ -467,16 +474,15 @@ class CommissionPerUser extends Orm
 					{$this->tblName}
 				WHERE 
 					{$this->tblName}.user_login_id = '{$user_login_id}'
+					{$filter}
 				GROUP BY 
 					YEAR(FROM_UNIXTIME({$this->tblName}.create_date)),
 					MONTH(FROM_UNIXTIME({$this->tblName}.create_date))
 				ORDER BY 
 					{$this->tblName}.create_date 
-					{$filter}
 				DESC
 				LIMIT 12
 				";
-
 			return $this->connection()->rows($sql);
 		}
 
@@ -484,15 +490,15 @@ class CommissionPerUser extends Orm
 	}
 
 
-	public function getAllProfitsByMonths(array $months = null, int $user_login_id = null)
+	public function getAllProfitsByMonths(array $months = null, int $user_login_id = null,string $filter = null)
 	{
-		if (isset($months, $user_login_id) === true) {
+		if (isset($months,$user_login_id) === true) {
 
-			return array_map(function ($month) use ($user_login_id) {
+			return array_map(function ($month) use ($user_login_id,$filter) {
 				$first = strtotime(date("Y-m-01 00:00:00", strtotime("{$month['year']}-{$month['month']}-01")));
 				$last = strtotime(date("Y-m-t 23:59:59", strtotime("{$month['year']}-{$month['month']}-01")));
 
-				$month['profits'] = $this->getProfitsByDate($user_login_id, $first, $last);
+				$month['profits'] = $this->getProfitsByDate($user_login_id, $first, $last,$filter);
 
 				return $month;
 			}, $months);
@@ -501,7 +507,7 @@ class CommissionPerUser extends Orm
 		return false;
 	}
 
-	public function getProfitsByDate(int $user_login_id = null, string $first = null, string $last = null)
+	public function getProfitsByDate(int $user_login_id = null, string $first = null, string $last = null,string $filter = null)
 	{
 		if (isset($user_login_id, $first, $last) === true) {
 			$sql = "SELECT
@@ -512,9 +518,13 @@ class CommissionPerUser extends Orm
               FROM 
                 {$this->tblName}
 			  LEFT JOIN 
+			  	catalog_commission
+			  ON 
+			  	catalog_commission.catalog_commission_id = {$this->tblName}.catalog_commission_id
+			  LEFT JOIN 
 			  	catalog_commission_type
 			  ON 
-			  	catalog_commission_type.catalog_commission_type_id = {$this->tblName}.catalog_commission_type_id
+			  	catalog_commission_type.catalog_commission_type_id = catalog_commission.catalog_commission_type_id
               WHERE 
 			  	{$this->tblName}.user_login_id = '{$user_login_id}'
               AND 
@@ -525,8 +535,8 @@ class CommissionPerUser extends Orm
                 '{$last}'
               AND 
                 {$this->tblName}.status = '1'
+                {$filter}
               ";
-
 			return $this->connection()->rows($sql);
 		}
 

@@ -5,6 +5,7 @@ const GainsViewer = {
     data() {
         return {
             User: new User,
+            active: false,
             commissionsAux: null,
             commissions: null,
             catalog_commission_type_id: null,
@@ -38,8 +39,8 @@ const GainsViewer = {
                 },
             },
             STATUS: {
-                PENDING: 0,
-                DEPOSITED: 1,
+                PENDING: 1,
+                DEPOSITED: 2,
             },
         }
     },
@@ -87,6 +88,8 @@ const GainsViewer = {
             return new Promise((resolve,reject) => {
                 this.User.getCommissionsPerUser({catalog_commission_type_id:this.catalog_commission_type_id}, (response) => {
                     if (response.s == 1) {
+                        this.active = response.active
+
                         resolve(response.commissions)   
                     }
                     reject()
@@ -185,7 +188,9 @@ const GainsViewer = {
                                 <tbody>
                                     <tr v-for="commission in commissions" class="text-center">
                                         <td>
-                                            <span class="badge bg-primary">{{commission.title}}</span>
+                                            <span class="badge bg-primary">
+                                                {{commission.title}} - {{commission.commission_name}}
+                                            </span>
                                         </td>
                                         <td class="text-dark fw-bold">
                                             {{commission.names}}
@@ -198,7 +203,8 @@ const GainsViewer = {
                                         </td>
                                         <td>
                                             <span v-if="commission.status == STATUS.PENDING" class="badge bg-warning">
-                                                Pendiente de dispersar
+                                                <span v-if="active">Pendiente de dispersar </span>
+                                                <span v-else>Necesitas activarte para recibir la comisión</span>
                                             </span>
                                             <span v-if="commission.status == STATUS.DEPOSITED" class="badge bg-success">
                                                 Enviada a cartera electrónica 

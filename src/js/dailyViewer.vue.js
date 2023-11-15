@@ -12,7 +12,7 @@ const DailyViewer = {
     },
     methods: {
         getIncome() {
-            this.User.getIncome({},(response)=>{
+            this.User.getIncome({catalog_commission_id:[1,2,3,4,5,6]},(response)=>{
                 if(response.s == 1)
                 {
                     this.initChart(response.income)
