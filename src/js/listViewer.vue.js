@@ -23,7 +23,7 @@ const ListViewer = {
             })
         },
         getNetwork() {
-            this.User.getNetwork({limit:12},(response)=>{
+            this.User.getNetwork({limit:1},(response)=>{
                 if(response.s == 1)
                 {
                     this.network = response.network
