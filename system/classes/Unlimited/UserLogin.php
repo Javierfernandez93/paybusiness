@@ -952,7 +952,7 @@ class UserLogin extends Orm {
     return $members;
   }
 
-  public function getNetwork(int $limit = 2) : array|bool
+  public function getNetwork(int $limit = 3) : array|bool
   {
     if($this->logged === true)
     {

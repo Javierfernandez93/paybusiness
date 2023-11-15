@@ -100,7 +100,7 @@
                         <div class="col-12 col-md-4 col-xl-4 my-5 my-xl-0">
                             <div class="row d-flex justify-content-center">
                                 <div class="col-4 col-md-8">
-                                    <img src="../../src/img/logo-white.svg" class="img-fluid">
+                                    <img src="../../src/img/logo-white.svg?t=1" class="img-fluid">
                                 </div>
                             </div>
                         </div>

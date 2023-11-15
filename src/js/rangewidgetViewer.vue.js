@@ -31,7 +31,7 @@ const RangewidgetViewer = {
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col">
-                        <img :src="profile.range.image" :alt="profile.range.title" :title="profile.range.title" class="avatar avatar-special"/>
+                        <img :src="profile.range.image" :alt="profile.range.title" :title="profile.range.title" class="avatar avatar-xxl"/>
                     </div>
                     <div class="col-auto">
                         Contador de Miembros
@@ -47,7 +47,7 @@ const RangewidgetViewer = {
                         <div class="row align-items-center">
                             <div class="col-auto">
                                 <div class="avatar avatar">
-                                    <img :src="profile.image" class="avatar rounded-circle border border-primary border-2" title="user" alt="user"/>
+                                    <img :src="profile.image" class="avatar rounded-circle shadow" title="user" alt="user"/>
                                 </div>
                             </div>
                             <div class="col">
