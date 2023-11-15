@@ -21,15 +21,15 @@ if($UserLogin->logged === true)
         'image' => $UserLogin->_data['user_account']['image'] ? $UserLogin->_data['user_account']['image'] : HCStudio\Connection::getMainPath()."/src/img/user.png",
     ];
 
+    $data['members'] = 0;
     if($members = $UserLogin->getNetworkCount())
     {
         $data['members'] = $members;
-        $data['r'] = 'DATA_OK';
-	    $data['s'] = 1;
-    } else {
-        $data['r'] = 'NOT_MEMBERS';
-	    $data['s'] = 0;
     }
+
+
+    $data['r'] = 'DATA_OK';
+    $data['s'] = 1;
 } else {
 	$data['r'] = 'NOT_SESSION';
 	$data['s'] = 0;
