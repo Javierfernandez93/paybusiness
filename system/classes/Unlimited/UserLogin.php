@@ -1440,6 +1440,16 @@ class UserLogin extends Orm {
     return $this->verified_mail;
   }
 
+  public function isKyCVerified()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    return (new UserKyc)->findField("user_login_id = ? AND status = ?",[$this->company_id,1],"user_login_id");
+  }
+
   public function getFrontalUsers()
   {
     $left = $this->getNode($this->company_id,UserReferral::LEFT);
