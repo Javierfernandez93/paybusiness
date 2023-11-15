@@ -5,6 +5,7 @@ const UserflyerViewer = {
     data() {
         return {
             User: new User,
+            ranges: null,
             profile: null,
             mask : null
         }
@@ -12,6 +13,7 @@ const UserflyerViewer = {
     methods: {
         generateFlyer(mask) {
             this.mask = mask
+
             $(this.$refs.modal).modal('show')
             // this.User.generateFlyer({},(response)=>{
             //     if(response.s == 1)
@@ -28,6 +30,11 @@ const UserflyerViewer = {
                 }
             })
         },
+        getCurrentRange() {
+            this.User.getCurrentRange({},(response)=>{
+                this.ranges = response.ranges
+            })
+        },
         downloadImage() {
             html2canvas($(this.$refs.flyer)[0]).then((canvas) => {
                 var myImage = canvas.toDataURL("image/png");
@@ -39,6 +46,7 @@ const UserflyerViewer = {
     },
     mounted() 
     {   
+        this.getCurrentRange()
         this.getProfileShort()
     },
     template : `
@@ -65,17 +73,32 @@ const UserflyerViewer = {
             </div>
         </div>
 
-        <div class="card animation-fall-down" style="--delay: 800ms">
+        <div class="alert alert-secondary text-white animation-fall-down mb-3" style="--delay: 300ms">
+            <div>
+                <strong>Importante</strong>
+            </div>
+            Para generarlo da clic en generar flyer, ten en cuenta que debes de subir una imagen de perfil si no lo has hecho hazlo <a href="../../apps/backoffice/profile">Aquí</a>
+        </div>
+        <div class="card animation-fall-down mb-3" style="--delay: 800ms">
             <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../../assets/img/ivancik.jpg')">
                 <span class="mask bg-primary"></span>
                 <div class="card-body position-relative z-index-1 h-100 p-3">
-                    <h4 class="text-white font-weight-bolder mb-3">¿Ya tienes tu Flyer?</h4>
-                    <h6 class="text-white font-weight-bolder mb-3">¡Ya puedes generar tus flyers!</h6>
-                    <p class="text-white mb-3">
-                        Para generarlo da clic en generar flyer, ten en cuenta que debes de subir una imagen de perfil si no lo has hecho hazlo <a href="../../apps/backoffice/profile">Aquí</a>
-                    </p>
+                    <h4 class="text-white font-weight-bolder mb-3">Flyer de Bienvenida</h4>
                     <button @click="generateFlyer('../../src/img/mask.png')" class="btn btn-round btn-outline-white mb-3">
                         Descargar Flyer de bienvenida
+                        <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div v-if="ranges" class="card animation-fall-down" style="--delay: 800ms">
+            <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../../assets/img/ivancik.jpg')">
+                <span class="mask bg-primary"></span>
+                <div class="card-body position-relative z-index-1 h-100 p-3">
+                    <h4 class="text-white font-weight-bolder mb-3">Flyer de Rango {{ranges.current.title}}</h4>
+                   
+                    <button @click="generateFlyer(ranges.current.mask)" class="btn btn-round btn-outline-white mb-3">
+                        Descargar Flyer de {{ranges.current.title}}
                         <i class="fas fa-arrow-right text-sm ms-1" aria-hidden="true"></i>
                     </button>
                 </div>

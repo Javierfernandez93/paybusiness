@@ -85,6 +85,7 @@ class CatalogRangePerUser extends Orm {
             catalog_range.image,
             catalog_range.volumen,
             catalog_range.is_percentage,
+            catalog_range.mask,
             catalog_range.amount,
             catalog_range.start_volumen,
             catalog_range.end_volumen,

@@ -65,6 +65,7 @@ class CatalogRange extends Orm {
                         {$this->tblName}.image,
                         {$this->tblName}.volumen,
                         {$this->tblName}.is_percentage,
+						{$this->tblName}.mask,
 						{$this->tblName}.amount,
                         {$this->tblName}.start_volumen,
                         {$this->tblName}.end_volumen
