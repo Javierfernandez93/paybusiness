@@ -7,16 +7,16 @@
 
     <teamselector-viewer class="animation-fall-down" style="--delay:450ms"></teamselector-viewer>
 
-    <div class="row mb-3 justify-content-center align-items-center">
+    <div class="row mb-0 mb-xl-3 justify-content-center align-items-center">
         <div class="col-12 col-xl mb-3 mb-xl-0">
             <rangewidget-viewer class="animation-fall-down" style="--delay:500ms"></rangewidget-viewer>
         </div>
         <div class="col-12 col-xl mb-3 mb-md-0">
             <div class="row justify-content-center align-items-center">
-                <div class="col-12 col-md mb-3 mb-md-0">
+                <div class="col-12 col-xl-6 mb-3 mb-md-0">
                     <landing-viewer class="animation-fall-down" style="--delay:650ms"></landing-viewer>
                 </div>
-                <div class="col-12 col-md mb-3 mb-md-0">
+                <div class="col-12 col-xl-6 mb-3 mb-md-0">
                     <membershipwidget-viewer class="animation-fall-down" style="--delay:700ms"></membershipwidget-viewer>
                 </div>
             </div>
