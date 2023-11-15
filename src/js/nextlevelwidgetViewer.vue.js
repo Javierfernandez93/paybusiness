@@ -33,14 +33,14 @@ const NextlevelwidgetViewer = {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-md-6 text-start">
+                    <div class="col-6 text-start">
                         <div class="avatar avatar-xxl">
                             <img :src="ranges.current.image" alt="range" title="range" class="avatar avatar-xxl"/>
                         </div>
                         <div class="text-xs text-secondary">Rango actual</div>
                         <div class="lead fw-semibold text-dark sans">{{ranges.current.title}}</div>
                     </div>
-                    <div class="col-12 col-md-6 text-end">
+                    <div class="col-6 text-end">
                         <div class="avatar avatar-xxl">
                             <img :src="ranges.next.image" alt="range" title="range" class="avatar avatar-xxl"/>
                         </div>
