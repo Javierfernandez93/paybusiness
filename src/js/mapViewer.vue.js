@@ -63,25 +63,25 @@ const MapViewer = {
         markersSelectable: true,
         labels: {
           markers: {
-            render: function (marker) {
+            render(marker) {
               return marker.name;
             },
           },
         },
-        onRegionSelected: function (index, isSelected, selectedRegions) {
+        onRegionSelected(index, isSelected, selectedRegions) {
           console.log(index, isSelected, selectedRegions);
         },
-        onRegionTooltipShow: function (event, tooltip, index) {
+        onRegionTooltipShow(event, tooltip, index) {
           let usersTotal = _this.getUsersByInternet(index);
           console.log(tooltip, index);
           tooltip
             .css({ backgroundColor: "red" })
-            .text(tooltip.text() + ` ${usersTotal} miembros`);
+            .text(tooltip.text() + ` ${usersTotal} usuarios`);
         },
-        onMarkerSelected: function (code, isSelected, selectedMarkers) {
+        onMarkerSelected(code, isSelected, selectedMarkers) {
           console.log(code, isSelected, selectedMarkers);
         },
-        onMarkerTooltipShow: function (event, tooltip, code) {
+        onMarkerTooltipShow(event, tooltip, code) {
           tooltip.text(tooltip.text() + " (Hello World (marker))");
         },
       });

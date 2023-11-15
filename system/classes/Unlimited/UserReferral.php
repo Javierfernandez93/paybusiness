@@ -441,7 +441,7 @@ class UserReferral extends Orm {
               LEFT JOIN 
                 user_account 
               ON 
-              user_account.user_login_id = {$this->tblName}.user_login_id
+                user_account.user_login_id = {$this->tblName}.user_login_id
               WHERE 
                 {$this->tblName}.sponsor_id = '{$sponsor_id}' 
               AND 

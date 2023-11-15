@@ -1817,16 +1817,31 @@ class UserLogin extends Orm {
       return false;
     }
 
-    $members = (new UserReferral)->getLastMembersCountries($this->company_id);
+    $_members = (new UserReferral)->getNetwork(-1,$this->company_id);
+    $members = [];
+
+    foreach($_members as $level)
+    {
+      foreach($level as $user_login_id)
+      {
+        $members[] = $user_login_id;
+      }
+    }
 
     if(!$members) 
     {
       return false;
     }
 
-    $members = array_map(function($member){
-      $member['active'] = $this->_hasProductPermission(Product::PAY_BUSINESS,$member['user_login_id']);
-      return $member;
+    $UserAddress = new UserAddress;
+    
+    $members = array_map(function($user_login_id) use($UserAddress){
+      
+      return [
+        'country_id' => $UserAddress->getCountryId($user_login_id),
+        'active' => $this->_hasProductPermission(Product::PAY_BUSINESS,$user_login_id),
+        'user_login_id' => $user_login_id
+      ];
     },$members);
 
     $_members = [];

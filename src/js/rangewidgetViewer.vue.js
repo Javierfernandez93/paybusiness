@@ -36,7 +36,7 @@ const RangewidgetViewer = {
                         <img :src="profile.range.image" :alt="profile.range.title" :title="profile.range.title" class="avatar avatar-xxl"/>
                     </div>
                     <div class="col-auto text-end">
-                        <div class="text-secondary text-xs">Contador de miembros</div>
+                        <div class="text-secondary text-xs">Contador de usuarios</div>
                         <div class="sans">
                             {{members.numberFormat(0)}}
                         </div>
@@ -88,7 +88,7 @@ const RangewidgetViewer = {
                         Rango Actual
                     </div>
                     <div class="col-auto">
-                        Contador de Miembros
+                        Contador de usuarios
                     </div>
                     <div class="col-auto">
                         <i class="bi bi-check-circle-fill text-success"></i>

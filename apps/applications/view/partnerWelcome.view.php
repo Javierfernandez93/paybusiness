@@ -5,7 +5,7 @@
 </h3>
 
 <h3>
-    Ya le hemos dado la bienvenida. Esperamos continues afiliando miembros a tu equipo
+    Ya le hemos dado la bienvenida. Esperamos continues afiliando usuarios a tu equipo
 </h3>
 
 <h3>
