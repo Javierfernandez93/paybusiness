@@ -611,6 +611,15 @@ class UserLogin extends Orm {
     }
   }
 
+  public function getRange() {
+    if(!$this->getId())
+    {
+      return false;
+    }
+    
+    return (new CatalogRangePerUser)->getLastRange($this->company_id);
+  }
+
   /* profile fun */  
   public function getProfile(int $user_login_id = null)
   {
@@ -1725,6 +1734,19 @@ class UserLogin extends Orm {
   }
   
   
+  public function insertFirstRange()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    return CatalogRangePerUser::insertFirstRange([
+      'catalog_range_id' => CatalogRange::FIRST_RANGE_ID,
+      'user_login_id' => $this->company_id,
+    ]);
+  }
+
   public function sendDni(string $dni = null)
   {
     if(!$this->getId())

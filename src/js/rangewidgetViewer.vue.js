@@ -29,9 +29,9 @@ const RangewidgetViewer = {
     template : `
         <div v-if="profile" class="card shadow-none border">
             <div class="card-header">
-                <div class="row">
+                <div class="row align-items-center">
                     <div class="col">
-                        Rango Actual
+                        <img :src="profile.range.image" :alt="profile.range.title" :title="profile.range.title" class="avatar avatar-md"/>
                     </div>
                     <div class="col-auto">
                         Contador de Miembros

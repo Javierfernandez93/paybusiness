@@ -3,10 +3,12 @@
 namespace Unlimited;
 
 use HCStudio\Orm;
-use HCStudio\Util;
 
 class CatalogRange extends Orm {
 	protected $tblName = 'catalog_range';
+	
+	const FIRST_RANGE_ID = 1;
+
 	public function __construct() {
 		parent::__construct();
 	}

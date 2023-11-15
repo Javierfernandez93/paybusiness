@@ -147,3 +147,7 @@ fieldset:disabled .btn {
 .mb-6 {
   margin-bottom: 122px !important;
 }
+.avatar-md {
+  width: 6rem;
+  height: 6rem;
+}
