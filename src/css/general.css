@@ -152,6 +152,9 @@ fieldset:disabled .btn {
   height: 6rem !important;
 }
 .avatar-xxl {
-  width: 9rem !important;
-  height: 9rem !important;
+  width: 5rem !important;
+  height: 5rem !important;
+}
+.card-height-special {
+  height: 250px;
 }

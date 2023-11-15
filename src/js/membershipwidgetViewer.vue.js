@@ -23,30 +23,32 @@ const MembershipwidgetViewer = {
         this.getProductPermissions()
     },
     template : `
-        <div v-if="productPermissions" class="card shadow-none border">
-            <div class="card-body text-center text-center">
-                <div class="lead fw-semibold text-dark mb-3">
-                    Membresía
-                </div>
-                <div class="mb-2">
-                    <span v-if="productPermissions.pay_business" class="badge bg-success text-uppercase">
+        <div v-if="productPermissions" class="card shadow-none card-height-special border">
+            <div class="d-flex align-items-center vh-100">
+                <div class="card-body text-center text-center">
+                    <div class="lead fw-semibold text-dark mb-3">
+                        Membresía
+                    </div>
+                    <div class="mb-2">
+                        <span v-if="productPermissions.pay_business" class="badge bg-success text-uppercase">
+                                <i class="bi bi-check"></i>
+                            Pay Business
+                        </span>
+                        <span v-else class="badge bg-danger text-uppercase">
+                            <i class="bi bi-x"></i>
+                            Pay Business
+                        </span>
+                    </div>
+                    <div>
+                        <span v-if="productPermissions.academy" class="badge bg-success text-uppercase">
                             <i class="bi bi-check"></i>
-                        Pay Business
-                    </span>
-                    <span v-else class="badge bg-danger text-uppercase">
-                        <i class="bi bi-x"></i>
-                        Pay Business
-                    </span>
-                </div>
-                <div>
-                    <span v-if="productPermissions.academy" class="badge bg-success text-uppercase">
-                        <i class="bi bi-check"></i>
-                        Pay Academy
-                    </span>
-                    <span v-else class="badge bg-danger text-uppercase">
-                        <i class="bi bi-x"></i>
-                        Pay Academy
-                    </span>
+                            Pay Academy
+                        </span>
+                        <span v-else class="badge bg-danger text-uppercase">
+                            <i class="bi bi-x"></i>
+                            Pay Academy
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

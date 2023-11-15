@@ -35,7 +35,7 @@ const PaybusinesswidgetViewer = {
         this.getCurrentMembership()
     },
     template : `
-        <div v-if="membership" class="card shadow-none border">
+        <div v-if="membership" class="card shadow-none card-height-special border">
             <div class="card-body text-center">
                 <div class="row mb-3">
                     <div class="col-12 col-xl">
@@ -48,7 +48,7 @@ const PaybusinesswidgetViewer = {
                 </div>
             </div>
         </div>
-        <div v-else-if="membership == false" class="card shadow-none overflow-hidden border">
+        <div v-else-if="membership == false" class="card shadow-none card-height-special overflow-hidden border">
             <div class="mask bg-dark d-flex d-none justify-content-center align-items-center text-center text-white z-index-1">
                 <div class="row">
                     <div class="col-12">

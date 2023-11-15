@@ -29,7 +29,7 @@ const RangewidgetViewer = {
         this.getMemberCounter()
     },
     template : `
-        <div v-if="profile" class="card shadow-none border">
+        <div v-if="profile" class="card shadow-none border card-height-special">
             <div class="card-header">
                 <div class="row align-items-center">
                     <div class="col">

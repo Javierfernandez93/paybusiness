@@ -25,14 +25,14 @@ const NextlevelwidgetViewer = {
         this.getCurrentRange()
     },
     template : `
-        <div v-if="ranges" class="card shadow-none border">
+        <div v-if="ranges" class="card shadow-none card-height-special border">
             <div class="card-body text-center">
-                <div class="row mb-3">
+                <div class="row">
                     <div class="col-12 col-xl">
-                        <h2 class="text-dark">Next level</h2>
+                        <h3 class="text-dark">Next level</h3>
                     </div>
                 </div>
-                <div class="row mb-3">
+                <div class="row">
                     <div class="col-12 col-xl text-start">
                         <div class="avatar avatar-xxl">
                             <img :src="ranges.current.image" alt="range" title="range" class="avatar avatar-xxl"/>

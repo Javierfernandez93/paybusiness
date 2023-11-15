@@ -36,33 +36,36 @@ const LandingViewer = {
         this.getReferralLanding()
     },
     template : `
-        <div v-if="landing" class="card shadow-none border">
-            <div class="card-body text-center">
-                <div class="row align-items-center">
-                    <div class="col-12 col-md">
-                        <div class="text-dark fw-semibold">
-                            Enlace De Referidos
-                        </div>
-                        <div class="text-xs text-secondary">
-                            {{landing.getFullLanding()}}
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center align-items-center">
-                    <div class="col-12 col-md-6">
-                        <div class="d-flex">
-                            <button @click="copyToClipBoard(landing.getFullLanding())" ref="landing" class="btn mb-0 text-success shadow-none">
-                                <div><i class="bi fs-2 bi-copy"></i></div>
-                                Copiar
-                            </button>
+        <div v-if="landing" class="card shadow-none d-flex  card-height-special border">
+            <div class="d-flex align-items-center vh-100">
+                <div class="card-body text-center w-100">
+                    
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md">
+                            <div class="text-dark fw-semibold">
+                                Enlace De Referidos
+                            </div>
+                            <div class="text-xs text-secondary">
+                                {{landing.getFullLanding()}}
+                            </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <div class="d-flex">
-                            <button @click="sendByWhatsapp(landing.getFullLanding())" class="btn mb-0 text-success shadow-none">
-                                <div><i class="bi fs-2 bi-send-fill"></i></div>
-                                Envíar
-                            </button>
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="d-flex">
+                                <button @click="copyToClipBoard(landing.getFullLanding())" ref="landing" class="btn mb-0 text-success shadow-none">
+                                    <div><i class="bi fs-2 bi-copy"></i></div>
+                                    Copiar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="d-flex">
+                                <button @click="sendByWhatsapp(landing.getFullLanding())" class="btn mb-0 text-success shadow-none">
+                                    <div><i class="bi fs-2 bi-send-fill"></i></div>
+                                    Envíar
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
