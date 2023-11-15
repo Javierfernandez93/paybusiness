@@ -70,7 +70,7 @@ const TeamViewer = {
                                     <a class="cursor-pointer">
                                         <span class="sans text-xs shadow position-relative rounded-3 p-3 mx-3 fw-semibold">
                                             <div class="avatar">
-                                                <img class="avatar avatar-md border border-primary rounded-circle" src="${user.image}"/>
+                                                <img class="avatar avatar-md shadow rounded-circle" src="${user.image}"/>
                                             </div>
                                             
                                             <div data-landing="${user.landing}" class="text-uppercase fw-semibold sans mt-2">
