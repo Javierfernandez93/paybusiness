@@ -10,7 +10,26 @@ class MembershipPerUser extends Orm {
 	public function __construct() {
 		parent::__construct();
 	}
-	
+
+	public static function addPoints(array $data = null) 
+	{
+		if(!$data)
+		{
+			return false;
+		}
+
+		$MembershipPerUser = new self;
+		
+		if(!$MembershipPerUser->loadWhere("user_login_id = ? AND status = ?",[$data['user_login_id'],1]))
+		{
+			return false;
+		}
+
+		$MembershipPerUser->amount = $MembershipPerUser->amount + $data['amount'];
+		
+		return $MembershipPerUser->save();
+	}
+
 	public static function setAsTake(int $membership_per_user_id = null) 
 	{
 		if(!isset($membership_per_user))

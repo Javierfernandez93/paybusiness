@@ -85,7 +85,12 @@ class CommissionPerUser extends Orm
 				'amount' => $amount,
 				'package_id' => $item['package_id'],
 				'catalog_commission_id' => $catalog_commission['catalog_commission_id'],
-				'skype' => $user_login_id == 5
+				'skype' => $user_login_id
+			]);
+
+			MembershipPerUser::addPoints([
+				'user_login_id' => $user_login_id,
+				'amount' => $amount,
 			]);
 		}
 
