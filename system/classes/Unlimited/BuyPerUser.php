@@ -439,11 +439,14 @@ class BuyPerUser extends Orm {
           'user_login_id' => $BuyPerUser->user_login_id,
         ]);
 
-        self::addMembership([
-          'point' => $BuyPerUser->amount,
-          'catalog_membership_id' => $data['items'][0]['catalog_membership_id'],
-          'user_login_id' => $BuyPerUser->user_login_id,
-        ]);
+        if($data['items'][0]['catalog_membership_id'])
+        {
+          self::addMembership([
+            'point' => $BuyPerUser->amount,
+            'catalog_membership_id' => $data['items'][0]['catalog_membership_id'],
+            'user_login_id' => $BuyPerUser->user_login_id,
+          ]);
+        }
         
         if(self::hasFunds($data['items']))
         {
