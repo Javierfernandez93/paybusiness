@@ -19,6 +19,7 @@
 namespace HCStudio;
 
 use Exception;
+use Google\Protobuf\Field;
 
 #! Simple Object Relational Mapper
 abstract class Orm

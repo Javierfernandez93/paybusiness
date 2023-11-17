@@ -11,6 +11,52 @@ class MembershipPerUser extends Orm {
 		parent::__construct();
 	}
 	
+	public static function setAsTake(int $membership_per_user_id = null) 
+	{
+		if(!isset($membership_per_user))
+		{
+			return false;
+		}
+
+		$MembershipPerUser = new self;
+		
+		if(!$MembershipPerUser->loadWhere("membership_per_user_id = ?",$membership_per_user_id))
+		{
+			return false;
+		}
+
+		$MembershipPerUser->take = 1;
+		
+		return $MembershipPerUser->save();
+	}
+
+	public static function getNetworkPoints(array $data = null) 
+	{
+		if(!isset($data) && !is_array($data))
+		{
+			return [];
+		}
+
+		$UserData = new UserData;
+		$MembershipPerUser = new self;
+
+		$data = array_map(function($user_login_id) use($UserData,$MembershipPerUser){
+			$membership = $MembershipPerUser->findRow("user_login_id = ? AND status = ?",[$user_login_id,1],['membership_per_user_id','point','catalog_membership_id']);
+			
+			return [
+				'user_login_id' => $user_login_id,
+				'names' => $UserData->findField("user_login_id = ?",[$user_login_id],"names"),
+				'point' => $membership ? $membership['point'] : 0,
+				'catalog_membership_id' => $membership ? $membership['catalog_membership_id'] : 0,
+				'membership_per_user_id' => $membership ? $membership['membership_per_user_id'] : 0,
+			];
+		},$data);
+
+		return array_filter($data,function($user){
+			return $user['point'] > 0;
+		});
+	}
+
 	public static function add(array $data = null) 
 	{
 		if(!isset($data))
@@ -18,22 +64,16 @@ class MembershipPerUser extends Orm {
 			return false;
 		}
 		
-		$catalog_membership_id = (new CatalogMembership)->getCatalogMembershipId($data['package_id']);
-		
-		if(!isset($catalog_membership_id))
-		{
-			return false;
-		}
-
 		$MembershipPerUser = new self;
 		
-		if($MembershipPerUser->loadWhere("user_login_id = ? AND catalog_membership_id = ?",[$data['user_login_id'],$catalog_membership_id]))
+		if($MembershipPerUser->loadWhere("user_login_id = ? AND catalog_membership_id = ?",[$data['user_login_id'],$data['catalog_membership_id']]))
 		{
 			return false;
 		}
 		
 		$MembershipPerUser->user_login_id = $data['user_login_id'];
-		$MembershipPerUser->catalog_membership_id = $catalog_membership_id;
+		$MembershipPerUser->point = $data['point'];
+		$MembershipPerUser->catalog_membership_id = $data['catalog_membership_id'];
 		$MembershipPerUser->create_date = time();
 		
 		return $MembershipPerUser->save();
@@ -46,7 +86,7 @@ class MembershipPerUser extends Orm {
 			return false;
 		}
 
-		if($membership = $this->connection()->row("
+		return $this->connection()->row("
 			SELECT 
 				{$this->tblName}.{$this->tblName}_id,
 				{$this->tblName}.amount,
@@ -63,11 +103,6 @@ class MembershipPerUser extends Orm {
 				{$this->tblName}.user_login_id = '{$user_login_id}'
 			AND 
 				{$this->tblName}.status = '1'
-		"))
-		{
-			return $membership;
-		}
-
-		return false;
+		");
 	}
 }

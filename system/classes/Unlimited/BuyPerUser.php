@@ -404,24 +404,16 @@ class BuyPerUser extends Orm {
 
   public static function addMembership(array $data = null) 
   {
-    if(!isset($data['items']))
+    if(!isset($data))
     {
       return false;
     }
-
-    foreach($data['items'] as $item)
-    {
-      if($item['type'] == 'package')
-      {
-        if($item['id'] == Package::PAY_BUSINESS)
-        {
-          MembershipPerUser::add([
-            'package_id' => $item['id'],
-            'user_login_id' => $data['user_login_id'],
-          ]);
-        }
-      }
-    }
+    
+    MembershipPerUser::add([
+      'point' => $data['point'],
+      'catalog_membership_id' => $data['catalog_membership_id'],
+      'user_login_id' => $data['user_login_id'],
+    ]);
   }
 
   public static function processPayment(int $buy_per_user_id = null,bool $sendCommissions = null) : bool
@@ -446,9 +438,10 @@ class BuyPerUser extends Orm {
           'items' => $data['items'],
           'user_login_id' => $BuyPerUser->user_login_id,
         ]);
-        
+
         self::addMembership([
-          'items' => $data['items'],
+          'point' => $BuyPerUser->amount,
+          'catalog_membership_id' => $data['items'][0]['catalog_membership_id'],
           'user_login_id' => $BuyPerUser->user_login_id,
         ]);
         

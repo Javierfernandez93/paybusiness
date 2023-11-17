@@ -25,82 +25,25 @@ class CommissionPerUser extends Orm
 		parent::__construct();
 	}
 
-	public static function addFundMamCommission(array $products = null, int $user_login_id = null, int $buy_per_user_id = null): bool
+	public static function addBinaryCommission(array $data = null): bool
 	{
-		if ($founded = array_sum(array_column($products, "quantity"))) {
-			if ($profitSplit = round(Util::getPercentaje($founded, self::PROFIT_MAMP_SPONSOR), 3, PHP_ROUND_HALF_UP)) {
-				if ($referral_id = (new UserReferral)->getReferralId($user_login_id)) {
-					self::add([
-						'user_login_id_from' => $user_login_id,
-						'user_login_id' => $referral_id,
-						'buy_per_user_id' => $buy_per_user_id,
-						'gain_per_client_id' => 0,
-						'amount' => $profitSplit,
-						'package_id' => 0,
-						'catalog_commission_type_id' => CatalogCommissionType::FUND_MAM_ID,
-					]);
-
-					return true;
-				}
-			}
+		$CommissionPerUser = new self;
+		
+		if($CommissionPerUser->findField("user_login_id_from = ? AND user_login_id = ? AND membership_per_user_id = ? AND status != ?",[$data['user_login_id_from'],$data['user_login_id'],$data['membership_per_user_id'],-1],"commission_per_user_id"))
+		{
+			return false;
 		}
 
-		return false;
-	}
+		$CommissionPerUser->catalog_commission_id = $data['catalog_commission_id'];
+		$CommissionPerUser->membership_per_user_id = $data['membership_per_user_id'];
+		$CommissionPerUser->user_login_id_from = $data['user_login_id_from'];
+		$CommissionPerUser->user_login_id = $data['user_login_id'];
+		$CommissionPerUser->catalog_currency_id = CatalogCurrency::USDTTRC20;
+		$CommissionPerUser->amount = Util::getPercentaje($data['amount'],$data['percentaje']);
+		$CommissionPerUser->status = isset($data['status']) ? $data['status'] : self::PENDING_FOR_DISPERSION;
+		$CommissionPerUser->create_date = time();
 
-	public static function addMamCommission(array $data = null): bool
-	{
-		$profitSplit = round(Util::getPercentaje($data['profit'], self::PROFIT_MAMP_NETWORK), 3, PHP_ROUND_HALF_UP);
-		// $profitSplit = round($data['profit'],2, PHP_ROUND_HALF_DOWN);
-
-		$network = (new UserReferral)->getSponsorByReverseLevel(self::DEFAULT_NETWORK_MAM_LEVELS, $data['user_login_id']);
-
-		$CatalogCommission = new CatalogCommission;
-
-		$gived = 0;
-
-		if ($catalog_commissions = $CatalogCommission->getAllBycatalogCommissionTypeId(CatalogCommissionType::NETWORK_MAM_ID)) {
-			foreach ($catalog_commissions as $catalog_commission) {
-				$percentaje = round((($catalog_commission['amount'] * 100) / self::PROFIT_MAMP_NETWORK), 2, PHP_ROUND_HALF_DOWN);
-
-				$amount = $catalog_commission['is_percentaje'] ? Util::getPercentaje($profitSplit, $percentaje) : $catalog_commission['amount'];
-
-				if ($catalog_commission['commission_type'] == CatalogCommissionType::NETWORK_MAM) {
-					if (isset($network[$catalog_commission['level'] - 1])) {
-						if ($network[$catalog_commission['level'] - 1] > 0) {
-							// echo "$ {$amount} para el nivel {$catalog_commission['level']} ID {$network[$catalog_commission['level']-1]}\n";
-							$gived += $amount;
-
-							self::addFromGain([
-								'user_login_id_from' => $data['user_login_id'],
-								'user_login_id' => $network[$catalog_commission['level'] - 1],
-								'gain_per_client_id' => $data['gain_per_client_id'],
-								'amount' => $amount,
-								'package_id' => 0,
-								'create_date' => strtotime(date('Y-m-d 23:59:59', strtotime('last day of previous month'))),
-								'catalog_commission_type_id' => $catalog_commission['catalog_commission_type_id'],
-							]);
-						}
-					}
-				}
-			}
-
-			if ($gived < $profitSplit) {
-				self::addFromGain([
-					'user_login_id_from' => $data['user_login_id'],
-					'user_login_id' => 1,
-					'gain_per_client_id' => $data['gain_per_client_id'],
-					'amount' => $profitSplit - $gived,
-					'package_id' => 0,
-					'create_date' => strtotime(date('Y-m-d 23:59:59', strtotime('last day of previous month'))),
-					'catalog_commission_type_id' => CatalogCommissionType::RESIDUAL_MAM
-				]);
-			}
-
-			return true;
-		}
-
-		return false;
+		return $CommissionPerUser->save();
 	}
 
 	public static function appendCommissionToNetwork(array $network = null, int $user_login_id = null): array
@@ -284,7 +227,7 @@ class CommissionPerUser extends Orm
 				LEFT JOIN
 					catalog_commission_type 
 				ON 
-					catalog_commission_type.catalog_commission_type_id = catalog_commission.catalog_commission_id
+					catalog_commission_type.catalog_commission_type_id = catalog_commission.catalog_commission_type_id
 				LEFT JOIN
 					user_data 
 				ON 

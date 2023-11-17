@@ -1771,7 +1771,6 @@ class UserLogin extends Orm {
     return $UserKyc->save();
   }
   
-  
   public function insertFirstRange()
   {
     if(!$this->getId())
@@ -1879,5 +1878,135 @@ class UserLogin extends Orm {
       $member['country'] = $Country->getCountryNameAndInternet($member['country_id']);
       return $member;
     },array_values($_members));
+  }
+
+  public static function getSingleArray(array $network = null)
+  {
+    $_network = [];
+
+    if(!isset($network))
+    {
+      return $_network;
+    }
+
+    foreach($network as $level)
+    {
+      foreach($level as $user_login_id)
+      {
+        $_network[] = $user_login_id;
+      }
+    }
+
+    return $_network;
+  }
+
+  public function getBinaryPoints()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    return $this->_getBinaryPoints($this->company_id);
+  }
+
+  public function _getBinaryPoints(int $user_login_id = null)
+  { 
+    if(!$user_login_id)
+    {
+      return false;
+    }
+
+    $directs = $this->_getBinaryTree($user_login_id);
+
+    if(!$directs)
+    {
+      return false;
+    }
+
+    if(isset($directs[0]))
+    {
+      $_directs['start']['users'][] = $directs[0]['user_login_id'];
+
+      if($networkLeft = (new UserReferral)->getNetworkReferral(-1,$directs[0]['user_login_id']))
+      {
+        $_directs['start']['users'] = array_merge($_directs['start']['users'],self::getSingleArray($networkLeft));
+      }
+    }
+
+    if(isset($directs[1]))
+    {
+      $_directs['end']['users'][] = $directs[1]['user_login_id'];
+
+      if($networkLeft = (new UserReferral)->getNetworkReferral(-1,$directs[1]['user_login_id']))
+      {
+        $_directs['end']['users'] = array_merge($_directs['end']['users'],self::getSingleArray($networkLeft));
+      }
+    }
+
+    
+    
+    if(isset($_directs['start']['users']))
+    {
+      $_directs['start']['users'] = MembershipPerUser::getNetworkPoints($_directs['start']['users']);
+      $_directs['start']['points'] = array_sum(array_column($_directs['start']['users'],"point"));
+    }
+    
+    if(isset($_directs['end']['users']))
+    {
+      $_directs['end']['users'] = MembershipPerUser::getNetworkPoints($_directs['end']['users']);
+      $_directs['end']['points'] = array_sum(array_column($_directs['end']['users'],"point"));
+    }
+    
+    return $_directs;
+  }
+
+  public static function getNetworkToPay(array $binary = null)
+  {
+    if(sizeof($binary) < 2)
+    {
+      return false;
+    }
+  
+    $network = [];
+
+    if($binary['start']['points'] == $binary['end']['points'])
+    {
+      $network['pay']['users'] = array_merge($binary['start']['users'],$binary['end']['users']);
+      $network['pay']['percentaje'] = 5;
+    }
+    
+    if($binary['start']['points'] > $binary['end']['points'])
+    {
+      $network['pay']['users'] = $binary['end']['users'];
+      $network['pay']['percentaje'] = 10;
+      $network['pass']['users'] = $binary['start']['users'];
+    }
+    
+    if($binary['end']['points'] > $binary['start']['points'])
+    {
+      $network['pay']['users'] = $binary['start']['users'];
+      $network['pay']['percentaje'] = 10;
+      $network['pass']['users'] = $binary['end']['users'];
+    }
+
+    return $network;
+  }
+
+  public function getSponsorActivation()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    $sponsor_id = (new UserReferral)->findField("user_login_id = ?",$this->company_id,"sponsor_id");
+
+    if(!$sponsor_id)
+    {
+      return false;
+    }
+
+    return $this->_hasProductPermission('pay_business',$sponsor_id);
   }
 }

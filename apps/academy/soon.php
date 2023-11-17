@@ -4,8 +4,6 @@ require_once TO_ROOT . "/system/core.php";
 
 $UserLogin = new Unlimited\UserLogin;
 
-HCStudio\Util::redirectTo(TO_ROOT."/apps/academy/soon");
-
 if($UserLogin->logged === false) {
 	HCStudio\Util::redirectTo(TO_ROOT."/apps/login/");
 }
@@ -15,11 +13,11 @@ $UserLogin->checkRedirection();
 $Layout = JFStudio\Layout::getInstance();
 
 $route = JFStudio\Router::Academy;
-$Layout->init(JFStudio\Router::getName($route),'index',"backoffice",'',TO_ROOT.'/');
+$Layout->init(JFStudio\Router::getName($route),'soon',"backoffice",'',TO_ROOT.'/');
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
-	'academy.vue.js'
+	
 ]);
 
 $Layout->setVar([

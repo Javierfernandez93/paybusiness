@@ -385,6 +385,22 @@ class UserReferral extends Orm {
     return $result;
   }
   
+  public function getNetworkReferral(int $limit = -1 ,string $referral_id = null,int $count = 0) 
+  {
+    $result = [];
+        
+    $sql = "SELECT user_login_id FROM user_referral WHERE referral_id IN ({$referral_id}) AND status = '1'";      
+
+    if (($count != $limit) && ($data = $this->connection()->column($sql))) {
+      $count++;
+      $join = join(",", $data);
+      $result = $this->getNetworkReferral($limit, $join, $count);
+      $result = array_merge(array($data), $result);
+    }
+
+    return $result;
+  }
+  
   public function simplyfyNetwork(array $network = null) : array {
     $data = [];
 
@@ -507,5 +523,4 @@ class UserReferral extends Orm {
 
     return $result;
   }
-  
 }

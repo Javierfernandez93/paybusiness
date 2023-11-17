@@ -753,6 +753,10 @@ class User extends Http {
     uploadImageProfileCut(data, callback) {
         return this.call('../../app/application/uploadImageProfileCut.php', data, callback, null, null, 'POST');
     }
+    /* sponsor */
+    getSponsorActivation(data, callback) {
+        return this.call('../../app/application/getSponsorActivation.php', data, callback);
+    }
     /* kyc */
     uploadKyCFile(data, progress, callback) {
         return this.callFile('../../app/application/uploadKyCFile.php', data, callback, progress);
@@ -771,6 +775,9 @@ class User extends Http {
     }
     getMemberCounter(data, callback) {
         return this.call('../../app/application/getMemberCounter.php', data, callback);
+    }
+    getBinaryPoints(data, callback) {
+        return this.call('../../app/application/getBinaryPoints.php', data, callback);
     }
 }
 

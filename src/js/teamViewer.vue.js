@@ -6,6 +6,7 @@ const TeamViewer = {
         return {
             User: new User,
             frontals : null,
+            points : null,
             query : null,
             usersCalled : [],
             user_login_id : null,
@@ -53,6 +54,16 @@ const TeamViewer = {
                         })
                     }
                 },500)
+            })
+        },
+        getBinaryPoints() {
+            this.busy = true
+            this.User.getBinaryPoints({},(response)=>{
+                this.busy = false
+                if(response.s == 1)
+                {
+                    this.points = response.points
+                }
             })
         },
         insertHtml(data) {
@@ -176,6 +187,7 @@ const TeamViewer = {
         let _this = this
 
         this.getMainBinaryTree()
+        this.getBinaryPoints()
 
         window.getBinaryTree = function(user_login_id)
         {
@@ -205,6 +217,38 @@ const TeamViewer = {
                 </div>
             </div>
         </div>
+        <div v-if="points" class="row justify-content-center align-items-center mb-3">
+            <div class="col-12 col-xl-8">
+                <div class="card card-body px-5">
+                    <div class="row g-4 justify-content-center align-items-center">
+                        <div v-if="points.start" class="col">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-12 col-xl">
+                                    <div class="text-secondary text-xs">
+                                        Puntos lado izquierdo 
+                                    </div>
+                                    <div class="h3">
+                                        {{points.start.points}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="points.end" class="col">
+                            <div class="row justify-content-center align-items-center">
+                                <div class="col-12 col-xl">
+                                    <div class="text-secondary text-xs">
+                                        Puntos lado derecho 
+                                    </div>
+                                    <div class="h3">
+                                        {{points.end.points}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         
         <div class="row justify-content-center align-items-center mb-5">
             <div class="col-12 col-xl-6">
@@ -222,6 +266,21 @@ const TeamViewer = {
         <div v-if="user_login_id" id="tree" class="tree justify-content-center w-100 animation-fall-down" style="--delay:500ms" id="trees">
             <div id="0"></div>
         </div>
+
+        <div v-if="frontals" class="row justify-content-center mb-3">
+            <div class="col-12 col-xl-8">
+                <div class="row justify-content-center align-items-center">
+                    <div v-for="frontal in frontals" class="col">
+                        <div class="d-grid">
+                            <button @click="scrollToSpan(frontal.user_login_id)" class="btn btn-primary shadow-none">
+                                Último {{frontal.side == SIDE.START ? 'Izquierda' : 'Derecha'}}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     `,
 }
 

@@ -9,6 +9,8 @@ const StoreitemsViewer = {
             User: new User,
             account : null,
             viewMam : false,
+            viewPackages : false,
+            sponsor_activation : null,
             userAccounts : null,
             catalog_package_type_id : null,
             packages : null,
@@ -142,6 +144,14 @@ const StoreitemsViewer = {
 
             console.log(this.viewMam)
         },
+        getSponsorActivation() {
+            this.User.getSponsorActivation({}, (response) => {
+                if (response.s == 1) {
+                    this.viewPackages = response.sponsor_activation
+                    this.sponsor_activation = response.sponsor_activation
+                } 
+            })
+        },
         getBridgeAccount() {
             if(this.account == null) 
             {
@@ -160,6 +170,8 @@ const StoreitemsViewer = {
 
         this.catalog_package_type_id = getParam("cptid") ? getParam("cptid") : this.CATALOG_PACKAGE_TYPE.PAY_BUSINESS
         
+        this.getSponsorActivation()
+        
         if(['package'].includes(package_type)) {
             this.getPackages(this.catalog_package_type_id)
         }
@@ -174,57 +186,50 @@ const StoreitemsViewer = {
             </li>
         </ul>
 
-        <div v-if="packages" class="row justify-content-center align-items-center">
-            <div v-for="(package,index) in packages" class="col-12 col-xl-4 col-md-4">
-                <div class="card bg-primary rounded animation-fall-down overflow-hidden mb-5" :style="{'--delay': (index+1)*0.3+'s'}">
-                    <div v-if="package.image">
-                        <img class="card-img-top" :src="package.image" :alt="package.title">
+        <div v-if="packages">
+            <div v-if="!sponsor_activation && !viewPackages" class="alert alert-secondary text-white text-center">
+                <strong>Aviso</strong>
+                <div class="lead">
+                    Tu patrocinador no está activo
+                </div>
+                <div class="mb-3 lead">
+                    ¿Deseas continuar?
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button @click="viewPackages = true" class="btn mb-0 shadow-none btn-light">Continuar</button>
                     </div>
-                    
-                    <div class="card-header bg-transparent">
-                        <div class="row justify-content-center align-items-center">
-                            <div v-if="!package.image" class="col-12 col-xl-auto">
-                                <img src="../../src/img/single-icon-white.svg" style="width:2rem"/>
-                            </div>
-                            <div class="col-12 col-xl">
-                                <div :class="package.image ? 'text-primary' : 'text-white'" class="fw-semibold fs-4 fw-semibold">{{package.title}}</div>
-                                <div :class="package.image ? 'text-secondary' : 'text-white'" class="">{{package.description}}</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-body">    
-                        <div v-if="CATALOG_PACKAGE_TYPE.MARKETING == package.catalog_package_type_id">
-                            <div v-if="package.products">
-                                <ul class="list-group list-group-flush">
-                                    <li v-for="item in package.products" class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-12 col-xl-auto">
-                                                <span class="badge text-white p-0">
-                                                    {{item.quantity}}
-                                                </span>
-                                            </div>
-                                            <div class="col-12 col-xl">
-                                                <div class="fw-semibold text-white">
-                                                    {{item.product.title}}
-                                                </div>
-                                                <div class="text-xs text-secondary">
-                                                    {{item.product.description}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div v-else-if="CATALOG_PACKAGE_TYPE.FUND == package.catalog_package_type_id">
-                            <span v-html="package.full_description"></span>
+                </div>
+            </div>
+            <div v-if="viewPackages" class="row justify-content-center align-items-center">
+                <div v-for="(package,index) in packages" class="col-12 col-xl-4 col-md-4">
+                    <div class="card bg-primary rounded animation-fall-down overflow-hidden mb-5" :style="{'--delay': (index+1)*0.3+'s'}">
+                        <div v-if="package.image">
+                            <img class="card-img-top" :src="package.image" :alt="package.title">
                         </div>
                         
-                        <div class="h1 text-center text-white">$ {{package.amount.numberFormat(2)}}</div>
-                    </div>
-                    <div class="card-footer d-grid">
-                        <button @click="addPackage(package)" class="btn btn-white btn-lg mb-0 shadow-none">Elegir</button>
+                        <div class="card-header bg-transparent">
+                            <div class="row justify-content-center align-items-center">
+                                <div v-if="!package.image" class="col-12 col-xl-auto">
+                                    <img src="../../src/img/single-icon-white.svg" style="width:2rem"/>
+                                </div>
+                                <div class="col-12 col-xl">
+                                    <div :class="package.image ? 'text-primary' : 'text-white'" class="fw-semibold fs-4 fw-semibold">{{package.title}}</div>
+                                    <div :class="package.image ? 'text-secondary' : 'text-white'" class="">{{package.description}}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">    
+                            <div v-if="CATALOG_PACKAGE_TYPE.FUND == package.catalog_package_type_id">
+                                <span v-html="package.full_description"></span>
+                            </div>
+                            
+                            <div class="h1 text-center text-white">$ {{package.amount.numberFormat(2)}}</div>
+                        </div>
+                        <div class="card-footer d-grid">
+                            <button @click="addPackage(package)" class="btn btn-white btn-lg mb-0 shadow-none">Elegir</button>
+                        </div>
                     </div>
                 </div>
             </div>

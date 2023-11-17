@@ -165,3 +165,6 @@ fieldset:disabled .btn {
     height: 3rem !important;
   }
 }
+.lead-xxl {
+  font-size: 2rem;
+}
