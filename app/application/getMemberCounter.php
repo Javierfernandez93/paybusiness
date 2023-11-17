@@ -27,7 +27,6 @@ if($UserLogin->logged === true)
         $data['members'] = $members;
     }
 
-
     $data['r'] = 'DATA_OK';
     $data['s'] = 1;
 } else {

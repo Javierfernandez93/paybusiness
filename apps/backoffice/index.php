@@ -8,6 +8,11 @@ if($UserLogin->logged === false) {
 	HCStudio\Util::redirectTo(TO_ROOT."/apps/login/");
 }
 
+// Unlimited\MembershipPerUser::addPoints([
+// 	'user_login_id' => 1,
+// 	'amount' => 40,
+// ]);
+
 $UserLogin->checkRedirection();
 $UserLogin->getBinaryPoints();
 

@@ -3,14 +3,50 @@
 namespace Unlimited;
 
 use HCStudio\Orm;
+use Unlimited\CatalogMembership;
 
 class MembershipPerUser extends Orm {
 	protected $tblName = 'membership_per_user';
 
+	const END = 2;
 	public function __construct() {
 		parent::__construct();
 	}
 
+	public static function getNextMembershipPackage(int $user_login_id = null) 
+	{
+		$MembershipPerUser = new self;
+		
+		$currentMembership = $MembershipPerUser->getCurrentMembership($user_login_id);
+
+		if(!$currentMembership)
+		{
+			return CatalogMembership::FIRST_MEMBERSHIP_ID;
+		}
+
+		$CatalogMembership = new CatalogMembership;
+		$catalogMembership = $CatalogMembership->findRow("catalog_membership_id  = ?",$currentMembership['catalog_membership_id']);
+			
+		if(!$catalogMembership)
+		{
+			return false;
+		}
+
+		if($currentMembership['target'] >= $catalogMembership['target'])
+		{
+			$catalogMembership = $CatalogMembership->getNextMembership($currentMembership['catalog_membership_id']);
+
+			if(!$catalogMembership)
+			{
+				return false;
+			}
+			
+			return $catalogMembership['catalog_membership_id'];
+		}
+
+		return false;
+	}
+	
 	public static function addPoints(array $data = null) 
 	{
 		if(!$data)
@@ -24,9 +60,29 @@ class MembershipPerUser extends Orm {
 		{
 			return false;
 		}
-
-		$MembershipPerUser->amount = $MembershipPerUser->amount + $data['amount'];
 		
+		$CatalogMembership = new CatalogMembership;
+		$catalogMembership = $CatalogMembership->findRow("catalog_membership_id  = ?",$MembershipPerUser->catalog_membership_id);
+
+		if(!$catalogMembership)
+		{
+			return false;
+		}
+
+		$target = $MembershipPerUser->amount + $data['amount'];
+		$amount = 0;
+		
+		if($target > $catalogMembership['target'])
+		{
+			$amount_extra = $target - $catalogMembership['target'];
+			$amount = $catalogMembership['target'];
+		} else {
+			$amount = $target;
+		}
+		
+		$MembershipPerUser->amount = $amount;
+		$MembershipPerUser->amount_extra = isset($amount_extra) ? $amount_extra : 0;
+
 		return $MembershipPerUser->save();
 	}
 
@@ -76,6 +132,25 @@ class MembershipPerUser extends Orm {
 		});
 	}
 
+	public static function setMembershipAsEnd(int $membership_per_user_id = null) 
+	{
+		if(!isset($membership_per_user_id))
+		{
+			return false;
+		}
+
+		$MembershipPerUser = new self;
+		
+		if(!$MembershipPerUser->loadWhere("membership_per_user_id = ? AND status = ?",[$membership_per_user_id,1]))
+		{
+			return false;
+		}
+
+		$MembershipPerUser->status = self::END;
+		
+		return $MembershipPerUser->save();
+	}
+
 	public static function add(array $data = null) 
 	{
 		if(!isset($data))
@@ -89,8 +164,20 @@ class MembershipPerUser extends Orm {
 		{
 			return false;
 		}
+
+		$amount = 0;
+
+		$currentMembership = $MembershipPerUser->getCurrentMembership($data['user_login_id']);
+
+		if($currentMembership)
+		{
+			$amount = $currentMembership['amount_extra'];
+
+			self::setMembershipAsEnd($currentMembership['membership_per_user_id']);
+		}
 		
 		$MembershipPerUser->user_login_id = $data['user_login_id'];
+		$MembershipPerUser->amount = $amount;
 		$MembershipPerUser->point = $data['point'];
 		$MembershipPerUser->catalog_membership_id = $data['catalog_membership_id'];
 		$MembershipPerUser->create_date = time();
@@ -109,7 +196,9 @@ class MembershipPerUser extends Orm {
 			SELECT 
 				{$this->tblName}.{$this->tblName}_id,
 				{$this->tblName}.amount,
+				{$this->tblName}.user_login_id,
 				{$this->tblName}.amount_extra,
+				catalog_membership.catalog_membership_id,
 				catalog_membership.target,
 				catalog_membership.title
 			FROM
