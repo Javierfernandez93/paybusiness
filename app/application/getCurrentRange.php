@@ -13,6 +13,8 @@ if($UserLogin->logged === true)
 		'next' => $UserLogin->getNextRange()
 	];
 	
+	$data['amount'] = $UserLogin->getCurrentMembershipAmount();
+	
     $data['r'] = 'DATA_OK';
 	$data['s'] = 1;
 } else {

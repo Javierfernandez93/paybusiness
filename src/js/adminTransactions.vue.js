@@ -1,5 +1,5 @@
 /* vue */
-import { AdmintransactionsViewer } from '../../src/js/admintransactionsViewer.vue.js?v=2.5.4'
+import { AdmintransactionsViewer } from '../../src/js/admintransactionsViewer.vue.js?v=2.5.5'
 
 Vue.createApp({
     components : { 

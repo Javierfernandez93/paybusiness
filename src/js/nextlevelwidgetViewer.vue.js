@@ -1,19 +1,27 @@
-import { User } from '../../src/js/user.module.js?v=2.5.4'   
+import { User } from '../../src/js/user.module.js?v=2.5.5'   
 
 const NextlevelwidgetViewer = {
     name : 'nextlevelwidget-viewer',
     data() {
         return {
             User: new User,
+            percentage : 0,
+            amount : null,
             ranges : null
         }
     },
     methods: {
+        getPercentage() {
+            this.percentage = Math.round((this.amount * 100) / this.ranges.next.volumen)
+        },
         getCurrentRange() {
             this.User.getCurrentRange({},(response)=>{
                 if(response.s == 1)
                 {
+                    this.amount = response.amount
                     this.ranges = response.ranges
+
+                    this.getPercentage()
                 } else {
                     this.ranges = false
                 }
@@ -49,7 +57,7 @@ const NextlevelwidgetViewer = {
                     </div>
                 </div>
                 <div class="progress" style="height:1rem" role="progressbar" aria-label="Success example" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                    <div style="height:1rem" class="progress-bar bg-success" style="width: 0%">0%</div>
+                    <div style="height:1rem" class="progress-bar bg-success" :style="{'width': percentage+'%'}">{{percentage}}%</div>
                 </div>
             </div>
         </div>

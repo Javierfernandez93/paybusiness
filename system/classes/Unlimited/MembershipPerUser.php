@@ -124,4 +124,27 @@ class MembershipPerUser extends Orm {
 				{$this->tblName}.status = '1'
 		");
 	}
+	
+	public function getCurrentMembershipAmount(int $user_login_id = null) 
+	{
+		if(!isset($user_login_id))
+		{
+			return false;
+		}
+
+		return $this->connection()->field("
+			SELECT 
+				{$this->tblName}.amount
+			FROM
+				{$this->tblName}
+			LEFT JOIN 
+				catalog_membership
+			ON 
+				catalog_membership.catalog_membership_id = {$this->tblName}.catalog_membership_id
+			WHERE 
+				{$this->tblName}.user_login_id = '{$user_login_id}'
+			AND 
+				{$this->tblName}.status = '1'
+		");
+	}
 }

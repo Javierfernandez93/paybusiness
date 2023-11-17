@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.5.4'   
+import { User } from '../../src/js/user.module.js?v=2.5.5'   
 
 const StorepaymentmethodsViewer = {
     name : 'storepaymentmethods-viewer',

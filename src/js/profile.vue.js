@@ -1,6 +1,6 @@
-import { ProfileViewer } from '../../src/js/profileViewer.vue.js?v=2.5.4'
-import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.5.4'
-import { KycViewer } from '../../src/js/kycViewer.vue.js?v=2.5.4'   
+import { ProfileViewer } from '../../src/js/profileViewer.vue.js?v=2.5.5'
+import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.5.5'
+import { KycViewer } from '../../src/js/kycViewer.vue.js?v=2.5.5'   
 
 Vue.createApp({
     components : { 

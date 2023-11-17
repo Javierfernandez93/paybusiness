@@ -1,4 +1,4 @@
-import { Guest } from '../../src/js/guest.module.js?v=2.5.4'   
+import { Guest } from '../../src/js/guest.module.js?v=2.5.5'   
 
 const LandingsViewer = {
     name : 'landings-viewer',

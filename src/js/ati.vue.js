@@ -1,6 +1,6 @@
 /* vue */
-import { AtiViewer } from '../../src/js/atiViewer.vue.js?v=2.5.4'
-import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.5.4'
+import { AtiViewer } from '../../src/js/atiViewer.vue.js?v=2.5.5'
+import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.5.5'
 
 Vue.createApp({
     components: {

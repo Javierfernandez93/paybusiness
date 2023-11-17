@@ -1,4 +1,4 @@
-import { AofViewer } from './aofViewer.vue.js?v=2.5.4'
+import { AofViewer } from './aofViewer.vue.js?v=2.5.5'
 
 Vue.createApp({
     components : { 
