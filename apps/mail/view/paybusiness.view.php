@@ -1,4 +1,4 @@
-<img src="<?php echo HCStudio\Connection::getMainPath();?>/src/img/mail-welcome.png" style="width: 100%;" alt="mail" title="mail"/>
+<img src="<?php echo HCStudio\Connection::getMainPath();?>/src/img/pay-business.jpeg" style="width: 100%;" alt="mail" title="mail"/>
 
 <h3>¡Bienvenido a Pay Business!<h2>
 <h3>Estimado <b><?php echo $names; ?></b>,<h2>
