@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=2.5.8'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=2.5.9'
 
 const AdminusersViewer = {
     name : 'adminusers-viewer',
@@ -77,6 +77,50 @@ const AdminusersViewer = {
         filterData() {
             this.users = this.usersAux
             this.users = this.users.filter(user =>  user.names.toLowerCase().includes(this.query.toLowerCase()) || user.email.toLowerCase().includes(this.query.toLowerCase()) || user.company_id.toString().includes(this.query.toLowerCase()))
+        },
+        verifyUser(user) {
+            let alert = alertCtrl.create({
+                title: "Alert",
+                subTitle: `¿Estás seguro de veriricar a <b>${user.names}</b>?`,
+                buttons: [
+                    {
+                        text: "Sí",
+                        class: 'btn-success',
+                        role: "cancel",
+                        handler: (data) => {
+                            
+                            this.UserSupport.verifyUser({user_login_id:user.user_login_id},(response)=>{
+                                if(response.s == 1)
+                                {
+                                    user.verified = true
+                                    user.verified_mail = true
+
+                                    alertInfo({
+                                        icon:'<i class="bi bi-ui-checks"></i>',
+                                        message: 'Usuario verificado',
+                                        _class:'bg-gradient-success text-white'
+                                    })
+                                } else {
+                                    alertInfo({
+                                        icon:'<i class="bi bi-x"></i>',
+                                        message: 'Error al verificar al usuario',
+                                        _class:'bg-gradient-danger text-white'
+                                    })
+                                }
+                            })
+                        },
+                    },
+                    {
+                        text: "Cancel",
+                        role: "cancel",
+                        handler: (data) => {
+                            
+                        },
+                    },
+                ],
+            })
+
+            alertCtrl.present(alert.modal)  
         },
         getInBackoffice(company_id) {
             this.UserSupport.getInBackoffice({ company_id: company_id }, (response) => {
@@ -243,9 +287,10 @@ const AdminusersViewer = {
                                             <div v-if="user.names" class="avatar avatar-sm me-2 bg-dark">
                                                 {{ user.names.getFirstLetter() }}
                                             </div>
+                                            
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">{{user.names}}</h6>
+                                            <h6 class="mb-0 text-sm">{{user.names}} <span class="ms-2 text-success" v-if="user.verified_mail"><i class="bi bi-check-circle-fill"></i></span></h6>
                                             <p class="text-xs text-secondary mb-0">{{user.email}}</p>
                                         </div>
                                     </div>
@@ -300,6 +345,7 @@ const AdminusersViewer = {
                                             <li><button class="dropdown-item" @click="goToEdit(user.user_login_id)">Editar</button></li>
                                             <li><button class="dropdown-item" @click="viewEwallet(user)">Ver e-wallet</button></li>
                                             <li><button class="dropdown-item" @click="getInBackoffice(user.user_login_id)">Acceder a backoffice</button></li>
+                                            <li v-if="!user.verified_mail"><button class="dropdown-item" @click="verifyUser(user)">Verificar email</button></li>
                                             <li><button class="dropdown-item" @click="deleteUser(user.user_login_id)">Eliminar</button></li>
                                         </ul>
                                     </div>

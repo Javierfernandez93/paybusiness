@@ -1,4 +1,4 @@
-import { ApipaymentsViewer } from './apipaymentsViewer.vue.js?v=2.5.8'
+import { ApipaymentsViewer } from './apipaymentsViewer.vue.js?v=2.5.9'
 
 Vue.createApp({
     components : { 

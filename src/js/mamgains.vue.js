@@ -1,6 +1,6 @@
 /* vue */
-import { MamgainsViewer } from '../../src/js/mamgainsViewer.vue.js?v=2.5.8'
-import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.5.8'
+import { MamgainsViewer } from '../../src/js/mamgainsViewer.vue.js?v=2.5.9'
+import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.5.9'
 
 Vue.createApp({
     components: {

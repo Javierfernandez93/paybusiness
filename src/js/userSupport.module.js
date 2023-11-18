@@ -1,4 +1,4 @@
-import { Http } from '../../src/js/http.module.js?v=2.5.8';
+import { Http } from '../../src/js/http.module.js?v=2.5.9';
 
 class UserSupport extends Http {
     constructor() {
@@ -25,6 +25,9 @@ class UserSupport extends Http {
     }
     setCommissionReferral(data, callback) {
         return this.call('../../app/application/setCommissionReferral.php', data, callback);
+    }
+    verifyUser(data, callback) {
+        return this.call('../../app/application/verifyUser.php', data, callback);
     }
     deleteUser(data, callback) {
         return this.call('../../app/application/delete_user.php', data, callback);

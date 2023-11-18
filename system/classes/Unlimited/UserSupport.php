@@ -1134,6 +1134,7 @@ class UserSupport extends Orm {
               user_login.signup_date,
               user_login.company_id,
               user_login.email,
+              user_login.verified_mail,
               user_account.image,
               user_data.names,
               user_address.country_id,
@@ -1466,5 +1467,24 @@ class UserSupport extends Orm {
     }
 
     return UserKyc::rejectKyc($data);
+  }
+
+
+  public function verifyUser(int $user_login_id = null) : bool
+  {
+    if($this->logged === true) 
+    {
+      $UserLogin = new UserLogin(false,false);
+      
+      if($UserLogin->loadWhere('user_login_id = ?', $user_login_id))
+      {
+        $UserLogin->verified_mail = 1;
+        $UserLogin->verified = 1;
+        
+        return $UserLogin->save();
+      }
+    }
+
+    return false;
   }
 }
