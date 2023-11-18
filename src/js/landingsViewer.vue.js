@@ -53,7 +53,7 @@ const LandingsViewer = {
             });
         },
         sendByWhatsapp(landing) {
-            window.open(`*¡Hola!* quiero invitarte a un *proyecto increíble* que te permite *ganar dinero* por el *entretenimiento* ¡regístrate ya! ${landing}`.getWhatsappLink())
+            window.open(`*¡Hola!* quiero invitarte a un *proyecto increíble* que te permite *ganar dinero* por la *educación* ¡regístrate ya! ${landing}`.getWhatsappLink())
         },
     },
     mounted() 
