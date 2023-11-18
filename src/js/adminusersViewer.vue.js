@@ -132,12 +132,34 @@ const AdminusersViewer = {
         goToBridgeAccounts(company_id) {
             window.location.href = '../../apps/admin-users/bridge?ulid=' + company_id
         },
-        deleteUser(company_id) {
-            this.UserSupport.deleteUser({ company_id: company_id }, (response) => {
-                if (response.s == 1) {
-                    this.getUsers()
-                }
+        deleteUser(user) {
+            let alert = alertCtrl.create({
+                title: "Alert",
+                subTitle: `¿Estás seguro de eliminar a <b>${user.names}</b>?`,
+                buttons: [
+                    {
+                        text: "Sí",
+                        class: 'btn-success',
+                        role: "cancel",
+                        handler: (data) => {
+                            this.UserSupport.deleteUser({ company_id: user.company_id }, (response) => {
+                                if (response.s == 1) {
+                                    this.getUsers()
+                                }
+                            })
+                        },
+                    },
+                    {
+                        text: "Cancel",
+                        role: "cancel",
+                        handler: (data) => {
+                            
+                        },
+                    },
+                ],
             })
+
+            alertCtrl.present(alert.modal)  
         },
         goToEdit(company_id) {
             window.location.href = '../../apps/admin-users/edit?ulid=' + company_id
@@ -346,7 +368,7 @@ const AdminusersViewer = {
                                             <li><button class="dropdown-item" @click="viewEwallet(user)">Ver e-wallet</button></li>
                                             <li><button class="dropdown-item" @click="getInBackoffice(user.user_login_id)">Acceder a backoffice</button></li>
                                             <li v-if="!user.verified_mail"><button class="dropdown-item" @click="verifyUser(user)">Verificar email</button></li>
-                                            <li><button class="dropdown-item" @click="deleteUser(user.user_login_id)">Eliminar</button></li>
+                                            <li><button class="dropdown-item" @click="deleteUser(user)">Eliminar</button></li>
                                         </ul>
                                     </div>
                                 </td>
