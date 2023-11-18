@@ -4,7 +4,6 @@ namespace Unlimited;
 
 use HCStudio\Orm;
 use JFStudio\Constants;
-use Phpml\NeuralNetwork\Network;
 
 class UserReferral extends Orm {
   protected $tblName  = 'user_referral';
@@ -13,11 +12,29 @@ class UserReferral extends Orm {
   const DEFAULT_COMMISSION = 30;
   const LEFT = 0;
   const RIGHT = 1;
+  const DELETED = -1;
   
   public function __construct() {
     parent::__construct();
   }
   
+  public static function deleteUser(int $user_login_id = null) 
+  {
+    $UserReferral = new self;
+
+    if(!$UserReferral->loadWhere("user_login_id = ?",$user_login_id))
+    {
+      return false;
+    }
+
+    $UserReferral->user_login_id = self::DELETED;
+    $UserReferral->sponsor_id = self::DELETED;
+    $UserReferral->referral_id = self::DELETED;
+    $UserReferral->status = self::DELETED;
+    
+    return $UserReferral->save();
+  }
+
   public static function appendReferral(array $data = null) 
   {
     $UserReferral = new self;

@@ -12,14 +12,16 @@ if($UserSupport->logged === true)
     {
         if($data['company_id'])
         {
-            $UserLogin = new Unlimited\UserLogin;
+            $UserLogin = new Unlimited\UserLogin(false,false);
     
             if($UserLogin->loadWhere("company_id = ?",$data['company_id'])) 
             {
                 $UserLogin->status = JFStudio\Constants::DELETE;
-    
+                
                 if($UserLogin->save())
                 {
+                    Unlimited\UserReferral::deleteUser($data['company_id']);
+
                     $data["s"] = 1;
                     $data["r"] = "DATA_OK";
                 } else {
