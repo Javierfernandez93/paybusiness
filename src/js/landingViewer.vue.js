@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.5.7'   
+import { User } from '../../src/js/user.module.js?v=2.5.8'   
 
 const LandingViewer = {
     name : 'landing-viewer',
@@ -28,7 +28,7 @@ const LandingViewer = {
             });
         },
         sendByWhatsapp(landing) {
-            window.open(`*¡Hola!* quiero invitarte a un *proyecto increíble* que te permite *ganar dinero* por el *entretenimiento* ¡regístrate ya! ${landing}`.getWhatsappLink())
+            window.open(`Hola!!\n\nTe invito a ser parte de mi equipo.\nHagamos historia juntos.\n¡Regístrate YA!\n\n${landing}`.fixWhatsAppBreakLine().getWhatsappLink())
         },
     },
     mounted() 

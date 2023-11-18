@@ -1108,6 +1108,11 @@ String.prototype.getFullImageSrc = function()
   return getMainPath() + this.replace('../..','')
 }
 
+String.prototype.fixWhatsAppBreakLine = function() 
+{
+  return this.replaceAll('\n','%0a')
+}
+
 String.prototype.getFullDocSrc = function() 
 {
   return getMainPath() + this.replace('../..','')
