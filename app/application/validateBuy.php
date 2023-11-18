@@ -35,21 +35,30 @@ if(($data['user'] ?? false == HCStudio\Util::USERNAME && $data['password'] ?? fa
                         //     $data['mail_sent'] = true;
                         // }
 
-                        if($items['items'][0]['title'] == 'PayBusiness')
+                        if(isset($items['items']))
                         {
-                            $names = (new Unlimited\UserData)->getNames($BuyPerUser->user_login_id);
-                                
-                            $company_name = Unlimited\SystemVar::_getValue("company_name");
-    
-                            JFStudio\Mailer::send([
-                                'view' => 'paybusiness',
-                                'subject' => "Gracias por comprar Pay Business",
-                                'vars' => [
-                                    'email' => (new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),
-                                    'company_name' => Unlimited\SystemVar::_getValue("company_name"),
-                                    'names' => $names,
-                                ],
-                            ]);  
+                            if(isset($items['items'][0]))
+                            {
+                                if(isset($items['items'][0]['title']))
+                                {
+                                    if($items['items'][0]['title'] == 'PayBusiness')
+                                    {
+                                        $names = (new Unlimited\UserData)->getNames($BuyPerUser->user_login_id);
+                                            
+                                        $company_name = Unlimited\SystemVar::_getValue("company_name");
+                
+                                        JFStudio\Mailer::send([
+                                            'view' => 'paybusiness',
+                                            'subject' => "Gracias por comprar Pay Business",
+                                            'vars' => [
+                                                'email' => (new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),
+                                                'company_name' => Unlimited\SystemVar::_getValue("company_name"),
+                                                'names' => $names,
+                                            ],
+                                        ]);  
+                                    }
+                                }
+                            }
                         }
 
                         // if(sendEmail(,$BuyPerUser->invoice_id))
