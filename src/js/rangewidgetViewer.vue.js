@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.5.1'   
+import { User } from '../../src/js/user.module.js?v=2.5.6'   
 
 const RangewidgetViewer = {
     name : 'rangewidget-viewer',
