@@ -335,6 +335,42 @@ class UserReferral extends Orm {
       return $this->connection()->row($sql);
     }
   }
+  
+  public function getSponsor(int $user_login_id = null) 
+  {
+    if(isset($user_login_id) === true) 
+    {
+      $sql = "SELECT 
+                user_login.user_login_id,
+                user_data.names,
+                user_account.image,
+                user_login.signup_date,
+                user_login.email
+              FROM 
+                {$this->tblName} 
+              LEFT JOIN 
+                user_data
+              ON 
+                user_data.user_login_id = {$this->tblName}.sponsor_id
+              LEFT JOIN 
+                user_account
+              ON 
+                user_account.user_login_id = {$this->tblName}.sponsor_id
+              LEFT JOIN 
+                user_login
+              ON 
+                user_login.user_login_id = {$this->tblName}.sponsor_id
+              WHERE 
+                {$this->tblName}.user_login_id = '{$user_login_id}' 
+              AND 
+                {$this->tblName}.status != '".Constants::DELETE."'
+              GROUP BY 
+                {$this->tblName}.user_login_id
+              ";
+              
+      return $this->connection()->row($sql);
+    }
+  }
 
   public static function getNetworkData(int $limit = -1 ,int $main_referral_id = null) : array|bool
   {

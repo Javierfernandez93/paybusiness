@@ -692,6 +692,16 @@ class UserLogin extends Orm {
     return 0;
   }
   
+  public function getSponsor()
+  {
+    if($this->getId())
+    {
+      return (new UserReferral)->getSponsor($this->company_id);
+    }
+
+    return 0;
+  }
+  
   public function getLastTransactions()
   {
     if($this->getId())
