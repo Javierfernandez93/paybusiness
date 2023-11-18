@@ -1,5 +1,5 @@
-import { Guest } from '../../src/js/guest.module.js?v=2.5.5'   
-import { Translator } from '../../src/js/translator.module.js?v=2.5.5'   
+import { Guest } from '../../src/js/guest.module.js?v=2.5.6'   
+import { Translator } from '../../src/js/translator.module.js?v=2.5.6'   
 
 const PaymentgatewayViewer = {
     name : 'paymentgateway-viewer',
