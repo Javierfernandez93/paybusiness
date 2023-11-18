@@ -1,4 +1,4 @@
-import { CountdownViewer } from '../../src/js/countdownViewer.vue.js?v=2.5.6'   
+import { CountdownViewer } from '../../src/js/countdownViewer.vue.js?v=2.5.7'   
 
 Vue.createApp({
     components : { 

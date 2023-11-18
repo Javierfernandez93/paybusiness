@@ -1,4 +1,4 @@
-import { Translate } from './translate.module.js?v=2.5.6'
+import { Translate } from './translate.module.js?v=2.5.7'
 
 const translate = new Translate
 translate.setLanguage('en')
