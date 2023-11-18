@@ -26,12 +26,36 @@ if(($data['user'] ?? false == HCStudio\Util::USERNAME && $data['password'] ?? fa
                     $BuyPerUser->user_support_id = $data['user_support_id'] ? $data['user_support_id'] : $BuyPerUser->user_support_id;
                     $BuyPerUser->status = Unlimited\BuyPerUser::VALIDATED;
 
+                    $items = $BuyPerUser->unformatData();
+
                     if($BuyPerUser->save())
                     {   
-                        if(sendEmail((new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),$BuyPerUser->invoice_id))
+                        // if(sendEmail((new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),$BuyPerUser->invoice_id))
+                        // {
+                        //     $data['mail_sent'] = true;
+                        // }
+
+                        if($items['items'][0]['title'] == 'PayBusiness')
                         {
-                            $data['mail_sent'] = true;
+                            $names = (new Unlimited\UserData)->getNames($BuyPerUser->user_login_id);
+                                
+                            $company_name = Unlimited\SystemVar::_getValue("company_name");
+    
+                            JFStudio\Mailer::send([
+                                'view' => 'paybusiness',
+                                'subject' => "Gracias por comprar Pay Business",
+                                'vars' => [
+                                    'email' => (new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),
+                                    'company_name' => Unlimited\SystemVar::_getValue("company_name"),
+                                    'names' => $names,
+                                ],
+                            ]);  
                         }
+
+                        // if(sendEmail(,$BuyPerUser->invoice_id))
+                        // {
+                        //     $data['mail_sent'] = true;
+                        // }
 
                         $data['status'] = $BuyPerUser->status;
                         $data['s'] = 1;
