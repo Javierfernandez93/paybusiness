@@ -977,7 +977,7 @@ class UserLogin extends Orm {
           $_network[$keyLevel][$key] = $this->getData($user_login_id);
 
           $_network[$keyLevel][$key]['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
-          $_network[$keyLevel][$key]['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
+          $_network[$keyLevel][$key]['pay_academy'] = $this->_hasProductPermission('pay_academy',$user_login_id);
           $_network[$keyLevel][$key]['sponsor'] = [
             'sponsor_id' => $sponsor_id,
             'names' => $UserData->getName($sponsor_id),

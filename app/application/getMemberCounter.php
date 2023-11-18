@@ -16,6 +16,7 @@ if($UserLogin->logged === true)
         'code' => $UserLogin->code,
         'user_login_id' => $UserLogin->company_id,
         'verified' => $UserLogin->isKyCVerified(),
+        'active' => $UserLogin->hasProductPermission('pay_business'),
         'names' => $UserLogin->_data['user_data']['names'],
         'range' => $UserLogin->getRange(),
         'image' => $UserLogin->_data['user_account']['image'] ? $UserLogin->_data['user_account']['image'] : HCStudio\Connection::getMainPath()."/src/img/user.png",
