@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=2.5.7'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=2.5.8'
 
 const AdminacademyViewer = {
     name : 'adminacademy-viewer',
