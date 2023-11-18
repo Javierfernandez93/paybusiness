@@ -19,8 +19,6 @@ class MembershipPerUser extends Orm {
 		
 		$currentMembership = $MembershipPerUser->getCurrentMembership($user_login_id);
 
-		d($currentMembership);
-
 		if(!$currentMembership)
 		{
 			return CatalogMembership::FIRST_MEMBERSHIP_ID;
