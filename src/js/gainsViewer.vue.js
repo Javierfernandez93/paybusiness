@@ -226,8 +226,8 @@ const GainsViewer = {
                         </div>
                     </div>
                 </div>
-                <div v-else-if="gains == false">
-                    <div class="alert alert-light text-center">
+                <div v-else-if="commissions == false">
+                    <div class="alert alert-info text-center text-white">
                         <div>No tenemos información sobre tus ganancias.</div>
                     </div>
                 </div>
