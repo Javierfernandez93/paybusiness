@@ -129,7 +129,7 @@
                                 <span class="nav-link-text ms-1">Tools</span>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item d-none">
                             <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Help])) { ?>active<?php } ?>" href="../../apps/ticket/">
                                 <i class="bi bi-headset"></i>
                                 <span class="nav-link-text ms-1">Customer Service</span>
