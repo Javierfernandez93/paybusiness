@@ -24,20 +24,36 @@ if ($request === FALSE || empty($request)) {
 
 parse_str($request, $output);
 
-processIPN($output);
+$data['result'] = processIPN($output);
 
 function processIPN(array $data = null)
 {    
+    $result = [];
+
     if($data['status'] == JFStudio\CapitalPayments::ORDER_PAID)
     {
-        validateBuy($data);
+        if(validateBuy($data))
+        {
+            $result['r'] = 'ORDER_PAID';
+        }
     } else if($data['status'] == JFStudio\CapitalPayments::ORDER_CANCELED) {
-        deleteBuy($data);
+        if(deleteBuy($data))
+        {
+            $result['r'] = 'ORDER_CANCELED';
+        }
     } else if($data['status'] == JFStudio\CapitalPayments::PAYOUT_DONE) {
-        setPayoutAsDone($data);
+        if(setPayoutAsDone($data))
+        {
+            $result['r'] = 'PAYOUT_DONE';
+        }
     }
 
-    saveIPN($data);
+    if(saveIPN($data))
+    {
+        $result['ipn_saved'] = true;
+    }
+
+    return $result;
 }
 
 function saveIPN(array $data = null)
