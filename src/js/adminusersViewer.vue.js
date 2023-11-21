@@ -76,7 +76,12 @@ const AdminusersViewer = {
         },
         filterData() {
             this.users = this.usersAux
-            this.users = this.users.filter(user =>  user.names.toLowerCase().includes(this.query.toLowerCase()) || user.email.toLowerCase().includes(this.query.toLowerCase()) || user.company_id.toString().includes(this.query.toLowerCase()))
+            this.users = this.users.filter(user => { 
+                return user.names.toLowerCase().includes(this.query.toLowerCase()) 
+                || user.email.toLowerCase().includes(this.query.toLowerCase()) 
+                || user.code.toString().includes(this.query.toLowerCase())
+                || user.company_id.toString().includes(this.query.toLowerCase())
+            })
         },
         verifyUser(user) {
             let alert = alertCtrl.create({
@@ -297,6 +302,7 @@ const AdminusersViewer = {
                         <tbody>
                             <tr v-for="user in users">
                                 <td class="align-middle text-center text-sm">
+                                    <span class="badge bg-primary">{{user.code}}</span>
                                     <p class="font-weight-bold mb-0">{{user.company_id}}</p>
                                 </td>
                                 <td>
