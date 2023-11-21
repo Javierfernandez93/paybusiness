@@ -12,6 +12,7 @@ $data['PHP_AUTH_PW'] = $data['PHP_AUTH_PW'] ?? false;
 if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] == HCStudio\Util::PASSWORD) || $UserSupport->logged === true)
 {
     $CommissionPerUser = new Unlimited\CommissionPerUser;
+    $UserLogin = new Unlimited\UserLogin(false,false);
     $BuyPerUser = new Unlimited\BuyPerUser;
     
     $dispertions = [];
@@ -20,8 +21,7 @@ if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ==
     {
         foreach($commissions as $commission)
         {
-            // if($BuyPerUser->isActive($commission['user_login_id']))
-            if(true)
+            if($UserLogin->_hasProductPermission('pay_business',$commission['user_login_id']))
             {
                 $message = 'COMISIÓN';
     

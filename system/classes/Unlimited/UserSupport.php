@@ -12,7 +12,6 @@ use JFStudio\Cookie;
 use Unlimited\CatalogUserType;
 use Unlimited\PermissionPerUserSupport;
 use Unlimited\UserType;
-use Unlimited\UserBridgeAccount;
 use Unlimited\UserLogin;
 use Unlimited\BuyPerUser;
 use Unlimited\Log;

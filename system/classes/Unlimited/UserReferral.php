@@ -482,7 +482,7 @@ class UserReferral extends Orm {
   {
     $result = [];
  
-    $sql = "SELECT referral_id FROM user_referral WHERE user_login_id IN ({$user_login_id})";      
+    $sql = "SELECT sponsor_id FROM user_referral WHERE user_login_id IN ({$user_login_id})";      
 
     if (($count != $limit) && ($data = $this->connection()->column($sql))) {
       $count++;

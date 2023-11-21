@@ -24,7 +24,7 @@ if($UserLogin->logged === true)
                         $data["r"] = "SAVE_OK";
                     } else {
                         $data["s"] = 0;
-                        $data["r"] = "NOT_EWALLET";
+                        $data["r"] = "TRANSACTION_PER_WALLET_ID";
                     }
                 } else {
                     $data["s"] = 0;
