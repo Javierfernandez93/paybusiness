@@ -85,6 +85,7 @@ const AdminusersViewer = {
             this.users = this.users.filter(user => { 
                 return user.names.toLowerCase().includes(this.query.toLowerCase()) 
                 || user.email.toLowerCase().includes(this.query.toLowerCase()) 
+                || user.landing.toLowerCase().includes(this.query.toLowerCase()) 
                 || user.code.toString().includes(this.query.toLowerCase())
                 || user.company_id.toString().includes(this.query.toLowerCase())
             })
