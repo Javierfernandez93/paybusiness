@@ -1135,6 +1135,7 @@ class UserSupport extends Orm {
               user_login.company_id,
               user_login.email,
               user_login.verified_mail,
+              user_account.landing,
               user_account.image,
               user_data.names,
               user_address.country_id,

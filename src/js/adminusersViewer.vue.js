@@ -38,9 +38,10 @@ const AdminusersViewer = {
                     name: 'licences',
                     desc: false,
                 },
-                active: {
-                    name: 'active',
+                landing: {
+                    name: 'landing',
                     desc: false,
+                    alphabetically: true,
                 },
                 phone: {
                     name: 'phone',
@@ -253,15 +254,15 @@ const AdminusersViewer = {
                                     <u class="text-sm ms-2">Usuario</u>
                                 </th>
                                 <th 
-                                    @click="sortData(columns.active)"
+                                    @click="sortData(columns.landing)"
                                     class="text-center c-pointer text-uppercase text-primary font-weight-bolder opacity-7">
-                                    <span v-if="columns.active.desc">
+                                    <span v-if="columns.landing.desc">
                                         <i class="bi text-primary bi-arrow-up-square-fill"></i>
                                     </span>    
                                     <span v-else>    
                                         <i class="bi text-primary bi-arrow-down-square-fill"></i>
                                     </span>    
-                                    <u class="text-sm ms-2">Activación</u>
+                                    <u class="text-sm ms-2">Nombre usuario</u>
                                 </th>
                                 <th 
                                     @click="sortData(columns.active)"
@@ -342,9 +343,8 @@ const AdminusersViewer = {
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">
-                                    
                                     <span class="badge bg-primary">
-                                        {{user.apis}}
+                                        {{user.landing}}
                                     </span>
                                 </td>
                                 <td class="align-middle text-center">
