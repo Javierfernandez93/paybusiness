@@ -43,6 +43,11 @@ const AdminusersViewer = {
                     desc: false,
                     alphabetically: true,
                 },
+                country: {
+                    name: 'country',
+                    desc: false,
+                    alphabetically: true,
+                },
                 phone: {
                     name: 'phone',
                     desc: false,
@@ -265,9 +270,9 @@ const AdminusersViewer = {
                                     <u class="text-sm ms-2">Nombre usuario</u>
                                 </th>
                                 <th 
-                                    @click="sortData(columns.active)"
+                                    @click="sortData(columns.country)"
                                     class="text-center c-pointer text-uppercase text-primary font-weight-bolder opacity-7">
-                                    <span v-if="columns.active.desc">
+                                    <span v-if="columns.country.desc">
                                         <i class="bi text-primary bi-arrow-up-square-fill"></i>
                                     </span>    
                                     <span v-else>    
