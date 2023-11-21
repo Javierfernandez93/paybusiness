@@ -11,7 +11,10 @@ if($UserSupport->logged === true)
     if($data['user_login_id'])
     {
         $data["user"] = $UserSupport->getUser($data['user_login_id']);
+        
         $data["user_referral_id"] = $UserSupport->getUserReferralId($data['user_login_id']);
+        $data["sponsor_id"] = $UserSupport->getSponsorId($data['user_login_id']);
+
         $data["user"]['user_account']['landing'] = $UserSupport->getLandingById($data['user_login_id']);
         
         $data["s"] = 1;

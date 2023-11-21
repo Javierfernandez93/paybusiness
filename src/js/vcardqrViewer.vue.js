@@ -1,4 +1,4 @@
-import { Guest } from '../../src/js/guest.module.js?v=2.5.9'   
+import { Guest } from '../../src/js/guest.module.js?v=2.6.0'   
 
 const VcardqrViewer = {
     name : 'vcardqr-viewer',

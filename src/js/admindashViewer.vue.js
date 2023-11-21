@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=2.5.9'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=2.6.0'
 
 const AdmindashViewer = {
     name : 'admindash-viewer',

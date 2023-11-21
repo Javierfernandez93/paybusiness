@@ -1171,7 +1171,12 @@ class UserSupport extends Orm {
   
   public function getUserReferralId(int $user_login_id = null)
   {
-    return (new UserReferral)->getUserReferralId($user_login_id);
+    return (new UserReferral)->findField("referral_id = ?",$user_login_id,"sponsor_id");
+  }
+
+  public function getSponsorId(int $user_login_id = null)
+  {
+    return (new UserReferral)->findField("user_login_id = ?",$user_login_id,"sponsor_id");
   }
 
   public function getLandingById(int $user_login_id = null)

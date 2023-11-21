@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=2.5.9'   
+import { UserSupport } from '../../src/js/userSupport.module.js?v=2.6.0'   
 
 const AdminedituserViewer = {
     name : 'adminedituser-viewer',
@@ -14,6 +14,9 @@ const AdminedituserViewer = {
                     landing: null,
                 },
                 referral: {
+                    user_login_id: null
+                },
+                sponsor: {
                     user_login_id: null
                 },
                 password: null,
@@ -55,6 +58,7 @@ const AdminedituserViewer = {
                         this.user = {...this.user,...response.user}
 
                         this.user.referral.user_login_id = response.user_referral_id
+                        this.user.sponsor.user_login_id = response.sponsor_id
                     }
 
                     resolve(response.user_referral_id)
@@ -67,6 +71,17 @@ const AdminedituserViewer = {
                     self.user.referral = {...self.user.referral,...response.profile} 
                 } else if(response.r == "NOT_PROFILE") {
                     self.user.referral = {
+                        user_login_id: null
+                    }
+                }
+            })
+        },500),
+        getAdminSponsorProfile: _debounce((self) => {
+            self.UserSupport.getAdminReferralProfile({referral_id:self.user.sponsor.user_login_id}, (response) => {
+                if (response.s == 1) {
+                    self.user.sponsor = {...self.user.sponsor,...response.profile} 
+                } else if(response.r == "NOT_PROFILE") {
+                    self.user.sponsor = {
                         user_login_id: null
                     }
                 }
@@ -149,8 +164,8 @@ const AdminedituserViewer = {
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12 col-xl-6">
-                        <label>Referido por</label>
+                    <div class="col-12 col-md-4">
+                        <label>Referido por (Binario)</label>
                         <input 
                             v-model="user.referral.user_login_id"
                             :class="user.referral.user_login_id ? 'is-valid' : ''"
@@ -162,7 +177,20 @@ const AdminedituserViewer = {
                             {{user.referral.names}}
                         </div>
                     </div>
-                    <div class="col-12 col-xl-6">
+                    <div class="col-12 col-md-4">
+                        <label>Referido por (Unilevel)</label>
+                        <input 
+                            v-model="user.sponsor.user_login_id"
+                            :class="user.sponsor.user_login_id ? 'is-valid' : ''"
+                            @keypress="getAdminSponsorProfile(this)"
+                            ref="sponsor_id"
+                            type="number" class="form-control" placeholder="Número">
+                        
+                        <div v-if="user.sponsor.names" class="alert mb-0 mt-2 alert-info text-center text-white">
+                            {{user.referral.names}}
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
                         <label>Teléfono</label>
                         <div class="row">
                             <div class="col-auto">

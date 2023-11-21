@@ -128,14 +128,15 @@ function updateUserReferral($data = null) : bool
 {
     $UserReferral = new Unlimited\UserReferral;   
         
-    if($UserReferral->loadWhere("user_login_id = ?",$data['user_login_id']))
+    if(!$UserReferral->loadWhere("user_login_id = ?",$data['user_login_id']))
     {
-        $UserReferral->referral_id = $data['referral']['user_login_id'];
-        
-        return $UserReferral->save();
+        return true;
     }
 
-    return false;
+    $UserReferral->sponsor_id = $data['sponsor']['user_login_id'];
+    $UserReferral->referral_id = $data['referral']['user_login_id'];
+    
+    return $UserReferral->save();
 }
 
 echo json_encode(HCStudio\Util::compressDataForPhone($data)); 

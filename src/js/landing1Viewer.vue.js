@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.5.9'   
+import { User } from '../../src/js/user.module.js?v=2.6.0'   
 
 const Landing1Viewer = {
     name : 'landing1-viewer',
