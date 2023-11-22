@@ -54,12 +54,14 @@ class MembershipPerUser extends Orm {
 			return false;
 		}
 
-		if(!$this->loadWhere("user_login_id = ? AND status = ?",[$user_login_id,1]))
+		$membership = $this->getCurrentMembership($user_login_id);
+
+		if(!$membership)
 		{
 			return false;
 		}
 
-		return $this->amount_extra > 0;
+		return $membership['amount'] >= $membership['target'];
 	}
 
 	public static function addPoints(array $data = null) 

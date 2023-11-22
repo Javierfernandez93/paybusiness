@@ -91,7 +91,7 @@ class CommissionPerUser extends Orm
 				'status' => (new MembershipPerUser)->hasAmountExtra($user_login_id) ? 0 : 1,
 				'package_id' => $item['package_id'],
 				'catalog_commission_id' => $catalog_commission['catalog_commission_id'],
-				'skype' => $user_login_id
+				'skype' => $user_login_id 
 			]);
 		}
 
@@ -100,13 +100,14 @@ class CommissionPerUser extends Orm
 
 	public static function add(array $data = null): bool
 	{
+		// if (isset($data['skype']) && $data['skype'] == true) {
+		// 	return false;
+		// }
+		
 		$CommissionPerUser = new CommissionPerUser;
-
-		if (isset($data['skype']) && $data['skype'] == false) {
-			$CommissionPerUser->loadWhere("buy_per_user_id = ? AND user_login_id = ? ", [$data['buy_per_user_id'], $data['user_login_id']]);
-		}
-
-		if ($CommissionPerUser->getId()) {
+		
+		if($CommissionPerUser->loadWhere("buy_per_user_id = ? AND user_login_id = ? ", [$data['buy_per_user_id'], $data['user_login_id']]))
+		{
 			return false;
 		}
 
