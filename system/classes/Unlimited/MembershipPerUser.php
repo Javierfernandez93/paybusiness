@@ -47,6 +47,21 @@ class MembershipPerUser extends Orm {
 		return false;
 	}
 	
+	public function hasAmountExtra(int $user_login_id = null) 
+	{
+		if(!$user_login_id)
+		{
+			return false;
+		}
+
+		if(!$this->loadWhere("user_login_id = ? AND status = ?",[$user_login_id,1]))
+		{
+			return false;
+		}
+
+		return $this->amount_extra > 0;
+	}
+
 	public static function addPoints(array $data = null) 
 	{
 		if(!$data)

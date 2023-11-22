@@ -78,19 +78,20 @@ class CommissionPerUser extends Orm
 		$user_login_id = $user_login_id == 0 ? 1 : $user_login_id;
 
 		if (isset($user_login_id)) {
+			MembershipPerUser::addPoints([
+				'user_login_id' => $user_login_id,
+				'amount' => $amount,
+			]);
+
 			self::add([
 				'user_login_id_from' => $user_login_id_from,
 				'user_login_id' => $user_login_id,
 				'buy_per_user_id' => $buy_per_user_id,
 				'amount' => $amount,
+				'status' => (new MembershipPerUser)->hasAmountExtra($user_login_id) ? 0 : 1,
 				'package_id' => $item['package_id'],
 				'catalog_commission_id' => $catalog_commission['catalog_commission_id'],
 				'skype' => $user_login_id
-			]);
-
-			MembershipPerUser::addPoints([
-				'user_login_id' => $user_login_id,
-				'amount' => $amount,
 			]);
 		}
 
@@ -105,21 +106,21 @@ class CommissionPerUser extends Orm
 			$CommissionPerUser->loadWhere("buy_per_user_id = ? AND user_login_id = ? ", [$data['buy_per_user_id'], $data['user_login_id']]);
 		}
 
-		if ($CommissionPerUser->getId() == 0) {
-			$CommissionPerUser->user_login_id = $data['user_login_id'];
-			$CommissionPerUser->buy_per_user_id = $data['buy_per_user_id'] ?? 0;
-			$CommissionPerUser->catalog_commission_id = $data['catalog_commission_id'];
-			$CommissionPerUser->user_login_id_from = $data['user_login_id_from'];
-			$CommissionPerUser->amount = $data['amount'];
-			$CommissionPerUser->catalog_currency_id = CatalogCurrency::USD;
-			$CommissionPerUser->package_id = $data['package_id'];
-			$CommissionPerUser->status = self::PENDING_FOR_DISPERSION;
-			$CommissionPerUser->create_date = time();
-
-			return $CommissionPerUser->save();
+		if ($CommissionPerUser->getId()) {
+			return false;
 		}
 
-		return false;
+		$CommissionPerUser->user_login_id = $data['user_login_id'];
+		$CommissionPerUser->buy_per_user_id = $data['buy_per_user_id'] ?? 0;
+		$CommissionPerUser->catalog_commission_id = $data['catalog_commission_id'];
+		$CommissionPerUser->user_login_id_from = $data['user_login_id_from'];
+		$CommissionPerUser->amount = $data['amount'];
+		$CommissionPerUser->catalog_currency_id = CatalogCurrency::USD;
+		$CommissionPerUser->package_id = $data['package_id'];
+		$CommissionPerUser->status = isset($data['status']) ? $data['status'] : self::PENDING_FOR_DISPERSION;
+		$CommissionPerUser->create_date = time();
+
+		return $CommissionPerUser->save();
 	}
 
 	public static function addFromGain(array $data = null): bool

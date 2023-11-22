@@ -991,8 +991,8 @@ class UserLogin extends Orm {
             
             $_user = $userData;
           
-            $user['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
-            $user['pay_academy'] = $this->_hasProductPermission('pay_academy',$user_login_id);
+            $_user['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
+            $_user['pay_academy'] = $this->_hasProductPermission('pay_academy',$user_login_id);
             
             if($sponsor_id = $UserReferral->findField("user_login_id = ?",$user_login_id,"sponsor_id"))
             {
@@ -1402,20 +1402,13 @@ class UserLogin extends Orm {
     if (!isset($user_login_id)) {
       return false;
     }
-    
+
     $product_id = (new Product)->getIdByCode($code);
 
-    // if(!isset($this->temporal_permissions[$product_id]))
-    // {
-      return ProductPermission::hasPermission([
-        'product_id' => (new Product)->getIdByCode($code),
-        'user_login_id' => $user_login_id
-      ]);
-
-    //   $this->temporal_permissions[$product_id] = $hasPermission;
-    // }
-    
-    // return $this->temporal_permissions[$product_id];
+    return ProductPermission::hasPermission([
+      'product_id' => $product_id,
+      'user_login_id' => $user_login_id
+    ]);
   }
   
   public function getBinaryTree()
