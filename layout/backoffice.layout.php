@@ -229,10 +229,10 @@
     <script src="../../src/js/plugins/chartjs.min.js" type="text/javascript"></script>
     <script src="../../src/js/42d5adcbca.js" type="text/javascript"></script>
     
-    <script src="../../src/js/constants.js?v=2.6.2" type="text/javascript"></script>
-    <script src="../../src/js/alertCtrl.js?v=2.6.2" type="text/javascript"></script>
+    <script src="../../src/js/constants.js?v=2.6.3" type="text/javascript"></script>
+    <script src="../../src/js/alertCtrl.js?v=2.6.3" type="text/javascript"></script>
     <script src="../../src/js/jquery-3.5.1.min.js" type="text/javascript"></script>
-    <script src="../../src/js/general.js?v=2.6.2" type="text/javascript"></script>
+    <script src="../../src/js/general.js?v=2.6.3" type="text/javascript"></script>
     <!-- Github buttons -->
     
     <script>
@@ -248,21 +248,21 @@
 
     <!-- Github buttons -->
     <script src="../../src/js/buttons.js" type="text/javascript"></script>
-    <script src="../../src/js/soft-ui-dashboard.min.js?v=2.6.2"></script>
+    <script src="../../src/js/soft-ui-dashboard.min.js?v=2.6.3"></script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
     <link rel="stylesheet" href="../../src/css/general.css?v=1.2.8" />
     
-    <script src="../../src/js/vue.js?v=2.6.2" type="text/javascript"></script>
-    <script src="../../src/js/top.vue.js?v=2.6.2" type="module"></script>
-    <script src="../../src/js/notice.vue.js?v=2.6.2" type="module"></script>
-    <script src="../../src/js/chat.vue.js?v=2.6.2" type="module"></script>
-    <!-- <script src="../../src/js/translate.module.js?v=2.6.2" type="module"></script>
+    <script src="../../src/js/vue.js?v=2.6.3" type="text/javascript"></script>
+    <script src="../../src/js/top.vue.js?v=2.6.3" type="module"></script>
+    <script src="../../src/js/notice.vue.js?v=2.6.3" type="module"></script>
+    <script src="../../src/js/chat.vue.js?v=2.6.3" type="module"></script>
+    <!-- <script src="../../src/js/translate.module.js?v=2.6.3" type="module"></script>
     
-    <script src="../../src/js/translateInit.vue.js?v=2.6.2" type="module"></script> -->
+    <script src="../../src/js/translateInit.vue.js?v=2.6.3" type="module"></script> -->
     
     {{js_scripts}}
     {{css_scripts}}
 
-    <!-- <script src="../../src/js/translate.js?v=2.6.2" type="text/javascript"></script> -->
+    <!-- <script src="../../src/js/translate.js?v=2.6.3" type="text/javascript"></script> -->
 </body>
 </html>

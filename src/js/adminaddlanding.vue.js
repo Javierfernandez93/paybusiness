@@ -1,4 +1,4 @@
-import { AdminaddlandingViewer } from './adminaddlandingViewer.vue.js?v=2.6.2'
+import { AdminaddlandingViewer } from './adminaddlandingViewer.vue.js?v=2.6.3'
 
 Vue.createApp({
     components : { 

@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.6.2'   
+import { User } from '../../src/js/user.module.js?v=2.6.3'   
 
 // incoming money for partnertship and unilevel plan
 const DailyViewer = {
