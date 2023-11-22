@@ -38,7 +38,7 @@ class CommissionPerUser extends Orm
 		$CommissionPerUser->membership_per_user_id = $data['membership_per_user_id'];
 		$CommissionPerUser->user_login_id_from = $data['user_login_id_from'];
 		$CommissionPerUser->user_login_id = $data['user_login_id'];
-		$CommissionPerUser->catalog_currency_id = CatalogCurrency::USDTTRC20;
+		$CommissionPerUser->catalog_currency_id = CatalogCurrency::USD;
 		$CommissionPerUser->amount = Util::getPercentaje($data['amount'],$data['percentaje']);
 		$CommissionPerUser->status = isset($data['status']) ? $data['status'] : self::PENDING_FOR_DISPERSION;
 		$CommissionPerUser->create_date = time();

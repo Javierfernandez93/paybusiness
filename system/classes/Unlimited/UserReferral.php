@@ -576,4 +576,19 @@ class UserReferral extends Orm {
 
     return $result;
   }
+
+  public function getDirectsBySide(int $sponsor_id = null,int $side = null) 
+  {
+    if(!$sponsor_id)
+    {
+      return false;
+    }
+    
+    if(!isset($side))
+    {
+      return false;
+    }
+
+    return $this->connection()->column("SELECT user_login_id FROM user_referral WHERE sponsor_id = '{$sponsor_id}' AND side = '{$side}' AND status = '1'");  
+  }
 }

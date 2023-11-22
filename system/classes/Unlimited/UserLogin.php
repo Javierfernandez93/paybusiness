@@ -2027,39 +2027,68 @@ class UserLogin extends Orm {
 
   public function isQualified()
   {
-    if(!$this->getId())
+    return $this->_isQualified($this->company_id);
+  }
+  
+  public function hasQualifiedFromArray(array $users = null)
+  {
+    if(!$users)
     {
       return false;
     }
 
-    $left = $this->getNode($this->company_id,UserReferral::LEFT);
+    $isActive = false;
 
-    if(!$left)
+    foreach($users as $user_login_id)
     {
-      return false;
+      if($this->_hasProductPermission('pay_business',$user_login_id))
+      {
+        $isActive = true;
+
+        break;
+      }
     }
 
-    $leftActive = $this->_hasProductPermission('pay_business',$left['user_login_id']);
+    return $isActive;
+  }
 
-    if(!$leftActive)
+  public function _isQualified(int $user_login_id = null)
+  {
+    if(!$user_login_id)
     {
       return false;
     }
     
-    $right = $this->getNode($this->company_id,UserReferral::RIGHT);
+    $UserReferral = new UserReferral;
 
-    if(!$right)
+    $usersLeft = $UserReferral->getDirectsBySide($user_login_id,UserReferral::LEFT);
+
+    if(!$usersLeft)
     {
       return false;
     }
+    
+    $usersLeftActivation = $this->hasQualifiedFromArray($usersLeft);
 
-    $rightActive = $this->_hasProductPermission('pay_business',$right['user_login_id']);
-
-    if(!$rightActive)
+    if(!$usersLeftActivation)
     {
       return false;
     }
+    
+    $usersRight = $UserReferral->getDirectsBySide($user_login_id,UserReferral::RIGHT);
 
+    if(!$usersRight)
+    {
+      return false;
+    }
+    
+    $usersRightActivation = $this->hasQualifiedFromArray($usersRight);
+
+    if(!$usersRightActivation)
+    {
+      return false;
+    }
+    
     return true;
   }
 
