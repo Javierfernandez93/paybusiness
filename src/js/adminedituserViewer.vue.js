@@ -124,7 +124,7 @@ const AdminedituserViewer = {
             <div class="card-body">
                 <div class="row mb-3">
                     <div class="col-12 col-xl-6">
-                        <label>Usuario</label>
+                        <label>Nombre completo</label>
                         <input 
                             :autofocus="true"
                             :class="user.names ? 'is-valid' : ''"

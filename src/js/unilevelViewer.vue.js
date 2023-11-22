@@ -78,7 +78,9 @@ const UnilevelViewer = {
                                 <td class="align-middle">{{user.code}}</td>
                                 <td class="align-middle sans">{{user.names}}</td>
                                 <td class="align-middle">
-                                    {{user.signup_date.formatFullDate()}}
+                                    <span v-if="user.signup_date">
+                                        {{user.signup_date.formatFullDate()}}
+                                    </span>
                                 </td>
                                 <td class="align-middle">
                                     <span v-if="user.last_login_date" class="badge bg-success">
