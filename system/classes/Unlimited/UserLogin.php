@@ -984,20 +984,23 @@ class UserLogin extends Orm {
         
         foreach($level as $key => $user_login_id)
         {
+          $_user = [];
           $_network[$keyLevel][$key] = [];
           
-          $_network[$keyLevel][$key] = $this->getData($user_login_id);
+          $user = $this->getData($user_login_id);
           
-          // $_network[$keyLevel][$key]['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
-          // $_network[$keyLevel][$key]['pay_academy'] = $this->_hasProductPermission('pay_academy',$user_login_id);
+          // $user['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
+          // $user['pay_academy'] = $this->_hasProductPermission('pay_academy',$user_login_id);
           
           if($sponsor_id = $UserReferral->findField("user_login_id = ?",$user_login_id,"sponsor_id"))
           {
-            $_network[$keyLevel][$key]['sponsor'] = [
+            $user['sponsor'] = [
               'sponsor_id' => $sponsor_id,
               'names' => $UserData->getName($sponsor_id),
             ];
           }
+
+          $_network[$keyLevel][$key] = $_user;
         }  
       }
       
