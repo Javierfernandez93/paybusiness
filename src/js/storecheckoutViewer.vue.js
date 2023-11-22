@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.6.1'   
+import { User } from '../../src/js/user.module.js?v=2.6.2'   
 
 const StorecheckoutViewer = {
     name : 'storecheckout-viewer',
@@ -96,7 +96,7 @@ const StorecheckoutViewer = {
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" v-model="conditions" id="conditions">
                             <label class="form-check-label" for="conditions">
-                                Acepto <a class="text-primary text-decoration-underline cursor-pointer" href="../../apps/legal/?f=conditions">condiciones de cuenta</a>
+                                Acepto <a class="text-primary text-decoration-underline cursor-pointer" href="../../src/files/pdf/conditions.pdf">condiciones de cuenta</a>
                             </label>
                         </div>
                     </div>

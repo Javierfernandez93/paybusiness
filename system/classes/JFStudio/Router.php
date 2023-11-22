@@ -88,6 +88,7 @@ class Router {
     const Team = 145;
     const KyC = 146;
     const Unilevel = 147;
+    const Legal = 148;
     
     /* admin */
     const AdminUsers = 9;
@@ -268,6 +269,7 @@ class Router {
             self::Team => 'Team',
             self::KyC => 'KyC',
             self::Unilevel => 'Unilevel',
+            self::Legal => 'Legal',
             default => 'Sin nombre'
         };
     }
