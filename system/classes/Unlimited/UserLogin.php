@@ -987,10 +987,13 @@ class UserLogin extends Orm {
           $_user = [];
           $_network[$keyLevel][$key] = [];
           
-          $_user = $this->getData($user_login_id);
+          if($userData = $this->getData($user_login_id))
+          {
+            $_user = $userData;
+          }
           
-          // $user['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
-          // $user['pay_academy'] = $this->_hasProductPermission('pay_academy',$user_login_id);
+          $user['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
+          $user['pay_academy'] = $this->_hasProductPermission('pay_academy',$user_login_id);
           
           if($sponsor_id = $UserReferral->findField("user_login_id = ?",$user_login_id,"sponsor_id"))
           {
