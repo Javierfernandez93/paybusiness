@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.6.2'   
+import { User } from '../../src/js/user.module.js?v=2.6.3'   
 
 const GainsViewer = {
     name : 'gains-viewer',
@@ -39,6 +39,7 @@ const GainsViewer = {
                 },
             },
             STATUS: {
+                RETEINED: 0,
                 PENDING: 1,
                 DEPOSITED: 2,
             },
@@ -205,6 +206,9 @@ const GainsViewer = {
                                             <span v-if="commission.status == STATUS.PENDING" class="badge bg-warning">
                                                 <span v-if="active">Pendiente de dispersar </span>
                                                 <span v-else>Necesitas activarte para recibir la comisión</span>
+                                            </span>
+                                            <span v-if="commission.status == STATUS.RETEINED" class="badge bg-danger">
+                                                <span>Actualiza tu PayBusiness para recibir esta comisión</span>
                                             </span>
                                             <span v-if="commission.status == STATUS.DEPOSITED" class="badge bg-success">
                                                 Enviada a cartera electrónica 

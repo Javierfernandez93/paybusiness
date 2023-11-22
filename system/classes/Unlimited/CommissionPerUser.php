@@ -14,6 +14,7 @@ class CommissionPerUser extends Orm
 	protected $tblName = 'commission_per_user';
 
 	//** status */
+	const RETAINED = 0;
 	const PENDING_FOR_DISPERSION = 1;
 	const COMPLETED = 2;
 	const PROFIT_MAMP_NETWORK = 30;
@@ -242,7 +243,7 @@ class CommissionPerUser extends Orm
 				WHERE 
 					{$this->tblName}.user_login_id = '{$user_login_id}'
 				AND
-					{$this->tblName}.status IN (" . self::PENDING_FOR_DISPERSION . "," . self::COMPLETED . ")
+					{$this->tblName}.status IN (" . self::PENDING_FOR_DISPERSION . "," . self::COMPLETED . ",".self::RETAINED.")
 					{$filter}
 				GROUP BY 
 					{$this->tblName}.{$this->tblName}_id
