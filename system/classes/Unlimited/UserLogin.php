@@ -984,7 +984,7 @@ class UserLogin extends Orm {
 
         foreach($level as $key => $user_login_id)
         {
-          $_network[$keyLevel][$key] = $this->getData($user_login_id);
+          // $_network[$keyLevel][$key] = $this->getData($user_login_id);
           
           $_network[$keyLevel][$key]['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
           $_network[$keyLevel][$key]['pay_academy'] = $this->_hasProductPermission('pay_academy',$user_login_id);
