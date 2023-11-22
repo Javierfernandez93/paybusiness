@@ -56,7 +56,7 @@ function createTransactionCapitalPayments(Unlimited\BuyPerUser $BuyPerUser = nul
 {
     require_once TO_ROOT .'/vendor/autoload.php';
 
-	$Sdk = new \CapitalPayments\Sdk\Sdk(JFStudio\CapitalPayments::API_KEY,JFStudio\CapitalPayments::API_SECRET);
+	$Sdk = new \CapitalPayments\Sdk\Sdk(Unlimited\SystemVar::_getValue("api_key"),Unlimited\SystemVar::_getValue("api_secret"));
 
 	$response = $Sdk->createInvoice([
 		'amount' => $BuyPerUser->amount,
