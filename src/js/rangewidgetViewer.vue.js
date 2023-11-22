@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.6.0'   
+import { User } from '../../src/js/user.module.js?v=2.6.1'   
 
 const RangewidgetViewer = {
     name : 'rangewidget-viewer',
@@ -65,7 +65,7 @@ const RangewidgetViewer = {
                                 <span class="lead fw-semibold text-dark sans">$ {{balance.numberFormat(2)}} USD</span>    
                             </div>
                             <div class="col-auto">
-                                <span v-if="profile.active" class="badge bg-success">Calificado</span>    
+                                <span v-if="profile.qualified" class="badge bg-success">Calificado</span>    
                                 <span v-else class="badge bg-secondary">No calificado</span>    
                             </div>
                         </div>

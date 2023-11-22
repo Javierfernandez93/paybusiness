@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=2.6.0'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=2.6.1'
 
 const AdmintransactionsViewer = {
     name : 'admintransactions-viewer',

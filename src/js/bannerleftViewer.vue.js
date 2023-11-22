@@ -1,5 +1,5 @@
-import { User } from '../../src/js/user.module.js?v=2.6.0'   
-import { Banner } from '../../src/js/banner.module.js?v=2.6.0'   
+import { User } from '../../src/js/user.module.js?v=2.6.1'   
+import { Banner } from '../../src/js/banner.module.js?v=2.6.1'   
 
 const BannerleftViewer = {
     name : 'bannerleft-viewer',

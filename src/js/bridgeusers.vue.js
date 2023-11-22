@@ -1,4 +1,4 @@
-import { BridgeusersViewer } from '../../src/js/bridgeusersViewer.vue.js?v=2.6.0'
+import { BridgeusersViewer } from '../../src/js/bridgeusersViewer.vue.js?v=2.6.1'
 
 Vue.createApp({
     components : { 

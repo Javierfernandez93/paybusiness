@@ -1,4 +1,4 @@
-import { PaymentsViewer } from './paymentsViewer.vue.js?v=2.6.0'  
+import { PaymentsViewer } from './paymentsViewer.vue.js?v=2.6.1'  
 
 Vue.createApp({
     components: {

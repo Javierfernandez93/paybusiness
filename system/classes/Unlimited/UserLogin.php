@@ -1426,7 +1426,6 @@ class UserLogin extends Orm {
 
     return $this->_getBinaryTree($this->company_id);
   }
- 
   
   public function getTeamPending()
   {
@@ -2024,6 +2023,44 @@ class UserLogin extends Orm {
     }
 
     return $network;
+  }
+
+  public function isQualified()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    $left = $this->getNode($this->company_id,UserReferral::LEFT);
+
+    if(!$left)
+    {
+      return false;
+    }
+
+    $leftActive = $this->_hasProductPermission('pay_business',$left['user_login_id']);
+
+    if(!$leftActive)
+    {
+      return false;
+    }
+    
+    $right = $this->getNode($this->company_id,UserReferral::RIGHT);
+
+    if(!$right)
+    {
+      return false;
+    }
+
+    $rightActive = $this->_hasProductPermission('pay_business',$right['user_login_id']);
+
+    if(!$rightActive)
+    {
+      return false;
+    }
+
+    return true;
   }
 
   public function getSponsorActivation()
