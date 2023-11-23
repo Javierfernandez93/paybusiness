@@ -1,4 +1,4 @@
-import { AdviceViewer } from '../../src/js/adviceViewer.vue.js?v=2.6.3'
+import { AdviceViewer } from '../../src/js/adviceViewer.vue.js?v=2.6.4'
 
 const AboutViewer = {
     name : 'about-viewer',

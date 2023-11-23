@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.6.3';
+import { User } from '../../src/js/user.module.js?v=2.6.4';
 
 const ListViewer = {
     name : 'list-viewer',
@@ -7,6 +7,10 @@ const ListViewer = {
             User : new User,
             networkAux: null,
             network: null,
+            SIDE: {
+                START: 0,
+                END: 1,
+            }
         }
     },
     methods: {
@@ -57,6 +61,9 @@ const ListViewer = {
                                 {{levelIndex+1}}
                             </div>    
                             <div class="col-12 col-xl-auto">
+                                {{level.length}} usuario(s)
+                            </div>    
+                            <div class="col-12 col-xl-auto">
                                 <input type="text" @keyup="search($event.target,levelIndex)" class="form-control" placeholder="buscar..."/>
                             </div>    
                         </div>    
@@ -68,6 +75,7 @@ const ListViewer = {
                                 <tr class="text-center">
                                     <th class="tex-xs text-uppercase text-secondary">ID</th>
                                     <th class="tex-xs text-uppercase text-secondary">Usuario</th>
+                                    <th class="tex-xs text-uppercase text-secondary">LADO</th>
                                     <th class="tex-xs text-uppercase text-secondary">Teléfono</th>
                                     <th class="tex-xs text-uppercase text-secondary">País</th>
                                     <th class="tex-xs text-uppercase text-secondary">Fecha de registro</th>
@@ -78,11 +86,24 @@ const ListViewer = {
                             </thead>
 
                             <tbody>
-                                <tr v-for="user in level" class="text-center">
-                                <td class="align-middle sans">{{user.code}}</td>
+                                <tr v-for="(user,index) in level" class="text-center">
+                                <td class="align-middle">
+                                    <span>#{{index+1}}</span>
+                                    <div class="sans">
+                                        {{user.code}}
+                                    </div>
+                                </td>
                                 <td class="align-middle">
                                     <div class="text-dark">{{user.names}}</div>
                                     <div class="text-secondary sans">{{user.email}}</div>
+                                </td>
+                                <td class="align-middle">
+                                    <span v-if="user.side == SIDE.START" class="badge bg-success">
+                                        Izquierda
+                                    </span>
+                                    <span v-else-if="user.side == SIDE.END" class="badge bg-primary">
+                                        Derecha
+                                    </span>
                                 </td>
                                 <td class="align-middle">{{user.phone}}</td>
                                 <td class="align-middle">
