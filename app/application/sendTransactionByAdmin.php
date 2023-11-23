@@ -16,6 +16,8 @@ if($UserSupport->logged === true)
             {
                 if($data['user_login_id'] = (new BlockChain\Wallet)->getUserIdByPublicKey($data['address']))
                 {
+                    $message = 'By admin';
+                    
                     if(send($data['user_login_id'],$data['amount'],$message))
                     {
                         $data['s'] = 1;

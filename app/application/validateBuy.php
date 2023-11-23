@@ -23,7 +23,7 @@ if(($data['user'] ?? false == HCStudio\Util::USERNAME && $data['password'] ?? fa
                     $BuyPerUser->catalog_validation_method_id = $data['catalog_validation_method_id'];
                     $BuyPerUser->ipn_data = $data['ipn_data'] ?? '';
                     $BuyPerUser->approved_date = time();
-                    $BuyPerUser->user_support_id = $data['user_support_id'] ? $data['user_support_id'] : $BuyPerUser->user_support_id;
+                    $BuyPerUser->user_support_id = isset($data['user_support_id']) ? $data['user_support_id'] : $BuyPerUser->user_support_id;
                     $BuyPerUser->status = Unlimited\BuyPerUser::VALIDATED;
 
                     $items = $BuyPerUser->unformatData();
