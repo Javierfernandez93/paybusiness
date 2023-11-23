@@ -40,7 +40,14 @@ const AdminwalletViewer = {
         sendTransactionByAdmin() {
             const alert = alertCtrl.create({
                 title: `¿Deseas procesar ésta transacción?`,
-                subTitle: `Procesar a ${this.transaction.address} por $ ${this.transaction.amount.numberFormat(2)}`,
+                size: `modal-md`,
+                html: `
+                    <div class="text-center">
+                        <div class="text-secondary">Enviar a </div>
+                        <div class="text-break text-dark">${this.transaction.address}</div>
+                        <div class="text-dark h3">$ ${this.transaction.amount.numberFormat(2)}</div>
+                    </div>
+                `,
                 buttons: [
                     { 
                         text: 'Aceptar',
@@ -82,13 +89,7 @@ const AdminwalletViewer = {
                 <div class="row">
                     <div class="col-12 col-xl">
                         <div class="form-floating">
-                            <input
-                                v-model="transaction.address"
-                                :class="transaction.address ? 'is-valid' : ''"
-                                ref="address"
-                                :autofocus="true"
-                                @keydown.enter.exact.prevent="$refs.amount.focus()" 
-                                type="text" class="form-control pe-5" id="floatingInput" placeholder="address">
+                            <input v-model="transaction.address" :class="transaction.address ? 'is-valid' : ''" ref="address" :autofocus="true" @keydown.enter.exact.prevent="$refs.amount.focus()" type="text" class="form-control pe-5" id="floatingInput" placeholder="address">
                             <label for="floatingInput">Dirección</label>
                         </div>
                     </div>
