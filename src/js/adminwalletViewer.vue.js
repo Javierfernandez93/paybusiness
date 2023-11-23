@@ -86,8 +86,8 @@ const AdminwalletViewer = {
     template : `
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-12 col-xl">
+                <div class="row align-items-center">
+                    <div class="col-12 mb-3">
                         <div class="form-floating">
                             <input v-model="transaction.address" :class="transaction.address ? 'is-valid' : ''" ref="address" :autofocus="true" @keydown.enter.exact.prevent="$refs.amount.focus()" type="text" class="form-control pe-5" id="floatingInput" placeholder="address">
                             <label for="floatingInput">Dirección</label>
