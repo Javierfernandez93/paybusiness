@@ -32,13 +32,13 @@ if($UserLogin->logged === true)
                             'ipn_data' => json_encode($data),
                         ]);
 
-                        d($url."?".http_build_query([
-                            'user' => HCStudio\Util::USERNAME,
-                            'password' => HCStudio\Util::PASSWORD,
-                            'invoice_id' => $data['invoice_id'],
-                            'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::EWALLET,
-                            'ipn_data' => json_encode($data),
-                        ]));
+                        // d($url."?".http_build_query([
+                        //     'user' => HCStudio\Util::USERNAME,
+                        //     'password' => HCStudio\Util::PASSWORD,
+                        //     'invoice_id' => $data['invoice_id'],
+                        //     'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::EWALLET,
+                        //     'ipn_data' => json_encode($data),
+                        // ]));
 
                         if($response = $Curl->getResponse(true)) 
                         {
