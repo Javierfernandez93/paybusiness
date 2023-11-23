@@ -63,7 +63,7 @@ const InvoicesViewer = {
         </div>
 
         <div v-if="invoices">
-            <div class="card bg-transparent shadow-none">
+            <div class="card">
                 <div class="card-header bg-transparent">
                     <div class="row align-items-center">
                         <div class="col fw-semibold text-dark">

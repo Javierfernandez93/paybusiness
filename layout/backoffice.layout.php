@@ -72,6 +72,15 @@
                                 <span class="nav-link-text ms-1">Buy</span>
                             </a>
                         </li>
+
+
+                        <li class="nav-item">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Gains])) { ?>active<?php } ?>" href="../../apps/store/invoices">
+                                <i class="bi bi-list-task"></i>
+                                <span class="nav-link-text ms-1">Invoices</span>
+                            </a>
+                        </li>
+
                         <li class="nav-item">
                             <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Gains])) { ?>active<?php } ?>" href="../../apps/gains">
                                 <i class="bi bi-currency-dollar"></i>

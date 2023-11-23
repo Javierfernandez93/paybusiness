@@ -37,10 +37,12 @@ const UserflyerViewer = {
         },
         downloadImage() {
             html2canvas($(this.$refs.flyer)[0]).then((canvas) => {
-                var myImage = canvas.toDataURL("image/png");
-
-                var image = myImage.replace("image/png", "image/octet-stream"); 
-                window.open(image); 
+                var image = canvas.toDataURL("image/png");
+        
+                var aDownloadLink = document.createElement('a');
+                aDownloadLink.download = 'flyer.png';
+                aDownloadLink.href = image;
+                aDownloadLink.click();
             });
         },
     },
