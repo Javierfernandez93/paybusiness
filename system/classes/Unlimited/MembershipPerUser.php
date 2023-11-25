@@ -240,7 +240,7 @@ class MembershipPerUser extends Orm {
 
 		return $this->connection()->field("
 			SELECT 
-				{$this->tblName}.amount
+				SUM({$this->tblName}.amount) as amount
 			FROM
 				{$this->tblName}
 			LEFT JOIN 
@@ -250,7 +250,7 @@ class MembershipPerUser extends Orm {
 			WHERE 
 				{$this->tblName}.user_login_id = '{$user_login_id}'
 			AND 
-				{$this->tblName}.status = '1'
+				{$this->tblName}.status IN('1','2')
 		");
 	}
 }

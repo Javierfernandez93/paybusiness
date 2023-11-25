@@ -43,6 +43,12 @@ const PaybusinesswidgetViewer = {
                         <h3 class="text-secondary fw-semilight">{{membership.title}}</h3>
                     </div>
                 </div>
+                <div v-if="membership.amount_extra > 0" class="text-center">
+                    <span class="border border-secondary px-3 py-1 rounded mb-3">
+                        Stand by $ {{membership.amount_extra.numberFormat(2)}} USD
+                    </span>
+                </div>
+
                 <div class="progress" style="height:1rem" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                     <div style="height:1rem" class="progress-bar bg-success" :style="{width: membership.percentaje+'%'}">{{membership.percentaje}}%</div>
                 </div>

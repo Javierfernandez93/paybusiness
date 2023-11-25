@@ -23,7 +23,7 @@ if($UserLogin->logged === true)
     ];
 
     $data['members'] = 0;
-
+    
     if($members = $UserLogin->getNetworkCount(10))
     {
         $data['members'] = $members;
