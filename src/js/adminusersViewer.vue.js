@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=2.6.6'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=2.6.7'
 
 const AdminusersViewer = {
     name : 'adminusers-viewer',
@@ -28,6 +28,10 @@ const AdminusersViewer = {
             columns: { // 0 DESC , 1 ASC 
                 company_id: {
                     name: 'company_id',
+                    desc: false,
+                },
+                kyc_approbed: {
+                    name: 'kyc_approbed',
                     desc: false,
                 },
                 signup_date: {
@@ -260,6 +264,17 @@ const AdminusersViewer = {
                                     <u class="text-sm ms-2">Usuario</u>
                                 </th>
                                 <th 
+                                    @click="sortData(columns.kyc_approbed)"
+                                    class="text-start c-pointer text-uppercase text-primary font-weight-bolder opacity-7">
+                                    <span v-if="columns.kyc_approbed.desc">
+                                        <i class="bi text-primary bi-arrow-up-square-fill"></i>
+                                    </span>    
+                                    <span v-else>    
+                                        <i class="bi text-primary bi-arrow-down-square-fill"></i>
+                                    </span>    
+                                    <u class="text-sm ms-2">Kyc</u>
+                                </th>
+                                <th 
                                     @click="sortData(columns.landing)"
                                     class="text-center c-pointer text-uppercase text-primary font-weight-bolder opacity-7">
                                     <span v-if="columns.landing.desc">
@@ -347,6 +362,14 @@ const AdminusersViewer = {
                                             <div>$ {{user.ewallet.amount.numberFormat(2)}}</div>
                                         </div>
                                     </div>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <span v-if="user.kyc_approbed" class="badge bg-primary">
+                                        <i class="bi bi-check"></i>
+                                    </span>
+                                    <span v-else="user.kyc_approbed" class="badge bg-secondary">
+                                        <i class="bi bi-x"></i>
+                                    </span>
                                 </td>
                                 <td class="align-middle text-center">
                                     <span class="badge bg-primary">

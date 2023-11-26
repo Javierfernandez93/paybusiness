@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=2.6.6'   
+import { UserSupport } from '../../src/js/userSupport.module.js?v=2.6.7'   
 
 const AdminlandingViewer = {
     name : 'adminlanding-viewer',

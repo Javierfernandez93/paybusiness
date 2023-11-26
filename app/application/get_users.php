@@ -27,9 +27,11 @@ if($UserSupport->logged === true)
 function format(array $users = null) : array 
 {
     $Country = new World\Country;
+    $UserKyc = new Unlimited\UserKyc;
     
-    return array_map(function($user) use($Country){
+    return array_map(function($user) use($Country,$UserKyc){
         $user['countryData'] = $Country->getCountryNameAndPhoneArea($user['country_id']);
+        $user['kyc_approbed'] = $UserKyc->findField("user_login_id = ? AND status = ?",[$user['user_login_id'],Unlimited\UserKyc::PASS],"status") == 2;
 
         return $user;
     },$users);

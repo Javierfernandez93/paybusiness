@@ -1,4 +1,4 @@
-import { ApiedititemViewer } from './apiedititemViewer.vue.js?v=2.6.6'
+import { ApiedititemViewer } from './apiedititemViewer.vue.js?v=2.6.7'
 
 Vue.createApp({
     components : { 
