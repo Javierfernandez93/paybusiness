@@ -1969,8 +1969,6 @@ class UserLogin extends Orm {
         $_directs['end']['users'] = array_merge($_directs['end']['users'],self::getSingleArray($networkLeft));
       }
     }
-
-    
     
     if(isset($_directs['start']['users']))
     {
