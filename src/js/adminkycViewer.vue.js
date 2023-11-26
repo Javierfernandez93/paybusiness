@@ -133,9 +133,9 @@ const AdminkycViewer = {
                         <td class="align-middle">{{user.names}}</td>
                         <td class="align-middle">{{user.create_date.formatFullDate()}}</td>
                         <td class="align-middle">
-                            <div class="d-grid"><button @click="viewDocument(user.document_front)" class="btn mb-1 px-1 shadow-none btn-sm btn-primary">Ver Identificación Frente</button></div>
-                            <div class="d-grid"><button @click="viewDocument(user.document_back)" class="btn mb-1 px-1 shadow-none btn-sm btn-primary">Ver Identificación Reverso</button></div>
-                            <div class="d-grid"><button @click="viewDocument(user.selfie)" class="btn mb-1 px-1 shadow-none btn-sm btn-primary">Ver selfie</button></div>
+                            <div v-if="user.document_front" class="d-grid"><button @click="viewDocument(user.document_front)" class="btn mb-1 px-1 shadow-none btn-sm btn-primary">Ver Identificación Frente</button></div>
+                            <div v-if="user.document_back" class="d-grid"><button @click="viewDocument(user.document_back)" class="btn mb-1 px-1 shadow-none btn-sm btn-primary">Ver Identificación Reverso</button></div>
+                            <div v-if="user.selfie" class="d-grid"><button @click="viewDocument(user.selfie)" class="btn mb-1 px-1 shadow-none btn-sm btn-primary">Ver selfie</button></div>
                         </td>
                         <td class="align-middle">
                             {{user.dni}}
