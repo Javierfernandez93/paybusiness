@@ -1,5 +1,5 @@
-import { User } from '../../src/js/user.module.js?v=2.6.4'   
-import { Translator } from '../../src/js/translator.module.js?v=2.6.4'   
+import { User } from '../../src/js/user.module.js?v=2.6.6'   
+import { Translator } from '../../src/js/translator.module.js?v=2.6.6'   
 
 const ApicustomerViewer = {
     name : 'apicustomer-viewer',

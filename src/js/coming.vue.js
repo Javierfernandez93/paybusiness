@@ -1,6 +1,6 @@
 /* vue */
-import { ComingViewer } from '../../src/js/comingViewer.vue.js?v=2.6.4'
-import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.6.4'
+import { ComingViewer } from '../../src/js/comingViewer.vue.js?v=2.6.6'
+import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.6.6'
 
 Vue.createApp({
     components: {
