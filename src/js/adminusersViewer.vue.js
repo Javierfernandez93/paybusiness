@@ -325,8 +325,8 @@ const AdminusersViewer = {
                                             
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h6 class="mb-0 text-sm">{{user.names}} <span class="ms-2 text-success" v-if="user.verified_mail"><i class="bi bi-check-circle-fill"></i></span></h6>
-                                            <p class="text-xs text-secondary mb-0">{{user.email}}</p>
+                                            <h6 class="mb-0 text-sm">{{user.names}}</h6>
+                                            <p class="text-xs text-secondary mb-0">{{user.email}} <span class="ms-2 text-success" v-if="user.verified_mail"><i class="bi bi-check-circle-fill"></i></span></p>
                                         </div>
                                     </div>
                                     <div v-if="user.ewallet" class="alert alert-dark text-white mt-3">
