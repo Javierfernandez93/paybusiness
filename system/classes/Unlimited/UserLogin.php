@@ -1463,7 +1463,7 @@ class UserLogin extends Orm {
       return false;
     }
 
-    return (new UserKyc)->findField("user_login_id = ? AND status = ?",[$this->company_id,1],"user_login_id");
+    return (new UserKyc)->findField("user_login_id = ? AND status = ?",[$this->company_id,UserKyc::PASS],"status") == UserKyc::PASS;
   }
 
   public function getFrontalUsers()
