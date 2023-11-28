@@ -7,6 +7,8 @@ const TeamViewer = {
             User: new User,
             frontals : null,
             points : null,
+            rounds : 0,
+            MAX_ROUNDS : 4,
             query : null,
             usersCalled : [],
             user_login_id : null,
@@ -115,9 +117,14 @@ const TeamViewer = {
         
                         $(`#${data.user_login_id}`).append(html)
     
-                        data.users.forEach(user => {
-                            $(`#${user.user_login_id}`).click()
-                        })
+                        this.rounds += 1
+
+                        if(this.rounds < this.MAX_ROUNDS) 
+                        {
+                            data.users.forEach(user => {
+                                $(`#${user.user_login_id}`).click()
+                            })
+                        }
                     }
                 }
             }
