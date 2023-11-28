@@ -23,6 +23,8 @@ class CatalogCommissionType extends Orm {
   const RESIDUAL_MAM = 5;
   const DUMMIE_TRADING_MEMBERSHIP_ID = 9;
   const ATI_MEMBERSHIP_ID = 10;
+  
+  const RANGE_BONUS_ID = 3;
 
   public function __construct() {
     parent::__construct();

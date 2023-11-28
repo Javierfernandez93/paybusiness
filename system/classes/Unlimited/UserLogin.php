@@ -617,7 +617,11 @@ class UserLogin extends Orm {
       return false;
     }
     
-    return (new CatalogRangePerUser)->getNextRange($this->company_id);
+    return self::_getNextRange($this->company_id);
+  }
+
+  public static function _getNextRange(int $user_login_id = null) {
+    return (new CatalogRangePerUser)->getNextRange($user_login_id);
   }
 
   public function getRange() {
@@ -626,7 +630,12 @@ class UserLogin extends Orm {
       return false;
     }
     
-    return (new CatalogRangePerUser)->getLastRange($this->company_id);
+    return self::getLastRange($this->company_id);
+  }
+
+  public static function getLastRange(int $user_login_id = null) {
+  
+    return (new CatalogRangePerUser)->getLastRange($user_login_id);
   }
 
   /* profile fun */  
@@ -1698,7 +1707,12 @@ class UserLogin extends Orm {
       return false;
     }
 
-    return (new MembershipPerUser)->getCurrentMembershipAmount($this->company_id);
+    return self::_getCurrentMembershipAmount($this->company_id);
+  }
+  
+  public static function _getCurrentMembershipAmount(int $user_login_id = null)
+  {
+    return (new MembershipPerUser)->getCurrentMembershipAmount($user_login_id);
   }
 
   public function getLastMembers()

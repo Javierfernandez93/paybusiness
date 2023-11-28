@@ -8,9 +8,31 @@ use Unlimited\CatalogRange;
 
 class CatalogRangePerUser extends Orm {
 	protected $tblName = 'catalog_range_per_user';
+    
+    const PASSED = 2;
+
 	public function __construct() {
 		parent::__construct();
 	}
+
+	public static function expireRange(int $catalog_range_per_user_id = null) : bool
+    {
+        if(!isset($catalog_range_per_user_id))
+        {
+            return false;
+        }
+
+        $CatalogRangePerUser = new self;
+        
+        if(!$CatalogRangePerUser->loadWhere("catalog_range_per_user_id = ?",$catalog_range_per_user_id))
+        {
+            return false;
+        }
+        
+        $CatalogRangePerUser->status = self::PASSED;
+        
+        return $CatalogRangePerUser->save();
+    }
 
 	public static function insertFirstRange(array $data = null) : bool
     {
@@ -81,6 +103,7 @@ class CatalogRangePerUser extends Orm {
         }
 
         return $this->connection()->row("SELECT 
+            {$this->tblName}.{$this->tblName}_id,
             {$this->tblName}.catalog_range_id,
             catalog_range.image,
             catalog_range.volumen,

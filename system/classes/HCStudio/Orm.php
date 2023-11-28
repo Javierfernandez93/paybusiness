@@ -488,7 +488,6 @@ abstract class Orm
 		return false;
 	}
 
-	
 	public function countWhere(string $where = null,array|string|int|float $binds = null) : int|bool
 	{
 		$query = "SELECT COUNT({$this->tblPrimary}) as c FROM {$this->tblName} WHERE {$where}";

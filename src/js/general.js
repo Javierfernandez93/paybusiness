@@ -1,7 +1,6 @@
-$(document).ready(function() {
-  $("body").tooltip({ selector: '[data-bs-toggle=tooltip]' });
-})
-
+$(document).ready(function () {
+  $("body").tooltip({ selector: "[data-bs-toggle=tooltip]" });
+});
 
 /* FUNC MODES */
 const CHECK_MAIL = "CHECK_MAIL";
@@ -175,49 +174,44 @@ function alertMessage(mesage, element, title = false) {
   alertmesage(mesage, element, title);
 }
 
-async function alertHtml(html,title,size)
-{
-    await _closeModal();
+async function alertHtml(html, title, size) {
+  await _closeModal();
 
-    title = (title) ? title : null;
-    size = size ? size : 'modal-md';
+  title = title ? title : null;
+  size = size ? size : "modal-md";
 
-    let alert = alertCtrl.create({
-      title: title,
-      size: size,
-      html: html,
-      buttons: [
-        {
-          text: "Aceptar",
-          role: "cancel",
-          handler: (data) => {
-            
-          },
-        },
-      ],
-    });
+  let alert = alertCtrl.create({
+    title: title,
+    size: size,
+    html: html,
+    buttons: [
+      {
+        text: "Aceptar",
+        role: "cancel",
+        handler: (data) => {},
+      },
+    ],
+  });
 
-    alertCtrl.present(alert.modal);
+  alertCtrl.present(alert.modal);
 }
 
-const _closeModal = function()
-{
+const _closeModal = function () {
   return new Promise((resolve, reject) => {
     if (alert != null) {
       alert.modal.dismiss();
     }
 
-    setTimeout(()=>{
-      resolve()
-    },900)
-  })
-}
+    setTimeout(() => {
+      resolve();
+    }, 900);
+  });
+};
 
-function closeModal()
-{
-    if (alert != null) {
-        alert.modal.dismiss();
-    }
+function closeModal() {
+  if (alert != null) {
+    alert.modal.dismiss();
+  }
 }
 
 function alertmesage(mesage, element, title = false) {
@@ -419,8 +413,6 @@ function compareDates(date_future) {
 
   return { days: days, hours: hours, minutes: minutes, seconds: seconds };
 }
-
-
 
 function time() {
   return parseInt((new Date().getTime() / 1000).toFixed(0));
@@ -637,15 +629,28 @@ String.prototype.formatDate = function () {
 };
 
 Number.prototype.formatFullDate = function () {
-  return new Date(this * 1000).toLocaleTimeString("es-ES",{ hour: 'numeric', minute: 'numeric', hour12: true, day: 'numeric', month: 'long'})
+  return new Date(this * 1000).toLocaleTimeString("es-ES", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+    day: "numeric",
+    month: "long",
+  });
 };
 
 Number.prototype.formatDateText = function () {
-  return new Date(this * 1000).toLocaleDateString("es-ES",{ weekday: 'long', day: 'numeric', month: 'long'})
+  return new Date(this * 1000).toLocaleDateString("es-ES", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
 };
 
 Number.prototype.formatDateTextChart = function () {
-  return new Date(this * 1000).toLocaleDateString("es-ES",{ day: 'numeric', month: 'long'})
+  return new Date(this * 1000).toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "long",
+  });
 };
 
 Number.prototype.numberFormat = function (decimals, dec_point, thousands_sep) {
@@ -700,23 +705,19 @@ String.prototype.numberFormat = function (decimals, dec_point, thousands_sep) {
   return s.join(dec);
 };
 
-Array.prototype.inArray = function(needle)
-{
-  let key = -1
-  for(let i = 0; i < this.length; i++) 
-  {
-    if(this[i] === needle)
-    {
-      key = i
+Array.prototype.inArray = function (needle) {
+  let key = -1;
+  for (let i = 0; i < this.length; i++) {
+    if (this[i] === needle) {
+      key = i;
     }
   }
 
-  return key
-}
+  return key;
+};
 
-Number.prototype.timeSince = function() 
-{
-  var date = this * 1000
+Number.prototype.timeSince = function () {
+  var date = this * 1000;
   var seconds = Math.floor((new Date() - date) / 1000);
 
   var interval = seconds / 31536000;
@@ -741,13 +742,12 @@ Number.prototype.timeSince = function()
     return Math.floor(interval) + " minuto(s)";
   }
   return Math.floor(seconds) + " segundos";
-}
-String.prototype.convertDataToHtml = function() {
-  var blocks = JSON.parse(this).blocks
+};
+String.prototype.convertDataToHtml = function () {
+  var blocks = JSON.parse(this).blocks;
 
   var convertedHtml = "";
-  blocks.map(block => {
-    
+  blocks.map((block) => {
     switch (block.type) {
       case "header":
         convertedHtml += `<h${block.data.level}>${block.data.text}</h${block.data.level}>`;
@@ -766,7 +766,7 @@ String.prototype.convertDataToHtml = function() {
         break;
       case "list":
         convertedHtml += "<ul>";
-        block.data.items.forEach(function(li) {
+        block.data.items.forEach(function (li) {
           convertedHtml += `<li>${li}</li>`;
         });
         convertedHtml += "</ul>";
@@ -777,503 +777,509 @@ String.prototype.convertDataToHtml = function() {
     }
   });
   return convertedHtml;
-}
+};
 
 String.prototype.getAcronime = function () {
-  let acronime = ''
-  const array = this.split(" ")
+  let acronime = "";
+  const array = this.split(" ");
 
   for (var i = 0; i < array.length; i++) {
-      if (i <= 2) {
-          acronime += array[i].charAt(0)
-      }
+    if (i <= 2) {
+      acronime += array[i].charAt(0);
+    }
   }
 
-  return acronime
-}
+  return acronime;
+};
 
 String.prototype.getFirstLetter = function () {
-  return this != undefined ? this.charAt(0) : 'C'
-}
+  return this != undefined ? this.charAt(0) : "C";
+};
 
-String.prototype.isValidUrl = function() 
-{
-  var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
-    '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
-    '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
-    '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+String.prototype.isValidUrl = function () {
+  var pattern = new RegExp(
+    "^(https?:\\/\\/)?" + // protocol
+      "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // domain name
+      "((\\d{1,3}\\.){3}\\d{1,3}))" + // OR ip (v4) address
+      "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // port and path
+      "(\\?[;&a-z\\d%_.~+=-]*)?" + // query string
+      "(\\#[-a-z\\d_]*)?$",
+    "i"
+  ); // fragment locator
   return !!pattern.test(this);
+};
+
+String.prototype.isImage = function () {
+  return /\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(this);
+};
+
+String.prototype.isFile = function () {
+  return /\.(pdf|doc?x|xls?x|zip|rar)$/i.test(this);
+};
+
+String.prototype.isVideo = function () {
+  return /\.(mp4|webm|mpg|mp2|mpeg|avi|flv|mov)$/i.test(this);
+};
+
+String.prototype.getFullLanding = function () {
+  return `https://www.unlimitedgroup.io/${this}`;
+};
+
+function replaceFullRoute(string) {
+  return string.replace(`${MAIN_PATH}/`, "../../");
 }
 
+String.prototype.replaceFullRoute = function () {
+  return this.replace(`${MAIN_PATH}/`, "../../");
+};
 
-String.prototype.isImage = function()
-{
-    return (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i).test(this)
-}
+String.prototype.getQrCode = function () {
+  return (
+    getMainPath() + `/app/application/get_qr_url.php?url=${this}&kind=text`
+  );
+};
 
-String.prototype.isFile = function()
-{
-    return (/\.(pdf|doc?x|xls?x|zip|rar)$/i).test(this)
-}
+String.prototype.getWhatsappLink = function () {
+  return `https://api.whatsapp.com/send?text=${this}`;
+};
 
-String.prototype.isVideo = function()
-{
-    return (/\.(mp4|webm|mpg|mp2|mpeg|avi|flv|mov)$/i).test(this)
-}
+String.prototype.sendWhatsApp = function (text) {
+  const number = this.replace(/\D/g, "");
+  return `https://wa.me/${number}/?text=${text}`;
+};
 
+String.prototype.formatPhoneNumber = function (phone_code) {
+  return `${phone_code}${this}`;
+};
 
-String.prototype.getFullLanding = function() 
-{
-    return `https://www.unlimitedgroup.io/${this}`
-}
+Number.prototype.formatPhoneNumber = function (phone_code) {
+  return `${phone_code}${this}`;
+};
 
-function replaceFullRoute(string) 
-{
-  return string.replace(`${MAIN_PATH}/`, '../../')
-}
+String.prototype.getQrCodeFromRoute = function () {
+  return `${MAIN_PATH}app/application/get_qr_url.php?url=${MAIN_PATH}${this}`;
+};
 
-String.prototype.replaceFullRoute = function () 
-{
-  return this.replace(`${MAIN_PATH}/`, '../../')
-}
-
-String.prototype.getQrCode = function ()
-{
-    return getMainPath() + `/app/application/get_qr_url.php?url=${this}&kind=text`
-}
-
-String.prototype.getWhatsappLink = function ()
-{
-  return `https://api.whatsapp.com/send?text=${this}`
-}
-
-String.prototype.sendWhatsApp = function (text)
-{
-  const number = this.replace(/\D/g, "")
-  return `https://wa.me/${number}/?text=${text}`
-}
-
-String.prototype.formatPhoneNumber = function (phone_code)
-{
-  return `${phone_code}${this}`
-}
-
-Number.prototype.formatPhoneNumber = function (phone_code)
-{
-  return `${phone_code}${this}`
-}
-
-String.prototype.getQrCodeFromRoute = function ()
-{
-    return `${MAIN_PATH}app/application/get_qr_url.php?url=${MAIN_PATH}${this}`
-}
-
-String.prototype.getWhatsAppFromRoute = function ()
-{
-    return `https://api.whatsapp.com/send?text=${MAIN_PATH}${this}`
-}
-String.prototype.getLinkedinFromRoute = function ()
-{
-    return `http://www.linkedin.com/shareArticle?mini=true&url=${MAIN_PATH}${this}`
-}
-String.prototype.getTwitterFromRoute = function ()
-{
-    return `http://twitter.com/share?url=${MAIN_PATH}${this}`
-}
-String.prototype.getRedditFromRoute = function ()
-{
-    return `http://reddit.com/submit?url=${MAIN_PATH}${this}`
-}
-String.prototype.getPinterestFromRoute = function ()
-{
-    return `http://pinterest.com/pin/create/link/?url=${MAIN_PATH}${this}`
-}
-String.prototype.getPinterestFromRoute = function ()
-{
-    return `http://pinterest.com/pin/create/link/?url=${MAIN_PATH}${this}`
-}
-String.prototype.getEmailFromRoute = function ()
-{
-    return `mailto:?Subject=&amp;Body=${MAIN_PATH}${this}`
-}
+String.prototype.getWhatsAppFromRoute = function () {
+  return `https://api.whatsapp.com/send?text=${MAIN_PATH}${this}`;
+};
+String.prototype.getLinkedinFromRoute = function () {
+  return `http://www.linkedin.com/shareArticle?mini=true&url=${MAIN_PATH}${this}`;
+};
+String.prototype.getTwitterFromRoute = function () {
+  return `http://twitter.com/share?url=${MAIN_PATH}${this}`;
+};
+String.prototype.getRedditFromRoute = function () {
+  return `http://reddit.com/submit?url=${MAIN_PATH}${this}`;
+};
+String.prototype.getPinterestFromRoute = function () {
+  return `http://pinterest.com/pin/create/link/?url=${MAIN_PATH}${this}`;
+};
+String.prototype.getPinterestFromRoute = function () {
+  return `http://pinterest.com/pin/create/link/?url=${MAIN_PATH}${this}`;
+};
+String.prototype.getEmailFromRoute = function () {
+  return `mailto:?Subject=&amp;Body=${MAIN_PATH}${this}`;
+};
 
 // socials
-String.prototype.getFacebookFromText = function ()
-{
-    return `https://www.facebook.com/${this}`
-}
+String.prototype.getFacebookFromText = function () {
+  return `https://www.facebook.com/${this}`;
+};
 
-String.prototype.getInstagramFromText = function ()
-{
-    return `https://www.instagram.com/${this}`
-}
+String.prototype.getInstagramFromText = function () {
+  return `https://www.instagram.com/${this}`;
+};
 
+String.prototype.getVimeoFrame = async function () {
+  const response = await fetch(
+    `../../app/application/getVimeoInfo.php?url=${this}`
+  );
 
-String.prototype.getVimeoFrame = async function() {
-  const response = await fetch(`../../app/application/getVimeoInfo.php?url=${this}`)
+  let result = await response.json();
 
-  let result = await response.json()
+  return `<div class="embed-responsive embed-responsive-16by9">${result.response.html}</div>`;
+};
 
-  return `<div class="embed-responsive embed-responsive-16by9">${result.response.html}</div>`
-}
-
-String.prototype.getYoutubeVideoFrame = function()
-{
-  const preg = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+String.prototype.getYoutubeVideoFrame = function () {
+  const preg =
+    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
 
   if (this.match(preg)) {
-    const id = this.match(preg)[1]
-    
+    const id = this.match(preg)[1];
+
     return `
       <div class="tutorial container text-center my-5 ratio ratio-16x9">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
-    `
+    `;
   }
 
-  return false
-}
+  return false;
+};
 
-String.prototype.getYoutubeFromText = function ()
-{
-    return `https://www.youtube.com/c/${this}`
-}
+String.prototype.getYoutubeFromText = function () {
+  return `https://www.youtube.com/c/${this}`;
+};
 
-String.prototype.getLinkedinFromText = function ()
-{
-    return `https://www.linkedin.com/in/${this}`
-}
-String.prototype.getWhatsAppFromText = function (text)
-{
-    return `https://api.whatsapp.com/send?text=${text}&phone=${this}`
-}
-String.prototype.getTelegramFromPhone = function ()
-{
-    return `https://t.me/+${this}`
-}
-String.prototype.shareOnTelegram = function (text)
-{
-  return `https://telegram.me/share/url?url=${this}&text=${text}`
-}
-String.prototype.getTwitterFromText = function ()
-{
-    return `https://twitter.com/${this}`
-}
-String.prototype.getRedditFromText = function ()
-{
-    return `https://www.reddit.com/user/${this}`
-}
-String.prototype.getPinterestFromText = function ()
-{
-    return `https://www.pinterest.com.mx/${this}`
-}
+String.prototype.getLinkedinFromText = function () {
+  return `https://www.linkedin.com/in/${this}`;
+};
+String.prototype.getWhatsAppFromText = function (text) {
+  return `https://api.whatsapp.com/send?text=${text}&phone=${this}`;
+};
+String.prototype.getTelegramFromPhone = function () {
+  return `https://t.me/+${this}`;
+};
+String.prototype.shareOnTelegram = function (text) {
+  return `https://telegram.me/share/url?url=${this}&text=${text}`;
+};
+String.prototype.getTwitterFromText = function () {
+  return `https://twitter.com/${this}`;
+};
+String.prototype.getRedditFromText = function () {
+  return `https://www.reddit.com/user/${this}`;
+};
+String.prototype.getPinterestFromText = function () {
+  return `https://www.pinterest.com.mx/${this}`;
+};
 
 function getUrlPart(part) {
-  return window.location.pathname.split('/')[part] != undefined ? window.location.pathname.split('/')[part] : false;
+  return window.location.pathname.split("/")[part] != undefined
+    ? window.location.pathname.split("/")[part]
+    : false;
 }
 
 function getLastUrlPart() {
-  const parts = window.location.pathname.split('/')
-  return parts[parts.length-1]
+  const parts = window.location.pathname.split("/");
+  return parts[parts.length - 1];
 }
 
-Number.prototype.getPercentaje = function(percentaje) 
-{
-  return this - ((percentaje * this) / 100)
-}
+Number.prototype.getPercentaje = function (percentaje) {
+  return this - (percentaje * this) / 100;
+};
 
-Number.prototype.getCoutryImage = function() 
-{
-  return `../../src/img/countries/${this}.png`
-}
+Number.prototype.getCoutryImage = function () {
+  return `../../src/img/countries/${this}.png`;
+};
 
-Number.prototype.getMinutes = function() {
-  return Math.floor((new Date(this * 1000) - new Date())/1000/60)
-}
+Number.prototype.getMinutes = function () {
+  return Math.floor((new Date(this * 1000) - new Date()) / 1000 / 60);
+};
 
-Number.prototype.getSeconds = function() {
+Number.prototype.getSeconds = function () {
   return new Date(this * 1000).toISOString().substr(11, 8);
-}
+};
 
-String.prototype.validateProtocol = function() 
-{
-    return this.search("/http:/") > -1  ? this : `http://${this}`
-}
+String.prototype.validateProtocol = function () {
+  return this.search("/http:/") > -1 ? this : `http://${this}`;
+};
 
-String.prototype.formatLandingRoute = function(route)
-{
-  return `${this}${route}`
-}
+String.prototype.formatLandingRoute = function (route) {
+  return `${this}${route}`;
+};
 
-String.prototype.isValidPhone = function()
-{
+String.prototype.isValidPhone = function () {
   var pattern = new RegExp(
     /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,8}$/im
   );
   return pattern.test(this);
-}
+};
 
-String.prototype.isValidMail = function()
-{
+String.prototype.isValidMail = function () {
   var pattern = new RegExp(
     /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
   );
   return pattern.test(this);
+};
+
+String.prototype.getChartCode = function () {
+  return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(this - 1);
+};
+
+Number.prototype.getChartCode = function () {
+  return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(this - 1);
+};
+
+function getChartCode(number) {
+  return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(number - 1);
 }
 
-String.prototype.getChartCode = function()
-{
-  return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(this-1)
-}
+String.prototype.validateProtocol = function () {
+  return this.search("/http:/") > -1 ? this : `http://${this}`;
+};
 
-Number.prototype.getChartCode = function()
-{
-  return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(this-1)
-}
+String.prototype.isValidEwalletAddress = function () {
+  return this.length == 66;
+};
 
-function getChartCode(number)
-{
-  return "ABCDEFGHIJKLMNOPQRSTUVWXYZ".charAt(number-1)
-}
-
-String.prototype.validateProtocol = function() 
-{
-    return this.search("/http:/") > -1  ? this : `http://${this}`
-}
-
-String.prototype.isValidEwalletAddress = function() 
-{
-    return this.length == 66
-}
-
-Number.prototype.getTimeFromSeconds = function()
-{
-  const h = Math.floor(this / 3600).toString().padStart(2,'0'),
-  m = Math.floor(this % 3600 / 60).toString().padStart(2,'0'),
-  s = Math.floor(this % 60).toString().padStart(2,'0');
-  const time = this > 43200 ? 'p.m.' : 'a.m.'
+Number.prototype.getTimeFromSeconds = function () {
+  const h = Math.floor(this / 3600)
+      .toString()
+      .padStart(2, "0"),
+    m = Math.floor((this % 3600) / 60)
+      .toString()
+      .padStart(2, "0"),
+    s = Math.floor(this % 60)
+      .toString()
+      .padStart(2, "0");
+  const time = this > 43200 ? "p.m." : "a.m.";
 
   return `${h}:${m} ${time}`;
-}
+};
 
-Number.prototype.inTimeInProgress = function()
-{
-  let hourStart = Math.floor(this / 3600) // 21:00
-  let hourEnd = hourStart + 1 // 22:00
-  
-  const actualHour = new Date().getHours()
-  
+Number.prototype.inTimeInProgress = function () {
+  let hourStart = Math.floor(this / 3600); // 21:00
+  let hourEnd = hourStart + 1; // 22:00
+
+  const actualHour = new Date().getHours();
+
   return actualHour >= hourEnd && actualHour < hourEnd;
-}
+};
 
-const alertAdvise = ({html:html, _class:_class, icon:icon, size:size},delay = 500) => {
+const alertAdvise = (
+  { html: html, _class: _class, icon: icon, size: size },
+  delay = 500
+) => {
   if (alert != null) {
     alert.modal.dismiss();
   }
 
-  setTimeout(()=>{
+  setTimeout(() => {
     const mAlert = alertCtrl.create({
       bgColor: `${_class} text-center border-0`,
-      size : size,
+      size: size,
       html: html,
     });
-  
-    alertCtrl.present(mAlert.modal);
-  },delay)
-}
 
-const alertInfo = async ({message:message, _class:_class, icon:icon, size:size},delay = 500) => {
+    alertCtrl.present(mAlert.modal);
+  }, delay);
+};
+
+const alertInfo = async (
+  { message: message, _class: _class, icon: icon, size: size },
+  delay = 500
+) => {
   await _closeModal();
 
-  setTimeout(()=>{
+  setTimeout(() => {
     const mAlert = alertCtrl.create({
       bgColor: `${_class} text-center border-0`,
-      size : size,
+      size: size,
       html: ` <div class="h2 text-white">${icon}</div> <div class="lead">${message}</div>`,
     });
-  
+
     alertCtrl.present(mAlert.modal);
-  },delay)
-}
+  }, delay);
+};
 
-String.prototype.formatRoute = function()
-{
-    return 'https://www.mizuum.com/'+this
-}
+String.prototype.formatRoute = function () {
+  return "https://www.mizuum.com/" + this;
+};
 
-String.prototype.getFullImageSrc = function() 
-{
-  return getMainPath() + this.replace('../..','')
-}
+String.prototype.getFullImageSrc = function () {
+  return getMainPath() + this.replace("../..", "");
+};
 
-String.prototype.fixWhatsAppBreakLine = function() 
-{
-  return this.replaceAll('\n','%0a')
-}
+String.prototype.fixWhatsAppBreakLine = function () {
+  return this.replaceAll("\n", "%0a");
+};
 
-String.prototype.getFullDocSrc = function() 
-{
-  return getMainPath() + this.replace('../..','')
-}
+String.prototype.getFullDocSrc = function () {
+  return getMainPath() + this.replace("../..", "");
+};
 
-String.prototype.hideText = function(repeat_times) 
-{
-  const repeat = '*'
-  return this.slice(0, (this.length - repeat_times)) + repeat.repeat(repeat_times)
-}
+String.prototype.hideText = function (repeat_times) {
+  const repeat = "*";
+  return (
+    this.slice(0, this.length - repeat_times) + repeat.repeat(repeat_times)
+  );
+};
 
-String.prototype.getLandingPathFormatted = function(landing) 
-{
-  return getMainPath() + '/' + this + `/${landing}`
-}
+String.prototype.getLandingPathFormatted = function (landing) {
+  return getMainPath() + "/" + this + `/${landing}`;
+};
 
-String.prototype.getLandingPath = function() 
-{
-  return getMainPath() + '/' + this + '/'
-}
+String.prototype.getLandingPath = function () {
+  return getMainPath() + "/" + this + "/";
+};
 
-const truncate = function(text) 
-{
-  return text.length > 20 ? text.slice(0, 20) : text
-}
+const truncate = function (text) {
+  return text.length > 20 ? text.slice(0, 20) : text;
+};
 
 const getMainPath = () => {
-  let proyectPath = '' 
+  let proyectPath = "";
 
-  if(window.location.hostname === 'localhost') {
-    proyectPath = `/${window.location.pathname.split("/")[1]}`
+  if (window.location.hostname === "localhost") {
+    proyectPath = `/${window.location.pathname.split("/")[1]}`;
   }
 
-  return window.location.origin + proyectPath
-}
+  return window.location.origin + proyectPath;
+};
 
 const getMainPathZuum = () => {
-  return window.location.hostname === 'localhost' ? 'http://localhost:8888/mizuum' : 'https://www.mizuum.com'
-}
+  return window.location.hostname === "localhost"
+    ? "http://localhost:8888/mizuum"
+    : "https://www.mizuum.com";
+};
 
-Number.prototype.getTimeLeft = function() {
+Number.prototype.getTimeLeft = function () {
   const now = new Date().getTime();
   const futureDate = new Date(this * 1000);
-  
+
   const timeleft = futureDate - now;
-  
+
   // convert milliseconds to seconds / minutes / hours etc.
   const msPerSecond = 1000;
   const msPerMinute = msPerSecond * 60;
   const msPerHour = msPerMinute * 60;
   const msPerDay = msPerHour * 24;
-  
+
   // calculate remaining time
   const days = Math.floor(timeleft / msPerDay);
   const hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / msPerHour);
   const minutes = Math.floor((timeleft % (1000 * 60 * 60)) / msPerMinute);
   const seconds = Math.floor((timeleft % (1000 * 60)) / msPerSecond);
 
-  if(hours < 0)
-  {
-    return `00:00:00`
+  if (hours < 0) {
+    return `00:00:00`;
   }
 
-  return `${hours.pad()}:${minutes.pad()}:${seconds.pad()}`
-}
+  return `${hours.pad()}:${minutes.pad()}:${seconds.pad()}`;
+};
 
-Number.prototype.pad = function(n) {
-  return ('0' + this).slice(-2)
-}
+Number.prototype.pad = function (n) {
+  return ("0" + this).slice(-2);
+};
 
-const httpBuildQuery = (data) => { 
-  return new URLSearchParams(data).toString()
-}
+const httpBuildQuery = (data) => {
+  return new URLSearchParams(data).toString();
+};
 
-String.prototype.getTronScanAddress = function()
-{
-  return `https://tronscan.org/#/address/${this}`
-}
+String.prototype.getTronScanAddress = function () {
+  return `https://tronscan.org/#/address/${this}`;
+};
 
-String.prototype.getTronScanAddress = function(sandbox)
-{
-  if(sandbox) 
-    return `https://nile.tronscan.org/#/address/${this}`
-  
-    return `https://tronscan.org/#/address/${this}`
-}
+String.prototype.getTronScanAddress = function (sandbox) {
+  if (sandbox) return `https://nile.tronscan.org/#/address/${this}`;
 
-String.prototype.getTronScanTransaction = function(sandbox)
-{
-  if(sandbox) 
-    return `https://nile.tronscan.org/#/transaction/${this}`
-  
-    return `https://tronscan.org/#/transaction/${this}`
-}
+  return `https://tronscan.org/#/address/${this}`;
+};
 
-String.prototype.isValidTronAddress = function()
-{
-  return this.length == 34
-}
+String.prototype.getTronScanTransaction = function (sandbox) {
+  if (sandbox) return `https://nile.tronscan.org/#/transaction/${this}`;
 
-String.prototype.securePassword = function()
-{
-  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,15}$/.test(this)
-}
+  return `https://tronscan.org/#/transaction/${this}`;
+};
 
-String.prototype.isValidAddress = function()
-{
-  return this.length >= 20
-}
+String.prototype.isValidTronAddress = function () {
+  return this.length == 34;
+};
+
+String.prototype.securePassword = function () {
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,15}$/.test(
+    this
+  );
+};
+
+String.prototype.isValidAddress = function () {
+  return this.length >= 20;
+};
 
 const _debounce = (fn, delay) => {
-  let timeout
+  let timeout;
 
   return (...args) => {
-      if (timeout) {
-      clearTimeout(timeout)
-      }
+    if (timeout) {
+      clearTimeout(timeout);
+    }
 
-      timeout = setTimeout(() => {
-      fn(...args)
-      }, delay)
-  }
-}
+    timeout = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+};
 
-String.prototype.isValidVimeoUrl = function() {
-  return this.includes("vimeo.com");
-}
+String.prototype.getVimeoFrameOld = function () {
+  const preg = /^.+vimeo.com\/(.*\/)?([^#\?]*)/;
 
-
-String.prototype.getVimeoFrameOld = function()
-{
-  const preg = /^.+vimeo.com\/(.*\/)?([^#\?]*)/
-
-  if(this.match(preg))
-  {
-    const id = this.match(preg)[2]
+  if (this.match(preg)) {
+    const id = this.match(preg)[2];
 
     return `
       <div style="padding:100% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/${id}?h=a3f12cc7dd&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
-    `  
+    `;
   }
 
-  return false
-}
+  return false;
+};
 
-
-String.prototype.isValidVimeoUrl = function() {
-  return this.includes("vimeo.com");
-}
-String.prototype.isValidYoutubeUrl = function() {
-  return this.includes("youtube.com");
-}
-
-String.prototype.removeHtmlTags = function() {
+String.prototype.removeHtmlTags = function () {
   return this.replace(/(<([^>]+)>)/gi, "");
-}
+};
 
-String.prototype.getShortTextFromHtml = function() {
-  return this.removeHtmlTags()
-}
+String.prototype.getShortTextFromHtml = function () {
+  return this.removeHtmlTags();
+};
 
-String.prototype.getFirstName = function() {
-  return this.split(" ")[0]
-}
+String.prototype.getFirstName = function () {
+  return this.split(" ")[0];
+};
+
+String.prototype.getVimeoVideoFrame = function () {
+  const preg =
+    /^.*(vimeo\.com\/)((channels\/[A-z]+\/)|(groups\/[A-z]+\/videos\/))?([0-9]+)/;
+
+  console.log(this.match(preg));
+
+  if (this.match(preg)) {
+    const id = this.match(preg)[5];
+
+    return `
+      <iframe src="https://player.vimeo.com/video/${id}?color=efeb00&title=0&byline=0&portrait=0" width="640" height="400" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+    `;
+  }
+};
+
+String.prototype.getYoutubeVideoFrame = function () {
+  const preg =
+    /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+
+  if (this.match(preg)) {
+    const id = this.match(preg)[1];
+
+    return `
+      <div class="tutorial container text-center  ratio ratio-16x9">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/${id}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    `;
+  }
+
+  return false;
+};
+
+String.prototype.getVoomlyVideoFrame = function () {
+  let arr = this.split("/");
+
+  if (arr.length > 0) {
+    const id = arr[arr.length - 1];
+
+    return `
+      <div class="voomly-embed" data-id="${id}" data-ratio="1.777778" data-type="v" data-skin-color="#008EFF" style="width: 100%; aspect-ratio: 1.77778 / 1; background: linear-gradient(45deg, rgb(142, 150, 164) 0%, rgb(201, 208, 222) 100%); border-radius: 10px;"></div>
+    `;
+  }
+
+  return false;
+};
+
+String.prototype.isValidVimeoUrl = function () {
+  return this.includes("vimeo.com");
+};
+
+String.prototype.isValidYoutubeUrl = function () {
+  return this.includes("youtube.com") || this.includes("yout.com");
+};
+String.prototype.isValidVoomlyUrl = function () {
+  return this.includes("voomly.com");
+};

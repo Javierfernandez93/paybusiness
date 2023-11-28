@@ -76,6 +76,7 @@ class Course extends Orm {
 
         $Course->title = $data['title'];
         // $Course->user_support_id = $data['user_support_id'];
+        $Course->attach_to_course_id = isset($data['attach_to_course_id']) ? $data['attach_to_course_id'] : 0;
         $Course->description = isset($data['description']) ? $data['description'] : '';
         $Course->image = isset($data['image']) ? $data['image'] : '';
         $Course->price = isset($data['price']) ? $data['price'] : 0;

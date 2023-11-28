@@ -39,6 +39,11 @@ class UserEnrolledInCourse extends Orm {
             return false;
         }
 
+        if(!isset($data['course_id']))
+        {
+            return false;
+        }
+
         $SessionTakeByUserPerCourse = new SessionTakeByUserPerCourse;
         $sessions_taked = $SessionTakeByUserPerCourse->countWhere("course_id = ? AND user_login_id = ?",[$data['course_id'],$data['user_login_id']]);
 

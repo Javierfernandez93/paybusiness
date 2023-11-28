@@ -1,5 +1,5 @@
-import { User } from '../../src/js/user.module.js?v=2.6.7'   
-import { Translator } from '../../src/js/translator.module.js?v=2.6.7'   
+import { User } from '../../src/js/user.module.js?v=2.6.8'   
+import { Translator } from '../../src/js/translator.module.js?v=2.6.8'   
 
 const ExmaaccountViewer = {
     name : 'exmaaccount-viewer',

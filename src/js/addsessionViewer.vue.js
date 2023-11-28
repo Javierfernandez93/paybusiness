@@ -1,4 +1,4 @@
-import { UserSupport } from "../../src/js/userSupport.module.js?v=2.6.7";
+import { UserSupport } from "../../src/js/userSupport.module.js?v=2.6.8";
 
 const AddsessionViewer = {
   name: "addsession-viewer",
@@ -8,6 +8,7 @@ const AddsessionViewer = {
     return {
       UserSupport: new UserSupport(),
       offCanvas: null,
+      isSessionComplete: false,
       sessionEditor: null,
       session: {},
     };
@@ -32,12 +33,17 @@ const AddsessionViewer = {
     },
     session: {
       handler() {
-        this.isSessionComplete = this.session.title && this.session.course 
+        this._isSessionComplete()
       },
       deep: true,
     },
   },
   methods: {
+    _isSessionComplete() {
+      this.isSessionComplete = this.session.title != undefined && this.session.course  != undefined
+
+      console.log(this.isSessionComplete)
+    },
     newSession() {
       this.session = {
         unique_id: getUniqueId(),
@@ -104,7 +110,7 @@ const AddsessionViewer = {
                 <div class="form-floating mb-3">
                     <input v-model="session.title" :class="session.title ? 'is-valid' : ''" @keydown.enter.exact.prevent="$refs.course.focus()" type="text" class="form-control" ref="title" placeholder="Título">
                     <label for="title">
-                        <t>Título</t>
+                        <t>Título de la lección</t>
                     </label>
                 </div>
 
@@ -128,7 +134,8 @@ const AddsessionViewer = {
                         <span class="frame-video" v-html="session.course"></span>
                     </div>
                     <div v-if="session.catalog_multimedia_id == 4">
-                        Html
+                        <textarea placeholder="Escribe el código HTML aquí" class="form-control" v-model="session.course" style="height:400px">
+                        </textarea>
                     </div>
                 </div>
 
@@ -143,7 +150,9 @@ const AddsessionViewer = {
                     </label>
                 </div>
 
-                <button :disabled="!isSessionComplete" class="btn btn-dark" @click="saveSession"><t>Guardar sessión</t></button>
+                <div class="d-grid">
+                  <button :disabled="!isSessionComplete" class="btn btn-dark shadow-none mb-0 btn-lg" @click="saveSession"><t>Guardar sessión</t></button>
+                </div>
             </div>
         </div>
     `,

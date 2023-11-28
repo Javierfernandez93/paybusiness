@@ -168,3 +168,14 @@ fieldset:disabled .btn {
 .lead-xxl {
   font-size: 2rem;
 }
+.z-zoom-element,
+.z-zoom-element:hover {
+    transition: all ease 250ms;
+}
+.z-zoom-element:hover {
+    transform: scale(1.05);
+}
+.card-img-top {
+  object-fit: cover;
+  height: 300px;
+}

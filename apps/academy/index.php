@@ -4,8 +4,6 @@ require_once TO_ROOT . "/system/core.php";
 
 $UserLogin = new Unlimited\UserLogin;
 
-HCStudio\Util::redirectTo(TO_ROOT."/apps/academy/soon");
-
 if($UserLogin->logged === false) {
 	HCStudio\Util::redirectTo(TO_ROOT."/apps/login/");
 }

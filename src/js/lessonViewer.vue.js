@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.6.7'   
+import { User } from '../../src/js/user.module.js?v=2.6.8'   
 
 const LessonViewer = {
     name : 'lesson-viewer',
@@ -100,24 +100,24 @@ const LessonViewer = {
                     session.sessionTaked = sessionTaked
                 }
 
-                const nextOrder = this.course.order_number+1 <= this.sessions.length ? this.course.order_number+1 : this.course.order_number
+                const nextSessionId = this.course.session.order_number + 1 <= this.sessions.length ? this.course.session.order_number + 1 : this.course.session.order_number
 
-                this.selectSession(this.getSession(nextOrder))
+                this.selectSession(this.getSession(nextSessionId))
 
                 this.getProgress()
             })
         },
         showCourseFinished(course) {
             alertInfo({
-                icon:'<i class="bi bi-ui-checks"></i>',
+                icon:'<i class="bi bi-ui-checks text-dark"></i>',
                 size: 'modal-fullscreen',
                 message: `
-                    <div class="h3 text-white">¡Felicidades!</div>
+                    <div class="h3 text-dark">¡Felicidades!</div>
                     <div class="lead">Has terminado el curso</div>
-                    <div class="h1 text-white">${course.title}</div>
+                    <div class="h1 text-success">${course.title}</div>
                     <div class="mt-3"><a href="../../apps/academy/">Vuelve a tu academia</a></div>
                 `,
-                _class:'bg-gradient-success text-white'
+                _class:'bg-white text-dark'
             })
         },
         setSessionAsTaked(session) {

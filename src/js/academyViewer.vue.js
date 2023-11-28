@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.6.7'   
+import { User } from '../../src/js/user.module.js?v=2.6.8'   
 
 const AcademyViewer = {
     name : 'academy-viewer',
@@ -30,7 +30,6 @@ const AcademyViewer = {
     methods: {
         filterData() {
             this.courses = this.coursesAux
-
             this.courses = this.courses.filter((course) => {
                 return course.title.toLowerCase().includes(this.query.toLowerCase()) 
             })
@@ -76,8 +75,8 @@ const AcademyViewer = {
             </div>
         </div>
         <div class="row g-5 align-items-center">
-            <div class="col-12 col-xl-4" v-for="course in courses">
-                <div class="card rounded zoom-element card-cover mb-3 min-height-300 border-radius-2xl overflow-hidden">
+            <div class="col-12 col-md-4 col-xl-4" v-for="course in courses">
+                <div class="card overflow-hidden rounded zoom-element card-cover mb-3 min-height-300 border-radius-2xl overflow-hidden">
                     <div v-if="course.blocked" class="mask z-index-1 bg-dark d-flex justify-content-center align-items-center">
                         <div class="col-12 text-white text-center">
                             <div class="h4 text-white">
@@ -88,6 +87,7 @@ const AcademyViewer = {
                             </div>
                         </div>
                     </div>
+                    
                     <img :src="course.image" class="card-img-top">
 
                     <div class="card-body row align-items-end text-dark">

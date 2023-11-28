@@ -210,7 +210,7 @@
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
 
         <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 border-radius-xl z-index-sticky shadow-none" id="navbarBlur" data-scroll="true">
-            <div class="container-fluid py-1 px-3">
+            <div class="container">
                 <nav aria-label="breadcrumb">
                 </nav>
                 <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
@@ -269,7 +269,7 @@
     <script src="../../src/js/42d5adcbca.js" type="text/javascript"></script>
     <script src="../../src/js/jquery-3.1.1.js" type="text/javascript"></script>
     <script src="../../src/js/general.js?t=3" type="text/javascript"></script>
-    <script src="../../src/js/alertCtrl.js?v=2.6.7" type="text/javascript"></script>
+    <script src="../../src/js/alertCtrl.js?v=2.6.8" type="text/javascript"></script>
 
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
@@ -283,7 +283,7 @@
     <!-- Github buttons -->
     <script async defer src="../../src/js/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-    <script src="../../src/js/soft-ui-dashboard.min.js?v=2.6.7.6"></script>
+    <script src="../../src/js/soft-ui-dashboard.min.js?v=2.6.8.6"></script>
 
     <script src="../../src/js/vue.js"></script>
 

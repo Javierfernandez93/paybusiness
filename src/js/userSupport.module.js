@@ -1,4 +1,4 @@
-import { Http } from '../../src/js/http.module.js?v=2.6.7';
+import { Http } from '../../src/js/http.module.js?v=2.6.8';
 
 class UserSupport extends Http {
     constructor() {
@@ -536,6 +536,9 @@ class UserSupport extends Http {
     }
     rejectKyc(data, callback) {
         return this.call('../../app/application/rejectKyc.php', data, callback);
+    }
+    getAdminCourses(data, callback) {
+        return this.call('../../app/application/getAdminCourses.php', data, callback);
     }
 }
 

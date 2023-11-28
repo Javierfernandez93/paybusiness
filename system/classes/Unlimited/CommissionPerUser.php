@@ -69,6 +69,15 @@ class CommissionPerUser extends Orm
 		return false;
 	}
 
+	public static function addCommissionRange(array $data = null): bool
+	{
+		if (!(new CommissionPerUser)->findField("catalog_commission_id = ? AND amount = ? and user_login_id = ?",[$data['catalog_commission_id'],$data['amount'],$data['user_login_id']],"commission_per_user_id")) {
+			return self::add($data);
+		}
+
+		return false;
+	}
+
 	public static function saveCommissionsByCatalogCommission(array $catalog_commission, array $item = null, int $user_login_id_from = null, int $buy_per_user_id = null): bool
 	{
 		$network = (new UserReferral)->getSponsorByReverseLevel(3, $user_login_id_from);

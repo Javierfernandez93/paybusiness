@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.6.7.1'   
+import { User } from '../../src/js/user.module.js?v=2.6.8.1'   
 
 const ConferenceViewer = {
     name : 'conference-viewer',

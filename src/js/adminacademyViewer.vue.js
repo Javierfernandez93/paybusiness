@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=2.6.7'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=2.6.8'
 
 const AdminacademyViewer = {
     name : 'adminacademy-viewer',
@@ -85,8 +85,14 @@ const AdminacademyViewer = {
         getCourses() 
         {
             this.UserSupport.getCourses({},(response)=>{
-                this.coursesAux = response.courses
-                this.courses = this.coursesAux
+                if(response.s == 1)
+                {
+                    this.coursesAux = response.courses
+                    this.courses = this.coursesAux
+                } else {
+                    this.coursesAux = false
+                    this.courses = false
+                }
             })
         }
     },
@@ -95,7 +101,6 @@ const AdminacademyViewer = {
         this.getCourses()
     },
     template : `
-
         <div class="row mb-3">
             <div class="col-12 col-xl">
                 <input :autofocus="true" v-model="query" type="text" class="form-control border-0 shadow-lg" placeholder="Buscar curso por nombre o precio...">
@@ -120,10 +125,8 @@ const AdminacademyViewer = {
             </div>
         </div>
 
-        <div class="row">
-            <div    
-                :class="grid ? 'col-6' : 'col-12'"
-                v-for="course in courses"> 
+        <div v-if="courses" class="row">
+            <div :class="grid ? 'col-6' : 'col-12'" v-for="course in courses"> 
                 
                 <div class="card mb-3">
                     <div class="card-body">
@@ -202,6 +205,10 @@ const AdminacademyViewer = {
                     </div>
                 </div>
             </div>
+        </div>
+        <div v-else-if="courses == false" class="alert alert-info text-white text-center">
+            <strong>No has añadido cursos a tu academia</strong>
+            <div>Para añadir uno, da clic en <a href="../../apps/admin-academy/add">añadir</a></div>
         </div>
     `,
 }
