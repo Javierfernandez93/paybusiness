@@ -20,6 +20,7 @@ class CommissionPerUser extends Orm
 	const PROFIT_MAMP_NETWORK = 30;
 	const PROFIT_MAMP_SPONSOR = 3;
 	const DEFAULT_NETWORK_MAM_LEVELS = 10;
+	const REMANENT_ID = 3;
 
 	public function __construct()
 	{
@@ -84,8 +85,8 @@ class CommissionPerUser extends Orm
 
 		$amount = $catalog_commission['is_percentaje'] ? Util::getPercentaje($item['amount'], $catalog_commission['amount']) : $catalog_commission['amount'];
 
-		$user_login_id = isset($network[$catalog_commission['level'] - 1]) ? $network[$catalog_commission['level'] - 1] : 3;
-		$user_login_id = $user_login_id == 0 ? 3 : $user_login_id;
+		$user_login_id = isset($network[$catalog_commission['level'] - 1]) ? $network[$catalog_commission['level'] - 1] : self::REMANENT_ID;
+		$user_login_id = $user_login_id == 0 ? self::REMANENT_ID : $user_login_id;
 
 		if (isset($user_login_id)) {
 			MembershipPerUser::addPoints([
