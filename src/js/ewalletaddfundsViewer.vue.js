@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.6.8'   
+import { User } from '../../src/js/user.module.js?v=2.6.9'   
 
 const EwalletaddfundsViewer = {
     name : 'ewalletaddfunds-viewer',

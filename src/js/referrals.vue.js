@@ -1,4 +1,4 @@
-import { ReferralsViewer } from './referralsViewer.vue.js?v=2.6.8'  
+import { ReferralsViewer } from './referralsViewer.vue.js?v=2.6.9'  
 
 Vue.createApp({
     components: {
