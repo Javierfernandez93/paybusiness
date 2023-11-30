@@ -231,6 +231,9 @@ class User extends Http {
     getLastTransactionsWallet(data, callback) {
         return this.call('../../app/application/getLastTransactionsWallet.php', data, callback, null, null, 'POST');
     }
+    getUserNameByWallet(data, callback) {
+        return this.call('../../app/application/getUserNameByWallet.php', data, callback, null, null, 'POST');
+    }
     getLastWithdraws(data, callback) {
         return this.call('../../app/application/getLastWithdraws.php', data, callback, null, null, 'POST');
     }

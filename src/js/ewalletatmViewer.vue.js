@@ -12,6 +12,7 @@ const EwalletatmViewer = {
             transactions: null,
             error: null,
             FEE_INTERNAL_TRANSACTION: 0,
+            names: null,
             errors: {
                 INVALID_ADDRESS_LENGHT : {
                     code: 1,
@@ -77,11 +78,11 @@ const EwalletatmViewer = {
                 this.User.sendEwalletFunds({recipientAdress:this.ewallet.recipientAdress,amountToSend:this.ewallet.amountToSend,message:this.ewallet.message},(response)=>{
                     this.sending = false        
                     
+                    $(this.$refs.offcanvasRight).offcanvas('hide')
+
                     if(response.s == 1)
                     {
                         this.$emit('getewallet')
-    
-                        $(this.$refs.offcanvasRight).offcanvas('hide')
                     } else if(response.r == "NOT_AMOUNT_TO_SEND") {
                         alertMessage('Ingresa una cantidad válida')
                     } else if(response.r == "NOT_ACTIVE") {
@@ -90,6 +91,14 @@ const EwalletatmViewer = {
                 })
             }
         },
+        getUserNameByWallet: _debounce((self) => {
+            self.names = null
+            self.User.getUserNameByWallet({wallet:self.ewallet.recipientAdress}, (response) => {
+                if (response.s == 1) {
+                    self.names = response.names
+                }
+            })
+        },500),
         getTransactionFee() {            
             this.User.getTransactionFee({},(response)=>{
                 
@@ -147,11 +156,16 @@ const EwalletatmViewer = {
                     <div class="card">
                         <div class="card-body">
                             <div class="form-floating mb-3">
-                                <input 
-                                    v-model="ewallet.recipientAdress"
-                                    :class="error != errors.INVALID_ADDRESS_LENGHT || error != errors.SAME_ADDRESS && ewallet.recipientAdress != null ? 'is-valid' : ''"
+                                <input v-model="ewallet.recipientAdress" @keypress="getUserNameByWallet(this)" @paste="getUserNameByWallet(this)" :class="error != errors.INVALID_ADDRESS_LENGHT || error != errors.SAME_ADDRESS && ewallet.recipientAdress != null ? 'is-valid' : ''"
                                     type="text" class="form-control" id="address" placeholder="Dirección destino">
                                 <label for="address">Dirección destino</label>
+                            </div>
+
+                            <div v-if="names" class="alert alert-info text-center text-white">
+                                <div>
+                                    <strong>Billetera de </strong>
+                                </div>
+                                {{names}}
                             </div>
                             
                             <div class="form-floating mb-3">
