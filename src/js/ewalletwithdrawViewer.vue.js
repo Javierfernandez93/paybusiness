@@ -15,7 +15,7 @@ const EwalletwithdrawViewer = {
             },
             FEE_WITHDRAW_TRANSACTION: 0,
             error: null,
-            MIN_AMOUNT_TO_WITHDRAW: 50,
+            MIN_AMOUNT_TO_WITHDRAW: 20,
             ERRORS: {
                 NOT_WITHDRAWS_METHODS : {
                     code: 1,

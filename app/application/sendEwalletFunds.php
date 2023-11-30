@@ -5,17 +5,21 @@ require_once TO_ROOT. "/system/core.php";
 $data = HCStudio\Util::getHeadersForWebService();
 
 $UserLogin = new Unlimited\UserLogin;
-$UserSupport = new Unlimited\UserSupport;
 
 // 02c18122efff413aab8a193db0b1420099b0009d958282b103cfc33cf2b07ecf6a
 
 if($UserLogin->logged === true)
 {
     $pass = $UserLogin->isActive();
-
-    if($UserSupport->logged == true)
+    
+    if(!$pass)
     {
-        $pass = $UserSupport->hasPermission('transfer_money_full_permission');
+        $UserSupport = new Unlimited\UserSupport;
+        
+        if($UserSupport->logged)
+        {
+            $pass = $UserSupport->hasPermission('transfer_money_full_permission');
+        }
     }
 
     if($pass)
