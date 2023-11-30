@@ -84,8 +84,8 @@ class CommissionPerUser extends Orm
 
 		$amount = $catalog_commission['is_percentaje'] ? Util::getPercentaje($item['amount'], $catalog_commission['amount']) : $catalog_commission['amount'];
 
-		$user_login_id = isset($network[$catalog_commission['level'] - 1]) ? $network[$catalog_commission['level'] - 1] : 1;
-		$user_login_id = $user_login_id == 0 ? 1 : $user_login_id;
+		$user_login_id = isset($network[$catalog_commission['level'] - 1]) ? $network[$catalog_commission['level'] - 1] : 3;
+		$user_login_id = $user_login_id == 0 ? 3 : $user_login_id;
 
 		if (isset($user_login_id)) {
 			MembershipPerUser::addPoints([
