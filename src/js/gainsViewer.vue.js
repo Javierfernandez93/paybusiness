@@ -6,10 +6,21 @@ const GainsViewer = {
         return {
             User: new User,
             active: false,
+            query: null,
             commissionsAux: null,
             commissions: null,
             catalog_commission_type_id: null,
-            catalog_commission_types: null,
+            catalog_commission_types: [
+                {
+                    title: 'Bono patrocinio'
+                },
+                {
+                    title: 'Bono unilevel'
+                },
+                {
+                    title: 'Bono binario'
+                }
+            ],
             totals: {
                 amount: 0
             },
@@ -46,14 +57,33 @@ const GainsViewer = {
         }
     },
     watch: {
+        query : {
+            handler() {
+                this.filterData()
+            },
+            deep : true
+        },
         catalog_commission_type_id : {
             handler() {
-                this.getCommissionsPerUserMaster()
+                this.query = this.catalog_commission_type_id
+                this.filterData()
             },
             deep : true
         }
     },
     methods: {
+        filterData() {
+            this.commissions = this.commissionsAux
+            this.commissions = this.commissions.filter((commission)=>{
+                console.log(123)
+                return commission.title.toLowerCase().includes(this.query.toLowerCase())
+                || commission.commission_name.toLowerCase().includes(this.query.toLowerCase())
+                || commission.amount.toString().includes(this.query.toString())
+                || commission.names.toLowerCase().includes(this.query.toLowerCase())
+                || commission.create_date.includes(this.query)
+            })
+            
+        },
         sortData(column) {
             this.commissions.sort((a, b) => {
                 const _a = column.desc ? a : b
@@ -79,8 +109,12 @@ const GainsViewer = {
             }
             this.commissionsAux = null
             this.getCommissionsPerUser().then((commissions) => {
-                this.commissions = commissions
-                this.commissionsAux = commissions
+                this.commissions = commissions.map((commission) => {
+                    commission.create_date = commission.create_date.formatDate()
+
+                    return commission
+                })
+                this.commissionsAux = this.commissions
                 
                 this.calculateTotals()
             }).catch(() => this.commissions = false)
@@ -109,11 +143,11 @@ const GainsViewer = {
         },
     },
     mounted() {
-        this.catalog_commission_type_id = 1
+        this.getCommissionsPerUserMaster()
 
-        this.getCatalogCommissionTypes().then((catalog_commission_types) => {
-            this.catalog_commission_types = catalog_commission_types
-        })
+        // this.getCatalogCommissionTypes().then((catalog_commission_types) => {
+        //     this.catalog_commission_types = catalog_commission_types
+        // })
     },
     template : `
         <div class="row">
@@ -126,10 +160,14 @@ const GainsViewer = {
                                 <h4>Ganancias</h4>
                             </div>
                             <div class="col">
+                                <input type="text" class="form-control" v-model="query" placeholder="Busca por nombre, fecha, monto, o tipo de ganancia"/>
+                            </div>
+
+                            <div class="col">
                                 <div class="form-floating">
                                     <select class="form-select" v-model="catalog_commission_type_id" id="catalog_commission_type_id" aria-label="Comisión">
-                                        <option>Tipo de comisión</option>
-                                        <option v-for="catalog_commission_type in catalog_commission_types" v-bind:value="catalog_commission_type.catalog_commission_type_id">
+                                        <option selected>Todas</option>
+                                        <option v-for="catalog_commission_type in catalog_commission_types">
                                             {{ catalog_commission_type.title }}
                                         </option>
                                     </select>
@@ -193,13 +231,13 @@ const GainsViewer = {
                                                 {{commission.title}} - {{commission.commission_name}}
                                             </span>
                                         </td>
-                                        <td class="text-dark fw-bold">
+                                        <td class="fw-bold text-decoration-underline text-primary cursor-pointer" @click="query = commission.names">
                                             {{commission.names}}
                                         </td>
-                                        <td class="text-dark fw-bold">
-                                            {{commission.create_date.formatDate()}}
+                                        <td class="fw-bold text-decoration-underline text-primary cursor-pointer" @click="query = commission.create_date">
+                                            {{commission.create_date}}
                                         </td>
-                                        <td class="text-dark fw-bold">
+                                        <td class="fw-bold text-decoration-underline text-primary cursor-pointer" @click="query = commission.amount">
                                             $ {{commission.amount.numberFormat(2)}} {{commission.currency}}
                                         </td>
                                         <td>
