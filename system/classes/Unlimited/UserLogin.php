@@ -1721,7 +1721,7 @@ class UserLogin extends Orm {
   
   public static function _getCurrentMembershipAmount(int $user_login_id = null)
   {
-    return (new MembershipPerUser)->getCurrentMembershipAmount($user_login_id);
+    return (new CatalogRangePerUser)->findField("user_login_id = ? AND status = ?",[$user_login_id,1],"amount");
   }
 
   public function getLastMembers()

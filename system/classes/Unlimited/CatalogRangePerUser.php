@@ -160,4 +160,24 @@ class CatalogRangePerUser extends Orm {
         DESC 
         ");
 	}
+
+
+	public static function addPoints(array $data = null)
+	{
+        if(!$data)
+        {
+            return false;
+        }
+
+		$CatalogRangePerUser = new self;
+		
+        if(!$CatalogRangePerUser->loadWhere("user_login_id = ? AND status = ?",[$data['user_login_id'],1]))
+        {
+            return false;
+        }
+
+        $CatalogRangePerUser->amount = $CatalogRangePerUser->amount + $data['amount'];
+        
+        return  $CatalogRangePerUser->save();
+	}
 }

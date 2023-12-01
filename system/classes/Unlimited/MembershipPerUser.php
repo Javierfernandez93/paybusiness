@@ -98,6 +98,8 @@ class MembershipPerUser extends Orm {
 			$MembershipPerUser->amount = $MembershipPerUser->amount + $data['amount'];
 		}
 
+		CatalogRangePerUser::addPoints($data);
+
 		return $MembershipPerUser->save();
 	}
 
@@ -190,14 +192,14 @@ class MembershipPerUser extends Orm {
 
 			self::setMembershipAsEnd($currentMembership['membership_per_user_id']);
 		}
-
-		CommissionPerUser::liberatePendingComissions($data['user_login_id']);
 		
 		$MembershipPerUser->user_login_id = $data['user_login_id'];
 		$MembershipPerUser->amount = $amount;
 		$MembershipPerUser->point = $data['point'];
 		$MembershipPerUser->catalog_membership_id = $data['catalog_membership_id'];
 		$MembershipPerUser->create_date = time();
+
+		CommissionPerUser::liberatePendingComissions($data['user_login_id']);
 		
 		return $MembershipPerUser->save();
 	}
