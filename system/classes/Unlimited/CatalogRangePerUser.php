@@ -128,4 +128,36 @@ class CatalogRangePerUser extends Orm {
         DESC 
         ");
 	}
+	
+    public function getBestRange(int $user_login_id = null) 
+	{
+        if(!isset($user_login_id))
+        {
+            return false;
+        }
+
+        return $this->connection()->row("SELECT 
+            {$this->tblName}.{$this->tblName}_id,
+            {$this->tblName}.catalog_range_id,
+            catalog_range.image,
+            catalog_range.volumen,
+            catalog_range.is_percentage,
+            catalog_range.mask,
+            catalog_range.amount,
+            catalog_range.start_volumen,
+            catalog_range.end_volumen,
+            catalog_range.title
+        FROM 
+            {$this->tblName}
+        LEFT JOIN 
+            catalog_range
+        ON
+            catalog_range.catalog_range_id = {$this->tblName}.catalog_range_id
+        WHERE 
+            {$this->tblName}.user_login_id = '{$user_login_id}'
+        ORDER BY 
+            {$this->tblName}.catalog_range_id
+        DESC 
+        ");
+	}
 }

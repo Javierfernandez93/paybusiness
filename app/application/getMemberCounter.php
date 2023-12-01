@@ -18,7 +18,7 @@ if($UserLogin->logged === true)
         'verified' => $UserLogin->isKyCVerified(),
         'qualified' => $UserLogin->isQualified(),
         'names' => $UserLogin->_data['user_data']['names'],
-        'range' => $UserLogin->getRange(),
+        'range' => $UserLogin->getBestRange(),
         'image' => $UserLogin->_data['user_account']['image'] ? $UserLogin->_data['user_account']['image'] : HCStudio\Connection::getMainPath()."/src/img/user.png",
     ];
 

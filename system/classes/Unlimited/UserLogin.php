@@ -633,6 +633,15 @@ class UserLogin extends Orm {
     return self::getLastRange($this->company_id);
   }
 
+  public function getBestRange() {
+    if(!$this->getId())
+    {
+      return false;
+    }
+    
+    return (new CatalogRangePerUser)->getBestRange($this->company_id);
+  }
+
   public static function getLastRange(int $user_login_id = null) {
   
     return (new CatalogRangePerUser)->getLastRange($user_login_id);
