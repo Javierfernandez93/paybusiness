@@ -3,7 +3,9 @@
 namespace Unlimited;
 
 use HCStudio\Orm;
+
 use Unlimited\CatalogMembership;
+use Unlimited\CommissionPerUser;
 
 class MembershipPerUser extends Orm {
 	protected $tblName = 'membership_per_user';
@@ -172,11 +174,11 @@ class MembershipPerUser extends Orm {
 		}
 		
 		$MembershipPerUser = new self;
-		
-		if($MembershipPerUser->loadWhere("user_login_id = ? AND catalog_membership_id = ?",[$data['user_login_id'],$data['catalog_membership_id']]))
-		{
-			return false;
-		}
+
+		// if($MembershipPerUser->loadWhere("user_login_id = ? AND catalog_membership_id = ? AND status = ?",[$data['user_login_id'],$data['catalog_membership_id'],1]))
+		// {
+		// 	return false;
+		// }
 
 		$amount = 0;
 
@@ -188,6 +190,8 @@ class MembershipPerUser extends Orm {
 
 			self::setMembershipAsEnd($currentMembership['membership_per_user_id']);
 		}
+
+		CommissionPerUser::liberatePendingComissions($data['user_login_id']);
 		
 		$MembershipPerUser->user_login_id = $data['user_login_id'];
 		$MembershipPerUser->amount = $amount;
@@ -267,4 +271,41 @@ class MembershipPerUser extends Orm {
 				{$this->tblName}.status IN('1','2')
 		");
 	}
-}
+
+	public function getActiveMemberships(int $user_login_id = null) 
+	{
+		if(!isset($user_login_id))
+		{
+			return false;
+		}
+
+		return $this->connection()->column("
+			SELECT 
+				{$this->tblName}.{$this->tblName}_id
+			FROM
+				{$this->tblName}
+			WHERE 
+				{$this->tblName}.user_login_id = '{$user_login_id}'
+			AND 
+				{$this->tblName}.status = '1'
+		");
+	}
+
+	public static function setOldMembershipAsTaked(int $user_login_id = null) 
+	{
+		if(!isset($user_login_id))
+		{
+			return false;
+		}
+		
+		$MembershipPerUser = new MembershipPerUser;
+		
+		if($memberships = $MembershipPerUser->getActiveMemberships($user_login_id))
+		{
+			foreach($memberships as $membership_per_user_id)
+			{
+				self::setAsTake($membership_per_user_id);
+			}
+		}
+	}
+}	

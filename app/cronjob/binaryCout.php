@@ -49,6 +49,7 @@ if($users)
                         $points_gived += $user_from['point'];
 
                         Unlimited\MembershipPerUser::setAsTake($user_from['membership_per_user_id']);
+                        Unlimited\MembershipPerUser::setOldMembershipAsTaked($user_from['user_login_id']);
                     }
 
                     if(isset($network['pass']))
@@ -72,6 +73,7 @@ if($users)
                                 $points_passed += $user_from['point'];
     
                                 Unlimited\MembershipPerUser::setAsTake($user_from['membership_per_user_id']);
+                                Unlimited\MembershipPerUser::setOldMembershipAsTaked($user_from['user_login_id']);
                             }
                         }
                     }

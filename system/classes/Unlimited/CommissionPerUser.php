@@ -27,6 +27,28 @@ class CommissionPerUser extends Orm
 		parent::__construct();
 	}
 
+	public static function liberatePendingComissions(int $user_login_id = null): bool
+	{
+		$CommissionPerUser = new self;
+		$commissions = $CommissionPerUser->findAll("user_login_id = ? AND status = ?",[$user_login_id,self::RETAINED],["commission_per_user_id"]);
+
+		if(!$commissions)
+		{
+			return false;
+		}
+
+		foreach($commissions as $commission)
+		{
+			if($CommissionPerUser->loadWhere("commission_per_user_id = ?",$commission['commission_per_user_id']))
+			{
+				$CommissionPerUser->status = self::PENDING_FOR_DISPERSION;
+				$CommissionPerUser->save();
+			}
+		}
+
+		return true;
+	}
+
 	public static function addBinaryCommission(array $data = null): bool
 	{
 		$amount = Util::getPercentaje($data['amount'],$data['percentaje']);
