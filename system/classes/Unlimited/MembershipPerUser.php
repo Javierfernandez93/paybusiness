@@ -98,7 +98,10 @@ class MembershipPerUser extends Orm {
 			$MembershipPerUser->amount = $MembershipPerUser->amount + $data['amount'];
 		}
 
-		CatalogRangePerUser::addPoints($data);
+		if(isset($data['addPointsToRange']) && $data['addPointsToRange'] == true)
+		{
+			CatalogRangePerUser::addPoints($data);
+		}
 
 		return $MembershipPerUser->save();
 	}

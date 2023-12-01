@@ -57,6 +57,7 @@ class CommissionPerUser extends Orm
 		{
 			MembershipPerUser::addPoints([
 				'user_login_id' => $data['user_login_id'],
+				'addPointsToRange' => $data['addPointsToRange'],
 				'amount' => $amount
 			]);
 		}
@@ -141,6 +142,7 @@ class CommissionPerUser extends Orm
 		if (isset($user_login_id)) {
 			MembershipPerUser::addPoints([
 				'user_login_id' => $user_login_id,
+				'addPointsToRange' => true,
 				'amount' => $amount,
 			]);
 

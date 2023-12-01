@@ -43,7 +43,8 @@ if($users)
                             'amount' => $user_from['point'],
                             'percentaje' => $network['pay']['percentaje'],
                             'validate_membership' => true,
-                            'addPointsToMembership' => true
+                            'addPointsToMembership' => true,
+                            'addPointsToRange' => false
                         ]);
                         
                         $points_gived += $user_from['point'];
