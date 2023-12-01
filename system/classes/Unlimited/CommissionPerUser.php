@@ -53,7 +53,7 @@ class CommissionPerUser extends Orm
 	{
 		$amount = Util::getPercentaje($data['amount'],$data['percentaje']);
 
-		if(isset($data['addPointsToMembership']))
+		if(isset($data['addPointsToMembership']) && $data['addPointsToMembership'] == true)
 		{
 			MembershipPerUser::addPoints([
 				'user_login_id' => $data['user_login_id'],
