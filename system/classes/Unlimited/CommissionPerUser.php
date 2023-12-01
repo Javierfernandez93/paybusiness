@@ -29,14 +29,23 @@ class CommissionPerUser extends Orm
 
 	public static function addBinaryCommission(array $data = null): bool
 	{
+		$amount = Util::getPercentaje($data['amount'],$data['percentaje']);
+
+		if(isset($data['addPointsToMembership']))
+		{
+			MembershipPerUser::addPoints([
+				'user_login_id' => $data['user_login_id'],
+				'amount' => $amount
+			]);
+		}
+
 		$CommissionPerUser = new self;
-		
+
 		if($CommissionPerUser->findField("user_login_id_from = ? AND user_login_id = ? AND membership_per_user_id = ? AND status != ?",[$data['user_login_id_from'],$data['user_login_id'],$data['membership_per_user_id'],-1],"commission_per_user_id"))
 		{
 			return false;
 		}
 
-		$amount = Util::getPercentaje($data['amount'],$data['percentaje']);
 		$pass = true;
 
 		$MembershipPerUser = new MembershipPerUser;
@@ -46,13 +55,6 @@ class CommissionPerUser extends Orm
 			$pass = $MembershipPerUser->hasMembershipSpace($data['user_login_id']);
 		}
 		
-		if(isset($data['addPointsToMembership']))
-		{
-			MembershipPerUser::addPoints([
-				'user_login_id' => $data['user_login_id'],
-				'amount' => $amount
-			]);
-		}
 
 		if(!$pass)
 		{

@@ -15,11 +15,11 @@ echo "<pre>";
 
 if($users)
 {
-    // $users = [
-    //     [
-    //         'user_login_id' => 1
-    //     ]
-    // ];
+    $users = [
+        [
+            'user_login_id' => 1
+        ]
+    ];
 
     foreach($users as $user)
     {
