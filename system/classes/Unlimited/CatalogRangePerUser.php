@@ -48,7 +48,7 @@ class CatalogRangePerUser extends Orm {
 
         $CatalogRangePerUser = new self;
         
-        if($CatalogRangePerUser->loadWhere('user_login_id = ? AND catalog_range_id = ?',[$data['user_login_id'],$data['catalog_range_id']]))
+        if($CatalogRangePerUser->loadWhere('user_login_id = ? AND catalog_range_id = ? AND status != ?',[$data['user_login_id'],$data['catalog_range_id'],3]))
         {
             return false;
         }

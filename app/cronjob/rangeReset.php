@@ -14,8 +14,15 @@ if($catalog_ranges)
     {
         if($CatalogRangePerUser->loadWhere("catalog_range_per_user_id = ?",$catalog_range['catalog_range_per_user_id']))
         {
-            $CatalogRangePerUser->status = -1 * $CatalogRangePerUser->status;
-            $CatalogRangePerUser->save();
+            $CatalogRangePerUser->status = 3;
+
+            if($CatalogRangePerUser->save())
+            {
+                Unlimited\CatalogRangePerUser::insertFirstRange([
+                    'catalog_range_id' => Unlimited\CatalogRange::FIRST_RANGE_ID,
+                    'user_login_id' => $CatalogRangePerUser->user_login_id,
+                ]);
+            }
         }
     }
 }
