@@ -36,13 +36,39 @@ class CommissionPerUser extends Orm
 			return false;
 		}
 
+		$amount = Util::getPercentaje($data['amount'],$data['percentaje']);
+		$pass = true;
+
+		$MembershipPerUser = new MembershipPerUser;
+
+		if(isset($data['validate_membership']))
+		{
+			$pass = $MembershipPerUser->hasMembershipSpace($data['user_login_id']);
+		}
+		
+		if(isset($data['addPointsToMembership']))
+		{
+			MembershipPerUser::addPoints([
+				'user_login_id' => $data['user_login_id'],
+				'amount' => $amount
+			]);
+		}
+
+		if(!$pass)
+		{
+			return false;
+		}
+
 		$CommissionPerUser->catalog_commission_id = $data['catalog_commission_id'];
 		$CommissionPerUser->membership_per_user_id = $data['membership_per_user_id'];
 		$CommissionPerUser->user_login_id_from = $data['user_login_id_from'];
 		$CommissionPerUser->user_login_id = $data['user_login_id'];
 		$CommissionPerUser->catalog_currency_id = CatalogCurrency::USD;
-		$CommissionPerUser->amount = Util::getPercentaje($data['amount'],$data['percentaje']);
-		$CommissionPerUser->status = isset($data['status']) ? $data['status'] : self::PENDING_FOR_DISPERSION;
+		$CommissionPerUser->amount = $amount;
+
+		$data['status'] = $MembershipPerUser->hasAmountExtra($data['user_login_id']) ? 0 : 1;
+
+		$CommissionPerUser->status = $data['status'];
 		$CommissionPerUser->create_date = time();
 
 		return $CommissionPerUser->save();

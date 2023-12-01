@@ -86,26 +86,22 @@ class MembershipPerUser extends Orm {
 			return false;
 		}
 
-		$target = $MembershipPerUser->amount + $data['amount'];
-		$amount = 0;
-		
-		if($target > $catalogMembership['target'])
+		if($MembershipPerUser->amount >= $catalogMembership['target'])
 		{
-			$amount_extra = $target - $catalogMembership['target'];
-			$amount = $catalogMembership['target'];
+			if($MembershipPerUser->amount_extra < $catalogMembership['target'])
+			{
+				$MembershipPerUser->amount_extra = $MembershipPerUser->amount_extra + $data['amount'];
+			}
 		} else {
-			$amount = $target;
+			$MembershipPerUser->amount = $MembershipPerUser->amount + $data['amount'];
 		}
-		
-		$MembershipPerUser->amount = $amount;
-		$MembershipPerUser->amount_extra = isset($amount_extra) ? $amount_extra : 0;
 
 		return $MembershipPerUser->save();
 	}
 
 	public static function setAsTake(int $membership_per_user_id = null) 
 	{
-		if(!isset($membership_per_user))
+		if(!isset($membership_per_user_id))
 		{
 			return false;
 		}
@@ -133,7 +129,7 @@ class MembershipPerUser extends Orm {
 		$MembershipPerUser = new self;
 
 		$data = array_map(function($user_login_id) use($UserData,$MembershipPerUser){
-			$membership = $MembershipPerUser->findRow("user_login_id = ? AND status = ?",[$user_login_id,1],['membership_per_user_id','point','catalog_membership_id']);
+			$membership = $MembershipPerUser->findRow("user_login_id = ? AND status = ? AND take = ?",[$user_login_id,1,0],['membership_per_user_id','point','catalog_membership_id'],['field' => 'membership_per_user_id', 'order' => 'DESC']);
 			
 			return [
 				'user_login_id' => $user_login_id,
@@ -213,6 +209,7 @@ class MembershipPerUser extends Orm {
 			SELECT 
 				{$this->tblName}.{$this->tblName}_id,
 				{$this->tblName}.amount,
+				{$this->tblName}.point,
 				{$this->tblName}.user_login_id,
 				{$this->tblName}.amount_extra,
 				catalog_membership.catalog_membership_id,
@@ -231,6 +228,23 @@ class MembershipPerUser extends Orm {
 		");
 	}
 	
+	public function hasMembershipSpace(int $user_login_id = null) : bool
+	{
+		if(!isset($user_login_id))
+		{
+			return false;
+		}
+		
+		$membership = $this->getCurrentMembership($user_login_id);
+
+		if(!$membership)
+		{
+			return false;
+		}
+
+		return $membership['amount_extra'] < ($membership['point'] * 20);
+	}
+
 	public function getCurrentMembershipAmount(int $user_login_id = null) 
 	{
 		if(!isset($user_login_id))

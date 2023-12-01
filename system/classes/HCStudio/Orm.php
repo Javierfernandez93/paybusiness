@@ -474,12 +474,17 @@ abstract class Orm
 		return false;
 	}
 	
-	public function findRow(string $where = null,array|string|int|float $binds = null,array $fields = null) : array|bool
+	public function findRow(string $where = null,array|string|int|float $binds = null,array $fields = null,array $orderBy = null) : array|bool
 	{
 		$fields = isset($fields) ? implode(',',$fields) : implode(",",array_keys($this->getFields()));
 
 		$query = "SELECT {$fields} FROM {$this->tblName} WHERE {$where}";
 
+		if(isset($orderBy))
+		{
+			$query .= " ORDER BY {$orderBy['field']} ".strtoupper($orderBy['order']);
+		}
+		
 		if($data = $this->db->row($query, $binds))
 		{
 			return $data;

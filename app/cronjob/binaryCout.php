@@ -30,7 +30,9 @@ if($users)
             if($binary_points)
             {
                 if($network = Unlimited\UserLogin::getNetworkToPay($binary_points))
-                {
+                {   
+                    $points_gived = 0;
+
                     foreach($network['pay']['users'] as $user_from)
                     {
                         Unlimited\CommissionPerUser::addBinaryCommission([
@@ -40,22 +42,37 @@ if($users)
                             'membership_per_user_id' => $user_from['membership_per_user_id'],
                             'amount' => $user_from['point'],
                             'percentaje' => $network['pay']['percentaje'],
+                            'validate_membership' => true,
+                            'addPointsToMembership' => true
                         ]);
+                        
+                        $points_gived += $user_from['point'];
+
+                        Unlimited\MembershipPerUser::setAsTake($user_from['membership_per_user_id']);
                     }
 
                     if(isset($network['pass']))
                     {
+                        $points_passed = 0;
+
                         foreach($network['pass']['users'] as $user_from)
                         {
-                            Unlimited\CommissionPerUser::addBinaryCommission([
-                                'catalog_commission_id' => $CatalogMembership->findField("catalog_membership_id = ?",[$user_from['catalog_membership_id']],"catalog_commission_id"),
-                                'user_login_id' => $user['user_login_id'],
-                                'user_login_id_from' => $user_from['user_login_id'],
-                                'membership_per_user_id' => $user_from['membership_per_user_id'],
-                                'status' => -2,
-                                'amount' => 0,
-                                'percentaje' => $network['pay']['percentaje'],
-                            ]);
+                            if($points_passed < $points_gived)
+                            {
+                                // Unlimited\CommissionPerUser::addBinaryCommission([
+                                //     'catalog_commission_id' => $CatalogMembership->findField("catalog_membership_id = ?",[$user_from['catalog_membership_id']],"catalog_commission_id"),
+                                //     'user_login_id' => $user['user_login_id'],
+                                //     'user_login_id_from' => $user_from['user_login_id'],
+                                //     'membership_per_user_id' => $user_from['membership_per_user_id'],
+                                //     'status' => -2,
+                                //     'amount' => 0,
+                                //     'percentaje' => $network['pay']['percentaje'],
+                                // ]);
+
+                                $points_passed += $user_from['point'];
+    
+                                Unlimited\MembershipPerUser::setAsTake($user_from['membership_per_user_id']);
+                            }
                         }
                     }
                 }
