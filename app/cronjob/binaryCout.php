@@ -15,11 +15,11 @@ echo "<pre>";
 
 if($users)
 {
-    $users = [
-        [
-            'user_login_id' => 1
-        ]
-    ];
+    // $users = [
+    //     [
+    //         'user_login_id' => 1
+    //     ]
+    // ];
 
     foreach($users as $user)
     {
@@ -43,7 +43,7 @@ if($users)
                             'amount' => $user_from['point'],
                             'percentaje' => $network['pay']['percentaje'],
                             'validate_membership' => true,
-                            'addPointsToMembership' => false
+                            'addPointsToMembership' => true
                         ]);
                         
                         $points_gived += $user_from['point'];
