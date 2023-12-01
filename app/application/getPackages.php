@@ -16,7 +16,7 @@ if($UserLogin->logged === true)
 
         if($catalog_membership_id)
         {
-            $filter .= " AND package.catalog_membership_id = '{$catalog_membership_id}'";
+            $filter .= " AND package.catalog_membership_id <= '{$catalog_membership_id}'";
         }
     }
 
