@@ -16,11 +16,11 @@ echo "<pre>";
 
 if($users)
 {
-    $users = [
-        [
-            'user_login_id' => 1
-        ]
-    ];
+    // $users = [
+    //     [
+    //         'user_login_id' => 1
+    //     ]
+    // ];
 
     foreach($users as $user)
     {
@@ -51,7 +51,7 @@ if($users)
                         $points_gived += $user_from['point'];
 
                         Unlimited\MembershipPerUser::setAsTake([
-                            'user_login_id' => $user_from['user_login_id'],
+                            'user_login_id' => $user['user_login_id'],
                             'membership_per_user_id' => $user_from['membership_per_user_id']
                         ]);
 
@@ -82,7 +82,7 @@ if($users)
                                 $points_passed += $user_from['point'];
     
                                 Unlimited\MembershipPerUser::setAsTake([
-                                    'user_login_id' => $user_from['user_login_id'],
+                                    'user_login_id' => $user['user_login_id'],
                                     'membership_per_user_id' => $user_from['membership_per_user_id']
                                 ]);
 

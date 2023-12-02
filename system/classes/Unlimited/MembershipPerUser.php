@@ -126,21 +126,19 @@ class MembershipPerUser extends Orm {
 		{
 			$take = json_decode($MembershipPerUser->take,true);
 
-			if($take == 0)
+			if(!in_array($data['user_login_id'],$take))
 			{
-				$take = [];
 				$take[] = $data['user_login_id'];
-			} else {
-				$take[] = $data['user_login_id'];
-			}
+			} 
 		} 
+
 
 		$MembershipPerUser->take = json_encode($take);
 		
 		return $MembershipPerUser->save();
 	}
 
-	public static function getNetworkPoints(array $data = null) 
+	public static function getNetworkPoints(array $data = null,int $sponsor_id = null) 
 	{
 		if(!isset($data) && !is_array($data))
 		{
@@ -150,9 +148,11 @@ class MembershipPerUser extends Orm {
 		$UserData = new UserData;
 		$MembershipPerUser = new self;
 
-		$data = array_map(function($user_login_id) use($UserData,$MembershipPerUser){
+		
+		$data = array_map(function($user_login_id) use($UserData,$MembershipPerUser,$sponsor_id){
 			$membership = $MembershipPerUser->findRow("user_login_id = ? AND status = ?",[$user_login_id,1],['membership_per_user_id','point','catalog_membership_id','take'],['field' => 'membership_per_user_id', 'order' => 'DESC']);
 			
+			// d($sponsor_id);
 			if(isset($membership['take']))
 			{
 				if(Util::isJson($membership['take']))
@@ -161,13 +161,13 @@ class MembershipPerUser extends Orm {
 					
 					if(is_array($membership['take']))
 					{
-						if(in_array($user_login_id,$membership['take']))
+						if(in_array($sponsor_id,$membership['take']))
 						{
 							$membership = false;
-						}
+						} 
 					}
 				}
-			}
+			} 
 
 			return [
 				'user_login_id' => $user_login_id,

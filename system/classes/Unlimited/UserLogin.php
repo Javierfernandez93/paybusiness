@@ -1995,17 +1995,18 @@ class UserLogin extends Orm {
     
     if(isset($_directs['start']['users']))
     {
-      $_directs['start']['users'] = MembershipPerUser::getNetworkPoints($_directs['start']['users']);
+      $_directs['start']['users'] = MembershipPerUser::getNetworkPoints($_directs['start']['users'],$user_login_id);
       $_directs['start']['points'] = array_sum(array_column($_directs['start']['users'],"point"));
     }
-
     
     if(isset($_directs['end']['users']))
     {
-      $_directs['end']['users'] = MembershipPerUser::getNetworkPoints($_directs['end']['users']);
+      $_directs['end']['users'] = MembershipPerUser::getNetworkPoints($_directs['end']['users'],$user_login_id);
       $_directs['end']['points'] = array_sum(array_column($_directs['end']['users'],"point"));
     }
     
+    // d($_directs);
+
     return $_directs;
   }
 
