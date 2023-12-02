@@ -1998,6 +1998,7 @@ class UserLogin extends Orm {
       $_directs['start']['users'] = MembershipPerUser::getNetworkPoints($_directs['start']['users']);
       $_directs['start']['points'] = array_sum(array_column($_directs['start']['users'],"point"));
     }
+
     
     if(isset($_directs['end']['users']))
     {

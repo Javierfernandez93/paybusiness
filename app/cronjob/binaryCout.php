@@ -9,17 +9,18 @@ $CatalogCommission = new Unlimited\CatalogCommission;
 $CatalogMembership = new Unlimited\CatalogMembership;
 $UserLogin = new Unlimited\UserLogin(false,false);
 
-$users = $MembershipPerUser->findAll("status = ? AND take = ?",[1,0]);
+// $users = $MembershipPerUser->findAll("status = ? AND take = ?",[1,0]);
+$users = $MembershipPerUser->findAll("status = ?",[1]);
 
 echo "<pre>";
 
 if($users)
 {
-    // $users = [
-    //     [
-    //         'user_login_id' => 1
-    //     ]
-    // ];
+    $users = [
+        [
+            'user_login_id' => 1
+        ]
+    ];
 
     foreach($users as $user)
     {
@@ -32,7 +33,7 @@ if($users)
                 if($network = Unlimited\UserLogin::getNetworkToPay($binary_points))
                 {   
                     $points_gived = 0;
-
+                    
                     foreach($network['pay']['users'] as $user_from)
                     {
                         Unlimited\CommissionPerUser::addBinaryCommission([
@@ -49,7 +50,11 @@ if($users)
                         
                         $points_gived += $user_from['point'];
 
-                        Unlimited\MembershipPerUser::setAsTake($user_from['membership_per_user_id']);
+                        Unlimited\MembershipPerUser::setAsTake([
+                            'user_login_id' => $user_from['user_login_id'],
+                            'membership_per_user_id' => $user_from['membership_per_user_id']
+                        ]);
+
                         Unlimited\MembershipPerUser::setOldMembershipAsTaked($user_from['user_login_id']);
                     }
 
@@ -59,8 +64,11 @@ if($users)
 
                         foreach($network['pass']['users'] as $user_from)
                         {
+                            // echo "{$user_from['user_login_id']} - ";
+
                             if($points_passed < $points_gived)
                             {
+                                // echo "{$user_from['point']} - ";
                                 // Unlimited\CommissionPerUser::addBinaryCommission([
                                 //     'catalog_commission_id' => $CatalogMembership->findField("catalog_membership_id = ?",[$user_from['catalog_membership_id']],"catalog_commission_id"),
                                 //     'user_login_id' => $user['user_login_id'],
@@ -73,9 +81,15 @@ if($users)
 
                                 $points_passed += $user_from['point'];
     
-                                Unlimited\MembershipPerUser::setAsTake($user_from['membership_per_user_id']);
+                                Unlimited\MembershipPerUser::setAsTake([
+                                    'user_login_id' => $user_from['user_login_id'],
+                                    'membership_per_user_id' => $user_from['membership_per_user_id']
+                                ]);
+
                                 Unlimited\MembershipPerUser::setOldMembershipAsTaked($user_from['user_login_id']);
                             }
+
+                            echo "<br>";
                         }
                     }
                 }

@@ -3,7 +3,7 @@
 namespace Unlimited;
 
 use HCStudio\Orm;
-
+use HCStudio\Util;
 use Unlimited\CatalogMembership;
 use Unlimited\CommissionPerUser;
 
@@ -106,21 +106,36 @@ class MembershipPerUser extends Orm {
 		return $MembershipPerUser->save();
 	}
 
-	public static function setAsTake(int $membership_per_user_id = null) 
+	public static function setAsTake(array $data = null) 
 	{
-		if(!isset($membership_per_user_id))
+		if(!isset($data))
 		{
 			return false;
 		}
 
 		$MembershipPerUser = new self;
 		
-		if(!$MembershipPerUser->loadWhere("membership_per_user_id = ?",$membership_per_user_id))
+		if(!$MembershipPerUser->loadWhere("membership_per_user_id = ?",$data['membership_per_user_id']))
 		{
 			return false;
 		}
 
-		$MembershipPerUser->take = 1;
+		$take = [];
+
+		if(Util::isJson($MembershipPerUser->take))
+		{
+			$take = json_decode($MembershipPerUser->take,true);
+
+			if($take == 0)
+			{
+				$take = [];
+				$take[] = $data['user_login_id'];
+			} else {
+				$take[] = $data['user_login_id'];
+			}
+		} 
+
+		$MembershipPerUser->take = json_encode($take);
 		
 		return $MembershipPerUser->save();
 	}
@@ -136,8 +151,24 @@ class MembershipPerUser extends Orm {
 		$MembershipPerUser = new self;
 
 		$data = array_map(function($user_login_id) use($UserData,$MembershipPerUser){
-			$membership = $MembershipPerUser->findRow("user_login_id = ? AND status = ? AND take = ?",[$user_login_id,1,0],['membership_per_user_id','point','catalog_membership_id'],['field' => 'membership_per_user_id', 'order' => 'DESC']);
+			$membership = $MembershipPerUser->findRow("user_login_id = ? AND status = ?",[$user_login_id,1],['membership_per_user_id','point','catalog_membership_id','take'],['field' => 'membership_per_user_id', 'order' => 'DESC']);
 			
+			if(isset($membership['take']))
+			{
+				if(Util::isJson($membership['take']))
+				{
+					$membership['take'] = json_decode($membership['take'],true);
+					
+					if(is_array($membership['take']))
+					{
+						if(in_array($user_login_id,$membership['take']))
+						{
+							$membership = false;
+						}
+					}
+				}
+			}
+
 			return [
 				'user_login_id' => $user_login_id,
 				'names' => $UserData->findField("user_login_id = ?",[$user_login_id],"names"),
@@ -309,7 +340,10 @@ class MembershipPerUser extends Orm {
 		{
 			foreach($memberships as $membership_per_user_id)
 			{
-				self::setAsTake($membership_per_user_id);
+				self::setAsTake([
+					'membership_per_user_id' => $membership_per_user_id,
+					'user_login_id' => $user_login_id
+				]);
 			}
 		}
 	}

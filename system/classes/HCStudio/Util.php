@@ -744,4 +744,9 @@ class Util
 	{
 		return date("d", $date) . " de " . self::getMonthById(date("m", $date) - 1) . " del " . date("Y", $date);
 	}
+
+	public static function isJson(string $string = null) {
+		json_decode($string);
+		return json_last_error() === JSON_ERROR_NONE;
+	 }
 }
