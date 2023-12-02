@@ -327,22 +327,22 @@ class MembershipPerUser extends Orm {
 		");
 	}
 
-	public static function setOldMembershipAsTaked(int $user_login_id = null) 
+	public static function setOldMembershipAsTaked(array $data = null) 
 	{
-		if(!isset($user_login_id))
+		if(!isset($data))
 		{
 			return false;
 		}
 		
 		$MembershipPerUser = new MembershipPerUser;
 		
-		if($memberships = $MembershipPerUser->getActiveMemberships($user_login_id))
+		if($memberships = $MembershipPerUser->getActiveMemberships($data['user_login_id']))
 		{
 			foreach($memberships as $membership_per_user_id)
 			{
 				self::setAsTake([
 					'membership_per_user_id' => $membership_per_user_id,
-					'user_login_id' => $user_login_id
+					'user_login_id' => $data['sponsor_id']
 				]);
 			}
 		}

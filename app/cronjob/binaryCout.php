@@ -55,7 +55,10 @@ if($users)
                             'membership_per_user_id' => $user_from['membership_per_user_id']
                         ]);
 
-                        Unlimited\MembershipPerUser::setOldMembershipAsTaked($user_from['user_login_id']);
+                        Unlimited\MembershipPerUser::setOldMembershipAsTaked([
+                            'sponsor_id' => $user['user_login_id'],
+                            'user_login_id' => $user_from['user_login_id']
+                        ]);
                     }
 
                     if(isset($network['pass']))
@@ -86,7 +89,10 @@ if($users)
                                     'membership_per_user_id' => $user_from['membership_per_user_id']
                                 ]);
 
-                                Unlimited\MembershipPerUser::setOldMembershipAsTaked($user_from['user_login_id']);
+                                Unlimited\MembershipPerUser::setOldMembershipAsTaked([
+                                    'sponsor_id' => $user['user_login_id'],
+                                    'user_login_id' => $user_from['user_login_id']
+                                ]);
                             }
 
                             echo "<br>";
