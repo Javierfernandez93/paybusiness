@@ -1,4 +1,4 @@
-import { Fxwinning } from './fxwinning.module.js?v=2.6.9'   
+import { Fxwinning } from './fxwinning.module.js?v=2.7.0'   
 
 const AutofxwinningViewer = {
     name : 'autofxwinning-viewer',

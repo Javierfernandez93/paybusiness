@@ -1,5 +1,5 @@
 /* vue */
-import { AdmintradingViewer } from '../../src/js/admintradingViewer.vue.js?v=2.6.9'
+import { AdmintradingViewer } from '../../src/js/admintradingViewer.vue.js?v=2.7.0'
 
 Vue.createApp({
     components: {

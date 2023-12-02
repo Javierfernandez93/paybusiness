@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.6.9'   
+import { User } from '../../src/js/user.module.js?v=2.7.0'   
 
 const LessonViewer = {
     name : 'lesson-viewer',
@@ -230,19 +230,7 @@ const LessonViewer = {
                                 AUDIO
                             </div>
                             <div v-else-if="course.session.catalog_multimedia_id == CATALOG_MULTIMEDIA.VIDEO">
-                                <div v-if="course.session.course.isValidYoutubeUrl()">
-                                    <span v-if="course.session.course.getYoutubeVideoFrame()">
-                                        <span v-html="course.session.course.getYoutubeVideoFrame()"></span>
-                                    </span>
-                                    <span v-else>
-                                        <span v-html="course.session.course"></span>
-                                    </span>
-                                </div>
-                                <div v-else>
-                                    <video style="width:100%" controls ref="video" class="rounded shadow-xl border border-5 border-dark">
-                                        <source :src="course.session.course" type="video/mp4">
-                                    </video>
-                                </div>
+                                <span v-html="course.session.course"></span>
                             </div>
                             <div v-else-if="course.session.catalog_multimedia_id == CATALOG_MULTIMEDIA.HTML">
                                 <div v-html="course.session.course"></div>
@@ -326,7 +314,7 @@ const LessonViewer = {
                                         <span class="badge p-0" :class="course.session.session_per_course_id == session.session_per_course_id ? 'border-white text-white': 'border-secondary text-secondary'">Módulo {{session.order_number}}</span>
                                         
                                         <span v-if="!session.aviable" class="badge border text-xxs ms-2" :class="course.session.session_per_course_id == session.session_per_course_id ? 'border-white text-white': 'border-warning text-warning'">Próximamente</span>
-                                    </div>
+                                    </span>
                                     <div class="h4 fw-semibold" :class="course.session.session_per_course_id == session.session_per_course_id ? 'text-white': ''">
                                         <span v-if="session.sessionTaked" class="me-2">
                                             <i class="bi bi-check-circle"></i>

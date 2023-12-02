@@ -1,4 +1,4 @@
-import { AdminiptvViewer } from './adminiptvViewer.vue.js?v=2.6.9'
+import { AdminiptvViewer } from './adminiptvViewer.vue.js?v=2.7.0'
 
 Vue.createApp({
     components : { 

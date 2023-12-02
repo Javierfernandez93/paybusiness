@@ -1,4 +1,4 @@
-import { AdminapisViewer } from '../../src/js/adminapisViewer.vue.js?v=2.6.9'
+import { AdminapisViewer } from '../../src/js/adminapisViewer.vue.js?v=2.7.0'
 
 Vue.createApp({
     components : { 

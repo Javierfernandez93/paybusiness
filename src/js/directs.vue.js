@@ -1,6 +1,6 @@
 
-import { DirectsViewer } from '../../src/js/directsViewer.vue.js?v=2.6.9'
-import { WidgetlandingViewer } from '../../src/js/widgetlandingViewer.vue.js?v=2.6.9'
+import { DirectsViewer } from '../../src/js/directsViewer.vue.js?v=2.7.0'
+import { WidgetlandingViewer } from '../../src/js/widgetlandingViewer.vue.js?v=2.7.0'
 
 Vue.createApp({
     components : { 

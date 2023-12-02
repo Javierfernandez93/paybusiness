@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.6.9'   
+import { User } from '../../src/js/user.module.js?v=2.7.0'   
 
 const EditvcardViewer = {
     name : 'editvcard-viewer',
