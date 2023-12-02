@@ -105,3 +105,6 @@
 .tree a:hover + ul span {
   background-color: var(--bs-focus-input-border-color) !important;
 }
+.avatar img {
+  object-fit: cover;
+}
