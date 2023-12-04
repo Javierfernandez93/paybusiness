@@ -4,9 +4,9 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserLogin = new Unlimited\UserLogin;
 
-if($UserSupport->logged === true)
+if($UserLogin->logged === true)
 {
     $data["zoom_button_2"] = Unlimited\SystemVar::_getValue("zoom_button_2");
     $data["zoom_class_2"] = Unlimited\SystemVar::_getValue("zoom_class_2");
