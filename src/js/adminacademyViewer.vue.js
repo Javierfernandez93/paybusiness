@@ -73,8 +73,9 @@ const AdminacademyViewer = {
                 }
             })
         },
-        delete(course)
+        deleteCourse(course)
         {
+            console.log(course)
             this.UserSupport.changeCourseStatus({course_id:course.course_id,status:-1},(response)=>{
                 if(response.s == 1)
                 {
@@ -197,7 +198,7 @@ const AdminacademyViewer = {
                                         <li><button class="dropdown-item"@click="edit(course.course_id)"><t>Editar</t></button></li>
                                         <li v-if="course.status == 1"><button class="dropdown-item"@click="unpublish(course)"><t>Despublicar</t></button></li>
                                         <li v-if="course.status == 0"><button class="dropdown-item"@click="publish(course)"><t>Publicar</t></button></li>
-                                        <li><button class="dropdown-item"@click="delete(course)"><t>Eliminar</t></button></li>
+                                        <li><button class="dropdown-item" @click="deleteCourse(course)"><t>Eliminar</t></button></li>
                                     </ul>
                                 </div>
                             </div>

@@ -239,7 +239,7 @@ class Course extends Orm {
                 ON
                     catalog_currency.catalog_currency_id = {$this->tblName}.catalog_currency_id
                 WHERE 
-                    {$this->tblName}.status = '".Constants::AVIABLE."'
+                    {$this->tblName}.status != '".Constants::DELETE."'
                 ";
         
         return $this->connection()->rows($sql);
