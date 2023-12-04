@@ -782,6 +782,9 @@ class User extends Http {
     getBinaryPoints(data, callback) {
         return this.call('../../app/application/getBinaryPoints.php', data, callback);
     }
+    getZoomLink(data, callback) {
+        return this.call('../../app/application/getZoomLink.php', data, callback);
+    }
 }
 
 export { User }
