@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=2.7.1'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=2.7.2'
 
 const AdminacademyViewer = {
     name : 'adminacademy-viewer',
@@ -192,7 +192,7 @@ const AdminacademyViewer = {
                             </div>
                             <div class="col-auto">
                                 <div class="dropdown">
-                                    <button type="button" class="btn btn-outline-primary px-3 btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button type="button" class="btn btn-outline-primary mb-0 px-3 btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 
                                     </button>
                                     <ul class="dropdown-menu shadow">

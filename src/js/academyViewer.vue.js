@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.7.1'   
+import { User } from '../../src/js/user.module.js?v=2.7.2'   
 
 const AcademyViewer = {
     name : 'academy-viewer',
@@ -6,7 +6,10 @@ const AcademyViewer = {
         return {
             User: new User,
             query: null,
-            zoom_class: null,
+            zoom_class_1: null,
+            zoom_class_2: null,
+            zoom_button_1: null,
+            zoom_button_2: null,
             courses: null,
             coursesAux: null,
             STATUS : {
@@ -59,7 +62,10 @@ const AcademyViewer = {
         getZoomLink() {
             this.User.getZoomLink({}, (response) => {
                 if (response.s == 1) {
-                    this.zoom_class = response.zoom_class
+                    this.zoom_button_2 = response.zoom_button_2
+                    this.zoom_button_1 = response.zoom_button_1
+                    this.zoom_class_2 = response.zoom_class_2
+                    this.zoom_class_1 = response.zoom_class_1
                 }
             })
         },
@@ -78,8 +84,9 @@ const AcademyViewer = {
                     <span class="badge bg-primary">total cursos {{coursesAux.length}}</span>
                     <h4>Cursos de Business Academy</h4>
                 </div>
-                <div v-if="zoom_class" class="col-12 col-xl-auto">
-                    <a :href="zoom_class" target="_blank" class="btn btn-primary mb-0 shadow-none">Ir a clase en vivo</a>
+                <div class="col-12 col-xl-auto">
+                    <a v-if="zoom_class_2" :href="zoom_class_2" target="_blank" class="btn btn-primary mb-0 shadow-none">{{zoom_button_2}}</a>
+                    <a v-if="zoom_class_1" :href="zoom_class_1" target="_blank" class="btn btn-primary mb-0 shadow-none">{{zoom_button_1}}</a>
                 </div>
                 <div class="col-12 col-xl-4">
                     <input v-model="query" type="text" class="form-control" placeholder="Buscar curso por nombre"/>
