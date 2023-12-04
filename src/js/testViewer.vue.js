@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.7.1'   
+import { User } from '../../src/js/user.module.js?v=2.7.2'   
 
 const TestViewer = {
     name : 'test-viewer',
