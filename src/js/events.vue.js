@@ -1,6 +1,6 @@
 /* vue */
-import { EventsViewer } from '../../src/js/eventsViewer.vue.js?v=2.7.2'
-import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.7.2'
+import { EventsViewer } from '../../src/js/eventsViewer.vue.js?v=2.7.3'
+import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.7.3'
 
 Vue.createApp({
     components: {

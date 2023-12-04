@@ -1,4 +1,4 @@
-import { Translator } from '../../src/js/translator.module.js?v=2.7.2'   
+import { Translator } from '../../src/js/translator.module.js?v=2.7.3'   
 
 const HomeViewer = {
     name : 'home-viewer',

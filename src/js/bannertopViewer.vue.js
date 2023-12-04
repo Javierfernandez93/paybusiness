@@ -1,5 +1,5 @@
-import { User } from '../../src/js/user.module.js?v=2.7.2'   
-import { Banner } from '../../src/js/banner.module.js?v=2.7.2'   
+import { User } from '../../src/js/user.module.js?v=2.7.3'   
+import { Banner } from '../../src/js/banner.module.js?v=2.7.3'   
 
 const BannertopViewer = {
     name : 'bannertop-viewer',
