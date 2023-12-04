@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=2.7.2'   
+import { UserSupport } from '../../src/js/userSupport.module.js?v=2.7.3'   
 
 const AdminconfigViewer = {
     name : 'adminconfig-viewer',
@@ -75,6 +75,11 @@ const AdminconfigViewer = {
                                 <div v-if="systemVar.label" class="form-text">
                                     {{systemVar.label}}
                                 </div>
+                            </div>
+                            <div class="col-auto">
+                                <button class="btn btn-primary" @click="saveSystemVar(systemVar)">
+                                Guardar
+                                </button>
                             </div>
                             <div v-if="systemVar.busy" class="col-auto">
                                 <div class="spinner-border spinner-border-sm" role="status">
