@@ -77,7 +77,7 @@ const AdminconfigViewer = {
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <button class="btn mb-0 shadow-none btn-sm px-3 btn-primary" @click="saveSystemVar(systemVar)">
+                                <button class="btn mb-0 shadow-none btn-sm px-3 btn-outline-primary" @click="saveSystemVar(systemVar)">
                                 save
                                 </button>
                             </div>
