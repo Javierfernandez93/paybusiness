@@ -8,6 +8,10 @@ if($UserLogin->logged === false) {
 	HCStudio\Util::redirectTo(TO_ROOT."/apps/login/");
 }
 
+if(!$UserLogin->hasProductPermission(Unlimited\Product::PAY_BUSINESS)) {
+	HCStudio\Util::redirectTo(TO_ROOT."/apps/store/package");
+}
+
 $UserLogin->checkRedirection();
 
 $Layout = JFStudio\Layout::getInstance();
