@@ -1,4 +1,4 @@
-import { AdminadministratorsViewer } from '../../src/js/adminadministratorsViewer.vue.js?v=2.7.3'
+import { AdminadministratorsViewer } from '../../src/js/adminadministratorsViewer.vue.js?v=2.7.5'
 
 Vue.createApp({
     components : { 

@@ -1,4 +1,4 @@
-import { Http } from '../../src/js/http.module.js?v=2.7.3';
+import { Http } from '../../src/js/http.module.js?v=2.7.5';
 
 class UserSupport extends Http {
     constructor() {

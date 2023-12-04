@@ -1,5 +1,5 @@
-import { User } from '../../src/js/user.module.js?v=2.7.3'   
-import { Translator } from '../../src/js/translator.module.js?v=2.7.3'   
+import { User } from '../../src/js/user.module.js?v=2.7.5'   
+import { Translator } from '../../src/js/translator.module.js?v=2.7.5'   
 
 const BridgesignViewer = {
     name : 'bridgesign-viewer',
