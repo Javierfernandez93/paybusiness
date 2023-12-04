@@ -84,7 +84,7 @@ const AcademyViewer = {
                     <span class="badge bg-primary">total cursos {{coursesAux.length}}</span>
                     <h4>Cursos de Business Academy</h4>
                 </div>
-                <div class="col-12 col-xl-auto">
+                <div class="col-12 col-xl-auto mb-3 mb-md-0">
                     <a v-if="zoom_class_2" :href="zoom_class_2" target="_blank" class="btn btn-primary mb-0 shadow-none">{{zoom_button_2}}</a>
                     <a v-if="zoom_class_1" :href="zoom_class_1" target="_blank" class="btn btn-primary mb-0 shadow-none">{{zoom_button_1}}</a>
                 </div>
