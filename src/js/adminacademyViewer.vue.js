@@ -75,16 +75,18 @@ const AdminacademyViewer = {
         },
         deleteCourse(course)
         {
-            console.log(course)
             this.UserSupport.changeCourseStatus({course_id:course.course_id,status:-1},(response)=>{
                 if(response.s == 1)
                 {
-                    course.status = response.status
+                    this.getCourses()
                 }
             })
         },
         getCourses() 
         {
+            this.coursesAux = null
+            this.courses = null
+
             this.UserSupport.getCourses({},(response)=>{
                 if(response.s == 1)
                 {
