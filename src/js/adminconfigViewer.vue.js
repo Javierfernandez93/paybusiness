@@ -77,8 +77,8 @@ const AdminconfigViewer = {
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <button class="btn btn-primary" @click="saveSystemVar(systemVar)">
-                                Guardar
+                                <button class="btn mb-0 shadow-none btn-sm px-3 btn-primary" @click="saveSystemVar(systemVar)">
+                                save
                                 </button>
                             </div>
                             <div v-if="systemVar.busy" class="col-auto">
