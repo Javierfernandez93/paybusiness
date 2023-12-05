@@ -51,7 +51,7 @@ const LastsignedwidgetViewer = {
                 <span class="visually-hidden">Loading...</span>
             </div>
             <div v-if="users">
-                <div class="sans text-secondary">El usuario más reciende de la compañía ingresó en </div>
+                <div class="sans text-secondary">El usuario más reciente de la compañía ingresó en </div>
                 <marquee class=>
                     <span v-for="user in users" class="mx-5">
                         <img :src="user.country_id.getCoutryImage()" class="me-2" title="flag" alt="flag" style="width:2rem"/> {{user.country}}
