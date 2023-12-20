@@ -1,4 +1,4 @@
-import { User } from "../../src/js/user.module.js?v=2.7.6";
+import { User } from "../../src/js/user.module.js?v=2.7.7";
 
 const MapViewer = {
   name: "map-viewer",

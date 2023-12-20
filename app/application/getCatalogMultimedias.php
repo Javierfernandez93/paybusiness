@@ -8,7 +8,7 @@ $UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {	
-    $data['catalog_multimedias'] = (new Unlimited\CatalogMultimedia)->getAll();
+    $data['catalog_multimedias'] = (new Unlimited\CatalogMultimedia)->findAll("status = ?",1);
     $data['r'] = 'DATA_OK';
     $data['s'] = 1;
 } else {

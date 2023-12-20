@@ -1,4 +1,4 @@
-import { UserSupport } from "../../src/js/userSupport.module.js?v=2.7.6";
+import { UserSupport } from "../../src/js/userSupport.module.js?v=2.7.7";
 
 const AddsessionViewer = {
   name: "addsession-viewer",
@@ -40,17 +40,17 @@ const AddsessionViewer = {
   },
   methods: {
     _isSessionComplete() {
-      this.isSessionComplete = this.session.title != undefined && this.session.course  != undefined
-
-      console.log(this.isSessionComplete)
+      this.isSessionComplete = this.session.title != undefined 
     },
-    newSession() {
+    newSession(attach_session_per_course_id) {
       this.session = {
-        unique_id: getUniqueId(),
+        unique_id: getUniqueIdSmall(),
         title: null,
+        sessions: [],
         course: '',
         courseValue: '',
         catalog_multimedia_id: 1,
+        attach_session_per_course_id: attach_session_per_course_id,
       };
     },
     selectSession(session) {
@@ -58,8 +58,8 @@ const AddsessionViewer = {
 
       this.offCanvas.show();
     },
-    addSession() {
-      this.newSession();
+    addSession(unique_id) {
+      this.newSession(unique_id);
 
       this.offCanvas.show();
     },
@@ -103,14 +103,14 @@ const AddsessionViewer = {
   template: `
         <div class="offcanvas offcanvas-end" tabindex="-1" ref="offcanvasRight" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
-                <h5 id="offcanvasRightLabel">Lección del curso</h5>
+                <h5 id="offcanvasRightLabel">Añadir</h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div class="form-floating mb-3">
                     <input v-model="session.title" :class="session.title ? 'is-valid' : ''" @keydown.enter.exact.prevent="$refs.course.focus()" type="text" class="form-control" ref="title" placeholder="Título">
                     <label for="title">
-                        <t>Título de la lección</t>
+                        <t>Título</t>
                     </label>
                 </div>
 
@@ -151,7 +151,7 @@ const AddsessionViewer = {
                 </div>
 
                 <div class="d-grid">
-                  <button :disabled="!isSessionComplete" class="btn btn-dark shadow-none mb-0 btn-lg" @click="saveSession"><t>Guardar sessión</t></button>
+                  <button :disabled="!isSessionComplete" class="btn btn-dark shadow-none mb-0 btn-lg" @click="saveSession"><t>Guardar</t></button>
                 </div>
             </div>
         </div>

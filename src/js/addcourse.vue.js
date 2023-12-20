@@ -1,6 +1,5 @@
-/* vue */
-import { AddcourseViewer } from '../../src/js/addcourseViewer.vue.js?v=2.7.6'
-import { AddsessionViewer } from '../../src/js/addsessionViewer.vue.js?v=2.7.6'
+import { AddcourseViewer } from '../../src/js/addcourseViewer.vue.js?v=2.7.7'
+import { AddsessionViewer } from '../../src/js/addsessionViewer.vue.js?v=2.7.7'
 
 Vue.createApp({
     components: {
@@ -13,8 +12,8 @@ Vue.createApp({
         saveSession(session) {
             this.$refs.course.saveSession(session)
         },
-        addSession() {
-            this.$refs.sessionViewer.addSession()
+        addSession(session) {
+            this.$refs.sessionViewer.addSession(session)
         },
     }
 }).mount('#app')

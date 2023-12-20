@@ -1,5 +1,5 @@
-import { VerifyViewer } from '../../src/js/verifyViewer.vue.js?v=2.7.6'   
-import { Translator } from '../../src/js/translator.module.js?v=2.7.6'   
+import { VerifyViewer } from '../../src/js/verifyViewer.vue.js?v=2.7.7'   
+import { Translator } from '../../src/js/translator.module.js?v=2.7.7'   
 
 Vue.createApp({
     components : { 

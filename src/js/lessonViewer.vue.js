@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.7.6'   
+import { User } from '../../src/js/user.module.js?v=2.7.7'   
 
 const LessonViewer = {
     name : 'lesson-viewer',
@@ -35,8 +35,7 @@ const LessonViewer = {
     },
     methods: {
         filterData() {
-            this.courses = this.campaignsAux
-
+            this.courses = this.coursesAux
             this.courses = this.courses.filter((campaign) => {
                 return campaign.name.toLowerCase().includes(this.query.toLowerCase()) 
             })
@@ -191,6 +190,7 @@ const LessonViewer = {
             this.getSessionsCourse(course.course_id).then((sessions)=>{
                 this.sessions = sessions
                 
+                console.log(this.sessions)
                 this.course.order_number = this.getLastOrder()
                 this.selectSession(this.getSession(this.course.order_number))
 
@@ -303,29 +303,76 @@ const LessonViewer = {
                         </div>
                     </div>
 
-                    <ul class="list-group list-group-flush" v-if="course.session">
-                        <li v-for="session in sessions" class="list-group-item rounded border-0 list-group-item-action cursor-pointer" :class="course.session.session_per_course_id == session.session_per_course_id ? 'bg-info': 'bg-transparent'">
-                            <div @click="selectSession(session)" class="row align-items-center">
-                                <div class="col-auto">
-                                    <span class="badge fs-5 border" :class="course.session.session_per_course_id == session.session_per_course_id ? 'text-white border-white': 'text-secondary border-secondary'"><i class="bi bi-collection-play"></i></span>
-                                </div>
-                                <div class="col">
-                                    <div v-if="session.order_number > 0" class="fs-6 fw-semibold">
-                                        <span class="badge p-0" :class="course.session.session_per_course_id == session.session_per_course_id ? 'border-white text-white': 'border-secondary text-secondary'">Módulo {{session.order_number}}</span>
-                                        
-                                        <span v-if="!session.aviable" class="badge border text-xxs ms-2" :class="course.session.session_per_course_id == session.session_per_course_id ? 'border-white text-white': 'border-warning text-warning'">Próximamente</span>
-                                    </span>
-                                    <div class="h4 fw-semibold" :class="course.session.session_per_course_id == session.session_per_course_id ? 'text-white': ''">
-                                        <span v-if="session.sessionTaked" class="me-2">
-                                            <i class="bi bi-check-circle"></i>
-                                        </span>
+                    <div v-if="course.session" class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li v-for="session in sessions" class="list-group-item p-0">
+                                <div v-if="session.hasChilds">
+                                    <div class="row align-items-center p-3">
+                                        <div class="col-auto">
+                                            <span class="badge fs-5 border"><i class="bi bi-folder-fill text-secondary"></i></span>
+                                        </div>
+                                        <div class="col">
+                                            <div class="h4 mb-0">
+                                                {{session.title}}
+                                            </div>
 
-                                        {{session.title}}
+                                            <div class="text-xs">
+                                                {{session.sessions.length}} módulos
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn btn-outline-dark px-3 mb-0 btn-sm" @click="session.toggle = !session.toggle">
+                                                <i v-if="session.toggle" class="bi bi-arrow-90deg-up"></i>
+                                                <i v-else class="bi bi-arrow-90deg-down"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <ul v-if="session.toggle == true" class="list-group list-group-flush">
+                                        <li v-for="sessionInternal in session.sessions" class="list-group-item" :class="course.session.session_per_course_id == sessionInternal.session_per_course_id ? 'bg-info': 'bg-transparent'">
+                                            <div @click="selectSession(sessionInternal)" class="row align-items-center">
+                                                <div class="col-auto">
+                                                    <span class="badge fs-5 border" :class="course.session.session_per_course_id == sessionInternal.session_per_course_id ? 'text-white border-white': 'text-secondary border-secondary'"><i class="bi bi-collection-play"></i></span>
+                                                </div>
+                                                <div class="col">
+                                                    <div v-if="sessionInternal.order_number > 0" class="fs-6">
+                                                        <span class="badge p-0" :class="course.session.session_per_course_id == sessionInternal.session_per_course_id ? 'border-white text-white': 'border-secondary text-secondary'">Módulo {{sessionInternal.order_number}}</span>
+                                                        <span v-if="!sessionInternal.aviable" class="badge border text-xxs ms-2" :class="course.session.session_per_course_id == sessionInternal.session_per_course_id ? 'border-white text-white': 'border-warning text-warning'">Próximamente</span>
+                                                    </div>
+                                                    <div class="h5" :class="course.session.session_per_course_id == sessionInternal.session_per_course_id ? 'text-white': ''">
+                                                        <span v-if="sessionInternal.sessionTaked" class="me-2">
+                                                            <i class="bi bi-check-circle"></i>
+                                                        </span>
+
+                                                        {{sessionInternal.title}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div v-else :class="course.session.session_per_course_id == session.session_per_course_id ? 'bg-info': 'bg-transparent'">
+                                    <div class="row align-items-center p-3 justify-content-center" @click="selectSession(session)">
+                                        <div class="col-auto">
+                                            <span class="badge fs-5 border" :class="course.session.session_per_course_id == session.session_per_course_id ? 'text-white border-white': 'text-secondary border-secondary'"><i class="bi bi-collection-play"></i></span>
+                                        </div>
+                                        <div class="col">
+                                            <div v-if="session.order_number > 0" class="fs-6 fw-semibold">
+                                                <span class="badge p-0" :class="course.session.session_per_course_id == session.session_per_course_id ? 'border-white text-white': 'border-secondary text-secondary'">Módulo {{session.order_number}}</span>
+                                                <span v-if="!session.aviable" class="badge border text-xxs ms-2" :class="course.session.session_per_course_id == session.session_per_course_id ? 'border-white text-white': 'border-warning text-warning'">Próximamente</span>
+                                            </div>
+                                            <div class="h4 fw-semibold" :class="course.session.session_per_course_id == session.session_per_course_id ? 'text-white': ''">
+                                                <span v-if="session.sessionTaked" class="me-2">
+                                                    <i class="bi bi-check-circle"></i>
+                                                </span>
+
+                                                {{session.title}}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

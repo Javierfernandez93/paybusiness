@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=2.7.6'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=1.0.2'
 
 const AddcourseViewer = {
     name : 'addcourse-viewer',
@@ -6,17 +6,10 @@ const AddcourseViewer = {
     data() {
         return {
             UserSupport : new UserSupport,
-            min_number_of_sessions : 1,
-            coursesList : null,
+            min_number_of_sessions : 0,
             catalog_courses : {},
             catalog_currencies : {},
             editor : null,
-            TYPE: {
-                TEXT : 1,
-                AUDIO : 2,
-                VIDEO : 3,
-                HTML : 4,
-            },
             TARGETS: [
                 {
                     code: -1,
@@ -24,11 +17,11 @@ const AddcourseViewer = {
                 },
                 {
                     code: 0,
-                    text: 'Sólo miembros no activos',
+                    text: 'Sólo no activos',
                 },
                 {
                     code: 1,
-                    text: 'Sólo miembros activos',
+                    text: 'Sólo activos',
                 }
             ],
             course : {
@@ -37,7 +30,6 @@ const AddcourseViewer = {
                 image : null,
                 duration : null,
                 catalog_course_id : 1,
-                attach_to_course_id : 0,
                 catalog_currency_id : 154,
                 free : true, // PREMIUM
                 sessions : [],
@@ -58,15 +50,6 @@ const AddcourseViewer = {
                         message: `Guardamos tu curso ${this.course.title}`,
                         _class:'bg-gradient-success text-white'
                     })
-                }
-            })
-        },
-        getCourses()
-        {
-            this.UserSupport.getCourses(this.course,(response)=>{
-                if(response.s == 1)
-                {
-                    this.coursesList = response.courses
                 }
             })
         },
@@ -94,38 +77,44 @@ const AddcourseViewer = {
                 });
             })
         },
-        getSessionKey(unique_id)
-        {
-            let key = -1
-
-            if(this.course.sessions.length > 0)
-            {
-                for(let i = 0; i < this.course.sessions.length; i++)
-                {
-                    if(this.course.sessions[i].unique_id == unique_id)   
-                    {
-                        key = i
-                    }
-                }
-            }
-
-            return key
-        },
         deleteSession(unique_id)
         {
             this.course.sessions = this.course.sessions.filter(function(session) { 
                 return session.unique_id != unique_id 
             })
         },
+        getSession(sessions,unique_id)
+        {
+            return sessions.find((session) => {
+                return session.unique_id == unique_id
+            })
+        },
         saveSession(session)
         {
-            const key = this.getSessionKey(session.unique_id)
-
-            if(key == -1)
+            if(session.attach_session_per_course_id)
             {
-                this.course.sessions.push(session)
+                let sessionFather = this.getSession(this.course.sessions,session.attach_session_per_course_id)
+                let sessionInternal = this.getSession(sessionFather.sessions,session.unique_id)  
+                
+                console.log('Sesion interna',sessionInternal)
+
+                if(sessionInternal)
+                {
+                    sessionInternal = session
+                } else {
+                    sessionFather.sessions.push(session)
+                }
             } else {
-                this.course.sessions[key] = session
+                let sessionInternal = this.getSession(this.course.sessions,session.unique_id)
+
+                console.log(sessionInternal)
+
+                if(sessionInternal)
+                {
+                    sessionInternal = session
+                } else {
+                    this.course.sessions.push(session)
+                }
             }
         },
         getCourseFormAddVars() 
@@ -163,15 +152,12 @@ const AddcourseViewer = {
         this.getCourseFormAddVars().then(()=>{
             this.init()
             this.initEditor()
-            this.getCourses()
         })
     },
     template : `
         <div class="row mb-3 align-items-center">
             <div class="col-12 col-xl">
-                <div :class="course.title ? 'lead' : 'h2'">Añadir curso</div>
-
-                <div class="h2" v-if="course.title">{{course.title}}</div>
+                <h4>Añadir curso</h4>
             </div>
             <div class="col-12 col-xl-auto">
                 <button :disabled="course.sessions.length < min_number_of_sessions" @click="saveCourse" class="btn btn-dark shadow-none me-2">
@@ -179,82 +165,65 @@ const AddcourseViewer = {
                 </button>
 
                 <button @click="$emit('addSession')" class="btn btn-dark shadow-none">
-                    <t>Añadir lección</t>
+                    <t>Añadir</t>
                 </button>
             </div>
         </div>
 
         <div class="d-flex row justify-content-center">
             <div class="col-12 col-xl-8">
-                <div class="card card-body">
-                    <h4 class="mb-3">Información del curso</h4>
-                    <div class="row d-none pb-3 align-items-center">
-                        <div class="d-none col-auto form-check form-switch">
-                            <input v-model="course.free" class="form-check-input" type="checkbox" reef="free">
-                            <label class="form-check-label" for="free">
-                                <t>Ofrecer curso gratuito</t>
-                            </label>
-                        </div>
-                        <div class="col-12 col-xl">
-                            <select class="form-select" v-model="course.target" aria-label="Campaña">
-                                <option v-for="target in TARGETS" v-bind:value="target.code">
-                                    {{ target.text }} 
-                                </option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="row mb-3 align-items-center">
-                        <div class="col-12 col-xl">
-                            <div class="form-floating">
-                                <input v-model="course.title" :class="course.title ? 'is-valid' : ''" @keydown.enter.exact.prevent="$refs.duration.focus()" type="text" autofocus class="form-control" ref="title" placeholder="name@example.com">
-                                <label for="title">
-                                    <t>Nombre del curso</t>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row pb-3 align-items-center">
+                            <div class="col lead">
+                                <t>Información</t>
+                            </div>
+                            <div class="col-auto form-check form-switch">
+                                <input v-model="course.free" class="form-check-input" type="checkbox" reef="free">
+                                <label class="form-check-label" for="free">
+                                    <t>Ofrecer curso gratuito</t>
                                 </label>
                             </div>
-                        </div>
-                        <div class="col-12 col-xl">
-                            <div class="form-floating">
-                                <input v-model="course.duration" id="duration" :class="course.duration ? 'is-valid' : ''" @keydown.enter.exact.prevent="$refs.description.focus()" type="text" class="form-control" ref="duration" data-mask="HH:MM" placeholder="name@example.com">
-                                <label for="duration">
-                                    <t>Horas del curso (formato HH:mm)</t>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="col-12 col-xl">
-                            <div class="form-floating">
+                            <div class="col-12 col-xl">
                                 <select class="form-select" v-model="course.target" aria-label="Campaña">
                                     <option v-for="target in TARGETS" v-bind:value="target.code">
                                         {{ target.text }} 
                                     </option>
                                 </select>
-                                <label for="floatingSelect">Público</label>
                             </div>
                         </div>
-                        <div class="col-12 col-xl">
-                            <div class="form-floating">
-                                <select class="form-select" v-model="course.attach_to_course_id" aria-label="Curso">
-                                    <option value="0">Sin vincular a curso</option>
-                                    <option v-for="courseList in coursesList" v-bind:value="courseList.course_id">
-                                        {{ courseList.title }} 
-                                    </option>
-                                </select>
-                                <label for="floatingSelect">Anclar a curso</label>
+
+                        <div class="row mb-3">
+                            <div class="col-12 col-xl-6">
+                                <div class="form-floating">
+                                    <input v-model="course.title" :class="course.title ? 'is-valid' : ''" @keydown.enter.exact.prevent="$refs.duration.focus()" type="text" autofocus class="form-control" ref="title" placeholder="name@example.com">
+                                    <label for="title">
+                                        <t>Nombre del curso</t>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-6">
+                                <div class="form-floating">
+                                    <input v-model="course.duration" id="duration" :class="course.duration ? 'is-valid' : ''" @keydown.enter.exact.prevent="$refs.description.focus()" type="text" class="form-control" ref="duration" data-mask="HH:MM" placeholder="name@example.com">
+                                    <label for="duration">
+                                        <t>Horas del curso</t>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="description">Descripción del curso</label>
-                        
-                        <div id="editor" style="height: 130px;"></div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="description">Descripción del curso</label>
+                            
+                            <div id="editor" style="height: 130px;"></div>
+                        </div>
 
-                    <div>
-                        <label for="tag">
-                            <t>Tags del curso</t>
-                        </label>
-                        <input  name="basic" ref="tag" id="tag" value="" data-tagify="true">
+                        <div>
+                            <label for="tag">
+                                <t>Tags del curso</t>
+                            </label>
+                            <input name="basic" class="rounded" ref="tag" id="tag" value="" data-tagify="true">
+                        </div>
                     </div>
                 </div>
 
@@ -263,16 +232,11 @@ const AddcourseViewer = {
                         <div class="card">
                             <div class="card-body">
                                 <div class="row align-items-center">
-                                    <div class="col h4">
+                                    <div class="col h6 mb-0">
                                         Lecciones del curso
                                     </div>
-                                    <div class="col-auto">
-                                        <span v-if="course.sessions.length == 0" class="text-secondary text-xs">
-                                            Sin lecciones, añade una en "Añadir lección"
-                                        </span>
-                                        <span v-else>
-                                            {{course.sessions.length}}
-                                        </span>
+                                    <div class="col-auto h6 mb-0">
+                                        {{ course.sessions.length }}
                                     </div>
                                 </div>
                             </div>
@@ -280,48 +244,87 @@ const AddcourseViewer = {
                                 <li v-for="(session, index) in course.sessions" class="list-group-item">
                                     <div class="row align-items-center">
                                         <div class="col-auto text-gradient-primary">
-                                            <span v-if="session.catalog_multimedia_id == TYPE.TEXT">
-                                                <i class="bi fs-3 text-primary text-gradient bi-body-text"></i>
+                                            <span v-if="session.catalog_multimedia_id == 1">
+                                                <i class="bi h3 bi-body-text"></i>
                                             </span>
-                                            <span v-else-if="session.catalog_multimedia_id == TYPE.AUDIO">
-                                                <i class="bi fs-3 text-primary text-gradient bi-camera-video"></i>
+                                            <span v-else-if="session.catalog_multimedia_id == 2">
+                                                <i class="bi h3 bi-camera-video"></i>
                                             </span>
-                                            <span v-else-if="session.catalog_multimedia_id == TYPE.VIDEO">
-                                                <i class="bi fs-3 text-primary text-gradient bi-collection-play"></i>
+                                            <span v-else-if="session.catalog_multimedia_id == 3">
+                                                <i class="bi h3 bi-collection-play"></i>
                                             </span>
-                                            <span v-else-if="session.catalog_multimedia_id == TYPE.HTML">
-                                                <i class="bi fs-3 text-primary text-gradient bi-collection-play"></i>
+                                            <span v-else-if="session.catalog_multimedia_id == 5">
+                                                <i class="bi h3 bi-folder-fill"></i>
                                             </span>
                                         </div>
                                         <div class="col">
                                             <div class="fw-semibold">{{session.title}}</div>
-                                            
-                                            <div v-if="session.catalog_multimedia_id == TYPE.TEXT">
-                                                <div v-html="session.course"></div>
+                                        
+                                            <div v-if="session.catalog_multimedia_id == 1">
+                                                <span v-html="session.course"></span>
                                             </div>
-                                            <div v-else-if="session.catalog_multimedia_id == TYPE.AUDIO">
-                                                AUDIO
-                                            </div>
-                                            <div v-else-if="session.catalog_multimedia_id == TYPE.VIDEO">
-                                                <div v-if="session.course.isValidYoutubeUrl()">
-                                                    <div v-if="session.course.getYoutubeVideoFrame()">
+                                            <div v-else-if="session.catalog_multimedia_id == 2">
+                                                <div class="row">
+                                                    <div class="col-12 col-lg-4">
+                                                        <img :src="session.course.youtubeThumbnail()" class="img-fluid">
                                                     </div>
                                                 </div>
-                                                <div v-else-if="session.course.isValidVimeoUrl()">
-                                                    <div v-if="session.course.getVimeoVideoFrame()">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div v-else-if="session.catalog_multimedia_id == TYPE.HTML">
-                                                <div v-html="session.course"></div>
                                             </div>
                                         </div>
                                         <div class="col-auto">
                                             <div class="d-grid">
-                                                <button class="btn btn-dark mb-1" @click="deleteSession(session.unique_id)">Borrar</button>
+                                                <button class="btn btn-dark btn-sm mb-1" @click="deleteSession(session.unique_id)">Borrar</button>
                                             </div>
                                             <div class="d-grid">
-                                                <button class="btn btn-dark" @click="$emit('selectSession',session)">Editar</button>
+                                                <button class="btn btn-dark btn-sm mb-1" @click="$emit('selectSession',session)">Editar</button>
+                                            </div>
+                                            <div v-if="session.catalog_multimedia_id == 5" class="d-grid">
+                                                <button @click="$emit('addSession',session.unique_id)" class="btn btn-dark btn-sm shadow-none">
+                                                    Añadir
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div v-if="session.catalog_multimedia_id == 5" class="p-3 bg-light rounded">
+                                        <div v-if="session.sessions.length > 0">
+                                            <div v-for="sessionInt in session.sessions" class="row align-items-center">
+                                                <div class="col-auto text-gradient-primary">
+                                                    <span v-if="sessionInt.catalog_multimedia_id == 1">
+                                                        <i class="bi h3 bi-body-text"></i>
+                                                    </span>
+                                                    <span v-else-if="sessionInt.catalog_multimedia_id == 2">
+                                                        <i class="bi h3 bi-camera-video"></i>
+                                                    </span>
+                                                    <span v-else-if="sessionInt.catalog_multimedia_id == 3">
+                                                        <i class="bi h3 bi-collection-play"></i>
+                                                    </span>
+                                                    <span v-else-if="sessionInt.catalog_multimedia_id == 5">
+                                                        <i class="bi h3 bi-folder-fill"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="col">
+                                                    <div class="fw-semibold">{{sessionInt.title}}</div>
+                                                
+                                                    <div v-if="sessionInt.catalog_multimedia_id == 1">
+                                                        <span v-html="sessionInt.course"></span>
+                                                    </div>
+                                                    <div v-else-if="sessionInt.catalog_multimedia_id == 2">
+                                                        <div class="row">
+                                                            <div class="col-12 col-lg-4">
+                                                                <img :src="sessionInt.course.youtubeThumbnail()" class="img-fluid">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <div class="d-grid">
+                                                        <button class="btn btn-dark btn-sm mb-1" @click="deleteSession(sessionInt.unique_id)">Borrar</button>
+                                                    </div>
+                                                    <div class="d-grid">
+                                                        <button class="btn btn-dark btn-sm mb-1" @click="$emit('selectSession',sessionInt)">Editar</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -333,21 +336,21 @@ const AddcourseViewer = {
             </div>
 
             <div class="col-12 col-xl-4">
-                <div :style="{backgroundImage: course.image ? 'url(' +course.image+')' : ''}" class="card mb-3 cursor-pointer z-zoom-element" style="height:300px;background-size:cover;">
+                <div :style="{backgroundImage: course.image ? 'url(' +course.image+')' : ''}" class="card mb-3 cursor-pointer" style="height:300px;background-size:cover;">
                     <div class="card-body">
                         <div @click="openFileManager($refs.uploadCoverCourse)" class="row cover h-100 d-flex align-items-center text-center">
                             <div class="col-12">
                                 <div v-if="!course.image">
-                                    <div class="h3">
+                                    <div class="lead text-xdark">
                                         <t>Imagen de portada</t>
                                     </div>
 
-                                    <div class="text-muted info small py-3">
+                                    <div class="text-muted info small">
                                         <t>Arrastra tu archivo aquí. Mínimo 500 pixeles de ancho por 500 pixeles de alto</t>
                                     </div>
-                                    <span class="badge mx-1 bg-secondary">JPG</span>
-                                    <span class="badge mx-1 bg-secondary">PNG</span>
-                                    <span class="badge mx-1 bg-secondary">JPEG</span>
+                                    <span class="badge bg-secondary">JPG</span>
+                                    <span class="badge bg-secondary">PNG</span>
+                                    <span class="badge bg-secondary">JPEG</span>
                                 </div>
                                 <div v-else>
                                     Cambiar foto deportada
@@ -360,8 +363,11 @@ const AddcourseViewer = {
                 </div>
 
                 <div class="card">
+                    <div class="card-header">
+                        <div class="h6 mb-0">Categoria del curso</div>
+                    </div>
                     <div class="card-body">
-                        <div class="form-floating mb-3">
+                        <div class="form-floating">
                             <select :class="course.catalog_course_id ? 'is-valid' : ''" class="form-select" ref="catalog_course_id" v-model="course.catalog_course_id" aria-label="Selecciona el tipo de proyecto">
                                 <option v-for="catalog_course in catalog_courses" v-bind:value="catalog_course.catalog_course_id">
                                     {{ catalog_course.name }}
