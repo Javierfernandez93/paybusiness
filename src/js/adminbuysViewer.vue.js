@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=1.0.0'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=2.7.8'
 
 const AdminbuysViewer = {
     name : 'adminbuys-viewer',
@@ -211,26 +211,30 @@ const AdminbuysViewer = {
     template : `
         <div v-if="buys" class="card mb-3">
             <div class="card-header">
-                <span class="badge text-secondary p-0">Total {{buys.length}}</span>
-                <div class="fs-4 fw-sembold text-primary">
-                    Compras
-                </div>
-            </div>
-            <div class="card-header">
-                <div class="input-group input-group-lg input-group-merge">
-                    <input
-                        v-model="query"
-                        :autofocus="true"
-                        @keydown.enter.exact.prevent="search"
-                        type="text" class="form-control" placeholder="Buscar compra..."/>
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-12 col-xl">
+                        <span class="text-secondary text-xs">Total {{buys.length}}</span>
+                        <div class="h6">
+                            Compras
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl">
+                        <div class="input-group input-group-lg input-group-merge">
+                            <input
+                                v-model="query"
+                                :autofocus="true"
+                                @keydown.enter.exact.prevent="search"
+                                type="text" class="form-control" placeholder="Buscar compra..."/>
 
-                    <select class="form-select" v-model="status" aria-label="Estatus">
-                        <option v-for="_status in STATUS" v-bind:value="_status">
-                            {{ _status.text }}
-                        </option>
-                    </select>
+                            <select class="form-select" v-model="status" aria-label="Estatus">
+                                <option v-for="_status in STATUS" v-bind:value="_status">
+                                    {{ _status.text }}
+                                </option>
+                            </select>
 
-                    <button @click="search" class="btn btn-light mb-0"><i class="bi bi-search"></i></button>
+                            <button @click="search" class="btn btn-light mb-0"><i class="bi bi-search"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
 

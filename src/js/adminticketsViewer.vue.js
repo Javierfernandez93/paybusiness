@@ -184,11 +184,11 @@ const AdminticketsViewer = {
                     <div class="fs-4 fw-sembold text-dark">
                         {{ticket.subject}}
                     </div>
-                    <div class="fs-5"><span v-html="ticket.items.main.message"></span></div>
+                    <div v-if="ticket.items" class="fs-5"><span v-html="ticket.items.main.message"></span></div>
                 </div>
 
                 <div v-if="ticket.showItems" class="card-footer bg-light">
-                    <ul class="list-group">
+                    <ul v-if="ticket.items" class="list-group">
                         <li v-for="item in ticket.items.items" class="list-group-item">
                             <div class="row align-items-center">
                                 <div class="col-auto">
@@ -264,7 +264,7 @@ const AdminticketsViewer = {
                             </span>
                         </div>
                         <div class="col-auto">
-                            <div>
+                            <div v-if="ticket.items">
                                 <span class="cursor-pointer me-2" @click="ticket.showItems = !ticket.showItems" class="badge border border-primary text-primary">
                                     <i class="bi bi-chat-right-text text-xs me-2"></i>
                                     <span v-if="ticket.items.items">

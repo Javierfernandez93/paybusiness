@@ -1302,3 +1302,9 @@ String.prototype.isValidYoutubeUrl = function () {
 String.prototype.isValidVoomlyUrl = function () {
   return this.includes("voomly.com");
 };
+
+
+
+String.prototype.cutString = function (size) {
+  return this.length > size ? this.slice(0, size) + "..." : this;
+};

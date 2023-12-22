@@ -3,7 +3,7 @@
         <div class="card-header">
             <div class="row">
                 <div class="col-12 col-xl">
-                    <div class="fw-semibold text-primary fs-4">Editar administrador</div>
+                    <div class="h5">Editar administrador</div>
                 </div>
                 <div class="col-12 col-xl-auto">
                     <button ref="button" type="submit" class="btn btn-dark shadow-none mb-0" @click="editAdministrator">Editar</button>
@@ -36,7 +36,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-12 col-xl fs-4 fw-semibold text-primary">
+                    <div class="col-12 col-xl h5">
                         Listado de permisos
                     </div>
                     <div class="col-12 col-xl-auto">

@@ -1,5 +1,5 @@
-import { UserSupport } from './userSupport.module.js?t=4'
-import { Loader } from './loader.module.js?t=4'
+import { UserSupport } from './userSupport.module.js?v=1.0.2'
+import { Loader } from './loader.module.js?v=1.0.2'
 
 const AddintentViewer = {
     name : 'addintent-viewer',
@@ -59,7 +59,6 @@ const AddintentViewer = {
     methods: {
         filterData () {
             this.intents = this.intentsAux
-
             this.intents = this.intents.filter((intent) => {
                 return intent.tag.toLowerCase().includes(this.query.toLowerCase()) || intent.words.toLowerCase().includes(this.query.toLowerCase())  
             })
@@ -95,7 +94,11 @@ const AddintentViewer = {
 
                 if(response.s == 1)
                 {
-                    event.target.innerText = 'Guardado'      
+                    event.target.innerText = 'Guardado'  
+                    
+                    toastInfo({
+                        message: 'Entrenamiento guardado',
+                    })
                 }
             })
         },
@@ -123,33 +126,42 @@ const AddintentViewer = {
         <div class="row d-flex justify-content-center">
            <div class="col-12">
                 <div class="card mb-3">
-                    <div class="input-group input-group-lg input-group-merge">
-                        <input 
-                            :autofocus="true"
-                            @keydown.space.prevent
-                            :class="catalog_intent.tag ? 'is-valid' : ''"
-                            v-model="catalog_intent.tag" type="text" class="form-control" placeholder="Nombre del tag">
-                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-12 col-xl">
+                                <div class="h6">
+                                    Entrenar ChatBot
+                                </div>
+                            </div>   
+                            <div class="col-12 col-xl-auto">
+                                <div class="input-group input-group-lg input-group-merge">
+                                    <input 
+                                        :autofocus="true"
+                                        @keydown.space.prevent
+                                        :class="catalog_intent.tag ? 'is-valid' : ''"
+                                        v-model="catalog_intent.tag" type="text" class="form-control" placeholder="Nombre del tag">
+                                </div>
+                            </div>   
+                            <div class="col-12 col-xl-auto">
+                                <button  @click="saveIntent($event)" class="btn btn-dark mb-0 shadow-none">Entrenar BOT</button>
+                            </div>   
+                            <div class="col-12 col-xl-auto d-none">
+                                <button  @click="importIntents" class="btn btn-dark mb-0 shadow-none">importIntents</button>
+                            </div>   
+                        </div>   
+                    </div>   
                 </div>   
                 
-                <div class="card overflow-hidden">
+                <div class="card overflow-hidden card-body">
                     <div class="row">
                         <div class="col-12 col-xl-6 border-end">
                             <div class="card-body"> 
                                 <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <span class="badge text-secondary">
-                                            {{intents.length}}
-                                        </span>
-                                    </div>
-                                    <div class="col">
-                                        Frases
+                                    <div class="col h6">
+                                        Frases ({{intents.length}})
                                     </div>
                                     <div class="col-auto">
-                                        <button 
-                                            :disabled="!isLastIntentFilled"
-                                            @click="insertIntent"
-                                            class="btn btn-dark shadow-none mb-0 btn-sm px-3"><i class="bi bi-plus-lg"></i></button>
+                                        <button :disabled="!isLastIntentFilled" @click="insertIntent" class="btn btn-dark shadow-none mb-0 btn-sm px-3">Añadir frase <i class="bi bi-plus-lg"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -157,30 +169,18 @@ const AddintentViewer = {
                             <ul class="list-group list-group-flush">
                                 <li v-for="intent in intents"
                                     class="list-group-item">
-                                    <input 
-                                        @keydown.enter.exact.prevent="insertIntent"
-                                        v-model="intent.words"
-                                        :class="intent.words ? 'is-valid' : ''"
-                                        type="text" placeholder="Escribe aquí.." class="form-control border-0">
+                                    <input  @keydown.enter.exact.prevent="insertIntent" v-model="intent.words" :class="intent.words ? 'is-valid' : ''" type="text" placeholder="Escribe aquí.." class="form-control border-0">
                                 </li>
                             </ul>
                         </div>
                         <div class="col-12 col-xl-6">
                             <div class="card-body"> 
                                 <div class="row align-items-center">
-                                    <div class="col-auto">
-                                        <span class="badge text-secondary">
-                                            {{replys_per_catalog_tag_intent.length}}
-                                        </span>
-                                    </div>
-                                    <div class="col">
-                                        Respuestas
+                                    <div class="col h6">
+                                        Respuestas ({{replys_per_catalog_tag_intent.length}})
                                     </div>
                                     <div class="col-auto">
-                                        <button 
-                                            :disabled="!isLastIntentReply"
-                                            @click="insertReplyPerCatalogTagIntent"
-                                            class="btn btn-dark shadow-none mb-0 btn-sm px-3"><i class="bi bi-plus-lg"></i></button>
+                                        <button :disabled="!isLastIntentReply" @click="insertReplyPerCatalogTagIntent" class="btn btn-dark shadow-none mb-0 btn-sm px-3">Añadir respuestas <i class="bi bi-plus-lg"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -188,21 +188,11 @@ const AddintentViewer = {
                             <ul class="list-group list-group-flush">
                                 <li v-for="reply_per_catalog_tag_intent in replys_per_catalog_tag_intent"
                                     class="list-group-item">
-                                    <textarea 
-                                        @keydown.enter.exact.prevent="insertReplyPerCatalogTagIntent"
-                                        v-model="reply_per_catalog_tag_intent.reply"
-                                        :class="reply_per_catalog_tag_intent.reply ? 'is-valid' : ''"
-                                        type="text" placeholder="Escribe aquí..." class="form-control border-0">
-                                        
+                                    <textarea  @keydown.enter.exact.prevent="insertReplyPerCatalogTagIntent" v-model="reply_per_catalog_tag_intent.reply" :class="reply_per_catalog_tag_intent.reply ? 'is-valid' : ''" type="text" placeholder="Escribe aquí..." class="form-control border-0">
                                     </textarea>
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="card-footer bg-white d-flex justify-content-end">
-                        <button 
-                            @click="saveIntent($event)" 
-                            class="btn btn-primary mb-0 shadow-none">Entrenar ia</button>
                     </div>
                 </div>
             </div>

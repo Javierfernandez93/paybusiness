@@ -224,21 +224,19 @@ const AdminusersViewer = {
         <div class="card border-radius-2xl mb-4">
             <div class="card-header pb-0">
                 <div class="row align-items-center">
-                    <div class="col fs-4 fw-sembold text-primary">
-                        <div v-if="users"><span class="badge p-0 text-secondary text-xxs">Total {{users.length}}</span></div>
-                        <div>Usuarios</div>
+                    <div class="col">
+                        <div v-if="users"><span class="text-xs text-secondary">Total {{users.length}}</span></div>
+                        <div class="h6">Usuarios</div>
                     </div>
                     <div class="col-auto text-end">
                         <div><a href="../../apps/admin-users/add" type="button" class="btn shadow-none mb-0 btn-success px-3 btn-sm">Añadir usuario</a></div>
                     </div>
+                    <div class="col-auto">
+                        <input v-model="query" :autofocus="true" type="text" class="form-control" placeholder="Buscar..." />
+                    </div>
                 </div>
             </div>
-            <div class="card-header">
-                <input v-model="query" :autofocus="true" type="text" class="form-control" placeholder="Buscar..." />
-            </div>
-            <div
-                v-if="users" 
-                class="card-body px-0 pt-0 pb-2">
+            <div v-if="users" class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive p-0">
                     <table class="table align-items-center mb-0">
                         <thead>

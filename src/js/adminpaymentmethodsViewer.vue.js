@@ -51,7 +51,7 @@ const AdminpaymentmethodsViewer = {
         }
     },
     methods: {
-        sortData: function (column) {
+        sortData(column) {
             this.catalogPaymentMethods.sort((a, b) => {
                 const _a = column.desc ? a : b
                 const _b = column.desc ? b : a
@@ -65,17 +65,17 @@ const AdminpaymentmethodsViewer = {
 
             column.desc = !column.desc
         },
-        filterData: function () {
+        filterData() {
             this.catalogPaymentMethods = this.catalogPaymentMethodsAux
 
             this.catalogPaymentMethods = this.catalogPaymentMethods.filter((catalogPaymentMethod) => {
                 return catalogPaymentMethod.code.toLowerCase().includes(this.query.toLowerCase()) || catalogPaymentMethod.currency.toLowerCase().includes(this.query.toLowerCase()) || catalogPaymentMethod.fee.toString().includes(this.query.toLowerCase()) || catalogPaymentMethod.description.includes(this.query.toLowerCase())
             })
         },
-        toggleEditingFee: function (catalogPaymentMethod) {
+        toggleEditingFee(catalogPaymentMethod) {
             catalogPaymentMethod.editingFee = !catalogPaymentMethod.editingFee
         },
-        savePaymentMethodFee: function (catalogPaymentMethod) {
+        savePaymentMethodFee(catalogPaymentMethod) {
             this.UserSupport.savePaymentMethodFee({catalog_payment_method_id: catalogPaymentMethod.catalog_payment_method_id, fee : catalogPaymentMethod.fee},(response)=>{
                 if(response.s == 1)
                 {
@@ -83,47 +83,70 @@ const AdminpaymentmethodsViewer = {
                 }
             })
         },
-        inactivePaymentMethod: function (catalogPaymentMethod) {
+        inactivePaymentMethod(catalogPaymentMethod) {
             this.UserSupport.inactivePaymentMethod({catalog_payment_method_id: catalogPaymentMethod.catalog_payment_method_id},(response)=>{
                 if(response.s == 1)
                 {
                     catalogPaymentMethod.status = response.status
+
+                    toastInfo({
+                        message: 'Se ha inactivado el método de pago',
+                    })
                 }
             })
         },
-        activePaymentMethod: function (catalogPaymentMethod) {
+        activePaymentMethod(catalogPaymentMethod) {
             this.UserSupport.activePaymentMethod({catalog_payment_method_id: catalogPaymentMethod.catalog_payment_method_id},(response)=>{
                 if(response.s == 1)
                 {
                     catalogPaymentMethod.status = response.status
+
+                    toastInfo({
+                        message: 'Se ha activado el método de pago',
+                    })
                 }
             })
         },
-        enableRecomendation: function (catalogPaymentMethod) {
+        enableRecomendation(catalogPaymentMethod) {
             this.UserSupport.enableRecomendation({catalog_payment_method_id: catalogPaymentMethod.catalog_payment_method_id},(response)=>{
                 if(response.s == 1)
                 {
                     catalogPaymentMethod.recomend = 1
+
+                    toastInfo({
+                        message: 'Se ha añadido a recomendados',
+                    })
                 }
             })
         },
-        disableRecomendation: function (catalogPaymentMethod) {
+        disableRecomendation(catalogPaymentMethod) {
             this.UserSupport.disableRecomendation({catalog_payment_method_id: catalogPaymentMethod.catalog_payment_method_id},(response)=>{
                 if(response.s == 1)
                 {
                     catalogPaymentMethod.recomend = 0
+
+                    toastInfo({
+                        message: 'Se ha quitado de recomendados',
+                    })
                 }
             })
         },
-        deletePaymentMethod: function (catalogPaymentMethod) {
+        deletePaymentMethod(catalogPaymentMethod) {
             this.UserSupport.deletePaymentMethod({catalog_payment_method_id: catalogPaymentMethod.catalog_payment_method_id},(response)=>{
                 if(response.s == 1)
                 {
                     this.getAllPaymentMethods()
+
+                    toastInfo({
+                        message: 'Se ha eliminado el método de pago',
+                    })
                 }
             })
         },
-        getAllPaymentMethods: function () {
+        getAllPaymentMethods() {
+            this.catalogPaymentMethodsAux = null
+            this.catalogPaymentMethods = null
+
             this.UserSupport.getAllPaymentMethods({}, (response) => {
                 if (response.s == 1) {
                     this.catalogPaymentMethodsAux = response.catalogPaymentMethods
@@ -136,17 +159,21 @@ const AdminpaymentmethodsViewer = {
         this.getAllPaymentMethods()
     },
     template: `
-        <div class="row">
+        <div class="row animation-fall-down" style="--delay:500ms">
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-header">
-                        <span v-if="catalogPaymentMethods" class="badge text-secondary p-0">Total {{catalogPaymentMethods.length}}</span>
-                        <div class="fs-4 fw-sembold text-primary">
-                            Métodos de pago
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-12 col-xl">
+                                <span v-if="catalogPaymentMethods" class="text-xs text-secondary">Total {{catalogPaymentMethods.length}}</span>
+                                <div class="h6">
+                                    Métodos de pago
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-auto">
+                                <input v-model="query" :autofocus="true" type="text" class="form-control" placeholder="Buscar..." />
+                            </div>
                         </div>
-                    </div>
-                    <div class="card-header">
-                        <input v-model="query" :autofocus="true" type="text" class="form-control" placeholder="Buscar..." />
                     </div>
                     <div
                         v-if="catalogPaymentMethods" 
@@ -305,7 +332,7 @@ const AdminpaymentmethodsViewer = {
                                         </td>
                                         <td class="align-middle text-center text-sm">
                                             <div class="btn-group">
-                                                <button type="button" class="btn px-3 btn-outline-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <button type="button" class="btn px-3 btn-primary mb-0 shadow-none btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 
                                                 </button>
                                                 <ul class="dropdown-menu shadow">

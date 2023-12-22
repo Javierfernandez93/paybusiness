@@ -96,7 +96,7 @@
                     <li class="nav-item">
                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminIntent])) { ?>active<?php } ?>" href="../../apps/admin-intent/">
                             <span class="badge me-2 d-flex justify-content-center align-items-center icon"><i class="bi bi-robot"></i></span>
-                            <span class="nav-link-text text-dark ms-1">Intents</span>
+                            <span class="nav-link-text text-dark ms-1">Entrenar BOT</span>
                         </a>
                     </li>
                 <?php } ?>

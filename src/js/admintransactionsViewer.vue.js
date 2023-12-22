@@ -156,7 +156,7 @@ const AdmintransactionsViewer = {
             <div class="card-header pb-0">
                 <div class="row align-items-center">
                     <div class="col-12 col-xl">
-                        <div class="fs-4 fw-sembold text-primary">Pagar comisiones</div>
+                        <div class="h5">Pagar comisiones</div>
                     </div>
                     <div class="col-12 col-xl-auto">
                         <div><span v-if="transactions" class="badge text-secondary">Total de comisiones {{transactions.length}}</span></div>
