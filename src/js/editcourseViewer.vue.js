@@ -132,8 +132,6 @@ const EditcourseViewer = {
                 {
                     sessionInternal = session
                 } else {
-
-                    console.log(this.course)
                     this.course.sessions.push(session)
                 }
             }
@@ -300,7 +298,7 @@ const EditcourseViewer = {
                                             </div>
                                         </div>
                                     </div>
-                                    <ul class="list-group list-group-flush">
+                                    <ul v-if="course.sessions" class="list-group list-group-flush">
                                         <li v-for="(session, index) in course.sessions" class="list-group-item">
                                             <div class="row align-items-center">
                                                 <div class="col-auto text-gradient-primary">

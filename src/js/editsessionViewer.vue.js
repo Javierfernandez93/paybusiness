@@ -44,6 +44,7 @@ const EditsessionViewer = {
         title: null,
         course: '',
         courseValue: '',
+        sessions: [],
         catalog_multimedia_id: 1,
         attach_session_per_course_id: attach_session_per_course_id,
       };
