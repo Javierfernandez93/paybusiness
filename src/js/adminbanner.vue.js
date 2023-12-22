@@ -1,4 +1,4 @@
-import { AdminbannerViewer } from '../../src/js/adminbannerViewer.vue.js?v=2.7.7'
+import { AdminbannerViewer } from '../../src/js/adminbannerViewer.vue.js?v=2.7.8'
 
 Vue.createApp({
     components: {

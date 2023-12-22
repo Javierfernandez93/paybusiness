@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=2.7.7'   
+import { User } from '../../src/js/user.module.js?v=2.7.8'   
 
 const EditcampaignViewer = {
     name : 'editcampaign-viewer',

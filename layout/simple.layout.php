@@ -49,8 +49,8 @@
     {{content}}
     
     <script src="<?php echo HCStudio\Connection::getMainPath();?>/src/js/jquery-3.1.1.js" type="text/javascript"></script>
-    <script src="<?php echo HCStudio\Connection::getMainPath();?>/src/js/general.js?v=2.7.7" type="text/javascript"></script>
-    <script src="<?php echo HCStudio\Connection::getMainPath();?>/src/js/constants.js?v=2.7.7" type="text/javascript"></script>
+    <script src="<?php echo HCStudio\Connection::getMainPath();?>/src/js/general.js?v=2.7.8" type="text/javascript"></script>
+    <script src="<?php echo HCStudio\Connection::getMainPath();?>/src/js/constants.js?v=2.7.8" type="text/javascript"></script>
     <script src="<?php echo HCStudio\Connection::getMainPath();?>/src/js/vue.js"></script> 
     
     {{js_scripts}}
