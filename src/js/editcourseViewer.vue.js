@@ -142,10 +142,10 @@ const EditcourseViewer = {
                 this.course.description = this.editor.root.innerHTML
             });
         },
-        getCoruseForEdit(course_id)
+        getCurseForEdit(course_id)
         {
             return new Promise((resolve, reject) => {
-                this.UserSupport.getCoruseForEdit({course_id:course_id},(response)=>{
+                this.UserSupport.getCurseForEdit({course_id:course_id},(response)=>{
                     if(response.s == 1)
                     {
                         resolve(response.course)
@@ -160,7 +160,7 @@ const EditcourseViewer = {
     {   
         if(getParam("cid"))
         {
-            this.getCoruseForEdit(getParam("cid")).then((course)=>{
+            this.getCurseForEdit(getParam("cid")).then((course)=>{
                 this.course = course
                 this.course.course_id = getParam("cid")
 
@@ -177,14 +177,12 @@ const EditcourseViewer = {
                 <h4>Editar curso</h4>
             </div>
             <div class="col-12 col-xl-auto">
-                
-
                 <button @click="saveCourse" class="btn btn-primary me-2">
                     <t>Editar</t>
                 </button>
 
                 <button @click="$emit('addSession')" class="btn btn-primary ">
-                    <t>Añadir lección</t>
+                    <t>Añadir</t>
                 </button>
             </div>
         </div>
@@ -253,10 +251,10 @@ const EditcourseViewer = {
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row align-items-center">
-                                            <div class="col">
+                                            <div class="col h6 mb-0">
                                                 Lecciones del curso
                                             </div>
-                                            <div class="col-auto">
+                                            <div class="col-auto h6 mb-0">
                                                 {{ course.sessions.length }}
                                             </div>
                                         </div>
@@ -274,12 +272,15 @@ const EditcourseViewer = {
                                                     <span v-else-if="session.catalog_multimedia_id == 3">
                                                         <i class="bi fs-3 text-primary text-gradient bi-collection-play"></i>
                                                     </span>
+                                                    <span v-else-if="session.catalog_multimedia_id == 5">
+                                                        <i class="bi h3 bi-folder-fill"></i>
+                                                    </span>
                                                 </div>
                                                 <div class="col">
                                                     <div class="fw-semibold">{{session.title}}</div>
                                                     
                                                     <div v-if="session.catalog_multimedia_id == 1">
-                                                        <div class="text-secondary">{{session.course}}</div>
+                                                        <span v-html="session.course"></span>
                                                     </div>
                                                     <div v-else-if="session.catalog_multimedia_id == 2">
                                                         <div class="row">
@@ -295,6 +296,53 @@ const EditcourseViewer = {
                                                     </div>
                                                     <div class="d-grid">
                                                         <button class="btn btn-dark" @click="$emit('selectSession',session)">Editar</button>
+                                                    </div>
+                                                    <div v-if="session.catalog_multimedia_id == 5" class="d-grid">
+                                                        <button @click="$emit('addSession',session.unique_id)" class="btn btn-dark btn-sm shadow-none">
+                                                            Añadir
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div v-if="session.catalog_multimedia_id == 5" class="p-3 bg-light rounded">
+                                                <div v-if="session.sessions.length > 0">
+                                                    <div v-for="sessionInt in session.sessions" class="row align-items-center">
+                                                        <div class="col-auto text-gradient-primary">
+                                                            <span v-if="sessionInt.catalog_multimedia_id == 1">
+                                                                <i class="bi h3 bi-body-text"></i>
+                                                            </span>
+                                                            <span v-else-if="sessionInt.catalog_multimedia_id == 2">
+                                                                <i class="bi h3 bi-camera-video"></i>
+                                                            </span>
+                                                            <span v-else-if="sessionInt.catalog_multimedia_id == 3">
+                                                                <i class="bi h3 bi-collection-play"></i>
+                                                            </span>
+                                                            <span v-else-if="sessionInt.catalog_multimedia_id == 5">
+                                                                <i class="bi h3 bi-folder-fill"></i>
+                                                            </span>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="fw-semibold">{{sessionInt.title}}</div>
+                                                        
+                                                            <div v-if="sessionInt.catalog_multimedia_id == 1">
+                                                                <span v-html="sessionInt.course"></span>
+                                                            </div>
+                                                            <div v-else-if="sessionInt.catalog_multimedia_id == 2">
+                                                                <div class="row">
+                                                                    <div class="col-12 col-lg-4">
+                                                                        <img :src="sessionInt.course.youtubeThumbnail()" class="img-fluid">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-auto">
+                                                            <div class="d-grid">
+                                                                <button class="btn btn-dark btn-sm mb-1" @click="deleteSession(sessionInt.unique_id)">Borrar</button>
+                                                            </div>
+                                                            <div class="d-grid">
+                                                                <button class="btn btn-dark btn-sm mb-1" @click="$emit('selectSession',sessionInt)">Editar</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -333,6 +381,9 @@ const EditcourseViewer = {
                         </div>
 
                         <div class="card">
+                            <div class="card-header">
+                                <div class="h6 mb-0">Categoria del curso</div>
+                            </div>
                             <div class="card-body">
                                 <div class="form-floating mb-3">
                                     <select :class="course.catalog_course_id ? 'is-valid' : ''" class="form-select" ref="catalog_course_id" v-model="course.catalog_course_id" aria-label="Selecciona el tipo de proyecto">

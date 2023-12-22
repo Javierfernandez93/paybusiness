@@ -512,8 +512,8 @@ class UserSupport extends Http {
     getAdminReferralProfile(data, callback) {
         return this.call('../../app/application/getAdminReferralProfile.php', data, callback);
     }
-    getCoruseForEdit(data, callback) {
-        return this.call('../../app/application/getCoruseForEdit.php', data, callback);
+    getCurseForEdit(data, callback) {
+        return this.call('../../app/application/getCurseForEdit.php', data, callback);
     }
     getSystemVars(data, callback) {
         return this.call('../../app/application/getSystemVars.php', data, callback);

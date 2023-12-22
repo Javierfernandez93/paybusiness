@@ -104,33 +104,25 @@ const AdminacademyViewer = {
         this.getCourses()
     },
     template : `
-        <div class="row mb-3">
-            <div class="col-12 col-xl">
-                <input :autofocus="true" v-model="query" type="text" class="form-control border-0 shadow-lg" placeholder="Buscar curso por nombre o precio...">
-            </div>
-
-            <div class="col-12 col-xl-auto">
-                <button
-                    @click="toggleGrid"
-                    class="btn btn-dark">
-                    <span v-if="grid">
-                        <i class="bi bi-list"></i>
-                    </span>
-                    <span v-else>
-                        <i class="bi bi-grid-fill"></i>
-                    </span>
-                </button>
-                <a
-                    href="../../apps/admin-academy/add"
-                    class="btn btn-dark">
-                    añadir
-                </a>
+        <div class="card card-body mb-3">
+            <div class="row align-items-center">
+                <div class="col-12 col-xl">
+                    <div v-if="courses" class="text-xs">total {{courses.length}}</div>
+                    <div class="h5">
+                        Cursos
+                    </div>
+                </div>
+                <div class="col-12 col-xl-auto">
+                    <input :autofocus="true" v-model="query" type="text" class="form-control" placeholder="Buscar curso por nombre o precio...">
+                </div>
+                <div class="col-12 col-xl-auto">
+                    <a href="../../apps/admin-academy/add" class="btn mb-0 btn-dark">añadir</a>
+                </div>
             </div>
         </div>
 
         <div v-if="courses" class="row">
             <div :class="grid ? 'col-6' : 'col-12'" v-for="course in courses"> 
-                
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="row align-items-center">

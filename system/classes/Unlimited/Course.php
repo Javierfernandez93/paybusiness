@@ -253,6 +253,20 @@ class Course extends Orm {
             $course['free'] = 1;
             $course['tag'] = json_decode($course['tag'],true);
             $course['sessions'] = (new SessionPerCourse)->getList($course_id);
+
+            $SessionPerCourse = new SessionPerCourse;
+            // getting sessions attached to session
+            $course['sessions'] = array_map(function($session) use($SessionPerCourse){
+                $session['sessions'] = [];
+
+                if($session['catalog_multimedia_id'] == CatalogMultimedia::MODULE)
+                {
+                    $session['sessions'] = $SessionPerCourse->findAll("attach_session_per_course_id = ? AND status = ?",[$session['session_per_course_id'],1]);
+                }
+
+                return $session;
+            },$course['sessions']);
+
             return $course;
         }
 

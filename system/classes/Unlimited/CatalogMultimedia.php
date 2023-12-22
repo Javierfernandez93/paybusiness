@@ -9,6 +9,8 @@ class CatalogMultimedia extends Orm {
 	public static $TEXT = 1;
 	public static $VIDEO = 2;
 	public static $AUDIO = 3;
+	const MODULE = 5;
+	
 	public function __construct() {
 		parent::__construct();
 	}
