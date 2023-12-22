@@ -1,4 +1,4 @@
- import { ChatViewer } from '../../src/js/chatViewer.vue.js?v=2.7.8'   
+ import { ChatViewer } from '../../src/js/chatViewer.vue.js?v=1.0.0'   
 
 Vue.createApp({
     components : { 

@@ -1,6 +1,6 @@
 /* vue */
-import { AcademyViewer } from '../../src/js/academyViewer.vue.js?v=2.7.8'
-import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=2.7.8'
+import { AcademyViewer } from '../../src/js/academyViewer.vue.js?v=1.0.0'
+import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=1.0.0'
 
 Vue.createApp({
     components: {
