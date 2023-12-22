@@ -38,21 +38,22 @@ const EditsessionViewer = {
     },
   },
   methods: {
-    newSession() {
+    newSession(attach_session_per_course_id) {
       this.session = {
-        unique_id: getUniqueId(),
+        unique_id: getUniqueIdSmall(),
         title: null,
         course: '',
         courseValue: '',
         catalog_multimedia_id: 1,
+        attach_session_per_course_id: attach_session_per_course_id,
       };
     },
     selectSession(session) {
       this.session = session;
       this.offCanvas.show();
     },
-    addSession() {
-      this.newSession();
+    addSession(unique_id) {
+      this.newSession(unique_id);
 
       this.offCanvas.show();
     },

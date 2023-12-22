@@ -13,8 +13,9 @@ Vue.createApp({
         saveSession(session) {
             this.$refs.course.saveSession(session)
         },
-        addSession() {
-            this.$refs.sessionViewer.addSession()
+        addSession(session) {
+            console.log(session)
+            this.$refs.sessionViewer.addSession(session)
         },
     }
 }).mount('#app')

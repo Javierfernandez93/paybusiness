@@ -94,9 +94,7 @@ const AddcourseViewer = {
             if(session.attach_session_per_course_id)
             {
                 let sessionFather = this.getSession(this.course.sessions,session.attach_session_per_course_id)
-                let sessionInternal = this.getSession(sessionFather.sessions,session.unique_id)  
-                
-                console.log('Sesion interna',sessionInternal)
+                let sessionInternal = this.getSession(sessionFather.sessions,session.unique_id) 
 
                 if(sessionInternal)
                 {
@@ -106,8 +104,6 @@ const AddcourseViewer = {
                 }
             } else {
                 let sessionInternal = this.getSession(this.course.sessions,session.unique_id)
-
-                console.log(sessionInternal)
 
                 if(sessionInternal)
                 {
@@ -280,7 +276,7 @@ const AddcourseViewer = {
                                             </div>
                                             <div v-if="session.catalog_multimedia_id == 5" class="d-grid">
                                                 <button @click="$emit('addSession',session.unique_id)" class="btn btn-dark btn-sm shadow-none">
-                                                    Añadir
+                                                    Añadir lección
                                                 </button>
                                             </div>
                                         </div>

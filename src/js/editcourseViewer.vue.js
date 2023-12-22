@@ -96,19 +96,46 @@ const EditcourseViewer = {
         },
         deleteSession(unique_id)
         {
-            this.course.sessions = this.course.sessions.filter(function(session) { 
+            this.course.sessions = this.course.sessions.filter((session) => { 
                 return session.unique_id != unique_id 
+            })
+        },
+        deleteSessionInt(session,unique_id)
+        {
+            session.sessions = session.sessions.filter((session) => { 
+                return session.unique_id != unique_id 
+            })
+        },
+        getSession(sessions,unique_id)
+        {
+            return sessions.find((session) => {
+                return session.unique_id == unique_id
             })
         },
         saveSession(session)
         {
-            const key = this.getSessionKey(session.unique_id)
-
-            if(key == -1)
+            if(session.attach_session_per_course_id)
             {
-                this.course.sessions.push(session)
+                let sessionFather = this.getSession(this.course.sessions,session.attach_session_per_course_id)
+                let sessionInternal = this.getSession(sessionFather.sessions,session.unique_id)  
+            
+                if(sessionInternal)
+                {
+                    sessionInternal = session
+                } else {
+                    sessionFather.sessions.push(session)
+                }
             } else {
-                this.course.sessions[key] = session
+                let sessionInternal = this.getSession(this.course.sessions,session.unique_id)
+
+                if(sessionInternal)
+                {
+                    sessionInternal = session
+                } else {
+
+                    console.log(this.course)
+                    this.course.sessions.push(session)
+                }
             }
         },
         getCourseFormAddVars() 
@@ -162,6 +189,20 @@ const EditcourseViewer = {
         {
             this.getCurseForEdit(getParam("cid")).then((course)=>{
                 this.course = course
+                this.course.sessions = course.sessions.map((session)=>{
+                    session.unique_id = getUniqueIdSmall()
+
+                    session.sessions = session.sessions.map((_session)=>{
+                        _session.unique_id = getUniqueIdSmall()
+                        return _session
+                    })
+
+                    return session
+                })
+
+
+                console.log(course)
+
                 this.course.course_id = getParam("cid")
 
                 this.getCourseFormAddVars().then(()=>{
@@ -292,21 +333,21 @@ const EditcourseViewer = {
                                                 </div>
                                                 <div class="col-auto">
                                                     <div class="d-grid">
-                                                        <button class="btn btn-dark mb-1" @click="deleteSession(session.unique_id)">Borrar</button>
+                                                        <button class="btn btn-dark btn-sm shadow-none mb-1" @click="deleteSession(session.unique_id)">Borrar</button>
                                                     </div>
                                                     <div class="d-grid">
-                                                        <button class="btn btn-dark" @click="$emit('selectSession',session)">Editar</button>
+                                                        <button class="btn btn-dark btn-sm shadow-none mb-1" @click="$emit('selectSession',session)">Editar</button>
                                                     </div>
                                                     <div v-if="session.catalog_multimedia_id == 5" class="d-grid">
                                                         <button @click="$emit('addSession',session.unique_id)" class="btn btn-dark btn-sm shadow-none">
-                                                            Añadir
+                                                            Añadir lección
                                                         </button>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div v-if="session.catalog_multimedia_id == 5" class="p-3 bg-light rounded">
                                                 <div v-if="session.sessions.length > 0">
-                                                    <div v-for="sessionInt in session.sessions" class="row align-items-center">
+                                                    <div v-for="sessionInt in session.sessions" class="row align-items-center border-bottom py-3">
                                                         <div class="col-auto text-gradient-primary">
                                                             <span v-if="sessionInt.catalog_multimedia_id == 1">
                                                                 <i class="bi h3 bi-body-text"></i>
@@ -337,10 +378,10 @@ const EditcourseViewer = {
                                                         </div>
                                                         <div class="col-auto">
                                                             <div class="d-grid">
-                                                                <button class="btn btn-dark btn-sm mb-1" @click="deleteSession(sessionInt.unique_id)">Borrar</button>
+                                                                <button class="btn btn-dark btn-sm mb-1" @click="deleteSessionInt(session,sessionInt.unique_id)">Borrar</button>
                                                             </div>
                                                             <div class="d-grid">
-                                                                <button class="btn btn-dark btn-sm mb-1" @click="$emit('selectSession',sessionInt)">Editar</button>
+                                                                <button class="btn btn-dark btn-sm mb-0" @click="$emit('selectSession',sessionInt)">Editar</button>
                                                             </div>
                                                         </div>
                                                     </div>
