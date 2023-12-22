@@ -109,92 +109,87 @@ const AdminacademyViewer = {
                 <div class="col-12 col-xl">
                     <div v-if="courses" class="text-xs">total {{courses.length}}</div>
                     <div class="h5">
-                        Cursos
+                        Cursos de academia
                     </div>
                 </div>
                 <div class="col-12 col-xl-auto">
                     <input :autofocus="true" v-model="query" type="text" class="form-control" placeholder="Buscar curso por nombre o precio...">
                 </div>
                 <div class="col-12 col-xl-auto">
-                    <a href="../../apps/admin-academy/add" class="btn mb-0 btn-dark">añadir</a>
+                    <a href="../../apps/admin-academy/add" class="btn mb-0 btn-dark shadow-none">añadir curso</a>
                 </div>
             </div>
         </div>
 
-        <div v-if="courses" class="row">
+        <div v-if="courses" class="row animation-fall-down" style="--delay:250ms">
             <div :class="grid ? 'col-6' : 'col-12'" v-for="course in courses"> 
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-xl-auto">
-                                <div class="avatar">
-                                    <span class="avatar bg-dark">C</span>
+                <div class="card mb-3 card-body px-4">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-xl-auto">
+                            <div class="avatar">
+                                <span class="avatar bg-dark">C</span>
+                            </div>
+                        </div>
+                        <div class="col-12 col-xl">
+                            <div>
+                                <span class="badge border border-secondary text-secondary me-2">Creado hace {{course.create_date.timeSince()}}</span>
+                                <span v-if="course.status == 0" class="badge border border-primary text-secondary me-2">
+                                    Despublicado
+                                </span>
+                                <span v-else-if="course.status == 1" class="badge border-success border text-success me-2"> 
+                                    Publicado
+                                </span>
+                            </div>
+                            <div class="h4 text-dark" @click="goToSheet(proyect.proyect_id)">
+                                {{course.title}} 
+                            </div>
+                            <div>
+                                <span v-if="course.price > 0" class="badge bg-gradient-success me-2">
+                                    {{ course.currency }} $ {{ course.price.numberFormat(2) }}
+                                </span>
+                                <span v-else class="text-xs me-2">
+                                    <t>Gratis</t>
+                                </span>
+                                <span class="text-xs">
+                                    {{course.type}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="row">
+                                <div class="col">
+                                    <i class="bi bi-hand-thumbs-up"></i>
+                                    <div class="h4">{{course.like}}</div>
+                                </div>
+
+                                <div class="col">
+                                    <i class="bi bi-chat"></i>
+                                    <div class="h4">{{course.comment}}</div>
+                                </div>
+                                
+                                <div class="col">
+                                    <i class="bi bi-person"></i>
+                                    <div class="h4">{{course.user}}</div>
+                                </div>
+
+                                <div class="col">
+                                    <i class="bi bi-eye"></i>
+                                    <div class="h4">{{course.visit}}</div>
                                 </div>
                             </div>
-                            <div class="col-12 col-xl">
-                                <div>
-                                    <span class="badge bg-secondary me-2">Creado hace {{course.create_date.timeSince()}}</span>
-                                    <span v-if="course.status == 0" class="badge bg-secondary me-2">
-                                        Despublicado
-                                    </span>
-                                    <span v-else-if="course.status == 1" class="badge bg-success me-2"> 
-                                        Publicado
-                                    </span>
-                                </div>
-                                <div class="h4 text-dark" @click="goToSheet(proyect.proyect_id)">
-                                    {{course.title}} 
-                                </div>
-                                <div>
-                                    
-                                    <span v-if="course.price > 0" class="badge bg-gradient-success me-2">
-                                        {{ course.currency }} $ {{ course.price.numberFormat(2) }}
-                                    </span>
-                                    <span v-else class="badge bg-primary me-2">
-                                        <t>Gratis</t>
-                                    </span>
+                        </div>
+                        <div class="col-auto">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary shadow-none mb-0 px-3 btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 
-
-                                    <span class="badge bg-warning">
-                                        {{course.type}}
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <div class="row">
-                                    <div class="col">
-                                        <i class="bi bi-hand-thumbs-up"></i>
-                                        <div class="h4">{{course.like}}</div>
-                                    </div>
-
-                                    <div class="col">
-                                        <i class="bi bi-chat"></i>
-                                        <div class="h4">{{course.comment}}</div>
-                                    </div>
-                                    
-                                    <div class="col">
-                                        <i class="bi bi-person"></i>
-                                        <div class="h4">{{course.user}}</div>
-                                    </div>
-
-                                    <div class="col">
-                                        <i class="bi bi-eye"></i>
-                                        <div class="h4">{{course.visit}}</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-outline-primary mb-0 px-3 btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-
-                                    </button>
-                                    <ul class="dropdown-menu shadow">
-                                        <li><button class="dropdown-item"@click="goToPreview(course.course_id)"><t>Ver previo</t></button></li>
-                                        <li><button class="dropdown-item"@click="edit(course.course_id)"><t>Editar</t></button></li>
-                                        <li v-if="course.status == 1"><button class="dropdown-item"@click="unpublish(course)"><t>Despublicar</t></button></li>
-                                        <li v-if="course.status == 0"><button class="dropdown-item"@click="publish(course)"><t>Publicar</t></button></li>
-                                        <li><button class="dropdown-item" @click="deleteCourse(course)"><t>Eliminar</t></button></li>
-                                    </ul>
-                                </div>
+                                </button>
+                                <ul class="dropdown-menu shadow">
+                                    <li><button class="dropdown-item"@click="goToPreview(course.course_id)"><t>Ver previo</t></button></li>
+                                    <li><button class="dropdown-item"@click="edit(course.course_id)"><t>Editar</t></button></li>
+                                    <li v-if="course.status == 1"><button class="dropdown-item"@click="unpublish(course)"><t>Despublicar</t></button></li>
+                                    <li v-if="course.status == 0"><button class="dropdown-item"@click="publish(course)"><t>Publicar</t></button></li>
+                                    <li><button class="dropdown-item" @click="deleteCourse(course)"><t>Eliminar</t></button></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
