@@ -10,6 +10,8 @@ if($UserSupport->logged === true)
 {
     $data['user_support_id'] = $UserSupport->getId();
 
+	$data['tag'] = $data['tag_json'];
+	
     if($course_id = Unlimited\Course::addCourse($data))
 	{
         $data['r'] = 'SAVE_COURSE';

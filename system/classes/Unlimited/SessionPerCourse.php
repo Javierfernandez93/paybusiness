@@ -3,6 +3,8 @@
 namespace Unlimited;
 
 use HCStudio\Orm;
+use HCStudio\Session;
+use JFStudio\Constants;
 
 class SessionPerCourse extends Orm {
 	protected $tblName = 'session_per_course';
@@ -12,6 +14,31 @@ class SessionPerCourse extends Orm {
 	public function __construct() {
 		parent::__construct();
 	}
+
+    public static function removeSessions(int $course_id = null) : bool
+    {
+        
+        if(!isset($course_id))
+        {
+            return false;
+        }
+        
+        $SessionPerCourse = new self;
+
+        $sessions = $SessionPerCourse->findAll("course_id = ?",$course_id,['session_per_course_id']);
+
+        if(!$sessions)
+        {
+            return false;
+        }
+
+        foreach($sessions as $session)
+        {
+            (new SessionPerCourse)->where("session_per_course_id","=",$session['session_per_course_id'])->updateStatus(Constants::DELETE);
+        }
+
+        return true;
+    }
 
     public static function addSession(array $data = null) : bool
     {

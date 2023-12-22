@@ -3,6 +3,7 @@
 namespace Unlimited;
 
 use HCStudio\Orm;
+use HCStudio\Util;
 use JFStudio\Constants;
 
 use Unlimited\SessionPerCourse;
@@ -92,17 +93,27 @@ class Course extends Orm {
         $Course->catalog_course_id = $data['catalog_course_id'];
         $Course->catalog_currency_id = $data['catalog_currency_id'];
         $Course->tag = $data['tag'];
-        
         $Course->create_date = time();
     
         if($Course->save())
         {
-            foreach($data['sessions'] as $key => $session)
+            if($data['course_id'])
             {
-                $session['course_id'] = $Course->getId();
-                $session['order'] = $key+1;
+                SessionPerCourse::removeSessions($data['course_id']);
+            }
 
-                SessionPerCourse::addSession($session);
+            if(isset($data['sessions']))
+            {
+                foreach($data['sessions'] as $key => $session)
+                {
+                    SessionPerCourse::addSession([
+                        ...$session,
+                        ...[
+                            'course_id' => $Course->getId(),
+                            'order' => $key+1
+                        ]
+                    ]);
+                }
             }
         }
 
@@ -251,21 +262,30 @@ class Course extends Orm {
         {
             $course = $this->_getCourse($course_id);
             $course['free'] = 1;
-            $course['tag'] = json_decode($course['tag'],true);
-            $course['sessions'] = (new SessionPerCourse)->getList($course_id);
 
+            if(Util::isJson($course['tag']))
+            {
+                $course['tag'] = json_decode($course['tag'],true);
+            }
+            
             $SessionPerCourse = new SessionPerCourse;
+            
+            $course['sessions'] = [];
+
             // getting sessions attached to session
-            $course['sessions'] = array_map(function($session) use($SessionPerCourse){
-                $session['sessions'] = [];
-
-                if($session['catalog_multimedia_id'] == CatalogMultimedia::MODULE)
-                {
-                    $session['sessions'] = $SessionPerCourse->findAll("attach_session_per_course_id = ? AND status = ?",[$session['session_per_course_id'],1]);
-                }
-
-                return $session;
-            },$course['sessions']);
+            if($sessions = (new SessionPerCourse)->getList($course_id))
+            {
+                $course['sessions'] = array_map(function($session) use($SessionPerCourse){
+                    $session['sessions'] = [];
+    
+                    if($session['catalog_multimedia_id'] == CatalogMultimedia::MODULE)
+                    {
+                        $session['sessions'] = $SessionPerCourse->findAll("attach_session_per_course_id = ? AND status = ?",[$session['session_per_course_id'],1]);
+                    }
+    
+                    return $session;
+                },$sessions);
+            } 
 
             return $course;
         }

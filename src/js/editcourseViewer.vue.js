@@ -40,7 +40,7 @@ const EditcourseViewer = {
     methods: {
         saveCourse()
         {
-            this.course.tag = JSON.stringify(this.$refs.tag.value)
+            this.course.tag_json = JSON.stringify(this.$refs.tag.value)
 
             this.UserSupport.updateCourse(this.course,(response)=>{
                 if(response.s == 1)
