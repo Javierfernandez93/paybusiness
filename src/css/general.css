@@ -179,3 +179,16 @@ fieldset:disabled .btn {
   object-fit: cover;
   height: 300px;
 }
+.progress {
+  border: 1px solid #8f43be;
+}
+.show-on-hover {
+  opacity: 0.5;
+}
+.show-on-hover,
+.show-on-hover:hover {
+  transition: opacity 500ms ease;
+}
+.show-on-hover:hover {
+  opacity: 1;
+}
