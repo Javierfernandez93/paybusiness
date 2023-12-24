@@ -97,7 +97,7 @@ class Course extends Orm {
     
         if($Course->save())
         {
-            if($data['course_id'])
+            if(isset($data['course_id']))
             {
                 SessionPerCourse::removeSessions($data['course_id']);
             }

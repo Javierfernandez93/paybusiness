@@ -1303,8 +1303,20 @@ String.prototype.isValidVoomlyUrl = function () {
   return this.includes("voomly.com");
 };
 
-
-
 String.prototype.cutString = function (size) {
   return this.length > size ? this.slice(0, size) + "..." : this;
+};
+
+const toastInfo = async (
+  { message: message, bgClass: bgClass },
+  delay = 50
+) => {
+  setTimeout(() => {
+    let toast = toastCtrl.create({
+      message: message,
+      bgClass: bgClass != undefined ? bgClass : "bg-dark",
+    });
+
+    toastCtrl.present(toast);
+  }, delay);
 };

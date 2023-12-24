@@ -270,6 +270,7 @@
     <script src="../../src/js/jquery-3.1.1.js" type="text/javascript"></script>
     <script src="../../src/js/general.js?t=3" type="text/javascript"></script>
     <script src="../../src/js/alertCtrl.js?v=1.0.1" type="text/javascript"></script>
+    <script src="../../src/js/toastCtrl.js?v=1.0.1" type="text/javascript"></script>
 
     <script>
         var win = navigator.platform.indexOf('Win') > -1;

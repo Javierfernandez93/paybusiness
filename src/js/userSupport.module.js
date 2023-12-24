@@ -483,7 +483,7 @@ class UserSupport extends Http {
 
     /* Academy */
     saveCourse(data, callback) {
-        return this.call('../../app/application/saveCourse.php', data, callback);
+        return this.call('../../app/application/saveCourse.php', data, callback, null, null, 'POST');
     }
     updateCourse(data, callback) {
         return this.call('../../app/application/updateCourse.php', data, callback, null, null, 'POST');
