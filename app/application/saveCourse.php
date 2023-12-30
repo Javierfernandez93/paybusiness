@@ -8,20 +8,14 @@ $UserSupport = new Unlimited\UserSupport;
 
 if($UserSupport->logged === true)
 {
-	if($data['course'])
+	$data['user_support_id'] = $UserSupport->getId();
+
+	if($course_id = Unlimited\Course::addCourse($data))
 	{
-		$data['user_support_id'] = $UserSupport->getId();
-	
-		if($course_id = Unlimited\Course::addCourse($data))
-		{
-			$data['r'] = 'SAVE_COURSE';
-			$data['s'] = 1;
-		} else {
-			$data['r'] = 'NOT_SAVE_COURSE';
-			$data['s'] = 0;
-		}
+		$data['r'] = 'SAVE_COURSE';
+		$data['s'] = 1;
 	} else {
-		$data['r'] = 'NOT_COURSE';
+		$data['r'] = 'NOT_SAVE_COURSE';
 		$data['s'] = 0;
 	}
 } else {

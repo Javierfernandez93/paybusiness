@@ -126,7 +126,8 @@
                             <li class="nav-item">
                                 <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Academy,JFStudio\Router::AcademyLesson])) { ?>active<?php } ?>" href="../../apps/academy">
                                     <i class="bi bi-mortarboard"></i>
-                                    <div class="nav-link-text ms-1">Business Academy</div> </a>
+                                    <div class="nav-link-text ms-1">Business Academy</div> 
+                                </a>
                             </li>
                         <?php } ?>
                         
