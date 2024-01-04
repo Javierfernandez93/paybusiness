@@ -198,9 +198,6 @@ const EditcourseViewer = {
                     return session
                 })
 
-
-                console.log(course)
-
                 this.course.course_id = getParam("cid")
 
                 this.getCourseFormAddVars().then(()=>{

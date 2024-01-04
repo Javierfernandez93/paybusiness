@@ -3,7 +3,7 @@
 namespace Unlimited;
 
 use HCStudio\Orm;
-use HCStudio\Session;
+
 use JFStudio\Constants;
 
 class SessionPerCourse extends Orm {
@@ -57,6 +57,7 @@ class SessionPerCourse extends Orm {
         $SessionPerCourse->aviable = isset($data['aviable']) ? $data['aviable'] : 1;      
         $SessionPerCourse->create_date = time();
         $SessionPerCourse->course_id = isset($data['course_id']) ? $data['course_id'] : 0;
+        $SessionPerCourse->status = Constants::AVIABLE;
         
         if(isset($data['attach_session_per_course_id']))
         {
