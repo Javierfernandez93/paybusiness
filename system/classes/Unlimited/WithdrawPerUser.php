@@ -109,6 +109,46 @@ class WithdrawPerUser extends Orm
 
         return false;
     }
+    
+    public function getLastWithdrawsById(int $wallet_id = null,string $limit = null)
+    {
+        if(isset($wallet_id) === true)
+        {
+            $sql =  "SELECT 
+                        {$this->tblName}.withdraw_method_per_user_id,
+                        {$this->tblName}.amount,
+                        {$this->tblName}.status,
+                        {$this->tblName}.result_data,
+                        withdraw_method_per_user.wallet,
+                        catalog_withdraw_method.method,
+                        catalog_currency.currency,
+                        {$this->tblName}.apply_date
+                    FROM
+                        {$this->tblName}
+                    LEFT JOIN 
+                        withdraw_method_per_user
+                    ON 
+                        withdraw_method_per_user.withdraw_method_per_user_id = {$this->tblName}.withdraw_method_per_user_id
+                    LEFT JOIN 
+                        catalog_withdraw_method
+                    ON 
+                        catalog_withdraw_method.catalog_withdraw_method_id = withdraw_method_per_user.catalog_withdraw_method_id
+                    LEFT JOIN 
+                        catalog_currency
+                    ON 
+                        catalog_currency.catalog_currency_id = catalog_withdraw_method.catalog_currency_id
+                    WHERE 
+                        {$this->tblName}.wallet_id = '{$wallet_id}' 
+                    AND 
+                        {$this->tblName}.status != '".self::DELETED."' 
+                        {$limit} 
+                    ";
+
+            return $this->connection()->rows($sql);
+        }
+
+        return false;
+    }
 
     public function getAll(string $filter = null)
     {

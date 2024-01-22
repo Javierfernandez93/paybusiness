@@ -101,7 +101,6 @@ const EwalletatmViewer = {
         },500),
         getTransactionFee() {            
             this.User.getTransactionFee({},(response)=>{
-                
                 if(response.s == 1)
                 {
                     this.FEE_INTERNAL_TRANSACTION = response.fee_transaction
@@ -114,8 +113,6 @@ const EwalletatmViewer = {
         openOffCanvas() {     
             $(this.$refs.offcanvasRight).offcanvas('show')
         },
-    },
-    updated() {
     },
     mounted() 
     {      

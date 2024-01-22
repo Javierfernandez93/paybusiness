@@ -8,7 +8,7 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id))
+    if($Wallet = BlockChain\Wallet::getWalletByWalletId($data['wallet_id']))
     {
         if($lastAddress = (new BlockChain\BlockChain)->getLastAddress($Wallet->getId(),'LIMIT 8'))
         {

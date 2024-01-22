@@ -23,8 +23,10 @@
             <ewallet-viewer
                 ref="ewallet"
                 @openatm="openAtm"
+                @setewallet="setewallet"
                 @openwithdraw="openWithdraw"
                 @openaddfunds="openAddFunds"
+                :ewallets="ewallets" 
                 :ewallet="ewallet" 
                 @getewallet="getEwallet"
                 @getewalletqr="getEwalletQr"

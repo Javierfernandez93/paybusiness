@@ -13,6 +13,11 @@ Vue.createApp({
     data() {
         return {
             User: new User,
+            ewallets: [],
+            WALLET_KIND : {
+                USDT_TRC20 : 1,
+                USDT_NOWITHDRAWABLE : 2,
+            },
             ewallet: {
                 public_key: null,
                 amount: 0,
@@ -25,37 +30,41 @@ Vue.createApp({
             }
         }
     },
-    watch : {
-        
-    },
     methods: {
-        openAtm: function() {
+        openAtm() {
             this.$refs.ewalletAtm.openAtm()
         },
-        openWithdraw: function() {
+        openWithdraw() {
             this.$refs.ewalletWithdraw.openWithdraw()
         },
-        openAddFunds: function() {
-            console.log(1)        
+        openAddFunds() {     
             this.$refs.ewalletAddFunds.openAddFunds()
         },
-        getEwalletQr: function() {       
+        getEwalletQr() {       
             this.$refs.ewalletqr.getEwalletQr()
         },
-        getEwallet: function() {            
-            this.User.getEwallet({},(response)=>{
-            
+        setewallet(ewallet) {       
+            this.ewallet = ewallet
+
+            this.loadTransactions(this.ewallet.wallet_id)
+        },
+        getEwallet(wallet_kind_id) {            
+            this.User.getEwallet({wallet_kind_id:wallet_kind_id},(response)=>{
                 if(response.s == 1)
                 {
-                    this.ewallet = {...this.ewallet,...response.ewallet}
+                    this.ewallets.push(response.ewallet)
 
                     this.$refs.ewallet.getLastTransactionsWallet()
                 }
             })
         },
+        loadTransactions(wallet_id) {            
+            this.$refs.ewallet.loadTransactions(wallet_id)
+        },
     },
     mounted() 
     {   
-        this.getEwallet()
+        this.getEwallet(this.WALLET_KIND.USDT_TRC20)
+        this.getEwallet(this.WALLET_KIND.USDT_NOWITHDRAWABLE)
     },
 }).mount('#app')

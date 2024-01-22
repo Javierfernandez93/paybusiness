@@ -43,24 +43,24 @@ class Wallet extends Orm
 	}
 	/* typical func */
 
-	public function existWallet(int $user_login_id = null) 
+	public function existWallet(int $user_login_id = null,int $wallet_kind_id = null) 
 	{
-		if(isset($user_login_id) === true)
+		if(!isset($user_login_id,$wallet_kind_id))
 		{
-			$sql = "SELECT
-						{$this->tblName}.{$this->tblName}_id
-					FROM 
-						{$this->tblName}
-					WHERE
-						{$this->tblName}.user_login_id = '{$user_login_id}'
-					AND 
-						{$this->tblName}.status = '".Constants::AVIABLE."'
-					";
-
-			return $this->connection()->field($sql);
+			return false;
 		}
-
-		return false;
+		
+		return $this->connection()->field("SELECT
+				{$this->tblName}.{$this->tblName}_id
+			FROM 
+				{$this->tblName}
+			WHERE
+				{$this->tblName}.user_login_id = '{$user_login_id}'
+			AND 
+				{$this->tblName}.wallet_kind_id = '{$wallet_kind_id}'
+			AND 
+				{$this->tblName}.status = '".Constants::AVIABLE."'
+		");
 	}
 
 	public function getMainPublicKey() 
@@ -139,22 +139,37 @@ class Wallet extends Orm
 		return false;
 	}
 
-	public static function getWallet(int $user_login_id = null) 
+	public static function getWallet(int $user_login_id = null,int $wallet_kind_id = 1) 
 	{
 		if(isset($user_login_id) === true)
 		{
 			$Wallet = new Wallet;
 
-			$wallet_id = $Wallet->existWallet($user_login_id);
+			$wallet_id = $Wallet->existWallet($user_login_id,$wallet_kind_id);
 
-			if($wallet_id == false)
+			if(!$wallet_id)
 			{
-				return self::createWallet($user_login_id);
+				return self::createWallet($user_login_id,$wallet_kind_id);
 			} else {
 				if($Wallet->loadWhere("wallet_id = ?",$wallet_id))
 				{
 					return $Wallet;
 				}
+			}
+		}
+
+		return false;
+	}
+	
+	public static function getWalletByWalletId(int $wallet_id = null) 
+	{
+		if(isset($wallet_id) === true)
+		{
+			$Wallet = new Wallet;
+
+			if($Wallet->loadWhere("wallet_id = ?",$wallet_id))
+			{
+				return $Wallet;
 			}
 		}
 
@@ -193,13 +208,14 @@ class Wallet extends Orm
 		}
 	}
 
-	public static function createWallet(int $user_login_id = null) 
+	public static function createWallet(int $user_login_id = null,int $wallet_kind_id = null) 
 	{
 		if($key = self::getKeyPair())
 		{
 			$Wallet = new Wallet;
 			$Wallet->key_pair = $key['key_pair'];
 			$Wallet->public_key = $key['public_key'];
+			$Wallet->wallet_kind_id = isset($wallet_kind_id) ? $wallet_kind_id : WalletKind::USDT_TRC20;
 			$Wallet->user_login_id = $user_login_id;
 			$Wallet->create_date = time();
 			$Wallet->format = self::EWALLET_FORMAT;
@@ -326,6 +342,8 @@ class Wallet extends Orm
 		{
 			$transactions = Transaction::unCompressTransactions($transactions);
 
+			$data = [];
+			
 			foreach($transactions as $transaction) 
 			{
 				$mode = $transaction['input']->address == $this->public_key ? Transaction::OUTPUT : Transaction::INPUT;

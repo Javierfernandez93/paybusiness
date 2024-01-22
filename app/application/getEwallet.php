@@ -8,19 +8,27 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id))
+    if($data['wallet_kind_id'])
     {
-        $data['ewallet'] = $Wallet->attr();
-        $data['ewallet']['amount'] = $Wallet->getBalance();
-        $data['ewallet']['link'] = (new Unlimited\ShortUrl)->getLink($Wallet);
-        $data['ewallet']['holder'] = $UserLogin->getNames();
-        $data['ewallet']['addressLenght'] = BlockChain\Wallet::ADDRESS_LENGTH;
+        if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id,$data['wallet_kind_id']))
+        {
+            $data['ewallet'] = $Wallet->data();
+            $data['ewallet']['recipientAdress'] = $data['ewallet']['public_key'];
+            $data['ewallet']['kind'] = (new BlockChain\WalletKind)->findRow("wallet_kind_id = ?",$data['ewallet']['wallet_kind_id']);
+            $data['ewallet']['amount'] = $Wallet->getBalance();
+            $data['ewallet']['link'] = (new Unlimited\ShortUrl)->getLink($Wallet);
+            $data['ewallet']['holder'] = $UserLogin->getNames();
+            $data['ewallet']['addressLenght'] = BlockChain\Wallet::ADDRESS_LENGTH;
 
-        $data['r'] = 'DATA_OK';
-        $data['s'] = 1;
+            $data['r'] = 'DATA_OK';
+            $data['s'] = 1;
+        } else {
+            $data['r'] = 'NOT_WALLET';
+            $data['s'] = 1;
+        }
     } else {
-        $data['r'] = 'NOT_WALLET';
-        $data['s'] = 1;
+        $data['r'] = 'NOT_WALLET_KIND_ID';
+        $data['s'] = 0;
     }
 } else {
 	$data['r'] = 'NOT_SESSION';

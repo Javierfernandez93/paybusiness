@@ -8,19 +8,25 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id))
+    if(isset($data['wallet_id']))
     {
-        if($lastTransactions = (new BlockChain\BlockChain)->getLastTransactionsWallet($Wallet->getId(),' LIMIT 8'))
+        if($Wallet = BlockChain\Wallet::getWalletByWalletId($data['wallet_id']))
         {
-            $data['lastTransactions'] = format(BlockChain\BlockChain::unCompressTransactions($lastTransactions),$Wallet->public_key);
-            $data['r'] = 'DATA_OK';
-            $data['s'] = 1;
+            if($lastTransactions = (new BlockChain\BlockChain)->getLastTransactionsWallet($Wallet->getId(),' LIMIT 8'))
+            {
+                $data['lastTransactions'] = format(BlockChain\BlockChain::unCompressTransactions($lastTransactions),$Wallet->public_key);
+                $data['r'] = 'DATA_OK';
+                $data['s'] = 1;
+            } else {
+                $data['r'] = 'NOT_FUNDS';
+                $data['s'] = 0;
+            }
         } else {
-            $data['r'] = 'NOT_FUNDS';
+            $data['r'] = 'NOT_EWALLET';
             $data['s'] = 0;
         }
     } else {
-        $data['r'] = 'NOT_EWALLET';
+        $data['r'] = 'NOT_WALLET_ID';
         $data['s'] = 0;
     }
 } else {

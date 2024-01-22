@@ -2,11 +2,12 @@ import { User } from '../../src/js/user.module.js?v=1.0.2'
 
 const EwalletViewer = {
     name : 'ewallet-viewer',
-    props: ['ewallet'],
-    emits: ['openatm','getewalletqr','openwithdraw','openaddfunds'],
+    props: ['ewallet','ewallets'],
+    emits: ['openatm','getewalletqr','openwithdraw','openaddfunds','setewallet'],
     data() {
         return {
             User: new User,
+            selected_wallet: null,
             lastAddress: null,
             lastWithdraws: null,
             lastTransactions: null,
@@ -25,6 +26,14 @@ const EwalletViewer = {
             }
         }
     },
+    watch: {
+        selected_wallet : {
+            handler() {
+                this.$emit('setewallet',this.selected_wallet)
+            },
+            deep: true
+        }
+    },
     methods: {
         goToViewTransaction(hash) {            
             window.location.href = `../../apps/blockchain/viewTransaction?txn=${hash}`
@@ -41,16 +50,20 @@ const EwalletViewer = {
         openAddFunds() {    
             this.$emit('openaddfunds')
         },
-        getLastTransactionsWallet() {   
-            this.User.getLastTransactionsWallet({},(response)=>{
+        getLastTransactionsWallet(wallet_id) {  
+            this.lastTransactions = null
+
+            this.User.getLastTransactionsWallet({wallet_id:wallet_id},(response)=>{
                 if(response.s == 1)
                 {
                     this.lastTransactions = response.lastTransactions
                 }
             })
         },
-        getLastWithdraws() {   
-            this.User.getLastWithdraws({},(response)=>{
+        getLastWithdraws(wallet_id) {   
+            this.lastWithdraws = null
+
+            this.User.getLastWithdraws({wallet_id:wallet_id},(response)=>{
                 if(response.s == 1)
                 {
                     this.lastWithdraws = response.lastWithdraws
@@ -64,8 +77,10 @@ const EwalletViewer = {
                 this.total.amount += commission.amount
             })
         },
-        getCommissionPerUserByType() {   
-            this.User.getCommissionPerUserByType({},(response)=>{
+        getCommissionPerUserByType(wallet_id) {   
+            this.commissions = null
+
+            this.User.getCommissionPerUserByType({wallet_id:wallet_id},(response)=>{
                 if(response.s == 1)
                 {
                     this.commissions = response.commissions
@@ -93,22 +108,25 @@ const EwalletViewer = {
         getEwalletQr() {    
             this.$emit('getewalletqr')
         },
-        getLastAddress() {         
-            this.User.getLastAddress({},(response)=>{
-                
+        getLastAddress(wallet_id) {         
+            this.lastAddress = null
+
+            this.User.getLastAddress({wallet_id:wallet_id},(response)=>{
                 if(response.s == 1)
                 {
                     this.lastAddress = response.lastAddress
                 }
             })
         },
-    },
-    mounted() 
-    {       
-        this.getLastTransactionsWallet()
-        this.getLastAddress()
-        this.getLastWithdraws()
-        this.getCommissionPerUserByType()
+        loadTransactions(wallet_id) {       
+            if(wallet_id)
+            {
+                this.getLastTransactionsWallet(wallet_id)
+                this.getLastAddress(wallet_id)
+                this.getLastWithdraws(wallet_id)
+                this.getCommissionPerUserByType(wallet_id)
+            }
+        },
     },
     template : `
         <div v-if="ewallet" class="row py-5">
@@ -128,6 +146,7 @@ const EwalletViewer = {
                             
                             <div class="mt-4 mb-5">
                                 <h5 class="text-white text-uppercase sans pb-2">Balance</h5>
+                               
                                 <div class="row">
                                     <div class="col">
                                         <h5 class="text-white text-uppercase pb-2">$ {{ewallet.amount.numberFormat(2)}} USD </h5>
@@ -136,15 +155,23 @@ const EwalletViewer = {
                                         <button 
                                             @click="getEwalletQr"
                                             class="btn btn-success btn-xs px-3 me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Recibir" aria-label="Enviar"><i class="bi bi-arrow-90deg-down"></i></button>
-                                        <button
-                                            @click="openAtm"
-                                            class="btn btn-danger btn-xs px-3 me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Enviar" aria-label="Recibir"><i class="bi bi-arrow-90deg-up"></i></button>
-                                        <button
-                                            @click="openWithdraw"
-                                            class="btn btn-primary btn-xs px-3 me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Retirar" aria-label="Retirar"><i class="bi bi-currency-exchange"></i></button>
-                                        <button
-                                            @click="openAddFunds"
-                                            class="btn btn-light btn-xs px-3" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Fondear" aria-label="Fondear"><i class="bi bi-plus"></i></button>
+
+                                        <span v-if="ewallet">
+                                            <span v-if="ewallet.kind">
+                                                <button
+                                                    @click="openAtm"
+                                                    v-if="ewallet.kind.incoming"
+                                                    class="btn btn-danger btn-xs px-3 me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Enviar" aria-label="Recibir"><i class="bi bi-arrow-90deg-up"></i></button>
+                                                <button
+                                                    v-if="ewallet.kind.withdraw"
+                                                    @click="openWithdraw"
+                                                    class="btn btn-primary btn-xs px-3 me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Retirar" aria-label="Retirar"><i class="bi bi-currency-exchange"></i></button>
+                                                <button
+                                                    @click="openAddFunds"
+                                                    v-if="ewallet.kind.found"
+                                                    class="btn btn-light btn-xs px-3" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Fondear" aria-label="Fondear"><i class="bi bi-plus"></i></button>
+                                            </span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -172,19 +199,17 @@ const EwalletViewer = {
             <div class="col-12 col-md-6 col-xl-7">
                 <div class="card mb-3 border-radius-xl overflow-hidden">
                     <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col col-xl-10 text-start">
-                                <span class="badge text-secondary p-0">Dirección</span>
-                                <div class="sans">
-                                    {{ewallet.public_key}}
-                                </div>
+                        <div class="row">
+                            <div class="col form-floating">
+                                <select class="form-select" v-model="selected_wallet" id="ewallet_id" aria-label="Billeteras">
+                                    <option v-for="ewallet in ewallets" v-bind:value="ewallet">
+                                        {{ ewallet.public_key }} - {{ ewallet.kind.title }} 
+                                    </option>
+                                </select>
+                                <label for="ewallet_id">Billeteras</label>
                             </div>
-                            <div class="col-auto col-xl-2">
-                                <div class="d-grid">
-                                    <button 
-                                        @click="copyPublicKey(ewallet.public_key,$event)"
-                                        class="btn btn-light shadow-none btn-xs px-3 mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="copiar"><i class="bi bi-clipboard"></i></button>
-                                </div>
+                            <div class="col-auto">
+                                <button @click="copyPublicKey(ewallet.public_key,$event)" class="btn btn-light shadow-none btn-xs px-3 mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="copiar"><i class="bi bi-clipboard"></i></button>
                             </div>
                         </div>
                     </div>

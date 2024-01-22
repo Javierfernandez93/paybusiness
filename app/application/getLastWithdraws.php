@@ -8,13 +8,19 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($lastWithdraws = (new Unlimited\WithdrawPerUser)->getLastWithdraws($UserLogin->company_id,' LIMIT 8'))
+    if(isset($data['wallet_id']))
     {
-        $data['lastWithdraws'] = $lastWithdraws;
-        $data['r'] = 'DATA_OK';
-        $data['s'] = 1;
+        if($lastWithdraws = (new Unlimited\WithdrawPerUser)->getLastWithdraws($UserLogin->company_id,' LIMIT 8'))
+        {
+            $data['lastWithdraws'] = $lastWithdraws;
+            $data['r'] = 'DATA_OK';
+            $data['s'] = 1;
+        } else {
+            $data['r'] = 'NOT_TRANSACTIONS';
+            $data['s'] = 0;
+        }
     } else {
-        $data['r'] = 'NOT_TRANSACTIONS';
+        $data['r'] = 'NOT_WALLET_ID';
         $data['s'] = 0;
     }
 } else {
