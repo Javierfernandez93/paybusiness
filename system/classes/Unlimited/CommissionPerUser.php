@@ -14,6 +14,7 @@ class CommissionPerUser extends Orm
 	protected $tblName = 'commission_per_user';
 
 	//** status */
+	const FROZEN = -3;
 	const RETAINED = 0;
 	const PENDING_FOR_DISPERSION = 1;
 	const COMPLETED = 2;
@@ -175,6 +176,10 @@ class CommissionPerUser extends Orm
 			}
 		}
 
+		$BuyPerUser = new BuyPerUser;
+
+		$catalog_payment_method_id = $BuyPerUser->findField("buy_per_user_id = ?",$data['buy_per_user_id'],"catalog_payment_method_id");
+
 		$CommissionPerUser->user_login_id = $data['user_login_id'];
 		$CommissionPerUser->buy_per_user_id = $data['buy_per_user_id'] ?? 0;
 		$CommissionPerUser->catalog_commission_id = $data['catalog_commission_id'];
@@ -182,7 +187,14 @@ class CommissionPerUser extends Orm
 		$CommissionPerUser->amount = $data['amount'];
 		$CommissionPerUser->catalog_currency_id = CatalogCurrency::USD;
 		$CommissionPerUser->package_id = $data['package_id'];
-		$CommissionPerUser->status = isset($data['status']) ? $data['status'] : self::PENDING_FOR_DISPERSION;
+
+		if($catalog_payment_method_id == CatalogPaymentMethod::EWALLET_PROTECTED)
+		{
+			$CommissionPerUser->status = self::FROZEN;
+		} else {
+			$CommissionPerUser->status = isset($data['status']) ? $data['status'] : self::PENDING_FOR_DISPERSION;
+		}
+
 		$CommissionPerUser->create_date = time();
 
 		return $CommissionPerUser->save();
