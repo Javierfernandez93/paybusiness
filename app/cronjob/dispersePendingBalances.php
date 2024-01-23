@@ -25,7 +25,12 @@ if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ==
             {
                 $message = 'COMISIÓN';
     
-                if($transaction_per_wallet_id = send($commission['user_login_id'],$commission['amount'],$message))
+                if($transaction_per_wallet_id = send([
+                    'status' => $commission['status'],
+                    'user_login_id' => $commission['user_login_id'],
+                    'amount' => $commission['amount'],
+                    'message' => $message
+                ]))
                 {
                     $dispertions[] = $commission;
 
@@ -50,15 +55,17 @@ function sendPush(string $user_login_id = null,string $message = null,int $catal
     return Unlimited\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
 }
 
-function send(int $user_login_id = null,float $amountToSend = null,string $message = null)
+function send(array $data = null)
 {
-    if($ReceiverWallet = BlockChain\Wallet::getWallet($user_login_id))
+    $wallet_kind_id = $data['status'] == Unlimited\CommissionPerUser::FROZEN ? BlockChain\WalletKind::USDT_NOWITHDRAWABLE : BlockChain\WalletKind::USDT_TRC20;
+
+    if($ReceiverWallet = BlockChain\Wallet::getWallet($data['user_login_id'],$wallet_kind_id))
     {
-        if($amountToSend)
+        if($data['amount'])
         {
             $Wallet = BlockChain\Wallet::getWallet(BlockChain\Wallet::MAIN_EWALLET);
 
-            if($transaction_per_wallet_id = $Wallet->createTransaction($ReceiverWallet->public_key,$amountToSend,BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true))
+            if($transaction_per_wallet_id = $Wallet->createTransaction($ReceiverWallet->public_key,$data['amount'],BlockChain\Transaction::prepareData(['@optMessage'=>$data['message']]),true))
             {
                 return $transaction_per_wallet_id;
             } 

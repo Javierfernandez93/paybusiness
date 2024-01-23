@@ -22,7 +22,7 @@ if($UserLogin->logged === true)
 				$data['user_login_id'] = $UserLogin->getId();
 				$data['invoice_id'] = $BuyPerUser->invoice_id;
 
-				// $Cart->delete();
+				$Cart->delete();
 
 				if($checkout_data = createTransaction($BuyPerUser,$UserLogin))
 				{

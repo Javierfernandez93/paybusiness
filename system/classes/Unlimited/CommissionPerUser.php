@@ -263,11 +263,12 @@ class CommissionPerUser extends Orm
 					{$this->tblName}.{$this->tblName}_id,
 					{$this->tblName}.user_login_id,
 					{$this->tblName}.user_login_id_from,
+					{$this->tblName}.status,
 					{$this->tblName}.amount
 				FROM 
 					{$this->tblName}
 				WHERE 
-					{$this->tblName}.status = '" . self::PENDING_FOR_DISPERSION . "'
+					{$this->tblName}.status IN('" . self::PENDING_FOR_DISPERSION . "','" . self::FROZEN . "')
 				";
 
 		return $this->connection()->rows($sql);
