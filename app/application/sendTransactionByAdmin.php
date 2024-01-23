@@ -14,11 +14,11 @@ if($UserSupport->logged === true)
         {
             if($data['amount'])
             {
-                if($data['user_login_id'] = (new BlockChain\Wallet)->getUserIdByPublicKey($data['address']))
+                if($data['wallet_id'] = (new BlockChain\Wallet)->getWalletIdByPublicKey($data['address']))
                 {
                     $message = 'By admin';
                     
-                    if(send($data['user_login_id'],$data['amount'],$message))
+                    if(send($data['wallet_id'],$data['amount'],$message))
                     {
                         $data['s'] = 1;
                         $data['r'] = "DATA_OK";
@@ -52,9 +52,9 @@ if($UserSupport->logged === true)
     $data['r'] = "INVALID_CREDENTIALS";
 }
 
-function send(int $user_login_id = null,float $amountToSend = null,string $message = null)
+function send(int $wallet_id = null,float $amountToSend = null,string $message = null)
 {
-    if($ReceiverWallet = BlockChain\Wallet::getWallet($user_login_id))
+    if($ReceiverWallet = BlockChain\Wallet::getWalletByWalletId($wallet_id))
     {
         if($amountToSend)
         {

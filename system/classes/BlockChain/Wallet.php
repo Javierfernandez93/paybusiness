@@ -30,7 +30,7 @@ class Wallet extends Orm
     const EWALLET_URL = 'apps/ewallet/send?address=';
     const EWALLET_CHECKOUT_URL = 'apps/ewallet/checkout';
     
-    const MAIN_EWALLET = 234;
+    const MAIN_EWALLET = 1;
 
 	public function __construct() 
 	{

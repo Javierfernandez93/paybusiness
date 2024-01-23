@@ -17,6 +17,9 @@ if($UserSupport->logged === true)
 
         $data["user"]['user_account']['landing'] = $UserSupport->getLandingById($data['user_login_id']);
         
+
+        
+
         $data["s"] = 1;
         $data["r"] = "DATA_OK";
     } else {

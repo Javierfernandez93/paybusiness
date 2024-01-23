@@ -1,7 +1,6 @@
 import { User } from '../../src/js/user.module.js?v=1.0.2'   
 
-const ProcessViewer = {
-    name : 'process-viewer',
+const ProprocessViewer = {
     data() {
         return {
             User: new User,
@@ -23,7 +22,7 @@ const ProcessViewer = {
     methods: {
         getEwallet() {            
             return new Promise((resolve)=>{
-                this.User.getEwallet({wallet_kind_id:1},(response)=>{
+                this.User.getEwallet({wallet_kind_id:2},(response)=>{
                 
                     if(response.s == 1)
                     {
@@ -36,8 +35,7 @@ const ProcessViewer = {
         payInvoiceFromWallet() {  
             this.loading = true     
 
-            this.User.payInvoiceFromWallet({invoice_id:this.invoice.invoice_id},(response)=>{
-
+            this.User.payInvoiceFromWallet({invoice_id:this.invoice.invoice_id,wallet_id:this.ewallet.wallet_id},(response)=>{
                 this.loading = false          
 
                 if(response.s == 1)
@@ -47,7 +45,7 @@ const ProcessViewer = {
             })
         },
         getInvoiceById() {
-            this.User.getInvoiceById({invoice_id:this.invoice.invoice_id,wallet_id:this.ewallet.wallet_id}, (response) => {
+            this.User.getInvoiceById({invoice_id:this.invoice.invoice_id}, (response) => {
                 if (response.s == 1) {
                     this.invoice = response.invoice
                 }
@@ -122,4 +120,4 @@ const ProcessViewer = {
     `,
 }
 
-export { ProcessViewer } 
+export { ProprocessViewer } 

@@ -13,6 +13,7 @@ if($UserLogin->logged === true)
 
 	if($Cart->count() > 0)
 	{
+
 		if($Cart->getVar('catalog_payment_method_id'))
 		{
 			if($BuyPerUser = saveBuy($Cart,$UserLogin))
@@ -21,7 +22,7 @@ if($UserLogin->logged === true)
 				$data['user_login_id'] = $UserLogin->getId();
 				$data['invoice_id'] = $BuyPerUser->invoice_id;
 
-				$Cart->delete();
+				// $Cart->delete();
 
 				if($checkout_data = createTransaction($BuyPerUser,$UserLogin))
 				{
@@ -63,6 +64,8 @@ function createTransaction(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\Use
 		return createTransactionFromCoinPayments($BuyPerUser,$UserLogin);
 	} else if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::EWALLET) {
 		return createTransactionFromEwallet($BuyPerUser,$UserLogin);
+	} else if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::EWALLET_PROTECTED) {
+		return createTransactionFromEwalletProtected($BuyPerUser,$UserLogin);
 	} else if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::PAYPAL) {
 		return createTransactionPayPal($BuyPerUser,$UserLogin);
 	} else if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::AIRTM) {
@@ -119,6 +122,16 @@ function createTransactionFromEwallet(Unlimited\BuyPerUser $BuyPerUser = null,Un
 		'txn_id' => $BuyPerUser->invoice_id,
 		'unix_time' => time(),
 		'checkout_url' => "../../apps/ewallet/process?txn_id={$BuyPerUser->invoice_id}"
+	];
+}
+
+function createTransactionFromEwalletProtected(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
+{
+	return [
+		'amount' => $BuyPerUser->amount,
+		'txn_id' => $BuyPerUser->invoice_id,
+		'unix_time' => time(),
+		'checkout_url' => "../../apps/ewallet/proprocess?txn_id={$BuyPerUser->invoice_id}"
 	];
 }
 

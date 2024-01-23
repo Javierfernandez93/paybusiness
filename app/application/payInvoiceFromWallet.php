@@ -10,51 +10,58 @@ if($UserLogin->logged === true)
 {
     if($data['invoice_id'])
     {
-        $BuyPerUser = new Unlimited\BuyPerUser;
+        if($data['wallet_id'])
+        {
+            $BuyPerUser = new Unlimited\BuyPerUser;
 
-		if($BuyPerUser->loadWhere('invoice_id = ?',$data['invoice_id']))
-		{
-            if($ReceiverWallet = BlockChain\Wallet::getWallet(BlockChain\Wallet::MAIN_EWALLET))
+            if($BuyPerUser->loadWhere('invoice_id = ?',$data['invoice_id']))
             {
-                if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id))
+                if($ReceiverWallet = BlockChain\Wallet::getWallet(BlockChain\Wallet::MAIN_EWALLET))
                 {
-                    $message = '';
-                    if($transaction_per_wallet_id = $Wallet->createTransaction($ReceiverWallet->public_key,$BuyPerUser->amount,BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true,BlockChain\Transaction::DEFAULT_FEE))
+                    if($Wallet = BlockChain\Wallet::getWalletByWalletId($data['wallet_id']))
                     {
-                        $url = HCStudio\Connection::getMainPath()."/app/application/validateBuy.php";
+                        $message = '';
 
-                        $Curl = new JFStudio\Curl;
-                        $Curl->post($url, [
-                            'user' => HCStudio\Util::USERNAME,
-                            'password' => HCStudio\Util::PASSWORD,
-                            'invoice_id' => $data['invoice_id'],
-                            'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::EWALLET,
-                            'ipn_data' => json_encode($data),
-                        ]);
-
-                        // d($url."?".http_build_query([
-                        //     'user' => HCStudio\Util::USERNAME,
-                        //     'password' => HCStudio\Util::PASSWORD,
-                        //     'invoice_id' => $data['invoice_id'],
-                        //     'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::EWALLET,
-                        //     'ipn_data' => json_encode($data),
-                        // ]));
-
-                        if($response = $Curl->getResponse(true)) 
+                        if($transaction_per_wallet_id = $Wallet->createTransaction($ReceiverWallet->public_key,$BuyPerUser->amount,BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true,BlockChain\Transaction::DEFAULT_FEE))
                         {
-                            if($response['s'] == 1)
+                            $url = HCStudio\Connection::getMainPath()."/app/application/validateBuy.php";
+
+                            $Curl = new JFStudio\Curl;
+                            $Curl->post($url, [
+                                'user' => HCStudio\Util::USERNAME,
+                                'password' => HCStudio\Util::PASSWORD,
+                                'invoice_id' => $data['invoice_id'],
+                                'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::EWALLET,
+                                'ipn_data' => json_encode($data),
+                            ]);
+
+                            // d($url."?".http_build_query([
+                            //     'user' => HCStudio\Util::USERNAME,
+                            //     'password' => HCStudio\Util::PASSWORD,
+                            //     'invoice_id' => $data['invoice_id'],
+                            //     'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::EWALLET,
+                            //     'ipn_data' => json_encode($data),
+                            // ]));
+
+                            if($response = $Curl->getResponse(true)) 
                             {
-                                $data['response'] = $response;
-                                $data["s"] = 1;
-                                $data["r"] = "DATA_OK";
+                                if($response['s'] == 1)
+                                {
+                                    $data['response'] = $response;
+                                    $data["s"] = 1;
+                                    $data["r"] = "DATA_OK";
+                                } else {
+                                    $data["response_r"] = $response['r'];
+                                    $data["s"] = 0;
+                                    $data["r"] = "error_on_response";
+                                }
                             } else {
-                                $data["response_r"] = $response['r'];
                                 $data["s"] = 0;
-                                $data["r"] = "error_on_response";
+                                $data["r"] = "NOT_RESPONSE";
                             }
                         } else {
                             $data["s"] = 0;
-                            $data["r"] = "NOT_RESPONSE";
+                            $data["r"] = "NOT_EWALLET";
                         }
                     } else {
                         $data["s"] = 0;
@@ -62,15 +69,15 @@ if($UserLogin->logged === true)
                     }
                 } else {
                     $data["s"] = 0;
-                    $data["r"] = "NOT_EWALLET";
+                    $data["r"] = "NOT_RECEIVER_WALLET";
                 }
             } else {
                 $data["s"] = 0;
-                $data["r"] = "NOT_RECEIVER_WALLET";
+                $data["r"] = "NOT_BUY_PER_USER";
             }
         } else {
             $data["s"] = 0;
-            $data["r"] = "NOT_BUY_PER_USER";
+            $data["r"] = "NOT_WALLET_ID";
         }
     } else {
         $data["s"] = 0;

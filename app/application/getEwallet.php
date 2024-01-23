@@ -8,6 +8,8 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
+    $data['wallet_kind_id'] = isset($data['wallet_kind_id']) ? $data['wallet_kind_id'] : 1;
+
     if($data['wallet_kind_id'])
     {
         if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id,$data['wallet_kind_id']))
