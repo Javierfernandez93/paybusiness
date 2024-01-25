@@ -377,9 +377,15 @@ class Cart
  	{
 		$amount = $this->getTotalAmount(null,null,['fee'=>false]);
 
-		if($fee = (new CatalogPaymentMethod)->getFee($this->getVar('catalog_payment_method_id')))
+		if($payment_method = (new CatalogPaymentMethod)->findRow("catalog_payment_method_id = ?",$this->getVar('catalog_payment_method_id')))
 		{
-			return Util::getPercentaje($amount,$fee);
+			if($payment_method['is_percentaje'])
+			{
+				return Util::getPercentaje($amount,$payment_method['fee']);
+			}
+
+
+			return $payment_method['fee'];
 		}
 		
 		return 0;
