@@ -20,7 +20,16 @@ if($UserLogin->logged === true)
                     {
                         $message = '';
                         
-                        if($transaction_per_wallet_id = $Wallet->createTransaction($ReceiverWallet->public_key,$data['amount'],BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true,BlockChain\Transaction::WITHDRAW_FEE))
+                        if($data['amount'] >= 20 && $data['amount'] < 50)
+                        {
+                            $fee = 10;
+                        } else if($data['amount'] >= 50 && $data['amount'] <= 99) {
+                            $fee = 5;
+                        } else if($data['amount'] >= 100) {
+                            $fee = 3;
+                        }
+
+                        if($transaction_per_wallet_id = $Wallet->createTransaction($ReceiverWallet->public_key,$data['amount'],BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true,$fee))
                         {
                             if(Unlimited\WithdrawPerUser::saveWithdraw($UserLogin->company_id,$data['withdraw_method_per_user_id'],$data['amount'],$transaction_per_wallet_id))
                             {

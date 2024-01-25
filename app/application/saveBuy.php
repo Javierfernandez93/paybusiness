@@ -13,7 +13,6 @@ if($UserLogin->logged === true)
 
 	if($Cart->count() > 0)
 	{
-
 		if($Cart->getVar('catalog_payment_method_id'))
 		{
 			if($BuyPerUser = saveBuy($Cart,$UserLogin))

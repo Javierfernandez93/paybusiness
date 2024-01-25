@@ -37,9 +37,20 @@ const EwalletwithdrawViewer = {
         }
     },
     watch : {
-        withdraw: {
+        'withdraw.amount': {
             handler() {
                 this.error = null
+
+                console.log("into")
+
+                if(this.withdraw.amount >= 20 && this.withdraw.amount < 50)
+                {
+                    this.FEE_WITHDRAW_TRANSACTION = 10
+                } else if(this.withdraw.amount >= 50 && this.withdraw.amount <= 99) {
+                    this.FEE_WITHDRAW_TRANSACTION = 5
+                } else if(this.withdraw.amount >= 100) {
+                    this.FEE_WITHDRAW_TRANSACTION = 3
+                }
 
                 this.withdraw.fee = (this.withdraw.amount * this.FEE_WITHDRAW_TRANSACTION) / 100
 
