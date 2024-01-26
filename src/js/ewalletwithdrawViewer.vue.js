@@ -236,7 +236,7 @@ const EwalletwithdrawViewer = {
                             </div>
                             <div v-else class="alert alert-success text-white">
                                 <div v-if="withdraw.fee > 0">
-                                    <strong>Aviso</strong> Fee de la transacción $ {{withdraw.fee.numberFormat(2)}} USDT
+                                    <strong>Aviso</strong> Fee de la transacción desde {{withdraw.fee.numberFormat(2)}} 
                                 </div>
                             </div>
 
