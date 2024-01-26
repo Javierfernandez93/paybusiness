@@ -20,7 +20,7 @@ class Transaction extends Orm
 	/* withdraw fees */
 	const DEFAULT_FEE = 0;
 	const TRANSACTION_FEE = 0;
-	const WITHDRAW_FEE = 1;
+	const WITHDRAW_FEE = 10;
 
 	const AVIABLE_FIELDS_DATA = ['@optMessage','@sysFee','@sysFund'];
 
