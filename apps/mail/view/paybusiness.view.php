@@ -1,8 +1,8 @@
 <img src="<?php echo HCStudio\Connection::getMainPath();?>/src/img/pay-business.jpeg" style="width: 100%;" alt="mail" title="mail"/>
 
 <h3>¡Bienvenido a Pay Business!<h2>
-<h3>Estimado <b><?php echo $names; ?></b>,<h2>
-
+<h3>Estimado <b><?php echo strtolower(ucwords($names)); ?></b>,<h2>
+    
 <h3>¡Bienvenido a tu membresía de PAY BUSINESS! La membresía que te da acceso a un modelo de educación y negocios sin límite.</h3>
 
 <h3>Tu membresía te activa una barra de progreso que te permitirá cobrar bonificaciones hasta por el doble de su valor. Si quieres seguir recibiendo beneficios deberás renovarla. </h3>

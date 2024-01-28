@@ -83,7 +83,7 @@ function createTransactionCapitalPayments(Unlimited\BuyPerUser $BuyPerUser = nul
 	$whatsapp = (new Unlimited\UserContact)->getWhatsApp($BuyPerUser->user_login_id);
 
 	$response = $Sdk->createInvoice([
-		'amount' => $BuyPerUser->amount,
+		'amount' => $BuyPerUser->amount + $BuyPerUser->fee,
 		'invoice_id' => $BuyPerUser->invoice_id,
 		'unique_id' => $BuyPerUser->user_login_id,
 		'whatsapp' => $whatsapp ? $whatsapp : '5213317361196',
