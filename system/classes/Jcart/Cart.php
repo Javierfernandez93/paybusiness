@@ -383,8 +383,7 @@ class Cart
 			{
 				return Util::getPercentaje($amount,$payment_method['fee']);
 			}
-
-
+			
 			return $payment_method['fee'];
 		}
 		

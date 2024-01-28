@@ -56,6 +56,21 @@ if(($data['user'] ?? false == HCStudio\Util::USERNAME && $data['password'] ?? fa
                                                 'names' => $names,
                                             ],
                                         ]);  
+                                    } else if($items['items'][0]['title'] == 'PayAcademy')
+                                    {
+                                        $names = (new Unlimited\UserData)->getNames($BuyPerUser->user_login_id);
+                                            
+                                        $company_name = Unlimited\SystemVar::_getValue("company_name");
+                
+                                        JFStudio\Mailer::send([
+                                            'view' => 'payacademy',
+                                            'subject' => "Gracias por comprar Pay Academy",
+                                            'vars' => [
+                                                'email' => (new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),
+                                                'company_name' => Unlimited\SystemVar::_getValue("company_name"),
+                                                'names' => $names,
+                                            ],
+                                        ]);  
                                     }
                                 }
                             }
