@@ -181,6 +181,7 @@ const AdminusersViewer = {
             window.location.href = '../../apps/admin-users/edit?ulid=' + company_id
         },
         viewEwallet(user) {
+            user.ewallets = []
             this._viewEwallet(user,1)
             this._viewEwallet(user,2)
         },
