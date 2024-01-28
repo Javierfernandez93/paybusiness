@@ -1,4 +1,4 @@
-import { HomeViewer } from '../../src/js/homeViewer.vue.js?v=1.0.3'
+import { HomeViewer } from '../../src/js/homeViewer.vue.js?v=1.0.4'
 
 Vue.createApp({
     components : { 

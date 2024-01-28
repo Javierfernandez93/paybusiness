@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.0.3'   
+import { User } from '../../src/js/user.module.js?v=1.0.4'   
 
 const StorepaymentmethodsViewer = {
     name : 'storepaymentmethods-viewer',
@@ -78,7 +78,10 @@ const StorepaymentmethodsViewer = {
                             </div>
                             <div class="col">
                                 <div>
-                                    <span v-if="catalogPaymentMethod.fee" class="badge bg-gradient-warning text-xxs">fee del {{catalogPaymentMethod.fee.numberFormat(0)}}% </span>
+                                    <span v-if="catalogPaymentMethod.fee" class="badge bg-gradient-warning text-xxs">fee del {{catalogPaymentMethod.fee.numberFormat(0)}} 
+
+                                    {{catalogPaymentMethod.is_percentaje ? '%' : 'USD'}}
+                                    </span>
                                     <span v-else class="badge text-success border border-success text-xxs">0% Comisión</span>
 
                                     <div class="fs-5 fw-semibold text-dark"

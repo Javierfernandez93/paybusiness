@@ -30,6 +30,7 @@ class CatalogPaymentMethod extends Orm {
 					{$this->tblName}.description,
 					{$this->tblName}.additional_info,
 					{$this->tblName}.recomend,
+					{$this->tblName}.is_percentaje,
 					{$this->tblName}.additional_data,
 					{$this->tblName}.status,
 					{$this->tblName}.create_date,
