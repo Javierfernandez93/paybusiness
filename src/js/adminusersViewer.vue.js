@@ -181,9 +181,13 @@ const AdminusersViewer = {
             window.location.href = '../../apps/admin-users/edit?ulid=' + company_id
         },
         viewEwallet(user) {
-            this.UserSupport.viewEwallet({user_login_id:user.user_login_id}, (response) => {
+            this._viewEwallet(user,1)
+            this._viewEwallet(user,2)
+        },
+        _viewEwallet(user,wallet_kind_id) {
+            this.UserSupport.viewEwallet({user_login_id:user.user_login_id,wallet_kind_id:wallet_kind_id}, (response) => {
                 if (response.s == 1) {
-                    user.ewallet = response.ewallet
+                    user.ewallets.push(response.ewallet)
                 } else if(response.r == 'INVALID_PERMISSION') {
                     alertHtml('No tienes permisos necesarios para hacer esta acción. <strong>El incidente será reportado.</strong>')
                 }
@@ -200,25 +204,19 @@ const AdminusersViewer = {
             });
         },
         getUsers() {
-            return new Promise((resolve,reject) => {
-                this.UserSupport.getUsers({}, (response) => {
-                    if (response.s == 1) {
-                        resolve(response.users)
-                    }
-
-                    reject()
-                })
+            this.UserSupport.getUsers({}, (response) => {
+                if (response.s == 1) {
+                    this.usersAux = response.users
+                    this.users = response.users
+                } else {
+                    this.usersAux = false
+                    this.users = false
+                }
             })
         },
     },
     mounted() {
-        this.getUsers().then((users) => {
-            this.usersAux = users
-            this.users = users
-        }).catch((err) => {
-            this.users = false
-            this.usersAux = false
-        })
+        this.getUsers()
     },
     template : `
         <div class="card border-radius-2xl mb-4">
@@ -342,22 +340,24 @@ const AdminusersViewer = {
                                             <p class="text-xs text-secondary mb-0">{{user.email}} <span class="ms-2 text-success" v-if="user.verified_mail"><i class="bi bi-check-circle-fill"></i></span></p>
                                         </div>
                                     </div>
-                                    <div v-if="user.ewallet" class="alert alert-dark text-white mt-3">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <span class="badge p-0 text-xxs text-secondary">Public key</span>
-                                            </div>
-                                            <div class="col-auto">
-                                                <button @click="goToViewPublicKey(user.ewallet.public_key)" class="btn btn-light btn-sm px-3 me-2 mb-0 shadow-none"><i class="bi bi-arrow-90deg-up"></i></button>
-                                                <button @click="copyPublicKey(user.ewallet.public_key)" class="btn btn-light btn-sm px-3 mb-0 shadow-none"><i class="bi bi-clipboard"></i></button>
+                                    <div v-if="user.ewallets.length > 0" class="alert alert-dark text-white mt-3">
+                                        <div v-for="ewallet in user.ewallets">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <span class="badge p-0 text-xxs text-secondary">Public key ({{ewallet.kind.title}})</span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <button @click="goToViewPublicKey(ewallet.public_key)" class="btn btn-light btn-sm px-3 me-2 mb-0 shadow-none"><i class="bi bi-arrow-90deg-up"></i></button>
+                                                    <button @click="copyPublicKey(ewallet.public_key)" class="btn btn-light btn-sm px-3 mb-0 shadow-none"><i class="bi bi-clipboard"></i></button>
+                                                </div>
+                                                <div>
+                                                    <span class="text-xxs">{{ewallet.public_key}}</span>
+                                                </div>
                                             </div>
                                             <div>
-                                                <span class="text-xxs">{{user.ewallet.public_key}}</span>
+                                                <span class="badge p-0 text-xxs text-secondary">Balance</span>
+                                                <div>$ {{ewallet.amount.numberFormat(2)}}</div>
                                             </div>
-                                        </div>
-                                        <div>
-                                            <span class="badge p-0 text-xxs text-secondary">Balance</span>
-                                            <div>$ {{user.ewallet.amount.numberFormat(2)}}</div>
                                         </div>
                                     </div>
                                 </td>

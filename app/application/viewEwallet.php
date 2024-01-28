@@ -12,10 +12,13 @@ if($UserSupport->logged === true)
     {
         if($data['user_login_id'])
         {
-            if($Wallet = BlockChain\Wallet::getWallet($data['user_login_id']))
+            $data['wallet_kind_id'] = isset($data['wallet_kind_id']) ? $data['wallet_kind_id'] : BlockChain\WalletKind::USDT_TRC20;
+
+            if($Wallet = BlockChain\Wallet::getWallet($data['user_login_id'],$data['wallet_kind_id']))
             {
                 $data['ewallet'] = $Wallet->attr();
                 $data['ewallet']['amount'] = $Wallet->getBalance();
+                $data['ewallet']['kind'] = (new BlockChain\WalletKind)->findRow("wallet_kind_id = ?",$Wallet->wallet_kind_id);
                 $data['ewallet']['link'] = (new Unlimited\ShortUrl)->getLink($Wallet);
     
                 $data['r'] = 'DATA_OK';

@@ -239,6 +239,7 @@
     
     <script src="../../src/js/constants.js?v=1.0.3" type="text/javascript"></script>
     <script src="../../src/js/alertCtrl.js?v=1.0.3" type="text/javascript"></script>
+    <script src="../../src/js/toastCtrl.js?v=1.0.3" type="text/javascript"></script>
     <script src="../../src/js/jquery-3.5.1.min.js" type="text/javascript"></script>
     <script src="../../src/js/general.js?v=1.0.3" type="text/javascript"></script>
     <!-- Github buttons -->

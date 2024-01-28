@@ -41,8 +41,6 @@ const EwalletwithdrawViewer = {
             handler() {
                 this.error = null
 
-                console.log("into")
-
                 if(this.withdraw.amount >= 20 && this.withdraw.amount < 50)
                 {
                     this.FEE_WITHDRAW_TRANSACTION = 10
@@ -144,6 +142,10 @@ const EwalletwithdrawViewer = {
                     this.$emit('getewallet')
 
                     $(this.$refs.offcanvasRight).offcanvas('hide')
+
+                    toastInfo({
+                        message: 'Retiro realizado con éxito',
+                    })
                 } else if(response.r == "NOT_ACTIVE") {
                     alertMessage('Debes de estar activo para poder retirar dinero')
                 }
@@ -221,7 +223,7 @@ const EwalletwithdrawViewer = {
                             <div class="form-floating mb-3 text-center">
                                 <span class="badge text-secondary p-0">Cantidad + (fee $ {{FEE_WITHDRAW_TRANSACTION.numberFormat(2)}}%) </span>
                                 <div class="fw-semibold text-dark">
-                                    $ {{(parseFloat(withdraw.amount)+parseFloat(withdraw.fee)).numberFormat(2)}} USD
+                                    $ {{(parseFloat(withdraw.amount)-parseFloat(withdraw.fee)).numberFormat(2)}} USD
                                 </div>
                             </div>
 

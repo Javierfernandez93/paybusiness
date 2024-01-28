@@ -264,7 +264,7 @@ class Wallet extends Orm
 			if($fee != Transaction::DEFAULT_FEE)
 			{
 				$feeAmout = Util::getPercentaje($amount,$fee);
-				$amount += $feeAmout;
+				// $amount += $feeAmout;
 
 				$dataTemp = json_encode([
 					'@sysFee' => [
@@ -273,7 +273,7 @@ class Wallet extends Orm
 						'recipient_adress' => $recipient_adress,
 					]
 				]);
-
+		
 				$this->_createTransaction($this->getMainPublicKey(),$feeAmout,$dataTemp);
 			}
 
@@ -285,6 +285,11 @@ class Wallet extends Orm
 
 	public function _createTransaction(string $recipient_adress = null,float $amount = null,string $data = '',bool $get_txid = false,float $feeAmout = 0) 
 	{
+		if(!$amount)
+		{
+			throw new \Exception("Amount is required");
+		}
+		
 		$Block = new Block;
 		
 		// search the public key if are they in the last block then'll update, instead we'll create the transaction 
@@ -292,6 +297,11 @@ class Wallet extends Orm
 		{
 			$Transaction = Transaction::create($this,$recipient_adress,$amount,$Block->getLastTransactionHash(),$data,$feeAmout);
 
+			if(!$Transaction)
+			{
+				return false;
+			}
+			
 			$Block = Block::addTransaction($Block,$Transaction);
 
 			if($transaction_per_wallet_id = $this->saveTransaction($Block,$Transaction,$recipient_adress))

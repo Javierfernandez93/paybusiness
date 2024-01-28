@@ -11,7 +11,7 @@ if($UserLogin->logged === true)
     if($UserLogin->isActive())
     {
         if($data['withdraw_method_per_user_id'])
-        {
+        {   
             if($data['amount'])
             {
                 if($ReceiverWallet = BlockChain\Wallet::getWallet(BlockChain\Wallet::MAIN_EWALLET))
