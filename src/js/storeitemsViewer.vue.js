@@ -2,7 +2,7 @@ import { User } from '../../src/js/user.module.js?v=1.0.5'
 
 const StoreitemsViewer = {
     name : 'storeitems-viewer',
-    props : ['cart','hasitems'],
+    props : ['cart','hasitems','active'],
     emits: ['nextstep'],
     data() {
         return {
@@ -181,7 +181,7 @@ const StoreitemsViewer = {
             <li class="nav-item" role="presentation">
                 <button @click="getPackages(CATALOG_PACKAGE_TYPE.PAY_BUSINESS)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.PAY_BUSINESS ? 'active' : ''" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">PayBusinesss</button>
             </li>
-            <li class="nav-item" role="presentation">
+            <li v-if="cart.active" class="nav-item" role="presentation">
                 <button @click="getPackages(CATALOG_PACKAGE_TYPE.PAY_ACADEMY)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.PAY_ACADEMY ? 'active' : ''" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">PayAcademy</button>
             </li>
         </ul>

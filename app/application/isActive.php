@@ -8,7 +8,7 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $data['active'] = false;
+    $data['active'] = $UserLogin->hasProductPermission(Unlimited\Product::PAY_BUSINESS);
     $data["s"] = 1;
 	$data["r"] = "DATA_OK";
 } else {

@@ -64,7 +64,7 @@ const UserflyerViewer = {
                             <img :src="mask" class="position-absolute flyer-mask z-index-1"/>
                             <img :src="profile.image" class="position-absolute flyer-target z-index-0"/>
 
-                            <div class="text position-absolute z-index-2">{{profile.names}}</div>
+                            <div class="text position-absolute text-uppercase z-index-2">{{profile.names}}</div>
                         </div>
                     </div>
                     <div class="modal-footer">

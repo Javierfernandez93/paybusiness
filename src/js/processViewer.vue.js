@@ -36,7 +36,7 @@ const ProcessViewer = {
         payInvoiceFromWallet() {  
             this.loading = true     
 
-            this.User.payInvoiceFromWallet({invoice_id:this.invoice.invoice_id},(response)=>{
+            this.User.payInvoiceFromWallet({invoice_id:this.invoice.invoice_id,wallet_id:this.ewallet.wallet_id},(response)=>{
 
                 this.loading = false          
 

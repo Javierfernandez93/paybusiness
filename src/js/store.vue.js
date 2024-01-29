@@ -37,6 +37,7 @@ Vue.createApp({
             },      
             cart: {
                 hasItems : false,
+                active: false,
                 id: null,
                 catalog_currency_id: null,
                 catalog_payment_method_id: null,
@@ -136,24 +137,16 @@ Vue.createApp({
             // this.cart.state = this.STATES.INVOICE
 
             this.isActive().then((active) =>{
-                this.active = active
+                this.cart.active = active
 
-                if(!active)
-                {
-                    this.cart.state = this.STATES.CHOICE_ITEMS
+                console.log(this.active)
+                this.cart.state = this.STATES.CHOICE_ITEMS
 
-                    this.initCart().then(() =>{
-                        console.log("cart:ok")
-                    }).catch(() => {
-                        alert("Hubo un error")
-                    })
-                } else if(['package'].includes(this.cart.package_type)) {
-                    alertInfo({
-                        icon:'<i class="bi bi-x fs-3"></i>',
-                        message: `<div class="h3 text-white">Aún no te has activo en tu Franquicia.</div> <div>Primero debes de activarte para poder comprar más licencias</div>`,
-                        _class:'bg-gradient-danger text-white'
-                    })
-                }
+                this.initCart().then(() =>{
+                    console.log("cart:ok")
+                }).catch(() => {
+                    alert("Hubo un error")
+                })
             })
 
         }
