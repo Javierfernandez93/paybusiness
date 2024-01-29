@@ -1,7 +1,7 @@
 <img src="<?php echo HCStudio\Connection::getMainPath();?>/src/img/pay-academy.png" style="width: 100%;" alt="mail" title="mail"/>
 
 <h3>¡Bienvenido a Pay Academy!<h2>
-<h3>Estimado <b><?php echo strtolower(ucwords($names)); ?></b>,<h2>
+<h3>Estimado <b><?php echo ucwords(strtolower($names)); ?></b>,<h2>
 
 <h3>¡Bienvenido a tu membresía de PAY ACADEMY! Estamos encantados de que hayas activado tu cuenta y te unas a nuestra plataforma de aprendizaje.</h3>
 
