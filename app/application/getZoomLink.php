@@ -12,6 +12,7 @@ if($UserLogin->logged === true)
     $data["zoom_class_2"] = Unlimited\SystemVar::_getValue("zoom_class_2");
     $data["zoom_button_1"] = Unlimited\SystemVar::_getValue("zoom_button_1");
     $data["zoom_class_1"] = Unlimited\SystemVar::_getValue("zoom_class_1");
+    
     $data["s"] = 1;
     $data["r"] = "DATA_OK";
 } else {

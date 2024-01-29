@@ -9,7 +9,7 @@ $UserLogin = new Unlimited\UserLogin;
 if($UserLogin->logged === true)
 {	
     $data['productPermissions'] = [
-        'academy' => $UserLogin->hasProductPermission('academy'),
+        'academy' => $UserLogin->hasProductPermission('pay_academy'),
         'pay_business' => $UserLogin->hasProductPermission('pay_business')
     ];
     $data['r'] = 'DATA_OK';
