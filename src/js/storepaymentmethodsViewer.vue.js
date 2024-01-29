@@ -78,7 +78,7 @@ const StorepaymentmethodsViewer = {
                             </div>
                             <div class="col">
                                 <div>
-                                    <span v-if="catalogPaymentMethod.fee" class="badge bg-gradient-warning text-xxs">fee del {{catalogPaymentMethod.fee.numberFormat(0)}} 
+                                    <span v-if="catalogPaymentMethod.fee" class="badge bg-gradient-warning text-xxs">fee de {{catalogPaymentMethod.fee.numberFormat(0)}} 
 
                                     {{catalogPaymentMethod.is_percentaje ? '%' : 'USD'}}
                                     </span>
