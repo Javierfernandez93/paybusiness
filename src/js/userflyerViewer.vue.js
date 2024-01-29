@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.0.4'   
+import { User } from '../../src/js/user.module.js?v=1.0.5'   
 
 const UserflyerViewer = {
     name : 'userflyer-viewer',
