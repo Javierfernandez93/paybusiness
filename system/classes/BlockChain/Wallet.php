@@ -257,6 +257,12 @@ class Wallet extends Orm
 
 	public function createTransaction(string $recipient_adress = null,float $amount = null,string $data = '',bool $get_txid = false,float $fee = 0) 
 	{
+		d([
+			$this->getBalance(),
+			$amount,
+			$data
+		]);
+		
 		if($this->getBalance() >= $amount)
 		{
 			$feeAmout = 0;
