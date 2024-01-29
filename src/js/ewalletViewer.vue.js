@@ -180,7 +180,7 @@ const EwalletViewer = {
                                 <div class="d-flex">
                                     <div class="me-4">
                                         <p class="text-white text-sm opacity-8 mb-0">Card Holder</p>
-                                        <h6 class="text-white mb-0">{{ewallet.holder}}</h6>
+                                        <h6 class="text-white text-uppercase mb-0">{{ewallet.holder}}</h6>
                                     </div>
                                     <div>
                                         <p class="text-white text-sm opacity-8 mb-0">Expires</p>
