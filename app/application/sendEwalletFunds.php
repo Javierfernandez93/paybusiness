@@ -6,8 +6,6 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 $UserLogin = new Unlimited\UserLogin;
 
-// 02c18122efff413aab8a193db0b1420099b0009d958282b103cfc33cf2b07ecf6a
-
 if($UserLogin->logged === true)
 {
     $pass = $UserLogin->isActive();
@@ -28,21 +26,27 @@ if($UserLogin->logged === true)
         {
             if($data['amountToSend'] > 0)
             {
-                if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id))
+                if($wallet = (new BlockChain\Wallet)->findRow("public_key = ?",$data['recipientAdress']))
                 {
-                    $message = $data['message'] ?? '';
-                    
-                    if($transaction_per_wallet_id = $Wallet->createTransaction($data['recipientAdress'],$data['amountToSend'],BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true,BlockChain\Transaction::TRANSACTION_FEE))
+                    if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id,$wallet['wallet_kind_id']))
                     {
-                        $data["s"] = 1;
-                        $data["r"] = "SAVE_OK";
+                        $message = $data['message'] ?? '';
+                        
+                        if($transaction_per_wallet_id = $Wallet->createTransaction($data['recipientAdress'],$data['amountToSend'],BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true,BlockChain\Transaction::TRANSACTION_FEE))
+                        {
+                            $data["s"] = 1;
+                            $data["r"] = "SAVE_OK";
+                        } else {
+                            $data["s"] = 0;
+                            $data["r"] = "NOT_TRANSACTION_PER_WALLET_ID";
+                        }
                     } else {
                         $data["s"] = 0;
-                        $data["r"] = "NOT_TRANSACTION_PER_WALLET_ID";
+                        $data["r"] = "NOT_EWALLET";
                     }
                 } else {
                     $data["s"] = 0;
-                    $data["r"] = "NOT_EWALLET";
+                    $data["r"] = "NOT_AMOUNT_TO_SEND";
                 }
             } else {
                 $data["s"] = 0;

@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=1.0.6'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=1.0.7'
 
 const AdminwalletViewer = {
     name : 'adminwallet-viewer',
@@ -57,6 +57,8 @@ const AdminwalletViewer = {
                             this.UserSupport.sendTransactionByAdmin(this.transaction, (response) => {
                                 if (response.s == 1) {
                                     alertHtml('El envío fué procesado con éxito')
+                                } else if(response.r == 'NOT_SEND') {
+                                    alertHtml('No pudimos procesar el envío')
                                 } else if(response.r == 'INVALID_PERMISSION') {
                                     alertHtml('No tienes permisos necesarios para hacer esta acción. <strong>El incidente será reportado.</strong>')
                                 }
@@ -79,6 +81,7 @@ const AdminwalletViewer = {
         if(getParam('publicKey'))
         {
             this.transaction.address = getParam('publicKey')
+            this.transaction.wallet_kind_id = getParam('wallet_kind_id')
 
             this.getEwalletInfo()
         }

@@ -1,9 +1,9 @@
-import { User } from '../../src/js/user.module.js?v=1.0.6'   
+import { User } from '../../src/js/user.module.js?v=1.0.7'   
 
 const NewpasswordViewer = {
-    name: 'newpassword-viewer',
     data() {
         return {
+            User : new User,
             feedback : null,
             hasValidPasswords : false,
             paswordReseted : false,
@@ -12,7 +12,6 @@ const NewpasswordViewer = {
                 password: null,
                 passwordVerificator: null,
             },
-            User : null
         }
     },
     watch : {
@@ -55,7 +54,7 @@ const NewpasswordViewer = {
     },
     mounted() 
     {
-        this.User = new User
+        console.log(123)
 
         if(getParam('token'))
         {
@@ -85,7 +84,7 @@ const NewpasswordViewer = {
                         <div class="form-floating mb-3">
                             <input 
                                 :class="hasValidPasswords ? 'is-valid' : ''"
-                                type="password" ref="passwordVerificator" v-model="user.passwordVerificator" class="form-control" @keydown.enter.exact.prevent="changePassword" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                                type="password" ref="passwordVerificator" v-model="user.passwordVerificator" class="form-control" @keydown.enter.exact.prevent="changePasswordWithoutLogin" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
 
                             <label for="passwordVerificator" >Contraseña de nuevo</label>    
                         </div>

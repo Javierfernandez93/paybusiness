@@ -15,7 +15,7 @@ if($UserSupport->logged === true)
 {
     if($data['address'])
     {
-        if($Wallet = BlockChain\Wallet::getWallet((new BlockChain\Wallet)->getUserIdByPublicKey($data['address'])))
+        if($Wallet = BlockChain\Wallet::getWallet((new BlockChain\Wallet)->getUserIdByPublicKey($data['address'],$data['wallet_kind_id'])))
         {
             if($lastTransactions = (new BlockChain\BlockChain)->getLastTransactionsWallet($Wallet->getId(),' LIMIT 120'))
             {
@@ -54,7 +54,7 @@ function findOutput(array $outputs = null,string $public_key,bool $same = null)
     return $_output;
 }
 
-function getTransactionData($lastTransaction = null,string $public_key) : array 
+function getTransactionData($lastTransaction = null,string $public_key = null) : array 
 {
     if($lastTransaction['input']->address == $public_key) 
     {
@@ -65,10 +65,15 @@ function getTransactionData($lastTransaction = null,string $public_key) : array
         $output = findOutput($lastTransaction['output'],$public_key,true);
     }
 
-    if($user_login_id = (new BlockChain\Wallet)->getUserIdByPublicKey($output->address))
-    {
+    $user_login_id = 0;
+    $names = '';
 
-        $names = (new Unlimited\UserData)->getNames($user_login_id);
+    if($output)
+    {
+        if($user_login_id = (new BlockChain\Wallet)->getUserIdByPublicKey($output->address))
+        {
+            $names = (new Unlimited\UserData)->getNames($user_login_id);
+        }
     }
 
     return [

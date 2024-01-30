@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=1.0.6'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=1.0.7'
 
 const AdminusersViewer = {
     name : 'adminusers-viewer',
@@ -194,8 +194,8 @@ const AdminusersViewer = {
                 }
             })
         },
-        goToViewPublicKey(publicKey) {
-            window.location.href = `../../apps/admin-wallet/?publicKey=${publicKey}`
+        goToViewPublicKey(wallet) {
+            window.location.href = `../../apps/admin-wallet/?publicKey=${wallet.public_key}&wallet_kind_id=${wallet.wallet_kind_id}`
         },
         copyPublicKey(publicKey) {
             navigator.clipboard.writeText(publicKey).then(function() {
@@ -348,7 +348,7 @@ const AdminusersViewer = {
                                                     <span class="badge p-0 text-xxs text-secondary">Public key ({{ewallet.kind.title}})</span>
                                                 </div>
                                                 <div class="col-auto">
-                                                    <button @click="goToViewPublicKey(ewallet.public_key)" class="btn btn-light btn-sm px-3 me-2 mb-0 shadow-none"><i class="bi bi-arrow-90deg-up"></i></button>
+                                                    <button @click="goToViewPublicKey(ewallet)" class="btn btn-light btn-sm px-3 me-2 mb-0 shadow-none"><i class="bi bi-arrow-90deg-up"></i></button>
                                                     <button @click="copyPublicKey(ewallet.public_key)" class="btn btn-light btn-sm px-3 mb-0 shadow-none"><i class="bi bi-clipboard"></i></button>
                                                 </div>
                                                 <div>
