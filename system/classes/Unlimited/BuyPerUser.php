@@ -426,20 +426,23 @@ class BuyPerUser extends Orm {
       {
         $data = $BuyPerUser->unformatData();
         
-        if($sendCommissions)
+        if($BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED)
         {
-          if(self::hasCommission($data['items']))
+          if($sendCommissions)
           {
-            CommissionPerUser::saveCommissionsByItems($data['items'],$BuyPerUser->user_login_id,$BuyPerUser->getId());
-          } 
-          
-          if($data['items'][0]['catalog_membership_id'])
-          {
-            self::addMembership([
-              'point' => $BuyPerUser->amount,
-              'catalog_membership_id' => $data['items'][0]['catalog_membership_id'],
-              'user_login_id' => $BuyPerUser->user_login_id,
-            ]);
+            if(self::hasCommission($data['items']))
+            {
+              CommissionPerUser::saveCommissionsByItems($data['items'],$BuyPerUser->user_login_id,$BuyPerUser->getId());
+            } 
+            
+            if($data['items'][0]['catalog_membership_id'])
+            {
+              self::addMembership([
+                'point' => $BuyPerUser->amount,
+                'catalog_membership_id' => $data['items'][0]['catalog_membership_id'],
+                'user_login_id' => $BuyPerUser->user_login_id,
+              ]);
+            }
           }
         }
 
@@ -448,22 +451,25 @@ class BuyPerUser extends Orm {
           'user_login_id' => $BuyPerUser->user_login_id,
         ]);
         
-        if(self::hasFunds($data['items']))
+        if($BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED)
         {
-          if($ReceiverWallet = Wallet::getWallet($BuyPerUser->user_login_id))
+          if(self::hasFunds($data['items']))
           {
-            $Wallet = Wallet::getWallet(Wallet::MAIN_EWALLET);
-            
-            if($transaction_per_wallet_id = $Wallet->createTransaction($ReceiverWallet->public_key,$BuyPerUser->amount,Transaction::prepareData(['@sysFund'=>$BuyPerUser->order_id]),true))
+            if($ReceiverWallet = Wallet::getWallet($BuyPerUser->user_login_id))
             {
-              $BuyPerUser->ipn_data = json_encode([
-                'transaction_per_wallet_id' => $transaction_per_wallet_id,
-                'public_key' => $ReceiverWallet->public_key,
-              ]);
+              $Wallet = Wallet::getWallet(Wallet::MAIN_EWALLET);
               
-              $BuyPerUser->save();
+              if($transaction_per_wallet_id = $Wallet->createTransaction($ReceiverWallet->public_key,$BuyPerUser->amount,Transaction::prepareData(['@sysFund'=>$BuyPerUser->order_id]),true))
+              {
+                $BuyPerUser->ipn_data = json_encode([
+                  'transaction_per_wallet_id' => $transaction_per_wallet_id,
+                  'public_key' => $ReceiverWallet->public_key,
+                ]);
+                
+                $BuyPerUser->save();
+              } 
             } 
-          } 
+          }
         }
 
         return true;
