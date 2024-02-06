@@ -381,7 +381,7 @@ class BuyPerUser extends Orm {
     {
       return false;
     }
-
+    
     foreach($data['items'] as $item)
     {
       if(isset($item['products']))
@@ -400,6 +400,26 @@ class BuyPerUser extends Orm {
         }
       }
     }
+  }
+
+  public static function addPayAcademyFirstMonthFree(int $user_login_id = null) 
+  {
+    if(self::isFirstBuy($user_login_id))
+    {
+      ProductPermission::add([
+        'user_login_id' => $user_login_id,
+        'product_id' => Product::PAY_ACADEMY_ID,
+        'create_date' => time(),
+        'end_date' => strtotime("+30 days"),
+      ]);
+    }
+  }
+
+  public static function isFirstBuy(int $user_login_id = null) 
+  {
+    $BuyPerUser = new self;
+        
+    return $BuyPerUser->countWhere("user_login_id = ? AND status = ?",[$user_login_id,self::VALIDATED]) == 1;
   }
 
   public static function addMembership(array $data = null) 
@@ -433,7 +453,7 @@ class BuyPerUser extends Orm {
             if(self::hasCommission($data['items']))
             {
               CommissionPerUser::saveCommissionsByItems($data['items'],$BuyPerUser->user_login_id,$BuyPerUser->getId());
-            } 
+            }
             
             if($data['items'][0]['catalog_membership_id'])
             {
@@ -711,7 +731,6 @@ class BuyPerUser extends Orm {
             $buy = array_merge($buy,$data);
             $buy['formated_items'] = implode(", ",array_column($data['items'],'title'));
 
-            d($buy);
             if(self::hasCatalogPackageIdOnItems($data['items'],$catalog_package_type_id))
             {
               $_buys[] = $buy;

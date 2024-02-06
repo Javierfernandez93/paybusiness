@@ -16,7 +16,11 @@ class Product extends Orm {
 
 	/* product control */
 	const ACADEMY = 'academy';
+	const PAY_ACADEMY = 'pay_academy';
 	const PAY_BUSINESS = 'pay_business';
+
+	const PAY_BUSINESS_ID = 1;
+	const PAY_ACADEMY_ID = 2;
 
 	public function __construct() {
 		parent::__construct();

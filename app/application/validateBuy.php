@@ -30,6 +30,8 @@ if(($data['user'] ?? false == HCStudio\Util::USERNAME && $data['password'] ?? fa
 
                     if($BuyPerUser->save())
                     {   
+                        Unlimited\BuyPerUser::addPayAcademyFirstMonthFree($BuyPerUser->user_login_id);
+
                         // if(sendEmail((new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),$BuyPerUser->invoice_id))
                         // {
                         //     $data['mail_sent'] = true;
