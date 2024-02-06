@@ -68,7 +68,7 @@ class ProductPermission extends Orm {
             return false;
         }
 
-        return true;
+        // return true;
 
         return time() < $end_date;
 	}
