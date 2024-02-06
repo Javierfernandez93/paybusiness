@@ -1424,6 +1424,11 @@ class UserLogin extends Orm {
 
     $product_id = (new Product)->getIdByCode($code);
 
+    if($product_id == Product::PAY_BUSINESS_ID)
+    {
+      return true;
+    }
+
     return ProductPermission::hasPermission([
       'product_id' => $product_id,
       'user_login_id' => $user_login_id
