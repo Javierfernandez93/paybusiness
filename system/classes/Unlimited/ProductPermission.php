@@ -72,4 +72,23 @@ class ProductPermission extends Orm {
 
         return time() < $end_date;
 	}
+	
+    public static function getDaysExpired(array $data = null)
+	{
+        if(!isset($data))
+        {
+            return false;
+        }
+
+		$end_date = (new self)->getProductEndDate($data);
+
+        if(!$end_date)
+        {
+            return 0;
+        }
+
+        $difference = $end_date - time();
+        
+        return floor($difference / 86400);
+    }
 }

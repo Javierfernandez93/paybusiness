@@ -40,7 +40,7 @@ const MembershipwidgetViewer = {
                         </span>
                     </div>
                     <div>
-                        <span v-if="productPermissions.academy" class="badge bg-success text-uppercase">
+                        <span v-if="productPermissions.pay_academy" class="badge bg-success text-uppercase">
                             <i class="bi bi-check"></i>
                             Pay Academy
                         </span>
@@ -48,6 +48,10 @@ const MembershipwidgetViewer = {
                             <i class="bi bi-x"></i>
                             Pay Academy
                         </span>
+                    </div>
+
+                    <div v-if="productPermissions.limit_to_activate_pay_academy" class="alert alert-danger text-xs text-center text-white">
+                        <div>Actívate cuanto antes en Pay Academy para no perder el acceso a tu educación</div>
                     </div>
                 </div>
             </div>

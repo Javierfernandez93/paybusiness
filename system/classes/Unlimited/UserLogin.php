@@ -1416,6 +1416,29 @@ class UserLogin extends Orm {
     return $this->_hasProductPermission($code,$this->company_id);
   }
   
+  public function getDaysExpired(string $code = null)
+  {
+    if (!$this->getId() || !isset($code)) {
+      return false;
+    }
+
+    return $this->_getDaysExpired($code,$this->company_id);
+  }
+  
+  public function _getDaysExpired(string $code = null,int $user_login_id = null)
+  {
+    if (!isset($user_login_id)) {
+      return false;
+    }
+
+    $product_id = (new Product)->getIdByCode($code);
+
+    return ProductPermission::getDaysExpired([
+      'product_id' => $product_id,
+      'user_login_id' => $user_login_id
+    ]);
+  }
+
   public function _hasProductPermission(string $code = null,int $user_login_id = null)
   {
     if (!isset($user_login_id)) {

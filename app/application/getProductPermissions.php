@@ -8,9 +8,12 @@ $UserLogin = new Unlimited\UserLogin;
 
 if($UserLogin->logged === true)
 {	
+    $limit_to_activate_pay_academy = $UserLogin->getDaysExpired('pay_academy');
+
     $data['productPermissions'] = [
-        'academy' => $UserLogin->hasProductPermission('pay_academy'),
-        'pay_business' => $UserLogin->hasProductPermission('pay_business')
+        'pay_academy' => $UserLogin->hasProductPermission('pay_academy'),
+        'pay_business' => $UserLogin->hasProductPermission('pay_business'),
+        'limit_to_activate_pay_academy' => $limit_to_activate_pay_academy < 0 && $limit_to_activate_pay_academy > -6
     ];
     $data['r'] = 'DATA_OK';
 	$data['s'] = 1;
