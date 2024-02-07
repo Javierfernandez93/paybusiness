@@ -122,7 +122,7 @@
                             </a>
                         </li>
 
-                        <?php if($UserLogin->hasProductPermission(Unlimited\Product::PAY_BUSINESS)) { ?>
+                        <?php if($UserLogin->hasProductPermission(Unlimited\Product::PAY_ACADEMY)) { ?>
                             <li class="nav-item">
                                 <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Academy,JFStudio\Router::AcademyLesson])) { ?>active<?php } ?>" href="../../apps/academy">
                                     <i class="bi bi-mortarboard"></i>
