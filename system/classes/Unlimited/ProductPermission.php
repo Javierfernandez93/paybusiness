@@ -68,7 +68,10 @@ class ProductPermission extends Orm {
             return false;
         }
 
-        // return true;
+        if($data['product_id'] == Product::PAY_ACADEMY_ID)
+        {
+            $end_date = strtotime('+5 days', $end_date);
+        }
 
         return time() < $end_date;
 	}

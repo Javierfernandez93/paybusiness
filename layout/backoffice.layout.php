@@ -122,8 +122,6 @@
                             </a>
                         </li>
 
-                        <?php echo $UserLogin->getDaysExpired(Unlimited\Product::PAY_ACADEMY); ?>
-                        
                         <?php if($UserLogin->hasProductPermission(Unlimited\Product::PAY_ACADEMY)) { ?>
                             <li class="nav-item">
                                 <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Academy,JFStudio\Router::AcademyLesson])) { ?>active<?php } ?>" href="../../apps/academy">
