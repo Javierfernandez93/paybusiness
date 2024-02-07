@@ -43,7 +43,7 @@ Vue.createApp({
         getEwalletQr() {       
             this.$refs.ewalletqr.getEwalletQr()
         },
-        setewallet(ewallet) {       
+        setewallet(ewallet) {   
             this.ewallet = ewallet
 
             this.loadTransactions(this.ewallet.wallet_id)

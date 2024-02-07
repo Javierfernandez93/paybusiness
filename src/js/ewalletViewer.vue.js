@@ -29,6 +29,8 @@ const EwalletViewer = {
     watch: {
         selected_wallet : {
             handler() {
+                console.log("Watch selected_wallet")
+
                 this.$emit('setewallet',this.selected_wallet)
             },
             deep: true

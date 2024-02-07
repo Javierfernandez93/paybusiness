@@ -28,17 +28,23 @@ if($UserLogin->logged === true)
             {
                 if($wallet = (new BlockChain\Wallet)->findRow("public_key = ?",$data['recipientAdress']))
                 {
-                    if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id,$wallet['wallet_kind_id']))
+                    if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id,$data['wallet_kind_id']))
                     {
-                        $message = $data['message'] ?? '';
-                        
-                        if($transaction_per_wallet_id = $Wallet->createTransaction($data['recipientAdress'],$data['amountToSend'],BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true,BlockChain\Transaction::TRANSACTION_FEE))
+                        if($Wallet->wallet_kind_id == $wallet['wallet_kind_id'])
                         {
-                            $data["s"] = 1;
-                            $data["r"] = "SAVE_OK";
+                            $message = $data['message'] ?? '';
+                            
+                            if($transaction_per_wallet_id = $Wallet->createTransaction($data['recipientAdress'],$data['amountToSend'],BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true,BlockChain\Transaction::TRANSACTION_FEE))
+                            {
+                                $data["s"] = 1;
+                                $data["r"] = "SAVE_OK";
+                            } else {
+                                $data["s"] = 0;
+                                $data["r"] = "NOT_TRANSACTION_PER_WALLET_ID";
+                            }
                         } else {
                             $data["s"] = 0;
-                            $data["r"] = "NOT_TRANSACTION_PER_WALLET_ID";
+                            $data["r"] = "INVALID_WALLET_ADDRESS_KIND";
                         }
                     } else {
                         $data["s"] = 0;

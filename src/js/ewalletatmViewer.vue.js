@@ -38,57 +38,104 @@ const EwalletatmViewer = {
         }
     },
     watch : {
-        ewallet: {
+        'ewallet.recipientAdress': {
             handler() {
-                this.error = null
-                
-                this.ewallet.fee = (this.ewallet.amountToSend * this.FEE_INTERNAL_TRANSACTION) / 100
-
-                const amountTemp = parseFloat(this.ewallet.amountToSend) + parseFloat(this.ewallet.fee)
-
-                if(this.ewallet.recipientAdress.length == this.ewallet.addressLenght)
-                {
-                    if(this.ewallet.public_key != this.ewallet.recipientAdress)
-                    {
-                        if(this.ewallet.amount >= amountTemp)
-                        {
-
-                        } else {
-                            this.error = this.errors.NOT_ENOUGH_FUNDS
-                        }
-                    } else {
-                        this.error = this.errors.SAME_ADDRESS
-                    }
-                } else {
-                    this.error = this.errors.INVALID_ADDRESS_LENGHT
-                }
+                this.validateVariables()
+            },
+            deep: true
+        },
+        'ewallet.amountToSend': {
+            handler() {
+                this.validateVariables()
             },
             deep: true
         }
     },
     methods: {
+        validateVariables() {            
+            console.log("Watch ewallet")
+
+            this.error = null
+            
+            this.ewallet.fee = (this.ewallet.amountToSend * this.FEE_INTERNAL_TRANSACTION) / 100
+
+            const amountTemp = parseFloat(this.ewallet.amountToSend) + parseFloat(this.ewallet.fee)
+
+            if(this.ewallet.recipientAdress.length == this.ewallet.addressLenght)
+            {
+                if(this.ewallet.public_key != this.ewallet.recipientAdress)
+                {
+                    if(this.ewallet.amount >= amountTemp)
+                    {
+
+                    } else {
+                        this.error = this.errors.NOT_ENOUGH_FUNDS
+                    }
+                } else {
+                    this.error = this.errors.SAME_ADDRESS
+                }
+            } else {
+                this.error = this.errors.INVALID_ADDRESS_LENGHT
+            }
+        },
         goToTransaction(hash) {            
             window.location.href = `../../apps/blockchain/transaction?txn=${hash}`
         },
         sendEwalletFunds() {    
             if(!this.sending)
             {
-                this.sending = true    
+                $(this.$refs.offcanvasRight).offcanvas('hide')
 
-                this.User.sendEwalletFunds({recipientAdress:this.ewallet.recipientAdress,amountToSend:this.ewallet.amountToSend,message:this.ewallet.message},(response)=>{
-                    this.sending = false        
-                    
-                    $(this.$refs.offcanvasRight).offcanvas('hide')
+                let alert = alertCtrl.create({
+                    title: "Aviso",
+                    subTitle: `¿Estás seguro de realizar éste envío?`,
+                    buttons: [
+                        {
+                            text: "Sí",
+                            class: 'btn-success',
+                            role: "cancel",
+                            handler: (data) => {
 
-                    if(response.s == 1)
-                    {
-                        this.$emit('getewallet')
-                    } else if(response.r == "NOT_AMOUNT_TO_SEND") {
-                        alertMessage('Ingresa una cantidad válida')
-                    } else if(response.r == "NOT_ACTIVE") {
-                        alertMessage('Debes de estar activo para poder retirar dinero')
-                    }
+                                toastInfo({
+                                    message: 'Enviando... espere un momento',
+                                })
+                                
+                                this.sending = true    
+
+                                alert.modal.dismiss();
+
+                                this.User.sendEwalletFunds({wallet_kind_id:this.ewallet.wallet_kind_id,recipientAdress:this.ewallet.recipientAdress,amountToSend:this.ewallet.amountToSend,message:this.ewallet.message},(response)=>{
+                                    this.sending = false        
+
+                                    $(this.$refs.offcanvasRight).offcanvas('hide')                                    
+
+                                    if(response.s == 1)
+                                    {
+                                        this.$emit('getewallet')
+
+                                        toastInfo({
+                                            message: 'Transacción realizada con éxito',
+                                        })
+                                    } else if(response.r == "NOT_AMOUNT_TO_SEND") {
+                                        alertMessage('Ingresa una cantidad válida')
+                                    } else if(response.r == "INVALID_WALLET_ADDRESS_KIND") {
+                                        alertMessage('El tipo de billetera destino es diferente a la billetera donante')
+                                    } else if(response.r == "NOT_ACTIVE") {
+                                        alertMessage('Debes de estar activo para poder retirar dinero')
+                                    }
+                                })
+                            },
+                        },
+                        {
+                            text: "Cancel",
+                            role: "cancel",
+                            handler: (data) => {
+                            },
+                        },
+                    ],
                 })
+    
+                alertCtrl.present(alert.modal)  
             }
         },
         getUserNameByWallet: _debounce((self) => {
@@ -199,9 +246,9 @@ const EwalletatmViewer = {
                                 :disabled="error != null || sending"
                                 @click="sendEwalletFunds"
                                 class="btn btn-primary waves-effect waves-light">
+
                                 <span v-if="sending">Enviando...</span>
-                                <span v-else>Enviando Enviar</span>
-                                
+                                <span v-else>Enviar</span>
                             </button>
                         </div>    
                     </div>    

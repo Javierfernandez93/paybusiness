@@ -15,7 +15,7 @@ if($UserLogin->logged === true)
         if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id,$data['wallet_kind_id']))
         {
             $data['ewallet'] = $Wallet->data();
-            $data['ewallet']['recipientAdress'] = $data['ewallet']['public_key'];
+            $data['ewallet']['recipientAdress'] = '';
             $data['ewallet']['kind'] = (new BlockChain\WalletKind)->findRow("wallet_kind_id = ?",$data['ewallet']['wallet_kind_id']);
             $data['ewallet']['amount'] = $Wallet->getBalance();
             $data['ewallet']['link'] = (new Unlimited\ShortUrl)->getLink($Wallet);
