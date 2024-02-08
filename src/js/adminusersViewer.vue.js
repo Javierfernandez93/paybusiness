@@ -315,29 +315,18 @@ const AdminusersViewer = {
                                 </td>
                                 <td>
                                     <div class="d-flex px-2 py-1">
-                                        <div v-if="user.image" class="avatar avatar-sm me-2">
-                                            <img :src="user.image" alt="referido"
-                                                class="border-radius-lg shadow">
-                                        </div>
-                                        <div v-else>
-                                            <div v-if="user.names" class="avatar avatar-sm me-2 bg-dark">
-                                                {{ user.names.getFirstLetter() }}
-                                            </div>
-                                            
-                                        </div>
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">{{user.names}}</h6>
                                             <p class="text-xs text-secondary mb-0">{{user.email}} <span class="ms-2 text-success" v-if="user.verified_mail"><i class="bi bi-check-circle-fill"></i></span></p>
                                         </div>
                                     </div>
 
-
                                     <div class="mt-3">
                                         <span class="badge bg-primary">
                                             {{user.landing}}
                                         </span>
                                     </div>
-                                    
+
                                     <div v-if="user.ewallets.length > 0" class="alert alert-dark text-white mt-3">
                                         <div v-for="ewallet in user.ewallets">
                                             <div class="row align-items-center">
