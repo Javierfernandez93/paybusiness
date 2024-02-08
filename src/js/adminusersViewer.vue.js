@@ -314,14 +314,14 @@ const AdminusersViewer = {
                                     <p class="font-weight-bold mb-0">{{user.company_id}}</p>
                                 </td>
                                 <td>
-                                    <div class="d-flex px-2 py-1">
+                                    <div class="d-flex">
                                         <div class="d-flex flex-column justify-content-center">
                                             <h6 class="mb-0 text-sm">{{user.names}}</h6>
                                             <p class="text-xs text-secondary mb-0">{{user.email}} <span class="ms-2 text-success" v-if="user.verified_mail"><i class="bi bi-check-circle-fill"></i></span></p>
                                         </div>
                                     </div>
 
-                                    <div class="mt-3">
+                                    <div class="mt-1">
                                         <span class="badge bg-primary">
                                             {{user.landing}}
                                         </span>
