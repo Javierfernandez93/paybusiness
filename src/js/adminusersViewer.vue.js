@@ -357,7 +357,7 @@ const AdminusersViewer = {
                                     </span>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <span v-if="user.country_id" class="badge border border-secondary text-secondary text-xs">
+                                    <span v-if="user.country_id" class="badge text-secondary text-xs">
                                         <div><img :src="user.country_id.getCoutryImage()" style="width:16px"/></div>
 
                                         {{user.countryData.country}}
