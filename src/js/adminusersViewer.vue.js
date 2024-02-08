@@ -329,13 +329,15 @@ const AdminusersViewer = {
                                             <h6 class="mb-0 text-sm">{{user.names}}</h6>
                                             <p class="text-xs text-secondary mb-0">{{user.email}} <span class="ms-2 text-success" v-if="user.verified_mail"><i class="bi bi-check-circle-fill"></i></span></p>
                                         </div>
-
-                                        <div class="mt-3">
-                                            <span class="badge bg-primary">
-                                                {{user.landing}}
-                                            </span>
-                                        </div>
                                     </div>
+
+
+                                    <div class="mt-3">
+                                        <span class="badge bg-primary">
+                                            {{user.landing}}
+                                        </span>
+                                    </div>
+                                    
                                     <div v-if="user.ewallets.length > 0" class="alert alert-dark text-white mt-3">
                                         <div v-for="ewallet in user.ewallets">
                                             <div class="row align-items-center">
