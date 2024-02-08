@@ -375,7 +375,7 @@ const AdminusersViewer = {
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     <div class="dropdown">
-                                        <button type="button" class="btn btn-outline-primary px-3 btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button type="button" class="btn btn-dark shadow-none mb-0 px-3 btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 
                                         </button>
                                         <ul class="dropdown-menu shadow">
