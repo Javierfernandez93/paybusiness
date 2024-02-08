@@ -15,7 +15,7 @@ if($UserLogin->logged === true)
 
 
     $BuyPerUser = new Unlimited\BuyPerUser;    
-    $data['payBusinessAnual'] = $BuyPerUser->getPackageBuys(4);
+    $data['payBusinessAnual'] = $BuyPerUser->getPackageBuys(4,$UserLogin->company_id);
 
     if(sizeof($data['payBusinessAnual']) == 0)
     {
