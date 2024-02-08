@@ -853,8 +853,8 @@ class BuyPerUser extends Orm {
   public function getPackageBuys(int $package_id = null,int $user_login_id = null) 
   {
     $user_login_id_filter = isset($user_login_id) ? "AND {$this->tblName}.user_login_id = '{$user_login_id}'" : "";
-    
-    if($buys = $this->getAllBuys("WHERE {$this->tblName}.status = '".self::VALIDATED."'",$user_login_id_filter))
+
+    if($buys = $this->getAllBuys("WHERE {$this->tblName}.status = '".self::VALIDATED."' ".$user_login_id_filter))
     {
       return array_filter($buys,function($buy) use($package_id) {
         if($data = self::_unformatData($buy))
