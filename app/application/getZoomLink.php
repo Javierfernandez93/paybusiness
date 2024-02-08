@@ -15,10 +15,9 @@ if($UserLogin->logged === true)
 
 
     $BuyPerUser = new Unlimited\BuyPerUser;    
-    $payBusinessAnual = $BuyPerUser->getPackageBuys(4);
+    $data['payBusinessAnual'] = $BuyPerUser->getPackageBuys(4);
 
-
-    if(sizeof($payBusinessAnual) == 0)
+    if(sizeof($data['payBusinessAnual']) == 0)
     {
         $data['zoom_button_2'] = '';
         $data['zoom_class_2'] = '';
