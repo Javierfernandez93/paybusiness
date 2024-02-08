@@ -272,17 +272,6 @@ const AdminusersViewer = {
                                     <u class="text-sm ms-2">Kyc</u>
                                 </th>
                                 <th 
-                                    @click="sortData(columns.landing)"
-                                    class="text-center c-pointer text-uppercase text-primary font-weight-bolder opacity-7">
-                                    <span v-if="columns.landing.desc">
-                                        <i class="bi text-primary bi-arrow-up-square-fill"></i>
-                                    </span>    
-                                    <span v-else>    
-                                        <i class="bi text-primary bi-arrow-down-square-fill"></i>
-                                    </span>    
-                                    <u class="text-sm ms-2">Nombre usuario</u>
-                                </th>
-                                <th 
                                     @click="sortData(columns.country)"
                                     class="text-center c-pointer text-uppercase text-primary font-weight-bolder opacity-7">
                                     <span v-if="columns.country.desc">
@@ -340,6 +329,12 @@ const AdminusersViewer = {
                                             <h6 class="mb-0 text-sm">{{user.names}}</h6>
                                             <p class="text-xs text-secondary mb-0">{{user.email}} <span class="ms-2 text-success" v-if="user.verified_mail"><i class="bi bi-check-circle-fill"></i></span></p>
                                         </div>
+
+                                        <div class="mt-3">
+                                            <span class="badge bg-primary">
+                                                {{user.landing}}
+                                            </span>
+                                        </div>
                                     </div>
                                     <div v-if="user.ewallets.length > 0" class="alert alert-dark text-white mt-3">
                                         <div v-for="ewallet in user.ewallets">
@@ -371,13 +366,9 @@ const AdminusersViewer = {
                                     </span>
                                 </td>
                                 <td class="align-middle text-center">
-                                    <span class="badge bg-primary">
-                                        {{user.landing}}
-                                    </span>
-                                </td>
-                                <td class="align-middle text-center">
-                                    <span v-if="user.country_id" class="badge border border-secondary text-secondary">
-                                        <img :src="user.country_id.getCoutryImage()" style="width:16px"/>
+                                    <span v-if="user.country_id" class="badge border border-secondary text-secondary text-xs">
+                                        <div><img :src="user.country_id.getCoutryImage()" style="width:16px"/></div>
+
                                         {{user.countryData.country}}
                                     </span>
                                 </td>
@@ -389,7 +380,6 @@ const AdminusersViewer = {
                                     </span>
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    <p class="text-xs font-weight-bold mb-0">Fecha</p>
                                     <p class="text-xs text-secondary mb-0">{{user.signup_date.formatDate()}}</p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
