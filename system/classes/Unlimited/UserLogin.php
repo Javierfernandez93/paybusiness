@@ -471,7 +471,6 @@ class UserLogin extends Orm {
     {
       return $code;
     } else {
-      echo "exist";
       return self::getCode();
     }
   }
