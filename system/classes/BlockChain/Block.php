@@ -42,7 +42,9 @@ class Block extends Orm {
 
 	public static function adjustDifficulty(Block $PreviousBlock = null,int $time_stamp = null)
 	{
-		return $PreviousBlock->time_stamp + self::MINE_RATE > $time_stamp ? $PreviousBlock->difficulty + 1 : $PreviousBlock->difficulty - 1; 
+		$difficulty = $PreviousBlock->time_stamp + self::MINE_RATE > $time_stamp ? $PreviousBlock->difficulty + 1 : $PreviousBlock->difficulty - 1; 
+
+		return $difficulty > 3 ? 3 : $difficulty;
 	}
 
 	public static function mine(Block $PreviousBlock = null,$data = null)

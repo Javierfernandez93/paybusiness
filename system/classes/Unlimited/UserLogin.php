@@ -464,7 +464,16 @@ class UserLogin extends Orm {
 
   public static function getCode() 
   {
-    return Token::randomNumber(self::CODE_LENGHT);
+    $code = Token::randomNumber(self::CODE_LENGHT);
+    $exist = (new self)->findField("code = ?",$code,"code");
+    
+    if(!$exist)
+    {
+      return $code;
+    } else {
+      echo "exist";
+      return self::getCode();
+    }
   }
 
   public function doSignup(array $data = null) 

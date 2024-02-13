@@ -47,7 +47,7 @@ function sendPayout(array $data = null)
 {
     require_once TO_ROOT .'/vendor/autoload.php';
 
-    $Sdk = new \CapitalPayments\Sdk\Sdk(JFStudio\CapitalPayments::API_KEY,JFStudio\CapitalPayments::API_SECRET);
+    $Sdk = new \CapitalPayments\Sdk\Sdk(Unlimited\SystemVar::_getValue("api_key"),Unlimited\SystemVar::_getValue("api_secret"));
 
 	$response = $Sdk->createPayout([
 		'payout_id' => $data['withdraw_per_user_id'],

@@ -8,6 +8,10 @@ if($UserSupport->logged === true) {
 	HCStudio\Util::redirectTo('../../apps/admin/');
 }
 
+$s = Unlimited\UserLogin::getCode();
+
+d($s);
+
 $Layout = JFStudio\Layout::getInstance();
 
 $route = JFStudio\Router::AdminLogin;
