@@ -51,6 +51,9 @@ class ProductPermission extends Orm {
                 {$this->tblName}.product_id = '{$data['product_id']}'
             AND
                 {$this->tblName}.status = '".self::ACTIVE."'
+            ORDER BY 
+                {$this->tblName}.create_date
+            DESC
         ");
     }
 

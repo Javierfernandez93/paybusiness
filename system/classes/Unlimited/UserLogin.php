@@ -2023,12 +2023,11 @@ class UserLogin extends Orm {
     {
       $_directs['end']['users'][] = $directs[1]['user_login_id'];
 
-      if($networkLeft = (new UserReferral)->getNetworkReferral(-1,$directs[1]['user_login_id']))
+      if($networkRight = (new UserReferral)->getNetworkReferral(-1,$directs[1]['user_login_id']))
       {
-        $_directs['end']['users'] = array_merge($_directs['end']['users'],self::getSingleArray($networkLeft));
+        $_directs['end']['users'] = array_merge($_directs['end']['users'],self::getSingleArray($networkRight));
       }
     }
-    
     if(isset($_directs['start']['users']))
     {
       $_directs['start']['users'] = MembershipPerUser::getNetworkPoints($_directs['start']['users'],$user_login_id);
@@ -2040,6 +2039,11 @@ class UserLogin extends Orm {
       $_directs['end']['users'] = MembershipPerUser::getNetworkPoints($_directs['end']['users'],$user_login_id);
       $_directs['end']['points'] = array_sum(array_column($_directs['end']['users'],"point"));
     }
+
+    d($_directs);
+    // d($networkLeft);
+    // d($networkRight);
+    // d($_directs);
     
     // d($_directs);
 

@@ -88,12 +88,12 @@ class MembershipPerUser extends Orm {
 			return false;
 		}
 
-		if($MembershipPerUser->amount >= $catalogMembership['target'])
+		$amountAux = $MembershipPerUser->amount + $data['amount'];
+
+		if($amountAux >= $catalogMembership['target'])
 		{
-			if($MembershipPerUser->amount_extra < $catalogMembership['target'])
-			{
-				$MembershipPerUser->amount_extra = $MembershipPerUser->amount_extra + $data['amount'];
-			}
+			$MembershipPerUser->amount = $catalogMembership['target'];
+			$MembershipPerUser->amount_extra = $amountAux - $catalogMembership['target'];
 		} else {
 			$MembershipPerUser->amount = $MembershipPerUser->amount + $data['amount'];
 		}
@@ -148,11 +148,14 @@ class MembershipPerUser extends Orm {
 		$UserData = new UserData;
 		$MembershipPerUser = new self;
 
+		$data = [
+			611
+		];
+		d($data);
 		
 		$data = array_map(function($user_login_id) use($UserData,$MembershipPerUser,$sponsor_id){
 			$membership = $MembershipPerUser->findRow("user_login_id = ? AND status = ?",[$user_login_id,1],['membership_per_user_id','point','catalog_membership_id','take'],['field' => 'membership_per_user_id', 'order' => 'DESC']);
 			
-			// d($sponsor_id);
 			if(isset($membership['take']))
 			{
 				if(Util::isJson($membership['take']))

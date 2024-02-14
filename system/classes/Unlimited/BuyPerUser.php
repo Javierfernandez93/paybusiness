@@ -13,11 +13,8 @@ use Unlimited\NotificationPerUser;
 use Unlimited\CatalogCommission;
 use Unlimited\Product;
 use Unlimited\AdviceType;
-use Unlimited\LicencePerUser;
-use Unlimited\BuyPerBridge;
 use Unlimited\CatalogCurrency;
 use Unlimited\CatalogNotification;
-use Unlimited\CreditPerUser;
 
 use BlockChain\Wallet;
 use BlockChain\Transaction;
@@ -454,13 +451,20 @@ class BuyPerUser extends Orm {
             {
               CommissionPerUser::saveCommissionsByItems($data['items'],$BuyPerUser->user_login_id,$BuyPerUser->getId());
             }
-            
+
             if($data['items'][0]['catalog_membership_id'])
-            {
+            { 
               self::addMembership([
                 'point' => $BuyPerUser->amount,
                 'catalog_membership_id' => $data['items'][0]['catalog_membership_id'],
                 'user_login_id' => $BuyPerUser->user_login_id,
+              ]);
+            } else if($data['items'][0]['catalog_package_type_id'] == CatalogPackageType::PAY_ACADEMY) {
+
+              MembershipPerUser::addPoints([
+                'user_login_id' => $BuyPerUser->user_login_id,
+                'addPointsToRange' => true,
+                'amount' => $BuyPerUser->amount
               ]);
             }
           }
@@ -763,70 +767,6 @@ class BuyPerUser extends Orm {
 
     return false;
   }
-  
-  public static function applyLicences(int $user_login_id = null,array $items = null) 
-  {
-    array_map(function($item) use($user_login_id) {
-      array_map(function($product) use($user_login_id) {
-        if(Product::hasLicenceSku($product['product']['sku']))
-        {
-          LicencePerUser::makeLicences($user_login_id,$product['quantity']);
-        }
-      },$item['products']);
-    },$items);
-  }
-
-  public static function applyCredits(int $user_login_id = null,array $items = null) 
-  {
-    array_map(function($item) use($user_login_id) {
-      if($item['sku'] == Product::CREDIT_SKU)
-      {
-        CreditPerUser::addCredits($user_login_id,$item['quantity']);
-      }
-    },$items);
-  }
-
-  public static function hasLicenceProduct(array $items = null) : bool
-  {
-    $licence_product = false;
-
-    foreach ($items as $item)
-    {
-      if(isset($item['products']))
-      {
-        foreach ($item['products'] as $product)
-        {
-          if(Product::hasLicenceSku($product['product']['sku']))
-          {
-            $licence_product = true;
-          }
-        }
-      } else {
-        if(Product::hasLicenceSku($item['sku']))
-          {
-            $licence_product = true;
-          }
-      }
-    }
-
-    return $licence_product;
-  }
-
-  public static function hasCreditProduct(array $items = null) : bool
-  {
-    $credit_product = false;
-
-    foreach ($items as $product)
-    {
-      if(Product::hasCreditSku($product['sku']))
-      {
-        $credit_product = true;
-      }
-    }
-
-    return $credit_product;
-  }
-
   public function getAllBuys(string $filter = null)
   {
     $sql = "SELECT 
