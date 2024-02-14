@@ -140,16 +140,23 @@ class CommissionPerUser extends Orm
 		$user_login_id = isset($network[$catalog_commission['level'] - 1]) ? $network[$catalog_commission['level'] - 1] : self::REMANENT_ID;
 		$user_login_id = $user_login_id == 0 ? self::REMANENT_ID : $user_login_id;
 
-		if (isset($user_login_id)) {
-			MembershipPerUser::addPoints([
-				'user_login_id' => $user_login_id,
-				'addPointsToRange' => true,
-				'amount' => $amount,
-			]);
+		if (isset($user_login_id)) 
+		{
+			$catalog_payment_method_id = (new BuyPerUser)->findField("buy_per_user_id = ?",$buy_per_user_id,"catalog_payment_method_id");
+			
+			if($catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED)
+			{
+				MembershipPerUser::addPoints([
+					'user_login_id' => $user_login_id,
+					'addPointsToRange' => true,
+					'amount' => $amount,
+				]);
+			}
 
 			self::add([
 				'user_login_id_from' => $user_login_id_from,
 				'user_login_id' => $user_login_id,
+				'catalog_payment_method_id' => $catalog_payment_method_id,
 				'buy_per_user_id' => $buy_per_user_id,
 				'amount' => $amount,
 				'status' => (new MembershipPerUser)->hasAmountExtra($user_login_id) ? 0 : 1,
@@ -319,7 +326,7 @@ class CommissionPerUser extends Orm
 				WHERE 
 					{$this->tblName}.user_login_id = '{$user_login_id}'
 				AND
-					{$this->tblName}.status IN (" . self::PENDING_FOR_DISPERSION . "," . self::COMPLETED . ",".self::RETAINED.")
+					{$this->tblName}.status IN (" . self::PENDING_FOR_DISPERSION . "," . self::COMPLETED . ",".self::RETAINED.",".self::FROZEN.")
 					{$filter}
 				GROUP BY 
 					{$this->tblName}.{$this->tblName}_id

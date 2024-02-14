@@ -443,8 +443,7 @@ class BuyPerUser extends Orm {
       {
         $data = $BuyPerUser->unformatData();
         
-        if($BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED)
-        {
+        
           if($sendCommissions)
           {
             if(self::hasCommission($data['items']))
@@ -452,23 +451,25 @@ class BuyPerUser extends Orm {
               CommissionPerUser::saveCommissionsByItems($data['items'],$BuyPerUser->user_login_id,$BuyPerUser->getId());
             }
 
-            if($data['items'][0]['catalog_membership_id'])
-            { 
-              self::addMembership([
-                'point' => $BuyPerUser->amount,
-                'catalog_membership_id' => $data['items'][0]['catalog_membership_id'],
-                'user_login_id' => $BuyPerUser->user_login_id,
-              ]);
-            } else if($data['items'][0]['catalog_package_type_id'] == CatalogPackageType::PAY_ACADEMY) {
+            if($BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED)
+            {
+              if($data['items'][0]['catalog_membership_id'])
+              { 
+                self::addMembership([
+                  'point' => $BuyPerUser->amount,
+                  'catalog_membership_id' => $data['items'][0]['catalog_membership_id'],
+                  'user_login_id' => $BuyPerUser->user_login_id,
+                ]);
+              } else if($data['items'][0]['catalog_package_type_id'] == CatalogPackageType::PAY_ACADEMY) {
 
-              MembershipPerUser::addPoints([
-                'user_login_id' => $BuyPerUser->user_login_id,
-                'addPointsToRange' => true,
-                'amount' => $BuyPerUser->amount
-              ]);
+                MembershipPerUser::addPoints([
+                  'user_login_id' => $BuyPerUser->user_login_id,
+                  'addPointsToRange' => true,
+                  'amount' => $BuyPerUser->amount
+                ]);
+              }
             }
           }
-        }
 
         self::addProductPermissions([
           'items' => $data['items'],

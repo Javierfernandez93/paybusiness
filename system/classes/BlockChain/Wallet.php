@@ -299,7 +299,7 @@ class Wallet extends Orm
 
 			if(!$Transaction)
 			{
-				return false;
+				throw new \Exception("Not transaction found");
 			}
 			
 			$Block = Block::addTransaction($Block,$Transaction);
@@ -310,6 +310,8 @@ class Wallet extends Orm
 
 				return $get_txid ? $transaction_per_wallet_id : true;
 			}
+		} else {
+			throw new \Exception("Not block generated");
 		}
 	}
 
