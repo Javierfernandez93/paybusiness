@@ -450,7 +450,6 @@ class BuyPerUser extends Orm {
             CommissionPerUser::saveCommissionsByItems($data['items'],$BuyPerUser->user_login_id,$BuyPerUser->getId());
           }
 
-          
           if($data['items'][0]['catalog_membership_id'])
           { 
             self::addMembership([
