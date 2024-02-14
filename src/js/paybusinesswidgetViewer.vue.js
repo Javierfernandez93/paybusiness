@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.0.9'   
+import { User } from '../../src/js/user.module.js?v=1.1.0'   
 
 const PaybusinesswidgetViewer = {
     name : 'paybusinesswidget-viewer',
@@ -15,6 +15,7 @@ const PaybusinesswidgetViewer = {
             if(membership.amount > 0) 
             {
                 membership.percentaje = Math.round((membership.amount * 100) / membership.target)
+                membership.percentaje = membership.percentaje > 100 ? 100 : membership.percentaje
             }
 
             return membership
