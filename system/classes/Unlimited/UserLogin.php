@@ -2040,7 +2040,7 @@ class UserLogin extends Orm {
       $_directs['end']['points'] = array_sum(array_column($_directs['end']['users'],"point"));
     }
 
-    d($_directs);
+    // d($_directs);
     // d($networkLeft);
     // d($networkRight);
     // d($_directs);

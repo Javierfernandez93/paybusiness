@@ -148,10 +148,9 @@ class MembershipPerUser extends Orm {
 		$UserData = new UserData;
 		$MembershipPerUser = new self;
 
-		$data = [
-			611
-		];
-		d($data);
+		// $data = [
+		// 	611
+		// ];
 		
 		$data = array_map(function($user_login_id) use($UserData,$MembershipPerUser,$sponsor_id){
 			$membership = $MembershipPerUser->findRow("user_login_id = ? AND status = ?",[$user_login_id,1],['membership_per_user_id','point','catalog_membership_id','take'],['field' => 'membership_per_user_id', 'order' => 'DESC']);
