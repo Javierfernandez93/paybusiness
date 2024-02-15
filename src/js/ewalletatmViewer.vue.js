@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.1.1'   
+import { User } from '../../src/js/user.module.js?v=1.1.2'   
 
 const EwalletatmViewer = {
     name : 'ewallet-viewer',
@@ -65,7 +65,7 @@ const EwalletatmViewer = {
             {
                 if(this.ewallet.public_key != this.ewallet.recipientAdress)
                 {
-                    if(this.ewallet.amount >= amountTemp)
+                    if(this.ewallet.amount >= this.ewallet.amountToSend)
                     {
 
                     } else {
