@@ -1,4 +1,4 @@
-import { UnilevelViewer } from '../../src/js/unilevelViewer.vue.js?v=1.1.2'
+import { UnilevelViewer } from '../../src/js/unilevelViewer.vue.js?v=1.1.1'
 
 Vue.createApp({
     components : { 

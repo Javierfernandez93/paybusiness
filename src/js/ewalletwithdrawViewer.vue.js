@@ -54,7 +54,9 @@ const EwalletwithdrawViewer = {
 
                 const tempAmount = parseFloat(this.withdraw.amount) + parseFloat(this.withdraw.fee)
 
-                if(this.ewallet.amount >= tempAmount)
+                console.log(this.ewallet.amount , tempAmount)
+
+                if(this.ewallet.amount >= this.withdraw.amount)
                 {
                     if(this.withdraw.amount >= this.MIN_AMOUNT_TO_WITHDRAW)
                     {
