@@ -39,44 +39,13 @@ const EwalletwithdrawViewer = {
     watch : {
         'withdraw.amount': {
             handler() {
-                this.error = null
-
-                if(this.withdraw.amount >= 20 && this.withdraw.amount < 50)
-                {
-                    this.FEE_WITHDRAW_TRANSACTION = 10
-                } else if(this.withdraw.amount >= 50 && this.withdraw.amount <= 99) {
-                    this.FEE_WITHDRAW_TRANSACTION = 5
-                } else if(this.withdraw.amount >= 100) {
-                    this.FEE_WITHDRAW_TRANSACTION = 3
-                }
-
-                this.withdraw.fee = (this.withdraw.amount * this.FEE_WITHDRAW_TRANSACTION) / 100
-
-                const tempAmount = parseFloat(this.withdraw.amount) + parseFloat(this.withdraw.fee)
-
-                console.log(this.ewallet.amount , tempAmount)
-
-                if(this.ewallet.amount >= this.withdraw.amount)
-                {
-                    if(this.withdraw.amount >= this.MIN_AMOUNT_TO_WITHDRAW)
-                    {
-                        if(this.withdraw.withdraw_method_per_user_id != null)
-                        {
-                            if(this.withdrawMethods != false)
-                            {
-
-                            } else {
-                                this.error = this.ERRORS.NOT_WITHDRAWS_METHODS
-                            }
-                        } else {
-                            this.error = this.ERRORS.NOT_WITHDRAWS_METHOD_CHOICED
-                        }
-                    } else {
-                        this.error = this.ERRORS.NOT_MINIMUM_AMOUNT
-                    }
-                } else {
-                    this.error = this.ERRORS.NOT_ENOUGH_FUNDS
-                }
+                this.validateFields()
+            },
+            deep: true
+        },
+        'withdraw.withdraw_method_per_user_id': {
+            handler() {
+                this.validateFields()
             },
             deep: true
         }
@@ -84,6 +53,46 @@ const EwalletwithdrawViewer = {
     methods: {
         goToTransaction(hash) {            
             window.location.href = `../../apps/blockchain/transaction?txn=${hash}`
+        },
+        validateFields() {            
+            this.error = null
+
+            if(this.withdraw.amount >= 20 && this.withdraw.amount < 50)
+            {
+                this.FEE_WITHDRAW_TRANSACTION = 10
+            } else if(this.withdraw.amount >= 50 && this.withdraw.amount <= 99) {
+                this.FEE_WITHDRAW_TRANSACTION = 5
+            } else if(this.withdraw.amount >= 100) {
+                this.FEE_WITHDRAW_TRANSACTION = 3
+            }
+
+            this.withdraw.fee = (this.withdraw.amount * this.FEE_WITHDRAW_TRANSACTION) / 100
+
+            const tempAmount = parseFloat(this.withdraw.amount) + parseFloat(this.withdraw.fee)
+
+            console.log(this.withdraw)
+
+            if(this.ewallet.amount >= this.withdraw.amount)
+            {
+                if(this.withdraw.amount >= this.MIN_AMOUNT_TO_WITHDRAW)
+                {
+                    if(this.withdraw.withdraw_method_per_user_id != null)
+                    {
+                        if(this.withdrawMethods != false)
+                        {
+
+                        } else {
+                            this.error = this.ERRORS.NOT_WITHDRAWS_METHODS
+                        }
+                    } else {
+                        this.error = this.ERRORS.NOT_WITHDRAWS_METHOD_CHOICED
+                    }
+                } else {
+                    this.error = this.ERRORS.NOT_MINIMUM_AMOUNT
+                }
+            } else {
+                this.error = this.ERRORS.NOT_ENOUGH_FUNDS
+            }
         },
         goToConfigureWithdrawMethods(hash) {            
             window.location.href = `../../apps/ewallet/withdrawmethods`
