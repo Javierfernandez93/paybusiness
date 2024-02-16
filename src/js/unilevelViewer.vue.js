@@ -61,57 +61,59 @@ const UnilevelViewer = {
                         </div>    
                     </div>    
 
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr class="text-center">
-                                <th class="tex-xs text-uppercase text-secondary">ID</th>
-                                <th class="tex-xs text-uppercase text-secondary">Nombre</th>
-                                <th class="tex-xs text-uppercase text-secondary">Fecha de registro</th>
-                                <th class="tex-xs text-uppercase text-secondary">Activo hace</th>
-                                <th class="tex-xs text-uppercase text-secondary">Patrocinador</th>
-                                <th class="tex-xs text-uppercase text-secondary">PayBusiness</th>
-                                <th class="tex-xs text-uppercase text-secondary">PayAcademy</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="user in level" class="text-center">
-                                <td class="align-middle">{{user.code}}</td>
-                                <td class="align-middle sans">{{user.names}}</td>
-                                <td class="align-middle">
-                                    <span v-if="user.signup_date">
-                                        {{user.signup_date.formatFullDate()}}
-                                    </span>
-                                </td>
-                                <td class="align-middle">
-                                    <span v-if="user.last_login_date" class="badge bg-success">
-                                        {{user.last_login_date.timeSince()}}
-                                    </span>
-                                    <span v-else class="badge bg-secondary">
-                                        Nunca
-                                    </span>
-                                </td>
-                                <td class="align-middle sans">
-                                    {{user.sponsor.names}}
-                                </td>
-                                <td class="align-middle">
-                                    <span v-if="!user.pay_business" class="badge bg-secondary">
-                                        <i class="bi h5 text-white bi-x"></i>
-                                    </span>
-                                    <span v-else class="badge bg-success">
-                                        <i class="bi h5 text-white bi-check"></i>
-                                    </span>
-                                </td>
-                                <td class="align-middle">
-                                    <span v-if="!user.academy" class="badge bg-secondary">
-                                        <i class="bi h5 text-white bi-x"></i>
-                                    </span>
-                                    <span v-else class="badge bg-success">
-                                        <i class="bi h5 text-white bi-check"></i>
-                                    </span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr class="text-center">
+                                    <th class="tex-xs text-uppercase text-secondary">ID</th>
+                                    <th class="tex-xs text-uppercase text-secondary">Nombre</th>
+                                    <th class="tex-xs text-uppercase text-secondary">Fecha de registro</th>
+                                    <th class="tex-xs text-uppercase text-secondary">Activo hace</th>
+                                    <th class="tex-xs text-uppercase text-secondary">Patrocinador</th>
+                                    <th class="tex-xs text-uppercase text-secondary">PayBusiness</th>
+                                    <th class="tex-xs text-uppercase text-secondary">PayAcademy</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="user in level" class="text-center">
+                                    <td class="align-middle">{{user.code}}</td>
+                                    <td class="align-middle sans">{{user.names}}</td>
+                                    <td class="align-middle">
+                                        <span v-if="user.signup_date">
+                                            {{user.signup_date.formatDate()}}
+                                        </span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <span v-if="user.last_login_date" class="badge bg-success">
+                                            {{user.last_login_date.timeSince()}}
+                                        </span>
+                                        <span v-else class="badge bg-secondary">
+                                            Nunca
+                                        </span>
+                                    </td>
+                                    <td class="align-middle sans">
+                                        {{user.sponsor.names}}
+                                    </td>
+                                    <td class="align-middle">
+                                        <span v-if="!user.pay_business" class="badge bg-secondary">
+                                            <i class="bi h5 text-white bi-x"></i>
+                                        </span>
+                                        <span v-else class="badge bg-success">
+                                            <i class="bi h5 text-white bi-check"></i>
+                                        </span>
+                                    </td>
+                                    <td class="align-middle">
+                                        <span v-if="!user.pay_academy" class="badge bg-secondary">
+                                            <i class="bi h5 text-white bi-x"></i>
+                                        </span>
+                                        <span v-else class="badge bg-success">
+                                            <i class="bi h5 text-white bi-check"></i>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div v-else-if="network == false">

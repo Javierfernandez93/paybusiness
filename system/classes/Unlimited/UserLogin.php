@@ -1018,8 +1018,8 @@ class UserLogin extends Orm {
             $_user = $userData;
           
             $_user['side'] = $UserReferral->findField('user_login_id = ?',$user_login_id,"side");
-            $_user['pay_business'] = $this->_hasProductPermission('pay_business',$user_login_id);
-            $_user['pay_academy'] = $this->_hasProductPermission('pay_academy',$user_login_id);
+            $_user['pay_business'] = $this->_hasProductPermission(Product::PAY_BUSINESS,$user_login_id);
+            $_user['pay_academy'] = $this->_hasProductPermission(Product::PAY_ACADEMY,$user_login_id);
             
             if($sponsor_id = $UserReferral->findField("user_login_id = ?",$user_login_id,"sponsor_id"))
             {
