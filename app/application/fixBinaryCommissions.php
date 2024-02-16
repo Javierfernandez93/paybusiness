@@ -14,22 +14,33 @@ $users = $MembershipPerUser->findAll("point = ? AND status = ?",[0,1]);
 
 if($users)
 {
-    d($users);
+    // $users = [
+    //     $users[20]
+    // ];
+    // $users = [
+    //     $users[17]
+    // ];
 
+    // d($users);
+    
     foreach($users as $user)
     {
         $BuyPerUser = new Unlimited\BuyPerUser;
         
-        $buy = $BuyPerUser->findRow("user_login_id = ? AND amount = ? AND catalog_payment_method_id = ? AND status = ?",[$user['user_login_id'],40,7,2]);
+        $buy = $BuyPerUser->findRow("user_login_id = ? AND amount = ? AND catalog_payment_method_id = ? AND status = ?",[$user['user_login_id'],20,7,2]);
 
         if($buy)
         {
+            // d($buy);
+
             $CommissionPerUser = new Unlimited\CommissionPerUser;
             
-            if($commissions = $CommissionPerUser->findAll("user_login_id_from = ? AND catalog_commission_id = ? AND status = ?",[$user['user_login_id'],7,2]))
+            if($commissions = $CommissionPerUser->findAll("user_login_id_from = ? AND catalog_commission_id = ? AND status = ?",[$user['user_login_id'],7,0]))
             {
                 if($commissions)
                 {
+                    // d($commissions);
+                    
                     foreach($commissions as $commission)
                     {
                         $CommissionPerUser = new Unlimited\CommissionPerUser;
