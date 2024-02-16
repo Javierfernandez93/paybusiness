@@ -34,7 +34,7 @@ if($users)
 
                         if($CommissionPerUser->loadWhere("commission_per_user_id = ?",$commission['commission_per_user_id']))
                         {
-                            $TransactionPerWallet->status = -1;
+                            $CommissionPerUser->status = -1;
 
                             if($CommissionPerUser->save())
                             {
