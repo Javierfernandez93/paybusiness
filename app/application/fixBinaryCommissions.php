@@ -18,7 +18,7 @@ if($users)
     {
         $BuyPerUser = new Unlimited\BuyPerUser;
         
-        $buy = $BuyPerUser->findRow("user_login_id = ? AND amount = ? AND catalog_payment_method_id = ? AND status = ?",[$user['user_login_id'],20,7,2]);
+        $buy = $BuyPerUser->findRow("user_login_id = ? AND amount = ? AND catalog_payment_method_id = ? AND status = ?",[$user['user_login_id'],40,7,2]);
 
         if($buy)
         {
