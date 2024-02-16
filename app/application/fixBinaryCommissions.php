@@ -14,6 +14,8 @@ $users = $MembershipPerUser->findAll("point = ? AND status = ?",[0,1]);
 
 if($users)
 {
+    d($users);
+
     foreach($users as $user)
     {
         $BuyPerUser = new Unlimited\BuyPerUser;
