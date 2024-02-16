@@ -13,11 +13,11 @@ if($buys)
     {
         $MembershipPerUser = new Unlimited\MembershipPerUser;
         
-        if($MembershipPerUser->loadWhere("user_login_id = ? AND catalog_membership_id = ?",[$buy['user_login_id'],1]))
+        if($MembershipPerUser->loadWhere("user_login_id = ? AND point = ?",[$buy['user_login_id'],$buy['amount']]))
         {
             echo "cambiandolo para {$buy['user_login_id']}\n";
 
-            $MembershipPerUser->points = 0;
+            $MembershipPerUser->point = 0;
             $MembershipPerUser->save();
         }
 
