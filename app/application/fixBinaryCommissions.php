@@ -5,31 +5,54 @@ require_once TO_ROOT. "/system/core.php";
 $data = HCStudio\Util::getHeadersForWebService();
 
 $MembershipPerUser = new Unlimited\MembershipPerUser;
-$buys = $MembershipPerUser->findAll("amount = ? AND catalog_payment_method_id = ? AND status = ?",[20,7,2],["user_login_id","amount"]);
+$users = $MembershipPerUser->findAll("point = ? AND status = ?",[0,1]);
 
-if($buys)
+// tomo usuarios
+// verifico si tienen compra gratis con ese puntaje
+// verifico si genero comision
+// elimino comisión de tabla y blockchain
+
+if($users)
 {
-    foreach($buys as $buy)
+    foreach($users as $user)
     {
-        $MembershipPerUser = new Unlimited\MembershipPerUser;
+        $BuyPerUser = new Unlimited\BuyPerUser;
         
-        // if($MembershipPerUser->loadWhere("user_login_id = ? AND catalog_membership_id = ?",[$buy['user_login_id'],1]))
-        // {
-        //     echo "cambiandolo para {$buy['user_login_id']}\n";
+        $buy = $BuyPerUser->findRow("user_login_id = ? AND amount = ? AND catalog_payment_method_id = ? AND status = ?",[$user['user_login_id'],20,7,2]);
 
-        //     $MembershipPerUser->amount = 0;
-        //     $MembershipPerUser->save();
-        // }
-
-        if(!$MembershipPerUser->findField("user_login_id = ? AND catalog_membership_id = ?",[$buy['user_login_id'],1],"membership_per_user_id"))
+        if($buy)
         {
-            echo "Creandolo para {$buy['user_login_id']}\n";
+            $CommissionPerUser = new Unlimited\CommissionPerUser;
+            
+            if($commissions = $CommissionPerUser->findAll("user_login_id_from = ? AND catalog_commission_id = ? AND status = ?",[$user['user_login_id'],7,2]))
+            {
+                if($commissions)
+                {
+                    foreach($commissions as $commission)
+                    {
+                        $CommissionPerUser = new Unlimited\CommissionPerUser;
 
-            Unlimited\BuyPerUser::addMembership([
-                'point' => $buy['amount'],
-                'catalog_membership_id' => 1,
-                'user_login_id' => $buy['user_login_id'],
-            ]);
+                        if($CommissionPerUser->loadWhere("commission_per_user_id = ?",$commission['commission_per_user_id']))
+                        {
+                            $TransactionPerWallet->status = -1;
+
+                            if($CommissionPerUser->save())
+                            {
+                                if($commission['transaction_per_wallet_id'])
+                                {
+                                    $TransactionPerWallet = new BlockChain\TransactionPerWallet;
+                                    
+                                    if($TransactionPerWallet->loadWhere('transaction_per_wallet_id = ?',$commission['transaction_per_wallet_id']))
+                                    {
+                                        $TransactionPerWallet->status = 0;
+                                        $TransactionPerWallet->save();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }   
