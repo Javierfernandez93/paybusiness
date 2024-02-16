@@ -13,16 +13,24 @@ if($buys)
     {
         $MembershipPerUser = new Unlimited\MembershipPerUser;
         
-        if(!$MembershipPerUser->findField("user_login_id = ? AND catalog_membership_id = ?",[$buy['user_login_id'],1],"membership_per_user_id"))
+        if($MembershipPerUser->loadWhere("user_login_id = ? AND catalog_membership_id = ?",[$buy['user_login_id'],1]))
         {
-            echo "Creandolo para {$buy['user_login_id']}\n";
+            echo "cambiandolo para {$buy['user_login_id']}\n";
 
-            Unlimited\BuyPerUser::addMembership([
-                'point' => $buy['amount'],
-                'catalog_membership_id' => 1,
-                'user_login_id' => $buy['user_login_id'],
-            ]);
+            $MembershipPerUser->amount = 0;
+            $MembershipPerUser->save();
         }
+
+        // if(!$MembershipPerUser->findField("user_login_id = ? AND catalog_membership_id = ?",[$buy['user_login_id'],1],"membership_per_user_id"))
+        // {
+        //     echo "Creandolo para {$buy['user_login_id']}\n";
+
+        //     Unlimited\BuyPerUser::addMembership([
+        //         'point' => $buy['amount'],
+        //         'catalog_membership_id' => 1,
+        //         'user_login_id' => $buy['user_login_id'],
+        //     ]);
+        // }
     }
 }   
 
