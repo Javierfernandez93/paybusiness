@@ -453,7 +453,7 @@ class BuyPerUser extends Orm {
           if($data['items'][0]['catalog_membership_id'])
           { 
             self::addMembership([
-              'point' => $BuyPerUser->amount,
+              'point' => $BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED ? $BuyPerUser->amount : 0,
               'catalog_membership_id' => $data['items'][0]['catalog_membership_id'],
               'user_login_id' => $BuyPerUser->user_login_id,
             ]);

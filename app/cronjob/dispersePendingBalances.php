@@ -59,6 +59,9 @@ function send(array $data = null)
 {
     $wallet_kind_id = $data['status'] == Unlimited\CommissionPerUser::FROZEN ? BlockChain\WalletKind::USDT_NOWITHDRAWABLE : BlockChain\WalletKind::USDT_TRC20;
 
+
+    d($wallet_kind_id);
+    
     if($ReceiverWallet = BlockChain\Wallet::getWallet($data['user_login_id'],$wallet_kind_id))
     {
         if($data['amount'])

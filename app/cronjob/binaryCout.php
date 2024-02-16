@@ -5,10 +5,6 @@ require_once TO_ROOT. "/system/core.php";
 $data = HCStudio\Util::getVarFromPGS();
 
 $MembershipPerUser = new Unlimited\MembershipPerUser;
-$CatalogCommission = new Unlimited\CatalogCommission;
-$CatalogMembership = new Unlimited\CatalogMembership;
-$UserLogin = new Unlimited\UserLogin(false,false);
-
 // $users = $MembershipPerUser->findAll("status = ? AND take = ?",[1,0]);
 $users = $MembershipPerUser->findAll("status = ?",[1]);
 
@@ -16,11 +12,16 @@ echo "<pre>";
 
 if($users)
 {
-    // $users = [
-    //     [
-    //         'user_login_id' => 1
-    //     ]
-    // ];
+    $CatalogCommission = new Unlimited\CatalogCommission;
+    $CatalogMembership = new Unlimited\CatalogMembership;
+    $UserLogin = new Unlimited\UserLogin(false,false);
+
+
+    $users = [
+        [
+            'user_login_id' => 1
+        ]
+    ];
 
     foreach($users as $user)
     {
@@ -28,6 +29,8 @@ if($users)
         {
             $binary_points = $UserLogin->_getBinaryPoints($user['user_login_id']);
             
+            d($binary_points);
+
             if($binary_points)
             {
                 if($network = Unlimited\UserLogin::getNetworkToPay($binary_points))
