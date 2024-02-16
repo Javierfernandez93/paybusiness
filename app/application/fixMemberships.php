@@ -17,7 +17,7 @@ if($buys)
         {
             echo "cambiandolo para {$buy['user_login_id']}\n";
 
-            $MembershipPerUser->amount = 0;
+            $MembershipPerUser->points = 0;
             $MembershipPerUser->save();
         }
 
