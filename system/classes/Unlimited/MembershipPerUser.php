@@ -204,6 +204,25 @@ class MembershipPerUser extends Orm {
 		return $MembershipPerUser->save();
 	}
 
+	public static function addPoint(array $data = null) 
+	{
+		if(!isset($data))
+		{
+			return false;
+		}
+
+		$MembershipPerUser = new self;
+		
+		if(!$MembershipPerUser->loadWhere("user_login_id = ? AND status = ?",[$data['user_login_id'],1]))
+		{
+			return false;
+		}
+
+		$MembershipPerUser->point = $MembershipPerUser->point + $data['point'];
+		
+		return $MembershipPerUser->save();
+	}
+
 	public static function add(array $data = null) 
 	{
 		if(!isset($data))

@@ -463,10 +463,9 @@ class BuyPerUser extends Orm {
           {
             if($data['items'][0]['catalog_package_type_id'] == CatalogPackageType::PAY_ACADEMY) {
 
-              MembershipPerUser::addPoints([
+              MembershipPerUser::addPoint([
                 'user_login_id' => $BuyPerUser->user_login_id,
-                'addPointsToRange' => true,
-                'amount' => $BuyPerUser->amount
+                'point' => $BuyPerUser->amount
               ]);
             }
           }
