@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.1.3';
+import { User } from '../../src/js/user.module.js?v=1.1.4';
 
 const ListViewer = {
     name : 'list-viewer',
@@ -129,7 +129,7 @@ const ListViewer = {
                                     </span>
                                 </td>
                                 <td class="align-middle">
-                                    <span v-if="!user.academy" class="badge bg-secondary">
+                                    <span v-if="!user.pay_academy" class="badge bg-secondary">
                                         <i class="bi lead text-white bi-x"></i>
                                     </span>
                                     <span v-else class="badge bg-success">
