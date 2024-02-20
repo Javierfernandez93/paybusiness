@@ -19,6 +19,8 @@ if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ==
     
     if($commissions = $CommissionPerUser->getPendingCommissions())
     {
+        d($commissions);
+        
         foreach($commissions as $commission)
         {
             if($UserLogin->_hasProductPermission('pay_business',$commission['user_login_id']))
