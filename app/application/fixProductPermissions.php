@@ -15,7 +15,7 @@ if($buys)
         
         if($ProductPermission->loadWhere("user_login_id = ? AND product_id = ? AND status = ?",[$buy['user_login_id'],2,1]))
         {
-            $ProductPermission->creend_dateate_date = strtotime("+360 days",$ProductPermission->create_date);
+            $ProductPermission->end_date = strtotime("+360 days",$ProductPermission->create_date);
             $ProductPermission->save();
         }
 
