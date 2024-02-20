@@ -19,8 +19,6 @@ if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ==
     
     if($commissions = $CommissionPerUser->getPendingCommissions())
     {
-        d($commissions);
-        
         foreach($commissions as $commission)
         {
             if($UserLogin->_hasProductPermission('pay_business',$commission['user_login_id']))
@@ -60,9 +58,6 @@ function sendPush(string $user_login_id = null,string $message = null,int $catal
 function send(array $data = null)
 {
     $wallet_kind_id = $data['status'] == Unlimited\CommissionPerUser::FROZEN ? BlockChain\WalletKind::USDT_NOWITHDRAWABLE : BlockChain\WalletKind::USDT_TRC20;
-
-
-    d($wallet_kind_id);
     
     if($ReceiverWallet = BlockChain\Wallet::getWallet($data['user_login_id'],$wallet_kind_id))
     {
