@@ -1,6 +1,5 @@
 import { User } from '../../src/js/user.module.js?v=1.1.4'   
 
-/* vue */
 import { StoreitemsViewer } from '../../src/js/storeitemsViewer.vue.js?v=1.1.4'
 import { StorepaymentmethodsViewer } from '../../src/js/storepaymentmethodsViewer.vue.js?v=1.1.4'
 import { StorecheckoutViewer } from '../../src/js/storecheckoutViewer.vue.js?v=1.1.4'
@@ -37,6 +36,7 @@ Vue.createApp({
             },      
             cart: {
                 hasItems : false,
+                activations: false,
                 active: false,
                 id: null,
                 catalog_currency_id: null,
@@ -115,11 +115,7 @@ Vue.createApp({
             return new Promise((resolve,reject) => {
                 if(['package'].includes(this.cart.package_type)) {
                     this.User.isActive({}, (response) => {
-                        if (response.s == 1) {
-                            resolve(response.active)
-                        }
-                        
-                        reject()
+                        resolve(response)
                     })
                 } else {
                     resolve(true)
@@ -136,10 +132,10 @@ Vue.createApp({
             this.cart.state = this.STATES.NOT_ACTIVE
             // this.cart.state = this.STATES.INVOICE
 
-            this.isActive().then((active) =>{
-                this.cart.active = active
+            this.isActive().then((response) =>{
+                this.cart.active = response.active
+                this.cart.activations = response.activations
 
-                console.log(this.active)
                 this.cart.state = this.STATES.CHOICE_ITEMS
 
                 this.initCart().then(() =>{

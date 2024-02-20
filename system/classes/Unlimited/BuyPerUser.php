@@ -387,11 +387,13 @@ class BuyPerUser extends Orm {
         {
           if(isset($product['product']))
           {
+            $days = $product['product']['day'] * $product['quantity'];
+            
             ProductPermission::add([
               'user_login_id' => $data['user_login_id'],
               'product_id' => $product['product_id'],
               'create_date' => time(),
-              'end_date' => strtotime("+{$product['product']['day']} days"),
+              'end_date' => strtotime("+{$days} days"),
             ]);
           }
         }
@@ -695,6 +697,7 @@ class BuyPerUser extends Orm {
                 {$this->tblName}.{$this->tblName}_id,
                 {$this->tblName}.invoice_id,
                 {$this->tblName}.user_login_id,
+                {$this->tblName}.catalog_payment_method_id,
                 {$this->tblName}.item,
                 {$this->tblName}.checkout_data,
                 {$this->tblName}.ipn_data,
@@ -714,6 +717,9 @@ class BuyPerUser extends Orm {
                 user_login.user_login_id = {$this->tblName}.user_login_id
               WHERE 
                 {$this->tblName}.user_login_id IN ({$user_login_id_in})
+              ORDER BY 
+                {$this->tblName}.create_date
+              DESC 
               ";
 
       return $this->connection()->rows($sql);
@@ -721,34 +727,101 @@ class BuyPerUser extends Orm {
 
     return false;
   }
+  
+  public function _getLastBuyByType(int $user_login_id = null)
+  {
+    if(!$user_login_id)
+    {
+      return false;
+    }
+
+    return $this->connection()->rows("SELECT 
+        {$this->tblName}.{$this->tblName}_id,
+        {$this->tblName}.invoice_id,
+        {$this->tblName}.user_login_id,
+        {$this->tblName}.catalog_payment_method_id,
+        {$this->tblName}.item,
+        {$this->tblName}.checkout_data,
+        {$this->tblName}.ipn_data,
+        {$this->tblName}.status,
+        {$this->tblName}.amount,
+        LOWER(user_data.names) as names,
+        user_login.email
+      FROM 
+        {$this->tblName}
+      LEFT JOIN 
+        user_data 
+      ON 
+        user_data.user_login_id = {$this->tblName}.user_login_id
+      LEFT JOIN 
+        user_login 
+      ON 
+        user_login.user_login_id = {$this->tblName}.user_login_id
+      WHERE 
+        {$this->tblName}.user_login_id = '{$user_login_id}'
+      AND 
+        {$this->tblName}.status = '2'
+      ORDER BY 
+        {$this->tblName}.create_date
+      DESC 
+    ");
+  }
+
+  public function getLastBuyByType(int $user_login_id = null,int $catalog_package_type_id = null)
+  {
+    if(!$user_login_id)
+    {
+      return false;
+    }
+
+    if($buys = $this->_getLastBuyByType($user_login_id))
+    {
+      $_buy = null;
+
+      foreach($buys as $buy) {
+        if($data = self::_unformatData($buy))
+        {
+          $buy = array_merge($buy,$data);
+          $buy['formated_items'] = implode(", ",array_column($data['items'],'title'));
+
+          if(self::hasCatalogPackageIdOnItems($data['items'],$catalog_package_type_id))
+          {
+            $_buy = $buy;
+            break;
+          }
+        }
+      }
+
+      return $_buy;
+    }
+  }
 
   public function getBuysByIn(string $user_login_id_in = null,int $catalog_package_type_id = null)
   {
-    if(isset($user_login_id_in) == true)
+    if(!$user_login_id_in)
     {
-      if($buys = $this->_getBuysByIn($user_login_id_in))
-      {
-        $_buys = [];
-
-        foreach($buys as $buy) {
-          if($data = self::_unformatData($buy))
-          {
-            $buy = array_merge($buy,$data);
-            $buy['formated_items'] = implode(", ",array_column($data['items'],'title'));
-
-            if(self::hasCatalogPackageIdOnItems($data['items'],$catalog_package_type_id))
-            {
-              $_buys[] = $buy;
-            }
-          }
-
-        }
-
-        return $_buys;
-      }
+      return false;
     }
 
-    return false;
+    if($buys = $this->_getBuysByIn($user_login_id_in))
+    {
+      $_buys = [];
+
+      foreach($buys as $buy) {
+        if($data = self::_unformatData($buy))
+        {
+          $buy = array_merge($buy,$data);
+          $buy['formated_items'] = implode(", ",array_column($data['items'],'title'));
+
+          if(self::hasCatalogPackageIdOnItems($data['items'],$catalog_package_type_id))
+          {
+            $_buys[] = $buy;
+          }
+        }
+      }
+
+      return $_buys;
+    }
   }
   
   public function getReferralPayments(int $user_login_id = null,int $catalog_package_type_id = null)

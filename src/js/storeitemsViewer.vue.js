@@ -187,12 +187,12 @@ const StoreitemsViewer = {
         </ul>
 
         <div v-if="packages">
-            <div v-if="!sponsor_activation && !viewPackages" class="alert alert-secondary text-white text-center">
+            <div v-if="!sponsor_activation && !viewPackages" class="alert alert-dark text-white text-center">
                 <strong>Aviso</strong>
                 <div class="lead">
                     Tu patrocinador no está activo
                 </div>
-                <div class="mb-3 lead">
+                <div class="mb-3 h4 text-white">
                     ¿Deseas continuar?
                 </div>
                 <div class="row">
@@ -227,8 +227,14 @@ const StoreitemsViewer = {
                             
                             <div class="h1 text-center text-white">$ {{package.amount.numberFormat(2)}}</div>
                         </div>
-                        <div class="card-footer d-grid">
-                            <button @click="addPackage(package)" class="btn btn-white btn-lg mb-0 shadow-none">Elegir</button>
+                        <div v-if="cart.activations.includes(package.package_id)" class="card-footer text-center align-items-center text-white d-grid">
+                            <div>
+                                <i class="bi bi-check-circle-fill me-2 lead"></i>
+                                Ya tienes este paquete
+                            </div>
+                        </div>
+                        <div v-else class="card-footer d-grid">
+                            <button @click="addPackage(package)" class="btn btn-white btn-lg mb-0 shadow-none">Elegir Paquete</button>
                         </div>
                     </div>
                 </div>
