@@ -13,7 +13,6 @@ if($UserLogin->logged === true)
     $data["zoom_button_1"] = Unlimited\SystemVar::_getValue("zoom_button_1");
     $data["zoom_class_1"] = Unlimited\SystemVar::_getValue("zoom_class_1");
 
-
     $BuyPerUser = new Unlimited\BuyPerUser;    
     $data['payBusinessAnual'] = $BuyPerUser->getPackageBuys(4,$UserLogin->company_id);
 
