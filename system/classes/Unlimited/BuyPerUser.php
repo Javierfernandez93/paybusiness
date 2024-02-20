@@ -465,15 +465,10 @@ class BuyPerUser extends Orm {
           {
             if($data['items'][0]['catalog_package_type_id'] == CatalogPackageType::PAY_ACADEMY) {
               
-              $sponsor_id = (new UserReferral)->getSponsorId($BuyPerUser->user_login_id);
-
-              if($sponsor_id)
-              {
-                MembershipPerUser::addPoint([
-                  'user_login_id' => $sponsor_id,
-                  'point' => $BuyPerUser->amount
-                ]);
-              }
+              MembershipPerUser::addPoint([
+                'user_login_id' => $BuyPerUser->user_login_id,
+                'point' => $BuyPerUser->amount
+              ]);
             }
           }
         }
