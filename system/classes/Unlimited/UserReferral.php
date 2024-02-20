@@ -353,6 +353,24 @@ class UserReferral extends Orm {
     }
   }
   
+  public function getSponsorId(int $user_login_id = null) 
+  {
+    if($user_login_id) 
+    {
+      return false;
+    }
+    
+    return $this->connection()->field("SELECT 
+      {$this->tblName}.sponsor_id
+    FROM 
+      {$this->tblName}
+    WHERE 
+      {$this->tblName}.user_login_id = '{$user_login_id}' 
+    AND 
+      {$this->tblName}.status = '1'
+  ");
+  }
+
   public function getSponsor(int $user_login_id = null) 
   {
     if(isset($user_login_id) === true) 
