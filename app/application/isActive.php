@@ -13,6 +13,8 @@ if($UserLogin->logged === true)
 
 	$BuyPerUser = new Unlimited\BuyPerUser;
 
+	$data['activations'] = [];
+
 	if($pay_businesss)
 	{
 		$buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_BUSINESS);
