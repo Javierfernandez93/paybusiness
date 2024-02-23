@@ -34,13 +34,18 @@ if($UserLogin->logged === true)
                         {
                             $message = $data['message'] ?? '';
                             
-                            if($transaction_per_wallet_id = $Wallet->createTransaction($data['recipientAdress'],$data['amountToSend'],BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true,BlockChain\Transaction::TRANSACTION_FEE))
-                            {
-                                $data["s"] = 1;
-                                $data["r"] = "SAVE_OK";
-                            } else {
+                            try {
+                                if($transaction_per_wallet_id = $Wallet->createTransaction($data['recipientAdress'],$data['amountToSend'],BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true,BlockChain\Transaction::TRANSACTION_FEE))
+                                {
+                                    $data["s"] = 1;
+                                    $data["r"] = "SAVE_OK";
+                                } else {
+                                    $data["s"] = 0;
+                                    $data["r"] = "NOT_TRANSACTION_PER_WALLET_ID";
+                                }
+                            } catch (Exception $e) {
                                 $data["s"] = 0;
-                                $data["r"] = "NOT_TRANSACTION_PER_WALLET_ID";
+                                $data["r"] = $e->getMessage();
                             }
                         } else {
                             $data["s"] = 0;

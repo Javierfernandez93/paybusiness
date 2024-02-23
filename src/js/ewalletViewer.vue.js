@@ -75,6 +75,8 @@ const EwalletViewer = {
             })
         },
         getTotals() {   
+            this.total.amount = 0
+            
             this.commissions.map((commission)=>{
                 this.total.amount += commission.amount
             })

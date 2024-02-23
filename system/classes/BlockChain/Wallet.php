@@ -257,6 +257,16 @@ class Wallet extends Orm
 
 	public function createTransaction(string $recipient_adress = null,float $amount = null,string $data = '',bool $get_txid = false,float $fee = 0) 
 	{
+		if(!$recipient_adress)
+		{
+			throw new \Exception("NOT_RECIPIENT_ADRESS");
+		}
+		
+		if(!$amount)
+		{
+			throw new \Exception("NOT_AMOUNT_TO_SEND");
+		}
+		
 		if($this->getBalance() >= $amount)
 		{
 			$feeAmout = 0;
@@ -280,7 +290,9 @@ class Wallet extends Orm
 			$amount -= $feeAmout;
 			
 			return $this->_createTransaction($recipient_adress,$amount,$data,$get_txid,$feeAmout);
-		} 
+		} else {
+			throw new \Exception("NOT_ENOUGH_FUNDS");
+		}
 	}
 
 	public function _createTransaction(string $recipient_adress = null,float $amount = null,string $data = '',bool $get_txid = false,float $feeAmout = 0) 
