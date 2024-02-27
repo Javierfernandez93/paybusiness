@@ -2160,4 +2160,40 @@ class UserLogin extends Orm {
 
     return $this->_hasProductPermission('pay_business',$sponsor_id);
   }
+  
+  public function getMemberships()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
+
+    $ProductPermission = new ProductPermission;
+
+    $pay_academy = ProductPermission::getDaysExpired([
+      'product_id' => Product::PAY_ACADEMY_ID,
+      'user_login_id' => $this->company_id
+    ]);
+
+    $pay_business = ProductPermission::getDaysExpired([
+      'product_id' => Product::PAY_BUSINESS_ID,
+      'user_login_id' => $this->company_id
+    ]);
+
+    if(!$pay_academy && !$pay_business)
+    {
+      return false;
+    }
+
+    return [
+      [
+        'name' => 'Pay Business', 
+        'days_to_expire' => $pay_business, 
+      ],
+      [
+        'name' => 'Pay Academy', 
+        'days_to_expire' => $pay_academy, 
+      ]
+    ];
+  }
 }

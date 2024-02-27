@@ -785,6 +785,10 @@ class User extends Http {
     getZoomLink(data, callback) {
         return this.call('../../app/application/getZoomLink.php', data, callback);
     }
+    /* memberships */
+    getMemberships(data, callback) {
+        return this.call('../../app/application/getMemberships.php', data, callback);
+    }
 }
 
 export { User }
