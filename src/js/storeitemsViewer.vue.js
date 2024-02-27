@@ -13,6 +13,7 @@ const StoreitemsViewer = {
             sponsor_activation : null,
             userAccounts : null,
             catalog_package_type_id : null,
+            currentAmount : 0,
             packages : null,
             status : null,
             STATUS : {
@@ -131,6 +132,7 @@ const StoreitemsViewer = {
 
             this.User.getPackages({catalog_package_type_id:this.catalog_package_type_id}, (response) => {
                 if (response.s == 1) {
+                    this.currentAmount = response.currentAmount
                     this.packages = response.packages
                 }
             })
@@ -225,7 +227,22 @@ const StoreitemsViewer = {
                                 <span v-html="package.full_description"></span>
                             </div>
                             
-                            <div class="h1 text-center text-white">$ {{package.amount.numberFormat(2)}}</div>
+                            <div class="text-center">
+                                <div v-if="cart.activations.includes(package.package_id)" class="h1 text-white">
+                                    $ {{package.amount.numberFormat(2)}}
+                                </div>
+                                <div v-else>
+                                    <div v-if="currentAmount">
+                                        <div class="h5 text-white"><s>$ {{(package.amount).numberFormat(2)}}</s></div>
+                                        <div class="h1 text-white">
+                                            $ {{(package.amount - currentAmount).numberFormat(2)}}
+                                        </div>
+                                    </div>
+                                    <div v-else class="h1 text-white">
+                                        <div>$ {{(package.amount).numberFormat(2)}}</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div v-if="cart.activations.includes(package.package_id)" class="card-footer text-center align-items-center text-white d-grid">
                             <div>

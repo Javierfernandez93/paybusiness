@@ -12,6 +12,15 @@ if($UserLogin->logged === true)
 	
 	if($Package->loadWhere("package_id = ? AND status = ?",[$data['package_id'],JFStudio\Constants::AVIABLE]))
 	{
+		$BuyPerUser = new Unlimited\BuyPerUser;
+
+		$buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, $Package->catalog_package_type_id);
+
+		if($buy)
+		{
+			$Package->amount -= $buy['amount'];
+		}
+		
 		$Cart = Jcart\Cart::getInstance(Jcart\Cart::LAST_INSTANCE);
 		$Cart->loadFromSession();	
 
