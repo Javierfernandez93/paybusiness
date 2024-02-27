@@ -26,13 +26,10 @@ if($users)
             {
                 if($network = Unlimited\UserLogin::getNetworkToPay($binary_points))
                 {   
-                    d($network);
                     $points_gived = 0;
                     
                     foreach($network['pay']['users'] as $user_from)
-                    {
-                        d($user_from);
-                        
+                    {   
                         Unlimited\CommissionPerUser::addBinaryCommission([
                             'catalog_commission_id' => $CatalogMembership->findField("catalog_membership_id = ?",[$user_from['catalog_membership_id']],"catalog_commission_id"),
                             'user_login_id' => $user['user_login_id'],
