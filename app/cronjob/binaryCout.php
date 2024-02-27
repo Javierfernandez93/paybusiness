@@ -16,13 +16,6 @@ if($users)
     $CatalogMembership = new Unlimited\CatalogMembership;
     $UserLogin = new Unlimited\UserLogin(false,false);
 
-
-    $users = [
-        [
-            'user_login_id' => 1
-        ]
-    ];
-
     foreach($users as $user)
     {
         if($UserLogin->_isQualified($user['user_login_id']))
