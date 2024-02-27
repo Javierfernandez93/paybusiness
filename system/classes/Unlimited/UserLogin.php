@@ -2188,11 +2188,11 @@ class UserLogin extends Orm {
     return [
       [
         'name' => 'Pay Business', 
-        'days_to_expire' => $pay_business, 
+        'days_to_expire' => $pay_business > 0 ? $pay_business : 0, 
       ],
       [
         'name' => 'Pay Academy', 
-        'days_to_expire' => $pay_academy, 
+        'days_to_expire' => $pay_academy > 0 ? $pay_academy : 0, 
       ]
     ];
   }
