@@ -16,13 +16,19 @@ if($UserLogin->logged === true)
     {
         $buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_ACADEMY);
 
-        $data['currentAmount'] = $buy['amount'];
-        $filter .= " AND package.order_id >= '{$buy['items'][0]['order_id']}'";
+        if($buy)
+        {
+            $data['currentAmount'] = $buy['amount'];
+            $filter .= " AND package.order_id >= '{$buy['items'][0]['order_id']}'";
+        }
     } else if($data['catalog_package_type_id'] == Unlimited\CatalogPackageType::PAY_BUSINESS) {
         $buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_BUSINESS);
 
-        $data['currentAmount'] = $buy['amount'];
-        $filter .= " AND package.order_id >= '{$buy['items'][0]['order_id']}'";
+        if($buy)
+        {
+            $data['currentAmount'] = $buy['amount'];
+            $filter .= " AND package.order_id >= '{$buy['items'][0]['order_id']}'";
+        }
     }
 
     if($data['catalog_package_type_id'] == Unlimited\CatalogPackageType::PAY_BUSINESS)

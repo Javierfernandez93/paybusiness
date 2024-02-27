@@ -794,6 +794,8 @@ class BuyPerUser extends Orm {
 
       return $_buy;
     }
+
+    return false;
   }
 
   public function getBuysByIn(string $user_login_id_in = null,int $catalog_package_type_id = null)
