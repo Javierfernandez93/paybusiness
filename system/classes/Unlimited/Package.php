@@ -139,6 +139,7 @@ class Package extends Orm {
 						{$this->tblName}.title,
 						{$this->tblName}.catalog_commission_ids,
 						{$this->tblName}.catalog_membership_id,
+						{$this->tblName}.order_id,
 						{$this->tblName}.product_ids,
 						{$this->tblName}.catalog_package_type_id,
 						{$this->tblName}.amount

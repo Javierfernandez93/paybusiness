@@ -22,6 +22,9 @@ if($UserLogin->logged === true)
 		if($buy)
 		{
 			$data['activations'][] = $buy['items'][0]['id'];
+			
+			$data['package']['pay_businesss'] = $buy['items'][0]['id'];
+
 		}
 	}
 

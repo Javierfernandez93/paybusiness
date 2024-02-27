@@ -8,11 +8,6 @@ if($UserLogin->logged === false) {
 	HCStudio\Util::redirectTo(TO_ROOT."/apps/login/");
 }
 
-// var_dump($UserLogin->hasProductPermission(Unlimited\Product::PAY_BUSINESS));
-// var_dump($UserLogin->hasProductPermission(Unlimited\Product::PAY_ACADEMY));
-
-// die;
-
 $UserLogin->checkRedirection();
 
 $Layout = JFStudio\Layout::getInstance();

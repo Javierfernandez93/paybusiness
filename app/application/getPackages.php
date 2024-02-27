@@ -10,6 +10,19 @@ if($UserLogin->logged === true)
 {
     $filter = "AND package.catalog_package_type_id = '{$data['catalog_package_type_id']}'";
 
+    $BuyPerUser = new Unlimited\BuyPerUser;
+
+    if($data['catalog_package_type_id'] == Unlimited\CatalogPackageType::PAY_ACADEMY)
+    {
+        $buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_ACADEMY);
+
+        $filter .= " AND package.order_id > '{$buy['items'][0]['order_id']}'";
+    } else if($data['catalog_package_type_id'] == Unlimited\CatalogPackageType::PAY_BUSINESS) {
+        $buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_BUSINESS);
+
+        $filter .= " AND package.order_id > '{$buy['items'][0]['order_id']}'";
+    }
+
     if($data['catalog_package_type_id'] == Unlimited\CatalogPackageType::PAY_BUSINESS)
     {
         $catalog_membership_id = Unlimited\MembershipPerUser::getNextMembershipPackage($UserLogin->company_id);
