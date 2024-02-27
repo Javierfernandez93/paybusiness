@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.1.4'   
+import { User } from '../../src/js/user.module.js?v=1.1.5'   
 
 const MembershipsViewer = {
     data() {
@@ -73,7 +73,7 @@ const MembershipsViewer = {
                             <input type="search" :autofocus="true" class="form-control" v-model="query" placeholder="buscar por nombre o días restantes"/>
                         </div>
                     </div>
-                </div>
+                </div>   
                 <div class="table-responsive">
                     <table class="table table-borderless table-hover">
                         <thead class="thead-light">
