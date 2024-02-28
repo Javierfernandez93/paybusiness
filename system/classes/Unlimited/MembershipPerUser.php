@@ -243,13 +243,15 @@ class MembershipPerUser extends Orm {
 		
 		if($currentMembership)
 		{
-			$amount = $currentMembership['amount_extra'];
+			$amount = $currentMembership['amount'];
+			$amount_extra = $currentMembership['amount_extra'];
 
 			self::setMembershipAsEnd($currentMembership['membership_per_user_id']);
 		}
 		
 		$MembershipPerUser->user_login_id = $data['user_login_id'];
 		$MembershipPerUser->amount = $amount;
+		$MembershipPerUser->amount_extra = $amount_extra;
 		$MembershipPerUser->point = $data['point'];
 		$MembershipPerUser->catalog_membership_id = $data['catalog_membership_id'];
 		$MembershipPerUser->create_date = time();
