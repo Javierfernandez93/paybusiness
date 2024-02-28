@@ -1,5 +1,5 @@
-import { UserSupport } from './userSupport.module.js?v=1.1.5'
-import { Loader } from './loader.module.js?v=1.1.5'
+import { UserSupport } from './userSupport.module.js?v=1.1.6'
+import { Loader } from './loader.module.js?v=1.1.6'
 
 const AddintentViewer = {
     name : 'addintent-viewer',

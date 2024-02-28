@@ -1,4 +1,4 @@
-import { AdminnoticesViewer } from '../../src/js/adminnoticesViewer.vue.js?v=1.1.5'
+import { AdminnoticesViewer } from '../../src/js/adminnoticesViewer.vue.js?v=1.1.6'
 
 Vue.createApp({
     components : {
