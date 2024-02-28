@@ -44,6 +44,9 @@ const MembershipsViewer = {
                 if (response.s == 1) {
                     this.memberships = response.memberships
                     this.membershipsAux = response.memberships
+                } else {
+                    this.memberships = false
+                    this.membershipsAux = false
                 }
             })
         },
@@ -107,7 +110,7 @@ const MembershipsViewer = {
             Aquí te mostraremos las membresías que tengas activas.
 
             <div class="d-flex justify-content-center py-3">
-                <a href="../../apps/store/package" class="btn btn-primary me-2 mb-0 shadow-none">Adquiere tus productos</a>
+                <a href="../../apps/store/package" class="btn btn-primary me-2 mb-0 shadow-none">Adquiere tus membersías</a>
             </div>
         </div>
     `,
