@@ -102,7 +102,7 @@ class Package extends Orm {
 					{$filter}
 				ORDER BY 
 					{$this->tblName}.order_id
-				DESC 
+				ASC
 				";
 		
 		return $this->connection()->rows($sql);
