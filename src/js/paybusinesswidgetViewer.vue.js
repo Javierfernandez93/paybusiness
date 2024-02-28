@@ -50,6 +50,10 @@ const PaybusinesswidgetViewer = {
                     </span>
                 </div>
 
+                <div class="text-center text-dark fw-bold">
+                    $ {{membership.amount.numberFormat(2)}} / $ {{membership.target.numberFormat(2)}} 
+                </div>
+
                 <div class="progress" style="height:1rem" role="progressbar" aria-label="Success example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
                     <div style="height:1rem" class="progress-bar bg-success" :style="{width: membership.percentaje+'%'}">{{membership.percentaje}}%</div>
                 </div>
