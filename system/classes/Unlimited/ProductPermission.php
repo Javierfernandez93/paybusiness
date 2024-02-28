@@ -23,17 +23,58 @@ class ProductPermission extends Orm {
         }
 
         $ProductPermission = new self;
+
+        if($data['product_id'] == Product::PAY_ACADEMY_ID)
+        {
+            $product_permission_id = $ProductPermission->getLastProductPermissionId($data['product_id'],$data['user_login_id']);
+
+            if($product_permission_id)
+            {
+                $ProductPermission->loadWhere('product_permission_id = ?',$product_permission_id);
+            }
+        }
         
-        if($ProductPermission->hasPermission($data))
+        if($ProductPermission->getId())
+        {
+            $ProductPermission->end_date = strtotime("+{$data['days']} days", $ProductPermission->end_date);
+        }
+
+        if($ProductPermission->hasPermission($data) && $data['product_id'] == Product::PAY_BUSINESS_ID)
         {
             return false;
         }
 
-        $ProductPermission->loadArray($data);
+        if(!$ProductPermission->getId())
+        {
+            $ProductPermission->loadArray($data);
+        }
         
         return $ProductPermission->save();
     }
     
+	public function getLastProductPermissionId(int $product_id = null, int $user_login_id = null)
+    {
+        if(!isset($product_id) || !isset($user_login_id))
+        {
+            return false;
+        }
+
+        return $this->connection()->field("SELECT 
+                {$this->tblName}.{$this->tblName}_id
+            FROM 
+                {$this->tblName}
+            WHERE 
+                {$this->tblName}.user_login_id = '{$user_login_id}'
+            AND 
+                {$this->tblName}.product_id = '{$product_id}'
+            AND
+                {$this->tblName}.status = '".self::ACTIVE."'
+            ORDER BY 
+                {$this->tblName}.create_date
+            DESC
+        ");
+    }
+
 	public function getProductEndDate(array $data = null)
     {
         if(!isset($data))

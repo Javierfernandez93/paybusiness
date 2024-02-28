@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.1.6'   
+import { User } from '../../src/js/user.module.js?v=1.1.7'   
 
 const StoreitemsViewer = {
     name : 'storeitems-viewer',
@@ -244,13 +244,19 @@ const StoreitemsViewer = {
                                 </div>
                             </div>
                         </div>
+                        
                         <div v-if="cart.activations.includes(package.package_id)" class="card-footer text-center align-items-center text-white d-grid">
                             <div>
                                 <i class="bi bi-check-circle-fill me-2 lead"></i>
                                 Ya tienes este paquete
                             </div>
                         </div>
-                        <div v-else class="card-footer d-grid">
+                        <div v-if="package.catalog_package_type_id == CATALOG_PACKAGE_TYPE.PAY_BUSINESS" class="card-footer d-grid">
+                            <div v-if="!cart.activations.includes(package.package_id)" class="card-footer d-grid">
+                                <button @click="addPackage(package)" class="btn btn-white btn-lg mb-0 shadow-none">Elegir Paquete</button>
+                            </div>
+                        </div>
+                        <div v-else-if="package.catalog_package_type_id == CATALOG_PACKAGE_TYPE.PAY_ACADEMY" class="card-footer d-grid">
                             <button @click="addPackage(package)" class="btn btn-white btn-lg mb-0 shadow-none">Elegir Paquete</button>
                         </div>
                     </div>

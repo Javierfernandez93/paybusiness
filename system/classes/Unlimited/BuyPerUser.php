@@ -392,6 +392,7 @@ class BuyPerUser extends Orm {
             ProductPermission::add([
               'user_login_id' => $data['user_login_id'],
               'product_id' => $product['product_id'],
+              'days' => $days,
               'create_date' => time(),
               'end_date' => strtotime("+{$days} days"),
             ]);
