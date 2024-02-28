@@ -100,6 +100,9 @@ class Package extends Orm {
 				WHERE 
 					{$this->tblName}.status = '".Constants::AVIABLE."'
 					{$filter}
+				ORDER BY 
+					{$this->tblName}.order_id
+				DESC 
 				";
 		
 		return $this->connection()->rows($sql);
