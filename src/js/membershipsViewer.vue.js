@@ -110,7 +110,7 @@ const MembershipsViewer = {
             Aquí te mostraremos las membresías que tengas activas.
 
             <div class="d-flex justify-content-center py-3">
-                <a href="../../apps/store/package" class="btn btn-primary me-2 mb-0 shadow-none">Adquiere tus membersías</a>
+                <a href="../../apps/store/package" class="btn btn-primary me-2 mb-0 shadow-none">Adquiere tus membrersías</a>
             </div>
         </div>
     `,
