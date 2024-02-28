@@ -1,6 +1,6 @@
 /* vue */
-import { CopysyntheticsViewer } from '../../src/js/copysyntheticsViewer.vue.js?v=1.1.6'
-import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=1.1.6'
+import { CopysyntheticsViewer } from '../../src/js/copysyntheticsViewer.vue.js?v=1.1.8'
+import { FlyerViewer } from '../../src/js/flyerViewer.vue.js?v=1.1.8'
 
 Vue.createApp({
     components: {

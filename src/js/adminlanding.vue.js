@@ -1,4 +1,4 @@
-import { AdminlandingViewer } from './adminlandingViewer.vue.js?v=1.1.6'
+import { AdminlandingViewer } from './adminlandingViewer.vue.js?v=1.1.8'
 
 Vue.createApp({
     components : { 
