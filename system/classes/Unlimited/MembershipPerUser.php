@@ -238,6 +238,7 @@ class MembershipPerUser extends Orm {
 		// }
 
 		$amount = 0;
+		$amount_extra = 0;
 
 		$currentMembership = $MembershipPerUser->getCurrentMembership($data['user_login_id']);
 		
