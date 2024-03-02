@@ -9,9 +9,6 @@ $password = '@Angela1993';
 $imap = imap_open("{$mailbox}INBOX", $username, $password, OP_HALFOPEN) or die('Cannot connect to email: ' . imap_last_error());
 $result = imap_check($imap);
 
-d($result->Mailbox);
-d($result);
-
 // Retrieve the incoming mail
 $messages = imap_search($imap, 'ALL'); 
 
