@@ -20,6 +20,7 @@ return array(
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
     'DummyTrader\\Sdk\\' => array($vendorDir . '/dummytrader/sdk/src'),
+    'Ddeboer\\Imap\\' => array($vendorDir . '/ddeboer/imap/src'),
     'Curl\\' => array($vendorDir . '/php-curl-class/php-curl-class/src/Curl'),
     'Complex\\' => array($vendorDir . '/markbaker/complex/classes/src'),
     'CapitalPayments\\Sdk\\' => array($vendorDir . '/capitalpayments/sdk/src'),

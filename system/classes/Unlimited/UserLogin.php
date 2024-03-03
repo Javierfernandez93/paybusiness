@@ -2058,13 +2058,37 @@ class UserLogin extends Orm {
     {
       $network['pay']['users'] = array_merge($binary['start']['users'],$binary['end']['users']);
       $network['pay']['percentaje'] = 5;
+
+      return $network;
     }
     
+    // if start points = 0 and end points > 0 take end points and pass start points
+    if($binary['start']['points'] == 0 && $binary['end']['points'] > 0)
+    {
+      $network['pay']['users'] = $binary['end']['users'];
+      $network['pay']['percentaje'] = 10;
+      $network['pass']['users'] = $binary['start']['users'];
+
+      return $network;
+    }
+    
+    // if end points = 0 and end start > 0 take start points and pass end points
+    if($binary['end']['points'] == 0 && $binary['start']['points'] > 0)
+    {
+      $network['pay']['users'] = $binary['start']['users'];
+      $network['pay']['percentaje'] = 10;
+      $network['pass']['users'] = $binary['end']['users'];
+
+      return $network;
+    }
+
     if($binary['start']['points'] > $binary['end']['points'])
     {
       $network['pay']['users'] = $binary['end']['users'];
       $network['pay']['percentaje'] = 10;
       $network['pass']['users'] = $binary['start']['users'];
+
+      return $network;
     }
     
     if($binary['end']['points'] > $binary['start']['points'])
@@ -2072,6 +2096,8 @@ class UserLogin extends Orm {
       $network['pay']['users'] = $binary['start']['users'];
       $network['pay']['percentaje'] = 10;
       $network['pass']['users'] = $binary['end']['users'];
+
+      return $network;
     }
 
     return $network;

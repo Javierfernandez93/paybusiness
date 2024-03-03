@@ -6,7 +6,7 @@ $data = HCStudio\Util::getVarFromPGS();
 
 $MembershipPerUser = new Unlimited\MembershipPerUser;
 // $users = $MembershipPerUser->findAll("status = ? AND take = ?",[1,0]);
-$users = $MembershipPerUser->findAll("status = ?",[1]);
+$users = $MembershipPerUser->findAll("status = ? and user_login_id = ?",[1,336]);
 
 echo "<pre>";
 
@@ -28,31 +28,34 @@ if($users)
                 {   
                     $points_gived = 0;
                     
-                    foreach($network['pay']['users'] as $user_from)
-                    {   
-                        Unlimited\CommissionPerUser::addBinaryCommission([
-                            'catalog_commission_id' => $CatalogMembership->findField("catalog_membership_id = ?",[$user_from['catalog_membership_id']],"catalog_commission_id"),
-                            'user_login_id' => $user['user_login_id'],
-                            'user_login_id_from' => $user_from['user_login_id'],
-                            'membership_per_user_id' => $user_from['membership_per_user_id'],
-                            'amount' => $user_from['point'],
-                            'percentaje' => $network['pay']['percentaje'],
-                            'validate_membership' => true,
-                            'addPointsToMembership' => true,
-                            'addPointsToRange' => false
-                        ]);
-                        
-                        $points_gived += $user_from['point'];
+                    if(isset($network['pay']))
+                    {
+                        foreach($network['pay']['users'] as $user_from)
+                        {   
+                            Unlimited\CommissionPerUser::addBinaryCommission([
+                                'catalog_commission_id' => $CatalogMembership->findField("catalog_membership_id = ?",[$user_from['catalog_membership_id']],"catalog_commission_id"),
+                                'user_login_id' => $user['user_login_id'],
+                                'user_login_id_from' => $user_from['user_login_id'],
+                                'membership_per_user_id' => $user_from['membership_per_user_id'],
+                                'amount' => $user_from['point'],
+                                'percentaje' => $network['pay']['percentaje'],
+                                // 'validate_membership' => true, # fix 2024-03-03
+                                'addPointsToMembership' => true,
+                                'addPointsToRange' => false
+                            ]);
+                            
+                            $points_gived += $user_from['point'];
 
-                        Unlimited\MembershipPerUser::setAsTake([
-                            'user_login_id' => $user['user_login_id'],
-                            'membership_per_user_id' => $user_from['membership_per_user_id']
-                        ]);
+                            Unlimited\MembershipPerUser::setAsTake([
+                                'user_login_id' => $user['user_login_id'],
+                                'membership_per_user_id' => $user_from['membership_per_user_id']
+                            ]);
 
-                        Unlimited\MembershipPerUser::setOldMembershipAsTaked([
-                            'sponsor_id' => $user['user_login_id'],
-                            'user_login_id' => $user_from['user_login_id']
-                        ]);
+                            Unlimited\MembershipPerUser::setOldMembershipAsTaked([
+                                'sponsor_id' => $user['user_login_id'],
+                                'user_login_id' => $user_from['user_login_id']
+                            ]);
+                        }
                     }
 
                     if(isset($network['pass']))

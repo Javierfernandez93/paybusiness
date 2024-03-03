@@ -3,7 +3,7 @@
         'name' => '__root__',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'b1140b7b83df0d8228d996cf094f5acfd69b5f11',
+        'reference' => '6edd1ae477e3f969f94b1d01e3425baaff262f59',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         '__root__' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'b1140b7b83df0d8228d996cf094f5acfd69b5f11',
+            'reference' => '6edd1ae477e3f969f94b1d01e3425baaff262f59',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -28,6 +28,15 @@
             'aliases' => array(
                 0 => '9999999-dev',
             ),
+            'dev_requirement' => false,
+        ),
+        'ddeboer/imap' => array(
+            'pretty_version' => '1.19.0',
+            'version' => '1.19.0.0',
+            'reference' => '30800b1cfeacc4add5bb418e40a8b6e95a8a04ac',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../ddeboer/imap',
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'dummytrader/sdk' => array(

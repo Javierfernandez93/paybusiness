@@ -29,8 +29,8 @@ if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ==
                     'status' => $commission['status'],
                     'user_login_id' => $commission['user_login_id'],
                     'amount' => $commission['amount'],
-                    'message' => $message
-                ]))
+                    'message' => $message,
+                ],$BuyPerUser))
                 {
                     $dispertions[] = $commission;
 
@@ -55,10 +55,17 @@ function sendPush(string $user_login_id = null,string $message = null,int $catal
     return Unlimited\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
 }
 
-function send(array $data = null)
+function send(array $data = null,$BuyPerUser = null)
 {
     $wallet_kind_id = $data['status'] == Unlimited\CommissionPerUser::FROZEN ? BlockChain\WalletKind::USDT_NOWITHDRAWABLE : BlockChain\WalletKind::USDT_TRC20;
-    
+
+    $last_buy_pay_business = $BuyPerUser->getLastBuyByType($data['user_login_id'],Unlimited\CatalogPackageType::PAY_BUSINESS);
+
+    if($last_buy_pay_business)
+    {
+        $wallet_kind_id = $last_buy_pay_business['catalog_payment_method_id'] == Unlimited\CatalogPaymentMethod::EWALLET_PROTECTED ? BlockChain\WalletKind::USDT_NOWITHDRAWABLE : BlockChain\WalletKind::USDT_TRC20;
+    }
+
     if($ReceiverWallet = BlockChain\Wallet::getWallet($data['user_login_id'],$wallet_kind_id))
     {
         if($data['amount'])

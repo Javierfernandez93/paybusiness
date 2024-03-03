@@ -48,6 +48,7 @@ class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
         'D' => 
         array (
             'DummyTrader\\Sdk\\' => 16,
+            'Ddeboer\\Imap\\' => 13,
         ),
         'C' => 
         array (
@@ -114,6 +115,10 @@ class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
         'DummyTrader\\Sdk\\' => 
         array (
             0 => __DIR__ . '/..' . '/dummytrader/sdk/src',
+        ),
+        'Ddeboer\\Imap\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ddeboer/imap/src',
         ),
         'Curl\\' => 
         array (
