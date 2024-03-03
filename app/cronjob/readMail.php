@@ -10,6 +10,10 @@ $port = 993;
 $username = 'javier@zuppi.io';
 $password = '@Angela1993';
 
+$hostname = 'imap.secureserver.net';
+$username = 'irene.quintero@emparejandotusfinanzas.com';
+$password = 'Irene.quintero500';
+
 $server = new Ddeboer\Imap\Server($hostname);
 $connection = $server->authenticate($username, $password);
 
