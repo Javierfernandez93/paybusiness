@@ -6,7 +6,8 @@ $data = HCStudio\Util::getVarFromPGS();
 
 $MembershipPerUser = new Unlimited\MembershipPerUser;
 // $users = $MembershipPerUser->findAll("status = ? AND take = ?",[1,0]);
-$users = $MembershipPerUser->findAll("status = ? and user_login_id = ?",[1,336]);
+// $users = $MembershipPerUser->findAll("status = ? and user_login_id = ?",[1,336]);
+$users = $MembershipPerUser->findAll("status = ?",[1]);
 
 echo "<pre>";
 
