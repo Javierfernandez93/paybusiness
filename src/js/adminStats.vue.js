@@ -1,5 +1,5 @@
 /* vue */
-import { StatsViewer } from '../../src/js/adminStatsViewer.vue.js?v=1.1.8'
+import { StatsViewer } from '../../src/js/adminStatsViewer.vue.js?v=1.1.9'
 
 Vue.createApp({
     components: {

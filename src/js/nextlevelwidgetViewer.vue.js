@@ -1,7 +1,6 @@
-import { User } from '../../src/js/user.module.js?v=1.1.8'   
+import { User } from '../../src/js/user.module.js?v=1.1.9'   
 
 const NextlevelwidgetViewer = {
-    name : 'nextlevelwidget-viewer',
     data() {
         return {
             User: new User,
@@ -13,6 +12,7 @@ const NextlevelwidgetViewer = {
     methods: {
         getPercentage() {
             this.percentage = Math.round((this.amount * 100) / this.ranges.next.volumen)
+            this.percentage = this.percentage > 100 ? 100 : this.percentage
         },
         getCurrentRange() {
             this.User.getCurrentRange({},(response)=>{

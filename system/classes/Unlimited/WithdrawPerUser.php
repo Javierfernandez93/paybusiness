@@ -60,7 +60,7 @@ class WithdrawPerUser extends Orm
             $WithdrawPerUser->user_login_id = $user_login_id;
             $WithdrawPerUser->transaction_per_wallet_id = $transaction_per_wallet_id;
             $WithdrawPerUser->withdraw_method_per_user_id = $withdraw_method_per_user_id;
-            $WithdrawPerUser->amount = Util::getPercentaje($amount,Transaction::WITHDRAW_FEE,true);
+            $WithdrawPerUser->amount = $amount;
             $WithdrawPerUser->status = self::WAITING_FOR_DEPOSIT;
             $WithdrawPerUser->create_date = time();
 

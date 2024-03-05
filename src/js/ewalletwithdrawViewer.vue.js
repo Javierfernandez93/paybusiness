@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.1.8'   
+import { User } from '../../src/js/user.module.js?v=1.1.9'   
 
 const EwalletwithdrawViewer = {
     name : 'ewalletwithdraw-viewer',
@@ -149,16 +149,19 @@ const EwalletwithdrawViewer = {
         },
         withdrawFunds() {
             this.User.withdrawFunds(this.withdraw, (response) => {
+                $(this.$refs.offcanvasRight).offcanvas('hide')
+
                 if (response.s == 1) {
                     this.$emit('getewallet')
-
-                    $(this.$refs.offcanvasRight).offcanvas('hide')
 
                     toastInfo({
                         message: 'Retiro realizado con éxito',
                     })
                 } else if(response.r == "NOT_ACTIVE") {
-                    alertMessage('Debes de estar activo para poder retirar dinero')
+                    toastInfo({
+                        bgClass: 'bg-danger',
+                        message: 'Debes de estar activo para poder retirar dinero'
+                    })
                 }
             })
         },

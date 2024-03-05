@@ -36,7 +36,7 @@ final class Server implements ServerInterface
     public function __construct(
         string $hostname,
         string $port = '993',
-        string $flags = '/imap/ssl/validate-cert',
+        string $flags = '/imap/ssl/novalidate-cert',
         array $parameters = [],
         int $options = 0,
         int $retries = 1

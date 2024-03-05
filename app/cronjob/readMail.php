@@ -3,14 +3,7 @@
 require_once TO_ROOT. "/system/core.php";
 require_once TO_ROOT. "/vendor/autoload.php";
 
-$mailbox = '{imap.dreamhost.com:993/imap/ssl/novalidate-cert}';
-
-$hostname = 'imap.dreamhost.com';
-$port = 993;
-$username = 'javier@zuppi.io';
-$password = '@Angela1993';
-
-$hostname = 'imap.secureserver.net';
+$hostname = 'cp7112.webempresa.eu';
 $username = 'irene.quintero@emparejandotusfinanzas.com';
 $password = 'Irene.quintero500';
 
@@ -18,7 +11,15 @@ $server = new Ddeboer\Imap\Server($hostname);
 $connection = $server->authenticate($username, $password);
 
 $mailbox = $connection->getMailbox('INBOX');
-$messages = $mailbox->getMessages();
+
+$today = new DateTimeImmutable();
+$thirtyDaysAgo = $today->sub(new DateInterval('P1D'));
+
+$messages = $mailbox->getMessages(
+    new Ddeboer\Imap\Search\Date\Since($thirtyDaysAgo),
+    \SORTDATE, // Sort criteria
+    true // Descending order
+);
 
 foreach ($messages as $message) {
     var_dump($message->getSubject());

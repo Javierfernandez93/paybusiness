@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.1.8'   
+import { User } from '../../src/js/user.module.js?v=1.1.9'   
 
 const WithdrawmethodsViewer = {
     name : 'withdrawmethods-viewer',
@@ -27,6 +27,12 @@ const WithdrawmethodsViewer = {
             this.User.editWithdrawMethod(withdrawMethod, (response) => {
                 if (response.s == 1) {
                     this.toggleEditing(withdrawMethod)
+
+                    toastInfo({
+                        message: 'Método de retiro actualizado con éxito'
+                    })
+
+                    window.history.back()
                 }
             })
         },

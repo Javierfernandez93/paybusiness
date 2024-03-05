@@ -31,6 +31,8 @@ if($UserLogin->logged === true)
 
                         if($transaction_per_wallet_id = $Wallet->createTransaction($ReceiverWallet->public_key,$data['amount'],BlockChain\Transaction::prepareData(['@optMessage'=>$message]),true,$fee))
                         {
+                            $data['amount'] = $data['amount'] - HCStudio\Util::getPercentaje($data['amount'],$fee);
+                            
                             if(Unlimited\WithdrawPerUser::saveWithdraw($UserLogin->company_id,$data['withdraw_method_per_user_id'],$data['amount'],$transaction_per_wallet_id))
                             {
                                 $data["s"] = 1;

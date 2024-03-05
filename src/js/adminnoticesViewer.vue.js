@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=1.1.8'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=1.1.9'
 
 const AdminnoticesViewer = {
     name: 'adminnotices-viewer',

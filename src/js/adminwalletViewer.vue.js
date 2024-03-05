@@ -1,4 +1,4 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=1.1.8'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=1.1.9'
 
 const AdminwalletViewer = {
     name : 'adminwallet-viewer',
@@ -10,7 +10,7 @@ const AdminwalletViewer = {
             lastTransactions: null,
             transaction: {
                 address: '',
-                amount: null
+                amount: 0
             },
             TRANSACTION_TYPES: {
                 OUTPUT : 'output',
