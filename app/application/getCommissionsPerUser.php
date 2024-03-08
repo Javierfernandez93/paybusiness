@@ -13,8 +13,6 @@ if($UserLogin->logged === true)
     if($commissions = (new Unlimited\CommissionPerUser)->getAll($UserLogin->company_id))
     {
         $data['commissions'] = BlockChain\TransactionPerWallet::attachWalletKind($commissions);
-
-        $data['commissions'] = $commissions;
         $data["s"] = 1;
         $data["r"] = "DATA_OK";
     } else {
