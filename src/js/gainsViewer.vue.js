@@ -80,10 +80,12 @@ const GainsViewer = {
         filterData() {
             this.commissions = this.commissionsAux
             this.commissions = this.commissions.filter((commission)=>{
+                let wallet_kind = commission.wallet_kind ? commission.wallet_kind.toLowerCase() : ''
                 return commission.title.toLowerCase().includes(this.query.toLowerCase())
                 || commission.commission_name.toLowerCase().includes(this.query.toLowerCase())
                 || commission.amount.toString().includes(this.query.toString())
                 || commission.names.toLowerCase().includes(this.query.toLowerCase())
+                || wallet_kind.toLowerCase().includes(this.query.toLowerCase())
                 || commission.create_date.includes(this.query)
             })
             
