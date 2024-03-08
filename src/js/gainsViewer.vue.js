@@ -76,7 +76,6 @@ const GainsViewer = {
         filterData() {
             this.commissions = this.commissionsAux
             this.commissions = this.commissions.filter((commission)=>{
-                console.log(123)
                 return commission.title.toLowerCase().includes(this.query.toLowerCase())
                 || commission.commission_name.toLowerCase().includes(this.query.toLowerCase())
                 || commission.amount.toString().includes(this.query.toString())
@@ -84,6 +83,7 @@ const GainsViewer = {
                 || commission.create_date.includes(this.query)
             })
             
+            this.calculateTotals()
         },
         sortData(column) {
             this.commissions.sort((a, b) => {
@@ -96,6 +96,9 @@ const GainsViewer = {
             column.desc = !column.desc
         },
         calculateTotals() {
+            this.totals = {
+                amount: 0
+            }
             if(this.commissions.length > 0)
             {
                 this.commissions.map((commission) => {
