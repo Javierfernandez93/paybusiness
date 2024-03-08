@@ -41,7 +41,7 @@ class TransactionPerWallet extends Orm
             return false;
         }
 
-        return $this->connection()->rows("SELECT
+        return $this->connection()->row("SELECT
                 {$this->tblName}.{$this->tblName}_id,
                 wallet.public_key,
                 wallet_kind.title
