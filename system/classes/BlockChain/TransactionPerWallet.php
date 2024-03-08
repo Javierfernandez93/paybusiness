@@ -25,6 +25,7 @@ class TransactionPerWallet extends Orm
         $TransactionPerWallet = new self;
         
         return array_map(function($item) use($TransactionPerWallet){
+            $item['wallet_kind'] = '-';
             if(isset($item['transaction_per_wallet_id']))
             {
                 $item['wallet_kind'] = $TransactionPerWallet->getWallet($item['transaction_per_wallet_id']);

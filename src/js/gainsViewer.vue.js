@@ -265,7 +265,7 @@ const GainsViewer = {
                                                 Pendiente  
                                             </span>
                                         </td>
-                                        <td>
+                                        <td class="fw-bold text-decoration-underline text-primary cursor-pointer" @click="query = commission.wallet_kind">
                                             <span v-if="commission.wallet_kind">
                                                 {{commission.wallet_kind}}
                                             </span>
