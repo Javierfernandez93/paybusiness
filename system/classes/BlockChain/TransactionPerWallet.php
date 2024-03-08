@@ -50,7 +50,7 @@ class TransactionPerWallet extends Orm
             LEFT JOIN
                 wallet
             ON 
-                {$this->tblName}.wallet_id = wallet.wallet_id
+                {$this->tblName}.to_wallet_id = wallet.wallet_id
             LEFT JOIN
                 wallet_kind
             ON  
