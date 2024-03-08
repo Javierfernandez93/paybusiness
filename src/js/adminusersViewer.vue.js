@@ -371,7 +371,7 @@ const AdminusersViewer = {
                                     </span>
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    <p class="text-xs text-secondary mb-0">{{user.signup_date.formatDate()}}</p>
+                                    <p class="mb-0">{{user.signup_date.formatDate()}}</p>
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     <div class="dropdown">
