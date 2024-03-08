@@ -53,10 +53,8 @@ class TransactionPerWallet extends Orm
                 {$this->tblName}.wallet_id = wallet.wallet_id
             LEFT JOIN
                 wallet_kind
-            ON 
+            ON  
                 wallet_kind.wallet_kind_id = wallet.wallet_kind_id
-            ON
-                transaction.transaction_id = {$this->tblName}.transaction_id
             WHERE
                 {$this->tblName}.transaction_per_wallet_id = '{$transaction_per_wallet_id}'
         ");
