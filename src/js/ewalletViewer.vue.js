@@ -128,7 +128,7 @@ const EwalletViewer = {
                 this.getLastTransactionsWallet(wallet_id)
                 this.getLastAddress(wallet_id)
                 this.getLastWithdraws(wallet_id)
-                this.getCommissionPerUserByType(wallet_id)
+                // this.getCommissionPerUserByType(wallet_id)
             }
         },
     },
@@ -235,34 +235,7 @@ const EwalletViewer = {
                 </div>
             </div>
 
-            <div v-if="commissions" class="col-12">
-                <table class="table">
-                    <thead>
-                        <tr class="text-center">
-                            <th>Fecha</th>
-                            <th>ID comisión</th>
-                            <th>Concepto</th>
-                            <th>Monto</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr v-for="commission in commissions" class="align-middle text-center">
-                            <td>{{commission.create_date.formatFullDate()}}</td>
-                            <td>{{commission.commission_per_user_id}}</td>
-                            <td>{{commission.title}}</td>
-                            <td class="text-dark fw-semibold">$ {{commission.amount.numberFormat(2)}}</td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr class="align-middle text-center">
-                            <td></td>
-                            <td></td>
-                            <td>Total</td>
-                            <td class="text-dark fw-semibold">$ {{total.amount.numberFormat(2)}}</td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+        
             <div class="col-xl-4 mt-3">
                 <div class="card overflow-hidden">
                     <div class="card-body">
