@@ -7,6 +7,9 @@ $hostname = 'cp7112.webempresa.eu';
 $username = 'irene.quintero@emparejandotusfinanzas.com';
 $password = 'Irene.quintero500';
 
+$username = 'administracion@emparejandotusfinanzas.com';
+$password = 'eTF*2023';
+
 $server = new Ddeboer\Imap\Server($hostname);
 $connection = $server->authenticate($username, $password);
 

@@ -4,6 +4,7 @@ namespace Unlimited;
 
 use HCStudio\Orm;
 use HCStudio\Util;
+use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Averages\Mean;
 use Unlimited\CatalogMembership;
 use Unlimited\CommissionPerUser;
 
@@ -11,8 +12,29 @@ class MembershipPerUser extends Orm {
 	protected $tblName = 'membership_per_user';
 
 	const END = 2;
+	const FILLED = 0;
+	const DAYS_TO_EXPIRE_BINARY = 5;
 	public function __construct() {
 		parent::__construct();
+	}
+
+
+	public static function getDaysToExpireBinary(int $fill_date = null)
+	{
+		if(!isset($fill_date))
+		{
+			return false;
+		}
+
+		$fill_date = date('Y-m-d H:i:s',$fill_date);
+		$fill_date = new \DateTime($fill_date);
+		$now = new \DateTime(date('Y-m-d H:i:s'));
+
+		$interval = $now->diff($fill_date);
+
+		$days_to_expire = self::DAYS_TO_EXPIRE_BINARY - $interval->days;
+
+		return $days_to_expire > 0 ? $days_to_expire : 0;
 	}
 
 	public static function getNextMembershipPackage(int $user_login_id = null) 
@@ -94,6 +116,13 @@ class MembershipPerUser extends Orm {
 		{
 			$MembershipPerUser->amount = $catalogMembership['target'];
 			$MembershipPerUser->amount_extra = $amountAux - $catalogMembership['target'];
+
+			// todo set filled if not exist
+			if($MembershipPerUser->fill_date)
+			{
+				$MembershipPerUser->fill_date = time();
+				$MembershipPerUser->status = self::FILLED;
+			}
 		} else {
 			$MembershipPerUser->amount = $MembershipPerUser->amount + $data['amount'];
 		}
@@ -329,6 +358,38 @@ class MembershipPerUser extends Orm {
 				{$this->tblName}.user_login_id = '{$user_login_id}'
 			AND 
 				{$this->tblName}.status IN('1','2')
+		");
+	}
+
+	public function getMembershipsPaybusiness(int $user_login_id = null) 
+	{
+		if(!isset($user_login_id))
+		{
+			return false;
+		}
+
+		return $this->connection()->rows("
+			SELECT 
+				{$this->tblName}.point,
+				{$this->tblName}.amount,
+				{$this->tblName}.amount_extra,
+				{$this->tblName}.take,
+				{$this->tblName}.fill_date,
+				{$this->tblName}.create_date,
+				{$this->tblName}.status,
+				{$this->tblName}.take_old,
+				catalog_membership.title,
+				catalog_membership.target
+			FROM
+				{$this->tblName}
+			LEFT JOIN 
+				catalog_membership
+			ON 
+				{$this->tblName}.catalog_membership_id = catalog_membership.catalog_membership_id 
+			WHERE 
+				{$this->tblName}.user_login_id = '{$user_login_id}'
+			AND 
+				{$this->tblName}.status != -1
 		");
 	}
 

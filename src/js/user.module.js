@@ -770,6 +770,9 @@ class User extends Http {
     getNetwork(data, callback) {
         return this.call('../../app/application/getNetwork.php', data, callback);
     }
+    getMembershipsPaybusiness(data, callback) {
+        return this.call('../../app/application/getMembershipsPaybusiness.php', data, callback);
+    }
     sendKyCValidation(data, callback) {
         return this.call('../../app/application/sendKyCValidation.php', data, callback);
     }

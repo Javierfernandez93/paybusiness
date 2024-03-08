@@ -2063,24 +2063,24 @@ class UserLogin extends Orm {
     }
     
     // if start points = 0 and end points > 0 take end points and pass start points
-    if($binary['start']['points'] == 0 && $binary['end']['points'] > 0)
-    {
-      $network['pay']['users'] = $binary['end']['users'];
-      $network['pay']['percentaje'] = 10;
-      $network['pass']['users'] = $binary['start']['users'];
+    // if($binary['start']['points'] == 0 && $binary['end']['points'] > 0)
+    // {
+    //   $network['pay']['users'] = $binary['end']['users'];
+    //   $network['pay']['percentaje'] = 10;
+    //   $network['pass']['users'] = $binary['start']['users'];
 
-      return $network;
-    }
+    //   return $network;
+    // }
     
-    // if end points = 0 and end start > 0 take start points and pass end points
-    if($binary['end']['points'] == 0 && $binary['start']['points'] > 0)
-    {
-      $network['pay']['users'] = $binary['start']['users'];
-      $network['pay']['percentaje'] = 10;
-      $network['pass']['users'] = $binary['end']['users'];
+    // // if end points = 0 and end start > 0 take start points and pass end points
+    // if($binary['end']['points'] == 0 && $binary['start']['points'] > 0)
+    // {
+    //   $network['pay']['users'] = $binary['start']['users'];
+    //   $network['pay']['percentaje'] = 10;
+    //   $network['pass']['users'] = $binary['end']['users'];
 
-      return $network;
-    }
+    //   return $network;
+    // }
 
     if($binary['start']['points'] > $binary['end']['points'])
     {
@@ -2187,14 +2187,36 @@ class UserLogin extends Orm {
     return $this->_hasProductPermission('pay_business',$sponsor_id);
   }
   
-  public function getMemberships()
+  public function getMembershipsPaybusiness()
   {
     if(!$this->getId())
     {
       return false;
     }
 
-    $ProductPermission = new ProductPermission;
+    $memberships = (new MembershipPerUser)->getMembershipsPaybusiness($this->company_id); 
+
+    if(!$memberships)
+    {
+      return false;
+    }
+
+    return array_map(function($membership){
+      if($membership['status'] == MembershipPerUser::FILLED)
+      {
+        $membership['days_to_delete_binary'] = MembershipPerUser::getDaysToExpireBinary($membership['fill_date']);
+      }
+
+      return $membership;
+    },$memberships);
+  }
+
+  public function getMemberships()
+  {
+    if(!$this->getId())
+    {
+      return false;
+    }
 
     $pay_academy = ProductPermission::getDaysExpired([
       'product_id' => Product::PAY_ACADEMY_ID,
