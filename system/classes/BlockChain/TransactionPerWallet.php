@@ -27,7 +27,7 @@ class TransactionPerWallet extends Orm
         return array_map(function($item) use($TransactionPerWallet){
             if(isset($item['transaction_per_wallet_id']))
             {
-                $item['kind'] = $TransactionPerWallet->getWallet($item['transaction_per_wallet_id']);
+                $item['wallet_kind'] = $TransactionPerWallet->getWallet($item['transaction_per_wallet_id']);
             }
 
             return $item;
@@ -41,9 +41,7 @@ class TransactionPerWallet extends Orm
             return false;
         }
 
-        return $this->connection()->row("SELECT
-                {$this->tblName}.{$this->tblName}_id,
-                wallet.public_key,
+        return $this->connection()->field("SELECT
                 wallet_kind.title
             FROM 
                 {$this->tblName}
