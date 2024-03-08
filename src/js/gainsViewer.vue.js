@@ -254,6 +254,8 @@ const GainsViewer = {
                                             </span>
                                             <span v-else-if="commission.status == STATUS.DEPOSITED" class="badge bg-success">
                                                 Enviada a cartera electrónica 
+
+                                                <div v-if="commission.kind" class="">{{commission.kind.title}}</div>
                                             </span>
                                             <span v-else-if="commission.status == STATUS.FROZEN" class="badge bg-secondary">
                                                 Pendiente  
