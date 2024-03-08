@@ -28,9 +28,9 @@ class Connection
 {
 	# Variables privadas
 	private static $connections = array(
-		'default' => ['localhost', 'root', 'root', 'app_unlimited'],
+		'default' => ['localhost', 'root', 'root', 'app_unlimited_good'],
 		'world' => ['localhost', 'root', 'root', 'apps_world'],
-		'blockchain' => ['localhost', 'root', 'root', 'app_blockchain_unlimited']
+		'blockchain' => ['localhost', 'root', 'root', 'app_blockchain_unlimited_good']
 	);
 
 	private static $instances;

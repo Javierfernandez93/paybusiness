@@ -4,7 +4,6 @@ namespace Unlimited;
 
 use HCStudio\Orm;
 use HCStudio\Util;
-use PhpOffice\PhpSpreadsheet\Calculation\Statistical\Averages\Mean;
 use Unlimited\CatalogMembership;
 use Unlimited\CommissionPerUser;
 
