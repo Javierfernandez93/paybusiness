@@ -34,9 +34,9 @@ class TransactionPerWallet extends Orm
         }, $data);
     }
 
-	public function getWallet(int $transaction_per_wallet = null) 
+	public function getWallet(int $transaction_per_wallet_id = null) 
     {
-        if(!$transaction_per_wallet)
+        if(!$transaction_per_wallet_id)
         {
             return false;
         }
@@ -58,7 +58,7 @@ class TransactionPerWallet extends Orm
             ON
                 transaction.transaction_id = {$this->tblName}.transaction_id
             WHERE
-                {$this->tblName}.transaction_per_wallet = '{$transaction_per_wallet}'
+                {$this->tblName}.transaction_per_wallet_id = '{$transaction_per_wallet_id}'
         ");
     }
 
