@@ -237,7 +237,7 @@ const AdminusersViewer = {
             </div>
             <div v-if="users" class="card-body px-0 pt-0 pb-2">
                 <div class="table-responsive-sm p-0">
-                    <table class="table align-items-center mb-0">
+                    <table class="table align-items-center table-hover mb-0">
                         <thead>
                             <tr class="align-items-center">
                                 <th @click="sortData(columns.company_id)" class="text-center c-pointer text-uppercase text-secondary font-weight-bolder opacity-7">
