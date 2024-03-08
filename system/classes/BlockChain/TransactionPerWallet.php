@@ -15,6 +15,50 @@ class TransactionPerWallet extends Orm
 		parent::__construct('blockchain');
 	}
 	
+	public static function attachWalletKind(array $data = null) 
+    {
+        if(!$data)
+        {
+            return false;
+        }
+
+        $TransactionPerWallet = new self;
+        
+        return array_map(function($item) use($TransactionPerWallet){
+            $item['kind'] = $TransactionPerWallet->getWallet($item['transaction_per_wallet']);
+
+            return $item;
+        }, $data);
+    }
+
+	public function getWallet(int $transaction_per_wallet = null) 
+    {
+        if(!$transaction_per_wallet)
+        {
+            return false;
+        }
+
+        return $this->connection()->rows("SELECT
+                {$this->tblName}.{$this->tblName}_id,
+                wallet.public_key,
+                wallet_kind.title
+            FROM 
+                {$this->tblName}
+            LEFT JOIN
+                wallet
+            ON 
+                {$this->tblName}.wallet_id = wallet.wallet_id
+            LEFT JOIN
+                wallet_kind
+            ON 
+                wallet_kind.wallet_kind_id = wallet.wallet_kind_id
+            ON
+                transaction.transaction_id = {$this->tblName}.transaction_id
+            WHERE
+                {$this->tblName}.transaction_per_wallet = '{$transaction_per_wallet}'
+        ");
+    }
+
 	public static function create(int $create_date = null,int $wallet_id = null,int $to_wallet_id = null,int $block_id = null,int $transaction_id = null) 
     {
         $TransactionPerWallet = new TransactionPerWallet;
