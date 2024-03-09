@@ -66,6 +66,8 @@ function send(array $data = null,$BuyPerUser = null)
         $wallet_kind_id = $last_buy_pay_business['catalog_payment_method_id'] == Unlimited\CatalogPaymentMethod::EWALLET_PROTECTED ? BlockChain\WalletKind::USDT_NOWITHDRAWABLE : BlockChain\WalletKind::USDT_TRC20;
     }
 
+    d($last_buy_pay_business);
+    d("DIE");   
     if($ReceiverWallet = BlockChain\Wallet::getWallet($data['user_login_id'],$wallet_kind_id))
     {
         if($data['amount'])
