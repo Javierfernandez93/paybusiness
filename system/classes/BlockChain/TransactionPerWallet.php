@@ -26,6 +26,7 @@ class TransactionPerWallet extends Orm
         
         return array_map(function($item) use($TransactionPerWallet){
             $item['wallet_kind'] = '-';
+
             if(isset($item['transaction_per_wallet_id']))
             {
                 $item['wallet_kind'] = $TransactionPerWallet->getWallet($item['transaction_per_wallet_id']);
@@ -44,6 +45,30 @@ class TransactionPerWallet extends Orm
 
         return $this->connection()->field("SELECT
                 wallet_kind.title
+            FROM 
+                {$this->tblName}
+            LEFT JOIN
+                wallet
+            ON 
+                {$this->tblName}.to_wallet_id = wallet.wallet_id
+            LEFT JOIN
+                wallet_kind
+            ON  
+                wallet_kind.wallet_kind_id = wallet.wallet_kind_id
+            WHERE
+                {$this->tblName}.transaction_per_wallet_id = '{$transaction_per_wallet_id}'
+        ");
+    }
+	
+    public function getWalletKindId(int $transaction_per_wallet_id = null) 
+    {
+        if(!$transaction_per_wallet_id)
+        {
+            return false;
+        }
+
+        return $this->connection()->field("SELECT
+                wallet_kind.wallet_kind_id
             FROM 
                 {$this->tblName}
             LEFT JOIN
