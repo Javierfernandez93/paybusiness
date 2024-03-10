@@ -221,7 +221,7 @@ class MembershipPerUser extends Orm {
 
 		$MembershipPerUser = new self;
 		
-		if(!$MembershipPerUser->loadWhere("membership_per_user_id = ? AND status = ?",[$membership_per_user_id,1]))
+		if(!$MembershipPerUser->loadWhere("membership_per_user_id = ? AND status != ?",[$membership_per_user_id,1]))
 		{
 			return false;
 		}
@@ -267,12 +267,12 @@ class MembershipPerUser extends Orm {
 		$amount = 0;
 		$amount_extra = 0;
 
-		$currentMembership = $MembershipPerUser->getCurrentMembership($data['user_login_id']);
+		$currentMembership = $MembershipPerUser->getCurrentMembershipOrFilled($data['user_login_id']);
 		
 		if($currentMembership)
 		{
-			$amount = $currentMembership['amount'];
-			$amount_extra = $currentMembership['amount_extra'];
+			// $amount = $currentMembership['amount'];
+			$amount = $currentMembership['amount_extra'];
 
 			self::setMembershipAsEnd($currentMembership['membership_per_user_id']);
 		}
@@ -316,6 +316,36 @@ class MembershipPerUser extends Orm {
 				{$this->tblName}.user_login_id = '{$user_login_id}'
 			AND 
 				{$this->tblName}.status = '1'
+		");
+	}
+	
+	public function getCurrentMembershipOrFilled(int $user_login_id = null) 
+	{
+		if(!isset($user_login_id))
+		{
+			return false;
+		}
+
+		return $this->connection()->row("
+			SELECT 
+				{$this->tblName}.{$this->tblName}_id,
+				{$this->tblName}.amount,
+				{$this->tblName}.point,
+				{$this->tblName}.user_login_id,
+				{$this->tblName}.amount_extra,
+				catalog_membership.catalog_membership_id,
+				catalog_membership.target,
+				catalog_membership.title
+			FROM
+				{$this->tblName}
+			LEFT JOIN 
+				catalog_membership
+			ON 
+				catalog_membership.catalog_membership_id = {$this->tblName}.catalog_membership_id
+			WHERE 
+				{$this->tblName}.user_login_id = '{$user_login_id}'
+			AND 
+				{$this->tblName}.status IN('1','0')
 		");
 	}
 	

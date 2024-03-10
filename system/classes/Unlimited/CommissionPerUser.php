@@ -156,8 +156,6 @@ class CommissionPerUser extends Orm
 				}
 			}
 
-			d("PREVENTION2");
-
 			self::add([
 				'user_login_id_from' => $user_login_id_from,
 				'user_login_id' => $user_login_id,
