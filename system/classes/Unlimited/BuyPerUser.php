@@ -464,7 +464,7 @@ class BuyPerUser extends Orm {
             }
           }
         }
-
+        
         if($data['items'][0]['catalog_membership_id'])
         { 
           self::addMembership([

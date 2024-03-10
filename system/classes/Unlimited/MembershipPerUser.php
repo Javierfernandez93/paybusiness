@@ -116,7 +116,7 @@ class MembershipPerUser extends Orm {
 			$MembershipPerUser->amount_extra = $amountAux - $catalogMembership['target'];
 
 			// todo set filled if not exist
-			if($MembershipPerUser->fill_date)
+			if(!$MembershipPerUser->fill_date)
 			{
 				$MembershipPerUser->fill_date = time();
 				$MembershipPerUser->status = self::FILLED;
