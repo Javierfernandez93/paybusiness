@@ -10,7 +10,6 @@ $memberships = $MembershipPerUser->getAllMembershipsPaybusiness();
 
 if($memberships)
 {
-   
     foreach($memberships as $membership)
     {
         if($membership['amount_total'] >= $membership['target'])
@@ -24,10 +23,13 @@ if($memberships)
                     $MembershipPerUserTemp->fill_date = time();
                     $MembershipPerUserTemp->status = Unlimited\MembershipPerUser::FILLED;
                     $MembershipPerUserTemp->save();
+
+                    $data['memberships'][] = $membership['membership_per_user_id'];
                 }
             }
         }
     }
 }
+
 
 echo json_encode(HCStudio\Util::compressDataForPhone($data)); 
