@@ -19,6 +19,8 @@ if($UserLogin->logged === true)
 	{
 		$buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_BUSINESS);
 
+		// print_r($buy);
+
 		if($buy)
 		{
 			$data['activations'][] = $buy['items'][0]['id'];
@@ -31,6 +33,8 @@ if($UserLogin->logged === true)
 	if($pay_academy)
 	{
 		$buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_ACADEMY);
+
+		// print_r($buy);
 
 		if($buy)
 		{

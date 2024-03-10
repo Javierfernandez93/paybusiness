@@ -17,6 +17,16 @@ class MembershipPerUser extends Orm {
 		parent::__construct();
 	}
 
+	public static function isReadyToExpireBinary(int $fill_date = null)
+	{
+		if(!isset($fill_date))
+		{
+			return false;
+		}
+
+		return self::getDaysToExpireBinary($fill_date) <= 0;
+	}
+
 	public static function getDaysToExpireBinary(int $fill_date = null)
 	{
 		if(!isset($fill_date))
@@ -435,6 +445,62 @@ class MembershipPerUser extends Orm {
 				{$this->tblName}.user_login_id = '{$user_login_id}'
 			AND 
 				{$this->tblName}.status != -1
+		");
+	}
+	
+	public function getMembershipsPaybusinessForDelete() 
+	{
+		return $this->connection()->rows("
+			SELECT 
+				{$this->tblName}.{$this->tblName}_id,
+				{$this->tblName}.point,
+				{$this->tblName}.user_login_id,
+				{$this->tblName}.amount,
+				{$this->tblName}.amount_extra,
+				{$this->tblName}.amount + {$this->tblName}.amount_extra as amount_total,
+				{$this->tblName}.take,
+				{$this->tblName}.fill_date,
+				{$this->tblName}.create_date,
+				{$this->tblName}.status,
+				{$this->tblName}.take_old,
+				catalog_membership.title,
+				catalog_membership.target
+			FROM
+				{$this->tblName}
+			LEFT JOIN 
+				catalog_membership
+			ON 
+				{$this->tblName}.catalog_membership_id = catalog_membership.catalog_membership_id 
+			WHERE 
+				{$this->tblName}.status IN (1,0)
+		");
+	}
+	
+	public function getAllMembershipsPaybusiness() 
+	{
+		return $this->connection()->rows("
+			SELECT 
+				{$this->tblName}.{$this->tblName}_id,
+				{$this->tblName}.point,
+				{$this->tblName}.user_login_id,
+				{$this->tblName}.amount,
+				{$this->tblName}.amount_extra,
+				{$this->tblName}.amount + {$this->tblName}.amount_extra as amount_total,
+				{$this->tblName}.take,
+				{$this->tblName}.fill_date,
+				{$this->tblName}.create_date,
+				{$this->tblName}.status,
+				{$this->tblName}.take_old,
+				catalog_membership.title,
+				catalog_membership.target
+			FROM
+				{$this->tblName}
+			LEFT JOIN 
+				catalog_membership
+			ON 
+				{$this->tblName}.catalog_membership_id = catalog_membership.catalog_membership_id 
+			WHERE 
+				{$this->tblName}.status = '1'
 		");
 	}
 

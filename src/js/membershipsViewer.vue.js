@@ -178,7 +178,7 @@ const MembershipsViewer = {
                                 </div>
                                 Necesitas maximizar tu membresía 
 
-                                <div>te quedan {{membership.days_to_delete_binary}} para hacerlo</div>
+                                <div>te queda(n) {{membership.days_to_delete_binary}} dia(s) para hacerlo</div>
                             </span>
                             <span v-else-if="membership.status == 2" class="badge bg-secondary">
                                 llena
