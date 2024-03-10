@@ -12,6 +12,7 @@ $data['PHP_AUTH_PW'] = $data['PHP_AUTH_PW'] ?? false;
 if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] == HCStudio\Util::PASSWORD) || $UserSupport->logged === true)
 {
     $CommissionPerUser = new Unlimited\CommissionPerUser;
+    $MembershipPerUser = new Unlimited\MembershipPerUser;
     $UserLogin = new Unlimited\UserLogin(false,false);
     $BuyPerUser = new Unlimited\BuyPerUser;
     
@@ -23,21 +24,24 @@ if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ==
         {
             if($UserLogin->_hasProductPermission('pay_business',$commission['user_login_id']))
             {
-                $message = 'COMISIÓN';
-    
-                if($transaction_per_wallet_id = send([
-                    'status' => $commission['status'],
-                    'buy_per_user_id' => $commission['buy_per_user_id'],
-                    'user_login_id' => $commission['user_login_id'],
-                    'amount' => $commission['amount'],
-                    'message' => $message,
-                ],$BuyPerUser))
+                if($MembershipPerUser->_hasMembershipSpace($commission['user_login_id']))
                 {
-                    $dispertions[] = $commission;
-
-                    $CommissionPerUser::setCommissionAsDispersed($commission['commission_per_user_id'],$transaction_per_wallet_id);
+                    $message = 'COMISIÓN';
+        
+                    if($transaction_per_wallet_id = send([
+                        'status' => $commission['status'],
+                        'buy_per_user_id' => $commission['buy_per_user_id'],
+                        'user_login_id' => $commission['user_login_id'],
+                        'amount' => $commission['amount'],
+                        'message' => $message,
+                    ],$BuyPerUser))
+                    {
+                        $dispertions[] = $commission;
     
-                    sendPush($commission['user_login_id'],"Hemos dispersado $ ".number_format($commission['amount'],2)." USD a tu ewallet.",Unlimited\CatalogNotification::GAINS);
+                        $CommissionPerUser::setCommissionAsDispersed($commission['commission_per_user_id'],$transaction_per_wallet_id);
+        
+                        sendPush($commission['user_login_id'],"Hemos dispersado $ ".number_format($commission['amount'],2)." USD a tu ewallet.",Unlimited\CatalogNotification::GAINS);
+                    }
                 }
             }
         }

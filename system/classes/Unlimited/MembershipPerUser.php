@@ -17,7 +17,6 @@ class MembershipPerUser extends Orm {
 		parent::__construct();
 	}
 
-
 	public static function getDaysToExpireBinary(int $fill_date = null)
 	{
 		if(!isset($fill_date))
@@ -335,6 +334,23 @@ class MembershipPerUser extends Orm {
 		}
 
 		return $membership['amount_extra'] < ($membership['point'] * 20);
+	}
+	
+	public function _hasMembershipSpace(int $user_login_id = null) : bool
+	{
+		if(!isset($user_login_id))
+		{
+			return false;
+		}
+		
+		$membership = $this->getCurrentMembership($user_login_id);
+
+		if(!$membership)
+		{
+			return false;
+		}
+
+		return $membership['amount_extra'] + $membership['amount'] < $membership['target'];
 	}
 
 	public function getCurrentMembershipAmount(int $user_login_id = null) 
