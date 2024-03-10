@@ -264,7 +264,7 @@ const GainsViewer = {
                                                 Enviada a cartera electrónica 
                                             </span>
                                             <span v-else-if="commission.status == STATUS.FROZEN" class="badge bg-secondary">
-                                                Pendiente  
+                                                Pendiente de dispersar
                                             </span>
                                         </td>
                                         <td class="fw-bold text-decoration-underline text-primary cursor-pointer" @click="query = commission.wallet_kind">

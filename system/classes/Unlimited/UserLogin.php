@@ -2051,6 +2051,12 @@ class UserLogin extends Orm {
     {
       return false;
     }
+
+    // fix 2024-03-09
+    if(empty($binary['start']['users']) || empty($binary['end']['users']))
+    {
+      return false;
+    }
   
     $network = [];
 

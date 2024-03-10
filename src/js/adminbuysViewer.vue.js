@@ -7,6 +7,7 @@ const AdminbuysViewer = {
             UserSupport: new UserSupport,
             buys: null,
             buysAux: null,
+            busy: false,
             query: null,
             status : null,
             STATUS : {
@@ -67,25 +68,29 @@ const AdminbuysViewer = {
         }
     },
     methods: {
-        filterData: function () {
+        filterData() {
             this.buys = this.buysAux
-
             this.buys = this.buys.filter((buy) => {
                 return buy.invoice_id.toLowerCase().includes(this.query.toLowerCase()) || buy.amount.toString().includes(this.query.toLowerCase()) || buy.payment_method.toLowerCase().includes(this.query.toLowerCase()) || buy.names.toLowerCase().includes(this.query.toLowerCase()) || buy.user_login_id.toString().includes(this.query.toLowerCase()) || buy.buy_per_user_id.toString().includes(this.query.toLowerCase())
             })
         },
-        getBuys: function () {
-            return new Promise((resolve,reject) => {
-                this.UserSupport.getBuys({status:this.status.status,query:this.query}, (response) => {
-                    if (response.s == 1) {
-                        resolve(response.buys)
-                    }
-
-                    reject()
-                })
+        getBuys() {
+            this.busy = true
+            this.buys = null
+            this.buysAux = null
+            
+            this.UserSupport.getBuys({status:this.status.status,query:this.query}, (response) => {
+                this.busy = false
+                if (response.s == 1) {
+                    this.buys = response.buys
+                    this.buysAux = response.buys
+                } else {
+                    this.buys = false
+                    this.buysAux = false
+                }
             })
         },
-        validateBuyByAdmin: function (buy) {
+        validateBuyByAdmin(buy) {
             const alert = alertCtrl.create({
                 title: `¿Deseas procesar éste pago?`,
                 subTitle: `Procesar orden #${buy.invoice_id}`,
@@ -129,7 +134,7 @@ const AdminbuysViewer = {
           
             alertCtrl.present(alert.modal);
         },
-        deleteBuyByAdmin: function (buy) {
+        deleteBuyByAdmin(buy) {
             const alert = alertCtrl.create({
                 title: `¿Deseas eliminar éste pago?`,
                 subTitle: `Eliminar orden #${buy.invoice_id}`,
@@ -159,7 +164,7 @@ const AdminbuysViewer = {
           
             alertCtrl.present(alert.modal);
         },
-        setBuyAsPendingByAdmin: function (buy) {
+        setBuyAsPendingByAdmin(buy) {
             const alert = alertCtrl.create({
                 title: `¿Deseas cambiar a pendiente éste pago?`,
                 subTitle: `Orden #${buy.invoice_id}`,
@@ -189,13 +194,10 @@ const AdminbuysViewer = {
           
             alertCtrl.present(alert.modal);
         },
-        search: function () {
-            this.getBuys().then((buys) => {
-                this.buys = buys
-                this.buysAux = buys
-            }).catch(() => this.buys = false)
+        search() {
+            this.getBuys()
         },
-        viewCoinpaymentsTXNId: function (buy) {
+        viewCoinpaymentsTXNId(buy) {
             const { txn_id } = buy.checkout_data
 
             this.UserSupport.viewCoinpaymentsTXNId({txn_id:txn_id}, (response) => {
@@ -209,11 +211,11 @@ const AdminbuysViewer = {
         this.status = this.STATUS.PENDING
     },
     template : `
-        <div v-if="buys" class="card mb-3">
+        <div class="card mb-3">
             <div class="card-header">
                 <div class="row justify-content-center align-items-center">
                     <div class="col-12 col-xl">
-                        <span class="text-secondary text-xs">Total {{buys.length}}</span>
+                        <span v-if="buys" class="text-secondary text-xs">Total {{buys.length}}</span>
                         <div class="h6">
                             Compras
                         </div>
@@ -235,12 +237,17 @@ const AdminbuysViewer = {
                             <button @click="search" class="btn btn-light mb-0"><i class="bi bi-search"></i></button>
                         </div>
                     </div>
+                    <div v-if="busy" class="col-12 col-xl-auto">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
+                    <div v-if="buys" class="table-responsive-sm p-0">
                         <table class="table align-items-center table-hover mb-0">
                             <thead>
                                 <tr>
@@ -325,11 +332,11 @@ const AdminbuysViewer = {
                             </tbody>
                         </table>
                     </div>
+                    <div v-else-if="buys == false" class="alert alert-light fw-semibold text-center">    
+                        No tenemos compras aún 
+                    </div>
                 </div>
             </div>
-        </div>
-        <div v-else-if="buys == false" class="alert alert-light fw-semibold text-center">    
-            No tenemos compras aún 
         </div>
     `,
 }

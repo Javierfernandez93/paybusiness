@@ -144,13 +144,16 @@ class CommissionPerUser extends Orm
 		{
 			$catalog_payment_method_id = (new BuyPerUser)->findField("buy_per_user_id = ?",$buy_per_user_id,"catalog_payment_method_id");
 			
-			if($catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED)
+			if($catalog_payment_method_id)
 			{
-				MembershipPerUser::addPoints([
-					'user_login_id' => $user_login_id,
-					'addPointsToRange' => true,
-					'amount' => $amount,
-				]);
+				if($catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED)
+				{
+					MembershipPerUser::addPoints([
+						'user_login_id' => $user_login_id,
+						'addPointsToRange' => true,
+						'amount' => $amount,
+					]);
+				}
 			}
 
 			self::add([
@@ -268,6 +271,7 @@ class CommissionPerUser extends Orm
 	{
 		$sql = "SELECT 
 					{$this->tblName}.{$this->tblName}_id,
+					{$this->tblName}.buy_per_user_id,
 					{$this->tblName}.user_login_id,
 					{$this->tblName}.user_login_id_from,
 					{$this->tblName}.status,

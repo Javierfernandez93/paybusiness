@@ -27,6 +27,7 @@ if(($data['PHP_AUTH_USER'] == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ==
     
                 if($transaction_per_wallet_id = send([
                     'status' => $commission['status'],
+                    'buy_per_user_id' => $commission['buy_per_user_id'],
                     'user_login_id' => $commission['user_login_id'],
                     'amount' => $commission['amount'],
                     'message' => $message,
@@ -59,15 +60,23 @@ function send(array $data = null,$BuyPerUser = null)
 {
     $wallet_kind_id = $data['status'] == Unlimited\CommissionPerUser::FROZEN ? BlockChain\WalletKind::USDT_NOWITHDRAWABLE : BlockChain\WalletKind::USDT_TRC20;
 
-    $last_buy_pay_business = $BuyPerUser->getLastBuyByType($data['user_login_id'],Unlimited\CatalogPackageType::PAY_BUSINESS);
-
-    if($last_buy_pay_business)
+    if(isset($data['buy_per_user_id']) && $data['buy_per_user_id'] != 0)
     {
-        $wallet_kind_id = $last_buy_pay_business['catalog_payment_method_id'] == Unlimited\CatalogPaymentMethod::EWALLET_PROTECTED ? BlockChain\WalletKind::USDT_NOWITHDRAWABLE : BlockChain\WalletKind::USDT_TRC20;
+        $catalog_payment_method_id = $BuyPerUser->findField("buy_per_user_id = ?",$data['buy_per_user_id'],"catalog_payment_method_id");
+
+        if($catalog_payment_method_id)
+        {
+            $wallet_kind_id = $catalog_payment_method_id == Unlimited\CatalogPaymentMethod::EWALLET_PROTECTED ? BlockChain\WalletKind::USDT_NOWITHDRAWABLE : BlockChain\WalletKind::USDT_TRC20;
+        }
+    } else {
+        $last_buy_pay_business = $BuyPerUser->getLastBuyByType($data['user_login_id'],Unlimited\CatalogPackageType::PAY_BUSINESS);
+
+        if($last_buy_pay_business)
+        {
+            $wallet_kind_id = $last_buy_pay_business['catalog_payment_method_id'] == Unlimited\CatalogPaymentMethod::EWALLET_PROTECTED ? BlockChain\WalletKind::USDT_NOWITHDRAWABLE : BlockChain\WalletKind::USDT_TRC20;
+        }
     }
 
-    d($last_buy_pay_business);
-    d("DIE");   
     if($ReceiverWallet = BlockChain\Wallet::getWallet($data['user_login_id'],$wallet_kind_id))
     {
         if($data['amount'])
