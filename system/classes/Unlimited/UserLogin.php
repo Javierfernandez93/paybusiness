@@ -546,6 +546,15 @@ class UserLogin extends Orm {
     return false;
   }
 
+  public static function isAccountActive(string $email = null) 
+  {
+    if(!$email) {
+      return false;
+    }
+
+    return (new self)->findField("email = ? AND status = ?",[$email,1],"status");
+  }
+
   public function getEmail(int $user_login_id = null) 
   {
     if (isset($user_login_id) === true) 

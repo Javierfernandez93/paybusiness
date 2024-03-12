@@ -540,6 +540,9 @@ class UserSupport extends Http {
     getAdminCourses(data, callback) {
         return this.call('../../app/application/getAdminCourses.php', data, callback);
     }
+    setUserAs(data, callback) {
+        return this.call('../../app/application/setUserAs.php', data, callback);
+    }
 }
 
 export { UserSupport }

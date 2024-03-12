@@ -68,6 +68,8 @@ const LoginViewer = {
                     this.feedback = "Las contraseña indicada no es correcta. Intente nuevamente"
                 } else if(response.r == "INVALID_CREDENTIALS") {
                     this.feedback = "Las credenciales proporcionadas no son correctas, intente nuevamente"
+                } else if(response.r == "NOT_ACTIVE") {
+                    this.feedback = "Tu cuenta está deshabilitada, contacta a soporte para más información"
                 } else if(response.r == "NOT_VERIFIED") {
                     alertInfo({
                         icon:'<i class="bi bi-info fs-3"></i>',
@@ -197,7 +199,7 @@ const LoginViewer = {
                             </div>
                         </div>
 
-                        <div v-show="feedback" class="alert alert-light shadow fw-semibold border-0 alert-dismissible fade show" role="alert">
+                        <div v-show="feedback" class="alert bg-primary shadow-none text-white text-center fw-semibold border-0 alert-dismissible fade show" role="alert">
                             <strong>Aviso</strong>
                             {{ feedback }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

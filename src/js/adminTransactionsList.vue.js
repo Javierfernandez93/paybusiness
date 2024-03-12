@@ -116,7 +116,7 @@ Vue.createApp({
         },
         deleteDeposit: function (transaction_requirement_per_user_id) {
             unlimitedgroup.io = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: "¿Estás seguro de eliminar éste depósito?",
                 buttons: [
                     {
@@ -132,7 +132,7 @@ Vue.createApp({
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },
@@ -145,7 +145,7 @@ Vue.createApp({
         },
         reactiveDeposit: function (transaction_requirement_per_user_id) {
             unlimitedgroup.io = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: "¿Estás seguro de reactivar éste depósito?",
                 buttons: [
                     {
@@ -160,7 +160,7 @@ Vue.createApp({
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },
@@ -172,7 +172,7 @@ Vue.createApp({
         },
         applyDeposit: function (transaction_requirement_per_user_id) {
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: "¿Estás seguro de aplicar éste depósito?",
                 buttons: [
                     {
@@ -188,7 +188,7 @@ Vue.createApp({
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },

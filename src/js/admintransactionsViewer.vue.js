@@ -105,7 +105,7 @@ const AdmintransactionsViewer = {
         deleteWithdraw(transaction) {
             console.log(transaction)
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `
                     <div class="text-center">¿Estás seguro de eliminar esta esta transacción?</div>
                     <div class="text-center mt-3">Regresaremos <b>$ ${transaction.amount} USD </b> a la billetera de <b>${transaction.names}</b></div>`,
@@ -124,7 +124,7 @@ const AdmintransactionsViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },

@@ -92,7 +92,7 @@ const IptvclientsViewer = {
             if(this.credits > 0)
             {
                 let alert = alertCtrl.create({
-                    title: "Alert",
+                    title: "Aviso",
                     subTitle: `<div class="h5">¿Estás seguro de renovar el servicio para <strong>${client.name}?</strong></div>`,
                     buttons: [
                         {
@@ -121,7 +121,7 @@ const IptvclientsViewer = {
                             },
                         },
                         {
-                            text: "Cancel",
+                            text: "Cancelar",
                             role: "cancel",
                             handler: (data) => {
                             },
@@ -140,7 +140,7 @@ const IptvclientsViewer = {
             if(this.credits > 0)
             {
                 let alert = alertCtrl.create({
-                    title: "Alert",
+                    title: "Aviso",
                     subTitle: `<div class="h5">¿Estás seguro de pedir el servicio para <strong>${client.name}?</strong></div>`,
                     buttons: [
                         {
@@ -167,7 +167,7 @@ const IptvclientsViewer = {
                             },
                         },
                         {
-                            text: "Cancel",
+                            text: "Cancelar",
                             role: "cancel",
                             handler: (data) => {
                             },

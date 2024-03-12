@@ -71,7 +71,7 @@ const ApipaymentsViewer = {
         },
         cancelInvoice(payment) {
             const alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `<p>Are you sure to cancel <strong>${payment.invoice_id}</strong></p>?`,
                 buttons: [
                     {
@@ -100,7 +100,7 @@ const ApipaymentsViewer = {
         },
         aceptPartialFounds(payment) {
             const alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `<p>Are you sure to acept partial founds from <strong>${payment.invoice_id}</strong></p>?`,
                 buttons: [
                     {
@@ -226,7 +226,7 @@ const ApipaymentsViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },

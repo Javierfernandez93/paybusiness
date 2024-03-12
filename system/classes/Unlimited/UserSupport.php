@@ -1130,6 +1130,7 @@ class UserSupport extends Orm {
     $sql = "SELECT
               user_login.user_login_id,
               user_login.catalog_campaing_id,
+              user_login.status,
               user_login.code,
               user_login.signup_date,
               user_login.company_id,
@@ -1159,7 +1160,7 @@ class UserSupport extends Orm {
             ON 
               user_address.user_login_id = user_login.user_login_id
             WHERE 
-              user_login.status = '1'
+              user_login.status != '-1'
               {$filter}
             GROUP BY user_login.user_login_id
             ORDER BY 
@@ -1236,7 +1237,7 @@ class UserSupport extends Orm {
               ON 
                 user_contact.user_login_id = user_login.user_login_id
               WHERE 
-                user_login.status = '1'
+                user_login.status != '-1'
               AND 
                 user_login.user_login_id = '{$user_login_id}'
               ORDER BY 

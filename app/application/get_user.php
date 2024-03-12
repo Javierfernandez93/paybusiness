@@ -16,9 +16,6 @@ if($UserSupport->logged === true)
         $data["sponsor_id"] = $UserSupport->getSponsorId($data['user_login_id']);
 
         $data["user"]['user_account']['landing'] = $UserSupport->getLandingById($data['user_login_id']);
-        
-
-        
 
         $data["s"] = 1;
         $data["r"] = "DATA_OK";

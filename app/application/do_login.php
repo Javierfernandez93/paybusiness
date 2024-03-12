@@ -16,67 +16,75 @@ if($data["email"])
 	{		
 		$UserLogin = new Unlimited\UserLogin;
 
-		if(!$UserLogin->needToUpdatePassword($data["email"]))
-		{
-			if($UserLogin->logged === true)
-			{
-				if($UserLogin->isVerifiedMail($data['email']))
-				{
-					if($redirecTo = (new HCStudio\Session())->getFlash('redirecTo')) {
-						$data["redirecTo"] = $redirecTo;
-					}
-		
-					if(filter_var($data['rememberMe'], FILTER_VALIDATE_BOOLEAN) == true)
-					{
-						JFStudio\Cookie::set(Unlimited\UserLogin::PID_NAME,$UserLogin->getPid());
-					}
-					
-					$data["data"] = $data;
-					$data["s"] = 1;
-					$data["r"] = "LOGGED_OK";
-				} else {
-					$UserLogin->logout(false);
-
-					if($secret = Unlimited\UserLogin::updateSecret($data['email']))
-					{
-						if(sendEmailToVerify($data['email'],$secret))
-						{
-							$data["s"] = 0;
-							$data["r"] = "NEED_UPDATE_PASSWORD";
-						} else {
-							$data["s"] = 0;
-							$data["r"] = "ERROR_SENDING_EMAIL";
-						}
-					} else {
-						$data["s"] = 0;
-						$data["r"] = "NOT_SECRET";
-					}
-
-					$data["s"] = 0;
-					$data["r"] = "NOT_VERIFIED";
-				}
-			} else {
-				$data["s"] = 0;
-				$data["r"] = "INVALID_PASSWORD";
-			}
-		} else {
-			$UserLogin->logout(false);
-
-			if($secret = Unlimited\UserLogin::updateSecret($data['email']))
-			{
-				if(sendEmailToUpdatePassword($data['email'],$secret))
-				{
-					$data["s"] = 0;
-					$data["r"] = "NEED_UPDATE_PASSWORD";
-				} else {
-					$data["s"] = 0;
-					$data["r"] = "ERROR_SENDING_EMAIL";
-				}
-			} else {
-				$data["s"] = 0;
-				$data["r"] = "NOT_SECRET";
-			}
-		}
+		if($UserLogin->isAccountActive($data["email"]))
+        {
+            if(!$UserLogin->needToUpdatePassword($data["email"]))
+            {
+                if($UserLogin->logged === true)
+                {
+                    if($UserLogin->isVerifiedMail($data['email']))
+                    {
+                        if($redirecTo = (new HCStudio\Session())->getFlash('redirecTo')) {
+                            $data["redirecTo"] = $redirecTo;
+                        }
+            
+                        if(filter_var($data['rememberMe'], FILTER_VALIDATE_BOOLEAN) == true)
+                        {
+                            JFStudio\Cookie::set(Unlimited\UserLogin::PID_NAME,$UserLogin->getPid());
+                        }
+                        
+                        $data["data"] = $data;
+                        $data["s"] = 1;
+                        $data["r"] = "LOGGED_OK";
+                    } else {
+                        $UserLogin->logout(false);
+    
+                        if($secret = Unlimited\UserLogin::updateSecret($data['email']))
+                        {
+                            if(sendEmailToVerify($data['email'],$secret))
+                            {
+                                $data["s"] = 0;
+                                $data["r"] = "NEED_UPDATE_PASSWORD";
+                            } else {
+                                $data["s"] = 0;
+                                $data["r"] = "ERROR_SENDING_EMAIL";
+                            }
+                        } else {
+                            $data["s"] = 0;
+                            $data["r"] = "NOT_SECRET";
+                        }
+    
+                        $data["s"] = 0;
+                        $data["r"] = "NOT_VERIFIED";
+                    }
+                } else {
+                    $data["s"] = 0;
+                    $data["r"] = "INVALID_PASSWORD";
+                }
+            } else {
+                $UserLogin->logout(false);
+    
+                if($secret = Unlimited\UserLogin::updateSecret($data['email']))
+                {
+                    if(sendEmailToUpdatePassword($data['email'],$secret))
+                    {
+                        $data["s"] = 0;
+                        $data["r"] = "NEED_UPDATE_PASSWORD";
+                    } else {
+                        $data["s"] = 0;
+                        $data["r"] = "ERROR_SENDING_EMAIL";
+                    }
+                } else {
+                    $data["s"] = 0;
+                    $data["r"] = "NOT_SECRET";
+                }
+            }
+        } else {
+            $UserLogin->logout(false);
+            
+            $data["s"] = 0;
+            $data["r"] = "NOT_ACTIVE";
+        }
 	} else {
 		$data["s"] = 0;
 		$data["r"] = "NOT_PASSWORD";

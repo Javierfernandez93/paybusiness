@@ -6,6 +6,8 @@ const AdminusersViewer = {
         return {
             UserSupport: new UserSupport,
             users: null,
+            busy: false,
+            busySmall: false,
             usersAux: null,
             query: null,
             UserType: {
@@ -94,9 +96,37 @@ const AdminusersViewer = {
                 || user.company_id.toString().includes(this.query.toLowerCase())
             })
         },
+        setUserAs(user,status) {
+            this.busySmall = true
+            this.UserSupport.setUserAs({user_login_id:user.user_login_id,status:status},(response)=>{
+                this.busySmall = false
+                
+                user.status = status
+
+                if(status == 0)
+                {
+
+                    toastInfo({
+                        message: 'Usuario inactivado',
+                    })
+                } else if(status == 1) {
+                    toastInfo({
+                        message: 'Usuario activado',
+                    })
+                } else if(status == -1) {
+                    toastInfo({
+                        message: 'Usuario eliminando. Refrescando lista...',
+                    })
+
+                    setTimeout (() => {
+                        this.getUsers()
+                    },3000)
+                }
+            })
+        },
         verifyUser(user) {
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `¿Estás seguro de veriricar a <b>${user.names}</b>?`,
                 buttons: [
                     {
@@ -127,7 +157,7 @@ const AdminusersViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                             
@@ -150,8 +180,8 @@ const AdminusersViewer = {
         },
         deleteUser(user) {
             let alert = alertCtrl.create({
-                title: "Alert",
-                subTitle: `¿Estás seguro de eliminar a <b>${user.names}</b>?`,
+                title: "Aviso",
+                subTitle: `¿Estás seguro de eliminar a <b>${user.names}</b>?. Se comprimirá la red a su patrocinador?`,
                 buttons: [
                     {
                         text: "Sí",
@@ -160,13 +190,13 @@ const AdminusersViewer = {
                         handler: (data) => {
                             this.UserSupport.deleteUser({ company_id: user.company_id }, (response) => {
                                 if (response.s == 1) {
-                                    this.getUsers()
+                                    this.setUserAs(user, -1)
                                 }
                             })
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                             
@@ -205,7 +235,11 @@ const AdminusersViewer = {
             });
         },
         getUsers() {
+            this.usersAux = null
+            this.users = null
+            this.busy = true
             this.UserSupport.getUsers({}, (response) => {
+                this.busy = false
                 if (response.s == 1) {
                     this.usersAux = response.users
                     this.users = response.users
@@ -233,14 +267,24 @@ const AdminusersViewer = {
                     <div class="col-auto">
                         <input v-model="query" :autofocus="true" type="text" class="form-control" placeholder="Buscar..." />
                     </div>
+                    <div v-if="busySmall" class="col-auto">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div v-if="users" class="card-body px-0 pt-0 pb-2">
-                <div class="table-responsive-sm p-0">
+            <div class="card-body px-0 pt-0 pb-2">
+                <div v-if="busy" class="text-center py-3">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div v-if="users" class="table-responsive-sm p-0 animation-fall-down" style="--delay:500ms">
                     <table class="table align-items-center table-hover mb-0">
                         <thead>
                             <tr class="align-items-center">
-                                <th @click="sortData(columns.company_id)" class="text-center c-pointer text-uppercase text-secondary font-weight-bolder opacity-7">
+                                <th @click="sortData(columns.company_id)" class="text-center c-pointer text-uppercase text-secondary font-weight-bolder opacity-7 sticky">
                                     <span v-if="columns.company_id.desc">
                                         <i class="bi text-primary bi-arrow-up-square-fill"></i>
                                     </span>    
@@ -249,9 +293,7 @@ const AdminusersViewer = {
                                     </span>    
                                     <u class="text-sm ms-2">ID</u>
                                 </th>
-                                <th 
-                                    @click="sortData(columns.names)"
-                                    class="text-start c-pointer text-uppercase text-primary font-weight-bolder opacity-7">
+                                <th @click="sortData(columns.names)" class="text-start c-pointer text-uppercase text-primary font-weight-bolder opacity-7 sticky">
                                     <span v-if="columns.names.desc">
                                         <i class="bi text-primary bi-arrow-up-square-fill"></i>
                                     </span>    
@@ -260,9 +302,7 @@ const AdminusersViewer = {
                                     </span>    
                                     <u class="text-sm ms-2">Usuario</u>
                                 </th>
-                                <th 
-                                    @click="sortData(columns.kyc_approbed)"
-                                    class="text-start c-pointer text-uppercase text-primary font-weight-bolder opacity-7">
+                                <th @click="sortData(columns.kyc_approbed)" class="text-start c-pointer text-uppercase text-primary font-weight-bolder opacity-7 sticky">
                                     <span v-if="columns.kyc_approbed.desc">
                                         <i class="bi text-primary bi-arrow-up-square-fill"></i>
                                     </span>    
@@ -271,9 +311,7 @@ const AdminusersViewer = {
                                     </span>    
                                     <u class="text-sm ms-2">Kyc</u>
                                 </th>
-                                <th 
-                                    @click="sortData(columns.country)"
-                                    class="text-center c-pointer text-uppercase text-primary font-weight-bolder opacity-7">
+                                <th @click="sortData(columns.country)" class="text-center c-pointer text-uppercase text-primary font-weight-bolder opacity-7 sticky">
                                     <span v-if="columns.country.desc">
                                         <i class="bi text-primary bi-arrow-up-square-fill"></i>
                                     </span>    
@@ -282,9 +320,7 @@ const AdminusersViewer = {
                                     </span>    
                                     <u class="text-sm ms-2">País</u>
                                 </th>
-                                <th 
-                                    @click="sortData(columns.phone)"
-                                    class="text-center c-pointer text-uppercase text-primary font-weight-bolder opacity-7">
+                                <th @click="sortData(columns.phone)" class="text-center c-pointer text-uppercase text-primary font-weight-bolder opacity-7 sticky">
                                     <span v-if="columns.phone.desc">
                                         <i class="bi text-primary bi-arrow-up-square-fill"></i>
                                     </span>    
@@ -293,9 +329,7 @@ const AdminusersViewer = {
                                     </span>    
                                     <u class="text-sm ms-2">Teléfono</u>
                                 </th>
-                                <th 
-                                    @click="sortData(columns.signup_date)"
-                                    class="text-center c-pointer text-uppercase text-primary font-weight-bolder opacity-7">
+                                <th @click="sortData(columns.signup_date)" class="text-center c-pointer text-uppercase text-primary font-weight-bolder opacity-7 sticky">
                                     <span v-if="columns.signup_date.desc">
                                         <i class="bi text-primary bi-arrow-up-square-fill"></i>
                                     </span>    
@@ -322,8 +356,15 @@ const AdminusersViewer = {
                                     </div>
 
                                     <div class="mt-1">
-                                        <span class="badge bg-primary">
+                                        <span class="badge border border-light text-secondary border-secondary me-2">
                                             {{user.landing}}
+                                        </span>
+                                        
+                                        <span v-if="user.status == 1" class="badge border border-success text-success">
+                                            Activo
+                                        </span>
+                                        <span v-else-if="user.status == 0" class="badge border border-secondary text-secondary">
+                                            Inactivo
                                         </span>
                                     </div>
 
@@ -359,19 +400,17 @@ const AdminusersViewer = {
                                 <td class="align-middle text-center">
                                     <span v-if="user.country_id" class="badge text-secondary text-xs">
                                         <div><img :src="user.country_id.getCoutryImage()" style="width:16px"/></div>
-
-                                        {{user.countryData.country}}
                                     </span>
                                 </td>
                                 <td class="align-middle text-center text-xs">
                                     <span v-if="user.phone">
-                                        <a :href="user.phone.formatPhoneNumber(user.countryData.phone_code).sendWhatsApp('¡Hola *'+user.names+'*! te contactamos de Unlimited')">
+                                        <a class="text-sm" :href="user.phone.formatPhoneNumber(user.countryData.phone_code).sendWhatsApp('¡Hola *'+user.names+'*! te contactamos de Unlimited')">
                                             +{{user.phone.formatPhoneNumber(user.countryData.phone_code)}}
                                         </a>
                                     </span>
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    <p class="mb-0">{{user.signup_date.formatDate()}}</p>
+                                    {{user.signup_date.formatDate()}}
                                 </td>
                                 <td class="align-middle text-center text-sm">
                                     <div class="dropdown">
@@ -383,7 +422,11 @@ const AdminusersViewer = {
                                             <li><button class="dropdown-item" @click="viewEwallet(user)">Ver e-wallet</button></li>
                                             <li><button class="dropdown-item" @click="getInBackoffice(user.user_login_id)">Acceder a backoffice</button></li>
                                             <li v-if="!user.verified_mail"><button class="dropdown-item" @click="verifyUser(user)">Verificar email</button></li>
-                                            <li><button class="dropdown-item" @click="deleteUser(user)">Eliminar</button></li>
+                                            
+                                            <li><button class="dropdown-item" @click="deleteUser(user,-1)">Eliminar</button></li>
+                                            
+                                            <li v-if="user.status == '1'"><button class="dropdown-item" @click="setUserAs(user,0)">Inactivar</button></li>
+                                            <li v-if="user.status == '0'"><button class="dropdown-item" @click="setUserAs(user,1)">Activar</button></li>
                                         </ul>
                                     </div>
                                 </td>
@@ -391,11 +434,10 @@ const AdminusersViewer = {
                         </tbody>
                     </table>
                 </div>
-            </div>
-            <div v-else-if="users == false"
-                class="card-body">
-                <div class="alert alert-secondary text-white text-center">
-                    <div>No tenemos usuarios aún</div>
+                <div v-else-if="users == false" class="card-body">
+                    <div class="alert alert-info text-dark text-center">
+                        <div>No tenemos usuarios aún</div>
+                    </div>
                 </div>
             </div>
         </div>

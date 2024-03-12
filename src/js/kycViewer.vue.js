@@ -26,7 +26,7 @@ const KycViewer = {
     methods: {
         sendDni() {
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `¿Estás seguro de guardar esta información?`,
                 inputs : [
                     {
@@ -68,7 +68,7 @@ const KycViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },

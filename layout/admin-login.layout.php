@@ -21,8 +21,7 @@
         <link href="../../src/css/general.css?v=1-3-1" rel="stylesheet" type="text/css">
         {{css_scripts}}
     </head>
-    <body class="bg-primary">
-        
+    <body class="bg-light">
         {{content}}
         
         <script src="../../src/js/jquery-3.1.1.js" type="text/javascript"></script>
@@ -33,8 +32,8 @@
 
         {{js_scripts}}
 
-        <footer class="fixed-bottom w-100 text-center py-3 fw-semibold text-white">
-            © <script> document.write(new Date().getFullYear()) </script>, made with <i class="bi bi-heart"></i> by <a href="<?php echo HCStudio\Connection::getMainPath(); ?>" class="font-weight-bold text-white" target="_blank"><?php echo JFStudio\Layout::PROYECT_NAME; ?></a> for a better web.
+        <footer class="fixed-bottom w-100 text-center py-3 fw-semibold text-dark">
+            © <script> document.write(new Date().getFullYear()) </script>, made with <i class="bi bi-heart"></i> by <a href="<?php echo HCStudio\Connection::getMainPath(); ?>" class="font-weight-bold text-dark" target="_blank"><?php echo JFStudio\Layout::PROYECT_NAME; ?></a> for a better web.
         </footer>
     </body>
 </html>

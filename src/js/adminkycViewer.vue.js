@@ -31,7 +31,7 @@ const AdminkycViewer = {
         },
         approbeKyc(user) {
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `¿Estás seguro de aporbar el KYC para ${user.names}?`,
                 buttons: [
                     {
@@ -48,7 +48,7 @@ const AdminkycViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },
@@ -60,7 +60,7 @@ const AdminkycViewer = {
         },
         rejectKyc(user) {
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `¿Estás seguro de rechazar el KYC para ${user.names}?`,
                 inputs : [
                     {
@@ -86,7 +86,7 @@ const AdminkycViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },

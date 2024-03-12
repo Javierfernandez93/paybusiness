@@ -67,7 +67,7 @@ const AcademycreateViewer = {
         saveComponent(component)
         {
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `¿Estás seguro de guardar esta información?`,
                 buttons: [
                     {
@@ -87,7 +87,7 @@ const AcademycreateViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },

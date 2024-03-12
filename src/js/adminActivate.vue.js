@@ -94,7 +94,7 @@ Vue.createApp({
             const ammount = this.user.ammount - this.user.originalAmmount
 
             unlimitedgroup.io = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: "¿Estás seguro de añadir éste fondeo?. Se recalculará el plan del usuario",
                 buttons: [
                     {
@@ -113,7 +113,7 @@ Vue.createApp({
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },
@@ -148,7 +148,7 @@ Vue.createApp({
 
             let message = this.user.originalAmmount != this.user.ammount ? '. <br><b>Aviso importante: Monto invertido ha sido modificado por lo cual se actualizará la diferencia como un fondeo</br>' : ''
             unlimitedgroup.io = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 html: "¿Estás seguro de guardar/actualizar ésta activación?"+ message,
                 buttons: [
                     {
@@ -166,7 +166,7 @@ Vue.createApp({
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },

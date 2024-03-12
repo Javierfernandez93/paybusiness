@@ -36,8 +36,8 @@ var alertCtrl = {
             open: function () { }, 
             buttons: [],
             inputs: [],
-            size: 'modal-sm',
-            bgColor: 'bg-light',
+            size: 'modal-md',
+            bgColor: 'bg-white',
             modalTitleClass: '',
         };
 
@@ -46,7 +46,7 @@ var alertCtrl = {
         var $modal = $("<div />").attr("id", this.settings.id).attr("role", "dialog").addClass(`modal ${this.settings.bgClass} fade`).attr("tabindex","-1").attr("aria-lalledby",this.settings.id).attr("aria-modal","true");
         
         var $dialog = $("<div />").addClass(`modal-dialog modal-dialog-centered `+this.settings.size);
-        var $content = $("<div />").addClass(`modal-content ${this.settings.bgColor}`);
+        var $content = $("<div />").addClass(`modal-content lead text-center ${this.settings.bgColor}`);
 
         if(this.settings.imgTop)
         {

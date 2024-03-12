@@ -48,10 +48,10 @@ const LoginsupportViewer = {
         
     },
     template: `
-        <div class="card shadow-lg border-radius-2xl animate__animated animate__bounceInDown">
+        <div class="card shadow-lg border-radius-2xl animation-fall-down" style="--delay:500ms">
             <div class="card-header">
                 <div class="row justify-content-center">
-                    <div class="col-2">
+                    <div class="col-3">
                         <img src="../../src/img/logo.svg" alt="logo" class="w-100"/>
                     </div>
                 </div>
@@ -63,6 +63,8 @@ const LoginsupportViewer = {
                     :class="isValidMail ? 'is-valid' : ''"
                     @keydown.enter.exact.prevent="$refs.password.focus()"
                     ref="email"
+                    name="email"
+                    id="email"
                     v-model="user.email"
                     type="email" class="form-control" placeholder="name@example.com">
                 <label for="email">Correo electrónico</label>
@@ -74,6 +76,8 @@ const LoginsupportViewer = {
                     :class="user.password ? 'is-valid' : ''"
                     @keydown.enter.exact.prevent="doLogin"
                     ref="password" 
+                    id="password"
+                    name="password"
                     v-model="user.password" 
                     type="password" class="form-control" placeholder="Password">
                 <label for="password">Contraseña</label>

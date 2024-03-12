@@ -136,7 +136,7 @@ const AdminbridgeViewer = {
             this.busy = true
 
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `¿Estás seguro ingresar como dinero enviado a Exma? (No enviaremos dinero)`,
                 buttons: [
                     {
@@ -154,7 +154,7 @@ const AdminbridgeViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                             this.busy = false
@@ -169,7 +169,7 @@ const AdminbridgeViewer = {
             this.busy = true
 
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `¿Estás seguro de enviar el correo a Exma?`,
                 buttons: [
                     {
@@ -187,7 +187,7 @@ const AdminbridgeViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {s
                             this.busy = false
@@ -202,7 +202,7 @@ const AdminbridgeViewer = {
             this.busy = true
 
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `¿Estás seguro de envíar el dinero de esta cuenta de (${buy.account}) a Exma?`,
                 buttons: [
                     {
@@ -221,7 +221,7 @@ const AdminbridgeViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                             this.busy = false

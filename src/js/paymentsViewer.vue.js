@@ -64,7 +64,7 @@ const PaymentsViewer = {
         },
         approbeReferralPayment(payment) {
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `¿Estás seguro de validar este pago con orden de compra <b>${payment.invoice_id}</b>?`,
                 buttons: [
                     {
@@ -92,7 +92,7 @@ const PaymentsViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },
@@ -104,7 +104,7 @@ const PaymentsViewer = {
         },
         deleteReferralPayment(payment) {
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `¿Estás seguro de cancelar este pago con orden de compra <b>${payment.invoice_id}</b>?`,
                 buttons: [
                     {
@@ -120,7 +120,7 @@ const PaymentsViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },

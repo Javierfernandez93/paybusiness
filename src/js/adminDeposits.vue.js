@@ -64,7 +64,7 @@ Vue.createApp({
         },
         deleteTransaction: function (transaction_per_wallet_id) {
             unlimitedgroup.io = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: "¿Estás seguro de eliminar éste fondeo?. Se recalculará el plan del usuario",
                 buttons: [
                     {
@@ -80,7 +80,7 @@ Vue.createApp({
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },

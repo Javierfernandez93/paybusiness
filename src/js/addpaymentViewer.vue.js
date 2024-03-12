@@ -75,7 +75,7 @@ const AddpaymentViewer = {
         },
         addReferralPayment(payment) {
             let alert = alertCtrl.create({
-                title: "Alert",
+                title: "Aviso",
                 subTitle: `¿Estás seguro de subir tu evidencia de pago?`,
                 buttons: [
                     {
@@ -87,7 +87,7 @@ const AddpaymentViewer = {
                         },
                     },
                     {
-                        text: "Cancel",
+                        text: "Cancelar",
                         role: "cancel",
                         handler: (data) => {
                         },
