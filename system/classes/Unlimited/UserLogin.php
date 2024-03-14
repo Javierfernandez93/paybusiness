@@ -1746,7 +1746,17 @@ class UserLogin extends Orm {
       return false;
     }
 
-    return (new MembershipPerUser)->getCurrentMembership($this->company_id);
+    return self::_getCurrentMembership($this->company_id);
+  }
+
+  public static function _getCurrentMembership(int $user_login_id = null)
+  {
+    if(!$user_login_id)
+    {
+      return false;
+    }
+
+    return (new MembershipPerUser)->getCurrentMembership($user_login_id);
   }
   
   public function getCurrentMembershipAmount()

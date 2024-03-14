@@ -179,33 +179,40 @@ const AdminusersViewer = {
             window.location.href = '../../apps/admin-users/bridge?ulid=' + company_id
         },
         deleteUser(user) {
-            let alert = alertCtrl.create({
-                title: "Aviso",
-                subTitle: `¿Estás seguro de eliminar a <b>${user.names}</b>?. Se comprimirá la red a su patrocinador?`,
-                buttons: [
-                    {
-                        text: "Sí",
-                        class: 'btn-success',
-                        role: "cancel",
-                        handler: (data) => {
-                            this.UserSupport.deleteUser({ company_id: user.company_id }, (response) => {
-                                if (response.s == 1) {
-                                    this.setUserAs(user, -1)
-                                }
-                            })
-                        },
-                    },
-                    {
-                        text: "Cancelar",
-                        role: "cancel",
-                        handler: (data) => {
-                            
-                        },
-                    },
-                ],
+            this.UserSupport.findFirstActive({ company_id: user.company_id }, (response) => {
+                if(response.s == 1)
+                {
+                    let alert = alertCtrl.create({
+                        title: "Aviso",
+                        subTitle: `El usuario se eliminará y su red se comprimirá para su primer activo <b>${response.user.names} ID ${response.user.company_id}</b>. ¿Estás seguro de eliminar a <b>${user.names}</b>?`,
+                        buttons: [
+                            {
+                                text: "Sí",
+                                class: 'btn-success',
+                                role: "cancel",
+                                handler: (data) => {
+                                    this.UserSupport.deleteUser({ company_id: user.company_id }, (response) => {
+                                        if (response.s == 1) {
+                                            this.setUserAs(user, -1)
+                                        }
+                                    })
+                                },
+                            },
+                            {
+                                text: "Cancelar",
+                                role: "cancel",
+                                handler: (data) => {
+                                    
+                                },
+                            },
+                        ],
+                    })
+        
+                    alertCtrl.present(alert.modal)  
+                    // this.deleteUserInternal()
+                }
             })
-
-            alertCtrl.present(alert.modal)  
+            
         },
         goToEdit(company_id) {
             window.location.href = '../../apps/admin-users/edit?ulid=' + company_id
@@ -265,7 +272,7 @@ const AdminusersViewer = {
                         <div><a href="../../apps/admin-users/add" type="button" class="btn shadow-none mb-0 btn-success px-3 btn-sm">Añadir usuario</a></div>
                     </div>
                     <div class="col-auto">
-                        <input v-model="query" :autofocus="true" type="text" class="form-control" placeholder="Buscar..." />
+                        <input :disabled="busy" v-model="query" :autofocus="true" type="text" class="form-control" placeholder="Buscar..." />
                     </div>
                     <div v-if="busySmall" class="col-auto">
                         <div class="spinner-border" role="status">

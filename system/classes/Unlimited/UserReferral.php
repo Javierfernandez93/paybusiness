@@ -17,22 +17,66 @@ class UserReferral extends Orm {
   public function __construct() {
     parent::__construct();
   }
-  
+
+  public static function compressNetwork(int $sponsor_id = null,int $new_sponsor_id = null) 
+  {
+    $directs = (new self)->findAll("sponsor_id = ?",$sponsor_id);
+
+    if($directs)
+    {
+      foreach($directs as $user)
+      {
+        $UserReferral = new self;
+        
+        if($UserReferral->loadWhere("user_referral_id = ?",$user['user_referral_id']))
+        {
+          $UserReferral->sponsor_id = $new_sponsor_id;
+          $UserReferral->save();
+        }
+      }
+    }
+    
+    $non_directs = (new self)->findAll("referral_id = ?",$sponsor_id);
+
+    if($non_directs)
+    {
+      foreach($non_directs as $user)
+      {
+        $UserReferral = new self;
+        
+        if($UserReferral->loadWhere("user_referral_id = ?",$user['user_referral_id']))
+        {
+          $UserReferral->referral_id = $new_sponsor_id;
+          $UserReferral->save();
+        }
+      }
+    }
+
+    return true;
+  }
+
   public static function deleteUser(int $user_login_id = null) 
   {
-    $UserReferral = new self;
-
-    if(!$UserReferral->loadWhere("user_login_id = ?",$user_login_id))
+    if(!$user_login_id)
     {
       return false;
     }
 
-    $UserReferral->user_login_id = self::DELETED;
-    $UserReferral->sponsor_id = self::DELETED;
-    $UserReferral->referral_id = self::DELETED;
-    $UserReferral->status = self::DELETED;
-    
-    return $UserReferral->save();
+    $network = (new UserReferral)->getNetworkReverseReferral(-1,$user_login_id);
+
+    if(!$network)
+    {
+      return false;
+    }
+
+    $first_active_user_login_id = (new MembershipPerUser)->getFirstActive($network);
+
+    if(!$first_active_user_login_id)
+    {
+      return false; 
+    }
+
+    return UserReferral::compressNetwork($user_login_id,$first_active_user_login_id);
   }
 
   public static function appendReferral(array $data = null) 
@@ -506,6 +550,22 @@ class UserReferral extends Orm {
       $count++;
       $join = join(",", $data);
       $result = $this->getNetworkReverse($limit, $join, $count);
+      $result = array_merge(array($data), $result);
+    }
+
+    return $result;
+  }
+
+  public function getNetworkReverseReferral(int $limit = -1 ,string $user_login_id = null,int $count = 0) 
+  {
+    $result = [];
+ 
+    $sql = "SELECT referral_id FROM user_referral WHERE user_login_id IN ({$user_login_id})";      
+
+    if (($count != $limit) && ($data = $this->connection()->column($sql))) {
+      $count++;
+      $join = join(",", $data);
+      $result = $this->getNetworkReverseReferral($limit, $join, $count);
       $result = array_merge(array($data), $result);
     }
 

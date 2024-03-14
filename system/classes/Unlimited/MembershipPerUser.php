@@ -17,6 +17,29 @@ class MembershipPerUser extends Orm {
 		parent::__construct();
 	}
 
+	public function getFirstActive(array $users = null)
+	{
+		if(!isset($users))
+		{
+			return false;
+		}
+
+		$user = false;
+
+		foreach($users as $user)
+		{
+			$membership = $this->getCurrentMembership($user[0]);
+
+			if($membership)
+			{
+				$user = $membership['user_login_id'];
+				
+				break;
+			}
+		}
+
+		return $user;
+	}
 	public static function isReadyToExpireBinary(int $fill_date = null)
 	{
 		if(!isset($fill_date))
@@ -310,6 +333,7 @@ class MembershipPerUser extends Orm {
 			SELECT 
 				{$this->tblName}.{$this->tblName}_id,
 				{$this->tblName}.amount,
+				{$this->tblName}.status,
 				{$this->tblName}.point,
 				{$this->tblName}.user_login_id,
 				{$this->tblName}.amount_extra,

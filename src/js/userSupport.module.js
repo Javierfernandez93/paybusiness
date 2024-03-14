@@ -543,6 +543,9 @@ class UserSupport extends Http {
     setUserAs(data, callback) {
         return this.call('../../app/application/setUserAs.php', data, callback);
     }
+    findFirstActive(data, callback) {
+        return this.call('../../app/application/findFirstActive.php', data, callback);
+    }
 }
 
 export { UserSupport }
