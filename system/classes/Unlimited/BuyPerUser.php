@@ -428,8 +428,12 @@ class BuyPerUser extends Orm {
     {
       return false;
     }
+
+    $catalogMembership = (new CatalogMembership)->findRow("catalog_membership_id = ?",$data['catalog_membership_id']);
+    $package = (new Package)->findRow("package_id = ?",$catalogMembership['package_id']);
     
     MembershipPerUser::add([
+      'is_upgrade' => $data['amount'] != $package['amount'],
       'point' => $data['point'],
       'catalog_membership_id' => $data['catalog_membership_id'],
       'user_login_id' => $data['user_login_id'],
@@ -468,6 +472,7 @@ class BuyPerUser extends Orm {
         if($data['items'][0]['catalog_membership_id'])
         { 
           self::addMembership([
+            'amount' => $BuyPerUser->amount,
             'point' => $BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED ? $BuyPerUser->amount : 0,
             'catalog_membership_id' => $data['items'][0]['catalog_membership_id'],
             'user_login_id' => $BuyPerUser->user_login_id,

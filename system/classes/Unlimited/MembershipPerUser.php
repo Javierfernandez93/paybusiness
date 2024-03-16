@@ -253,12 +253,32 @@ class MembershipPerUser extends Orm {
 		}
 
 		$MembershipPerUser = new self;
-		
-		if(!$MembershipPerUser->loadWhere("membership_per_user_id = ? AND status != ?",[$membership_per_user_id,1]))
+
+		if(!$MembershipPerUser->loadWhere("membership_per_user_id = ? AND status != ? ORDER BY catalog_membership_id DESC",[$membership_per_user_id,1]))
 		{
 			return false;
 		}
 
+		$MembershipPerUser->status = self::END;
+		
+		return $MembershipPerUser->save();
+	}
+
+	public static function setMembershipAsEndByUpgrade(int $membership_per_user_id = null) 
+	{
+		if(!$membership_per_user_id)
+		{
+			return false;
+		}
+
+		$MembershipPerUser = new self;
+
+		if(!$MembershipPerUser->loadWhere("membership_per_user_id = ? AND status = ? ORDER BY catalog_membership_id DESC",[$membership_per_user_id,1]))
+		{
+			return false;
+		}
+
+		$MembershipPerUser->upgrade_date = time();
 		$MembershipPerUser->status = self::END;
 		
 		return $MembershipPerUser->save();
@@ -301,13 +321,20 @@ class MembershipPerUser extends Orm {
 		$amount_extra = 0;
 
 		$currentMembership = $MembershipPerUser->getCurrentMembershipOrFilled($data['user_login_id']);
-		
+
 		if($currentMembership)
 		{
-			// $amount = $currentMembership['amount'];
-			$amount = $currentMembership['amount_extra'];
-
-			self::setMembershipAsEnd($currentMembership['membership_per_user_id']);
+			if(isset($data['is_upgrade']) && $data['is_upgrade'])
+			{
+				$amount = $currentMembership['amount'];
+				$amount = $currentMembership['amount_extra'];
+				
+				self::setMembershipAsEndByUpgrade($currentMembership['membership_per_user_id']);
+			} else {
+				$amount = $currentMembership['amount_extra'];
+	
+				self::setMembershipAsEnd($currentMembership['membership_per_user_id']);
+			}
 		}
 		
 		$MembershipPerUser->user_login_id = $data['user_login_id'];
@@ -337,6 +364,7 @@ class MembershipPerUser extends Orm {
 				{$this->tblName}.point,
 				{$this->tblName}.user_login_id,
 				{$this->tblName}.amount_extra,
+				catalog_membership.package_id,
 				catalog_membership.catalog_membership_id,
 				catalog_membership.target,
 				catalog_membership.title
@@ -380,6 +408,9 @@ class MembershipPerUser extends Orm {
 				{$this->tblName}.user_login_id = '{$user_login_id}'
 			AND 
 				{$this->tblName}.status IN('1','0')
+			ORDER BY 
+				catalog_membership.catalog_membership_id
+			DESC 
 		");
 	}
 	

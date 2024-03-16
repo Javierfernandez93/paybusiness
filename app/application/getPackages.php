@@ -13,12 +13,23 @@ if($UserLogin->logged === true)
     $BuyPerUser = new Unlimited\BuyPerUser;
 
     if($data['catalog_package_type_id'] == Unlimited\CatalogPackageType::PAY_BUSINESS) {
-        $buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_BUSINESS);
 
-        if($buy)
+        $membership = (new Unlimited\MembershipPerUser)->getCurrentMembership($UserLogin->company_id);
+
+        if($membership)
         {
-            $data['currentAmount'] = $buy['amount'];
-            $filter .= " AND package.order_id >= '{$buy['items'][0]['order_id']}'";
+            $package = (new Unlimited\Package)->findRow("package_id = ?",$membership['package_id']);
+    
+            // d($membership);
+            // $buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_BUSINESS);
+    
+            // d($buy);
+    
+            if($package)
+            {
+                $data['currentAmount'] = $package['amount'];
+                $filter .= " AND package.order_id >= '{$package['package_id']}'";
+            }
         }
     }
 

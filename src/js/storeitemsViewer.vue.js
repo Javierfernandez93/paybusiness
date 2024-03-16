@@ -181,7 +181,7 @@ const StoreitemsViewer = {
     template : `
         <ul class="nav nav-pills mb-5 bg-transparent" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button @click="getPackages(CATALOG_PACKAGE_TYPE.PAY_BUSINESS)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.PAY_BUSINESS ? 'active' : ''" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">PayBusinesss</button>
+                <button @click="getPackages(CATALOG_PACKAGE_TYPE.PAY_BUSINESS)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.PAY_BUSINESS ? 'active' : ''" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">PayBusiness</button>
             </li>
             <li v-if="cart.active" class="nav-item" role="presentation">
                 <button @click="getPackages(CATALOG_PACKAGE_TYPE.PAY_ACADEMY)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.PAY_ACADEMY ? 'active' : ''" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">PayAcademy</button>
@@ -233,10 +233,14 @@ const StoreitemsViewer = {
                                 </div>
                                 <div v-else>
                                     <div v-if="currentAmount">
-                                        <div class="h5 text-white"><s>$ {{(package.amount).numberFormat(2)}}</s></div>
+                                        <div class="h5 text-white">Pay Business $ {{(package.amount).numberFormat(2)}}</div>
+                                        <div class="text-xs text-white">Pagas la diferencia de tu paquete actual:</div>
+                                        
                                         <div class="h1 text-white">
                                             $ {{(package.amount - currentAmount).numberFormat(2)}}
                                         </div>
+
+                                        <div></div>
                                     </div>
                                     <div v-else class="h1 text-white">
                                         <div>$ {{(package.amount).numberFormat(2)}}</div>
