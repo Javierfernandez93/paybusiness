@@ -356,8 +356,7 @@ class MembershipPerUser extends Orm {
 			return false;
 		}
 
-		// return $this->connection()->row("
-		d("
+		return $this->connection()->row("
 			SELECT 
 				{$this->tblName}.{$this->tblName}_id,
 				{$this->tblName}.amount,
