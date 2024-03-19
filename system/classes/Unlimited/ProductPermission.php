@@ -36,7 +36,12 @@ class ProductPermission extends Orm {
         
         if($ProductPermission->getId())
         {
-            $ProductPermission->end_date = strtotime("+{$data['days']} days", $ProductPermission->end_date);
+            if($ProductPermission->end_date < time())
+            {
+                $ProductPermission->end_date = strtotime("+{$data['days']} days", $ProductPermission->end_date);
+            } else {
+                $ProductPermission->end_date = strtotime("+{$data['days']} days");
+            }
         }
 
         if($ProductPermission->hasPermission($data) && $data['product_id'] == Product::PAY_BUSINESS_ID)
