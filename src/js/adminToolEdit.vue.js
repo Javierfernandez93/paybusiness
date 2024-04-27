@@ -42,6 +42,10 @@ Vue.createApp({
                 if(response.s == 1)
                 {
                     this.$refs.button.innerText = "Actualizado con éxito"
+
+                    toastInfo({
+                        message: "Herramienta actualizada con éxito",
+                    })
                 }
             })
         },
@@ -108,6 +112,10 @@ Vue.createApp({
                     if(response.s == 1)
                     {
                         this.tool.route = response.target_path
+
+                        toastInfo({
+                            message: "Archivo subido con éxito",
+                        })
                     }
                     resolve()
                 })
