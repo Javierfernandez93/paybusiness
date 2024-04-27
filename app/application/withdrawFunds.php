@@ -9,7 +9,7 @@ $UserLogin = new Unlimited\UserLogin;
 if($UserLogin->logged === true)
 {
     // if($UserLogin->isActive())
-    if(false)
+    if(true)
     {
         if($data['withdraw_method_per_user_id'])
         {   
