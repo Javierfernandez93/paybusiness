@@ -28,8 +28,6 @@ if(($data['user'] ?? false == HCStudio\Util::USERNAME && $data['password'] ?? fa
 
                     $items = $BuyPerUser->unformatData();
 
-                    die;
-
                     if($BuyPerUser->save())
                     {   
                         Unlimited\BuyPerUser::addPayAcademyFirstMonthFree($BuyPerUser->user_login_id);
