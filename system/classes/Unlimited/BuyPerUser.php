@@ -489,8 +489,6 @@ class BuyPerUser extends Orm {
       'items' => $data['items'],
       'user_login_id' => $BuyPerUser->user_login_id,
     ]);
-
-    d(123);
     
     if($BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED)
     {
