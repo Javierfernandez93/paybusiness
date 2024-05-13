@@ -155,7 +155,9 @@
                 <?php if ($UserSupport->hasPermission('list_tools')) { ?>
                     <li class="nav-item">
                         <a class="nav-link <?php if (in_array($route, [JFStudio\Router::AdminTools])) { ?>active<?php } ?>" href="../../apps/admin-tools">
-                            <span class="badge me-2 d-flex justify-content-center align-items-center icon"><i class="bi bi-chat-left-fill"></i></span>
+                            <span class="badge me-2 d-flex justify-content-center align-items-center icon">
+                                <i class="bi bi-tools"></i>
+                            </span>
                             <span class="nav-link-text text-dark ms-1"><?php echo JFStudio\Router::getName(JFStudio\Router::AdminTools); ?></span>
                         </a>
                     </li>

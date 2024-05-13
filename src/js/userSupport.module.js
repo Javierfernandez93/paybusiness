@@ -89,6 +89,9 @@ class UserSupport extends Http {
     getCatalogTools(data, callback) {
         return this.call('../../app/application/getCatalogTools.php', data, callback);
     }
+    deleteTool(data, callback) {
+        return this.call('../../app/application/deleteTool.php', data, callback);
+    }
     getStats(data, callback) {
         return this.call('../../app/application/get_stats.php', data, callback);
     }

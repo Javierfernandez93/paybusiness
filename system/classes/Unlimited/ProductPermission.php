@@ -36,7 +36,7 @@ class ProductPermission extends Orm {
         
         if($ProductPermission->getId())
         {
-            if($ProductPermission->end_date < time())
+            if($ProductPermission->end_date > time())
             {
                 $ProductPermission->end_date = strtotime("+{$data['days']} days", $ProductPermission->end_date);
             } else {
