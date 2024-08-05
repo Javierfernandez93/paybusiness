@@ -153,7 +153,7 @@ class Image
 
     public function resize($width,$height){
         $new_image = $this->imageHelper->createTransparentTemplate($width,$height);
-        imagecopyresampled($new_image, $this->resource, 0, 0, 0, 0, (int)$width, (int)$height, $this->getWidth(), $this->getHeight());
+        imagecopyresampled($new_image, $this->resource, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
         $this->resource = $new_image;
     }
 

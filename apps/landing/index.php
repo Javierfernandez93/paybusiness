@@ -2,7 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$landing = HCStudio\Util::getVarFromPGS('landing');
+$landing = HCStudio\Util::getParam('landing');
 
 if($landing)
 {

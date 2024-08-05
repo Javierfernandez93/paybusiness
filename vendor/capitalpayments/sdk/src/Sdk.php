@@ -9,8 +9,8 @@ use GuzzleHttp\RequestOptions;
 use Exception;
 
 class Sdk {
-    private $api_key = 'aDqUT8pPlY4rKwhR';
-    private $api_secret = 'n5BmeYEuTqdeJ+4VIutsDzW7H1P7VFYSvn/LM8STmjqaPD+PDz09E+L5kQA6ElPsapPxvrIiyS6IJ/PQrsZOGA==:VEFMRU5UT1VNQlJFTExBMg==';
+    private $api_key = 'SET_YOUR_API_KEY';
+    private $api_secret = 'SET_YOUR_API_SECRET';
     
     public function __construct(string $api_key = null,string $api_secret = null)
     {
@@ -42,7 +42,7 @@ class Sdk {
         return [];
     }
 
-    public function createInvoice(array $data = null) 
+    public function createInvoice(array $data = null) : array
     {
         if(isset($data['amount'])) 
         {

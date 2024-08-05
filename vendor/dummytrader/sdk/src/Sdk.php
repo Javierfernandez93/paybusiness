@@ -67,4 +67,56 @@ class Sdk {
             throw new Exception('Invalid message');
         }
     }
+    
+    public function sendImageToChannel(array $data = null) : array
+    {
+        if(isset($data['image'])) 
+        {
+            if(is_string($data['image'])) 
+            {
+                $Client = new Client(['verify' => true, 'auth' => [$this->api_key, $this->api_secret]]);
+
+                $response = $Client->post(UrlManager::SEND_IMAGE_TO_CHANNEL, [
+                    RequestOptions::JSON => $data
+                ]);
+
+                if($response->getStatusCode() == 200) 
+                {
+                    return json_decode($response->getBody()->getContents(),true);
+                }
+
+                return [];
+            } else {
+                throw new Exception('Invalid image format');
+            }
+        } else {
+            throw new Exception('Invalid image');
+        }
+    }
+
+    public function createBinanceMarketOrder(array $data = null) : array
+    {
+        if(isset($data['message'])) 
+        {
+            if(is_string($data['message'])) 
+            {
+                $Client = new Client(['verify' => true, 'auth' => [$this->api_key, $this->api_secret]]);
+
+                $response = $Client->post(UrlManager::BINANCE_SEND_MARKET_ORDER, [
+                    RequestOptions::JSON => $data
+                ]);
+
+                if($response->getStatusCode() == 200) 
+                {
+                    return json_decode($response->getBody()->getContents(),true);
+                }
+
+                return [];
+            } else {
+                throw new Exception('Invalid message format');
+            }
+        } else {
+            throw new Exception('Invalid message');
+        }
+    }
 }

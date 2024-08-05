@@ -2,7 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$data = HCStudio\Util::getVarFromPGS();
+$data = HCStudio\Util::getParam();
 
 $Layout = JFStudio\Layout::getInstance();
 $Layout->init((new Unlimited\Landing)->getLandingTitleByPath($data['path']),'landings',"simple",'',TO_ROOT.'/');

@@ -10,4 +10,3 @@ include __DIR__ . "/../vendor/autoload.php";
 echo "<pre>";
 
 $Sdk = new \DummyTrader\Sdk\Sdk('api_key','api_secret');
-

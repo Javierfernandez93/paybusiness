@@ -1,5 +1,0 @@
-{
-	"require": {
-    "sngrl/php-firebase-cloud-messaging": "dev-master"
-	}
-}

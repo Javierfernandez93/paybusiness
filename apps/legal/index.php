@@ -26,7 +26,7 @@ $Layout->setScript([
 $Layout->setVar([
 	'route' =>  $route,
 	'setApp' =>  true,
-	'file' =>  HCStudio\Util::getVarFromPGS("f"),
+	'file' =>  HCStudio\Util::getParam("f"),
 	'UserLogin' => $UserLogin
 ]);
 $Layout();

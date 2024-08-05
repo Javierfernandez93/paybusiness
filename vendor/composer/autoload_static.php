@@ -4,13 +4,16 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
+class ComposerStaticInitf3ef2c96c54691b90192a651d47706e8
 {
     public static $files = array (
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
+        '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -26,17 +29,25 @@ class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
         array (
             'Treinetic\\ImageArtist\\' => 22,
         ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Php80\\' => 23,
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+            'Symfony\\Polyfill\\Ctype\\' => 23,
+        ),
         'P' => 
         array (
             'Psr\\SimpleCache\\' => 16,
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
-            'Phpml\\' => 6,
+            'PhpOption\\' => 10,
             'PhpOffice\\PhpSpreadsheet\\' => 25,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
+            'Monolog\\' => 8,
             'Matrix\\' => 7,
         ),
         'G' => 
@@ -44,11 +55,12 @@ class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'GrahamCampbell\\ResultType\\' => 26,
         ),
         'D' => 
         array (
             'DummyTrader\\Sdk\\' => 16,
-            'Ddeboer\\Imap\\' => 13,
+            'Dotenv\\' => 7,
         ),
         'C' => 
         array (
@@ -71,9 +83,25 @@ class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
         array (
             0 => __DIR__ . '/..' . '/treinetic/imageartist/src',
         ),
+        'Symfony\\Polyfill\\Php80\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php80',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
+        'Symfony\\Polyfill\\Ctype\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
+        ),
         'Psr\\SimpleCache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/src',
         ),
         'Psr\\Http\\Message\\' => 
         array (
@@ -84,9 +112,9 @@ class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
-        'Phpml\\' => 
+        'PhpOption\\' => 
         array (
-            0 => __DIR__ . '/..' . '/php-ai/php-ml/src',
+            0 => __DIR__ . '/..' . '/phpoption/phpoption/src/PhpOption',
         ),
         'PhpOffice\\PhpSpreadsheet\\' => 
         array (
@@ -95,6 +123,10 @@ class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
         'Matrix\\' => 
         array (
@@ -112,13 +144,17 @@ class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
+        'GrahamCampbell\\ResultType\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
+        ),
         'DummyTrader\\Sdk\\' => 
         array (
             0 => __DIR__ . '/..' . '/dummytrader/sdk/src',
         ),
-        'Ddeboer\\Imap\\' => 
+        'Dotenv\\' => 
         array (
-            0 => __DIR__ . '/..' . '/ddeboer/imap/src',
+            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
         ),
         'Curl\\' => 
         array (
@@ -142,20 +178,32 @@ class ComposerStaticInitedacdef1aab20a4660a295e080fdf993
                 0 => __DIR__ . '/..' . '/ezyang/htmlpurifier/library',
             ),
         ),
+        'C' => 
+        array (
+            'Curl' => 
+            array (
+                0 => __DIR__ . '/..' . '/curl/curl/src',
+            ),
+        ),
     );
 
     public static $classMap = array (
+        'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'FPDF' => __DIR__ . '/..' . '/setasign/fpdf/fpdf.php',
+        'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
+        'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
+        'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
+        'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitedacdef1aab20a4660a295e080fdf993::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitedacdef1aab20a4660a295e080fdf993::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitedacdef1aab20a4660a295e080fdf993::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitedacdef1aab20a4660a295e080fdf993::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf3ef2c96c54691b90192a651d47706e8::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf3ef2c96c54691b90192a651d47706e8::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitf3ef2c96c54691b90192a651d47706e8::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitf3ef2c96c54691b90192a651d47706e8::$classMap;
 
         }, null, ClassLoader::class);
     }

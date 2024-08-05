@@ -2,7 +2,7 @@
 
 require_once TO_ROOT. "/system/core.php";
 
-$data = HCStudio\Util::getVarFromPGS();
+$data = HCStudio\Util::getParam();
 
 if($user_ranges = (new Unlimited\CatalogRangePerUser)->findAll("status = ?",[1]))
 {

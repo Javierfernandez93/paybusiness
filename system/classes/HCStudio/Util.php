@@ -24,7 +24,7 @@ class Util
 	public static $username_streaming = "55A332A001N";
 	public static $password_streaming = "99e01032Axx";
 	public static $days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-	public static $months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+	public static $months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
 
 	const USERNAME = "1922@FUNNELS07";
 	const PASSWORD = "@FUNNELS07@";
@@ -127,23 +127,13 @@ class Util
 	# Convertimos arreglo en objeto
 	public static function arr2obj(array $array = null)
 	{
-		if(isset($array))
-		{
-			$json = json_encode($array);
-			$object = json_decode($json);
-
-			return $object;
-		}
-
-		return null;
+		return $array ? json_decode(json_encode($array)) : null;
 	}
 
 	# Convertimos objeto en arreglo
 	public static function obj2arr(array $array)
 	{
-		$json = json_encode($object);
-		$array = json_decode($json, true);
-		return $array;
+		return $array ? json_decode(json_encode($array)) : null;
 	}
 
 	# Devuelve nombre de script ejecutado
@@ -295,7 +285,7 @@ class Util
 		die();
 	}
 
-	public static function getVarFromPGS($var = null, $session_included = true, $server_auth_included = false)
+	public static function getParam($var = null, $session_included = true, $server_auth_included = false)
 	{
 		if (isset($var) === true) {
 			$data = (isset($_POST[$var])) ? $_POST[$var] : false;
@@ -428,7 +418,7 @@ class Util
 			self::getHeadersForAllDevices();
 		}
 
-		$data = self::getVarFromPGS(null, $session_included, $server_auth_included);
+		$data = self::getParam(null, $session_included, $server_auth_included);
 		$data["gzip"] = self::getCompressor();
 
 		return $data;
@@ -436,10 +426,13 @@ class Util
 
 	public static function getCompressor()
 	{
-		if (!ob_start("ob_gzhandler")) {
+		if (!in_array('ob_gzhandler', ob_list_handlers())) {
+			ob_start('ob_gzhandler');
+		} else {
 			ob_start();
-			return false;
-		} else return true;
+		}
+
+		return true;
 	}
 
 	public static function getDiffDaysFormat($date = null)
@@ -570,6 +563,8 @@ class Util
 				$timeleft[] = "{$left} " . ($left == 1 ? $time_sing : $time_plur);
 			}
 		}
+		
+		$ptime = isset($ptime) ? $ptime : time();
 
 		return $timeleft ? (time() > $ptime ? null : '-') . implode(' ', $timeleft) : 0;
 	}
@@ -647,29 +642,38 @@ class Util
 			}
 		}
 
+		$ptime = isset($ptime) ? $ptime : time();
+
 		return $timeleft ? (time() > $ptime ? null : '-') . implode(' ', $timeleft) : 0;
 	}
 
-	public static function getServerPath()
-	{
-		return Connection::$protocol . "://" . Connection::$proyect_url;
-	}
 	public static function getHeadersForAllDevices()
 	{
 		set_time_limit(0);
 		ini_set("memory_limit", "1024M");
 		ini_set("allow_url_fopen", true);
 
-		header("Content-Type: application/json");
-		header("Access-Control-Allow-Origin: *");
-		header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+		self::setHeaders();
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST' && empty($_POST)) $_POST = json_decode(file_get_contents('php://input'), true);
 	}
+
+	public static function setHeaders()
+	{
+		if(in_array('Content-Type: application/json',headers_list()))
+		{
+			return;
+		}
+		
+		header("Content-Type: application/json");
+		header("Access-Control-Allow-Origin: *");
+		header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+	}
+
 	public static function debug($var = null)
 	{
 		if (isset($var)) {
-			if ($debug = self::getVarFromPGS("debug")) {
+			if ($debug = self::getParam("debug")) {
 				echo "<pre>";
 				print_r($var);
 				die;
@@ -746,6 +750,11 @@ class Util
 	}
 
 	public static function isJson(string $string = null) {
+		if(is_null($string))
+		{
+			return $string;
+		}
+
 		json_decode($string);
 		return json_last_error() === JSON_ERROR_NONE;
 	}

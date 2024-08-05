@@ -2,7 +2,7 @@
 
 require_once TO_ROOT. "/system/core.php";
 
-$data = HCStudio\Util::getVarFromPGS();
+$data = HCStudio\Util::getParam();
 
 $MembershipPerUser = new Unlimited\MembershipPerUser;
 // $users = $MembershipPerUser->findAll("status = ? AND take = ?",[1,0]);
