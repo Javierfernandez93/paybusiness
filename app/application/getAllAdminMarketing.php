@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($UserSupport->hasPermission('list_marketing'))
     {
-        if($users = (new Unlimited\MarketingFieldPerUser)->getAll())
+        if($users = (new Site\MarketingFieldPerUser)->getAll())
         {
             $data["users"] = $users;
             $data["s"] = 1;

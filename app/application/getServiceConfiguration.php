@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if((new Unlimited\ServicePerUser)->hasService($UserLogin->company_id))
+    if((new Site\ServicePerUser)->hasService($UserLogin->company_id))
     {
         $data['s'] = 1;
         $data['r'] = 'DATA_OK';

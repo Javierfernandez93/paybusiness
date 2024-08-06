@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($licences = (new Unlimited\LicencePerUser)->_getAll($UserLogin->company_id))
+    if($licences = (new Site\LicencePerUser)->_getAll($UserLogin->company_id))
     {
         $data['licences'] = formatData($licences);
         $data['r'] = 'DATA_OK';
@@ -23,8 +23,8 @@ if($UserLogin->logged === true)
 }
 
 function formatData(array $licences = null) : array {
-    $UserAddress = new Unlimited\UserAddress;
-    $UserContact = new Unlimited\UserContact;
+    $UserAddress = new Site\UserAddress;
+    $UserContact = new Site\UserContact;
     $Country = new World\Country;
     
     return array_map(function($licence) use($Country,$UserAddress,$UserContact) {

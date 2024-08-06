@@ -4,13 +4,13 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['intent_chat_id'])
     {
-        $IntentChat = new Unlimited\IntentChat;
+        $IntentChat = new Site\IntentChat;
 
         if($IntentChat->loadWhere('intent_chat_id = ?',$data['intent_chat_id']))
         {

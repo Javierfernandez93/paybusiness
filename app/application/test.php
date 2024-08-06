@@ -8,12 +8,12 @@ sendWhatsApp(1);
 
 function sendWhatsApp(int $user_login_id = null) : bool
 {
-    return Unlimited\ApiWhatsApp::sendWhatsAppMessage([
-        'message' => Unlimited\ApiWhatsAppMessages::getWelcomeMessage(),
+    return Site\ApiWhatsApp::sendWhatsAppMessage([
+        'message' => Site\ApiWhatsAppMessages::getWelcomeMessage(),
         'image' => null,
         'contact' => [
-            "phone" => (new Unlimited\UserContact)->getWhatsApp($user_login_id),
-            "name" => (new Unlimited\UserData)->getName($user_login_id)
+            "phone" => (new Site\UserContact)->getWhatsApp($user_login_id),
+            "name" => (new Site\UserData)->getName($user_login_id)
         ]
     ]);
 }

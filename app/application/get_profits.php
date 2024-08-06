@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {   
-    if($profits = (new Unlimited\CommissionPerUser)->getAll($UserLogin->company_id))
+    if($profits = (new Site\CommissionPerUser)->getAll($UserLogin->company_id))
     {
         $data['profits'] = format($profits);
         $data["s"] = 1;
@@ -23,7 +23,7 @@ if($UserLogin->logged === true)
 }
 
 function format(array $profits = null) : array {
-    $Package = new Unlimited\Package;
+    $Package = new Site\Package;
     return array_map(function($profit) use($Package) {
         $profit['package'] = $Package->getPackage($profit['package_id']);
         return $profit;

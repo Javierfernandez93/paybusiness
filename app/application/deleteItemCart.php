@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
@@ -13,7 +13,7 @@ if($UserLogin->logged === true)
         $Cart = Jcart\Cart::getInstance(Jcart\Cart::LAST_INSTANCE);
         $Cart->loadFromSession();
         
-        $Package = new Unlimited\Package;
+        $Package = new Site\Package;
 
         if($Package->loadWhere("package_id = ? AND status = ?",[$data['id'],1]))
         {

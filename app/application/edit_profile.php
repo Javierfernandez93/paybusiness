@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -53,7 +53,7 @@ if($UserLogin->logged === true)
 
 function updateUserData($data = null,$company_id = null)
 {
-    $UserData = new Unlimited\UserData;   
+    $UserData = new Site\UserData;   
         
     if($UserData->loadWhere("user_login_id = ?",$company_id))
     {
@@ -67,7 +67,7 @@ function updateUserData($data = null,$company_id = null)
 
 function updateUserContact($data = null,$company_id = null)
 {
-    $UserContact = new Unlimited\UserContact;   
+    $UserContact = new Site\UserContact;   
         
     if($UserContact->loadWhere("user_login_id = ?",$company_id))
     {
@@ -80,7 +80,7 @@ function updateUserContact($data = null,$company_id = null)
 
 function updateUserAccount($data = null,$company_id = null)
 {
-    $UserAccount = new Unlimited\UserAccount;   
+    $UserAccount = new Site\UserAccount;   
         
     if($UserAccount->loadWhere("user_login_id = ?",$company_id))
     {
@@ -102,7 +102,7 @@ function updateUserAccount($data = null,$company_id = null)
 
 function updateUserAddress($data = null,$company_id = null)
 {
-    $UserAddress = new Unlimited\UserAddress;   
+    $UserAddress = new Site\UserAddress;   
         
     if($UserAddress->loadWhere("user_login_id = ?",$company_id))
     {
@@ -117,7 +117,7 @@ function updateUserAddress($data = null,$company_id = null)
 
 function updatePaymentMethodPerUser($data = null,$company_id = null)
 {
-    $PaymentMethodPerUser = new Unlimited\PaymentMethodPerUser;   
+    $PaymentMethodPerUser = new Site\PaymentMethodPerUser;   
         
     if(!$PaymentMethodPerUser->loadWhere("user_login_id = ?",$company_id))
     {

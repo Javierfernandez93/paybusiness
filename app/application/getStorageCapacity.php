@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-	$StoragePerUser = new Unlimited\StoragePerUser;
+	$StoragePerUser = new Site\StoragePerUser;
 
 	if($data['path'] = $StoragePerUser->getStoragePerUserId($UserLogin->company_id))
 	{
@@ -18,7 +18,7 @@ if($UserLogin->logged === true)
 		}
 
 
-		$data['max_size'] = HCStudio\Util::formatSizeUnits(Unlimited\StoragePerUser::DEFAULT_DISK_SIZE);
+		$data['max_size'] = HCStudio\Util::formatSizeUnits(Site\StoragePerUser::DEFAULT_DISK_SIZE);
 		$data['size'] = HCStudio\Util::formatSizeUnits($StoragePerUser->getDiskUsed($data['full_path']));
         $data['percentaje'] = $StoragePerUser->getPercentajeDiskUsed($data['full_path']);
 		$data['r'] = 'DATA_OK';

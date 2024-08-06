@@ -7,8 +7,8 @@ $data = HCStudio\Util::getHeadersForWebService();
 $create_date = strtotime(date("2024-03-04 00:00:00"));
 $catalog_commission_id = 7;
 
-$commissions = (new Unlimited\CommissionPerUser)->connection()->rows("SELECT * FROM commission_per_user where create_date > {$create_date} AND catalog_commission_id >= {$catalog_commission_id}");
-// $commissions = (new Unlimited\CommissionPerUser)->connection()->rows("SELECT * FROM commission_per_user where create_date > {$create_date} AND catalog_commission_id >= {$catalog_commission_id}
+$commissions = (new Site\CommissionPerUser)->connection()->rows("SELECT * FROM commission_per_user where create_date > {$create_date} AND catalog_commission_id >= {$catalog_commission_id}");
+// $commissions = (new Site\CommissionPerUser)->connection()->rows("SELECT * FROM commission_per_user where create_date > {$create_date} AND catalog_commission_id >= {$catalog_commission_id}
 
 //     and user_login_id = 12
 //     and user_login_id_from = 170
@@ -16,8 +16,8 @@ $commissions = (new Unlimited\CommissionPerUser)->connection()->rows("SELECT * F
 
 if($commissions)
 {
-    $CommissionPerUser = new Unlimited\CommissionPerUser;
-    $MembershipPerUser = new Unlimited\MembershipPerUser;
+    $CommissionPerUser = new Site\CommissionPerUser;
+    $MembershipPerUser = new Site\MembershipPerUser;
     $TransactionPerWallet = new BlockChain\TransactionPerWallet;
 
     $users = [];

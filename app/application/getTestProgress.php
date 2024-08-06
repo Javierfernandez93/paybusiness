@@ -4,13 +4,13 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-	if($progress = (new Unlimited\Exercise)->getCurrentExercise($UserLogin->company_id))
+	if($progress = (new Site\Exercise)->getCurrentExercise($UserLogin->company_id))
     {
-        $data['status'] = (new Unlimited\Exercise)->_getStatus($UserLogin->company_id);
+        $data['status'] = (new Site\Exercise)->_getStatus($UserLogin->company_id);
         $data['progress'] = $progress;
         $data['r'] = 'DATA_OK';
 	    $data['s'] = 1;

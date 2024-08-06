@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $UserReferral = new Unlimited\UserReferral;
+    $UserReferral = new Site\UserReferral;
     
     if($referrals = $UserReferral->getLastReferrals($UserLogin->company_id))
     {

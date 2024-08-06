@@ -4,15 +4,15 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['whatsapp_list_per_user_id'])
     {
-        if($contact_ids = Unlimited\WhatsAppContact::saveContacts($data['contacts']))
+        if($contact_ids = Site\WhatsAppContact::saveContacts($data['contacts']))
         {
-            if(Unlimited\ContactPerWhatsAppList::saveContacts($contact_ids,$data['whatsapp_list_per_user_id']))
+            if(Site\ContactPerWhatsAppList::saveContacts($contact_ids,$data['whatsapp_list_per_user_id']))
             {
                 $data['r'] = 'SAVE_OK';
                 $data['s'] = 1;

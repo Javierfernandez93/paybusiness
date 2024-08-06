@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-	if($catalog_messages = (new Unlimited\CatalogMessageWhatsAppType)->getAll())
+	if($catalog_messages = (new Site\CatalogMessageWhatsAppType)->getAll())
 	{
 		$data['catalog_messages'] = $catalog_messages;
 		$data['r'] = 'DATA_OK';

@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($marketingFields = (new Unlimited\MarketingFieldPerUser)->getAllMarketingFeedBacksMain($UserLogin->company_id))
+    if($marketingFields = (new Site\MarketingFieldPerUser)->getAllMarketingFeedBacksMain($UserLogin->company_id))
     {
         $data['marketingFields'] = $marketingFields;
         $data['s'] = 1;

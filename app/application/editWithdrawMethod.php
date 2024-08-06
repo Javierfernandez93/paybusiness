@@ -4,15 +4,15 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $UserWallet = new Unlimited\UserWallet;
+    $UserWallet = new Site\UserWallet;
     
     if($UserWallet->getSafeWallet($UserLogin->company_id))
     {
-        $WithdrawMethodPerUser = new Unlimited\WithdrawMethodPerUser;
+        $WithdrawMethodPerUser = new Site\WithdrawMethodPerUser;
         
         if(!$WithdrawMethodPerUser->loadWhere("catalog_withdraw_method_id = ? AND user_login_id = ?",[$data['catalog_withdraw_method_id'],$UserLogin->company_id]))
         {

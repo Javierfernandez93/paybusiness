@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($catalog_commission_types = (new Unlimited\CatalogCommissionType)->getAll())
+    if($catalog_commission_types = (new Site\CatalogCommissionType)->getAll())
     {
         $data["catalog_commission_types"] = $catalog_commission_types;
         $data["s"] = 1;

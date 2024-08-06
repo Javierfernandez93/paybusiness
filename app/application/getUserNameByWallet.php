@@ -4,7 +4,7 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
@@ -12,7 +12,7 @@ if($UserLogin->logged === true)
     {
         if($Wallet = BlockChain\Wallet::getWalletByPublicKey($data['wallet']))
         {
-            if($names = (new Unlimited\UserData)->getNames($Wallet->user_login_id))
+            if($names = (new Site\UserData)->getNames($Wallet->user_login_id))
             {
                  $data['names'] = $names;
                  $data['r'] = 'DATA_OK';

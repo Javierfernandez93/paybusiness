@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -38,33 +38,33 @@ if($UserLogin->logged === true)
 	$data['r'] = 'INVALID_CREDENTIALS';
 }
 
-function createTransaction(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
+function createTransaction(Site\BuyPerUser $BuyPerUser = null,Site\UserLogin $UserLogin = null)
 {
-	if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::COINPAYMENTS)
+	if($BuyPerUser->catalog_payment_method_id == Site\CatalogPaymentMethod::COINPAYMENTS)
 	{
 		return createTransactionFromCoinPayments($BuyPerUser,$UserLogin);
-	} else if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::PAYPAL) {
+	} else if($BuyPerUser->catalog_payment_method_id == Site\CatalogPaymentMethod::PAYPAL) {
 		return createTransactionPayPal($BuyPerUser,$UserLogin);
-	} else if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::EWALLET) {
+	} else if($BuyPerUser->catalog_payment_method_id == Site\CatalogPaymentMethod::EWALLET) {
 		return createTransactionFromEwallet($BuyPerUser,$UserLogin);
-	} else if($BuyPerUser->catalog_payment_method_id == Unlimited\CatalogPaymentMethod::CAPITALPAYMENTS) {
+	} else if($BuyPerUser->catalog_payment_method_id == Site\CatalogPaymentMethod::CAPITALPAYMENTS) {
 		return createTransactionCapitalPayments($BuyPerUser,$UserLogin);
 	}
 }
 
-function createTransactionCapitalPayments(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
+function createTransactionCapitalPayments(Site\BuyPerUser $BuyPerUser = null,Site\UserLogin $UserLogin = null)
 {
     require_once TO_ROOT .'/vendor/autoload.php';
 
-	$Sdk = new \CapitalPayments\Sdk\Sdk(Unlimited\SystemVar::_getValue("api_key"),Unlimited\SystemVar::_getValue("api_secret"));
+	$Sdk = new \CapitalPayments\Sdk\Sdk(Site\SystemVar::_getValue("api_key"),Site\SystemVar::_getValue("api_secret"));
 
 	$response = $Sdk->createInvoice([
 		'amount' => $BuyPerUser->amount,
 		'invoice_id' => $BuyPerUser->getId(),
 		'unique_id' => $BuyPerUser->user_login_id,
-		'whatsapp' => (new Unlimited\UserContact)->getWhatsApp($BuyPerUser->user_login_id),
-		'name' => (new Unlimited\UserData)->getName($BuyPerUser->user_login_id),
-		'email' => (new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id)
+		'whatsapp' => (new Site\UserContact)->getWhatsApp($BuyPerUser->user_login_id),
+		'name' => (new Site\UserData)->getName($BuyPerUser->user_login_id),
+		'email' => (new Site\UserLogin)->getEmail($BuyPerUser->user_login_id)
 	]);
 
 	if ($response['status'] == JFStudio\CapitalPayments::STATUS_200) {
@@ -74,7 +74,7 @@ function createTransactionCapitalPayments(Unlimited\BuyPerUser $BuyPerUser = nul
 	return false;
 }
 
-function createTransactionPayPal(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
+function createTransactionPayPal(Site\BuyPerUser $BuyPerUser = null,Site\UserLogin $UserLogin = null)
 {
 	require_once TO_ROOT . "/system/vendor/autoload.php";
 
@@ -128,7 +128,7 @@ function createTransactionPayPal(Unlimited\BuyPerUser $BuyPerUser = null,Unlimit
 	}
 }
 
-function createTransactionFromEwallet(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
+function createTransactionFromEwallet(Site\BuyPerUser $BuyPerUser = null,Site\UserLogin $UserLogin = null)
 {
 	return [
 		'amount' => $BuyPerUser->amount,
@@ -138,7 +138,7 @@ function createTransactionFromEwallet(Unlimited\BuyPerUser $BuyPerUser = null,Un
 	];
 }
 
-function createTransactionFromCoinPayments(Unlimited\BuyPerUser $BuyPerUser = null,Unlimited\UserLogin $UserLogin = null)
+function createTransactionFromCoinPayments(Site\BuyPerUser $BuyPerUser = null,Site\UserLogin $UserLogin = null)
 {
 	try {
 		require_once TO_ROOT .'/vendor2/autoload.php';
@@ -174,16 +174,16 @@ function createTransactionFromCoinPayments(Unlimited\BuyPerUser $BuyPerUser = nu
 
 function saveBuy($data = null,$UserLogin = null)
 {
-	$BuyPerUser = new Unlimited\BuyPerUser;
+	$BuyPerUser = new Site\BuyPerUser;
 	$BuyPerUser->user_login_id = $UserLogin->company_id;
-	$BuyPerUser->fee = Unlimited\BuyPerUser::getFee($data['catalog_payment_method_id'],$data['amount']);
+	$BuyPerUser->fee = Site\BuyPerUser::getFee($data['catalog_payment_method_id'],$data['amount']);
 	$BuyPerUser->item = Jcart\Cart::formatFundsItems($data['amount']);
 	$BuyPerUser->checkout_data = json_encode([]);
 	$BuyPerUser->ipn_data = json_encode([]);
 	$BuyPerUser->invoice_id = Jcart\Cart::getInstanceId();
 	$BuyPerUser->shipping = 0;
 	$BuyPerUser->catalog_payment_method_id = $data['catalog_payment_method_id'];
-	$BuyPerUser->catalog_currency_id = $data['catalog_currency_id'] ? $data['catalog_currency_id'] : Unlimited\CatalogCurrency::USD;
+	$BuyPerUser->catalog_currency_id = $data['catalog_currency_id'] ? $data['catalog_currency_id'] : Site\CatalogCurrency::USD;
 	$BuyPerUser->amount = $data['amount'];
 	$BuyPerUser->create_date = time();
 	

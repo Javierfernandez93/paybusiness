@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($catalogMamAccounts = (new Unlimited\CatalogMamAccount)->getAll())
+    if($catalogMamAccounts = (new Site\CatalogMamAccount)->getAll())
     {
         $data["catalogMamAccounts"] = $catalogMamAccounts;
         $data["s"] = 1;

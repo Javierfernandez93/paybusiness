@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if ($UserLogin->logged === true) 
 {
-    if ((new Unlimited\UserApi)->sendInvoiceWhatsApp([
+    if ((new Site\UserApi)->sendInvoiceWhatsApp([
         'whatsApp' => $data['whatsapp'],
         'name' => $data['name'],
         'invoice_id' => $data['invoice_id'],

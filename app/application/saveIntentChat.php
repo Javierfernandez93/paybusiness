@@ -4,13 +4,13 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if((new Unlimited\CatalogTagIntentChat)->isUnique($UserLogin->company_id,$data['tag']))
+    if((new Site\CatalogTagIntentChat)->isUnique($UserLogin->company_id,$data['tag']))
     {
-        if((new Unlimited\IntentChat)->add($data,$UserLogin->company_id))
+        if((new Site\IntentChat)->add($data,$UserLogin->company_id))
         {
             $data['s'] = 1;
             $data['r'] = 'DATA_OK';

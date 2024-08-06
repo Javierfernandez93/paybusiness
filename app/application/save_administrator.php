@@ -4,7 +4,7 @@ require_once TO_ROOT. '/system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -15,7 +15,7 @@ if($UserSupport->logged === true)
 
     if($UserSupport->isUniqueMail($data['administrator']['email']))
     {
-        $UserSupportNew = new Unlimited\UserSupport(false,false);
+        $UserSupportNew = new Site\UserSupport(false,false);
         $UserSupportNew->names = ucwords(strtolower($data['administrator']['names']));
         $UserSupportNew->email = strtolower($data['administrator']['email']);
         $UserSupportNew->password = sha1($data['administrator']['password']);
@@ -48,7 +48,7 @@ function savePermissions(int $user_support_id = null,array $permissions = null) 
 {
     foreach ($permissions as $permission)
     {
-        $PermissionPerUserSupport = new Unlimited\PermissionPerUserSupport;
+        $PermissionPerUserSupport = new Site\PermissionPerUserSupport;
         $PermissionPerUserSupport->loadWhere("user_support_id = ? AND catalog_permission_id = ?",[$user_support_id,$permission['catalog_permission_id']]);
         $PermissionPerUserSupport->user_support_id = $user_support_id;
         $PermissionPerUserSupport->catalog_permission_id = $permission['catalog_permission_id'];

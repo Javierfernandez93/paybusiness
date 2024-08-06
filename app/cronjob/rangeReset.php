@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 // $data = HCStudio\Util::getParam();
 // 
-// $CatalogRangePerUser = new Unlimited\CatalogRangePerUser;
+// $CatalogRangePerUser = new Site\CatalogRangePerUser;
 // 
 // $catalog_ranges = $CatalogRangePerUser->findAll("status IN(?,?)",[1,2],["catalog_range_per_user_id"]);
 // 
@@ -18,8 +18,8 @@ require_once TO_ROOT. "/system/core.php";
 // 
             // if($CatalogRangePerUser->save())
             // {
-                // Unlimited\CatalogRangePerUser::insertFirstRange([
-                    // 'catalog_range_id' => Unlimited\CatalogRange::FIRST_RANGE_ID,
+                // Site\CatalogRangePerUser::insertFirstRange([
+                    // 'catalog_range_id' => Site\CatalogRange::FIRST_RANGE_ID,
                     // 'user_login_id' => $CatalogRangePerUser->user_login_id,
                 // ]);
             // }

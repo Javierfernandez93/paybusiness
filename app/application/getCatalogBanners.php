@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($catalogBanners = (new Unlimited\CatalogBanner)->getAll())
+    if($catalogBanners = (new Site\CatalogBanner)->getAll())
     {
         $data['catalogBanners'] = format($catalogBanners);
         $data['r'] = 'DATA_OK';

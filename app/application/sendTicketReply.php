@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -14,7 +14,7 @@ if($UserLogin->logged === true)
         {
             if(isset($data['send_from']) === true)
             {
-                if(Unlimited\ItemPerTicket::saveItem($data))
+                if(Site\ItemPerTicket::saveItem($data))
                 {
                     $data['s'] = 1;
                     $data['r'] = 'DATA_OK';

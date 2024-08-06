@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -12,7 +12,7 @@ if($UserLogin->logged === true)
     {
         if($data['wallet_id'])
         {
-            $BuyPerUser = new Unlimited\BuyPerUser;
+            $BuyPerUser = new Site\BuyPerUser;
 
             if($BuyPerUser->loadWhere('invoice_id = ?',$data['invoice_id']))
             {
@@ -31,7 +31,7 @@ if($UserLogin->logged === true)
                                 'user' => HCStudio\Util::USERNAME,
                                 'password' => HCStudio\Util::PASSWORD,
                                 'invoice_id' => $data['invoice_id'],
-                                'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::EWALLET,
+                                'catalog_validation_method_id' => Site\CatalogValidationMethod::EWALLET,
                                 'ipn_data' => json_encode($data),
                             ]);
 
@@ -39,7 +39,7 @@ if($UserLogin->logged === true)
                             //     'user' => HCStudio\Util::USERNAME,
                             //     'password' => HCStudio\Util::PASSWORD,
                             //     'invoice_id' => $data['invoice_id'],
-                            //     'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::EWALLET,
+                            //     'catalog_validation_method_id' => Site\CatalogValidationMethod::EWALLET,
                             //     'ipn_data' => json_encode($data),
                             // ]));
 

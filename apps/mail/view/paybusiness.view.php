@@ -17,6 +17,6 @@
 
 <h3>
     <b>
-        Equipo <?php echo Unlimited\SystemVar::_getValue("company_name");?>
+        Equipo <?php echo Site\SystemVar::_getValue("company_name");?>
     </b>
 </h3>

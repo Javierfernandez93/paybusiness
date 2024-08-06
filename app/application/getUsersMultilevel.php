@@ -4,23 +4,23 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($multilevel = Unlimited\UserReferral::getNetworkData(10,$UserLogin->company_id))
+    if($multilevel = Site\UserReferral::getNetworkData(10,$UserLogin->company_id))
     {   
         $data['getRanges'] = isset($data['getRanges']) ? filter_var($data['getRanges'], FILTER_VALIDATE_BOOL) : true;
 
         if($data['getRanges'])
         {
-            $data["nextRange"] = (new Unlimited\CatalogRangePerUser)->getNextRange($UserLogin->company_id);
+            $data["nextRange"] = (new Site\CatalogRangePerUser)->getNextRange($UserLogin->company_id);
         }
         
-        $BuyPerUser = new Unlimited\BuyPerUser;
+        $BuyPerUser = new Site\BuyPerUser;
 
         $data["multilevel"] = $BuyPerUser->appendActives($multilevel);
-        $data["multilevel"] = Unlimited\CommissionPerUser::appendCommissionToNetwork($data['multilevel'],$UserLogin->company_id);
+        $data["multilevel"] = Site\CommissionPerUser::appendCommissionToNetwork($data['multilevel'],$UserLogin->company_id);
 
         $data["s"] = 1;
         $data["r"] = "DATA_OK";

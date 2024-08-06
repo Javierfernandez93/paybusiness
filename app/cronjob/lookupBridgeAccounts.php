@@ -4,15 +4,15 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getParam();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if(($data['PHP_AUTH_USER'] ?? false == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ?? false == HCStudio\Util::PASSWORD) || $UserSupport->logged === true)
 {
-    $UserBridgeAccount = new Unlimited\UserBridgeAccount;
+    $UserBridgeAccount = new Site\UserBridgeAccount;
     
     if($account = $UserBridgeAccount->getFirstPending())
     {
-        $ApiUnlimited = new Unlimited\ApiUnlimited;
+        $ApiUnlimited = new Site\ApiUnlimited;
 
         if($response = $ApiUnlimited->signupUser([
             'firstname' => $account['first_name'],
@@ -33,9 +33,9 @@ if(($data['PHP_AUTH_USER'] ?? false == HCStudio\Util::USERNAME && $data['PHP_AUT
         {
             if($response['s'] == 1)
             {
-                if(Unlimited\UserBridgeAccount::setAccount($account['user_bridge_account_id'],$response['account']))
+                if(Site\UserBridgeAccount::setAccount($account['user_bridge_account_id'],$response['account']))
                 {
-                    if(sendPush($account['user_login_id'],'Hemos dado tu cuenta en Bridge funds',Unlimited\CatalogNotification::ACCOUNT))
+                    if(sendPush($account['user_login_id'],'Hemos dado tu cuenta en Bridge funds',Site\CatalogNotification::ACCOUNT))
                     {
                         $data['push_sent'] = true;
                     }
@@ -65,7 +65,7 @@ if(($data['PHP_AUTH_USER'] ?? false == HCStudio\Util::USERNAME && $data['PHP_AUT
 
 function sendPush(string $user_login_id = null,string $message = null,int $catalog_notification_id = null) : bool
 {
-    return Unlimited\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
+    return Site\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
 }
 
 echo json_encode(HCStudio\Util::compressDataForPhone($data)); 

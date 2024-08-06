@@ -4,13 +4,13 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['whatsapp_contact_id'])
     {
-        $WhatsAppContact = new Unlimited\WhatsAppContact;
+        $WhatsAppContact = new Site\WhatsAppContact;
 
         if($WhatsAppContact->loadWhere('whatsapp_contact_id = ?',$data['whatsapp_contact_id']))
         {

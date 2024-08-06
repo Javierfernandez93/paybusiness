@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-	$Product = new Unlimited\Product;
+	$Product = new Site\Product;
 
 	if($Product->loadWhere("product_id = ? AND status = ?",[$data['product_id'],JFStudio\Constants::AVIABLE]))
 	{

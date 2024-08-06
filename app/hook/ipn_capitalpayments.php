@@ -3,8 +3,8 @@
 require_once TO_ROOT . "/system/core.php";
 
 
-$api_key = Unlimited\SystemVar::_getValue("api_key");
-$ipn_secret = Unlimited\SystemVar::_getValue("ipn_secret");
+$api_key = Site\SystemVar::_getValue("api_key");
+$ipn_secret = Site\SystemVar::_getValue("ipn_secret");
 
 if (!isset($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_USER'])) {
     echo json_encode(['error'=>"No api_key authentication sent"]);die;
@@ -58,7 +58,7 @@ function processIPN(array $data = null)
 
 function saveIPN(array $data = null)
 {
-  $Ipn = new Unlimited\Ipn;
+  $Ipn = new Site\Ipn;
   $Ipn->data = json_encode($data);
   $Ipn->create_date = time();
   $Ipn->status = 1;
@@ -74,7 +74,7 @@ function validateBuy(array $data = null)
         'user' => HCStudio\Util::USERNAME,
         'password' => HCStudio\Util::PASSWORD,
         'invoice_id' => $data['invoice_id'],
-        'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::CAPITALPAYMENTS_IPN,
+        'catalog_validation_method_id' => Site\CatalogValidationMethod::CAPITALPAYMENTS_IPN,
         'ipn_data' => json_encode($data),
     ]);
     
@@ -90,8 +90,8 @@ function deleteBuy(array $data = null)
         'user' => HCStudio\Util::USERNAME,
         'password' => HCStudio\Util::PASSWORD,
         'invoice_id' => $data['order_id'],
-        'status' => Unlimited\BuyPerUser::EXPIRED,
-        'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::CAPITALPAYMENTS_IPN,
+        'status' => Site\BuyPerUser::EXPIRED,
+        'catalog_validation_method_id' => Site\CatalogValidationMethod::CAPITALPAYMENTS_IPN,
         'ipn_data' => json_encode($data),
     ]);
 
@@ -100,14 +100,14 @@ function deleteBuy(array $data = null)
 
 function setPayoutAsDone(array $data = null)
 {
-    if(Unlimited\BuyPerBridge::isBuyPerBridgePayoutId($data['payout_id']))
+    if(Site\BuyPerBridge::isBuyPerBridgePayoutId($data['payout_id']))
     {   
-        Unlimited\BuyPerBridge::setAsBridgePaid([
-            'buy_per_bridge_id' => Unlimited\BuyPerBridge::getSanitizedId($data['payout_id']),
+        Site\BuyPerBridge::setAsBridgePaid([
+            'buy_per_bridge_id' => Site\BuyPerBridge::getSanitizedId($data['payout_id']),
             'tx_id' => $data['tx_id'],
         ]);
     } else {
-        Unlimited\WithdrawPerUser::setAsDepositedForPayout([
+        Site\WithdrawPerUser::setAsDepositedForPayout([
             'withdraw_per_user_id' => $data['payout_id'],
             'tx_id' => $data['tx_id']
         ]);

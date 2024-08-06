@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
     $data['catalog_broker_id'] = isset($data['catalog_broker_id']) ? $data['catalog_broker_id'] : null;
      
-    if($userAccounts = (new Unlimited\UserBridgeAccount)->getAllFromUser($UserLogin->company_id,$data['catalog_broker_id']))
+    if($userAccounts = (new Site\UserBridgeAccount)->getAllFromUser($UserLogin->company_id,$data['catalog_broker_id']))
     {
         $data['userAccounts'] = $userAccounts;
         $data['s'] = 1;

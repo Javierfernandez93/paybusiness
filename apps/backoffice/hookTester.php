@@ -3,7 +3,7 @@
 require_once TO_ROOT . "/system/core.php";
 
 
-// $res = Unlimited\HookManager::sendHook([
+// $res = Site\HookManager::sendHook([
 // 	'hook_url' => 'https://cpipn.auiro.com/capital-payments/handle-webhook',
 // 	'api_key' => 'pE5jheozAG1LlST9',
 // 	'ipn_secret' => '13laJWQToqku5dctv',
@@ -11,9 +11,9 @@ require_once TO_ROOT . "/system/core.php";
 // 	'invoice_id' => 1260
 // ]);
 
-// $HookManagerState = Unlimited\HookManagerStates::ORDER_PAID;
+// $HookManagerState = Site\HookManagerStates::ORDER_PAID;
 
-// $res = Unlimited\HookManager::sendHook([
+// $res = Site\HookManager::sendHook([
 //     'hook_url' => 'https://cpipn.auiro.com/capital-payments/handle-webhook',
 // 	'api_key' => 'pE5jheozAG1LlST9',
 // 	'ipn_secret' => '13laJWQToqku5dctv',
@@ -22,9 +22,9 @@ require_once TO_ROOT . "/system/core.php";
 //     'message' => $HookManagerState->label()
 // ]);
 
-$HookManagerState = Unlimited\HookManagerStates::ORDER_CANCELED;
+$HookManagerState = Site\HookManagerStates::ORDER_CANCELED;
 
-$res = Unlimited\HookManager::sendHook([
+$res = Site\HookManager::sendHook([
     'hook_url' => 'https://cpipn.auiro.com/capital-payments/handle-webhook',
 	'api_key' => 'pE5jheozAG1LlST9',
 	'ipn_secret' => '13laJWQToqku5dctv',

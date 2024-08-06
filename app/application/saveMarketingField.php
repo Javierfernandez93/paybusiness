@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
     if(sizeof(array_filter(array_column($data['data'], 'value'))) > 0)
     {
-        if(Unlimited\MarketingFieldPerUser::update([
+        if(Site\MarketingFieldPerUser::update([
             'catalog_marketing_field_id' => $data['catalog_marketing_field_id'],
             'user_login_id' => $UserLogin->company_id,
             'value' => $data['data'],

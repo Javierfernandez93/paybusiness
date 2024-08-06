@@ -4,14 +4,14 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$BuyPerUser = new Unlimited\BuyPerUser;
+$BuyPerUser = new Site\BuyPerUser;
 $buys = $BuyPerUser->findAll("amount = ? AND catalog_payment_method_id = ? AND status = ?",[240,7,2],["user_login_id","amount"]);
 
 if($buys)
 {
     foreach($buys as $buy)
     {
-        $ProductPermission = new Unlimited\ProductPermission;
+        $ProductPermission = new Site\ProductPermission;
         
         if($ProductPermission->loadWhere("user_login_id = ? AND product_id = ? AND status = ?",[$buy['user_login_id'],2,1]))
         {
@@ -23,7 +23,7 @@ if($buys)
         // {
         //     echo "Creandolo para {$buy['user_login_id']}\n";
 
-        //     Unlimited\BuyPerUser::addMembership([
+        //     Site\BuyPerUser::addMembership([
         //         'point' => $buy['amount'],
         //         'catalog_membership_id' => 1,
         //         'user_login_id' => $buy['user_login_id'],

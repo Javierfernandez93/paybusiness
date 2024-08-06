@@ -9,12 +9,12 @@ $returnData = Array();
 
 
 $returnData['buy_per_user_login'] = HCStudio\Util::getParam('buy_per_user_login');
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
 	if($returnData["buy_per_user_login"]){
-		$BuyPerUser = new Unlimited\BuyPerUser();
+		$BuyPerUser = new Site\BuyPerUser();
 
 		$BuyPerUser->setId($returnData["buy_per_user_login"]);
 

@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    $LicencePerUser = new Unlimited\LicencePerUser;
+    $LicencePerUser = new Site\LicencePerUser;
 
     if($LicencePerUser->isActiveSoonToExpire($UserLogin->company_id) || !$LicencePerUser->hasLicence($UserLogin->company_id))
     {

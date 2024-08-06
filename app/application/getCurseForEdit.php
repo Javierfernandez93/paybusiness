@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if ($UserSupport->logged === true) 
 {
      if ($data['course_id']) 
      {
-          if ($course = (new Unlimited\Course)->getCourse($data['course_id'])) 
+          if ($course = (new Site\Course)->getCourse($data['course_id'])) 
           {
                $data["course"] = $course;
                $data["s"] = 1;

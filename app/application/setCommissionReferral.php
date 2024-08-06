@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    if(Unlimited\UserReferral::addCommission($data))
+    if(Site\UserReferral::addCommission($data))
     {
         $data["s"] = 1;
         $data["r"] = "DATA_OK";

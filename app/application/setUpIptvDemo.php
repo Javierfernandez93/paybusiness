@@ -4,15 +4,15 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {	
     if($data['client_id'])
     {
-        if(Unlimited\DemoPerClient::setUpDemo($data))
+        if(Site\DemoPerClient::setUpDemo($data))
         {
-            $data['status'] = Unlimited\ServicePerClient::IN_USE;
+            $data['status'] = Site\ServicePerClient::IN_USE;
             $data['active_date'] = time();
             $data['r'] = 'DATA_OK';
             $data['s'] = 1;

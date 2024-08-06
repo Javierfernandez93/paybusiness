@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -20,7 +20,7 @@ if($UserSupport->logged === true)
                 'user' => HCStudio\Util::USERNAME,
                 'password' => HCStudio\Util::PASSWORD,
                 'invoice_id' => $data['invoice_id'],
-                'status' => Unlimited\BuyPerUser::DELETED,
+                'status' => Site\BuyPerUser::DELETED,
                 'user_support_id' => $UserSupport->getId(),
             ]);
 
@@ -28,7 +28,7 @@ if($UserSupport->logged === true)
             //     'user' => HCStudio\Util::USERNAME,
             //     'password' => HCStudio\Util::PASSWORD,
             //     'invoice_id' => $data['invoice_id'],
-            //     'status' => Unlimited\BuyPerUser::DELETED,
+            //     'status' => Site\BuyPerUser::DELETED,
             //     'user_support_id' => $UserSupport->getId(),
             // ]));
 
@@ -45,7 +45,7 @@ if($UserSupport->logged === true)
             $UserSupport->addLog([
                 'invoice_id' => $data['invoice_id'],
                 'unix_date' => time(),
-            ],Unlimited\LogType::INVALID_VALIDATION_PERMISSION);
+            ],Site\LogType::INVALID_VALIDATION_PERMISSION);
 
             $data['s'] = 0;
             $data['r'] = 'INVALID_PERMISSION';

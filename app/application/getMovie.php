@@ -4,13 +4,13 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['movie_id'])
     {
-        if($movie = (new Unlimited\Movie)->get($data['movie_id']))
+        if($movie = (new Site\Movie)->get($data['movie_id']))
         {
             $data['movie'] = $movie;
             $data['r'] = 'DATA_OK';

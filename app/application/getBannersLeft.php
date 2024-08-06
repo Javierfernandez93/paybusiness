@@ -4,15 +4,15 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($Wallet = BlockChain\Wallet::getWallet($UserLogin->company_id))
     {
-        $PrintPerBanner = new Unlimited\PrintPerBanner;
+        $PrintPerBanner = new Site\PrintPerBanner;
         
-        $data['banners'][] = $PrintPerBanner->getNextBanner($UserLogin->company_id,Unlimited\CatalogBanner::BOTTOM_LEFT);
+        $data['banners'][] = $PrintPerBanner->getNextBanner($UserLogin->company_id,Site\CatalogBanner::BOTTOM_LEFT);
         $data['r'] = 'DATA_OK';
         $data['s'] = 1;
     } else {

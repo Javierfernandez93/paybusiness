@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if($data["mail"]){
 
-	$UserLogin = new Unlimited\UserLogin;
+	$UserLogin = new Site\UserLogin;
 
 	if($UserLogin->isUniqueMail($data["mail"]))
 	{

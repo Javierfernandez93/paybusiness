@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -15,7 +15,7 @@ if($UserSupport->logged === true)
             'user_kyc_id' => $data['user_kyc_id']
         ]))
         {
-            $data["status"] = Unlimited\UserKyc::INCOMPLETE;
+            $data["status"] = Site\UserKyc::INCOMPLETE;
             $data["s"] = 1;
             $data["r"] = "DATA_OK";
         } else {

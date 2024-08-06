@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -12,7 +12,7 @@ if($UserSupport->logged === true)
     {
         if($data['tag'])
         {
-            $CatalogTagIntent = new Unlimited\CatalogTagIntent;
+            $CatalogTagIntent = new Site\CatalogTagIntent;
     
             if($CatalogTagIntent->loadWhere("tag = ?",$data['tag']) == false)
             {
@@ -49,7 +49,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'data' => $data,
             'unix_date' => time(),
-        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Site\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';
@@ -67,7 +67,7 @@ function saveIntents(array $intents = null,int $catalog_tag_intent_id = null) : 
     {
         if(empty($intent['words']) === false)
         {
-            $Intent = new Unlimited\Intent;
+            $Intent = new Site\Intent;
             $Intent->catalog_tag_intent_id = $catalog_tag_intent_id;
             $Intent->words = $intent['words'];
             $Intent->create_date = time();
@@ -90,7 +90,7 @@ function saveReplysPerCatalogTagIntent(array $replys_per_catalog_tag_intent = nu
     {
         if(empty($reply_per_catalog_tag_intent['reply']) === false)
         {
-            $ReplyPerCatalogTagIntent = new Unlimited\ReplyPerCatalogTagIntent;
+            $ReplyPerCatalogTagIntent = new Site\ReplyPerCatalogTagIntent;
             $ReplyPerCatalogTagIntent->catalog_tag_intent_id = $catalog_tag_intent_id;
             $ReplyPerCatalogTagIntent->reply = $reply_per_catalog_tag_intent['reply'];
             $ReplyPerCatalogTagIntent->create_date = time();

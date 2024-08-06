@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($images = (new Unlimited\Image)->getAll())
+    if($images = (new Site\Image)->getAll())
     {
         $data['images'] = format($images);
         $data['r'] = 'DATA_OK';

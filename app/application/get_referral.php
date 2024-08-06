@@ -4,8 +4,8 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
-$UserSupport = new Unlimited\UserSupport;
+$UserLogin = new Site\UserLogin;
+$UserSupport = new Site\UserSupport;
 
 if($UserLogin->logged === false || $UserSupport->logged === true)
 {
@@ -13,7 +13,7 @@ if($UserLogin->logged === false || $UserSupport->logged === true)
     
     if($data['referral_user_login_id'])
     {
-        $UserData = new Unlimited\UserData;
+        $UserData = new Site\UserData;
         
         if($referral = $UserLogin->getProfile($data['referral_user_login_id']))
         {

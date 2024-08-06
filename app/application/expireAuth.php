@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
     if(isset($data['key']) === true)
     {
-        if(Unlimited\AuthorizationPerUser::expireAuth($data['key']))
+        if(Site\AuthorizationPerUser::expireAuth($data['key']))
         {
             $data['s'] = 1;
             $data['r'] = 'DATA_OK';
@@ -23,7 +23,7 @@ if($UserLogin->logged === true)
         $data['r'] = 'NOT_DOCUMENTATION_ID';
     }	   
 } else {
-    $data['status'] = Unlimited\UserApiCodes::INVALID_CREDENTIALS;
+    $data['status'] = Site\UserApiCodes::INVALID_CREDENTIALS;
 }
 
 echo json_encode(HCStudio\Util::compressDataForPhone($data));

@@ -4,24 +4,24 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
     $filter = "AND package.catalog_package_type_id = '{$data['catalog_package_type_id']}'";
 
-    $BuyPerUser = new Unlimited\BuyPerUser;
+    $BuyPerUser = new Site\BuyPerUser;
 
-    if($data['catalog_package_type_id'] == Unlimited\CatalogPackageType::PAY_BUSINESS) {
+    if($data['catalog_package_type_id'] == Site\CatalogPackageType::PAY_BUSINESS) {
 
-        $membership = (new Unlimited\MembershipPerUser)->getCurrentMembership($UserLogin->company_id);
+        $membership = (new Site\MembershipPerUser)->getCurrentMembership($UserLogin->company_id);
 
         if($membership)
         {
-            $package = (new Unlimited\Package)->findRow("package_id = ?",$membership['package_id']);
+            $package = (new Site\Package)->findRow("package_id = ?",$membership['package_id']);
     
             // d($membership);
-            // $buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_BUSINESS);
+            // $buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Site\CatalogPackageType::PAY_BUSINESS);
     
             // d($buy);
     
@@ -33,9 +33,9 @@ if($UserLogin->logged === true)
         }
     }
 
-    if($data['catalog_package_type_id'] == Unlimited\CatalogPackageType::PAY_BUSINESS)
+    if($data['catalog_package_type_id'] == Site\CatalogPackageType::PAY_BUSINESS)
     {
-        $catalog_membership_id = Unlimited\MembershipPerUser::getNextMembershipPackage($UserLogin->company_id);
+        $catalog_membership_id = Site\MembershipPerUser::getNextMembershipPackage($UserLogin->company_id);
 
         if($catalog_membership_id)
         {
@@ -43,7 +43,7 @@ if($UserLogin->logged === true)
         }
     }
 
-    if($packages = (new Unlimited\Package)->getAllWithProducts($filter))
+    if($packages = (new Site\Package)->getAllWithProducts($filter))
     {
         $data['packages'] = $packages;
         $data["s"] = 1;

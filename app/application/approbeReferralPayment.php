@@ -4,36 +4,36 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
     if($data['invoice_id'])
 	{
-        if((new Unlimited\LicencePerUser)->hasAviableLicences($UserLogin->company_id))
+        if((new Site\LicencePerUser)->hasAviableLicences($UserLogin->company_id))
         {
-            $BuyPerUser = new Unlimited\BuyPerUser;
+            $BuyPerUser = new Site\BuyPerUser;
             
             if($BuyPerUser->isInvoicePending($data['invoice_id']))
             {
                 if($BuyPerUser->loadWhere('invoice_id = ?',$data['invoice_id']))
                 {	
-                    if(Unlimited\BuyPerUser::processPayment($BuyPerUser->getId()))
+                    if(Site\BuyPerUser::processPayment($BuyPerUser->getId()))
                     {
-                        $BuyPerUser->catalog_validation_method_id = Unlimited\CatalogValidationMethod::INTERNAL_USER;
+                        $BuyPerUser->catalog_validation_method_id = Site\CatalogValidationMethod::INTERNAL_USER;
                         // $BuyPerUser->ipn_data = $data['ipn_data'] ? $data['ipn_data'] : '';
                         $BuyPerUser->approved_date = time();
                         $BuyPerUser->user_support_id = $data['user_support_id'] ? $data['user_support_id'] : $BuyPerUser->user_support_id;
-                        $BuyPerUser->status = Unlimited\BuyPerUser::VALIDATED;
+                        $BuyPerUser->status = Site\BuyPerUser::VALIDATED;
     
                         if($BuyPerUser->save())
                         {
-                            if(Unlimited\LicencePerUser::assignLicence($UserLogin->company_id,$BuyPerUser->user_login_id))
+                            if(Site\LicencePerUser::assignLicence($UserLogin->company_id,$BuyPerUser->user_login_id))
                             {
                                 $data['licenceReleased'] = true;
                             }
 
-                            // if(sendEmail((new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),$BuyPerUser->invoice_id))
+                            // if(sendEmail((new Site\UserLogin)->getEmail($BuyPerUser->user_login_id),$BuyPerUser->invoice_id))
                             // {
                             //     $data['mail_sent'] = true;
                             // }
@@ -85,7 +85,7 @@ function sendEmail(string $email = null,string $invoice_id = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Unlimited\CatalogMailController::init(1);
+            $CatalogMailController = Site\CatalogMailController::init(1);
 
             $Layout->setVar([
                 "invoice_id" => $invoice_id,

@@ -5,7 +5,7 @@ require_once TO_ROOT . "/vendor/autoload.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {    
@@ -16,7 +16,7 @@ if($UserSupport->logged === true)
     //         if($data['user']['profit'] > 0)
     //         {
 
-    //             $UserBridgeAccount = new Unlimited\UserBridgeAccount;
+    //             $UserBridgeAccount = new Site\UserBridgeAccount;
 
     //             if($data['user']['first_name'])
     //             {
@@ -27,16 +27,16 @@ if($UserSupport->logged === true)
     //                     {
     //                         if(isset($data['user']['balance']) && !empty($data['user']['balance']))
     //                         {
-    //                             Unlimited\UserBridgeAccount::updateBalance($user_bridge_account_id,$data['user']['balance']);
+    //                             Site\UserBridgeAccount::updateBalance($user_bridge_account_id,$data['user']['balance']);
     //                         }
                             
-    //                         if(!(new Unlimited\GainPerClient)->exist($user_bridge_account_id))
+    //                         if(!(new Site\GainPerClient)->exist($user_bridge_account_id))
     //                         {
-    //                             if($gain_per_client_id = Unlimited\GainPerClient::add([
+    //                             if($gain_per_client_id = Site\GainPerClient::add([
     //                                 'user_bridge_account_id' => $user_bridge_account_id,
     //                                 'profit' => $data['user']['profit']
     //                             ])) {
-    //                                 if(Unlimited\CommissionPerUser::addMamCommission([
+    //                                 if(Site\CommissionPerUser::addMamCommission([
     //                                     'profit' => $data['user']['profit'],
     //                                     'user_login_id' => $data['user_login_id'],
     //                                     'gain_per_client_id' => $gain_per_client_id

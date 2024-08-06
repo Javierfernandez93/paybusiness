@@ -2,7 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if(date("Y-m-d H:i:s") < '2023-11-08 19:00:00')
 {
@@ -26,6 +26,6 @@ $Layout->setScript([
 
 $Layout->setVar([
 	'UserLogin' => $UserLogin,
-    'company_name' => Unlimited\SystemVar::_getValue('company_name')
+    'company_name' => Site\SystemVar::_getValue('company_name')
 ]);
 $Layout();

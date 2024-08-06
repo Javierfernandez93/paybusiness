@@ -4,13 +4,13 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['whatsapp_campaign_id'])
     {
-        if($campaign = (new Unlimited\WhatsAppCampaign)->getSingle($data['whatsapp_campaign_id']))
+        if($campaign = (new Site\WhatsAppCampaign)->getSingle($data['whatsapp_campaign_id']))
         {
             $data['campaign'] = $campaign;
             $data['r'] = 'DATA_OK';

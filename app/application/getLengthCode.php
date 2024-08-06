@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    for($i = 0; $i < Unlimited\AuthorizationPerUser::LENGTH_CODE; $i++)
+    for($i = 0; $i < Site\AuthorizationPerUser::LENGTH_CODE; $i++)
     {
         $data['codes'][] = [
             'value' => null,
@@ -19,7 +19,7 @@ if($UserLogin->logged === true)
     $data['s'] = 1;
     $data['r'] = 'DATA_OK';   
 } else {
-    $data['status'] = Unlimited\UserApiCodes::INVALID_CREDENTIALS;
+    $data['status'] = Site\UserApiCodes::INVALID_CREDENTIALS;
 }
 
 echo json_encode(HCStudio\Util::compressDataForPhone($data));

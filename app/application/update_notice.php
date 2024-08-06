@@ -4,15 +4,15 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $Notice = new Unlimited\Notice;
+    $Notice = new Site\Notice;
 
     if($data['notice_id'])
     {
-        if(Unlimited\Notice::addOrUpdate([
+        if(Site\Notice::addOrUpdate([
             'notice_id' => $data['notice_id'],
             'title' => $data['title'],
             'preview' => $data['preview'] ? $data['preview'] : $Notice->preview,

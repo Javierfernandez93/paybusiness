@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($classes = (new Unlimited\VideoClass)->getAllByCatalog(Unlimited\CatalogVideoClass::ACADEMY_COMING))
+    if($classes = (new Site\VideoClass)->getAllByCatalog(Site\CatalogVideoClass::ACADEMY_COMING))
     {
         $data['classes'] = $classes;
         $data['s'] = 1;

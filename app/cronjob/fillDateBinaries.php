@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$MembershipPerUser = new Unlimited\MembershipPerUser;
+$MembershipPerUser = new Site\MembershipPerUser;
 
 $memberships = $MembershipPerUser->getAllMembershipsPaybusiness();
 
@@ -14,14 +14,14 @@ if($memberships)
     {
         if($membership['amount_total'] >= $membership['target'])
         {
-            $MembershipPerUserTemp = new Unlimited\MembershipPerUser;
+            $MembershipPerUserTemp = new Site\MembershipPerUser;
 
             if($MembershipPerUserTemp->loadWhere("membership_per_user_id = ?", $membership['membership_per_user_id']))
             {
                 if(!$MembershipPerUserTemp->fill_date)
                 {
                     $MembershipPerUserTemp->fill_date = time();
-                    $MembershipPerUserTemp->status = Unlimited\MembershipPerUser::FILLED;
+                    $MembershipPerUserTemp->status = Site\MembershipPerUser::FILLED;
                     $MembershipPerUserTemp->save();
 
                     $data['memberships'][] = $membership['membership_per_user_id'];

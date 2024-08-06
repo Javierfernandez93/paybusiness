@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $UserWallet = new Unlimited\UserWallet;
+    $UserWallet = new Site\UserWallet;
     
     if($UserWallet->getSafeWallet(($data['user_login_id'])))
     {

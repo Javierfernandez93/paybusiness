@@ -39,7 +39,7 @@
         {{js_scripts}}
 
         <footer class="fixed-bottom d-none w-100 text-center py-3 fw-semibold">
-            © <script> document.write(new Date().getFullYear()) </script>, made with <i class="bi bi-heart"></i> by <a href="https://www.unlimitedgroup.io/" class="font-weight-bold" target="_blank"><?php echo Unlimited\SystemVar::_getValue('company_name'); ?></a> for a better web.
+            © <script> document.write(new Date().getFullYear()) </script>, made with <i class="bi bi-heart"></i> by <a href="https://www.unlimitedgroup.io/" class="font-weight-bold" target="_blank"><?php echo Site\SystemVar::_getValue('company_name'); ?></a> for a better web.
         </footer>
     </body>
 </html>

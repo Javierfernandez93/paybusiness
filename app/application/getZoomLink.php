@@ -4,16 +4,16 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $data["zoom_button_2"] = Unlimited\SystemVar::_getValue("zoom_button_2");
-    $data["zoom_class_2"] = Unlimited\SystemVar::_getValue("zoom_class_2");
-    $data["zoom_button_1"] = Unlimited\SystemVar::_getValue("zoom_button_1");
-    $data["zoom_class_1"] = Unlimited\SystemVar::_getValue("zoom_class_1");
+    $data["zoom_button_2"] = Site\SystemVar::_getValue("zoom_button_2");
+    $data["zoom_class_2"] = Site\SystemVar::_getValue("zoom_class_2");
+    $data["zoom_button_1"] = Site\SystemVar::_getValue("zoom_button_1");
+    $data["zoom_class_1"] = Site\SystemVar::_getValue("zoom_class_1");
 
-    $BuyPerUser = new Unlimited\BuyPerUser;    
+    $BuyPerUser = new Site\BuyPerUser;    
     $data['payBusinessAnual'] = $BuyPerUser->getPackageBuys(4,$UserLogin->company_id);
 
     if(sizeof($data['payBusinessAnual']) == 0)

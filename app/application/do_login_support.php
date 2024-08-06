@@ -14,13 +14,13 @@ if($data["email"])
 {
 	if($data["password"])
 	{		
-		$UserSupport = new Unlimited\UserSupport;
+		$UserSupport = new Site\UserSupport;
 
 		if($UserSupport->logged === true)
 		{
 			if(filter_var($data['rememberMe'], FILTER_VALIDATE_BOOLEAN) == true)
 			{
-				JFStudio\Cookie::set(Unlimited\UserSupport::PID_NAME,$UserSupport->getPid());
+				JFStudio\Cookie::set(Site\UserSupport::PID_NAME,$UserSupport->getPid());
 			}
 
 			$data["s"] = 1;

@@ -4,13 +4,13 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     $UserLogin->insertFirstRange();
 
-    $data['balance'] = (new Unlimited\CommissionPerUser)->sumWhere("user_login_id = ? AND status != ?",[$UserLogin->company_id,-1],"amount");
+    $data['balance'] = (new Site\CommissionPerUser)->sumWhere("user_login_id = ? AND status != ?",[$UserLogin->company_id,-1],"amount");
 
     $data["profile"] = [
         'code' => $UserLogin->code,

@@ -4,12 +4,12 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {	
-    $data['catalog_courses'] = (new Unlimited\CatalogCourse)->getAll();
-    $data['catalog_currencies'] = format((new Unlimited\CatalogCurrency)->getAll());
+    $data['catalog_courses'] = (new Site\CatalogCourse)->getAll();
+    $data['catalog_currencies'] = format((new Site\CatalogCurrency)->getAll());
     $data['r'] = 'DATA_OK';
     $data['s'] = 1;
 } else {

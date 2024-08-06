@@ -4,25 +4,25 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['transaction_per_wallet_id'])
     {
-        $TransactionPerWallet = new Unlimited\TransactionPerWallet;
+        $TransactionPerWallet = new Site\TransactionPerWallet;
         
         if($TransactionPerWallet->loadWhere('transaction_per_wallet_id = ?',$data['transaction_per_wallet_id']))
         {
-            $TransactionPerWallet->status = Unlimited\TransactionPerWallet::DELETED;
+            $TransactionPerWallet->status = Site\TransactionPerWallet::DELETED;
 
             if($TransactionPerWallet->save())
             {
-                $UserWallet = new Unlimited\UserWallet;
+                $UserWallet = new Site\UserWallet;
 
                 if($user_login_id = $UserWallet->getCompanyId($TransactionPerWallet->user_wallet_id))
                 {
-                    $UserPlan = new Unlimited\UserPlan;
+                    $UserPlan = new Site\UserPlan;
 
                     if($UserPlan->setPlan($user_login_id))
                     {

@@ -7,7 +7,7 @@ use setasign\Fpdi\Fpdi;
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {       
@@ -62,7 +62,7 @@ function createAofDocument(array $data = null)
     $pdf = new FPDI();
 
     $pdf->AddPage(); 
-    $pdf->setSourceFile(Unlimited\Lpoa::getSourceTemplateAof(TO_ROOT,'aof')); 
+    $pdf->setSourceFile(Site\Lpoa::getSourceTemplateAof(TO_ROOT,'aof')); 
 
     $tplIdx = $pdf->importPage(1); 
     $pdf->useTemplate($tplIdx); 
@@ -70,11 +70,11 @@ function createAofDocument(array $data = null)
     $pdf->SetFont('Arial', '', '11'); 
     $pdf->SetTextColor(0,0,0);
 
-    $name = Unlimited\Lpoa::getCoords('nameAof');
+    $name = Site\Lpoa::getCoords('nameAof');
     $pdf->SetXY($name['x'], $name['y']);
     $pdf->Write(0, properText($data['title']) . ' ' . properText($data['names']));
 
-    $investorNumberCords = Unlimited\Lpoa::getCoords('investorNumberAof');
+    $investorNumberCords = Site\Lpoa::getCoords('investorNumberAof');
     $pdf->SetXY($investorNumberCords['x'], $investorNumberCords['y']);
     $pdf->Write(0, $data['investor']['number']);
 
@@ -83,16 +83,16 @@ function createAofDocument(array $data = null)
     $pdf->SetFont('Arial', '', '8'); 
     $pdf->SetTextColor(0,0,0);
 
-    $currentDateCords = Unlimited\Lpoa::getCoords('currentDateAof');
+    $currentDateCords = Site\Lpoa::getCoords('currentDateAof');
     $pdf->SetXY($currentDateCords['x'], $currentDateCords['y']);
     $pdf->Write(0, $data['currentDate']);
     
-    $signatureCords = Unlimited\Lpoa::getCoords('signatureAof');
+    $signatureCords = Site\Lpoa::getCoords('signatureAof');
     $pdf->Image($data['signature'], $signatureCords['x'], $signatureCords['y'], 40);
 
-    $path = Unlimited\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']);
+    $path = Site\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']);
 
-    $pdf->Output(Unlimited\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']), 'F');
+    $pdf->Output(Site\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']), 'F');
     
     return $path;
 }

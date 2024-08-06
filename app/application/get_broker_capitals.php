@@ -4,17 +4,17 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['broker_id'])
     {
-        $Broker = new Unlimited\Broker;
+        $Broker = new Site\Broker;
 
         if($Broker->loadWhere('broker_id = ?',$data['broker_id']))
         {
-            $CapitalPerBroker = new Unlimited\CapitalPerBroker;
+            $CapitalPerBroker = new Site\CapitalPerBroker;
             $data["capitals"] = $CapitalPerBroker->getAll($Broker->getId());
             $data["broker"] = $Broker->data();
             $data["s"] = 1;

@@ -8,16 +8,16 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['filter'])
     {
-        $data['filter'] = Unlimited\Movie::getFilter($data['filter']);
+        $data['filter'] = Site\Movie::getFilter($data['filter']);
     }
 
-    if($movies = (new Unlimited\Movie)->_getAll($data['filter']))
+    if($movies = (new Site\Movie)->_getAll($data['filter']))
     {
         $data['movies'] = $movies;
         $data['r'] = 'DATA_OK';

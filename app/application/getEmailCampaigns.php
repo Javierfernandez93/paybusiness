@@ -4,11 +4,11 @@ require_once TO_ROOT. '/system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    if($campaigns = (new Unlimited\CampaignEmail)->getAll())
+    if($campaigns = (new Site\CampaignEmail)->getAll())
     {
         $data['campaigns'] = $campaigns;
         $data['s'] = 1;

@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($notices = format((new Unlimited\Notice)->getAllPublished(),$UserLogin->isActive()))
+    if($notices = format((new Site\Notice)->getAllPublished(),$UserLogin->isActive()))
     {   
         $data["notices"] = $notices;
         $data["s"] = 1;
@@ -24,7 +24,7 @@ if($UserLogin->logged === true)
 
 function isAviable(array $notice = null,bool $active = null) : bool
 {
-    $targetSelected = $notice['target'] != Unlimited\Notice::ALL ? $notice['target'] == $active : true;
+    $targetSelected = $notice['target'] != Site\Notice::ALL ? $notice['target'] == $active : true;
 
     if($targetSelected)
     {

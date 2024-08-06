@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $GainPerBroker = new Unlimited\GainPerBroker;
+    $GainPerBroker = new Site\GainPerBroker;
 
     if($gains = $GainPerBroker->getGainsPerDays())
     {

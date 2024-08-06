@@ -4,20 +4,20 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     $data['day'] = date("Y-m-d");
 
-    $GainPerBroker = new Unlimited\GainPerBroker;
-    $ProfitPerUser = new Unlimited\ProfitPerUser;
-    $CapitalPerBroker = new Unlimited\CapitalPerBroker;
+    $GainPerBroker = new Site\GainPerBroker;
+    $ProfitPerUser = new Site\ProfitPerUser;
+    $CapitalPerBroker = new Site\CapitalPerBroker;
     
     getBrokersChartData($data,$CapitalPerBroker);
     
-    $TransactionPerWallet = new Unlimited\TransactionPerWallet;
-    $WithdrawPerUser = new Unlimited\WithdrawPerUser;
+    $TransactionPerWallet = new Site\TransactionPerWallet;
+    $WithdrawPerUser = new Site\WithdrawPerUser;
 
     $pendingWithdraws = $WithdrawPerUser->getCountPending();
 
@@ -49,10 +49,10 @@ if($UserSupport->logged === true)
 	$data["r"] = "NOT_FIELD_SESSION_DATA";
 }
 
-function getBrokersChartData(array &$data = null,Unlimited\CapitalPerBroker $CapitalPerBroker = null)
+function getBrokersChartData(array &$data = null,Site\CapitalPerBroker $CapitalPerBroker = null)
 {
-    $Broker = new Unlimited\Broker;
-    $GainPerBroker = new Unlimited\GainPerBroker;
+    $Broker = new Site\Broker;
+    $GainPerBroker = new Site\GainPerBroker;
     
     if($data['brokers'] = $Broker->getActive())
     {

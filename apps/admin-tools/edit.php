@@ -2,7 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === false) {
 	HCStudio\Util::redirectTo('../../apps/admin-login/');

@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {	
-	if($courses = (new Unlimited\Course)->getCourses())
+	if($courses = (new Site\Course)->getCourses())
 	{ 
 		$data['courses'] = format($courses);
 		$data['r'] = 'DATA_OK';
@@ -24,10 +24,10 @@ if($UserSupport->logged === true)
 
 function format(array $courses = null) : array
 {	
-	$LikePerCourse = new Unlimited\LikePerCourse;
-	$CommentPerCourse = new Unlimited\CommentPerCourse;
-	$VisitPerCourse = new Unlimited\VisitPerCourse;
-	$UserEnrolledInCourse = new Unlimited\UserEnrolledInCourse;
+	$LikePerCourse = new Site\LikePerCourse;
+	$CommentPerCourse = new Site\CommentPerCourse;
+	$VisitPerCourse = new Site\VisitPerCourse;
+	$UserEnrolledInCourse = new Site\UserEnrolledInCourse;
 
 	return array_map(function($course) use($LikePerCourse,$CommentPerCourse,$VisitPerCourse,$UserEnrolledInCourse) {
         $course['like'] = $LikePerCourse->getCount($course['course_id']);

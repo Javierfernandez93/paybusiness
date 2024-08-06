@@ -7,7 +7,7 @@ use setasign\Fpdi\Fpdi;
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {       
@@ -62,18 +62,18 @@ function createLpoaDocument(array $data = null)
     $pdf = new FPDI();
 
     $pdf->AddPage(); 
-    $pdf->setSourceFile(Unlimited\Lpoa::getSourceTemplate(TO_ROOT,$data['sponsor']['lpoa'])); 
+    $pdf->setSourceFile(Site\Lpoa::getSourceTemplate(TO_ROOT,$data['sponsor']['lpoa'])); 
     $tplIdx = $pdf->importPage(1); 
     $pdf->useTemplate($tplIdx); 
 
     $pdf->SetFont('Arial', '', '11'); 
     $pdf->SetTextColor(0,0,0);
 
-    $titleCords = Unlimited\Lpoa::getCoords('title');
+    $titleCords = Site\Lpoa::getCoords('title');
     $pdf->SetXY($titleCords['x'], $titleCords['y']);
     $pdf->Write(0, properText($data['title']) . ' ' . properText($data['names']));
 
-    $investorNumberCords = Unlimited\Lpoa::getCoords('investorNumber');
+    $investorNumberCords = Site\Lpoa::getCoords('investorNumber');
     $pdf->SetXY($investorNumberCords['x'], $investorNumberCords['y']);
     $pdf->Write(0, $data['investor']['number']);
 
@@ -85,7 +85,7 @@ function createLpoaDocument(array $data = null)
         $offset = 50;
     }
 
-    $monthCords = Unlimited\Lpoa::getCoords('month');
+    $monthCords = Site\Lpoa::getCoords('month');
     $pdf->SetXY($monthCords['x']+$offset, $monthCords['y']);
     $pdf->Write(0, 'x');
 
@@ -96,7 +96,7 @@ function createLpoaDocument(array $data = null)
         $offset = 15;
     }
 
-    $percentageCords = Unlimited\Lpoa::getCoords('percentage');
+    $percentageCords = Site\Lpoa::getCoords('percentage');
     $pdf->SetXY($percentageCords['x']+$offset, $percentageCords['y']);
     $pdf->Write(0, 'x');
 
@@ -105,21 +105,21 @@ function createLpoaDocument(array $data = null)
     $pdf->SetFont('Arial', '', '8'); 
     $pdf->SetTextColor(0,0,0);
 
-    $namesCords = Unlimited\Lpoa::getCoords('names');
+    $namesCords = Site\Lpoa::getCoords('names');
     $pdf->SetXY($namesCords['x'], $namesCords['y']);
     $pdf->Write(0, properText($data['names']));
 
-    $currentDateCords = Unlimited\Lpoa::getCoords('currentDate');
+    $currentDateCords = Site\Lpoa::getCoords('currentDate');
     $pdf->SetXY($currentDateCords['x'], $currentDateCords['y']);
     $pdf->Write(0, $data['currentDate']);
     
-    $signatureCords = Unlimited\Lpoa::getCoords('signature');
+    $signatureCords = Site\Lpoa::getCoords('signature');
     $pdf->Image($data['signature'], $signatureCords['x'], $signatureCords['y'], 40);
 
 
-    $path = Unlimited\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']);
+    $path = Site\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']);
 
-    $pdf->Output(Unlimited\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']), 'F');
+    $pdf->Output(Site\Lpoa::getSourceTemplateOutput(TO_ROOT,$data['company_id']), 'F');
     
     return $path;
 }

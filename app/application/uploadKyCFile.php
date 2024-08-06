@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -22,7 +22,7 @@ if($UserLogin->logged === true)
 			{
                 $ImageResize = new JFStudio\ImageResize($target_path);
 				$ImageResize->quality_jpg = 80;
-				$ImageResize->resizeToWidth(Unlimited\UserLogin::USER_IMAGE_SIZE);
+				$ImageResize->resizeToWidth(Site\UserLogin::USER_IMAGE_SIZE);
 				
 				if($ImageResize->save($target_path))
 				{

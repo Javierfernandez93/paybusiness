@@ -3,7 +3,7 @@
 namespace JFStudio;
 
 use HCStudio\Connection;
-use Unlimited\SystemVar;
+use Site\SystemVar;
 
 class Layout
 {

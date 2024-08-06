@@ -4,21 +4,21 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
     $items = array_map(function($value){
         return ["message"=>$value];
-    },explode(",",Unlimited\SystemVar::_getValue("quick_questions")));
+    },explode(",",Site\SystemVar::_getValue("quick_questions")));
 
     shuffle($items);
     array_values($items);
     array_slice($items,0,5);
 
     $data['message'] = [
-        'message' => Unlimited\Parser::doParser(Unlimited\SystemVar::_getValue("welcome_message"),[
-            "company_name" => Unlimited\SystemVar::_getValue("company_name"),
+        'message' => Site\Parser::doParser(Site\SystemVar::_getValue("welcome_message"),[
+            "company_name" => Site\SystemVar::_getValue("company_name"),
         ]),
         'items' => $items
     ];

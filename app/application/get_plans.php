@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if(true)
 {
-    $CatalogPlan = new Unlimited\CatalogPlan;
+    $CatalogPlan = new Site\CatalogPlan;
 
     if($plans = $CatalogPlan->getAll())
     {

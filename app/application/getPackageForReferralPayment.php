@@ -4,13 +4,13 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($data['package_id'] = Unlimited\Package::getMonthlyPackage($UserLogin->company_id))
+    if($data['package_id'] = Site\Package::getMonthlyPackage($UserLogin->company_id))
     {
-        $Package = new Unlimited\Package;
+        $Package = new Site\Package;
         
         if($Package->loadWhere("package_id = ? AND status = ?",[$data['package_id'],JFStudio\Constants::AVIABLE]))
         {

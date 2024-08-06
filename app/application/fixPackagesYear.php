@@ -4,8 +4,8 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$BuyPerUser = new Unlimited\BuyPerUser;
-$ProductPermission = new Unlimited\ProductPermission;
+$BuyPerUser = new Site\BuyPerUser;
+$ProductPermission = new Site\ProductPermission;
 
 $product_permissions = $ProductPermission->findAll("status = ? AND product_id = ?",[1,2]);
 
@@ -32,7 +32,7 @@ if($product_permissions)
 
 function updateSuscription(array $data = null)
 {
-    $ProductPermission = new Unlimited\ProductPermission;
+    $ProductPermission = new Site\ProductPermission;
     
     if($ProductPermission->loadWhere("product_permission_id = ?",[$data['product_permission_id']]))
     {

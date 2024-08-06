@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if($templates = (new Unlimited\Template)->getAll($UserLogin->company_id))
+    if($templates = (new Site\Template)->getAll($UserLogin->company_id))
     {
         $data['templates'] = $templates;
         $data['r'] = 'DATA_OK';

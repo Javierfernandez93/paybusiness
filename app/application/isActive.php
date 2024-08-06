@@ -4,20 +4,20 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $pay_businesss = $UserLogin->hasProductPermission(Unlimited\Product::PAY_BUSINESS);
-    $pay_academy = $UserLogin->hasProductPermission(Unlimited\Product::PAY_ACADEMY);
+    $pay_businesss = $UserLogin->hasProductPermission(Site\Product::PAY_BUSINESS);
+    $pay_academy = $UserLogin->hasProductPermission(Site\Product::PAY_ACADEMY);
 
-	$BuyPerUser = new Unlimited\BuyPerUser;
+	$BuyPerUser = new Site\BuyPerUser;
 
 	$data['activations'] = [];
 
 	if($pay_businesss)
 	{
-		$buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_BUSINESS);
+		$buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Site\CatalogPackageType::PAY_BUSINESS);
 
 		// print_r($buy);
 
@@ -32,7 +32,7 @@ if($UserLogin->logged === true)
 
 	if($pay_academy)
 	{
-		$buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Unlimited\CatalogPackageType::PAY_ACADEMY);
+		$buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Site\CatalogPackageType::PAY_ACADEMY);
 
 		// print_r($buy);
 

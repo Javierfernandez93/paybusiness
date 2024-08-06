@@ -4,13 +4,13 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['campaign_banner_per_user_id'])
     {
-        if($campaign = (new Unlimited\CampaignBannerPerUser)->getSingle($data['campaign_banner_per_user_id']))
+        if($campaign = (new Site\CampaignBannerPerUser)->getSingle($data['campaign_banner_per_user_id']))
         {
             $data['campaign'] = format($campaign);
             $data['r'] = 'DATA_OK';

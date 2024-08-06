@@ -4,17 +4,17 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['ticket_per_user_id'])
 	{
-        $TicketPerUser = new Unlimited\TicketPerUser;
+        $TicketPerUser = new Site\TicketPerUser;
 
         if($TicketPerUser->loadWhere('ticket_per_user_id = ?',$data['ticket_per_user_id']))
         {
-            if($data['status'] == Unlimited\TicketPerUser::SUPPORTING)
+            if($data['status'] == Site\TicketPerUser::SUPPORTING)
             {
                 $TicketPerUser->user_support_id = $UserSupport->getId();
             }

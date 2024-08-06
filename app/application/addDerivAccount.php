@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if(Unlimited\UserAti::addDerivAccount([
+    if(Site\UserAti::addDerivAccount([
         'user_login_id' => $UserLogin->company_id,
         'deriv_server' => $data['deriv_server'],
         'deriv_login' => $data['deriv_login']

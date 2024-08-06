@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -12,7 +12,7 @@ if($UserSupport->logged === true)
     {
         if($data['company_id'])
         {
-            $UserLogin = new Unlimited\UserLogin(false,false);
+            $UserLogin = new Site\UserLogin(false,false);
     
             if($UserLogin->loadWhere("company_id = ?",$data['company_id'])) 
             {
@@ -20,7 +20,7 @@ if($UserSupport->logged === true)
                 
                 if($UserLogin->save())
                 {
-                    Unlimited\UserReferral::deleteUser($data['company_id']);
+                    Site\UserReferral::deleteUser($data['company_id']);
 
                     $data["s"] = 1;
                     $data["r"] = "DATA_OK";
@@ -40,7 +40,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'company_id' => $data['company_id'],
             'unix_date' => time(),
-        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Site\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';

@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -34,7 +34,7 @@ if($UserLogin->logged === true)
                         {
                             $data['amount'] = $data['amount'] - HCStudio\Util::getPercentaje($data['amount'],$fee);
                             
-                            if(Unlimited\WithdrawPerUser::saveWithdraw($UserLogin->company_id,$data['withdraw_method_per_user_id'],$data['amount'],$transaction_per_wallet_id))
+                            if(Site\WithdrawPerUser::saveWithdraw($UserLogin->company_id,$data['withdraw_method_per_user_id'],$data['amount'],$transaction_per_wallet_id))
                             {
                                 $data["s"] = 1;
                                 $data["r"] = "SAVE_OK";

@@ -8,9 +8,9 @@
     -->
     <meta charset="UTF-8">
     <title>{{title}}</title>
-    <meta name="description" content="<?php echo Unlimited\SystemVar::_getValue("metadata_description") ?>">
-    <meta name="author" content="<?php echo Unlimited\SystemVar::_getValue("metadata_author") ?>">
-    <meta name="keywords" content="<?php echo Unlimited\SystemVar::_getValue("metadata_keywords") ?>">
+    <meta name="description" content="<?php echo Site\SystemVar::_getValue("metadata_description") ?>">
+    <meta name="author" content="<?php echo Site\SystemVar::_getValue("metadata_author") ?>">
+    <meta name="keywords" content="<?php echo Site\SystemVar::_getValue("metadata_keywords") ?>">
     <!--
     Mobile Specific Metas
     ==================================================
@@ -61,7 +61,7 @@
                     <div class="container-fluid">
                         <div class="logo">
                             <a href="index.html">
-                                <img src="../../src/img/logo-horizontal.svg" alt="<?php echo Unlimited\SystemVar::_getValue("company_name") ?>" />
+                                <img src="../../src/img/logo-horizontal.svg" alt="<?php echo Site\SystemVar::_getValue("company_name") ?>" />
                             </a>
                         </div>
                         <div class="search-widget search-widget-1">
@@ -156,13 +156,13 @@
                         </div>
                         <ul class="horizontal-list">
                             <li class="social-item-1">
-                                <a href="<?php echo Unlimited\SystemVar::_getValue("social_facebook");?>" class="fa fa-facebook"></a>
+                                <a href="<?php echo Site\SystemVar::_getValue("social_facebook");?>" class="fa fa-facebook"></a>
                             </li>
                             <li class="social-item-1">
-                                <a href="<?php echo Unlimited\SystemVar::_getValue("social_instagram");?>" class="fa fa-instagram"></a>
+                                <a href="<?php echo Site\SystemVar::_getValue("social_instagram");?>" class="fa fa-instagram"></a>
                             </li>
                             <li class="social-item-1">
-                                <a href="<?php echo Unlimited\SystemVar::_getValue("social_youtube");?>" class="fa fa-youtube"></a>
+                                <a href="<?php echo Site\SystemVar::_getValue("social_youtube");?>" class="fa fa-youtube"></a>
                             </li>
                         </ul>
                     </div>
@@ -173,7 +173,7 @@
                     <div class="block-left">
                         <div class="logo">
                             <a href="index.html">
-                                <img src="../../src/img/logo-horizontal.svg" alt="<?php echo Unlimited\SystemVar::_getValue("company_name") ?>" />
+                                <img src="../../src/img/logo-horizontal.svg" alt="<?php echo Site\SystemVar::_getValue("company_name") ?>" />
                             </a>
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                 <div class="block-left">
                     <div class="logo-mobile">
                         <a href="index.html">
-                            <img src="../../src/img/logo-horizontal.svg" alt="<?php echo Unlimited\SystemVar::_getValue("company_name") ?>">
+                            <img src="../../src/img/logo-horizontal.svg" alt="<?php echo Site\SystemVar::_getValue("company_name") ?>">
                         </a>
                     </div>
                     <nav>
@@ -630,7 +630,7 @@
                         <div class="col-md-6">
                             <div class="footer-block-1">
                                 <div class="logo">
-                                    <img src="../../src/img/logo.svg" alt="<?php echo Unlimited\SystemVar::_getValue("company_name") ?>" />
+                                    <img src="../../src/img/logo.svg" alt="<?php echo Site\SystemVar::_getValue("company_name") ?>" />
                                 </div>
                                 <div class="quick-link">
                                     <div class="row">
@@ -668,9 +668,9 @@
                                 </div>
                                 <div class="contact-list">
                                     <ul>
-                                        <li>Address: <?php echo Unlimited\SystemVar::_getValue("company_address") ?></li>
-                                        <li>Phone: <?php echo Unlimited\SystemVar::_getValue("social_whatsapp") ?></li>
-                                        <li>Email: <?php echo Unlimited\SystemVar::_getValue("company_email") ?></li>
+                                        <li>Address: <?php echo Site\SystemVar::_getValue("company_address") ?></li>
+                                        <li>Phone: <?php echo Site\SystemVar::_getValue("social_whatsapp") ?></li>
+                                        <li>Email: <?php echo Site\SystemVar::_getValue("company_email") ?></li>
                                     </ul>
                                 </div>
                             </div>
@@ -683,13 +683,13 @@
                                 <div class="social-list">
                                     <ul class="horizontal-list">
                                         <li class="social-item-2 social-item-1">
-                                            <a href="<?php echo Unlimited\SystemVar::_getValue("social_facebook");?>" class="fa fa-facebook"></a>
+                                            <a href="<?php echo Site\SystemVar::_getValue("social_facebook");?>" class="fa fa-facebook"></a>
                                         </li>
                                         <li class="social-item-2 social-item-1">
-                                            <a href="<?php echo Unlimited\SystemVar::_getValue("social_youtube");?>"  class="fa fa-youtube"></a>
+                                            <a href="<?php echo Site\SystemVar::_getValue("social_youtube");?>"  class="fa fa-youtube"></a>
                                         </li>
                                         <li class="social-item-2 social-item-1">
-                                            <a href="<?php echo Unlimited\SystemVar::_getValue("social_instagram");?>"  class="fa fa-instagram"></a>
+                                            <a href="<?php echo Site\SystemVar::_getValue("social_instagram");?>"  class="fa fa-instagram"></a>
                                         </li>
                                     </ul>
                                 </div>

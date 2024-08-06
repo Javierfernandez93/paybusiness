@@ -7,9 +7,8 @@
         "setasign/fpdf": "^1.8",
         "setasign/fpdi": "^2.0",
         "dummytrader/sdk": "dev-main",
+        "php-ai/php-ml": "^0.10.0",
         "treinetic/imageartist": "^1.0",
-        "vlucas/phpdotenv": "^5.6",
-        "monolog/monolog": "^3.7",
-        "curl/curl": "^2.5"
+        "ddeboer/imap": "^1.19"
     }
 }

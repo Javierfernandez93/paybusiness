@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getParam();
 
-$MembershipPerUser = new Unlimited\MembershipPerUser;
+$MembershipPerUser = new Site\MembershipPerUser;
 // $users = $MembershipPerUser->findAll("status = ? AND take = ?",[1,0]);
 // $users = $MembershipPerUser->findAll("status = ? and user_login_id = ?",[1,336]);
 $users = $MembershipPerUser->findAll("status = ?",[1]);
@@ -13,9 +13,9 @@ echo "<pre>";
 
 if($users)
 {
-    $CatalogCommission = new Unlimited\CatalogCommission;
-    $CatalogMembership = new Unlimited\CatalogMembership;
-    $UserLogin = new Unlimited\UserLogin(false,false);
+    $CatalogCommission = new Site\CatalogCommission;
+    $CatalogMembership = new Site\CatalogMembership;
+    $UserLogin = new Site\UserLogin(false,false);
 
     foreach($users as $user)
     {
@@ -27,7 +27,7 @@ if($users)
                 
                 if($binary_points)
                 {
-                    if($network = Unlimited\UserLogin::getNetworkToPay($binary_points))
+                    if($network = Site\UserLogin::getNetworkToPay($binary_points))
                     {   
                         $points_gived = 0;
                         
@@ -35,7 +35,7 @@ if($users)
                         {
                             foreach($network['pay']['users'] as $user_from)
                             {   
-                                Unlimited\CommissionPerUser::addBinaryCommission([
+                                Site\CommissionPerUser::addBinaryCommission([
                                     'catalog_commission_id' => $CatalogMembership->findField("catalog_membership_id = ?",[$user_from['catalog_membership_id']],"catalog_commission_id"),
                                     'user_login_id' => $user['user_login_id'],
                                     'user_login_id_from' => $user_from['user_login_id'],
@@ -49,12 +49,12 @@ if($users)
                                 
                                 $points_gived += $user_from['point'];
     
-                                Unlimited\MembershipPerUser::setAsTake([
+                                Site\MembershipPerUser::setAsTake([
                                     'user_login_id' => $user['user_login_id'],
                                     'membership_per_user_id' => $user_from['membership_per_user_id']
                                 ]);
     
-                                Unlimited\MembershipPerUser::setOldMembershipAsTaked([
+                                Site\MembershipPerUser::setOldMembershipAsTaked([
                                     'sponsor_id' => $user['user_login_id'],
                                     'user_login_id' => $user_from['user_login_id']
                                 ]);
@@ -72,7 +72,7 @@ if($users)
                                 if($points_passed < $points_gived)
                                 {
                                     // echo "{$user_from['point']} - ";
-                                    // Unlimited\CommissionPerUser::addBinaryCommission([
+                                    // Site\CommissionPerUser::addBinaryCommission([
                                     //     'catalog_commission_id' => $CatalogMembership->findField("catalog_membership_id = ?",[$user_from['catalog_membership_id']],"catalog_commission_id"),
                                     //     'user_login_id' => $user['user_login_id'],
                                     //     'user_login_id_from' => $user_from['user_login_id'],
@@ -84,12 +84,12 @@ if($users)
     
                                     $points_passed += $user_from['point'];
         
-                                    Unlimited\MembershipPerUser::setAsTake([
+                                    Site\MembershipPerUser::setAsTake([
                                         'user_login_id' => $user['user_login_id'],
                                         'membership_per_user_id' => $user_from['membership_per_user_id']
                                     ]);
     
-                                    Unlimited\MembershipPerUser::setOldMembershipAsTaked([
+                                    Site\MembershipPerUser::setOldMembershipAsTaked([
                                         'sponsor_id' => $user['user_login_id'],
                                         'user_login_id' => $user_from['user_login_id']
                                     ]);

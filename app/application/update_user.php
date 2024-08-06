@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -53,7 +53,7 @@ if($UserSupport->logged === true)
 
 function updateUserData($data = null) : bool
 {
-    $UserData = new Unlimited\UserData;   
+    $UserData = new Site\UserData;   
         
     if($UserData->loadWhere("user_login_id = ?",$data['user_login_id']))
     {
@@ -67,7 +67,7 @@ function updateUserData($data = null) : bool
 
 function updateUserContact($data = null) : bool
 {
-    $UserContact = new Unlimited\UserContact;   
+    $UserContact = new Site\UserContact;   
         
     if($UserContact->loadWhere("user_login_id = ?",$data['user_login_id']))
     {
@@ -82,7 +82,7 @@ function updateUserContact($data = null) : bool
 
 function updateUserAccount($data = null) : bool
 {
-    $UserAccount = new Unlimited\UserAccount;   
+    $UserAccount = new Site\UserAccount;   
         
     if($UserAccount->loadWhere("user_login_id = ?",$data['user_login_id']))
     {
@@ -96,7 +96,7 @@ function updateUserAccount($data = null) : bool
 
 function updateUserAddress($data = null) : bool
 {
-    $UserAddress = new Unlimited\UserAddress;   
+    $UserAddress = new Site\UserAddress;   
         
     if($UserAddress->loadWhere("user_login_id = ?",$data['user_login_id']))
     {
@@ -110,7 +110,7 @@ function updateUserAddress($data = null) : bool
 
 function updateUserLogin($data = null) : bool
 {
-    $UserLogin = new Unlimited\UserLogin(false,false);   
+    $UserLogin = new Site\UserLogin(false,false);   
         
     if($UserLogin->loadWhere("user_login_id = ?",$data['user_login_id']))
     {
@@ -126,7 +126,7 @@ function updateUserLogin($data = null) : bool
 
 function updateUserReferral($data = null) : bool
 {
-    $UserReferral = new Unlimited\UserReferral;   
+    $UserReferral = new Site\UserReferral;   
         
     if(!$UserReferral->loadWhere("user_login_id = ?",$data['user_login_id']))
     {

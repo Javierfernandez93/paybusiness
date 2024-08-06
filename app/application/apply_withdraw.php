@@ -4,17 +4,17 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['withdraw_per_user_id'])
     {
-        $WithdrawPerUser = new Unlimited\WithdrawPerUser;
+        $WithdrawPerUser = new Site\WithdrawPerUser;
         
         if($WithdrawPerUser->loadWhere('withdraw_per_user_id = ?',$data['withdraw_per_user_id']))
         {
-            $data['status'] = Unlimited\WithdrawPerUser::DEPOSITED;
+            $data['status'] = Site\WithdrawPerUser::DEPOSITED;
             $WithdrawPerUser->status = $data['status'];
         
             if($WithdrawPerUser->save())

@@ -4,21 +4,21 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
     if($data['invoice_id'])
 	{
-        $BuyPerUser = new Unlimited\BuyPerUser;
+        $BuyPerUser = new Site\BuyPerUser;
         
         if($BuyPerUser->isInvoicePending($data['invoice_id']))
         {
             if($BuyPerUser->loadWhere('invoice_id = ?',$data['invoice_id']))
             {	
-                if(Unlimited\BuyPerUser::deletePayment($BuyPerUser->getId()))
+                if(Site\BuyPerUser::deletePayment($BuyPerUser->getId()))
                 {
-                    $data['status'] = Unlimited\BuyPerUser::DELETED;
+                    $data['status'] = Site\BuyPerUser::DELETED;
                     $data['s'] = 1;
                     $data['r'] = 'SAVE_OK';
                 } else {

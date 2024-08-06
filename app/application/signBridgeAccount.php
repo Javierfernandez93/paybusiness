@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
@@ -26,19 +26,19 @@ if($UserLogin->logged === true)
                                 {   
                                     $data['user_login_id'] = $UserLogin->company_id;
 
-                                    $UserBridgeAccount = new Unlimited\UserBridgeAccount;
+                                    $UserBridgeAccount = new Site\UserBridgeAccount;
 
                                     if(true)
                                     {   
-                                        if($user_bridge_account_id = Unlimited\UserBridgeAccount::add([
+                                        if($user_bridge_account_id = Site\UserBridgeAccount::add([
                                             ...$data,
                                             ...[
-                                                'status'=>Unlimited\UserBridgeAccount::PENDING,
-                                                'catalog_broker_id'=> (new Unlimited\CatalogBroker)->getBrokerByName('Bridge'),
+                                                'status'=>Site\UserBridgeAccount::PENDING,
+                                                'catalog_broker_id'=> (new Site\CatalogBroker)->getBrokerByName('Bridge'),
                                             ]
                                         ]))
                                         {
-                                            $ApiUnlimited = new Unlimited\ApiUnlimited;
+                                            $ApiUnlimited = new Site\ApiUnlimited;
                                             
                                             if($response = $ApiUnlimited->signupUser([
                                                 'firstname' => $data['first_name'],
@@ -61,7 +61,7 @@ if($UserLogin->logged === true)
                                                 {
                                                     $data['account'] = $response['account'];
 
-                                                    if(Unlimited\UserBridgeAccount::attachAccount([
+                                                    if(Site\UserBridgeAccount::attachAccount([
                                                         'user_bridge_account_id' => $user_bridge_account_id,
                                                         'account' => $data['account']
                                                     ]))

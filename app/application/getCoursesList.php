@@ -4,17 +4,17 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    $Course = new Unlimited\Course;
+    $Course = new Site\Course;
     $Course->connection()->stmtQuery("SET NAMES utf8mb4");
 
     if($courses = $Course->getList())
     {
         $data['courses'] = array_values(format(filter($courses,$UserLogin->company_id),$UserLogin->company_id));
-        $data['courses'] = Unlimited\Course::filterCoursesBlocked($data['courses'],$UserLogin->company_id);
+        $data['courses'] = Site\Course::filterCoursesBlocked($data['courses'],$UserLogin->company_id);
         $data['r'] = 'DATA_OK';
         $data['s'] = 1;
     } else {
@@ -28,12 +28,12 @@ if($UserLogin->logged === true)
 
 function filter(array $courses = null,int $user_login_id = null) : array
 {
-    $BuyPerUser = new Unlimited\BuyPerUser;
+    $BuyPerUser = new Site\BuyPerUser;
 
     return array_filter($courses,function($course) use($BuyPerUser,$user_login_id) {
         $aviable = true;
         
-        if($course['target'] != Unlimited\Course::ALL)
+        if($course['target'] != Site\Course::ALL)
         {    
             $aviable = $BuyPerUser->hasPackageBuy($user_login_id,$course['target']);
         }
@@ -44,9 +44,9 @@ function filter(array $courses = null,int $user_login_id = null) : array
 
 function format(array $courses = null,int $user_login_id = null) : array
 {	
-    $SessionTakeByUserPerCourse = new Unlimited\SessionTakeByUserPerCourse;
-    $UserEnrolledInCourse = new Unlimited\UserEnrolledInCourse;
-    $Course = new Unlimited\Course;
+    $SessionTakeByUserPerCourse = new Site\SessionTakeByUserPerCourse;
+    $UserEnrolledInCourse = new Site\UserEnrolledInCourse;
+    $Course = new Site\Course;
     
 	return array_map(function ($course) use($SessionTakeByUserPerCourse,$UserEnrolledInCourse,$Course,$user_login_id) {
         $course['isEnrolled'] = $UserEnrolledInCourse->isEnrolled($course['course_id'],$user_login_id);

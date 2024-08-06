@@ -2,7 +2,7 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 $Layout = JFStudio\Layout::getInstance();
 

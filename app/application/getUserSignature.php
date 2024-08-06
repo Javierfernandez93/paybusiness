@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if(true)
 {
-    if($signature = (new Unlimited\RemotePelSign)->getUserSignature($data['sign_code']))
+    if($signature = (new Site\RemotePelSign)->getUserSignature($data['sign_code']))
     {
         $data["signature"] = $signature;
         $data["s"] = 1;

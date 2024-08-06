@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$ProductPermission = new Unlimited\ProductPermission;
+$ProductPermission = new Site\ProductPermission;
 
 $product_permissions = $ProductPermission->findAll("status = ?",1);
 
@@ -28,7 +28,7 @@ if($product_permissions)
 
 function createPayAcademyFree($payBusiness)
 {
-    $ProductPermission = new Unlimited\ProductPermission;
+    $ProductPermission = new Site\ProductPermission;
 
     $ProductPermission->loadArray([
         'user_login_id' => $payBusiness['user_login_id'],

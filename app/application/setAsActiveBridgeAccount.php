@@ -4,15 +4,15 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getParam();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['user_bridge_account_id'])
     {
-        if(Unlimited\UserBridgeAccount::setAs([
+        if(Site\UserBridgeAccount::setAs([
             'user_bridge_account_id' => $data['user_bridge_account_id'],
-            'status' => Unlimited\UserBridgeAccount::ACTIVE
+            'status' => Site\UserBridgeAccount::ACTIVE
         ]))
         {
             $data['r'] = 'DATA_OK';

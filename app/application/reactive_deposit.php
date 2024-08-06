@@ -4,21 +4,21 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $CatalogPlan = new Unlimited\CatalogPlan;
+    $CatalogPlan = new Site\CatalogPlan;
 
     if($data['transaction_requirement_per_user_id'])
     {
-        $TransactionRequirementPerUser = new Unlimited\TransactionRequirementPerUser;
+        $TransactionRequirementPerUser = new Site\TransactionRequirementPerUser;
         
         if($TransactionRequirementPerUser->isAviableToReactive($data['transaction_requirement_per_user_id']))
         {
             if($TransactionRequirementPerUser->loadWhere('transaction_requirement_per_user_id = ?',$data['transaction_requirement_per_user_id']))
             {
-                $TransactionRequirementPerUser->status = Unlimited\TransactionRequirementPerUser::PENDING;
+                $TransactionRequirementPerUser->status = Site\TransactionRequirementPerUser::PENDING;
 
                 if($TransactionRequirementPerUser->save())
                 {

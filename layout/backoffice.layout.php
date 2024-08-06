@@ -40,7 +40,7 @@
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             
             <a class="navbar-brand text-center" href="<?php echo HCStudio\Connection::getMainPath(); ?>" target="_blank">
-                <img src="../../src/img/logo-lg.svg" alt="logo" title="logo" class="w-50"/>
+                <img src="../../src/img/logo-dark.png" alt="logo" title="logo" class="w-50"/>
             </a>
         </div>
         
@@ -129,7 +129,7 @@
                             </a>
                         </li>
 
-                        <?php if($UserLogin->hasProductPermission(Unlimited\Product::PAY_ACADEMY)) { ?>
+                        <?php if($UserLogin->hasProductPermission(Site\Product::PAY_ACADEMY)) { ?>
                             <li class="nav-item">
                                 <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Academy,JFStudio\Router::AcademyLesson])) { ?>active<?php } ?>" href="../../apps/academy">
                                     <i class="bi bi-mortarboard"></i>

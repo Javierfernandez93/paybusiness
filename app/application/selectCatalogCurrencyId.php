@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-	$CatalogCurrency = new Unlimited\CatalogCurrency;
+	$CatalogCurrency = new Site\CatalogCurrency;
 	
 	if($CatalogCurrency->loadWhere("catalog_currency_id = ? AND status = ?",[$data['catalog_currency_id'],1]))
 	{

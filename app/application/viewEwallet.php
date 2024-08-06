@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -19,7 +19,7 @@ if($UserSupport->logged === true)
                 $data['ewallet'] = $Wallet->attr();
                 $data['ewallet']['amount'] = $Wallet->getBalance();
                 $data['ewallet']['kind'] = (new BlockChain\WalletKind)->findRow("wallet_kind_id = ?",$Wallet->wallet_kind_id);
-                $data['ewallet']['link'] = (new Unlimited\ShortUrl)->getLink($Wallet);
+                $data['ewallet']['link'] = (new Site\ShortUrl)->getLink($Wallet);
     
                 $data['r'] = 'DATA_OK';
                 $data['s'] = 1;
@@ -35,7 +35,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'company_id' => $data['user_login_id'],
             'unix_date' => time(),
-        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Site\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';

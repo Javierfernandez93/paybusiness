@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
     $data['user_login_id'] = $UserLogin->company_id;
 
-    if(Unlimited\TicketPerUser::saveTicket($data))
+    if(Site\TicketPerUser::saveTicket($data))
     {
         $data['s'] = 1;
         $data['r'] = 'DATA_OK';

@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getParam();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -14,20 +14,20 @@ if($UserSupport->logged === true)
         {
             if($data['amount'])
             {
-                if(!(new Unlimited\GainPerUser)->hasGainOnWeek($data['user_login_id']))
+                if(!(new Site\GainPerUser)->hasGainOnWeek($data['user_login_id']))
                 {
                     $day = date("Y-m-d");
                     $message = "Profit por Trading del día {$day}";
 
                     if($transaction_per_wallet_id = send($data['user_login_id'],$data['amount'],$message))
                     {
-                        if(Unlimited\GainPerUser::add([
+                        if(Site\GainPerUser::add([
                             'user_login_id' => $data['user_login_id'],
                             'amount' => $data['amount'],
                             'transaction_per_wallet_id' => $transaction_per_wallet_id
                         ]))
                         {
-                            if(Unlimited\NotificationPerUser::push($data['user_login_id'],$message,Unlimited\CatalogNotification::GAINS,""))
+                            if(Site\NotificationPerUser::push($data['user_login_id'],$message,Site\CatalogNotification::GAINS,""))
                             {
                                 $data['push_sent'] = true;
                             }
@@ -58,7 +58,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'transaction' => json_encode(['address'=>$data['address'],'amount'=>$data['amount']]),
             'unix_date' => time(),
-        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Site\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';

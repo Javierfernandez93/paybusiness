@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$MembershipPerUser = new Unlimited\MembershipPerUser;
+$MembershipPerUser = new Site\MembershipPerUser;
 $users = $MembershipPerUser->findAll("point = ? AND status = ?",[0,1]);
 
 // tomo usuarios
@@ -25,7 +25,7 @@ if($users)
     
     foreach($users as $user)
     {
-        $BuyPerUser = new Unlimited\BuyPerUser;
+        $BuyPerUser = new Site\BuyPerUser;
         
         $buy = $BuyPerUser->findRow("user_login_id = ? AND amount = ? AND catalog_payment_method_id = ? AND status = ?",[$user['user_login_id'],40,7,2]);
 
@@ -33,7 +33,7 @@ if($users)
         {
             // d($buy);
 
-            $CommissionPerUser = new Unlimited\CommissionPerUser;
+            $CommissionPerUser = new Site\CommissionPerUser;
             
             if($commissions = $CommissionPerUser->findAll("user_login_id_from = ? AND catalog_commission_id = ? AND status = ?",[$user['user_login_id'],7,0]))
             {
@@ -43,7 +43,7 @@ if($users)
                     
                     foreach($commissions as $commission)
                     {
-                        $CommissionPerUser = new Unlimited\CommissionPerUser;
+                        $CommissionPerUser = new Site\CommissionPerUser;
 
                         if($CommissionPerUser->loadWhere("commission_per_user_id = ?",$commission['commission_per_user_id']))
                         {

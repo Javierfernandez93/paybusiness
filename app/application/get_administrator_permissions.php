@@ -4,11 +4,11 @@ require_once TO_ROOT. '/system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $data['permissions'] = (new Unlimited\CatalogPermission)->getAll();
+    $data['permissions'] = (new Site\CatalogPermission)->getAll();
     $data['s'] = 1;
     $data['r'] = 'DATA_OK';
 } else {

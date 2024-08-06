@@ -4,7 +4,7 @@ namespace JFStudio;
 
 use JFStudio\Layout;
 
-use Unlimited\CatalogMailController;
+use Site\CatalogMailController;
 
 use \Exception;
 

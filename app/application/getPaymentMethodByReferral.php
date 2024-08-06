@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($paymentMethod = (new Unlimited\PaymentMethodPerUser)->_get($UserLogin->getReferralId()))
+    if($paymentMethod = (new Site\PaymentMethodPerUser)->_get($UserLogin->getReferralId()))
     {
         $data['paymentMethod'] = $paymentMethod;
         $data['s'] = 1;

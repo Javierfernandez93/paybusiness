@@ -4,7 +4,7 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
@@ -18,7 +18,7 @@ if($UserLogin->logged === true)
             $data['ewallet']['recipientAdress'] = '';
             $data['ewallet']['kind'] = (new BlockChain\WalletKind)->findRow("wallet_kind_id = ?",$data['ewallet']['wallet_kind_id']);
             $data['ewallet']['amount'] = $Wallet->getBalance();
-            $data['ewallet']['link'] = (new Unlimited\ShortUrl)->getLink($Wallet);
+            $data['ewallet']['link'] = (new Site\ShortUrl)->getLink($Wallet);
             $data['ewallet']['holder'] = $UserLogin->getNames();
             $data['ewallet']['addressLenght'] = BlockChain\Wallet::ADDRESS_LENGTH;
 

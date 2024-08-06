@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($gains = Unlimited\GainPerUser::getGainsChart($UserLogin->company_id))
+    if($gains = Site\GainPerUser::getGainsChart($UserLogin->company_id))
     {
         $data["gains"] = $gains;
         $data["s"] = 1;

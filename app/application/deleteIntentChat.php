@@ -8,7 +8,7 @@ if($UserLogin->logged === true)
 {	
     if($data['intent_chat_id'])
     {
-        $IntentChat = new Unlimited\IntentChat;
+        $IntentChat = new Site\IntentChat;
 
         if($IntentChat->loadWhere('intent_chat_id = ?',$data['intent_chat_id']))
         {

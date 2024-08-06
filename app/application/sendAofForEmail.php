@@ -31,7 +31,7 @@ function sendEmail(array $data = null,string $file_path = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Unlimited\CatalogMailController::init(1);
+            $CatalogMailController = Site\CatalogMailController::init(1);
 
             $Layout->setVar([
                 "names" => $data['names'],

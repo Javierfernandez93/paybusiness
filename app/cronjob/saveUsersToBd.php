@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getParam();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 // if(($data['PHP_AUTH_USER'] ?? false == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ?? false == HCStudio\Util::PASSWORD) || $UserSupport->logged === true)
 if(true)
@@ -14366,7 +14366,7 @@ if(true)
 
     foreach($users as $user)
     {
-        $UserLogin = new Unlimited\UserLogin(false,false);
+        $UserLogin = new Site\UserLogin(false,false);
 
         if($UserLogin->isUniqueMail($user['Email']))
         {

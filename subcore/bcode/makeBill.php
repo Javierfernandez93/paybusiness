@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 $data=$data["data"];
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 $Cart = Jcart\Cart::getInstance($UserLogin->company_id); // @todo change for 
 
 error_reporting(1);

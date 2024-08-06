@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
     if($data['buy_per_user_id'])
 	{
-        $BuyPerUser = new Unlimited\BuyPerUser;
+        $BuyPerUser = new Site\BuyPerUser;
 
 		if($BuyPerUser->loadWhere('buy_per_user_id = ?',$data['buy_per_user_id']))
 		{

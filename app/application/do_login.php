@@ -14,7 +14,7 @@ if($data["email"])
 {
 	if($data["password"])
 	{		
-		$UserLogin = new Unlimited\UserLogin;
+		$UserLogin = new Site\UserLogin;
 
 		if($UserLogin->isAccountActive($data["email"]))
         {
@@ -30,7 +30,7 @@ if($data["email"])
             
                         if(filter_var($data['rememberMe'], FILTER_VALIDATE_BOOLEAN) == true)
                         {
-                            JFStudio\Cookie::set(Unlimited\UserLogin::PID_NAME,$UserLogin->getPid());
+                            JFStudio\Cookie::set(Site\UserLogin::PID_NAME,$UserLogin->getPid());
                         }
                         
                         $data["data"] = $data;
@@ -39,7 +39,7 @@ if($data["email"])
                     } else {
                         $UserLogin->logout(false);
     
-                        if($secret = Unlimited\UserLogin::updateSecret($data['email']))
+                        if($secret = Site\UserLogin::updateSecret($data['email']))
                         {
                             if(sendEmailToVerify($data['email'],$secret))
                             {
@@ -64,7 +64,7 @@ if($data["email"])
             } else {
                 $UserLogin->logout(false);
     
-                if($secret = Unlimited\UserLogin::updateSecret($data['email']))
+                if($secret = Site\UserLogin::updateSecret($data['email']))
                 {
                     if(sendEmailToUpdatePassword($data['email'],$secret))
                     {
@@ -109,7 +109,7 @@ function sendEmailToUpdatePassword(string $email = null,string $secret = null) :
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Unlimited\CatalogMailController::init(1);
+            $CatalogMailController = Site\CatalogMailController::init(1);
 
             $Layout->setVar([
                 "email" => $email,
@@ -161,7 +161,7 @@ function sendEmailToVerify(string $email = null,string $secret = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Unlimited\CatalogMailController::init(1);
+            $CatalogMailController = Site\CatalogMailController::init(1);
 
             $Layout->setVar([
                 "email" => $email,

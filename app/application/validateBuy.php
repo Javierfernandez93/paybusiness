@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if(($data['user'] ?? false == HCStudio\Util::USERNAME && $data['password'] ?? false == HCStudio\Util::PASSWORD) || $UserSupport->logged === true)
 {
     if($data['invoice_id'] ?? false)
 	{
-        $BuyPerUser = new Unlimited\BuyPerUser;
+        $BuyPerUser = new Site\BuyPerUser;
         
         if($BuyPerUser->isInvoicePending($data['invoice_id'] ?? false))
         {
@@ -18,21 +18,21 @@ if(($data['user'] ?? false == HCStudio\Util::USERNAME && $data['password'] ?? fa
             {	
                 $data['sendCommissions'] = isset($data['sendCommissions']) ? $data['sendCommissions'] : true;
 
-                if(Unlimited\BuyPerUser::processPayment($BuyPerUser->getId(),$data['sendCommissions']))
+                if(Site\BuyPerUser::processPayment($BuyPerUser->getId(),$data['sendCommissions']))
                 {
                     $BuyPerUser->catalog_validation_method_id = $data['catalog_validation_method_id'];
                     $BuyPerUser->ipn_data = $data['ipn_data'] ?? '';
                     $BuyPerUser->approved_date = time();
                     $BuyPerUser->user_support_id = isset($data['user_support_id']) ? $data['user_support_id'] : $BuyPerUser->user_support_id;
-                    $BuyPerUser->status = Unlimited\BuyPerUser::VALIDATED;
+                    $BuyPerUser->status = Site\BuyPerUser::VALIDATED;
 
                     $items = $BuyPerUser->unformatData();
 
                     if($BuyPerUser->save())
                     {   
-                        Unlimited\BuyPerUser::addPayAcademyFirstMonthFree($BuyPerUser->user_login_id);
+                        Site\BuyPerUser::addPayAcademyFirstMonthFree($BuyPerUser->user_login_id);
 
-                        // if(sendEmail((new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),$BuyPerUser->invoice_id))
+                        // if(sendEmail((new Site\UserLogin)->getEmail($BuyPerUser->user_login_id),$BuyPerUser->invoice_id))
                         // {
                         //     $data['mail_sent'] = true;
                         // }
@@ -45,31 +45,31 @@ if(($data['user'] ?? false == HCStudio\Util::USERNAME && $data['password'] ?? fa
                                 {
                                     if($items['items'][0]['title'] == 'PayBusiness')
                                     {
-                                        $names = (new Unlimited\UserData)->getNames($BuyPerUser->user_login_id);
+                                        $names = (new Site\UserData)->getNames($BuyPerUser->user_login_id);
                                             
-                                        $company_name = Unlimited\SystemVar::_getValue("company_name");
+                                        $company_name = Site\SystemVar::_getValue("company_name");
                 
                                         JFStudio\Mailer::send([
                                             'view' => 'paybusiness',
                                             'subject' => "Gracias por comprar Pay Business",
                                             'vars' => [
-                                                'email' => (new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),
-                                                'company_name' => Unlimited\SystemVar::_getValue("company_name"),
+                                                'email' => (new Site\UserLogin)->getEmail($BuyPerUser->user_login_id),
+                                                'company_name' => Site\SystemVar::_getValue("company_name"),
                                                 'names' => $names,
                                             ],
                                         ]);  
                                     } else if($items['items'][0]['title'] == 'PayAcademy')
                                     {
-                                        $names = (new Unlimited\UserData)->getNames($BuyPerUser->user_login_id);
+                                        $names = (new Site\UserData)->getNames($BuyPerUser->user_login_id);
                                             
-                                        $company_name = Unlimited\SystemVar::_getValue("company_name");
+                                        $company_name = Site\SystemVar::_getValue("company_name");
                 
                                         JFStudio\Mailer::send([
                                             'view' => 'payacademy',
                                             'subject' => "Gracias por comprar Pay Academy",
                                             'vars' => [
-                                                'email' => (new Unlimited\UserLogin)->getEmail($BuyPerUser->user_login_id),
-                                                'company_name' => Unlimited\SystemVar::_getValue("company_name"),
+                                                'email' => (new Site\UserLogin)->getEmail($BuyPerUser->user_login_id),
+                                                'company_name' => Site\SystemVar::_getValue("company_name"),
                                                 'names' => $names,
                                             ],
                                         ]);  
@@ -126,7 +126,7 @@ function sendEmail(string $email = null,string $invoice_id = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Unlimited\CatalogMailController::init(1);
+            $CatalogMailController = Site\CatalogMailController::init(1);
 
             $Layout->setVar([
                 "invoice_id" => $invoice_id,

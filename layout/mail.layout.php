@@ -508,7 +508,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="logo" style="text-align: left;">
-                                            <h1><a href=""><?php echo Unlimited\SystemVar::_getValue("company_name")?></a></h1>
+                                            <h1><a href=""><?php echo Site\SystemVar::_getValue("company_name")?></a></h1>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -549,8 +549,8 @@
                                                         <td style="text-align: left; padding-left: 5px; padding-right: 5px;">
                                                             <h3 class="heading">Información de contacto</h3>
                                                             <ul>
-                                                                <li><span class="text"><?php echo Unlimited\SystemVar::_getValue("company_email")?></span></li>
-                                                                <li><span class="text">+<?php echo Unlimited\SystemVar::_getValue("social_whatsapp")?></span></li>
+                                                                <li><span class="text"><?php echo Site\SystemVar::_getValue("company_email")?></span></li>
+                                                                <li><span class="text">+<?php echo Site\SystemVar::_getValue("social_whatsapp")?></span></li>
                                                             </ul>
                                                         </td>
                                                     </tr>

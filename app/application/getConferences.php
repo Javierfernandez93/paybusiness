@@ -4,13 +4,13 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     $timeZone = $UserLogin->getTimeZone();
 
-    if($conferences = (new Unlimited\Conference)->getAll($timeZone))
+    if($conferences = (new Site\Conference)->getAll($timeZone))
     {
         $data['timezoneConfigurated'] = $UserLogin->hasTimeZoneConfigurated();
         $data['conferences'] = $conferences;

@@ -5,22 +5,22 @@ require_once TO_ROOT . "/system/core.php";
 $data = HCStudio\Util::getHeadersForWebService();
 
 $Token = new HCStudio\Token;
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($Token->checkToken(['token'=>$data['token'],'key'=>$data['key']]) || $UserLogin->logged === true)
 {
 	if($UserLogin->logged === false)
 	{
-		$UserLoginTemp = new Unlimited\UserLogin;
+		$UserLoginTemp = new Site\UserLogin;
 		$UserLoginTemp->_setPid(['token'=>$data['token'],'key'=>$data['key']]);
-		$UserLogin = new Unlimited\UserLogin;
+		$UserLogin = new Site\UserLogin;
 	}
 
 	if($UserLogin->logged === true)
 	{
 		if($data['main_buy_per_user_id'])
 		{
-            $MainBuyPerUser = new Unlimited\MainBuyPerUser;
+            $MainBuyPerUser = new Site\MainBuyPerUser;
             
 			if($main_buy_per_user = $MainBuyPerUser->get($data['main_buy_per_user_id']))
 			{
@@ -121,8 +121,8 @@ function getCapitalika($UserLogin = null,$data = null)
 		// @todo change for catalog_currency_id value
 		$currency_code = "MXN";
 	} else {
-		$data['shipping'] = Unlimited\Currency::getAmountOnUSD($data['shipping']);
-		$data['amount'] = Unlimited\Currency::getAmountOnUSD($data['amount']);
+		$data['shipping'] = Site\Currency::getAmountOnUSD($data['shipping']);
+		$data['amount'] = Site\Currency::getAmountOnUSD($data['amount']);
 		// @todo change for catalog_currency_id value
 		$currency_code = "USD";
 	}
@@ -149,8 +149,8 @@ function getLocalBitcoin($UserLogin = null,$data = null)
 		// @todo change for catalog_currency_id value
 		$currency_code = "MXN";
 	} else {
-		$data['shipping'] = Unlimited\Currency::getAmountOnUSD($data['shipping']);
-		$data['amount'] = Unlimited\Currency::getAmountOnUSD($data['amount']);
+		$data['shipping'] = Site\Currency::getAmountOnUSD($data['shipping']);
+		$data['amount'] = Site\Currency::getAmountOnUSD($data['amount']);
 		// @todo change for catalog_currency_id value
 		$currency_code = "USD";
 	}
@@ -177,8 +177,8 @@ function getBisto($UserLogin = null,$data = null)
 		// @todo change for catalog_currency_id value
 		$currency_code = "MXN";
 	} else {
-		$data['shipping'] = Unlimited\Currency::getAmountOnUSD($data['shipping']);
-		$data['amount'] = Unlimited\Currency::getAmountOnUSD($data['amount']);
+		$data['shipping'] = Site\Currency::getAmountOnUSD($data['shipping']);
+		$data['amount'] = Site\Currency::getAmountOnUSD($data['amount']);
 		// @todo change for catalog_currency_id value
 		$currency_code = "USD";
 	}
@@ -204,8 +204,8 @@ function getAirTm($UserLogin = null,$data = null)
 		// @todo change for catalog_currency_id value
 		$currency_code = "MXN";
 	} else {
-		$data['shipping'] = Unlimited\Currency::getAmountOnUSD($data['shipping']);
-		$data['amount'] = Unlimited\Currency::getAmountOnUSD($data['amount']);
+		$data['shipping'] = Site\Currency::getAmountOnUSD($data['shipping']);
+		$data['amount'] = Site\Currency::getAmountOnUSD($data['amount']);
 		// @todo change for catalog_currency_id value
 		$currency_code = "USD";
 	}
@@ -334,7 +334,7 @@ function getOxxo($UserLogin = null,$data = null)
 	);
 
 	$oxxo_data = [
-	    'code_id' => (new Unlimited\Oxxo(46,1))->createCodeId($oxxo_data),
+	    'code_id' => (new Site\Oxxo(46,1))->createCodeId($oxxo_data),
 	    'email' => $UserLogin->mail,
 		'file_name' => 'Bill_From_'.$UserLogin->company_id,
 		'buy_date' => $data['date_create'],
@@ -366,8 +366,8 @@ function getPayU($UserLogin = null,$data = null)
 		// @todo change for catalog_currency_id value
 		$currency_code = "MXN";
 	} else {
-		$data['shipping'] = Unlimited\Currency::getAmountOnUSD($data['shipping']);
-		$data['amount'] = Unlimited\Currency::getAmountOnUSD($data['amount']);
+		$data['shipping'] = Site\Currency::getAmountOnUSD($data['shipping']);
+		$data['amount'] = Site\Currency::getAmountOnUSD($data['amount']);
 		// @todo change for catalog_currency_id value
 		$currency_code = "USD";
 	}
@@ -393,8 +393,8 @@ function getEwallet($UserLogin = null,$data = null)
 		// @todo change for catalog_currency_id value
 		$currency_code = "MXN";
 	} else {
-		$data['shipping'] = Unlimited\Currency::getAmountOnUSD($data['shipping']);
-		$data['amount'] = Unlimited\Currency::getAmountOnUSD($data['amount']);
+		$data['shipping'] = Site\Currency::getAmountOnUSD($data['shipping']);
+		$data['amount'] = Site\Currency::getAmountOnUSD($data['amount']);
 		// @todo change for catalog_currency_id value
 		$currency_code = "USD";
 	}
@@ -421,8 +421,8 @@ function getStripe($UserLogin = null,$data = null)
 		// @todo change for catalog_currency_id value
 		$currency_code = "MXN";
 	} else {
-		$data['shipping'] = Unlimited\Currency::getAmountOnUSD($data['shipping']);
-		$data['amount'] = Unlimited\Currency::getAmountOnUSD($data['amount']);
+		$data['shipping'] = Site\Currency::getAmountOnUSD($data['shipping']);
+		$data['amount'] = Site\Currency::getAmountOnUSD($data['amount']);
 		// @todo change for catalog_currency_id value
 		$currency_code = "USD";
 	}

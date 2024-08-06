@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $CatalogPriority = new Unlimited\CatalogPriority;
+    $CatalogPriority = new Site\CatalogPriority;
 
     if($catalog_priorities = $CatalogPriority->getAll())
     {

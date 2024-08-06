@@ -8,7 +8,7 @@ use HCStudio\Token;
 
 use BlockChain\Transaction;
 
-use Unlimited\ShortUrl;
+use Site\ShortUrl;
 
 use JFStudio\Constants;
 

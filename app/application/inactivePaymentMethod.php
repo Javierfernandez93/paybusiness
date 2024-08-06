@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['catalog_payment_method_id'])
     {
-        $CatalogPaymentMethod = new Unlimited\CatalogPaymentMethod;
+        $CatalogPaymentMethod = new Site\CatalogPaymentMethod;
 
         if($CatalogPaymentMethod->loadWhere('catalog_payment_method_id = ?',$data['catalog_payment_method_id']))
         {

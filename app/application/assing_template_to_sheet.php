@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -12,11 +12,11 @@ if($UserLogin->logged === true)
 	{
 		if($data['template_id'])
 		{
-			$Template = new Unlimited\Template;
+			$Template = new Site\Template;
 
 			if($Template->loadWhere("template_id = ?",$data['template_id']))
 			{
-				$VCardPerUser = new Unlimited\VCardPerUser;
+				$VCardPerUser = new Site\VCardPerUser;
 
 				if($VCardPerUser->loadWhere("vcard_per_user_id = ?",$data['vcard_per_user_id']))
 				{	
@@ -24,7 +24,7 @@ if($UserLogin->logged === true)
 
 					if($VCardPerUser->save())
 					{
-						$path = TO_ROOT.Unlimited\VCardPerUser::PROYECTS_URL."/".$VCardPerUser->getId()."/view/";
+						$path = TO_ROOT.Site\VCardPerUser::PROYECTS_URL."/".$VCardPerUser->getId()."/view/";
 
 						if(file_exists($path) == false)
 						{
@@ -39,7 +39,7 @@ if($UserLogin->logged === true)
 					
 						$File = JFStudio\File::getInstance();
 
-						$File->setFileName(Unlimited\VCardPerUser::TEMPLATE_NAME."-".$VCardPerUser->getId());
+						$File->setFileName(Site\VCardPerUser::TEMPLATE_NAME."-".$VCardPerUser->getId());
 						$File->setPath($path);
 						$File->setContent(getHtml($Template->view));
 

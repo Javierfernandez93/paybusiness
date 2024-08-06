@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    if(Unlimited\LicencePerUser::makeLicences($data['company_id'],$data['amount']))
+    if(Site\LicencePerUser::makeLicences($data['company_id'],$data['amount']))
     {
         $data['s'] = 1;
         $data['r'] = 'DATA_OK';

@@ -8,11 +8,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($payments = (new Unlimited\BuyPerUser)->getReferralPayments($UserLogin->company_id,$data['catalog_package_type_id']))
+    if($payments = (new Site\BuyPerUser)->getReferralPayments($UserLogin->company_id,$data['catalog_package_type_id']))
     {
         $data['payments'] = $payments;
         $data['r'] = 'DATA_OK';

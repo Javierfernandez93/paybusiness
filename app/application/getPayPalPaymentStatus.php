@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -19,9 +19,9 @@ if($UserLogin->logged === true)
                     $data['buy_per_user_id'] = $payment->getTransactions()[0]->getInvoiceNumber();
 
                     // UPDATE TRANSACTION_REQUIREMENT
-                    $BuyPerUser = new Unlimited\BuyPerUser;
+                    $BuyPerUser = new Site\BuyPerUser;
                     
-                    if($BuyPerUser->loadWhere("buy_per_user_id = ? AND status = ?",[$data['buy_per_user_id'],Unlimited\BuyPerUser::PENDING]))
+                    if($BuyPerUser->loadWhere("buy_per_user_id = ? AND status = ?",[$data['buy_per_user_id'],Site\BuyPerUser::PENDING]))
                     {
                         $url = HCStudio\Connection::getMainPath()."/app/application/validateBuy.php";
 
@@ -30,7 +30,7 @@ if($UserLogin->logged === true)
                             'user' => HCStudio\Util::USERNAME,
                             'password' => HCStudio\Util::PASSWORD,
                             'invoice_id' => $BuyPerUser->invoice_id,
-                            'catalog_validation_method_id' => Unlimited\CatalogValidationMethod::PAYPAL_CDN,
+                            'catalog_validation_method_id' => Site\CatalogValidationMethod::PAYPAL_CDN,
                             'ipn_data' => json_encode($data),
                         ]);
 

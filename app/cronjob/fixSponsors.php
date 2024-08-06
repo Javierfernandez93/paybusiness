@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getParam();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 // if(($data['PHP_AUTH_USER'] ?? false == HCStudio\Util::USERNAME && $data['PHP_AUTH_PW'] ?? false == HCStudio\Util::PASSWORD) || $UserSupport->logged === true)
 if(true)
@@ -14365,7 +14365,7 @@ if(true)
     // busco correo
     // busco id por correo
 
-    $UserLogin = new Unlimited\UserLogin(false,false);
+    $UserLogin = new Site\UserLogin(false,false);
 
     foreach($users as $user)
     {
@@ -14382,7 +14382,7 @@ if(true)
                 {
                     if($referral_id = $UserLogin->getCompanyIdByEmail($email))
                     {
-                        Unlimited\UserReferral::updateReferral($company_id,$referral_id);
+                        Site\UserReferral::updateReferral($company_id,$referral_id);
                     }
                 }
             }

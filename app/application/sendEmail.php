@@ -4,7 +4,7 @@ require_once TO_ROOT. '/system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -12,21 +12,21 @@ if($UserSupport->logged === true)
     {
         if($data['campaign_email_id'])
         {
-            $CampaignEmail = new Unlimited\CampaignEmail;
+            $CampaignEmail = new Site\CampaignEmail;
             $CampaignEmail->connection()->stmtQuery("SET NAMES utf8mb4");
             
             if($campaign = $CampaignEmail->get($data['campaign_email_id']))
             {
                 $names = 'Socio Unlimited';
 
-                if($company_id = (new Unlimited\UserLogin)->getCompanyIdByMail($data['email']))
+                if($company_id = (new Site\UserLogin)->getCompanyIdByMail($data['email']))
                 {
-                    $names = (new Unlimited\UserData)->getNames($company_id);
+                    $names = (new Site\UserData)->getNames($company_id);
                 }
 
                 if(sendEmail($data['email'],$campaign['title'],$campaign['content'],$names))
                 {
-                    if(Unlimited\EmailPerCampaign::addEmailRecord($company_id,$data['email'],$campaign['campaign_email_id']))
+                    if(Site\EmailPerCampaign::addEmailRecord($company_id,$data['email'],$campaign['campaign_email_id']))
                     {
                         $data['s'] = 1;
                         $data['r'] = 'DATA_OK';
@@ -70,7 +70,7 @@ function sendEmail(string $email = null,string $subject = null,$content = null,s
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Unlimited\CatalogMailController::init(1);
+            $CatalogMailController = Site\CatalogMailController::init(1);
 
             $content = $Layout->replaceTags([
                'names' => ucwords($names)

@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['tool_id'])
     {
-        $Tool = new Unlimited\Tool;
+        $Tool = new Site\Tool;
         
         if($tool = $Tool->getTool($data['tool_id']))
         {

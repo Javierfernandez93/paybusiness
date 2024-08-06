@@ -4,17 +4,17 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($UserSupport->hasPermission('list_mam'))
     {
-        $BuyPerBridge = new Unlimited\BuyPerBridge;
+        $BuyPerBridge = new Site\BuyPerBridge;
 
         if($BuyPerBridge->isAviableToSendMoneyToBridge($data['buy_per_bridge_id']))
         {
-            if(Unlimited\BuyPerBridge::setAsProcessing($data['buy_per_bridge_id']))
+            if(Site\BuyPerBridge::setAsProcessing($data['buy_per_bridge_id']))
             {
                 $data["s"] = 1;
                 $data["r"] = "DATA_OK";
@@ -45,9 +45,9 @@ function sendPayout(array $data = null)
 		'payout_id' => $data['payout_id'],
 		'amount' => $data['amount'],
 		'address' => $data['address'],
-		'whatsapp' => (new Unlimited\UserContact)->getWhatsApp($data['user_login_id']),
-		'name' => (new Unlimited\UserData)->getName($data['user_login_id']),
-		'email' => (new Unlimited\UserLogin)->getEmail($data['user_login_id'])
+		'whatsapp' => (new Site\UserContact)->getWhatsApp($data['user_login_id']),
+		'name' => (new Site\UserData)->getName($data['user_login_id']),
+		'email' => (new Site\UserLogin)->getEmail($data['user_login_id'])
 	]);
 
 	if ($response['status'] ?? false == JFStudio\CapitalPayments::STATUS_200) {

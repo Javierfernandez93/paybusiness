@@ -4,13 +4,13 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['link'])
     {    
-        $data['link_access'] = Unlimited\ExternalLoginRouter::LOGIN_FOR_TOOL."?".http_build_query(array_merge([
+        $data['link_access'] = Site\ExternalLoginRouter::LOGIN_FOR_TOOL."?".http_build_query(array_merge([
             'link' => $data['link'],
         ],$UserLogin->getPid()));
         

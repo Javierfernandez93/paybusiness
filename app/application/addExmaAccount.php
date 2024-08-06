@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if(Unlimited\UserBridgeAccount::add([
+    if(Site\UserBridgeAccount::add([
         'user_login_id' => $UserLogin->company_id,
-        'catalog_broker_id' => Unlimited\CatalogBroker::EXMA,
+        'catalog_broker_id' => Site\CatalogBroker::EXMA,
         'account' => $data['account'],
     ]))
     {

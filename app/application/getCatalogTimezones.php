@@ -4,11 +4,11 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($timezones = (new Unlimited\CatalogTimezone)->getAll())
+    if($timezones = (new Site\CatalogTimezone)->getAll())
     {
         $data["timezones"] = $timezones;
         $data["s"] = 1;

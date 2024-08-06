@@ -4,15 +4,15 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $intents = Unlimited\Intent::getIntents($data['message']);
+    $intents = Site\Intent::getIntents($data['message']);
 
     if($tag = predict($intents,$data['message']))
     {
-        $CatalogTagIntent = new Unlimited\CatalogTagIntent;
+        $CatalogTagIntent = new Site\CatalogTagIntent;
 
         $data['catalog_tag_intent_id'] = $CatalogTagIntent->getCatalogTagIntentIdByTag($tag['tag']);
         
@@ -25,7 +25,7 @@ if($UserLogin->logged === true)
 				$balance = $Wallet->getBalance();
 			}
 
-			$systemVariables = (new Unlimited\SystemVar)->getAllPair();
+			$systemVariables = (new Site\SystemVar)->getAllPair();
 			$userVars = [
 				'names' => $UserLogin->_data['user_data']['names'],
 				'balance' => number_format($balance,2),
@@ -34,7 +34,7 @@ if($UserLogin->logged === true)
 
 			$vars = array_merge($userVars,$systemVariables);
 
-            $data['response'] = nl2br(Unlimited\Parser::doParser(getMLReplay($tag['tag'],$data['catalog_tag_intent_id']),$vars));
+            $data['response'] = nl2br(Site\Parser::doParser(getMLReplay($tag['tag'],$data['catalog_tag_intent_id']),$vars));
         }
 
 		$data['tag'] = $tag['tag'];
@@ -134,10 +134,10 @@ function getMLReplay(string $tag = null,$catalog_tag_intent_id = null) : string
 {
 	if(isset($tag,$catalog_tag_intent_id) === true)
 	{
-		return Unlimited\ReplyPerCatalogTagIntent::getReplyRandom($catalog_tag_intent_id);
+		return Site\ReplyPerCatalogTagIntent::getReplyRandom($catalog_tag_intent_id);
 	}
 
-	return Unlimited\ReplyPerCatalogTagIntent::getDefaultReply();
+	return Site\ReplyPerCatalogTagIntent::getDefaultReply();
 }
 
 echo json_encode($data); 

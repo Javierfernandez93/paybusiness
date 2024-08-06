@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {	
-	if($courses = (new Unlimited\Course)->findRow("status = ?",[1],["course_id","title"]))
+	if($courses = (new Site\Course)->findRow("status = ?",[1],["course_id","title"]))
 	{ 
 		$data['courses'] = $courses;
 		$data['r'] = 'DATA_OK';

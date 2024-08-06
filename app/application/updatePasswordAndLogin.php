@@ -10,7 +10,7 @@ if($data['password'])
     {
         if($data['email'])
         {
-            $UserLogin = new Unlimited\UserLogin(false,false);
+            $UserLogin = new Site\UserLogin(false,false);
         
             if($UserLogin->updatePassword([
                 'secret' => $data['secret'],

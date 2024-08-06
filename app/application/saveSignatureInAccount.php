@@ -8,7 +8,7 @@ if($data['sign_code'])
 {
     if($data['signature'])
 	{
-        if(Unlimited\RemotePelSign::attachSignature($data['sign_code'],$data['signature']))
+        if(Site\RemotePelSign::attachSignature($data['sign_code'],$data['signature']))
         {
             $data['r'] = 'DATA_OK';
             $data['s'] = 1;

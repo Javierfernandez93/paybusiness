@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {	
-	if($intents = (new Unlimited\Intent)->getAllGroup())
+	if($intents = (new Site\Intent)->getAllGroup())
 	{
 		$data['intents'] = format($intents);
 		$data['r'] = 'DATA_OK';
@@ -24,8 +24,8 @@ if($UserSupport->logged === true)
 
 function format(array $intents = null) : array
 {
-	$ReplyPerCatalogTagIntent = new Unlimited\ReplyPerCatalogTagIntent;
-	$Intent = new Unlimited\Intent;
+	$ReplyPerCatalogTagIntent = new Site\ReplyPerCatalogTagIntent;
+	$Intent = new Site\Intent;
 
 	return array_map(function($intent) use($Intent,$ReplyPerCatalogTagIntent) {
 		$intent['words'] = $Intent->getAllByCatalogTagIntentId($intent['catalog_tag_intent_id']);

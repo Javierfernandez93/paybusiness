@@ -4,11 +4,11 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
-    if(Unlimited\ExternalLogin::signupChecker($UserLogin->email,Unlimited\ExternalLoginRouter::ZUUM_SIGNUP_CHECKER))
+    if(Site\ExternalLogin::signupChecker($UserLogin->email,Site\ExternalLoginRouter::ZUUM_SIGNUP_CHECKER))
     {
         $data['r'] = 'DATA_OK';
         $data['s'] = 1;

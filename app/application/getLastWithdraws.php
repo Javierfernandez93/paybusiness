@@ -4,13 +4,13 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if(isset($data['wallet_id']))
     {
-        if($lastWithdraws = (new Unlimited\WithdrawPerUser)->getLastWithdraws($UserLogin->company_id,' LIMIT 8'))
+        if($lastWithdraws = (new Site\WithdrawPerUser)->getLastWithdraws($UserLogin->company_id,' LIMIT 8'))
         {
             $data['lastWithdraws'] = $lastWithdraws;
             $data['r'] = 'DATA_OK';

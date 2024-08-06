@@ -4,15 +4,15 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['company_id'])
     {
-        if($network = (new Unlimited\UserReferral)->getNetworkReverseReferral(-1,$data['company_id']))
+        if($network = (new Site\UserReferral)->getNetworkReverseReferral(-1,$data['company_id']))
         {
-            if($first_active_user_login_id = (new Unlimited\MembershipPerUser)->getFirstActive($network))
+            if($first_active_user_login_id = (new Site\MembershipPerUser)->getFirstActive($network))
             {
                 $data["user"] = $UserSupport->getUser($first_active_user_login_id);
                 

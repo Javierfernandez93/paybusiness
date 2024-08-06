@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -12,7 +12,7 @@ if($UserLogin->logged === true)
 
     $img = new \Treinetic\ImageArtist\lib\Image('../../src/img/mask.png');
 
-    $size = Unlimited\UserLogin::USER_IMAGE_SIZE;
+    $size = Site\UserLogin::USER_IMAGE_SIZE;
     
     $img2 = new \Treinetic\ImageArtist\lib\Image($UserLogin->_data['user_account']['image']);
     $img2->crop(0,0,$size,$size);

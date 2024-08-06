@@ -6,8 +6,8 @@ $landing = HCStudio\Util::getParam('landing');
 
 if($landing)
 {
-	if($user_login_id = (new Unlimited\UserAccount)->getIdByLanding($landing))
+	if($user_login_id = (new Site\UserAccount)->getIdByLanding($landing))
 	{
-		HCStudio\Util::redirectTo(Unlimited\UserLogin::_getLanding($user_login_id));
+		HCStudio\Util::redirectTo(Site\UserLogin::_getLanding($user_login_id));
 	}
 }

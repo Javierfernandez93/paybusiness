@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {   
     $data['active'] = $UserLogin->hasProductPermission('pay_business');    
     
-    if($commissions = (new Unlimited\CommissionPerUser)->getAll($UserLogin->company_id))
+    if($commissions = (new Site\CommissionPerUser)->getAll($UserLogin->company_id))
     {
         $data['commissions'] = BlockChain\TransactionPerWallet::attachWalletKind($commissions);
         $data["s"] = 1;

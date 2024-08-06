@@ -4,12 +4,12 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
-$UserLogin = new Unlimited\UserLogin;
+$UserSupport = new Site\UserSupport;
+$UserLogin = new Site\UserLogin;
 
 if($UserSupport->logged === true || $UserLogin->logged === true)
 {	
-    if($banners = (new Unlimited\Banner)->findAll("status != ?",-1,null,null,"1"))
+    if($banners = (new Site\Banner)->findAll("status != ?",-1,null,null,"1"))
     {
         $data['banners'] = $banners;
         $data['r'] = 'DATA_OK';

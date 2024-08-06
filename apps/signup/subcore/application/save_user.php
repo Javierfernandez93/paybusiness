@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 $data = $data["data"];
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($data["use_login"]["email"])
 {
@@ -29,14 +29,14 @@ if($data["use_login"]["email"])
 
 				if($UserLogin->save())
 				{
-					$UserData = new Unlimited\UserData;
+					$UserData = new Site\UserData;
 					$UserData->cargarArray($data["use_data"]);
 					$UserData->user_login_id=$user_login_id;
 					$UserLogin->fillFields($UserData);
 
 					if($UserData->save())
 					{
-						$UserAddrees = new Unlimited\UserAddress;
+						$UserAddrees = new Site\UserAddress;
 						
 						$Country = new World\Country;
 						
@@ -47,14 +47,14 @@ if($data["use_login"]["email"])
 
 						if($UserAddrees->save())
 						{
-							$UserContact = new Unlimited\UserContact;
+							$UserContact = new Site\UserContact;
 							$UserContact->cargarArray($data["user_contact"]);
 							$UserContact->user_login_id = $user_login_id;		
 							$UserLogin->fillFields($UserContact);			
 
 							if($UserContact->save())
 							{
-								$UserAccount = new Unlimited\UserAccount;									
+								$UserAccount = new Site\UserAccount;									
 								
 								if($data['user_account']["sponsor_id"])
 								{
@@ -74,13 +74,13 @@ if($data["use_login"]["email"])
 								
 								if($UserAccount->save())
 								{
-									$UserBank = new Unlimited\UserBank();
+									$UserBank = new Site\UserBank();
 									$UserBank->user_login_id = $user_login_id;	
 									$UserLogin->fillFields($UserBank);							
 									
 									if($UserBank->save())
 									{
-										$UserSetting = new Unlimited\UserSetting();
+										$UserSetting = new Site\UserSetting();
 										$UserSetting->user_login_id = $user_login_id;	
 										$UserLogin->fillFields($UserSetting);							
 										
@@ -193,7 +193,7 @@ function saveNotification($message = null,$company_id = null)
 {
 	if(isset($message,$company_id) === true)
 	{
-		$NotificationPerUser = new Unlimited\NotificationPerUser;
+		$NotificationPerUser = new Site\NotificationPerUser;
 		$NotificationPerUser->company_id = $company_id;
 		$NotificationPerUser->catalog_notification_id = 2;
 		$NotificationPerUser->message = $message;

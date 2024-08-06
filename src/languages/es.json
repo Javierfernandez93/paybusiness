@@ -61,5 +61,9 @@
   "security_body" : "Todos tus datos están protegidos porque están encriptados, sólo tu tienes el poder de utilizar tu dinero.",
   "filter": "Filter",
   "whatsapp_default_message": "¡Hola! te escribimos desde Unlimited",
-  "start_now": "Empezar ahora"
+  "start_now": "Empezar ahora",
+  "join_on_project": "Únete al proyecto",
+  "login_on_account": "Inicia sesión en tu cuenta",
+  "discover_your_potential": "Descubre tu potencial",
+  "language": "Idioma"
 }

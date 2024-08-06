@@ -4,7 +4,7 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$BuyPerUser = new Unlimited\BuyPerUser;
+$BuyPerUser = new Site\BuyPerUser;
 
 if($buys = $BuyPerUser->getBuysByAmount(2))
 {

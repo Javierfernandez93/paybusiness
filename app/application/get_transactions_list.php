@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
-    $TransactionRequirementPerUser = new Unlimited\TransactionRequirementPerUser;
+    $TransactionRequirementPerUser = new Site\TransactionRequirementPerUser;
 
-    if(in_array($data['status'],[Unlimited\TransactionRequirementPerUser::PENDING,Unlimited\TransactionRequirementPerUser::EXPIRED,Unlimited\TransactionRequirementPerUser::VALIDATED,Unlimited\TransactionRequirementPerUser::DELETED]))
+    if(in_array($data['status'],[Site\TransactionRequirementPerUser::PENDING,Site\TransactionRequirementPerUser::EXPIRED,Site\TransactionRequirementPerUser::VALIDATED,Site\TransactionRequirementPerUser::DELETED]))
     {
         $data['filter'] = " WHERE transaction_requirement_per_user.status = '".$data['status']."'";
     }

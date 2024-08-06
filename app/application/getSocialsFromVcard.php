@@ -8,7 +8,7 @@ if(true)
 {	
     if($data['vcard_per_user_id'])
     {
-        $TagPerVCard = new Unlimited\TagPerVCard;
+        $TagPerVCard = new Site\TagPerVCard;
 
         $data['socials'] = [
             'facebook' => $TagPerVCard->getValueByTag($data['vcard_per_user_id'],'facebook'),
@@ -17,7 +17,7 @@ if(true)
             'instagram' => $TagPerVCard->getValueByTag($data['vcard_per_user_id'],'instagram'),
             'pinterest' => $TagPerVCard->getValueByTag($data['vcard_per_user_id'],'pinterest'),
             'reddit' => $TagPerVCard->getValueByTag($data['vcard_per_user_id'],'reddit'),
-            'whatsapp' => Unlimited\TagPerVCard::unFormatPhone($TagPerVCard->getValueByTag($data['vcard_per_user_id'],'whatsapp')),
+            'whatsapp' => Site\TagPerVCard::unFormatPhone($TagPerVCard->getValueByTag($data['vcard_per_user_id'],'whatsapp')),
             'linkedin' => $TagPerVCard->getValueByTag($data['vcard_per_user_id'],'linkedin'),
         ];
         $data['r'] = 'DATA_OK';

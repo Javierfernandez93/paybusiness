@@ -6,7 +6,7 @@ $link = HCStudio\Util::getParam('link');
 
 if($link)
 {
-	if((new Unlimited\ShortUrl)->existCode($link)) {
-		Unlimited\ShortUrl::redirectToUrlByCode($link);
+	if((new Site\ShortUrl)->existCode($link)) {
+		Site\ShortUrl::redirectToUrlByCode($link);
 	}
 }

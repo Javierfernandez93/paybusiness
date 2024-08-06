@@ -4,17 +4,17 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($buys = (new Unlimited\BuyPerMam)->getAllForMailSend())
+    if($buys = (new Site\BuyPerMam)->getAllForMailSend())
     {
         foreach($buys as $buy)
         {
             if(sendEmail($buy))
             {
-                Unlimited\BuyPerMam::setAsMailSent($buy['buy_per_bridge_id']);
+                Site\BuyPerMam::setAsMailSent($buy['buy_per_bridge_id']);
             }
         }
     } else {
@@ -42,7 +42,7 @@ function sendEmail(array $data = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Unlimited\CatalogMailController::init(1);
+            $CatalogMailController = Site\CatalogMailController::init(1);
 
             $Layout->setVar($data);
 

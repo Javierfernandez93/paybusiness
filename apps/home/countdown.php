@@ -17,7 +17,7 @@ $Layout->setScript([
 ]);
 
 $Layout->setVar([
-	'UserLogin' => new Unlimited\UserLogin,
+	'UserLogin' => new Site\UserLogin,
 	'Translator' => $Translator
 ]);
 $Layout();

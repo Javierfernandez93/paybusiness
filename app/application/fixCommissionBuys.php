@@ -5,10 +5,10 @@ require_once TO_ROOT. "/system/core.php";
 $data = HCStudio\Util::getHeadersForWebService();
 
 $TransactionPerWallet = new BlockChain\TransactionPerWallet;
-$CommissionPerUser = new Unlimited\CommissionPerUser;
+$CommissionPerUser = new Site\CommissionPerUser;
 $commissions = $CommissionPerUser->findAll("buy_per_user_id != ? AND status = ?",['',2]);
 
-$BuyPerUser = new Unlimited\BuyPerUser;
+$BuyPerUser = new Site\BuyPerUser;
 
 if($commissions)
 {
@@ -18,7 +18,7 @@ if($commissions)
         {
             $catalog_payment_method_id = $BuyPerUser->findField('buy_per_user_id = ?',$commission['buy_per_user_id'],'catalog_payment_method_id');
 
-            if($catalog_payment_method_id == Unlimited\CatalogPaymentMethod::EWALLET_PROTECTED)
+            if($catalog_payment_method_id == Site\CatalogPaymentMethod::EWALLET_PROTECTED)
             {
                 $wallet_kind_id = $TransactionPerWallet->getWalletKindId($commission['transaction_per_wallet_id']);
 
@@ -42,7 +42,7 @@ if($commissions)
                             {
                                 echo " ok \n";
 
-                                $CommissionPerUserTemp = new Unlimited\CommissionPerUser;
+                                $CommissionPerUserTemp = new Site\CommissionPerUser;
                                 $CommissionPerUserTemp->loadWhere("commission_per_user_id = ?",$commission['commission_per_user_id']);
                                 $CommissionPerUserTemp->transaction_per_wallet_id = $new_transaction_per_wallet_id;
                                 $CommissionPerUserTemp->save();

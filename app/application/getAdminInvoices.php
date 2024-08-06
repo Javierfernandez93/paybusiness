@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($UserSupport->hasPermission('list_buys') === true)
     {
-        if($invoices = (new Unlimited\PaymentGateway)->getAdminInvoices($data['status']))
+        if($invoices = (new Site\PaymentGateway)->getAdminInvoices($data['status']))
         {
             $data['invoices'] = $invoices;
             $data['s'] = 1;
@@ -23,7 +23,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'transaction' => json_encode(['address'=>$data['address'],'amount'=>$data['amount']]),
             'unix_date' => time(),
-        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Site\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';
@@ -36,7 +36,7 @@ if($UserSupport->logged === true)
 function format(array $invoices = null) : array 
 {    
     return array_map(function($invoice) {
-        $invoice = Unlimited\BuyPerUser::_unformatData($invoice);
+        $invoice = Site\BuyPerUser::_unformatData($invoice);
 
         return $invoice;
     },$invoices);

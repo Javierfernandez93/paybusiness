@@ -4,11 +4,11 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    if($api = (new Unlimited\ApiCredential)->getApiCredentials($UserLogin->company_id))
+    if($api = (new Site\ApiCredential)->getApiCredentials($UserLogin->company_id))
     {
         $data['api'] = $api;
         $data['s'] = 1;

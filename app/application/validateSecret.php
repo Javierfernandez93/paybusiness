@@ -8,7 +8,7 @@ if($data['secret'])
 {
     if($data['email'])
     {
-        $UserLogin = new Unlimited\UserLogin(false,false);
+        $UserLogin = new Site\UserLogin(false,false);
     
         if($UserLogin->isValidSecret($data['secret'],$data['email']))
         {

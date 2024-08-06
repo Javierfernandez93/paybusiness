@@ -4,18 +4,18 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     $data['today'] = date("Y-m-d");
     $data['day'] = $data['day'] ? date("Y-m-d",strtotime($data['day'])) : $data['today'];
 
-    $Broker = new Unlimited\Broker;
+    $Broker = new Site\Broker;
 
     if($brokers = $Broker->getAll())
     {   
-        $data["operation_open"] = (new Unlimited\TradingPerformance)->isOperationOpen($data['day']);
+        $data["operation_open"] = (new Site\TradingPerformance)->isOperationOpen($data['day']);
         $data["data"] = filterData($brokers,$data['day']);
         $data["s"] = 1;
         $data["r"] = "DATA_OK";
@@ -30,8 +30,8 @@ if($UserSupport->logged === true)
 
 function filterData(array $brokers = null,string $day = null)
 {
-    $CapitalPerBroker = new Unlimited\CapitalPerBroker;
-    $GainPerBroker = new Unlimited\GainPerBroker;
+    $CapitalPerBroker = new Site\CapitalPerBroker;
+    $GainPerBroker = new Site\GainPerBroker;
 
     foreach ($brokers as $key => $broker)
     {

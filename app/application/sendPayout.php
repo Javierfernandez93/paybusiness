@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
@@ -16,7 +16,7 @@ if($UserSupport->logged === true)
             'address' => $data['wallet'],
             'user_login_id' => $data['user_login_id']
         ])) {
-            if(Unlimited\WithdrawPerUser::setAsProcessingForPayout($data['withdraw_per_user_id']))
+            if(Site\WithdrawPerUser::setAsProcessingForPayout($data['withdraw_per_user_id']))
             {
                 $data["s"] = 1;
                 $data["r"] = "DATA_OK";
@@ -32,7 +32,7 @@ if($UserSupport->logged === true)
         $UserSupport->addLog([
             'withdraw_per_user_id' => $data['withdraw_per_user_id'],
             'unix_date' => time(),
-        ],Unlimited\LogType::INVALID_TRANSACTION_PERMISSION);
+        ],Site\LogType::INVALID_TRANSACTION_PERMISSION);
 
         $data['s'] = 0;
         $data['r'] = 'INVALID_PERMISSION';
@@ -47,15 +47,15 @@ function sendPayout(array $data = null)
 {
     require_once TO_ROOT .'/vendor/autoload.php';
 
-    $Sdk = new \CapitalPayments\Sdk\Sdk(Unlimited\SystemVar::_getValue("api_key"),Unlimited\SystemVar::_getValue("api_secret"));
+    $Sdk = new \CapitalPayments\Sdk\Sdk(Site\SystemVar::_getValue("api_key"),Site\SystemVar::_getValue("api_secret"));
 
 	$response = $Sdk->createPayout([
 		'payout_id' => $data['withdraw_per_user_id'],
 		'amount' => $data['amount'],
 		'address' => $data['address'],
-		'whatsapp' => (new Unlimited\UserContact)->getWhatsApp($data['user_login_id']),
-		'name' => (new Unlimited\UserData)->getName($data['user_login_id']),
-		'email' => (new Unlimited\UserLogin)->getEmail($data['user_login_id'])
+		'whatsapp' => (new Site\UserContact)->getWhatsApp($data['user_login_id']),
+		'name' => (new Site\UserData)->getName($data['user_login_id']),
+		'email' => (new Site\UserLogin)->getEmail($data['user_login_id'])
 	]);
 
 	if ($response['status'] ?? false == JFStudio\CapitalPayments::STATUS_200) {

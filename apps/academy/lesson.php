@@ -2,12 +2,12 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 $route = JFStudio\Router::AcademyLesson;
 
 if($UserLogin->logged === false) {
-	Unlimited\UserLogin::redirectTo(JFStudio\Router::getName($route));
+	Site\UserLogin::redirectTo(JFStudio\Router::getName($route));
 }
 
 $UserLogin->checkRedirection();

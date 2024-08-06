@@ -16,11 +16,11 @@ if($data["password"] ?? false)
     
     if($Token->checkToken($token))
     {    
-        $UserLogin = new Unlimited\UserLogin(false,false);
+        $UserLogin = new Site\UserLogin(false,false);
 
         if($UserLogin->isUniqueMail($Token->params['email']) === false)
         {
-            $UserLogin = new Unlimited\UserLogin;
+            $UserLogin = new Site\UserLogin;
 
             if($UserLogin->isUniqueMail($Token->params['email']) === false)
             {

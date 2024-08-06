@@ -4,13 +4,13 @@ require_once TO_ROOT . "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if(($data['user'] == HCStudio\Util::USERNAME && $data['password'] == HCStudio\Util::PASSWORD) || $UserSupport->logged === true)
 {
     if($data['invoice_id'])
 	{
-        $BuyPerUser = new Unlimited\BuyPerUser;
+        $BuyPerUser = new Site\BuyPerUser;
         
         if($BuyPerUser->isInvoicePending($data['invoice_id']))
         {

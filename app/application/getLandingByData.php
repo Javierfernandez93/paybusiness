@@ -8,17 +8,17 @@ if($data['path'])
 {
     if($data['landing'])
     {
-        if($landing = (new Unlimited\Landing)->getLandingByPath($data['path']))
+        if($landing = (new Site\Landing)->getLandingByPath($data['path']))
         {
-            if($user_login_id = (new Unlimited\UserAccount)->getIdByLanding($data['landing']))
+            if($user_login_id = (new Site\UserAccount)->getIdByLanding($data['landing']))
             {
                 $data['userData'] = [
                     'landing' => $data['landing'],
-                    'whatsApp' => (new Unlimited\UserContact)->getWhatsApp($user_login_id),
-                    'names' => (new Unlimited\UserData)->getNames($user_login_id),
+                    'whatsApp' => (new Site\UserContact)->getWhatsApp($user_login_id),
+                    'names' => (new Site\UserData)->getNames($user_login_id),
                 ];
                 
-                $landing['content'] = Unlimited\Parser::doParser($landing['content'],$data['userData']);
+                $landing['content'] = Site\Parser::doParser($landing['content'],$data['userData']);
             }
 
             $data['landing'] = $landing;

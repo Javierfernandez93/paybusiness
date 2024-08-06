@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -12,15 +12,15 @@ if($UserLogin->logged === true)
     {
         if($data['ammount'])
         {
-            $UserWallet = new Unlimited\UserWallet;
+            $UserWallet = new Site\UserWallet;
             
             if($UserWallet->getSafeWallet($UserLogin->company_id))
             {
                 if($data["balance"] <= $UserWallet->getBalance())
                 {
-                    if($UserWallet->doTransaction($data['ammount'],Unlimited\Transaction::WITHDRAW,null,$data['catalog_withdraw_method_id']))
+                    if($UserWallet->doTransaction($data['ammount'],Site\Transaction::WITHDRAW,null,$data['catalog_withdraw_method_id']))
                     {
-                        $UserPlan = new Unlimited\UserPlan;
+                        $UserPlan = new Site\UserPlan;
                         
                         if($UserPlan->setPlan($UserWallet->user_login_id))
                         {

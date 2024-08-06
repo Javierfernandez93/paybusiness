@@ -10,7 +10,7 @@ $Layout->init("Cursos","view","backoffice","",TO_ROOT."/");
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript(['courses.*','view-courses.css']);
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 $Course = new OwnBoss\Course;
 
 $Course->loadWhere("course_id = ?",HCStudio\Util::getParam("cid"));

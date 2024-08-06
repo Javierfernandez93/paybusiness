@@ -2,16 +2,11 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-if(date("Y-m-d H:i:s") < '2023-11-08 19:00:00')
-{
-	// HCStudio\Util::redirectTo("../../apps/home/countdown");
-}
-
 $Layout = JFStudio\Layout::getInstance();
 
 $route = JFStudio\Router::Home;
 
-$Layout->init(JFStudio\Router::getName($route),'index',"index-1",'',TO_ROOT.'/');
+$Layout->init(JFStudio\Router::getName($route),'index',"index",'',TO_ROOT.'/');
 
 $Translator = JFStudio\Translator::getInstance();
 $Translator->init();
@@ -22,7 +17,8 @@ $Layout->setScript([
 ]);
 
 $Layout->setVar([
-	'UserLogin' => new Unlimited\UserLogin,
+	'UserLogin' => new Site\UserLogin,
+	'route' => $route,
 	'Translator' => $Translator
 ]);
 $Layout();

@@ -4,13 +4,13 @@ require_once TO_ROOT. '/system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($data['administrator']['user_support_id'])
     {
-        $UserSupportUpdate = new Unlimited\UserSupport(false,false);
+        $UserSupportUpdate = new Site\UserSupport(false,false);
         
         if($UserSupportUpdate->loadWhere('user_support_id = ?',$data['administrator']['user_support_id']))
         {
@@ -50,7 +50,7 @@ function savePermissions(int $user_support_id = null,array $permissions = null) 
 {
     foreach ($permissions as $permission)
     {
-        $PermissionPerUserSupport = new Unlimited\PermissionPerUserSupport;
+        $PermissionPerUserSupport = new Site\PermissionPerUserSupport;
         $PermissionPerUserSupport->loadWhere("user_support_id = ? AND catalog_permission_id = ?",[$user_support_id,$permission['catalog_permission_id']]);
         $PermissionPerUserSupport->user_support_id = $user_support_id;
         $PermissionPerUserSupport->catalog_permission_id = $permission['catalog_permission_id'];

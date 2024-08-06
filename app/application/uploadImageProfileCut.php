@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -59,7 +59,7 @@ function uploadUserImageBase64(string $data = null,string $type = null)
 
 function uploadUserImage(int $company_id = null,string $image = null) : bool 
 {
-	$UserAccount = new Unlimited\UserAccount;
+	$UserAccount = new Site\UserAccount;
 	
 	if($UserAccount->loadWhere("user_login_id = ?",$company_id))
 	{

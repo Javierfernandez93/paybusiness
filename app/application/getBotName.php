@@ -4,11 +4,11 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
-    $data['bot_name'] = Unlimited\SystemVar::_getValue("bot_name");
+    $data['bot_name'] = Site\SystemVar::_getValue("bot_name");
     $data['r'] = 'DATA_OK';
     $data['s'] = 1;
 } else {

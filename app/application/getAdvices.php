@@ -4,7 +4,7 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if(true)
 {	
@@ -23,8 +23,8 @@ if(true)
     shuffle($advices);
 
     $advices[] = [
-        'transactions' => (new Unlimited\TransactionPerWallet('blockchain'))->getCount(),
-        'advice_type' => Unlimited\AdviceType::TRANSACTIONS,
+        'transactions' => (new Site\TransactionPerWallet('blockchain'))->getCount(),
+        'advice_type' => Site\AdviceType::TRANSACTIONS,
         'showed' => false
     ];
     

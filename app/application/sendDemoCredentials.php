@@ -4,7 +4,7 @@ require_once TO_ROOT . "system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {	
@@ -30,8 +30,8 @@ if($UserSupport->logged === true)
 
 function sendWhatsApp(array $data = null) 
 {
-    return Unlimited\ApiWhatsApp::sendWhatsAppMessage([
-        'message' => Unlimited\ApiWhatsAppMessages::getIptvSetUpDemoMessage(),
+    return Site\ApiWhatsApp::sendWhatsAppMessage([
+        'message' => Site\ApiWhatsAppMessages::getIptvSetUpDemoMessage(),
         'image' => null,
         'contact' => [
             "phone" => $data['whatsapp'],

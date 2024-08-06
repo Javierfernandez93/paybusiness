@@ -6,9 +6,9 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if($data['utm'])
 {
-    if($data['landing_per_user_id'] = (new Unlimited\LandingPerUser)->getLandingIdByRoute($data['utm'],$data['catalog_landing_id']))
+    if($data['landing_per_user_id'] = (new Site\LandingPerUser)->getLandingIdByRoute($data['utm'],$data['catalog_landing_id']))
     {
-        if(Unlimited\VisitPerLanding::addVisit($data['landing_per_user_id'],HCStudio\Util::getIP(),$data['catalog_landing_id']))
+        if(Site\VisitPerLanding::addVisit($data['landing_per_user_id'],HCStudio\Util::getIP(),$data['catalog_landing_id']))
         {
             $data["s"] = 1;
             $data["r"] = "DATA_OK";

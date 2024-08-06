@@ -4,13 +4,13 @@ require_once TO_ROOT . 'system/core.php';
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {	
     if($data['session_take_by_user_per_course_id'])
     {
-        $SessionTakeByUserPerCourse = new Unlimited\SessionTakeByUserPerCourse;
+        $SessionTakeByUserPerCourse = new Site\SessionTakeByUserPerCourse;
         
         if($SessionTakeByUserPerCourse->isAviableCourse($data['session_take_by_user_per_course_id'],$UserLogin->company_id))
         {

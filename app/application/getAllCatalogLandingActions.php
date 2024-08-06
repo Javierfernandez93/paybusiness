@@ -4,13 +4,13 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getParam();
 
-$UserSupport = new Unlimited\UserSupport;
+$UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true)
 {
     if($UserSupport->hasPermission('add_ewallet_transaction') === true)
     {
-        if($catalog_landing_actions = (new Unlimited\CatalogLandingAction)->getAll()) {
+        if($catalog_landing_actions = (new Site\CatalogLandingAction)->getAll()) {
             $data['catalog_landing_actions'] = $catalog_landing_actions;
             $data['s'] = 1;
             $data['r'] = "DATA_OK";

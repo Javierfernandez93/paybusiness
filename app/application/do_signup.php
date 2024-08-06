@@ -6,7 +6,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 if($data['email'])
 {
-    $UserLogin = new Unlimited\UserLogin;
+    $UserLogin = new Site\UserLogin;
 
     if($UserLogin->isUniqueMail($data['email']))
     {
@@ -14,7 +14,7 @@ if($data['email'])
         {
             if($user_login_id = $UserLogin->doSignup($data))
             {
-                $secret = Unlimited\UserLogin::updateSecret($data['email']);
+                $secret = Site\UserLogin::updateSecret($data['email']);
 
                 if(sendEmailUser([
                     'email' => $data['email'],
@@ -74,42 +74,42 @@ if($data['email'])
 
 function sendWhatsApp(int $user_login_id = null) : bool
 {
-    return Unlimited\ApiWhatsApp::sendWhatsAppMessage([
-        'message' => Unlimited\ApiWhatsAppMessages::getWelcomeMessage(),
+    return Site\ApiWhatsApp::sendWhatsAppMessage([
+        'message' => Site\ApiWhatsAppMessages::getWelcomeMessage(),
         'image' => null,
         'contact' => [
-            "phone" => (new Unlimited\UserContact)->getWhatsApp($user_login_id),
-            "name" => (new Unlimited\UserData)->getName($user_login_id)
+            "phone" => (new Site\UserContact)->getWhatsApp($user_login_id),
+            "name" => (new Site\UserData)->getName($user_login_id)
         ]
     ]);
 }
 
 function sendPush(string $user_login_id = null,string $message = null,int $catalog_notification_id = null) : bool
 {
-    return Unlimited\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
+    return Site\NotificationPerUser::push($user_login_id,$message,$catalog_notification_id,"");
 }
 
 function sendPushUser(string $user_login_id = null,string $names = null) : bool
 {
-    return sendPush($user_login_id,"Bienvenido a bordo {$names}, estamos felices de que te hayas registrado en Unlimited",Unlimited\CatalogNotification::ACCOUNT);
+    return sendPush($user_login_id,"Bienvenido a bordo {$names}, estamos felices de que te hayas registrado en Unlimited",Site\CatalogNotification::ACCOUNT);
 }
 
 function sendPushSponsor(string $user_login_id = null,string $names = null) : bool
 {
-    return sendPush($user_login_id,"Felicitaciones, {$names} se unió a tu grupo de referidos",Unlimited\CatalogNotification::REFERRAL);
+    return sendPush($user_login_id,"Felicitaciones, {$names} se unió a tu grupo de referidos",Site\CatalogNotification::REFERRAL);
 }
 
 function sendEmailSponsor(array $data = null) : bool
 {
     if(isset($datanames) === true)
     {
-        $UserLogin = new Unlimited\UserLogin;
+        $UserLogin = new Site\UserLogin;
 
         if($email = $UserLogin->getEmail($data['user_login_id']))
         {
             return sendEmail([
                 'email' => $email,
-                'names' => (new Unlimited\UserData)->getNames($data['user_login_id']),
+                'names' => (new Site\UserData)->getNames($data['user_login_id']),
                 'subject' => 'Nuevo afiliado en Unlimited',
                 'view' => 'partnerWelcome'
             ]);
@@ -150,7 +150,7 @@ function sendEmail(array $data = null) : bool
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
 
-            $CatalogMailController = Unlimited\CatalogMailController::init(1);
+            $CatalogMailController = Site\CatalogMailController::init(1);
 
             $Layout->setVar($data);
 

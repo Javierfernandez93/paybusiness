@@ -10,7 +10,7 @@ $returnData['current_password'] = HCStudio\Util::getParam('current_password');
 $returnData['password'] = HCStudio\Util::getParam('password');
 $returnData['confirm_password'] = HCStudio\Util::getParam('confirm_password');
 
-$UserLogin = new Unlimited\UserLogin(true);
+$UserLogin = new Site\UserLogin(true);
 
 if($UserLogin->logged === true)
 {

@@ -4,7 +4,7 @@ require_once TO_ROOT. "/system/core.php";
 
 $data = HCStudio\Util::getHeadersForWebService();
 
-$UserLogin = new Unlimited\UserLogin;
+$UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === true)
 {
@@ -12,7 +12,7 @@ if($UserLogin->logged === true)
     
     if(!$pass)
     {
-        $UserSupport = new Unlimited\UserSupport;
+        $UserSupport = new Site\UserSupport;
         
         if($UserSupport->logged)
         {
