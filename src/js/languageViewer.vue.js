@@ -20,14 +20,6 @@ const LanguageViewer = {
                 {
                     language : "pt",
                     name : "Português",
-                },
-                {
-                    language : "de",
-                    name : "German",
-                },
-                {
-                    language : "ko",
-                    name : "Korean",
                 }
             ]
         }
