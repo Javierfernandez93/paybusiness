@@ -51,8 +51,12 @@
     <div class="bg-primary header-Disruptivo-signature" style="height: 0.3rem;">
     </div>
     
-    <div>
-        {{content}}    
+    <div class="container-fluid">
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-12 col-xl-10">
+                {{content}}    
+            </div>
+        </div>
     </div>
     <!--   Core JS Files   -->
     <script src="../../src/js/plugins/perfect-scrollbar.min.js"></script>

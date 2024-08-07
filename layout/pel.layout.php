@@ -29,7 +29,7 @@
     <link id="pagestyle" href="../../src/css/soft-ui-dashboard.css?v=1.1.5" rel="stylesheet" />
   </head>
 
-  <div class="bg-gradient-primary header-Disruptivo-signature" style="height: 0.3rem;">
+  <div class="bg-primary header-Disruptivo-signature" style="height: 0.3rem;">
   </div>
 
 

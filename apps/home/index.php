@@ -2,6 +2,12 @@
 
 require_once TO_ROOT . "/system/core.php";
 
+
+if(date("Y-m-d H:i:s") < '2024-08-10 19:00:00')
+{
+	HCStudio\Util::redirectTo("../../apps/home/working");
+}
+
 $Layout = JFStudio\Layout::getInstance();
 
 $route = JFStudio\Router::Home;

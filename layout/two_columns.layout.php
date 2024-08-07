@@ -22,7 +22,7 @@
         {{css_scripts}}
     </head>
     <body class="bg-light">
-        <div class="bg-gradient-primary header-Disruptivo-signature" style="height: 0.3rem;">
+        <div class="bg-primary header-Disruptivo-signature" style="height: 0.3rem;">
         </div>
         
         {{content}}
