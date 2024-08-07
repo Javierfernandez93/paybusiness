@@ -2,7 +2,6 @@
 
 namespace Site;
 
-use GPBMetadata\Google\Api\Usage;
 use JFStudio\Cookie;
 use JFStudio\Curl;
 
@@ -23,6 +22,7 @@ use Site\UserTradingAccount;
 use Site\ProductPermission;
 use Site\MembershipPerUser;
 use Site\TransactionRequirementPerUser;
+use Site\SystemVar;
 
 class UserLogin extends Orm {
   protected $tblName  = 'user_login';
@@ -2265,4 +2265,13 @@ class UserLogin extends Orm {
       ]
     ];
   }
+
+  public static function checkRedirectionByWorking()
+  {
+    $site_working = filter_var(SystemVar::_getValue("site_working"), FILTER_VALIDATE_BOOLEAN);
+
+    if(!$site_working) {
+      Util::redirectTo("../../apps/home/working");
+    }
+  } 
 }
