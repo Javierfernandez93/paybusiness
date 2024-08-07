@@ -60,7 +60,7 @@
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="../../apps/home" class="nav-link px-2 text-uppercase link-white opacity-3 <?php if (in_array($route,[JFStudio\Router::Home])) { ?>opacity-10<?php } ?>"><?php echo $Translator->t('home');?></a></li>
-                <li><a href="../../apps/home/products" class="nav-link px-2 text-uppercase opacity-3 link-white <?php if (in_array($route,[JFStudio\Router::Products])) { ?>opacity-10<?php } ?>"><?php echo $Translator->t('products');?></a></li>
+                <!-- <li><a href="../../apps/home/products" class="nav-link px-2 text-uppercase opacity-3 link-white <?php if (in_array($route,[JFStudio\Router::Products])) { ?>opacity-10<?php } ?>"><?php echo $Translator->t('products');?></a></li> -->
                 <li><a href="../../apps/home/about" class="nav-link px-2 text-uppercase opacity-3 link-white <?php if (in_array($route,[JFStudio\Router::About])) { ?>opacity-10<?php } ?>"><?php echo $Translator->t('about');?></a></li>
             </ul>
 

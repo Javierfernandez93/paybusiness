@@ -9,6 +9,7 @@
         "dummytrader/sdk": "dev-main",
         "php-ai/php-ml": "^0.10.0",
         "treinetic/imageartist": "^1.0",
-        "ddeboer/imap": "^1.19"
+        "ddeboer/imap": "^1.19",
+        "vlucas/phpdotenv": "^5.6"
     }
 }
