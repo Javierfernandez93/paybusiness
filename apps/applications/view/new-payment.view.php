@@ -1,4 +1,4 @@
-<h3>Unlimited tiene un nuevo cliente para ti ! </h3>
+<h3>Disruptivo tiene un nuevo cliente para ti ! </h3>
 
 <h3>Exma Trading porque confiamos en ti, enviamos los datos del siguiente cliente para apertura su cuenta </h3>
 
@@ -34,4 +34,4 @@
     </b>
 </h3>
 
-<h3>Unlimited</h3>
+<h3>Disruptivo</h3>

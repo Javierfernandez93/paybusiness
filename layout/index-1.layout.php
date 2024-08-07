@@ -395,7 +395,7 @@
                 </div>
                 <div class="col-md-6 p-t-90 p-b-75">
                     <div class="heading-section heading-section-1 dark">
-                        <h3>UNLIMITED BUSINESS ACADEMY</h3>
+                        <h3>Disruptivo BUSINESS ACADEMY</h3>
                     </div>
                     <p class="text-block m-b-25">Por qué sabemos que tienes el potencial para llegar a donde tú quieras, queremos ir de la mano contigo y cumplir tus sueños juntos. </p>
                     <p class="text-block m-b-25">Queremos proporcionarte las herramientas necesarias y el conocimiento oportuno para hacer de ti esa mejor versión que buscas.</p>
@@ -630,7 +630,7 @@
                         <div class="col-md-6">
                             <div class="footer-block-1">
                                 <div class="logo">
-                                    <img src="../../src/img/logo.svg" alt="<?php echo Site\SystemVar::_getValue("company_name") ?>" />
+                                    <img src="../../src/img/logo-dark.png" alt="<?php echo Site\SystemVar::_getValue("company_name") ?>" />
                                 </div>
                                 <div class="quick-link">
                                     <div class="row">

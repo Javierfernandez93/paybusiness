@@ -1,4 +1,4 @@
-class Unlimited {
+class Disruptivo {
     constructor() {
         this.view = VIEWS.ITEMS
         this.logged = false
@@ -225,15 +225,15 @@ class Unlimited {
     }
     process(){
         window.addEventListener("load", (event) => {
-            let Unlimited = document.getElementsByClassName('Unlimited')[0]
+            let Disruptivo = document.getElementsByClassName('Disruptivo')[0]
 
-            if(Unlimited)
+            if(Disruptivo)
             {
                 if(this.getView() == VIEWS.ITEMS)
                 {
-                    this.getViewItems(Unlimited)
+                    this.getViewItems(Disruptivo)
                 } else if(this.getView() == VIEWS.CHECKOUT) {
-                    this.getViewCheckout(Unlimited)
+                    this.getViewCheckout(Disruptivo)
                 }
             }
         })

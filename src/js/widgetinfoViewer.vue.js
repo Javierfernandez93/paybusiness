@@ -14,7 +14,7 @@ const WidgetinfoViewer = {
             <div class="card-body p-0">
                 <div class="row align-items-center">
                     <div class="col-12 col-xl p-5">
-                        <img src="../../src/img/Unlimited-academy-white.png" alt="image" title="image" class="img-fluid"/>
+                        <img src="../../src/img/Disruptivo-academy-white.png" alt="image" title="image" class="img-fluid"/>
 
                         <h3 class="text-white mb-3">+ 500 Horas de clases de trading pregrabadas</h3>
 

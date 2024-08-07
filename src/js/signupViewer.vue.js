@@ -164,12 +164,12 @@ const SignupViewer = {
             <div class="card-header pb-0 bg-transparent">
                 <div class="row justify-content-center">
                     <div class="col-3 col-xl-3">
-                        <img src="../../src/img/logo.svg" title="logo" alt="logo" class="w-100"/>
+                        <img src="../../src/img/logo-dark.png" title="logo" alt="logo" class="w-100"/>
                     </div>
                 </div>
             </div>
             <div class="card-header pb-0 text-left bg-transparent">
-                <p class="lead fs-3 text-dark text-center sans"><span v-html="Translator.words.welcome_unlimited"></span></p>
+                <p class="lead fs-3 text-dark text-center sans"><span v-html="Translator.words.welcome_Disruptivo"></span></p>
                 <div
                     v-if="user.referral.user_login_id" class="fs-4 fw-sembold">
                     <div class="text-secondary">Referido por <span class="fw-semibold text-primary">{{user.referral.names}}</span></div>

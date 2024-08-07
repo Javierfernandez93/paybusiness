@@ -109,7 +109,7 @@ function sendEmail(string $email = null,string $invoice_id = null) : bool
             //Content
             $mail->isHTML(true);                                  
             $mail->CharSet = 'UTF-8';
-            $mail->Subject = 'Bienvenido a Unlimited';
+            $mail->Subject = 'Bienvenido a Disruptivo';
             $mail->Body = $Layout->getHtml();
             $mail->AltBody = strip_tags($Layout->getHtml());
 

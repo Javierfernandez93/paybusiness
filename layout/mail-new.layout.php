@@ -508,7 +508,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="logo" style="text-align: left;">
-                                            <h1><a href="">Unlimited</a></h1>
+                                            <h1><a href="">Disruptivo</a></h1>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -564,10 +564,10 @@
                                                         <td style="text-align: left; padding-left: 10px;">
                                                             <h3 class="heading">Links</h3>
                                                             <ul>
-                                                                <li><a href="https://www.unlimitedgroup.io/">Inicio</a></li>
-                                                                <li><a href="https://www.unlimitedgroup.io/apps/login/">Ingresar a tu cuenta</a></li>
-                                                                <li><a href="https://www.unlimitedgroup.io/apps/signup/">Registro</a></li>
-                                                                <li><a href="https://www.unlimitedgroup.io/apps/login/forgotPassword">Recuperar contraseña</a></li>
+                                                                <li><a href="https://www.Disruptivogroup.io/">Inicio</a></li>
+                                                                <li><a href="https://www.Disruptivogroup.io/apps/login/">Ingresar a tu cuenta</a></li>
+                                                                <li><a href="https://www.Disruptivogroup.io/apps/signup/">Registro</a></li>
+                                                                <li><a href="https://www.Disruptivogroup.io/apps/login/forgotPassword">Recuperar contraseña</a></li>
                                                             </ul>
                                                         </td>
                                                     </tr>

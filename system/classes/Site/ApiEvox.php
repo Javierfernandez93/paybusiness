@@ -5,7 +5,7 @@ namespace Site;
 use HCStudio\Util;
 use JFStudio\Curl;
 
-class ApiUnlimited {
+class ApiDisruptivo {
     // const END_POINT = 'http://54.162.5.4:3000/';
     const END_POINT = 'http://localhost:3000/';
     const END_POINT_EXMA = 'http://44.201.64.220:3000/';

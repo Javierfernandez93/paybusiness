@@ -60,7 +60,7 @@ const AutotradingViewer = {
                         Contacta a tu patrocinador
                         
                         <div>
-                            Unlimitedglobal
+                            Disruptivoglobal
                         </div>
                     </h3>
                 </div>

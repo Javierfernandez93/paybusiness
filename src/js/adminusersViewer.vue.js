@@ -411,7 +411,7 @@ const AdminusersViewer = {
                                 </td>
                                 <td class="align-middle text-center text-xs">
                                     <span v-if="user.phone">
-                                        <a class="text-sm" :href="user.phone.formatPhoneNumber(user.countryData.phone_code).sendWhatsApp('¡Hola *'+user.names+'*! te contactamos de Unlimited')">
+                                        <a class="text-sm" :href="user.phone.formatPhoneNumber(user.countryData.phone_code).sendWhatsApp('¡Hola *'+user.names+'*! te contactamos de Disruptivo')">
                                             +{{user.phone.formatPhoneNumber(user.countryData.phone_code)}}
                                         </a>
                                     </span>

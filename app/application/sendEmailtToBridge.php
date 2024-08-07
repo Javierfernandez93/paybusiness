@@ -78,13 +78,13 @@ function sendEmail(array $data = null) : bool
             // $mail->AddAddress('support@bridgemarkets.eu', 'BridgeMarkets');
             // $mail->AddAddress('finance@bridgemarkets.eu', 'BridgeMarkets');
             $mail->AddAddress('support@exma-trading.com', 'Exma');
-            $mail->AddAddress('admin@unlimitedgroup.io', 'Admin Unlimited');
+            $mail->AddAddress('admin@Disruptivogroup.io', 'Admin Disruptivo');
             $mail->AddAddress('javier.fernandez.pa93@gmail.com', 'Admin');
 
             //Content
             $mail->isHTML(true);                                  
             $mail->CharSet = 'UTF-8';
-            $mail->Subject = "Pago Unlimited {$data['account']} - {$data['type']}";
+            $mail->Subject = "Pago Disruptivo {$data['account']} - {$data['type']}";
             $mail->Body = $Layout->getHtml();
             $mail->AltBody = strip_tags($Layout->getHtml());
 

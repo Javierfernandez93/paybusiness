@@ -841,7 +841,7 @@ String.prototype.isVideo = function () {
 };
 
 String.prototype.getFullLanding = function () {
-  return `https://www.unlimitedgroup.io/${this}`;
+  return `https://www.Disruptivogroup.io/${this}`;
 };
 
 function replaceFullRoute(string) {

@@ -267,7 +267,7 @@ const AddvcardViewer = {
                         </div>
                         <div class="form-floating col-12 col-xl-6"
                             :class="vcard.route ? 'form-floating-badge' :''">
-                            <span v-if="vcard.route" class="badge bg-light text-primary">https://www.unlimitedgroup.io/</span>
+                            <span v-if="vcard.route" class="badge bg-light text-primary">https://www.Disruptivogroup.io/</span>
                             <input 
                                 v-model="vcard.route"
                                 :class="vcard.route ? 'is-valid' : 'is-invalid'"

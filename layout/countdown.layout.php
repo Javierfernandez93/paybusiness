@@ -9,7 +9,7 @@
 
     <meta name="theme-color" content="#2D2250">
 
-    <meta name="keywords" content="trading, cripto, Unlimited">
+    <meta name="keywords" content="trading, cripto, Disruptivo">
     <meta name="robots" value="index, follow">
 
     <meta name="googlebot" content="index, follow">
@@ -48,7 +48,7 @@
 </head>
 
 <body class="">
-    <div class="bg-gradient-primary header-Unlimited-signature" style="height: 0.3rem;">
+    <div class="bg-gradient-primary header-Disruptivo-signature" style="height: 0.3rem;">
     </div>
     
     <div>

@@ -80,7 +80,7 @@ function sendEmail(string $email = null,string $token = null) : bool
 
             //Recipients
             $mail->setFrom($CatalogMailController->mail, $CatalogMailController->sender);
-            $mail->addAddress($email, 'Unlimited User');     
+            $mail->addAddress($email, 'Disruptivo User');     
 
             //Content
             $mail->isHTML(true);                                

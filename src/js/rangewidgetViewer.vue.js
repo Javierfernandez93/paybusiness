@@ -78,7 +78,7 @@ const RangewidgetViewer = {
                 <div class="row">
                     <div class="col-12">
                         <div><i class="bi h1 text-white bi-lock-fill"></i></div>
-                        Comienza a invitar a personas a Unlimited
+                        Comienza a invitar a personas a Disruptivo
                     </div>
                 </div>
             </div>

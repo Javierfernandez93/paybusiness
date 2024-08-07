@@ -91,7 +91,7 @@ function sendPush(string $user_login_id = null,string $message = null,int $catal
 
 function sendPushUser(string $user_login_id = null,string $names = null) : bool
 {
-    return sendPush($user_login_id,"Bienvenido a bordo {$names}, estamos felices de que te hayas registrado en Unlimited",Site\CatalogNotification::ACCOUNT);
+    return sendPush($user_login_id,"Bienvenido a bordo {$names}, estamos felices de que te hayas registrado en Disruptivo",Site\CatalogNotification::ACCOUNT);
 }
 
 function sendPushSponsor(string $user_login_id = null,string $names = null) : bool
@@ -110,7 +110,7 @@ function sendEmailSponsor(array $data = null) : bool
             return sendEmail([
                 'email' => $email,
                 'names' => (new Site\UserData)->getNames($data['user_login_id']),
-                'subject' => 'Nuevo afiliado en Unlimited',
+                'subject' => 'Nuevo afiliado en Disruptivo',
                 'view' => 'partnerWelcome'
             ]);
         }
@@ -126,7 +126,7 @@ function sendEmailUser(array $data = null) : bool
         return sendEmail([
             ...$data,
             ...[
-                'subject' => 'Bienvenido a Unlimited, activa tu cuenta',
+                'subject' => 'Bienvenido a Disruptivo, activa tu cuenta',
                 'view' => 'welcome'
             ]
         ]);

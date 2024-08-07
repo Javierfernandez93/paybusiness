@@ -17,7 +17,7 @@ if($UserSupport->logged === true)
             
             if($campaign = $CampaignEmail->get($data['campaign_email_id']))
             {
-                $names = 'Socio Unlimited';
+                $names = 'Socio Disruptivo';
 
                 if($company_id = (new Site\UserLogin)->getCompanyIdByMail($data['email']))
                 {

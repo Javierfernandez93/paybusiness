@@ -52,7 +52,7 @@ const LoginsupportViewer = {
             <div class="card-header">
                 <div class="row justify-content-center">
                     <div class="col-3">
-                        <img src="../../src/img/logo.svg" alt="logo" class="w-100"/>
+                        <img src="../../src/img/logo-dark.png" alt="logo" class="w-100"/>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@ const LoginsupportViewer = {
                 <button 
                 :disabled="!userComplete" 
                 @click="doLogin"
-                class="btn btn-primary shadow-none w-100 btn-block btn-lg badge-pill mb-0" type="button">Ingresar a Unlimited</button>
+                class="btn btn-primary shadow-none w-100 btn-block btn-lg badge-pill mb-0" type="button">Ingresar a Disruptivo</button>
             </div>
         </div>        
     `

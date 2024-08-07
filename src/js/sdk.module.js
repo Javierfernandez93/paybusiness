@@ -113,7 +113,7 @@ class SDK {
     }
     process(){
         window.addEventListener("load", (event) => {
-            let productsContainer = document.getElementsByClassName('Unlimited-products')[0]
+            let productsContainer = document.getElementsByClassName('Disruptivo-products')[0]
 
             if(productsContainer)
             {

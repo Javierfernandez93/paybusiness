@@ -108,7 +108,7 @@ const PanelViewer = {
         },
         init() {
             this.getApiCredentials().then(()=>{
-                this.getProyectInfo('Unlimited').then(proyect => {
+                this.getProyectInfo('Disruptivo').then(proyect => {
                     this.proyect = proyect
                     this.initCharts()
                 })
@@ -147,7 +147,7 @@ const PanelViewer = {
         configureService() {
             return new Promise((resolve) => {
                 this.getApiCredentials().then(()=>{
-                    this.Api.getPackagesList({apiFilter:{name:'Unlimited'}},(response)=>{
+                    this.Api.getPackagesList({apiFilter:{name:'Disruptivo'}},(response)=>{
 
                         if(response.s == 1)
                         {

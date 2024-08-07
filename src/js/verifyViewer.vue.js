@@ -95,7 +95,7 @@ const VerifyViewer = {
                 <div v-if="user.validToken">
                     <div class="card bg-transparent shadow-none">
                         <div class="card-header pb-0 bg-transparent">
-                            <img src="../../src/img/logo.svg" title="logo" alt="logo" class="w-50"/>
+                            <img src="../../src/img/logo-dark.png" title="logo" alt="logo" class="w-50"/>
                         </div>
 
                         <div class="card-header text-center bg-transparent">

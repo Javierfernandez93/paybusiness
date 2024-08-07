@@ -44,7 +44,7 @@ const UnilevelViewer = {
                     ¡Echa un vistazo a "Unilevel" y conoce a tus referidos a tres niveles! 
                 </div>
                 <div class="h4 text-white">
-                    ¡Descubre la red que estás construyendo en Unlimited!
+                    ¡Descubre la red que estás construyendo en Disruptivo!
                 </div>
             </div>
             <div v-if="network">
@@ -119,7 +119,7 @@ const UnilevelViewer = {
             <div v-else-if="network == false">
                 <div class="alert alert-info text-center text-white">
                     <div>Aún no tienes tu unilevel activo</div>
-                    <div class="h4 text-white">Comienza invitando personas a Unlimited</div>
+                    <div class="h4 text-white">Comienza invitando personas a Disruptivo</div>
 
                     <a href="../../apps/backoffice" class="btn mt-3 btn-outline-light">Ir a mi dashboard</a>
                 </div>

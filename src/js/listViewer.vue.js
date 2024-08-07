@@ -48,7 +48,7 @@ const ListViewer = {
                     ¡Echa un vistazo a "Mi Equipo" y conoce a tus referidos! Desde los nuevos hasta los veteranos, todos están aquí. 
                 </div>
                 <div class="h4 text-white">
-                    ¡Descubre la red que estás construyendo en Unlimited!
+                    ¡Descubre la red que estás construyendo en Disruptivo!
                 </div>
             </div>
 
@@ -145,7 +145,7 @@ const ListViewer = {
             <div v-else-if="network == false">
                 <div class="alert alert-info text-center text-white">
                     <div>Aún no tienes tu unilevel activo</div>
-                    <div class="h4 text-white">Comienza invitando personas a Unlimited</div>
+                    <div class="h4 text-white">Comienza invitando personas a Disruptivo</div>
 
                     <a href="../../apps/backoffice" class="btn mt-3 btn-outline-light">Ir a mi dashboard</a>
                 </div>

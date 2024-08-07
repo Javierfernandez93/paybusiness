@@ -18,7 +18,7 @@ const MarketingViewer = {
                 <div class="card card-body bg-transparent shadow-none">
                     <div class="lead">
                         <div class="mb-3">
-                            Comparte <strong>Unlimited</strong>, Con todo el mundo con <strong>marketing digital de primera calidad</strong>, flyers, videos y más.
+                            Comparte <strong>Disruptivo</strong>, Con todo el mundo con <strong>marketing digital de primera calidad</strong>, flyers, videos y más.
                         </div>
                         <div class="mb-3">
                             Todo este material está disponible de forma <b>gratuita</b> a través de nuestro canal de telegram
@@ -79,7 +79,7 @@ const MarketingViewer = {
                                         target="_blank"
                                         class="btn btn-primary mb-0"
                                         ><div class="d-flex align-items-center">
-                                            <i class="bi bi-telegram fs-4 me-2"></i> Canal de señales Unlimited
+                                            <i class="bi bi-telegram fs-4 me-2"></i> Canal de señales Disruptivo
                                             Academy
                                         </div></a
                                         >
@@ -101,7 +101,7 @@ const MarketingViewer = {
                     <div class="col-12">
                         <ul>
                             <li class="list-group-item bg-transparent py-3 border-0"> 
-                                <a href="https://www.facebook.com/Unlimitedcommunity" target="_blank">
+                                <a href="https://www.facebook.com/Disruptivocommunity" target="_blank">
                                     <div class="row">
                                     <div class="col-12 col-xl-auto">
                                         <i class="bi fs-2 text-primary bi-facebook"></i>
@@ -113,7 +113,7 @@ const MarketingViewer = {
                                 </a>
                             </li>
                             <li class="list-group-item bg-transparent py-3 border-0"> 
-                                <a href="https://www.instagram.com/Unlimitedcommunity/" target="_blank">
+                                <a href="https://www.instagram.com/Disruptivocommunity/" target="_blank">
                                     <div class="row">
                                     <div class="col-12 col-xl-auto">
                                         <i class="bi fs-2 text-warning bi-instagram"></i>
@@ -135,7 +135,7 @@ const MarketingViewer = {
                                 </a>
                             </li>
                             <li class="list-group-item bg-transparent py-3 border-0"> 
-                                <a href="https://www.tiktok.com/@Unlimitedcommunity" target="_blank">
+                                <a href="https://www.tiktok.com/@Disruptivocommunity" target="_blank">
                                     <div class="row">
                                     <div class="col-12 col-xl-auto">
                                         <i class="bi fs-2 text-primary bi-tiktok"></i>
@@ -151,7 +151,7 @@ const MarketingViewer = {
                                             <i class="bi fs-2 text-success bi-whatsapp"></i>
                                         </div>
                                         <div class="col-12 col-xl">
-                                            <span class="fs-3"> Contacto soporte Unlimited </span>
+                                            <span class="fs-3"> Contacto soporte Disruptivo </span>
                                         </div>
                                     </div>
                                 </a>

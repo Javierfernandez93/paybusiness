@@ -42,7 +42,7 @@ const Landing1Viewer = {
                                 </div>
                                 <div v-else>
                                     <video width="480" height="320" controls="" class="py-3">
-                                        <source src="../../src/files/video/video-Unlimited.mp4" type="video/mp4">
+                                        <source src="../../src/files/video/video-Disruptivo.mp4" type="video/mp4">
                                         <source src="movie.ogg" type="video/ogg"> Your browser does not support the video tag.
                                     </video>
                                 </div>
@@ -177,7 +177,7 @@ const Landing1Viewer = {
                 <div class="col-12 col-xl-6 py-5"> 
                     <div class="row mb-3">
                         <div class="col-12">
-                            <div class="fw-semibold fs-2 mb-3">Unlimited está dirigido especialmente para tí</div>
+                            <div class="fw-semibold fs-2 mb-3">Disruptivo está dirigido especialmente para tí</div>
                             <div class="fs-4 mb-3">Las <span class="fw-semibold">herrramientas que desarrollamos</span> aunada a la educación que impartimos es la fuente del éxito. <span class="fw-semibold">Nuestra plataforma conjunta 4 poderozas formulas</span> para lograr el <span class="fw-semibold">éxito:</span></div>
                             <div class="fs-4 mb-3">
                                 <ul class="list-group list-grou-flush">

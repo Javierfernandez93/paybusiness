@@ -70,7 +70,7 @@ const WidgethewalletViewer = {
                 </div>
                 <div class="d-grid">
                     <a href="../../apps/ewallet/" class="btn btn-primary shadow-none mb-0 btn-lg">
-                        Ewallet Unlimited
+                        Ewallet Disruptivo
                     </a>
                 </div>
             </div>

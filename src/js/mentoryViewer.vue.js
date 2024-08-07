@@ -23,7 +23,7 @@ const MentoryViewer = {
                 <div class="card rounded card-body bg-secondary text-white">
                     <div class="lead">
                         <div class="mb-3">
-                            Descubre <strong>UnlimitedMentory</strong>, un servicio para <strong>desarrollar tu mentailidad</strong>, hábitos de <strong>éxito</strong> y <strong>liderazgo</strong>. 
+                            Descubre <strong>DisruptivoMentory</strong>, un servicio para <strong>desarrollar tu mentailidad</strong>, hábitos de <strong>éxito</strong> y <strong>liderazgo</strong>. 
                         </div>
                         <div>
                             Aprende a construir comunidades y tener un <b>impacto positivo en la vida de otros</b>

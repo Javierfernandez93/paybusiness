@@ -10,7 +10,7 @@ if($UserSupport->logged === true)
 {	
     if($data['user_name'])
     {
-        if($user = Site\ApiUnlimited::getUser($data['user_name']))
+        if($user = Site\ApiDisruptivo::getUser($data['user_name']))
         {
             $data['user'] = $user;
             $data['r'] = 'DATA_OK';

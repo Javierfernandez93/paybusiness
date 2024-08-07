@@ -33490,7 +33490,7 @@ Mocha.process = process;
   // helps finding memory leaks.
   //
   // Obviously not all Emitters should be limited to 10. This function allows
-  // that to be increased. Set to zero for unlimited.
+  // that to be increased. Set to zero for Disruptivo.
 
   EventEmitter.prototype.delimiter = '.';
 

@@ -14,9 +14,9 @@ if($UserSupport->logged === true)
         
         if($account = $UserBridgeAccount->getPending($data['user_bridge_account_id']))
         {
-            $ApiUnlimited = new Site\ApiUnlimited;
+            $ApiDisruptivo = new Site\ApiDisruptivo;
 
-            if($response = $ApiUnlimited->signupUser([
+            if($response = $ApiDisruptivo->signupUser([
                 'firstname' => $account['first_name'],
                 'lastname' => $account['last_name'],
                 'address' => $account['address'],

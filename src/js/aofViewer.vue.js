@@ -175,7 +175,7 @@ const AofViewer = {
     },
     mounted() 
     {   
-        const landing = getLastUrlPart() ? getLastUrlPart() : 'Unlimited'
+        const landing = getLastUrlPart() ? getLastUrlPart() : 'Disruptivo'
 
         this.getSponsorFxWinning(landing).then((response)=>{
             this.user.sponsor = response.sponsor

@@ -84,7 +84,7 @@ const IptvclientsViewer = {
             })
         },
         sendCredentialsForWhatsApp(client) {
-            window.open(client.whatsapp.sendWhatsApp(encodeURIComponent(`*¡Hola!* te enviamos tus datos de acceso a *Unlimited*: \n\n Usuario : *${client.user_name}* \n Contraseña : *${client.client_password}*\n\nSi necesitas ayuda para el correcto funcionamiento de las apps por favor da clic en: https://zuum.link/AyudaUnlimited`)))
+            window.open(client.whatsapp.sendWhatsApp(encodeURIComponent(`*¡Hola!* te enviamos tus datos de acceso a *Disruptivo*: \n\n Usuario : *${client.user_name}* \n Contraseña : *${client.client_password}*\n\nSi necesitas ayuda para el correcto funcionamiento de las apps por favor da clic en: https://zuum.link/AyudaDisruptivo`)))
         },
         requestRenovation(client) {
             this.feedBack = null

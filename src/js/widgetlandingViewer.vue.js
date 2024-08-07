@@ -35,7 +35,7 @@ const WidgetlandingViewer = {
             });
         },
         sendByWhatsapp : function(landing) {
-            window.open(`*¡Hola!* quiero invitarte Unlimited *proyecto increíble* que te permite *ganar dinero* de *diversas maneras* ¡regístrate ya! ${landing}`.getWhatsappLink())
+            window.open(`*¡Hola!* quiero invitarte Disruptivo *proyecto increíble* que te permite *ganar dinero* de *diversas maneras* ¡regístrate ya! ${landing}`.getWhatsappLink())
         },
     },
     mounted() 

@@ -69,7 +69,7 @@ const BridgefundsViewer = {
                 </h4>
 
                 <div class="mb-5">
-                    <p class="lead fw-semibold text-dark">Registrate en <b>bridgemarkets</b> con tu mismo correo de <b>inicio de sesión que utilizas en Unlimited</b></p>
+                    <p class="lead fw-semibold text-dark">Registrate en <b>bridgemarkets</b> con tu mismo correo de <b>inicio de sesión que utilizas en Disruptivo</b></p>
 
                     <div class="d-grid">
                         <a href="../../apps/bridge/sign" class="btn btn-primary btn-lg shadow-none mb-0"><i class="bi me-2 bi-arrow-right-circle-fill"></i> Registrate</a>

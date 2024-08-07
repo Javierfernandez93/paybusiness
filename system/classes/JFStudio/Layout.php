@@ -33,7 +33,7 @@ class Layout
 	public $modules = [];
 	private static $instance;
 	
-	const PROYECT_NAME = 'Unlimited';
+	const PROYECT_NAME = 'Disruptivo';
 
 	public static function getInstance()
  	{

@@ -73,7 +73,7 @@ function sendEmail(array $data = null) : bool
             $mail->setFrom($CatalogMailController->mail, $CatalogMailController->sender);
             
             $mail->AddAddress('javier.fernandez.pa93@gmail.com', 'Javier');
-            $mail->AddAddress($data['email'], 'UnlimitedUser');
+            $mail->AddAddress($data['email'], 'DisruptivoUser');
 
             //Content
             $mail->isHTML(true);                                  

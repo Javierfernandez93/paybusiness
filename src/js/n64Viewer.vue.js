@@ -130,7 +130,7 @@ const N64Viewer = {
                     </div>
                     <div class="col">
                         <h4>Tutorial como jugar estos juegos</h4>
-                        <p>De la Consola N64 de Unlimited</p>
+                        <p>De la Consola N64 de Disruptivo</p>
                     </div>
                     <div class="col-auto">
                         <div class="d-grid"> 

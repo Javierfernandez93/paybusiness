@@ -14,7 +14,7 @@ const CommunityViewer = {
         <div class="mb-3 h3 fw-sembold text-dark">Síguenos en nuestras redes sociales y entérate de todos los beneficios que tenemos para ti</div>
         <ul class="list-group list-group-flush bg-transparent">
             <li class="list-group-item bg-transparent py-3 border-0">
-                <a href="https://www.facebook.com/Unlimitedcommunity" target="_blank">
+                <a href="https://www.facebook.com/Disruptivocommunity" target="_blank">
                     <div class="row">
                         <div class="col-12 col-xl-auto">
                             <i class="bi fs-2 text-primary bi-facebook"></i>
@@ -28,7 +28,7 @@ const CommunityViewer = {
                 </a>
             </li>
             <li class="list-group-item bg-transparent py-3 border-0">
-                <a href="https://www.instagram.com/Unlimitedcommunity/" target="_blank">
+                <a href="https://www.instagram.com/Disruptivocommunity/" target="_blank">
                     <div class="row">
                         <div class="col-12 col-xl-auto">
                             <i class="bi fs-2 text-warning bi-instagram"></i>
@@ -56,7 +56,7 @@ const CommunityViewer = {
                 </a>
             </li>
             <li class="list-group-item bg-transparent py-3 border-0">
-                <a href="https://www.tiktok.com/@Unlimitedcommunity" target="_blank">
+                <a href="https://www.tiktok.com/@Disruptivocommunity" target="_blank">
                     <div class="row">
                         <div class="col-12 col-xl-auto">
                             <i class="bi fs-2 text-primary bi-tiktok"></i>
@@ -77,7 +77,7 @@ const CommunityViewer = {
                         </div>
                         <div class="col-12 col-xl">
                             <span class="fs-3">
-                                Contacto soporte Unlimited
+                                Contacto soporte Disruptivo
                             </span>
                         </div>
                     </div>
@@ -126,7 +126,7 @@ const CommunityViewer = {
                         <a href="https://t.me/+8qmMYK8vMrc5YjAx" target="_blank" class="btn btn-primary mb-0 btn-lg">
                             <div class="d-flex align-items-center">
                                 <i class="bi bi-telegram fs-4 me-2"></i>
-                                Canal de señales Unlimited Academy
+                                Canal de señales Disruptivo Academy
                             </div>
                         </a>
                     </div>

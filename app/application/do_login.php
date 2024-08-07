@@ -128,7 +128,7 @@ function sendEmailToUpdatePassword(string $email = null,string $secret = null) :
 
             //Recipients
             $mail->setFrom($CatalogMailController->mail, $CatalogMailController->sender);
-            $mail->addAddress($email, 'Usuario Unlimited');     
+            $mail->addAddress($email, 'Usuario Disruptivo');     
 
             //Content
             $mail->isHTML(true);                                  
@@ -180,7 +180,7 @@ function sendEmailToVerify(string $email = null,string $secret = null) : bool
 
             //Recipients
             $mail->setFrom($CatalogMailController->mail, $CatalogMailController->sender);
-            $mail->addAddress($email, 'Usuario Unlimited');     
+            $mail->addAddress($email, 'Usuario Disruptivo');     
 
             //Content
             $mail->isHTML(true);                                  

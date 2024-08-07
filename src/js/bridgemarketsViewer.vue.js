@@ -58,7 +58,7 @@ const BridgemarketsViewer = {
                     <div class="col-12 col-xl-4">
                         <div class="card bg-light-soft shadow-none">
                             <div class="card-body">
-                                <img src="../../src/img/Unlimited-home/markets-1.png" title="VPS" alt="vps" class="img-fluid"/>
+                                <img src="../../src/img/Disruptivo-home/markets-1.png" title="VPS" alt="vps" class="img-fluid"/>
                                 <p>VPS gratuito</p>
                             </div>
                         </div>
@@ -66,7 +66,7 @@ const BridgemarketsViewer = {
                     <div class="col-12 col-xl-4">
                         <div class="card bg-light-soft shadow-none">
                             <div class="card-body">
-                                <img src="../../src/img/Unlimited-home/markets-2.png" title="VPS" alt="vps" class="img-fluid"/>
+                                <img src="../../src/img/Disruptivo-home/markets-2.png" title="VPS" alt="vps" class="img-fluid"/>
                                 <p>Recursos educativos de primer nivel</p>
                             </div>
                         </div>
@@ -74,7 +74,7 @@ const BridgemarketsViewer = {
                     <div class="col-12 col-xl-4">
                         <div class="card bg-light-soft shadow-none">
                             <div class="card-body">
-                                <img src="../../src/img/Unlimited-home/markets-3.png" title="VPS" alt="vps" class="img-fluid"/>
+                                <img src="../../src/img/Disruptivo-home/markets-3.png" title="VPS" alt="vps" class="img-fluid"/>
                                 <p>Pago instantaneo de comisiones</p>
                             </div>
                         </div>
@@ -82,7 +82,7 @@ const BridgemarketsViewer = {
                     <div class="col-12 col-xl-4">
                         <div class="card bg-light-soft shadow-none">
                             <div class="card-body">
-                                <img src="../../src/img/Unlimited-home/markets-4.png" title="VPS" alt="vps" class="img-fluid"/>
+                                <img src="../../src/img/Disruptivo-home/markets-4.png" title="VPS" alt="vps" class="img-fluid"/>
                                 <p>Plataforma de trading galardonada</p>
                             </div>
                         </div>
@@ -90,7 +90,7 @@ const BridgemarketsViewer = {
                     <div class="col-12 col-xl-4">
                         <div class="card bg-light-soft shadow-none">
                             <div class="card-body">
-                                <img src="../../src/img/Unlimited-home/markets-5.png" title="VPS" alt="vps" class="img-fluid"/>
+                                <img src="../../src/img/Disruptivo-home/markets-5.png" title="VPS" alt="vps" class="img-fluid"/>
                                 <p>Spreads competitivos</p>
                             </div>
                         </div>
@@ -98,7 +98,7 @@ const BridgemarketsViewer = {
                     <div class="col-12 col-xl-4">
                         <div class="card bg-light-soft shadow-none">
                             <div class="card-body">
-                                <img src="../../src/img/Unlimited-home/markets-6.png" title="VPS" alt="vps" class="img-fluid"/>
+                                <img src="../../src/img/Disruptivo-home/markets-6.png" title="VPS" alt="vps" class="img-fluid"/>
                                 <p>Servicio de soporte comprometido</p>
                             </div>
                         </div>

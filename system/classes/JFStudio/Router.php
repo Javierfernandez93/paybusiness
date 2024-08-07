@@ -64,7 +64,7 @@ class Router {
     const MarketingGains = 110;
     const BridgeFunds = 111;
     const BridgeFundsGains = 112;
-    const UnlimitedSynthetics = 113;
+    const DisruptivoSynthetics = 113;
     const CopySynthetics = 114;
     const BridgeFundsAccounts = 115;
     const BridgeMarkets = 116;
@@ -77,8 +77,8 @@ class Router {
     const MarketingCreate = 126;
     const SignExma = 130;
     const Conference = 132;
-    const UnlimitedMentory = 133;
-    const UnlimitedMarketing = 134;
+    const DisruptivoMentory = 133;
+    const DisruptivoMarketing = 134;
     const Academy = 135;
     const Exma = 136;
     const Ati = 137;
@@ -151,7 +151,7 @@ class Router {
             self::Plans => 'Planes',
             self::Notifications => 'Notifications',
             self::TradingView => 'Resultados del broker',
-            self::Wallet => 'Billetera Unlimited',
+            self::Wallet => 'Billetera Disruptivo',
             self::Calculator => 'Calculadora',
             self::AddFunds => 'Añadir fondos',
             self::AdminDash => 'Home',
@@ -232,11 +232,11 @@ class Router {
             self::SplitManager => 'Split Manager',
             self::Hosts => 'Hosts',
             self::Multilevel => 'Multilevel',
-            self::Products => 'Productos Unlimited',
+            self::Products => 'Productos Disruptivo',
             self::BridgeFunds => 'Ver tipos de cuentas',
             self::BridgeFundsAccounts => 'Mis cuentas',
             self::BridgeFundsGains => 'Ganancias',
-            self::UnlimitedSynthetics => 'Academia',
+            self::DisruptivoSynthetics => 'Academia',
             self::CopySynthetics => 'Copy sintéticos',
             self::BridgeMarkets => 'Bridge Markets',
             self::AutoTrading => 'Trading automático',
@@ -255,8 +255,8 @@ class Router {
             self::AdminBridgeUserAccount => 'Cuentas bridge',
             self::DummieTrading => 'DummieTrading',
             self::Conference => 'Próximas clases',
-            self::UnlimitedMentory => 'UnlimitedMentory',
-            self::UnlimitedMarketing => 'UnlimitedMarketing',
+            self::DisruptivoMentory => 'DisruptivoMentory',
+            self::DisruptivoMarketing => 'DisruptivoMarketing',
             self::Academy => 'Academy',
             self::Exma => 'Exma',
             self::Ati => 'Ati',

@@ -38,9 +38,9 @@ if($UserLogin->logged === true)
                                             ]
                                         ]))
                                         {
-                                            $ApiUnlimited = new Site\ApiUnlimited;
+                                            $ApiDisruptivo = new Site\ApiDisruptivo;
                                             
-                                            if($response = $ApiUnlimited->signupUser([
+                                            if($response = $ApiDisruptivo->signupUser([
                                                 'firstname' => $data['first_name'],
                                                 'lastname' => $data['last_name'],
                                                 'address' => $data['address'],

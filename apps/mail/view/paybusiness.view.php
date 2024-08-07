@@ -9,9 +9,9 @@
 
 <h3>Podrás construir carrera con nosotros e ir por esos rangos  que te ofrecen poderosas ganancias, premios, viajes y mucho más. </h3>
 
-<h3>Si tienes alguna pregunta o necesitas asistencia, no dudes en ponerte en contacto con nuestro equipo de soporte en customerservice@unlimitedgroup.com o a través de nuestro WhatsApp +57 (301) 378-1612.</h3>
+<h3>Si tienes alguna pregunta o necesitas asistencia, no dudes en ponerte en contacto con nuestro equipo de soporte en customerservice@Disruptivogroup.com o a través de nuestro WhatsApp +57 (301) 378-1612.</h3>
 
-<h3>Gracias por elegir UNLIMITED. ¡Esperamos que disfrutes tu experiencia de éxito con nosotros!</h3>
+<h3>Gracias por elegir Disruptivo. ¡Esperamos que disfrutes tu experiencia de éxito con nosotros!</h3>
 
 <h3>Saludos cordiales,</h3>
 

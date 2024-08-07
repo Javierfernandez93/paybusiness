@@ -31,16 +31,16 @@
     <link id="pagestyle" href="../../src/css/soft-ui-dashboard.css?v=1.2.8" rel="stylesheet" />
 </head>
 
-<div class="bg-gradient-primary position-fixed top-0 w-100" style="height: 0.5rem;z-index:10000 !important">
+<div class="bg-primary position-fixed top-0 w-100" style="height: 0.5rem;z-index:10000 !important">
 </div>
 
 <body class="g-sidenav-show bg-light mt-3">
     <aside class="sidenav navbar navbar-vertical shadow-none navbar-expand-xs bg-white fixed-start" id="sidenav-main">
-        <div class="sidenav-header p-4">
+        <div class="sidenav-header p-4 mb-3">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             
             <a class="navbar-brand text-center" href="<?php echo HCStudio\Connection::getMainPath(); ?>" target="_blank">
-                <img src="../../src/img/logo-dark.png" alt="logo" title="logo" class="w-50"/>
+                <img src="../../src/img/logo-dark.png" alt="logo" title="logo" class="w-75"/>
             </a>
         </div>
         

@@ -102,7 +102,7 @@ const LoginViewer = {
                                     Hora de actualizarse
                                 </div>
                                 <div class="">
-                                    Hemos enviado un correo a <b>${this.user.email}</b> con las instrucciones para que actualices tu contraseña y puedas acceder a Unlimited
+                                    Hemos enviado un correo a <b>${this.user.email}</b> con las instrucciones para que actualices tu contraseña y puedas acceder a Disruptivo
                                 </div>
                                 <div class="text-xs mt-3">
                                     <stong>Importante</stong>
@@ -149,7 +149,7 @@ const LoginViewer = {
                 <div class="card-header pb-0 bg-transparent text-center">
                     <div class="row justify-content-center">
                         <div class="col-4 col-xl-4 col-md-2">
-                            <img src="../../src/img/logo.png" title="logo" alt="logo" class="w-100"/>
+                            <img src="../../src/img/logo-letters-dark.png" title="logo" alt="logo" class="w-100"/>
                         </div>
                     </div>
                 </div>
