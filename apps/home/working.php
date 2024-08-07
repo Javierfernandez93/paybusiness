@@ -12,7 +12,7 @@ $UserLogin->checkRedirection();
 
 $Layout = JFStudio\Layout::getInstance();
 
-$route = JFStudio\Router::Academy;
+$route = JFStudio\Router::Working;
 $Layout->init(JFStudio\Router::getName($route),'working',"working",'',TO_ROOT.'/');
 
 $Layout->setScriptPath(TO_ROOT . '/src/');

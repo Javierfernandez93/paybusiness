@@ -90,6 +90,7 @@ class Router {
     const Unilevel = 147;
     const Legal = 148;
     const Memberships = 149;
+    const Working = 150;
     
     /* admin */
     const AdminUsers = 9;
@@ -272,6 +273,7 @@ class Router {
             self::Unilevel => 'Unilevel',
             self::Legal => 'Legal',
             self::Memberships => 'Membresías',
+            self::Working => 'Volveremos pronto',
             default => 'Sin nombre'
         };
     }
