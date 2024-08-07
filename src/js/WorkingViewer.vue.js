@@ -29,7 +29,7 @@ const WorkingViewer = {
             <h2>Estamos trabajando en la nueva plataforma</h2>
             <div class="lead">
                 <i class="bi bi-clock"></i>
-                Pronto estarmos operando
+                Pronto estaremos operando
             </div>
         </div>
     `
