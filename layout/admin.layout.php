@@ -33,7 +33,7 @@
         <div class="sidenav-header text-center">
             <i class="fas fa-times p-4 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
             <a class="navbar-brand text-primary pb-3 mb-3 text.center" href=" https://Disruptivogroup.io" target="_blank">
-                <img src="../../src/img/logo-dark.png" alt="logo" class="h-100"/>
+                <img src="../../src/img/logo-dark.png" alt="logo" class="w-50"/>
             </a>
         </div>
         
