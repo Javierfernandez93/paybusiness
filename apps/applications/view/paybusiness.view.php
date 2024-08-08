@@ -11,7 +11,6 @@
 
 <h3>Gracias por elegir DISRUPTIVO. ¡Esperamos que disfrutes tu experiencia de aprendizaje con nosotros!</h3>
 
-
 <h3>
     <b>
         Equipo <?php echo Site\SystemVar::_getValue("company_name");?>
