@@ -144,7 +144,7 @@ const EwalletViewer = {
                                     <i class="fas fa-wifi text-white p-2" aria-hidden="true"></i>
                                 </div>
                                 <div class="col-auto">
-                                    <img src="../../src/img/logo-white.svg?t=1" style="height:2rem">
+                                    <img src="../../src/img/logo.png?t=1" style="height:4rem">
                                 </div>
                             </div>
                             
