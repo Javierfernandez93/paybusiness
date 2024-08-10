@@ -1,16 +1,22 @@
 import { UserSupport } from '../../src/js/userSupport.module.js?t=1.1.5'   
+import Loader from '../../src/js/components/Loader.vue.js?v=1.0.0'
 
 const AdminbannerViewer = {
-    name : 'adminbanner-viewer',
+    components : { 
+        Loader
+    },
     data() {
         return {
             UserSupport: new UserSupport,
-            banners : null
+            banners : [],
+            busy : false
         }
     },
     methods: {
         getBanners() {
+            this.busy = true
             this.UserSupport.getBanners({},(response)=>{
+                this.busy = false
                 if(response.s == 1)
                 {
                     this.banners = response.banners
@@ -18,11 +24,15 @@ const AdminbannerViewer = {
             })
         },
         saveBanner(banner) {
-            banner.busy = true
+            this.busy = true
             this.UserSupport.saveBanner({banner:banner},(response)=>{                
                 if(response.s == 1)
                 {
-                    banner.busy = false
+                    this.busy = false
+
+                    toastInfo({
+                        message: 'Banner actualizado con éxito',
+                    })
                 }
             })
         },
@@ -58,7 +68,10 @@ const AdminbannerViewer = {
                     </div>
                 </div>
             </div>
-            <div v-if="banners">
+
+            <Loader :busy="busy"/>
+
+            <div v-if="banners.length > 0">
                 <div v-for="banner in banners" class="card card-body mb-3">
                     <div>
                         <div class="text-secondary mb-3 text-xs">Dimensiones recomendadas 635x230px</div>                                     

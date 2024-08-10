@@ -281,6 +281,7 @@
         }
     </script>
     <!-- Github buttons -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js" type="module"></script>
     <script async defer src="../../src/js/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../../src/js/soft-ui-dashboard.min.js?v=1.0.0.6"></script>

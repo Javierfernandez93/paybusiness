@@ -19,7 +19,6 @@ $Layout->init(JFStudio\Router::getName($route),"banner","admin","",TO_ROOT."/");
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
-	'chart.js',
 	'adminbanner.vue.js',
 ]);
 

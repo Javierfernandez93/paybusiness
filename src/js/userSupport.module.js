@@ -1,6 +1,6 @@
-import { Http } from '../../src/js/http.module.js?v=1.0.0';
+import HttpMemoized from '../../src/js/httpMemoized.module.js?v=1.0.0';
 
-class UserSupport extends Http {
+class UserSupport extends HttpMemoized {
     constructor() {
         super();
     }
