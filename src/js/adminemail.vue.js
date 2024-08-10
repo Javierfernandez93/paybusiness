@@ -1,5 +1,5 @@
 /* vue */
-import { AdminemailViewer } from '../../src/js/adminemailViewer.vue.js?v=1.1.9'
+import { AdminemailViewer } from '../../src/js/adminemailViewer.vue.js?v=1.0.0'
 
 Vue.createApp({
     components: {
