@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.0.0'   
+import { User } from '../../src/js/user.module.js?v=1.0.1'   
 
 const EwalletViewer = {
     name : 'ewallet-viewer',
@@ -149,13 +149,17 @@ const EwalletViewer = {
                             </div>
                             
                             <div class="mt-4 mb-5">
-                                <h5 class="text-white text-uppercase sans pb-2">Balance</h5>
+                                
                                
-                                <div class="row">
+                                <div class="row align-items-center">
                                     <div class="col">
-                                        <h5 class="text-white text-uppercase pb-2">$ {{ewallet.amount.numberFormat(2)}} USD </h5>
+                                        <img src="../../src/img/chip.png?t=1" style="height:4rem">
                                     </div>
-                                    <div class="col-auto">
+                                    <div class="col-auto text-end">
+                                        <div>
+                                            <div class="text-white lead text-uppercase sans mb-0">Balance</div>
+                                            <div class="text-white h4 text-uppercase pb-2">$ {{ewallet.amount.numberFormat(2)}} USD </div>
+                                        </div>
                                         <button 
                                             @click="getEwalletQr"
                                             class="btn btn-success btn-xs px-3 me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Recibir" aria-label="Enviar"><i class="bi bi-arrow-90deg-down"></i></button>

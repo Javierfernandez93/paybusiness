@@ -1,4 +1,4 @@
-import { AdminkycViewer } from '../../src/js/adminkycViewer.vue.js?v=1.0.0'   
+import { AdminkycViewer } from '../../src/js/adminkycViewer.vue.js?v=1.0.1'   
 
 Vue.createApp({
     components : { 
