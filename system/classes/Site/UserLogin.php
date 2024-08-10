@@ -2268,6 +2268,10 @@ class UserLogin extends Orm {
 
   public static function checkRedirectionByWorking()
   {
+    if(isset($_GET['byPass']) && $_GET['byPass'] == 'true') {
+      return;
+    }
+
     $site_working = filter_var(SystemVar::_getValue("site_working"), FILTER_VALIDATE_BOOLEAN);
 
     if(!$site_working) {
