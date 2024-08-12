@@ -193,19 +193,16 @@ const StoreitemsViewer = {
             <div v-if="viewPackages" class="row g-3 justify-content-center align-items-center">
                 <div v-for="(package,index) in packages" class="col-12 col-md-4 col-xl-3">
                     <div class="card border border-light rounded animation-fall-down overflow-hidden mb-5" :style="{'--delay': (index+1)*0.3+'s'}">
-                        <div v-if="package.image">
-                            <img class="card-img-top" :src="package.image" :alt="package.title">
-                        </div>
                         
                         <div class="position-relative z-index-1">
-                            <div class="card-header bg-transparent mt-n7">
+                            <div class="card-header bg-primary">
                                 <div class="row justify-content-center align-items-center">
                                     <div v-if="!package.image" class="col-12 col-xl-auto">
                                         <img src="../../src/img/single-icon-white.svg" style="width:2rem"/>
                                     </div>
                                     <div class="col-12 col-xl">
-                                        <div class="fw-semibold text-dark h2 fw-semibold">{{t(package.title)}}</div>
-                                        <div class="text-dark">
+                                        <div class="fw-semibold text-white h2 fw-semibold">{{t(package.title)}}</div>
+                                        <div class="text-white">
                                             {{t(package.description,{
                                                 amount : '$50.00 USD'
                                             })}}
@@ -214,22 +211,9 @@ const StoreitemsViewer = {
                                 </div>
                             </div>
 
-                            <div class="card-body">    
-                                <ul v-if="package.products" class="list-group  my-3">
-                                    <li v-for="product in package.products" class="list-group-item  py-1">
-                                        <div class="row gx-0 justify-content-center align-items-center">
-                                            <div class="col-auto">
-                                                <i class="bi bi-check-circle-fill text-success me-2"></i>
-                                            </div>
-                                            <div class="col">
-                                                {{t(product.product.title)}}
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                                
+                            <div class="card-body bg-primary"> 
                                 <div class="text-center">
-                                    <div class="h1 text-dark">
+                                    <div class="h1 text-white">
                                         $ {{package.amount.numberFormat(0)}}
                                     </div>
                                 </div>
@@ -241,13 +225,13 @@ const StoreitemsViewer = {
                                     {{t('already_have_package')}}
                                 </div>
                             </div>
-                            <div v-if="package.catalog_package_type_id == CATALOG_PACKAGE_TYPE.MEMBERSHIP" class="card-footer d-grid">
+                            <div v-if="package.catalog_package_type_id == CATALOG_PACKAGE_TYPE.MEMBERSHIP" class="card-footer d-grid bg-primary">
                                 <div v-if="!cart.activations.includes(package.package_id)" class="card-footer d-grid">
                                     <div v-if="cart.activations">
-                                        <button @click="addPackage(package)" class="btn px-3 w-100 btn-primary btn-lg mb-0 shadow-none">{{t('do_upgrade')}}</button>
+                                        <button @click="addPackage(package)" class="btn px-3 w-100 btn-light btn-lg mb-0 shadow-none">{{t('do_upgrade')}}</button>
                                     </div>
                                     <div v-else>
-                                        <button @click="addPackage(package)" class="btn px-3 w-100 btn-primary btn-lg mb-0 shadow-none">{{t('choose_package')}}</button>
+                                        <button @click="addPackage(package)" class="btn px-3 w-100 btn-light btn-lg mb-0 shadow-none">{{t('choose_package')}}</button>
                                     </div>
                                 </div>
                             </div>
