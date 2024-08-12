@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.4.7'   
+import { User } from '../../src/js/user.module.js?v=1.0.2'   
 
 const StoreitemsViewer = {
     props : ['cart','hasitems','active'],

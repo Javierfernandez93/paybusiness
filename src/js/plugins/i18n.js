@@ -1,6 +1,6 @@
 import i18next from "https://unpkg.com/i18next/dist/esm/i18next.js";
-import { Cookie } from "../../../src/js/cookie.module.js?v=1.0.1";
-import LanguageManager  from "../../../src/js/languageManager.module.js?v=1.0.1";
+import { Cookie } from "../../../src/js/cookie.module.js?v=1.0.2";
+import LanguageManager  from "../../../src/js/languageManager.module.js?v=1.0.2";
 
 const languageManager = new LanguageManager()
 const cookie = new Cookie()

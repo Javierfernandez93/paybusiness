@@ -1,5 +1,5 @@
-import { Image } from '../../../src/js/image.module.js?v=1.4.7'
-import Loader from '../../../src/js/components/Loader.vue.js?v=1.4.7'
+import { Image } from '../../../src/js/image.module.js?v=1.0.2'
+import Loader from '../../../src/js/components/Loader.vue.js?v=1.0.2'
 
 export default {
     props: ['path','maxSize','label'],
