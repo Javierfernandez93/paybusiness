@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.0.2'   
+import { User } from '../../src/js/user.module.js?v=1.0.3'   
 
 const StoreitemsViewer = {
     props : ['cart','hasitems','active'],
@@ -191,7 +191,7 @@ const StoreitemsViewer = {
                 </div>
             </div>
             <div v-if="viewPackages" class="row g-3 justify-content-center align-items-center">
-                <div v-for="(package,index) in packages" class="col-12 col-md-4 col-xl-3">
+                <div v-for="(package,index) in packages" class="col-12 col-md-4 col-xl-4">
                     <div class="card border border-light rounded animation-fall-down overflow-hidden mb-5" :style="{'--delay': (index+1)*0.3+'s'}">
                         
                         <div class="position-relative z-index-1">

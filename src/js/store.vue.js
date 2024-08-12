@@ -1,5 +1,5 @@
-import i18nPlugin from '../../src/js/plugins/i18n.js?v=1.0.2'
-import { StoreViewer } from '../../src/js/storeViewer.vue.js?v=1.0.2'
+import i18nPlugin from '../../src/js/plugins/i18n.js?v=1.0.3'
+import { StoreViewer } from '../../src/js/storeViewer.vue.js?v=1.0.3'
 
 async function initApp() {
     await i18nPlugin.load();
