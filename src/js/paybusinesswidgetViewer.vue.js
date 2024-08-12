@@ -40,8 +40,7 @@ const PaybusinesswidgetViewer = {
             <div class="card-body text-center py-5">
                 <div class="row mb-3">
                     <div class="col-12 col-xl">
-                        <h2 class="text-dark">Education and Business</h2>
-                        <h3 class="text-secondary fw-semilight">{{membership.title}}</h3>
+                        <h3 class="text-dark">{{membership.title}}</h3>
                     </div>
                 </div>
                 <div v-if="membership.amount_extra > 0" class="text-center">
