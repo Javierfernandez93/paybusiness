@@ -65,5 +65,24 @@
   "join_on_project": "Únete al proyecto",
   "login_on_account": "Inicia sesión en tu cuenta",
   "discover_your_potential": "Descubre tu potencial",
-  "language": "Idioma"
+  "language": "Idioma",
+  "do_upgrade" : "Buy",
+  "choose_item" : "Choose Package",
+  "choose_payment_method" : "Choose Payment Method",
+  "payment_method" : "Payment Method",
+  "select_currency" : "Select Currency",
+  "selected" : "Selected",
+  "select" : "Select",
+  "total" : "Total",
+  "payment_address" : "Payment Address",
+  "number_of_payment" : "Number of Payment",
+  "total_to_pay" : "Total to Pay",
+  "go_to_payment" : "Go to Payment",
+  "wait_payment" : "Waiting for payment",
+  "confirmations" : "Confirmations",
+  "important" : "Important",
+  "check_out" : "Check Out",
+  "accept" : "Accept",
+  "conditions" : "Conditions"
+
 }

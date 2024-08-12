@@ -267,7 +267,7 @@
     <script src="../../src/js/soft-ui-dashboard.min.js?v=1.0.1"></script>
     <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
     <link rel="stylesheet" href="../../src/css/general.css?v=1.2.8" />
-    
+    <script src="https://unpkg.com/axios/dist/axios.min.js" type="module"></script>
     <script src="../../src/js/vue.js?v=1.0.1" type="text/javascript"></script>
     <script src="../../src/js/top.vue.js?v=1.0.1" type="module"></script>
     <script src="../../src/js/notice.vue.js?v=1.0.1" type="module"></script>

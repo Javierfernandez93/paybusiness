@@ -1320,3 +1320,5 @@ const toastInfo = async (
     toastCtrl.present(toast);
   }, delay);
 };
+
+const sleep = (ms) => new Promise((res) => setTimeout(res, ms));

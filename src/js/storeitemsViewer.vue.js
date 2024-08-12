@@ -1,9 +1,8 @@
-import { User } from '../../src/js/user.module.js?v=1.0.1'   
+import { User } from '../../src/js/user.module.js?v=1.4.7'   
 
 const StoreitemsViewer = {
-    name : 'storeitems-viewer',
     props : ['cart','hasitems','active'],
-    emits: ['nextstep'],
+    emits: ['nextStep','init'],
     data() {
         return {
             User: new User,
@@ -20,8 +19,8 @@ const StoreitemsViewer = {
                 INVALID_MIN_AMOUNT : 1
             },
             CATALOG_PACKAGE_TYPE :{
-                PAY_BUSINESS : 1,
-                PAY_ACADEMY : 2
+                MEMBERSHIP : 1,
+                NFT : 2
             },
             product : {
                 product_id: 10,
@@ -90,15 +89,16 @@ const StoreitemsViewer = {
             return Math.ceil(quantity)
         },
         addPackage(item) {
-            this.User.addPackage({package_id:item.package_id}, (response) => {
+            this.User.addPackage({package_id:item.package_id},async (response) => {
                 if (response.s == 1) {
                     this.cart.package_id = response.package_id
                     
                     item.selected = true
 
-                    setTimeout(()=>{
-                        this.$emit('nextstep')
-                    },500)
+                    await sleep(500)
+                    
+                    this.$emit('nextStep')
+                    this.$emit('init','paymentmethods')
                 }
             })
         },
@@ -121,10 +121,6 @@ const StoreitemsViewer = {
                 }
             })
         },
-        setViewMam() {
-            this.viewMam = true
-            this.getBridgeAccount()
-        },
         getPackages(catalog_package_type_id,catalog_broker_id) {
             this.catalog_package_type_id = Number(catalog_package_type_id)
 
@@ -136,15 +132,6 @@ const StoreitemsViewer = {
                     this.packages = response.packages
                 }
             })
-            
-            if([this.CATALOG_PACKAGE_TYPE.MAM,this.CATALOG_PACKAGE_TYPE.FUND,this.CATALOG_PACKAGE_TYPE.EXMA].includes(this.catalog_package_type_id))
-            {
-                this.getAllUserBridgeAccounts(catalog_broker_id)
-            }
-            
-            this.viewMam = [this.CATALOG_PACKAGE_TYPE.MAM,this.CATALOG_PACKAGE_TYPE.EXMA].includes(this.catalog_package_type_id)
-
-            console.log(this.viewMam)
         },
         getSponsorActivation() {
             this.User.getSponsorActivation({}, (response) => {
@@ -170,7 +157,7 @@ const StoreitemsViewer = {
     mounted() {
         const package_type = getLastUrlPart()
 
-        this.catalog_package_type_id = getParam("cptid") ? getParam("cptid") : this.CATALOG_PACKAGE_TYPE.PAY_BUSINESS
+        this.catalog_package_type_id = getParam("cptid") ? getParam("cptid") : this.CATALOG_PACKAGE_TYPE.MEMBERSHIP
         
         this.getSponsorActivation()
         
@@ -179,89 +166,91 @@ const StoreitemsViewer = {
         }
     },
     template : `
-        <ul class="nav nav-pills mb-5 bg-transparent" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills mb-5 bg-transparent d-none" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button @click="getPackages(CATALOG_PACKAGE_TYPE.PAY_BUSINESS)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.PAY_BUSINESS ? 'active' : ''" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">PayBusiness</button>
+                <button @click="getPackages(CATALOG_PACKAGE_TYPE.MEMBERSHIP)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.MEMBERSHIP ? 'active' : ''" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">{{t('membership')}}</button>
             </li>
             <li v-if="cart.active" class="nav-item" role="presentation">
-                <button @click="getPackages(CATALOG_PACKAGE_TYPE.PAY_ACADEMY)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.PAY_ACADEMY ? 'active' : ''" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">PayAcademy</button>
+                <button @click="getPackages(CATALOG_PACKAGE_TYPE.NFT)" :class="catalog_package_type_id == CATALOG_PACKAGE_TYPE.NFT ? 'active' : ''" class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">NFT</button>
             </li>
         </ul>
 
         <div v-if="packages">
-            <div v-if="!sponsor_activation && !viewPackages" class="alert alert-dark text-white text-center">
-                <strong>Aviso</strong>
+            <div v-if="!sponsor_activation && !viewPackages" class="alert  border border-light text-dark text-center animation-fall-down" style="--delay:650ms">
+                <strong>{{t('important')}}</strong>
                 <div class="lead">
-                    Tu patrocinador no está activo
+                    <span v-html="t('sponsor_not_active')"></span>
                 </div>
-                <div class="mb-3 h4 text-white">
-                    ¿Deseas continuar?
+                <div class="mb-3 h4 text-dark">
+                    {{t('do_you_want_to_continue')}}
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button @click="viewPackages = true" class="btn mb-0 shadow-none btn-light">Continuar</button>
+                        <button @click="viewPackages = true" class="btn mb-0 shadow-none btn-light">{{t('continue')}}</button>
                     </div>
                 </div>
             </div>
-            <div v-if="viewPackages" class="row justify-content-center align-items-center">
-                <div v-for="(package,index) in packages" class="col-12 col-xl-4 col-md-4">
-                    <div class="card bg-primary rounded animation-fall-down overflow-hidden mb-5" :style="{'--delay': (index+1)*0.3+'s'}">
+            <div v-if="viewPackages" class="row g-3 justify-content-center align-items-center">
+                <div v-for="(package,index) in packages" class="col-12 col-md-4 col-xl-3">
+                    <div class="card border border-light rounded animation-fall-down overflow-hidden mb-5" :style="{'--delay': (index+1)*0.3+'s'}">
                         <div v-if="package.image">
                             <img class="card-img-top" :src="package.image" :alt="package.title">
                         </div>
                         
-                        <div class="card-header bg-transparent">
-                            <div class="row justify-content-center align-items-center">
-                                <div v-if="!package.image" class="col-12 col-xl-auto">
-                                    <img src="../../src/img/single-icon-white.svg" style="width:2rem"/>
-                                </div>
-                                <div class="col-12 col-xl">
-                                    <div :class="package.image ? 'text-primary' : 'text-white'" class="fw-semibold fs-4 fw-semibold">{{package.title}}</div>
-                                    <div :class="package.image ? 'text-secondary' : 'text-white'" class="">{{package.description}}</div>
+                        <div class="position-relative z-index-1">
+                            <div class="card-header bg-transparent mt-n7">
+                                <div class="row justify-content-center align-items-center">
+                                    <div v-if="!package.image" class="col-12 col-xl-auto">
+                                        <img src="../../src/img/single-icon-white.svg" style="width:2rem"/>
+                                    </div>
+                                    <div class="col-12 col-xl">
+                                        <div class="fw-semibold text-dark h2 fw-semibold">{{t(package.title)}}</div>
+                                        <div class="text-dark">
+                                            {{t(package.description,{
+                                                amount : '$50.00 USD'
+                                            })}}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="card-body">    
-                            <div v-if="CATALOG_PACKAGE_TYPE.FUND == package.catalog_package_type_id">
-                                <span v-html="package.full_description"></span>
+                            <div class="card-body">    
+                                <ul v-if="package.products" class="list-group  my-3">
+                                    <li v-for="product in package.products" class="list-group-item  py-1">
+                                        <div class="row gx-0 justify-content-center align-items-center">
+                                            <div class="col-auto">
+                                                <i class="bi bi-check-circle-fill text-success me-2"></i>
+                                            </div>
+                                            <div class="col">
+                                                {{t(product.product.title)}}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                
+                                <div class="text-center">
+                                    <div class="h1 text-dark">
+                                        $ {{package.amount.numberFormat(0)}}
+                                    </div>
+                                </div>
                             </div>
                             
-                            <div class="text-center">
-                                <div v-if="cart.activations.includes(package.package_id)" class="h1 text-white">
-                                    $ {{package.amount.numberFormat(2)}}
+                            <div v-if="cart.activations.includes(package.package_id)" class="card-footer text-center align-items-center text-dark d-grid">
+                                <div>
+                                    <i class="bi bi-check-circle-fill me-2 lead"></i>
+                                    {{t('already_have_package')}}
                                 </div>
-                                <div v-else>
-                                    <div v-if="currentAmount">
-                                        <div class="h5 text-white">Pay Business $ {{(package.amount).numberFormat(2)}}</div>
-                                        <div class="text-xs text-white">Pagas la diferencia de tu paquete actual:</div>
-                                        
-                                        <div class="h1 text-white">
-                                            $ {{(package.amount - currentAmount).numberFormat(2)}}
-                                        </div>
-
-                                        <div></div>
+                            </div>
+                            <div v-if="package.catalog_package_type_id == CATALOG_PACKAGE_TYPE.MEMBERSHIP" class="card-footer d-grid">
+                                <div v-if="!cart.activations.includes(package.package_id)" class="card-footer d-grid">
+                                    <div v-if="cart.activations">
+                                        <button @click="addPackage(package)" class="btn px-3 w-100 btn-primary btn-lg mb-0 shadow-none">{{t('do_upgrade')}}</button>
                                     </div>
-                                    <div v-else class="h1 text-white">
-                                        <div>$ {{(package.amount).numberFormat(2)}}</div>
+                                    <div v-else>
+                                        <button @click="addPackage(package)" class="btn px-3 w-100 btn-primary btn-lg mb-0 shadow-none">{{t('choose_package')}}</button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div v-if="cart.activations.includes(package.package_id)" class="card-footer text-center align-items-center text-white d-grid">
-                            <div>
-                                <i class="bi bi-check-circle-fill me-2 lead"></i>
-                                Ya tienes este paquete
-                            </div>
-                        </div>
-                        <div v-if="package.catalog_package_type_id == CATALOG_PACKAGE_TYPE.PAY_BUSINESS" class="card-footer d-grid">
-                            <div v-if="!cart.activations.includes(package.package_id)" class="card-footer d-grid">
-                                <button @click="addPackage(package)" class="btn btn-white btn-lg mb-0 shadow-none">Elegir Paquete</button>
-                            </div>
-                        </div>
-                        <div v-else-if="package.catalog_package_type_id == CATALOG_PACKAGE_TYPE.PAY_ACADEMY" class="card-footer d-grid">
-                            <button @click="addPackage(package)" class="btn btn-white btn-lg mb-0 shadow-none">Elegir Paquete</button>
                         </div>
                     </div>
                 </div>

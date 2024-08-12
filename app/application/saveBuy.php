@@ -80,13 +80,11 @@ function createTransactionCapitalPayments(Site\BuyPerUser $BuyPerUser = null,Sit
 
 	$Sdk = new \CapitalPayments\Sdk\Sdk(Site\SystemVar::_getValue("api_key"),Site\SystemVar::_getValue("api_secret"));
 
-	$whatsapp = (new Site\UserContact)->getWhatsApp($BuyPerUser->user_login_id);
 
 	$response = $Sdk->createInvoice([
 		'amount' => $BuyPerUser->amount + $BuyPerUser->fee,
 		'invoice_id' => $BuyPerUser->invoice_id,
 		'unique_id' => $BuyPerUser->user_login_id,
-		'whatsapp' => $whatsapp ? $whatsapp : '5213317361196',
 		'name' => (new Site\UserData)->getName($BuyPerUser->user_login_id),
 		'email' => (new Site\UserLogin)->getEmail($BuyPerUser->user_login_id)
 	]);

@@ -53,21 +53,27 @@ class Package extends Orm {
 
 	public function getAllWithProducts(string $filter = '')
 	{
-		if($packages = $this->getALl($filter))
-		{
-			$Product = new Product; 
-			
-			return array_map(function($package) use($Product) {
-				$package['products'] = json_decode($package['product_ids'],true);
+		$packages = $this->getAll($filter);
+		
+		if(!$packages) {
+			return false;
+		}
 
+		$Product = new Product; 
+		
+		return array_map(function($package) use($Product) {
+			$package['products'] = json_decode($package['product_ids'],true);
+
+			if($package['products']) {
 				$package['products'] = array_map(function($product) use($Product) {
 					$product['product'] = $Product->getProduct($product['product_id']);
 					return $product;
 				},$package['products']);	
+			}
 
-				return $package;
-			},$packages);
-		}
+
+			return $package;
+		},$packages);
 	}
 
 	public static function getMonthlyPackage(int $user_login_id = null)

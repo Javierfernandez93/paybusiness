@@ -18,17 +18,15 @@ if($UserLogin->logged === true)
 
         if($membership)
         {
-            $package = (new Site\Package)->findRow("package_id = ?",$membership['package_id']);
-    
-            // d($membership);
-            // $buy = $BuyPerUser->getLastBuyByType($UserLogin->company_id, Site\CatalogPackageType::PAY_BUSINESS);
-    
-            // d($buy);
-    
-            if($package)
+            if(isset($membership['package_id']) && $membership['package_id'] > 0)
             {
-                $data['currentAmount'] = $package['amount'];
-                $filter .= " AND package.order_id >= '{$package['package_id']}'";
+                $package = (new Site\Package)->findRow("package_id = ?",$membership['package_id']);
+        
+                if($package)
+                {
+                    $data['currentAmount'] = $package['amount'];
+                    $filter .= " AND package.order_id >= '{$package['package_id']}'";
+                }
             }
         }
     }

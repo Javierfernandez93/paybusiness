@@ -1,9 +1,8 @@
-import { User } from '../../src/js/user.module.js?v=1.0.1'   
+import { User } from '../../src/js/user.module.js?v=1.4.7'   
 
 const StorepaymentmethodsViewer = {
-    name : 'storepaymentmethods-viewer',
     props : ['cart'],
-    emits : ['nextstep'],
+    emits : ['nextStep','init'],
     data() {
         return {
             User: new User,
@@ -47,7 +46,8 @@ const StorepaymentmethodsViewer = {
                     if(!catalogPaymentMethod.currencies)
                     {
                         setTimeout(()=>{
-                            this.$emit('nextstep')
+                            this.$emit('nextStep')
+                            this.$emit('init','checkout')
                         },500)
                     } else {
                         this.cart.catalog_currency_id = catalogPaymentMethod.currencies[1].catalog_currency_id
@@ -56,15 +56,18 @@ const StorepaymentmethodsViewer = {
                 }
             })
         },
+        init() {
+            this.getPaymentMethods().then(catalogPaymentMethods => this.catalogPaymentMethods = catalogPaymentMethods)
+        }
     },
     mounted() {
-        this.getPaymentMethods().then(catalogPaymentMethods => this.catalogPaymentMethods = catalogPaymentMethods)
+        
     },
     template : `
         <div v-if="catalogPaymentMethods" class="row justify-content-center">
            <div class="col-12">
-                <ul class="list-group">
-                    <li v-for="catalogPaymentMethod in catalogPaymentMethods" class="list-group-item list-group-item-action f-zoom-element-sm">
+                <ul class="list-group border border-light bg-transparent">
+                    <li v-for="catalogPaymentMethod in catalogPaymentMethods" class="list-group-item list-group-item-action f-zoom-element-sm bg-transparent">
                         <div class="row align-items-center cursor-pointer py-3">
                             <div class="col-auto">
                                 <div class="avatar avatar">
@@ -78,11 +81,12 @@ const StorepaymentmethodsViewer = {
                             </div>
                             <div class="col">
                                 <div>
-                                    <span v-if="catalogPaymentMethod.fee" class="badge bg-gradient-warning text-xxs">fee de {{catalogPaymentMethod.fee.numberFormat(0)}} 
-
-                                    {{catalogPaymentMethod.is_percentaje ? '%' : 'USD'}}
+                                    <span v-if="catalogPaymentMethod.fee > 0"> 
+                                        <span v-if="catalogPaymentMethod.fee > 0" class="badge bg-gradient-warning text-xxs">fee de {{catalogPaymentMethod.fee.numberFormat(0)}} 
+                                            {{catalogPaymentMethod.is_percentaje ? '%' : 'USD'}}
+                                        </span>
+                                        <span v-else class="badge text-success border border-success text-xxs">0% {{t('commission')}}</span>
                                     </span>
-                                    <span v-else class="badge text-success border border-success text-xxs">0% Comisión</span>
 
                                     <div class="fs-5 fw-semibold text-dark"
                                         :class="cart.catalog_payment_method_id == catalogPaymentMethod.catalog_payment_method_id ? 'fw-sembold text-dark' : ''">{{catalogPaymentMethod.payment_method}}</div>
@@ -95,14 +99,14 @@ const StorepaymentmethodsViewer = {
                                             {{ currency.currency }} - {{ currency.description }}
                                         </option>
                                     </select>
-                                    <label for="floatingSelect">Selecciona tu moneda</label>
+                                    <label for="floatingSelect">{{t('select_currency')}}</label>
                                 </div>
                             </div>
                             <div class="col-auto">
                                 <button 
                                     @click="selectCatalogPaymentMethodId(catalogPaymentMethod)"
-                                    :class="cart.catalog_payment_method_id == catalogPaymentMethod.catalog_payment_method_id ? 'btn-secondary' : 'btn-success'"
-                                    v-text="cart.catalog_payment_method_id == catalogPaymentMethod.catalog_payment_method_id ? 'Elegido' : 'Elegir método'"
+                                    :class="cart.catalog_payment_method_id == catalogPaymentMethod.catalog_payment_method_id ? 'btn-dark' : 'btn-success'"
+                                    v-text="cart.catalog_payment_method_id == catalogPaymentMethod.catalog_payment_method_id ? t('selected') : t('select')"
                                     class="btn shadow-none mb-0"></button>
                             </div>
                         </div>
