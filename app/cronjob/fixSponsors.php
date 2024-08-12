@@ -13,7 +13,7 @@ if(true)
     [
       'ID' => '1',
       'User ID' => 'DisruptivoGroup',
-      'Email' => 'financial@Disruptivogroup.io.co',
+      'Email' => 'financial@disruptivo.academy.co',
       'Name' => 'Disruptivo Group',
       'Phone' => '(+34) 604104435',
       'Country' => 'Colombia',
@@ -23,7 +23,7 @@ if(true)
     [
       'ID' => '2',
       'User ID' => 'DisruptivoGroup2',
-      'Email' => 'financial2@Disruptivogroup.io.co',
+      'Email' => 'financial2@disruptivo.academy.co',
       'Name' => 'Disruptivo Group',
       'Phone' => '(+34) 604104435',
       'Country' => 'Colombia',
@@ -33,7 +33,7 @@ if(true)
     [
       'ID' => '3',
       'User ID' => 'DisruptivoGroup3',
-      'Email' => 'financial3@Disruptivogroup.io.co',
+      'Email' => 'financial3@disruptivo.academy.co',
       'Name' => 'Disruptivo Group',
       'Phone' => '(+34) 604104435',
       'Country' => 'Colombia',

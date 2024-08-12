@@ -1,1 +1,1 @@
-const MAIN_PATH = 'https://www.Disruptivogroup.io/'
+const MAIN_PATH = 'https://www.disruptivo.academy/'

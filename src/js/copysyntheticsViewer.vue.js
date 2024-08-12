@@ -35,7 +35,7 @@ const CopysyntheticsViewer = {
                     <p class="lead fw-semibold text-dark">En caso de requerir ayuda puedes usar nuestro chat bot</p>
 
                     <div class="justify-content-center">
-                        <a href="https://backoffice.Disruptivogroup.io.co/dashboard/DisruptivoSynthetics/copySynthetics#:~:text=En%20caso%20de%20requerir%20ayuda%20puedes%20usar%20nuestro%20chat%20bot" class="btn btn-info btn-lg shadow-none px-4 mb-3"><i class="bi fs-4 bi-telegram"></i></a>
+                        <a href="https://backoffice.disruptivo.academy.co/dashboard/DisruptivoSynthetics/copySynthetics#:~:text=En%20caso%20de%20requerir%20ayuda%20puedes%20usar%20nuestro%20chat%20bot" class="btn btn-info btn-lg shadow-none px-4 mb-3"><i class="bi fs-4 bi-telegram"></i></a>
                     </div>
 
                     <h4>

@@ -20,7 +20,7 @@ Te invitamos a explorar nuestro Módulo de Aprendizaje (LMS). Allí encontrarás
 </h4>
 
 <h4>
-En la sección ATI de tu BackOffice encontrarás los tutoriales necesarios para iniciar a operar con tu Asistente de Trading Inteligente, ¡Ingresa ya a Disruptivogroup.io y comienza a generar ingresos hoy mismo!
+En la sección ATI de tu BackOffice encontrarás los tutoriales necesarios para iniciar a operar con tu Asistente de Trading Inteligente, ¡Ingresa ya a disruptivo.academy y comienza a generar ingresos hoy mismo!
 </h4>
 
 <h4>

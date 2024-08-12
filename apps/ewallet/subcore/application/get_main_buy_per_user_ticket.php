@@ -260,8 +260,8 @@ function getPayPalForm($MainBuyPerUser = null,$main_buy_per_user = null,$company
 	$transaction->setAmount($amount);
 	
     $redirectUrls = new \PayPal\Api\RedirectUrls;
-	$redirectUrls->setReturnUrl("https://www.Disruptivogroup.io/apps/paypal/index.php")
-	    ->setCancelUrl("https://www.Disruptivogroup.io/apps/paypal/index.php");
+	$redirectUrls->setReturnUrl("https://www.disruptivo.academy/apps/paypal/index.php")
+	    ->setCancelUrl("https://www.disruptivo.academy/apps/paypal/index.php");
 
 	$payment = new \PayPal\Api\Payment;
 

@@ -57,7 +57,7 @@ function sendEmail(array $data = null) : bool
             $mail->Port = $CatalogMailController->port; 
 
             //Recipients
-            $mail->setFrom('support@Disruptivogroup.io', 'Disruptivo Support');
+            $mail->setFrom('support@disruptivo.academy', 'Disruptivo Support');
             $mail->addAddress('javier.fernandez.pa93@gmail.com', 'BridgeFunds');     
 
             //Content

@@ -564,10 +564,10 @@
                                                         <td style="text-align: left; padding-left: 10px;">
                                                             <h3 class="heading">Links</h3>
                                                             <ul>
-                                                                <li><a href="https://www.Disruptivogroup.io/">Inicio</a></li>
-                                                                <li><a href="https://www.Disruptivogroup.io/apps/login/">Ingresar a tu cuenta</a></li>
-                                                                <li><a href="https://www.Disruptivogroup.io/apps/signup/">Registro</a></li>
-                                                                <li><a href="https://www.Disruptivogroup.io/apps/login/forgotPassword">Recuperar contraseña</a></li>
+                                                                <li><a href="https://www.disruptivo.academy/">Inicio</a></li>
+                                                                <li><a href="https://www.disruptivo.academy/apps/login/">Ingresar a tu cuenta</a></li>
+                                                                <li><a href="https://www.disruptivo.academy/apps/signup/">Registro</a></li>
+                                                                <li><a href="https://www.disruptivo.academy/apps/login/forgotPassword">Recuperar contraseña</a></li>
                                                             </ul>
                                                         </td>
                                                     </tr>

@@ -12,9 +12,9 @@ class PayPal {
     const CLIENT_ID = ""; 
     const CLIENT_SECRET = "";
 
-    const RETURN_URL = "https://www.Disruptivogroup.io/apps/paypal/";
-    const CANCEL_URL = "https://www.Disruptivogroup.io/apps/backoffice";
-    const URL = "https://www.Disruptivogroup.io/apps/admin/subcore/application/validate_buy.php";
+    const RETURN_URL = "https://www.disruptivo.academy/apps/paypal/";
+    const CANCEL_URL = "https://www.disruptivo.academy/apps/backoffice";
+    const URL = "https://www.disruptivo.academy/apps/admin/subcore/application/validate_buy.php";
     
     const MODE = 'live'; // 'live', 'sandbox'
     

@@ -54,8 +54,8 @@ function sendEmail(array $data = null,string $file_path = null) : bool
             
             // $mail->AddAddress('javier.fernandez.pa93@gmail.com', 'Javier');
             $mail->AddAddress('support@bridgemarkets.eu', 'BridgeMarkets');
-            $mail->AddAddress('corporate@Disruptivogroup.io', 'Corporativo Disruptivo');
-            $mail->AddAddress('admin@Disruptivogroup.io', 'Admin Disruptivo');
+            $mail->AddAddress('corporate@disruptivo.academy', 'Corporativo Disruptivo');
+            $mail->AddAddress('admin@disruptivo.academy', 'Admin Disruptivo');
 
             $mail->AddAttachment($file_path, "LPOA-{$data['investor']['number']}");
 
