@@ -149,7 +149,7 @@ const AdminUsersTableRow = {
                         <h6 class="mb-0 text-sm">{{user.names}}</h6>
                         <p class="text-xs text-secondary mb-0">{{user.email}}</p>
                         <p v-if="user.phone" class="text-xs text-secondary mb-0">
-                            <a :href="user.phone.formatPhoneNumber(user.countryData.phone_code).sendWhatsApp('¡Hola *'+user.names+'*! te contactamos de DummieTrading')">
+                            <a :href="user.phone.formatPhoneNumber(user.countryData.phone_code).sendWhatsApp('¡Hola *'+user.names+'*! te contactamos de Site')">
                                 +{{user.phone.formatPhoneNumber(user.countryData.phone_code)}}
                             </a>
                         </p>

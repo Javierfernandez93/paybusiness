@@ -18,6 +18,11 @@ if($UserSupport->logged === true)
             {
                 if($user_login_id = $UserLogin->doSignup($data['user']))
                 {
+                    JFStudio\EmailManager::getInstance('es')->dispatch('welcome',[
+                        'email' => $data['user']['email'],
+                        'names' => $data['user']['names']
+                    ]);
+
                     // if(sendEmailUser($data['user']['email'],$data['user']['names']))
                     // {
                     //     $data['email_sent'] = true;

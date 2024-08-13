@@ -6,6 +6,7 @@ use HCStudio\Orm;
 
 class CatalogMailController extends Orm {
 	protected $tblName = 'catalog_mail_controller';
+	const DEFAULT_CATALOG_MAIL_CONTROLLER_ID = 1;
 	public function __construct() {
 		parent::__construct();
 	}

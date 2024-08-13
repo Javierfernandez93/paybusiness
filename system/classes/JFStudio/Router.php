@@ -132,7 +132,7 @@ class Router {
     const AdminMarketing = 127;
     const AdminIntent = 128;
     const AdminBridgeUserAccount = 129;
-    const DummieTrading = 131;
+    const Site = 131;
     const AdminAti = 141;
     const AdminAcademy = 142;
     const AdminConfig = 143;
@@ -254,7 +254,7 @@ class Router {
             self::AdminMarketing => 'Marketing',
             self::AdminIntent => 'Entrenamiento IA',
             self::AdminBridgeUserAccount => 'Cuentas bridge',
-            self::DummieTrading => 'DummieTrading',
+            self::Site => 'Site',
             self::Conference => 'Próximas clases',
             self::DisruptivoMentory => 'DisruptivoMentory',
             self::DisruptivoMarketing => 'DisruptivoMarketing',

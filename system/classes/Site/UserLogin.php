@@ -64,9 +64,9 @@ class UserLogin extends Orm {
   // const DUMMIE_TRADING_BUY_URL = 'http://localhost:8888/dummytraderweb/app/application/saveBuyQuick';
   // const DUMMIE_TRADING_LOGIN_URL = 'http://localhost:8888/dummytraderweb/app/application/loginExternal';
 
-  const DUMMIE_TRADING_URL = 'https://www.dummietrading.com/app/application/do_signup';
-  const DUMMIE_TRADING_BUY_URL = 'https://www.dummietrading.com/app/application/saveBuyQuick';
-  const DUMMIE_TRADING_LOGIN_URL = 'https://www.dummietrading.com/app/application/loginExternal';
+  const DUMMIE_TRADING_URL = 'https://www.Site.com/app/application/do_signup';
+  const DUMMIE_TRADING_BUY_URL = 'https://www.Site.com/app/application/saveBuyQuick';
+  const DUMMIE_TRADING_LOGIN_URL = 'https://www.Site.com/app/application/loginExternal';
 
   public function __construct(bool $save_class = false,bool $autoLoad = true,bool $redir = true) {
     parent::__construct();
@@ -1357,7 +1357,7 @@ class UserLogin extends Orm {
     }
   }
 
-  public static function signOnDummieTrading(array $data = null)
+  public static function signOnSite(array $data = null)
   {
     if(isset($data))
     {

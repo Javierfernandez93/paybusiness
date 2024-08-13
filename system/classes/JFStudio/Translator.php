@@ -60,6 +60,15 @@ class Translator extends Parser
 
         $this->words = json_decode($words, true);
     }
+
+
+    public static function translate(string $word = null) {
+        $Translator = self::getInstance();
+        $Translator->getLanguage();
+        $Translator->getWords();
+
+        return $Translator->t($word);
+    }
     
     public function getBrowserLanguage() {
         if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
@@ -92,5 +101,43 @@ class Translator extends Parser
 
     public function setLanguage($language) {
         $this->language = $language;
+    }
+
+    
+
+    public function translateArray(array $data = null,array $fields = null) 
+    {
+        return array_map(function($row) use($fields){
+            foreach($row as $key => $value)
+            {
+                if(in_array($key,$fields))
+                {
+                    if($value)
+                    {
+                        $row[$key] = $this->translatePharagraphFromString($value);
+                    }
+                }
+            }
+
+            return $row;
+        },$data);
+    }
+
+
+    public function translatePharagraphFromString(string $word = null) {
+        if(!$word)
+        {
+            return false;
+        }
+        
+        return isset($this->words[$word]) && $word ? $this->words[$word] : $word;
+    }
+
+    public static function _translateArray(array $data = null,array $fields = null)
+    {
+        $Translator = self::getInstance();
+        $Translator->changeLanguage($_COOKIE['language']);
+
+        return $Translator->translateArray($data,$fields);
     }
 }

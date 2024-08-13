@@ -8,23 +8,69 @@ class Parser {
         return strpos($text, "{{{$arg}}}") !== false;
     }
 
-    public static function doParser(string $text = null,array $args = null) : string
+    public static function doParser(string $text = null,array $args = null,bool $validateArgs = true) : string
     {
-        if(!isset($text))
+        foreach ($args as $key => $arg)
         {
-            return false;
+            if(isset($arg))
+            {
+                if($validateArgs)
+                {
+                    if(self::existArg($text,$key))
+                    {
+                        $text = str_replace("{{{$key}}}",$arg,$text);
+                    }
+                } else {
+                    $text = str_replace("{{{$key}}}",$arg,$text);
+                }
+            }
         }
         
-        if(!isset($args))
+        return $text;
+    }
+
+    public static function parserArray(array $data = null) : string
+    {
+        $temp = [];
+
+        foreach($data as $key => $value)
         {
-            return false;
+            if($value)
+            {
+                $temp[] = "{$key} : {$value}";
+            }
         }
 
+
+        return implode(PHP_EOL,$temp);
+    }
+
+    public static function parserMultidimensionalArray(array $data = null) : string
+    {
+        $temp = [];
+
+        foreach($data as $array)
+        {
+            if($array)
+            {
+                $temp[] = self::parserArray($array);
+            }
+        }
+
+        return implode(PHP_EOL,$temp);
+    }
+
+
+    public static function do(string $text = null,array $args = null) : string
+    {
         foreach ($args as $key => $arg)
         {
             if(self::existArg($text,$key))
             {
-                $text = str_replace("{{{$key}}}",$arg,$text);
+                if(isset($key,$arg,$text))
+                {
+                    $text = str_replace("{{{$key}}}",$arg,$text);
+                }
             }
         }
 

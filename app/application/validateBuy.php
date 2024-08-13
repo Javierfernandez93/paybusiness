@@ -30,12 +30,7 @@ if(($data['user'] ?? false == HCStudio\Util::USERNAME && $data['password'] ?? fa
 
                     if($BuyPerUser->save())
                     {   
-                        Site\BuyPerUser::addPayAcademyFirstMonthFree($BuyPerUser->user_login_id);
-
-                        // if(sendEmail((new Site\UserLogin)->getEmail($BuyPerUser->user_login_id),$BuyPerUser->invoice_id))
-                        // {
-                        //     $data['mail_sent'] = true;
-                        // }
+                        // Site\BuyPerUser::addPayAcademyFirstMonthFree($BuyPerUser->user_login_id);
 
                         if(isset($items['items']))
                         {
@@ -43,45 +38,14 @@ if(($data['user'] ?? false == HCStudio\Util::USERNAME && $data['password'] ?? fa
                             {
                                 if(isset($items['items'][0]['title']))
                                 {
-                                    if($items['items'][0]['title'] == 'PayBusiness')
-                                    {
-                                        $names = (new Site\UserData)->getNames($BuyPerUser->user_login_id);
-                                            
-                                        $company_name = Site\SystemVar::_getValue("company_name");
-                
-                                        JFStudio\Mailer::send([
-                                            'view' => 'paybusiness',
-                                            'subject' => "Gracias por comprar Pay Business",
-                                            'vars' => [
-                                                'email' => (new Site\UserLogin)->getEmail($BuyPerUser->user_login_id),
-                                                'company_name' => Site\SystemVar::_getValue("company_name"),
-                                                'names' => $names,
-                                            ],
-                                        ]);  
-                                    } else if($items['items'][0]['title'] == 'PayAcademy')
-                                    {
-                                        $names = (new Site\UserData)->getNames($BuyPerUser->user_login_id);
-                                            
-                                        $company_name = Site\SystemVar::_getValue("company_name");
-                
-                                        JFStudio\Mailer::send([
-                                            'view' => 'payacademy',
-                                            'subject' => "Gracias por comprar Pay Academy",
-                                            'vars' => [
-                                                'email' => (new Site\UserLogin)->getEmail($BuyPerUser->user_login_id),
-                                                'company_name' => Site\SystemVar::_getValue("company_name"),
-                                                'names' => $names,
-                                            ],
-                                        ]);  
-                                    }
+                                    JFStudio\EmailManager::getInstance('es')->dispatch('academyPayment',[
+                                        'email' => (new Site\UserLogin)->getEmail($BuyPerUser->user_login_id),
+                                        'company_name' => Site\SystemVar::_getValue("company_name"),
+                                        'names' => $names,
+                                    ]);
                                 }
                             }
                         }
-
-                        // if(sendEmail(,$BuyPerUser->invoice_id))
-                        // {
-                        //     $data['mail_sent'] = true;
-                        // }
 
                         $data['status'] = $BuyPerUser->status;
                         $data['s'] = 1;
