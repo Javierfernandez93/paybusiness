@@ -550,7 +550,6 @@
                                                             <h3 class="heading">Información de contacto</h3>
                                                             <ul>
                                                                 <li><span class="text"><?php echo Site\SystemVar::_getValue("company_email")?></span></li>
-                                                                <li><span class="text">+<?php echo Site\SystemVar::_getValue("social_whatsapp")?></span></li>
                                                             </ul>
                                                         </td>
                                                     </tr>

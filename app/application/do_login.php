@@ -104,7 +104,7 @@ function sendEmailToUpdatePassword(string $email = null,string $secret = null) :
 
         try {
             $Layout = JFStudio\Layout::getInstance();
-            $Layout->init("","update-password","mail-new",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
+            $Layout->init("","update-password","mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
 
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
@@ -156,7 +156,7 @@ function sendEmailToVerify(string $email = null,string $secret = null) : bool
 
         try {
             $Layout = JFStudio\Layout::getInstance();
-            $Layout->init("","verify-account","mail-new",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
+            $Layout->init("","verify-account","mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
 
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);

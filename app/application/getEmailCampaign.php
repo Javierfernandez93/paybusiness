@@ -37,7 +37,7 @@ function getHtml(string $content = null)
 	if(isset($content) == true)
 	{
 		$Layout = JFStudio\Layout::getInstance();
-		$Layout->init("","blank","mail-new",TO_ROOT.'/apps/applications/',TO_ROOT."/");
+		$Layout->init("","blank","mail",TO_ROOT.'/apps/applications/',TO_ROOT."/");
 		$Layout->setVar([
             'content' => $content
         ]);

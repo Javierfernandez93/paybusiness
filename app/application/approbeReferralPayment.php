@@ -80,7 +80,7 @@ function sendEmail(string $email = null,string $invoice_id = null) : bool
 
         try {
             $Layout = JFStudio\Layout::getInstance();
-            $Layout->init("",'buy-franchise',"mail-new",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
+            $Layout->init("",'buy-franchise',"mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
 
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);

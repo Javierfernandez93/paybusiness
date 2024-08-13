@@ -11,7 +11,7 @@ use \Exception;
 
 class Mailer
 {
-    const DEFAULT_LAYOUT = 'mail-new';
+    const DEFAULT_LAYOUT = 'mail';
     const DEFAULT_VIEW = 'mail';
     const DEFAULT_CATALOG_MAIL_CONTROLLER_ID = 1;
 

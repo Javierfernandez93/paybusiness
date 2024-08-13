@@ -65,7 +65,7 @@ function sendEmail(string $email = null,string $subject = null,$content = null,s
 
         try {
             $Layout = JFStudio\Layout::getInstance();
-            $Layout->init("",'blank',"mail-new",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
+            $Layout->init("",'blank',"mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
 
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);
