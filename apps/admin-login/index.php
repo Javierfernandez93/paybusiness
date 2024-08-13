@@ -2,13 +2,6 @@
 
 require_once TO_ROOT . "/system/core.php";
 
-$res = JFStudio\EmailManager::getInstance('es')->dispatch('welcome',[
-	'email' => 'javier.fernandez.pa93@gmail.com',
-	'names' => 'Javier',
-]);
-
-d($res);	
-
 $UserSupport = new Site\UserSupport;
 
 if($UserSupport->logged === true) {
