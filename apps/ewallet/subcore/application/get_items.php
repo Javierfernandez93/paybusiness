@@ -3,7 +3,7 @@
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 
-require_once TO_ROOT . "/system/core.php";
+require_once TO_ROOT . "system/core.php";
 
 $returnData = Array();
 $UserLogin = new Umbrella\UserLogin();

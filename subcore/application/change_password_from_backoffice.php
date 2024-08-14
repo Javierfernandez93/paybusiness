@@ -3,7 +3,7 @@
 header("Content-Type: application/json");
 header("Access-Control-Allow-Origin: *");
 
-require_once TO_ROOT . "/system/core.php";
+require_once TO_ROOT . "system/core.php";
 
 $returnData = Array();
 $returnData['current_password'] = HCStudio\Util::getParam('current_password');

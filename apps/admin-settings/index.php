@@ -1,6 +1,6 @@
-<?php define("TO_ROOT", "../.."); = new GranCapital = new GranCapital
+<?php define("TO_ROOT", "../../"); = new GranCapital = new GranCapital
 
-require_once TO_ROOT . "/system/core.php";
+require_once TO_ROOT . "system/core.php";
 
 $Layout = JFStudio\Layout::getInstance();
 

@@ -26,12 +26,12 @@ use Site\SystemVar;
 
 class UserLogin extends Orm {
   protected $tblName  = 'user_login';
-  private $Session = false;
-  private $Token   = false;
+  private $Session = null;
+  private $Token = null;
   
   public $_data = [];
   public $_parent = [];
-  public $_parent_id = false;
+  public $_parent_id = null;
   public $save_class = false;
   public $logged  = false;
   
@@ -616,7 +616,7 @@ class UserLogin extends Orm {
   {
     if(isset($user_login_id) === true)
     {
-      return Connection::getMainPath().'/apps/signup/?uid='.$user_login_id;
+      return getFullPath("apps/signup/?uid={$user_login_id}"); 
     }
   }
 
@@ -1261,22 +1261,11 @@ class UserLogin extends Orm {
   
   public function isValidSecretForValidateEmail(string $secret = null,string $email = null) : bool
   {
-    if(isset($secret,$email) === true)
-    {
-      $sql = "SELECT
-                {$this->tblName}.email
-              FROM
-                {$this->tblName}
-              WHERE 
-                {$this->tblName}.email = '{$email}'
-              AND 
-                {$this->tblName}.secret = '{$secret}'
-                ";
-  
-      return $this->connection()->field($sql) ? true : false;
+    if(!isset($secret,$email)) {
+      return false;
     }
 
-    return false;
+    return $this->findField("email = ? AND secret = ?",[$email,$secret],"email") ? true : false;
   }
 
   public function getCompanyIdByEmail(string $email = null) : bool|string
@@ -1355,57 +1344,6 @@ class UserLogin extends Orm {
     {
       return $this->login($this->email,$this->password);
     }
-  }
-
-  public static function signOnSite(array $data = null)
-  {
-    if(isset($data))
-    {
-      $UserLogin = new self(false,false);
-      $UserLogin->loginWithId($data['user_login_id']);
-      
-      $Curl = new Curl;
-      $Curl->get(self::DUMMIE_TRADING_URL,[
-        'email' => $UserLogin->email,
-        'password' => $UserLogin->password,
-        'phone' => $UserLogin->_data['user_contact']['phone'],
-        'country_id' => $UserLogin->_data['user_address']['country_id'],
-        'names' => $UserLogin->_data['user_data']['names'],
-        'encrpyt' => false
-      ]);
-      
-      if($response = $Curl->getResponse(true))
-      {
-        if($response['s'] == 1 || $response['r'] == 'MAIL_ALREADY_EXISTS')
-        {
-          UserDummie::add([
-            'dummie_user_login_id' => $response['user_login_id'],
-            'user_login_id' => $UserLogin->company_id
-          ]);
-
-          $Curl = new Curl;
-          
-          $Curl->get(self::DUMMIE_TRADING_BUY_URL,[
-            'user' => Util::USERNAME,
-            'password' => Util::PASSWORD,
-            'user_login_id' => (new UserDummie)->getDummieUserLoginId($data['user_login_id']),
-            'checkout_data' => [
-              'site_name' => Connection::proyect_name,
-              'buy_per_user_id' => $data['buy_per_user_id']
-            ],
-            'country_id' => $UserLogin->_data['user_address']['country_id'],
-            'package_id' => Package::transporter($data['package_id'])
-          ]);
-
-          if($response = $Curl->getResponse(true))
-          {
-            return $response['s'] == 1;
-          }
-        } 
-      }
-    }
-
-    return false;
   }
 
   public function generateDummieLoginToken() 
