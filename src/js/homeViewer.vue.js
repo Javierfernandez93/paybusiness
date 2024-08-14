@@ -1,5 +1,5 @@
-import { Guest } from '../../src/js/guest.module.js?v=1.0.3'   
-import { LanguageViewer } from '../../src/js/languageViewer.vue.js?v=1.0.3'
+import { Guest } from '../../src/js/guest.module.js?v=1.0.4'   
+import { LanguageViewer } from '../../src/js/languageViewer.vue.js?v=1.0.4'
 
 const HomeViewer = {
     components : {

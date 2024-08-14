@@ -1,4 +1,4 @@
-import Loader from '../../../src/js/components/Loader.vue.js?v=1.0.3'
+import Loader from '../../../src/js/components/Loader.vue.js?v=1.0.4'
 
 export default {
     components : {

@@ -1,5 +1,5 @@
-import { User } from '../../src/js/user.module.js?v=1.0.3'   
-import { Translator } from '../../src/js/translator.module.js?v=1.0.3'   
+import { User } from '../../src/js/user.module.js?v=1.0.4'   
+import { Translator } from '../../src/js/translator.module.js?v=1.0.4'   
 
 const SignupViewer = {
     name: 'signup-viewer',
@@ -65,7 +65,12 @@ const SignupViewer = {
             this.User.getReferral({user_login_id:user_login_id,utm:this.user.utm},(response)=>{
                 if(response.s == 1)
                 {
-                   Object.assign(this.user.referral,response.referral)
+                    this.user.referral = {
+                        ...this.user.referral,
+                        ...response.referral
+                    }
+
+                    console.log(this.user.referral) 
                 } else if(response.r == "NOT_DATA") {
                     this.feedback = "No encontramos información del link de referido proporcionado"
                 }
@@ -73,6 +78,14 @@ const SignupViewer = {
         },
         toggleFieldPasswordType() {
             this.fieldPasswordType = this.fieldPasswordType == 'password' ? 'text' : 'password'
+        },
+        validateInput(event) {
+            const regex = /^[a-zA-Z0-9]*$/;
+
+            if (!regex.test(this.user.user_account.landing)) {
+              event.target.value = this.user.user_account.landing.replace(/[^a-zA-Z0-9]/g, '');
+              this.user.user_account.landing = event.target.value;
+            }
         },
         doSignup() {
             this.loading = true
@@ -188,7 +201,7 @@ const SignupViewer = {
                     <input 
                         :class="user.names ? 'is-valid' : ''"
                         @keypress="checkUserName(this)"
-                        :autofocus="true" id="landing" @keydown.space.prevent type="text" ref="landing" v-model="user.user_account.landing" class="form-control" @keydown.enter.exact.prevent="$refs.phone.focus()" :placeholder="Translator.words.name" :aria-label="Translator.words.name" aria-describedby="basic-addon1">
+                        :autofocus="true" id="landing" @keydown.space.prevent type="text" ref="landing" v-model="user.user_account.landing" @input="validateInput" class="form-control" @keydown.enter.exact.prevent="$refs.phone.focus()" placeholder="Nombre de usuario" aria-label="Nombre de usuario" aria-describedby="basic-addon1">
                         
                     <label for="landing">{{Translator.words.user_name}}</label>
                 </div>
