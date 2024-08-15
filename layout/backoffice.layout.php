@@ -139,6 +139,13 @@
                         <?php } ?>
                         
                         <li class="nav-item">
+                            <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Help])) { ?>active<?php } ?>" href="../../apps/ticket">
+                                <i class="bi bi-headset"></i>
+                                <span class="nav-link-text ms-1">Ayuda</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link <?php if (in_array($route, [JFStudio\Router::Tools])) { ?>active<?php } ?>" href="../../apps/backoffice/tools">
                                 <i class="bi bi-gear"></i>
                                 <span class="nav-link-text ms-1">Tools</span>
