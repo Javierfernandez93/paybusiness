@@ -20,6 +20,7 @@ class Cart
 	private $Sessions = null;
 
 	public $main = false;
+	public $vars = [];
 	public $charge_shipping = false;
 
 	public $_instance_id = null;
