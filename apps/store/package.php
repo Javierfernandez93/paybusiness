@@ -17,6 +17,7 @@ $Layout->init(JFStudio\Router::getName($route),'package',"backoffice",'',TO_ROOT
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
+	'qrcode.js',
 	'store.css',
 	'store.vue.js',
 ]);
