@@ -89,5 +89,7 @@
   "email.welcome": "Bienvenido a Disruptivo, activa tu cuenta",
   "email.academyPayment": "Bienvenido a Disruptivo",
   "sponsor_not_active" : "Patrocinador no activo",
-  "do_you_want_to_continue" : "¿Deseas continuar?"
+  "do_you_want_to_continue" : "¿Deseas continuar?",
+  "ticket_payment": "Ticket de pago",
+  "important_message_pay": "Al dar clic en <strong>IR A PAGAR</strong> serás redirijido a otra páginas según el medio de pago. Si es la <strong>primera vez que realizas un pago como éste</strong>, es importante que <strong>leas las instrucciones</strong> antes de realizar el pago."
 }
