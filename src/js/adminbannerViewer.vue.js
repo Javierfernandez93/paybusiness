@@ -1,5 +1,5 @@
 import { UserSupport } from '../../src/js/userSupport.module.js?t=1.1.5'   
-import Loader from '../../src/js/components/Loader.vue.js?v=1.0.4'
+import Loader from '../../src/js/components/Loader.vue.js?v=1.0.5'
 
 const AdminbannerViewer = {
     components : { 

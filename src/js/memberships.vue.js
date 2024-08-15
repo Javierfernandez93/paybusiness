@@ -1,4 +1,4 @@
-import { MembershipsViewer } from '../../src/js/membershipsViewer.vue.js?v=1.0.4'
+import { MembershipsViewer } from '../../src/js/membershipsViewer.vue.js?v=1.0.5'
 
 Vue.createApp({
     components: {

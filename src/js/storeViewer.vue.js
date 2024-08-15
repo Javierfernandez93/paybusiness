@@ -1,9 +1,9 @@
-import { User } from '../../src/js/user.module.js?v=1.0.4'   
+import { User } from '../../src/js/user.module.js?v=1.0.5'   
 
-import { StoreitemsViewer } from '../../src/js/storeitemsViewer.vue.js?v=1.0.4'
-import { StorepaymentmethodsViewer } from '../../src/js/storepaymentmethodsViewer.vue.js?v=1.0.4'
-import { StorecheckoutViewer } from '../../src/js/storecheckoutViewer.vue.js?v=1.0.4'
-import { StoreinvoiceViewer } from '../../src/js/storeinvoiceViewer.vue.js?v=1.0.4'
+import { StoreitemsViewer } from '../../src/js/storeitemsViewer.vue.js?v=1.0.5'
+import { StorepaymentmethodsViewer } from '../../src/js/storepaymentmethodsViewer.vue.js?v=1.0.5'
+import { StorecheckoutViewer } from '../../src/js/storecheckoutViewer.vue.js?v=1.0.5'
+import { StoreinvoiceViewer } from '../../src/js/storeinvoiceViewer.vue.js?v=1.0.5'
 
 const StoreViewer = {
     components: {

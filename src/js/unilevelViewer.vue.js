@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?js?v=1.0.4';
+import { User } from '../../src/js/user.module.js?js?v=1.0.5';
 
 const UnilevelViewer = {
     name : 'unilevel-viewer',
@@ -68,10 +68,9 @@ const UnilevelViewer = {
                                     <th class="tex-xs text-uppercase text-secondary">ID</th>
                                     <th class="tex-xs text-uppercase text-secondary">Nombre</th>
                                     <th class="tex-xs text-uppercase text-secondary">Fecha de registro</th>
-                                    <th class="tex-xs text-uppercase text-secondary">Activo hace</th>
+                                    <th class="tex-xs text-uppercase text-secondary">En línea hace</th>
                                     <th class="tex-xs text-uppercase text-secondary">Patrocinador</th>
-                                    <th class="tex-xs text-uppercase text-secondary">PayBusiness</th>
-                                    <th class="tex-xs text-uppercase text-secondary">PayAcademy</th>
+                                    <th class="tex-xs text-uppercase text-secondary">Membresía</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -96,14 +95,6 @@ const UnilevelViewer = {
                                     </td>
                                     <td class="align-middle">
                                         <span v-if="!user.pay_business" class="badge bg-secondary">
-                                            <i class="bi h5 text-white bi-x"></i>
-                                        </span>
-                                        <span v-else class="badge bg-success">
-                                            <i class="bi h5 text-white bi-check"></i>
-                                        </span>
-                                    </td>
-                                    <td class="align-middle">
-                                        <span v-if="!user.pay_academy" class="badge bg-secondary">
                                             <i class="bi h5 text-white bi-x"></i>
                                         </span>
                                         <span v-else class="badge bg-success">

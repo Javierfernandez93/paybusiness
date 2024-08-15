@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.0.4';
+import { User } from '../../src/js/user.module.js?v=1.0.5';
 
 const ListViewer = {
     name : 'list-viewer',
@@ -79,7 +79,7 @@ const ListViewer = {
                                     <th class="tex-xs text-uppercase text-secondary">Teléfono</th>
                                     <th class="tex-xs text-uppercase text-secondary">País</th>
                                     <th class="tex-xs text-uppercase text-secondary">Fecha de registro</th>
-                                    <th class="tex-xs text-uppercase text-secondary">Activo hace</th>
+                                    <th class="tex-xs text-uppercase text-secondary">En línea hace</th>
                                     <th class="tex-xs text-uppercase text-secondary">Activo</th>
                                 </tr>
                             </thead>

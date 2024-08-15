@@ -1,4 +1,4 @@
-import ListItemInline from './ListItemInline.vue.js?v=1.0.4'
+import ListItemInline from './ListItemInline.vue.js?v=1.0.5'
 
 export default {
     components : {
