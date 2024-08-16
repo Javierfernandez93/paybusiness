@@ -19,6 +19,5 @@ $Layout->setScript([
     'forgotpassword.vue.js'
 ]);
 
-$Layout->setVar([
-]);
+$Layout->setVar();
 $Layout();

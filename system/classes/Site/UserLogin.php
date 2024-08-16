@@ -2216,4 +2216,17 @@ class UserLogin extends Orm {
       Util::redirectTo("../../apps/home/working");
     }
   } 
+
+
+  public static function generateTokenByParams(array $params)
+  {
+    if(!isset($params)) {
+      return false;
+    }
+
+    $Token = new Token;
+    $token = $Token->getToken($params);
+
+    return "{$token['token']}[{$token['key']}]";
+  }
 }

@@ -37,7 +37,23 @@ class EmailManager
             'academyPayment' => [
                 'view' => 'academyPayment',
                 'subject' => Parser::doParser($this->Translator->t('email.academyPayment'),$data),
-            ]
+            ],
+            'updatePassword' => [
+                'view' => 'updatePassword',
+                'subject' => Parser::doParser($this->Translator->t('email.update_password'),$data),
+            ],
+            'newReferral' => [
+                'view' => 'newReferral',
+                'subject' => Parser::doParser($this->Translator->t('email.new_referral'),$data),
+            ],
+            'recoverPassword' => [
+                'view' => 'recoverPassword',
+                'subject' => Parser::doParser($this->Translator->t('email.recover_password'),$data),
+            ],
+            'tokenRequest' => [
+                'view' => 'tokenRequest',
+                'subject' => Parser::doParser($this->Translator->t('email.token_request'),$data),
+            ],
         };
     }
 
