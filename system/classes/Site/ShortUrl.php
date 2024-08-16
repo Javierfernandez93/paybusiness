@@ -28,12 +28,12 @@ class ShortUrl extends Orm {
 	public function getDomain(string $domain= null)
 	{
 
-		return Connection::protocol."://".($domain ? $domain : self::SHORT_LINK_URL);
+		return $_ENV['PROJECT_PROTOCOL']."://".($domain ? $domain : self::SHORT_LINK_URL);
 	}
 
 	public function __constructLinkCode()
 	{
-		return Connection::protocol."://".$this->_constructLinkCode($this->domain,$this->code);
+		return $_ENV['PROJECT_PROTOCOL']."://".$this->_constructLinkCode($this->domain,$this->code);
 	}
 
 	public function _constructLinkCode($domain = null,$code = null)

@@ -10,8 +10,6 @@ if($UserSupport->logged === true)
 {
     if($data['txn_id'])
     {
-        require_once TO_ROOT .'/vendor2/autoload.php';
-
         $cps_api = new CoinpaymentsAPI(CoinPayments\Api::private_key, CoinPayments\Api::public_key, 'json');
         
         try {            

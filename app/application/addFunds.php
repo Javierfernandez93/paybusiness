@@ -141,8 +141,6 @@ function createTransactionFromEwallet(Site\BuyPerUser $BuyPerUser = null,Site\Us
 function createTransactionFromCoinPayments(Site\BuyPerUser $BuyPerUser = null,Site\UserLogin $UserLogin = null)
 {
 	try {
-		require_once TO_ROOT .'/vendor2/autoload.php';
-
 		$CoinpaymentsAPI = new CoinpaymentsAPI(JFStudio\CoinPayments::PRIVATE_KEY, JFStudio\CoinPayments::PUBLIC_KEY, 'json');
 
 		$req = [

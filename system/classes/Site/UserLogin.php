@@ -2229,4 +2229,35 @@ class UserLogin extends Orm {
 
     return "{$token['token']}[{$token['key']}]";
   }
+
+  public function getAllUsersData()
+  {
+    return $this->connection()->rows("
+      SELECT
+        {$this->tblName}.user_login_id,
+        {$this->tblName}.email,
+        {$this->tblName}.signup_date,
+        user_data.names,
+        user_data_sponsor.names as sponsor_names
+      FROM
+        {$this->tblName}
+      LEFT JOIN
+        user_data
+      ON
+        user_data.user_login_id = {$this->tblName}.user_login_id
+      LEFT JOIN
+        user_referral
+      ON
+        user_referral.user_login_id = {$this->tblName}.user_login_id
+      LEFT JOIN
+        user_data as user_data_sponsor
+      ON
+        user_data_sponsor.user_login_id = user_referral.sponsor_id
+      WHERE
+        {$this->tblName}.status = '1'
+      ORDER BY
+        {$this->tblName}.signup_date
+      DESC  
+    ");
+  }
 }

@@ -195,8 +195,6 @@ class Wallet extends Orm
 
 	public static function getKeyPair() 
 	{
-		require_once TO_ROOT . "/system/vendor2/autoload.php";
-
 		$EC = new \Elliptic\EC(self::EWALLET_FORMAT);
 		
 		if($key = $EC->genKeyPair())
