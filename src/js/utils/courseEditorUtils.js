@@ -1,0 +1,15 @@
+const lessonType = Object.freeze({
+    text: 1,
+    audio: 2,
+    video: 3,
+    html: 4,
+    module: 5,
+    test: 6,
+})
+
+const isLessonType = (value, type) => value === lessonType[type];
+
+export {
+    isLessonType,
+    lessonType,
+}

@@ -1,4 +1,4 @@
-import { UserSupport } from '../userSupport.module.js?v=1.6.8';
+import { UserSupport } from '../userSupport.module.js?v=1.6.7';
 
 const AdminUsersTableRow = {
     props: ['settings', 'showCampaignColumn','user'],
@@ -149,7 +149,7 @@ const AdminUsersTableRow = {
                         <h6 class="mb-0 text-sm">{{user.names}}</h6>
                         <p class="text-xs text-secondary mb-0">{{user.email}}</p>
                         <p v-if="user.phone" class="text-xs text-secondary mb-0">
-                            <a :href="user.phone.formatPhoneNumber(user.countryData.phone_code).sendWhatsApp('¡Hola *'+user.names+'*! te contactamos de Site')">
+                            <a :href="user.phone.formatPhoneNumber(user.countryData.phone_code).sendWhatsApp('¡Hola *'+user.names+'*! te contactamos de DummieTrading')">
                                 +{{user.phone.formatPhoneNumber(user.countryData.phone_code)}}
                             </a>
                         </p>
@@ -195,7 +195,11 @@ const AdminUsersTableRow = {
             </td>
             <td v-if="showCampaignColumn" class="align-middle text-center text-sm">{{user.campaign}}</td>
             <td class="align-middle text-center text-xs">
-                
+                <i v-if="settings?.broker" :class=" user.setup.trading_account ? 'text-success': ''" class="bi bi-wallet-fill px-1" title="Cuenta de Broker"></i>
+                <i v-if="settings?.copytrading" :class=" user.setup.copy ? 'text-success': ''" class="bi bi-check2-all px-1" title="Copytrading"></i>
+                <i v-if="settings?.signals" :class=" user.setup.signals ? 'text-success': ''" class="bi bi-escape px-1" title="Señales IA"></i>
+                <i v-if="settings?.telegram" :class=" user.setup.telegram ? 'text-success': ''" class="bi bi-telegram px-1" title="Telegram"></i>
+                <i v-if="settings?.academy" :class=" user.setup.academy ? 'text-success': ''" class="bi bi-clipboard-check px-1" title="Academia"></i>
             </td>
             <td class="align-middle text-center text-sm">
                 {{user.signup_date.formatDate()}}

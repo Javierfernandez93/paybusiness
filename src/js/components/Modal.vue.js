@@ -1,4 +1,4 @@
-const ModalViewer = {
+export default {
     props: ['busy','title','size'],
     data() {
         return {
@@ -49,5 +49,3 @@ const ModalViewer = {
         </Teleport>
     `,
 }
-
-export default ModalViewer

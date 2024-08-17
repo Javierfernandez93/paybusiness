@@ -1,18 +1,18 @@
-import Loader from '../../../src/js/components/Loader.vue.js?v=1.0.5'
+import LoaderViewer from '../../../src/js/loaderViewer.vue.js?v=1.1.7'
 
 export default {
     components : {
-        Loader
+        LoaderViewer
     },
     props: ['busy','dataLength','query'],
     template : `
-        <Loader :busy="busy"/>
+        <LoaderViewer :busy="busy"/>
 
-        <div v-if="busy === false" class="card-body pb-0">
-            <div v-if="dataLength == 0" class="alert border border-light text-center">
-                <strong>{{t('warning')}}</strong>
+        <div v-if="busy === false && dataLength == 0" class="card-body pb-0">
+            <div class="alert border border-light text-center">
+                <strong>Aviso</strong>
                 <div>
-                    {{t('no_results')}}
+                    No hay resultados. Intenta cambiar tu búsqueda o recarga la página
                 </div>
             </div>
         </div>

@@ -578,6 +578,20 @@ class MembershipPerUser extends Orm {
 		");
 	}
 
+	public function getAllMemberships() 
+	{
+		return $this->connection()->column("
+			SELECT 
+				{$this->tblName}.user_login_id
+			FROM
+				{$this->tblName}
+			WHERE 
+				{$this->tblName}.status != -1
+			GROUP BY
+				{$this->tblName}.user_login_id
+		");
+	}
+
 	public static function setOldMembershipAsTaked(array $data = null) 
 	{
 		if(!isset($data))

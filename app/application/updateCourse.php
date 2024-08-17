@@ -1,28 +1,26 @@
 <?php define("TO_ROOT", "../../");
 
-require_once TO_ROOT . "system/core.php";
-
-$data = HCStudio\Util::getHeadersForWebService();
+require_once TO_ROOT. "/system/core.php";
 
 $UserSupport = new Site\UserSupport;
 
-if($UserSupport->logged === true)
-{
-    $data['user_support_id'] = $UserSupport->getId();
-
-	$data['tag'] = $data['tag_json'];
-	
-    if($course_id = Site\Course::addCourse($data))
-	{
-        $data['r'] = 'SAVE_COURSE';
-        $data['s'] = 1;
-	} else {
-		$data['r'] = 'NOT_SAVE_COURSE';
-		$data['s'] = 0;
-	}
-} else {
-	$data['r'] = 'NOT_SESSION';
-	$data['s'] = 0;
+if(!$UserSupport->logged) {
+    endWebServiceWithUnauthorized();
 }
 
-echo json_encode(HCStudio\Util::compressDataForPhone($data)); 
+$data = HCStudio\Util::getHeadersForWebService();
+
+$data['user_support_id'] = 1;
+
+$data['tag'] = $data['tagsFormatted'];
+unset($data['tagsFormatted']);
+
+$course_id = Site\Course::addCourse($data);
+
+if(!$course_id)	 {
+	endWebServiceWithError('COURSE_ALREADY_EXIST');
+}
+
+endWebServiceWithSuccess(null,[
+	'course_id' => $course_id	
+]);

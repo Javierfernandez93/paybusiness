@@ -2230,7 +2230,7 @@ class UserLogin extends Orm {
     return "{$token['token']}[{$token['key']}]";
   }
 
-  public function getAllUsersData()
+  public function getAllUsersData(string $filter = '')
   {
     return $this->connection()->rows("
       SELECT
@@ -2255,6 +2255,7 @@ class UserLogin extends Orm {
         user_data_sponsor.user_login_id = user_referral.sponsor_id
       WHERE
         {$this->tblName}.status = '1'
+        {$filter}
       ORDER BY
         {$this->tblName}.signup_date
       DESC  

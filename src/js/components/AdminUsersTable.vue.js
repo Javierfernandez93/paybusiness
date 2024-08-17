@@ -2,7 +2,7 @@ import AdminUsersTableRow from './AdminUsersTableRow.vue.js';
 import AdminUsersTableHeaderCell from './AdminUsersTableHeaderCell.vue.js';
 
 const AdminUsersTable = {
-    props: ['sortByColumn', 'sortOrder', 'users','filterQuery'],
+    props: ['campaigns', 'sortByColumn', 'sortOrder', 'users','filterQuery'],
     emits: [ 'onChangeBusyStatus', 'onDeleteUser', 'onSort', 'openCanvas' ],
     components: {
         Row: AdminUsersTableRow,
@@ -10,9 +10,16 @@ const AdminUsersTable = {
     },
     data() {
         return {
+            campaignSettings: null,
         }
     },
     methods: {
+        settingsFor(campaign) {
+            if(this.campaignSettings === null){
+                this.updateCampaignSettings();
+            }
+            return this.campaignSettings?.[campaign];
+        },
         changeBusyStatus(newStatus){
             this.$emit('onChangeBusyStatus', newStatus);
         },
@@ -22,11 +29,14 @@ const AdminUsersTable = {
         openCanvas(user){
             this.$emit('openCanvas', user);
         },
-        orderBy(columnName) {
-            return this.sortByColumn === columnName ? this.sortOrder : null
-        },
-        onSortBy(column, order) {
+        sortBy(column, order) {
             this.$emit('onSort', column, order);
+        },
+        updateCampaignSettings(){
+            this.campaignSettings = (this.campaigns ?? []).reduce((prev, campaign) => ({
+                ...prev,
+                [campaign.campaign]: JSON.parse(campaign.features ?? '{}'),
+            }),{});
         },
     },
     template: `
@@ -35,14 +45,14 @@ const AdminUsersTable = {
                 <table class="table table-hover mb-0">
                     <thead class="bg-white th-sticky">
                         <tr>
-                            <HeaderCell @onClick="onSortBy" column="company_id" :order="orderBy('company_id')">ID</HeaderCell>
-                            <HeaderCell @onClick="onSortBy" column="names" :order="orderBy('names')">Usuario</HeaderCell>
-                            <HeaderCell @onClick="onSortBy" column="" :order="">Activo</HeaderCell>
-                            <HeaderCell @onClick="onSortBy" column="" :order="null">Productos</HeaderCell>
-                            <HeaderCell @onClick="onSortBy" column="" :order="null">Cuentas de Trading</HeaderCell>
-                            <HeaderCell v-if="campaigns.length > 1" @onClick="onSortBy" column="campaign" :order="orderBy('campaign')">Campaign</HeaderCell>
-                            <HeaderCell @onClick="onSortBy" column="" :order="null">Atributos</HeaderCell>
-                            <HeaderCell @onClick="onSortBy" column="signup_date" :order="orderBy('signup_date')">Miembro desde</HeaderCell>
+                            <HeaderCell @onClick="sortBy" column="company_id" :order="sortByColumn === 'company_id' ? sortOrder : null">ID</HeaderCell>
+                            <HeaderCell @onClick="sortBy" column="names" :order="sortByColumn === 'names' ? sortOrder : null">Usuario</HeaderCell>
+                            <HeaderCell @onClick="sortBy" column="" :order="">Activo</HeaderCell>
+                            <HeaderCell @onClick="sortBy" column="" :order="null">Productos</HeaderCell>
+                            <HeaderCell @onClick="sortBy" column="" :order="null">Cuentas de Trading</HeaderCell>
+                            <HeaderCell v-if="campaigns.length > 1" @onClick="sortBy" column="campaign" :order="sortByColumn === 'campaign' ? sortOrder : null">Campaign</HeaderCell>
+                            <HeaderCell @onClick="sortBy" column="" :order="null">Atributos</HeaderCell>
+                            <HeaderCell @onClick="sortBy" column="signup_date" :order="sortByColumn === 'signup_date' ? sortOrder : null">Miembro desde</HeaderCell>
                             <HeaderCell>Opciones</HeaderCell>
                         </tr>
                     </thead>

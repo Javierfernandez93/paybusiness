@@ -1,8 +1,8 @@
 export default {
     props: ['value','myClass'],
-    template : `
-        <span class="badge" :class="myClass">
+    template: `
+        <span :class="myClass" class="badge">
             {{value}}
-        </span>
+        </div>
     `,
-}
+};

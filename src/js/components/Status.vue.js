@@ -1,11 +1,10 @@
 const Status = {
     props: ['status'],
-    template : `
-        <span class="h4">
-            <i :class="status ? 'bi bi-check-circle-fill text-success' : 'bi bi-x-circle-fill text-danger'"></i>
+    template: `
+        <span class="h3">
+            <i :class="status == 1 ? 'bi-check text-success' : 'bi-x text-secondary'" class="bi"></i>
         </span>
-        
     `,
-}
+};
 
-export default Status
+export default Status;

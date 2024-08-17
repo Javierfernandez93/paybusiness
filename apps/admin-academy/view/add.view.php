@@ -1,4 +1,3 @@
-<div class="container-fluid py-4" id="app">
-    <addcourse-viewer @add-session="addSession" @select-session="selectSession" ref="course"></addcourse-viewer>
-    <addsession-viewer @save-session="saveSession" ref="sessionViewer"> </addsession-viewer>
+<div class="py-4" id="app">
+    <course-editor-viewer></course-editor-viewer>
 </div>

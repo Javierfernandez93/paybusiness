@@ -1,6 +1,6 @@
-import { User } from '../../../src/js/user.module.js?v=1.6.8'   
-import { OffCanvasViewer } from '../../../src/js/offCanvasViewer.vue.js?v=1.6.8'
-import { LoaderViewer } from '../../../src/js/loaderViewer.vue.js?v=1.6.8'
+import { User } from '../../../src/js/user.module.js?v=1.6.7'   
+import { OffCanvasViewer } from '../../../src/js/components/OffCanvas.vue.js?v=1.6.7'
+import { LoaderViewer } from '../../../src/js/loaderViewer.vue.js?v=1.6.7'
 
 const FollowUser = {
     props : ['signal'],
