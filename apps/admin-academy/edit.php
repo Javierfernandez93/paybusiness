@@ -24,7 +24,7 @@ $Layout->setScript([
 	'quill.snow.css',
 	'quill.*',
 	'add-course.css',
-    'apps/admin-academy/.vue.js'
+    'editcourse.vue.js'
 ]);
 
 $Layout->setVar([
