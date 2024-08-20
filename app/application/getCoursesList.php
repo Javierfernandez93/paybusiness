@@ -2,28 +2,32 @@
 
 require_once TO_ROOT . 'system/core.php'; 
 
-$data = HCStudio\Util::getHeadersForWebService();
-
 $UserLogin = new Site\UserLogin;
 
-if($UserLogin->logged === true)
-{	
-    $Course = new Site\Course;
-    $Course->connection()->stmtQuery("SET NAMES utf8mb4");
+if(!$UserLogin->logged) {
+    endWebServiceWithError();
+}
 
-    if($courses = $Course->getList())
-    {
-        $data['courses'] = array_values(format(filter($courses,$UserLogin->company_id),$UserLogin->company_id));
-        $data['courses'] = Site\Course::filterCoursesBlocked($data['courses'],$UserLogin->company_id);
-        $data['r'] = 'DATA_OK';
-        $data['s'] = 1;
-    } else {
-        $data['r'] = 'DATA_OK';
-        $data['s'] = 1;
-    }
-} else {
-	$data['r'] = 'NOT_SESSION';
-	$data['s'] = 0;
+$data = HCStudio\Util::getHeadersForWebService();
+
+$Course = new Site\Course;
+$Course->connection()->stmtQuery("SET NAMES utf8mb4");
+
+$data['catalog_course_type_id'] = isset($data['catalog_course_type_id']) ? $data['catalog_course_type_id'] : 1;
+
+$filter = "AND course.catalog_course_type_id = '{$data['catalog_course_type_id']}'";
+
+$courses = $Course->getList($filter);
+
+if(!$courses) {
+    endWebServiceWithError(Constants::RESPONSES['NOT_DATA']);
+}
+
+$courses = array_values(format(filter($courses,$UserLogin->company_id),$UserLogin->company_id));
+$courses = Site\Course::filterCoursesBlocked($courses,$UserLogin->company_id);
+
+if(empty($courses)) {
+    endWebServiceWithError(Constants::RESPONSES['DATA_EMPTY']);
 }
 
 function filter(array $courses = null,int $user_login_id = null) : array
@@ -70,4 +74,6 @@ function format(array $courses = null,int $user_login_id = null) : array
     },$courses);
 }
 
-echo json_encode(HCStudio\Util::compressDataForPhone($data)); 
+endWebServiceWithSuccess(null,[
+    'courses' => $courses,
+]);

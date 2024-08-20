@@ -97,6 +97,7 @@ class Course extends Orm {
                     {$this->tblName}.price,
                     {$this->tblName}.create_date,
                     {$this->tblName}.target,
+                    {$this->tblName}.attach_to_course_id,
                     {$this->tblName}.image,
                     catalog_course.name,
                     catalog_course_type.catalog_course_type_id,
@@ -304,5 +305,37 @@ class Course extends Orm {
                     AND 
                         {$this->tblName}.course_id = '{$course_id}'
                     ");
+    }
+
+    public static function filterCoursesBlocked(array $courses = null,int $user_login_id = null) : array
+    {
+        if(!isset($courses))
+        {
+            return false;
+        }
+
+        if(!isset($user_login_id))
+        {
+            return false;
+        }
+
+        return array_map(function($course) use($user_login_id){
+            $course['blocked'] = self::filterCourseBlocked($course,$user_login_id);
+
+            return $course;
+        },$courses);
+    }
+
+	public static function filterCourseBlocked(array $course = null,int $user_login_id = null) : bool
+    {
+        if(!$course['attach_to_course_id'])
+        {
+            return false;
+        }
+
+        return !(new UserEnrolledInCourse)->isCourseFinished([
+            'course_id' => $course['attach_to_course_id'],
+            'user_login_id' => $user_login_id,
+        ]);
     }
 }
