@@ -12,6 +12,7 @@ class CatalogPackageType extends Orm {
 	public static $DEPOSIT = 1;
 	public static $CASH = 2;
 
+	const MEMBERSHIP = 1; // new constant
 	const PAY_BUSINESS = 1;
 	const PAY_ACADEMY = 2;
 

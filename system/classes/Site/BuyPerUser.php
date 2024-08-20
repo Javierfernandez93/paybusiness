@@ -454,22 +454,23 @@ class BuyPerUser extends Orm {
 
     $data = $BuyPerUser->unformatData();
     
+    if(self::hasCommission($data['items'])) {
+      CommissionPerUser::saveCommissionsByItems(
+        $data['items'],
+        $BuyPerUser->user_login_id,
+        $BuyPerUser->getId(),
+        $sendCommissions
+      );
+    }
+
     if($sendCommissions)
     {
-      if(self::hasCommission($data['items']))
-      {
-        CommissionPerUser::saveCommissionsByItems($data['items'],$BuyPerUser->user_login_id,$BuyPerUser->getId());
-      }
-
-      if($BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED)
-      {
-        if($data['items'][0]['catalog_package_type_id'] == CatalogPackageType::PAY_ACADEMY) {
-          
-          MembershipPerUser::addPoint([
-            'user_login_id' => $BuyPerUser->user_login_id,
-            'point' => $BuyPerUser->amount
-          ]);
-        }
+      if($BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED && $data['items'][0]['catalog_package_type_id'] == CatalogPackageType::MEMBERSHIP) 
+      { 
+        MembershipPerUser::addPoint([
+          'user_login_id' => $BuyPerUser->user_login_id,
+          'point' => $BuyPerUser->amount
+        ]);
       }
     }
     

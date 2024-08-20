@@ -42,15 +42,15 @@ $BuyPerUser->status = Site\BuyPerUser::VALIDATED;
 
 $items = $BuyPerUser->unformatData();
 
-if(!$BuyPerUser->save()) {
-    endWebServiceWithError('NOT_UPDATE');
-}
+// if(!$BuyPerUser->save()) {
+//     endWebServiceWithError('NOT_UPDATE');
+// }
 
-$response = JFStudio\EmailManager::getInstance('es')->dispatch('academyPayment',[
-    'email' => (new Site\UserLogin)->getEmail($BuyPerUser->user_login_id),
-    'company_name' => Site\SystemVar::_getValue("company_name"),
-    'names' => (new Site\UserData)->getNames($BuyPerUser->user_login_id),
-]);
+// $response = JFStudio\EmailManager::getInstance('es')->dispatch('academyPayment',[
+//     'email' => (new Site\UserLogin)->getEmail($BuyPerUser->user_login_id),
+//     'company_name' => Site\SystemVar::_getValue("company_name"),
+//     'names' => (new Site\UserData)->getNames($BuyPerUser->user_login_id),
+// ]);
 
 endWebServiceWithSuccess(null,[
     'buy_per_user_id' => $BuyPerUser->getId(),

@@ -13,6 +13,7 @@ class Constants {
         'INVALID_DATA' => 'INVALID_DATA',
         'NOT_DATA' => 'NOT_DATA',
         'NOT_VALID_SECRET' => 'NOT_VALID_SECRET',
+        'NOT_RESPONSE' => 'NOT_RESPONSE',
         'NOT_PARAM' => 'NOT_PARAM',
         'API_ERROR' => 'API_ERROR',
         'DATA_EMPTY' => 'DATA_EMPTY',

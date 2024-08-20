@@ -131,7 +131,7 @@ class CommissionPerUser extends Orm
 		return false;
 	}
 
-	public static function saveCommissionsByCatalogCommission(array $catalog_commission, array $item = null, int $user_login_id_from = null, int $buy_per_user_id = null): bool
+	public static function saveCommissionsByCatalogCommission(array $catalog_commission, array $item = null, int $user_login_id_from = null, int $buy_per_user_id = null,bool $sendCommissions = true): bool
 	{
 		$network = (new UserReferral)->getSponsorByReverseLevel(3, $user_login_id_from);
 
@@ -140,42 +140,40 @@ class CommissionPerUser extends Orm
 		$user_login_id = isset($network[$catalog_commission['level'] - 1]) ? $network[$catalog_commission['level'] - 1] : self::REMANENT_ID;
 		$user_login_id = $user_login_id == 0 ? self::REMANENT_ID : $user_login_id;
 
-		if (isset($user_login_id)) 
-		{
-			$catalog_payment_method_id = (new BuyPerUser)->findField("buy_per_user_id = ?",$buy_per_user_id,"catalog_payment_method_id");
-			
-			if($catalog_payment_method_id)
-			{
-				if($catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED)
-				{
-					MembershipPerUser::addPoints([
-						'user_login_id' => $user_login_id,
-						'addPointsToRange' => true,
-						'amount' => $amount,
-					]);
-				}
-			}
+		if (!isset($user_login_id)) {
+			return false;
+		}
 
-			self::add([
-				'user_login_id_from' => $user_login_id_from,
+		$catalog_payment_method_id = (new BuyPerUser)->findField("buy_per_user_id = ?",$buy_per_user_id,"catalog_payment_method_id");
+		$catalog_payment_method_id = $sendCommissions ? $catalog_payment_method_id : CatalogPaymentMethod::EWALLET_PROTECTED;
+
+		if($catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED) {
+			MembershipPerUser::addPoints([
 				'user_login_id' => $user_login_id,
-				'catalog_payment_method_id' => $catalog_payment_method_id,
-				'buy_per_user_id' => $buy_per_user_id,
+				'addPointsToRange' => true,
 				'amount' => $amount,
-				'status' => (new MembershipPerUser)->hasAmountExtra($user_login_id) ? 0 : 1,
-				'package_id' => $item['package_id'],
-				'catalog_commission_id' => $catalog_commission['catalog_commission_id'],
-				'force_pay' => $user_login_id == 1
 			]);
 		}
 
-		return false;
+		self::add([
+			'user_login_id_from' => $user_login_id_from,
+			'user_login_id' => $user_login_id,
+			'catalog_payment_method_id' => $catalog_payment_method_id,
+			'buy_per_user_id' => $buy_per_user_id,
+			'amount' => $amount,
+			'status' => (new MembershipPerUser)->hasAmountExtra($user_login_id) ? 0 : 1,
+			'package_id' => $item['package_id'],
+			'catalog_commission_id' => $catalog_commission['catalog_commission_id'],
+			'force_pay' => $user_login_id == 1
+		]);
+
+		return true;
 	}
 
 	public static function add(array $data = null): bool
 	{	
 		$CommissionPerUser = new CommissionPerUser;
-		
+
 		$force_pay = isset($data['force_pay']) ? $data['force_pay'] : false;
 
 		if(!$force_pay)
@@ -189,6 +187,7 @@ class CommissionPerUser extends Orm
 		$BuyPerUser = new BuyPerUser;
 
 		$catalog_payment_method_id = $BuyPerUser->findField("buy_per_user_id = ?",$data['buy_per_user_id'],"catalog_payment_method_id");
+		$data['catalog_payment_method_id'] = isset($data['catalog_payment_method_id']) ? $data['catalog_payment_method_id'] : $catalog_payment_method_id;
 
 		$CommissionPerUser->user_login_id = $data['user_login_id'];
 		$CommissionPerUser->buy_per_user_id = $data['buy_per_user_id'] ?? 0;
@@ -197,12 +196,10 @@ class CommissionPerUser extends Orm
 		$CommissionPerUser->amount = $data['amount'];
 		$CommissionPerUser->catalog_currency_id = CatalogCurrency::USD;
 		$CommissionPerUser->package_id = $data['package_id'];
-
-		if($catalog_payment_method_id == CatalogPaymentMethod::EWALLET_PROTECTED)
-		{
+		$CommissionPerUser->status = isset($data['status']) ? $data['status'] : self::PENDING_FOR_DISPERSION;
+		
+		if($data['catalog_payment_method_id'] == CatalogPaymentMethod::EWALLET_PROTECTED) {
 			$CommissionPerUser->status = self::FROZEN;
-		} else {
-			$CommissionPerUser->status = isset($data['status']) ? $data['status'] : self::PENDING_FOR_DISPERSION;
 		}
 
 		$CommissionPerUser->create_date = time();
@@ -359,12 +356,12 @@ class CommissionPerUser extends Orm
 		return false;
 	}
 
-	public static function saveCommissionsByCatalogCommissions(array $catalog_commissions, array $item = null, int $user_login_id_from = null, int $buy_per_user_id = null): bool
+	public static function saveCommissionsByCatalogCommissions(array $catalog_commissions, array $item = null, int $user_login_id_from = null, int $buy_per_user_id = null,bool $sendCommissions = true): bool
 	{
 		$saved = 0;
 
 		foreach ($catalog_commissions as $catalog_commission) {
-			if (self::saveCommissionsByCatalogCommission($catalog_commission, $item, $user_login_id_from, $buy_per_user_id)) {
+			if (self::saveCommissionsByCatalogCommission($catalog_commission, $item, $user_login_id_from, $buy_per_user_id, $sendCommissions)) {
 				$saved++;
 			}
 		}
@@ -372,14 +369,18 @@ class CommissionPerUser extends Orm
 		return sizeof($catalog_commissions) == $saved;
 	}
 
-	public static function saveCommissionsByItems(array $items, int $user_login_id_from = null, int $buy_per_user_id = null)
+	public static function saveCommissionsByItems(array $items, int $user_login_id_from = null, int $buy_per_user_id = null,bool $sendCommissions = true)
 	{
-		if (isset($items, $user_login_id_from) === true) {
-			foreach ($items as $item) {
-				if (isset($item['catalog_commission']) && is_array($item['catalog_commission']) && !empty($item['catalog_commission'])) {
-					self::saveCommissionsByCatalogCommissions($item['catalog_commission'], $item, $user_login_id_from, $buy_per_user_id);
-				}
+		if (!isset($items, $user_login_id_from))  {
+			return false;
+		}
+		
+		foreach ($items as $item) {
+			if (!isset($item['catalog_commission']) || empty($item['catalog_commission'])) {
+				continue;
 			}
+
+			self::saveCommissionsByCatalogCommissions($item['catalog_commission'], $item, $user_login_id_from, $buy_per_user_id, $sendCommissions);
 		}
 	}
 
