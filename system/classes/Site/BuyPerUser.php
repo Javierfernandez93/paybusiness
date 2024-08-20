@@ -454,7 +454,8 @@ class BuyPerUser extends Orm {
 
     $data = $BuyPerUser->unformatData();
     
-    if(self::hasCommission($data['items'])) {
+    if($sendCommissions && self::hasCommission($data['items'])) 
+    {
       CommissionPerUser::saveCommissionsByItems(
         $data['items'],
         $BuyPerUser->user_login_id,
@@ -463,22 +464,21 @@ class BuyPerUser extends Orm {
       );
     }
 
-    if($sendCommissions)
-    {
-      if($BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED && $data['items'][0]['catalog_package_type_id'] == CatalogPackageType::MEMBERSHIP) 
-      { 
-        MembershipPerUser::addPoint([
-          'user_login_id' => $BuyPerUser->user_login_id,
-          'point' => $BuyPerUser->amount
-        ]);
-      }
+    if($BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED && $data['items'][0]['catalog_package_type_id'] == CatalogPackageType::MEMBERSHIP) 
+    { 
+      // add points to binary
+      MembershipPerUser::addPoint([
+        'user_login_id' => $BuyPerUser->user_login_id,
+        'point' => $BuyPerUser->amount
+      ]);
     }
     
     if($data['items'][0]['catalog_membership_id'])
     { 
+      // add membership
       self::addMembership([
         'amount' => $BuyPerUser->amount,
-        'point' => $BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED ? $BuyPerUser->amount : 0,
+        'point' => $BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED && $sendCommissions ? $BuyPerUser->amount : 0,
         'catalog_membership_id' => $data['items'][0]['catalog_membership_id'],
         'user_login_id' => $BuyPerUser->user_login_id,
       ]);

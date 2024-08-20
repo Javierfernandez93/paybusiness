@@ -145,9 +145,8 @@ class CommissionPerUser extends Orm
 		}
 
 		$catalog_payment_method_id = (new BuyPerUser)->findField("buy_per_user_id = ?",$buy_per_user_id,"catalog_payment_method_id");
-		$catalog_payment_method_id = $sendCommissions ? $catalog_payment_method_id : CatalogPaymentMethod::EWALLET_PROTECTED;
 
-		if($catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED) {
+		if($catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED && $sendCommissions) {
 			MembershipPerUser::addPoints([
 				'user_login_id' => $user_login_id,
 				'addPointsToRange' => true,
