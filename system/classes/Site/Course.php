@@ -66,23 +66,21 @@ class Course extends Orm {
 
         if($Course->save())
         {
-            if(isset($data['sessions']) && !empty($data['sessions']))
+            foreach($data['sessions'] as $key => $session)
             {
-                foreach($data['sessions'] as $key => $session)
-                {
-                    $session['course_id'] = $Course->getId();
-                    $session['order'] = $key+1;
+                $session['course_id'] = $Course->getId();
+                $session['order'] = $key+1;
 
-                    SessionPerCourse::addSession($session);
-                }
+                SessionPerCourse::addSession($session);
+            }
 
-                if(isset($data['deleted_lessons']))
-                {
-                    foreach($data['deleted_lessons'] as $lesson_id){
-                        if (!is_numeric($lesson_id)) {
-                            continue;
-                        }
+            if(isset($data['deleted_lessons']))
+            {
+                foreach($data['deleted_lessons'] as $lesson_id){
+                    if (!is_numeric($lesson_id)) {
+                        continue;
                     }
+                    $_was_removed = SessionPerCourse::removeSingleSession($data['course_id'], $lesson_id);
                 }
             }
         }
@@ -234,7 +232,8 @@ class Course extends Orm {
             return false;
         }
 
-        $course['free'] = 1;
+        $course['free'] = (int)($course['price']) <= 0 ? 1 : 0;
+        $course['tag'] = json_decode($course['tag'],true);
 
         $SessionPerCourse = new SessionPerCourse;
         
@@ -305,37 +304,5 @@ class Course extends Orm {
                     AND 
                         {$this->tblName}.course_id = '{$course_id}'
                     ");
-    }
-
-	public static function filterCoursesBlocked(array $courses = null,int $user_login_id = null) : array
-    {
-        if(!isset($courses))
-        {
-            return false;
-        }
-
-        if(!isset($user_login_id))
-        {
-            return false;
-        }
-
-        return array_map(function($course) use($user_login_id){
-            $course['blocked'] = self::filterCourseBlocked($course,$user_login_id);
-
-            return $course;
-        },$courses);
-    }
-
-    public static function filterCourseBlocked(array $course = null,int $user_login_id = null) : bool
-    {
-        if(!$course['attach_to_course_id'])
-        {
-            return false;
-        }
-
-        return !(new UserEnrolledInCourse)->isCourseFinished([
-            'course_id' => $course['attach_to_course_id'],
-            'user_login_id' => $user_login_id,
-        ]);
     }
 }

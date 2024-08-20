@@ -442,16 +442,14 @@ class BuyPerUser extends Orm {
 
   public static function processPayment(int $buy_per_user_id = null,bool $sendCommissions = null) : bool
   {
-    if(!isset($buy_per_user_id))
-    {
-      return false;
+    if(!isset($buy_per_user_id)) {
+      throw new \Exception('INVALID_BUY_PER_USER_ID');
     }
     
     $BuyPerUser = new self;
 
-    if(!$BuyPerUser->loadWhere('buy_per_user_id = ?',$buy_per_user_id))
-    {
-      return false;
+    if(!$BuyPerUser->loadWhere('buy_per_user_id = ?',$buy_per_user_id)) {
+      throw new \Exception('NOT_BUY_PER_USER');
     }
 
     $data = $BuyPerUser->unformatData();
@@ -504,14 +502,12 @@ class BuyPerUser extends Orm {
               'transaction_per_wallet_id' => $transaction_per_wallet_id,
               'public_key' => $ReceiverWallet->public_key,
             ]);
-            
-            $BuyPerUser->save();
           } 
         } 
       }
     }
 
-    return false;
+    return $BuyPerUser->save();
   }
   
   public function getCurrency()

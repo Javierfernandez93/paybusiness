@@ -2,63 +2,41 @@
 
 require_once TO_ROOT . "system/core.php";
 
-$data = HCStudio\Util::getHeadersForWebService();
-
 $UserSupport = new Site\UserSupport;
 
-if($UserSupport->logged === true)
-{
-    if($data['invoice_id']) 
-    {
-        if($UserSupport->hasPermission('delete_payment') === true) 
-        {
-            $url = HCStudio\Connection::getMainPath()."/app/application/validateBuy.php";
-            
-            // d($url."?".http_build_query([
-            //     'user' => HCStudio\Util::USERNAME,
-            //     'password' => HCStudio\Util::PASSWORD,
-            //     'invoice_id' => $data['invoice_id'],
-            //     'catalog_validation_method_id' => Site\CatalogValidationMethod::ADMINISTRATOR,
-            //     'user_support_id' => $UserSupport->getId(),
-            // ]));
-             
-            $data['sendCommissions'] = isset($data['sendCommissions']) ? filter_var($data['sendCommissions'],FILTER_VALIDATE_BOOL) : true;
-
-            $Curl = new JFStudio\Curl;
-            $Curl->post($url, [
-                'user' => HCStudio\Util::USERNAME,
-                'password' => HCStudio\Util::PASSWORD,
-                'invoice_id' => $data['invoice_id'],
-                'catalog_validation_method_id' => Site\CatalogValidationMethod::ADMINISTRATOR,
-                'sendCommissions' => $data['sendCommissions'],
-                'user_support_id' => $UserSupport->getId(),
-            ]);
-            
-            if($response = $Curl->getResponse(true))
-            {
-                $data['response'] = $response;
-                $data['s'] = 1;
-                $data['r'] = 'DATA_OK';
-            } else {
-                $data['s'] = 0;
-                $data['r'] = 'NOT_RESPONSE';
-            }
-        } else {
-            $UserSupport->addLog([
-                'invoice_id' => $data['invoice_id'],
-                'unix_date' => time(),
-            ],Site\LogType::INVALID_VALIDATION_PERMISSION);
-
-            $data['s'] = 0;
-            $data['r'] = 'INVALID_PERMISSION';
-        }
-    } else {
-        $data['s'] = 0;
-        $data['r'] = 'NOT_INVOICE_ID';
-    }
-} else {
-	$data['s'] = 0;
-	$data['r'] = 'INVALID_CREDENTIALS';
+if(!$UserSupport->logged) {
+    endWebServiceWithUnauthorized();
 }
 
-echo json_encode(HCStudio\Util::compressDataForPhone($data)); 
+$data = HCStudio\Util::getHeadersForWebService();
+
+if(!isset($data['invoice_id'])) {
+    endWebServiceWithError(Constants::RESPONSES['NOT_PARAM']);
+}
+
+if(!$UserSupport->hasPermission('delete_payment'))  {
+    endWebServiceWithError(Constants::RESPONSES['NOT_PERMISSION']);
+}
+
+$url = getFullPath("app/application/validateBuy.php"); 
+$data['sendCommissions'] = isset($data['sendCommissions']) ? filter_var($data['sendCommissions'],FILTER_VALIDATE_BOOL) : true;
+
+$Curl = new JFStudio\Curl;
+$Curl->post($url, [
+    'user' => HCStudio\Util::USERNAME,
+    'password' => HCStudio\Util::PASSWORD,
+    'invoice_id' => $data['invoice_id'],
+    'catalog_validation_method_id' => Site\CatalogValidationMethod::ADMINISTRATOR,
+    'sendCommissions' => $data['sendCommissions'],
+    'user_support_id' => $UserSupport->getId(),
+]);
+
+$response = $Curl->getResponse(true);
+
+if(!$response) {
+    endWebServiceWithError(Constants::RESPONSES['NOT_RESPONSE']);
+}
+
+endWebServiceWithSuccess(null,[
+    'response' => $response,
+]);
