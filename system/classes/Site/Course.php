@@ -80,7 +80,6 @@ class Course extends Orm {
                     if (!is_numeric($lesson_id)) {
                         continue;
                     }
-                    $_was_removed = SessionPerCourse::removeSingleSession($data['course_id'], $lesson_id);
                 }
             }
         }
