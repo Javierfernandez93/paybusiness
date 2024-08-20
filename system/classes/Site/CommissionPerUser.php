@@ -21,7 +21,7 @@ class CommissionPerUser extends Orm
 	const PROFIT_MAMP_NETWORK = 30;
 	const PROFIT_MAMP_SPONSOR = 3;
 	const DEFAULT_NETWORK_MAM_LEVELS = 10;
-	const REMANENT_ID = 3;
+	const REMANENT_ID = 1;
 
 	public function __construct()
 	{

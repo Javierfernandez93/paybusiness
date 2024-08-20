@@ -7,7 +7,7 @@
 <h3>Estamos encantados de que hayas activado tu cuenta y te unas a nuestra plataforma de aprendizaje.</h3>
 <h3>Ahora, estás listo para acceder a una amplia gama de información y recursos que te ayudarán a alcanzar tus metas educativas y profesionales; También podrás construir carrera con nosotros e ir por esos rangos que te ofrecen poderosas ganancias construyendo y liderando equipos de trabajo. </h3>
 
-<h3>Si tienes alguna pregunta o necesitas asistencia, no dudes en ponerte en contacto con nuestro equipo de soporte en customerservice@unlimitedgroup.com o a través de nuestro servidor en Discord.</h3>
+<h3>Si tienes alguna pregunta o necesitas asistencia, no dudes en ponerte en contacto con nuestro equipo de soporte en customerservice@disruptivo.academy o a través de nuestro servidor en Discord.</h3>
 
 <h3>Gracias por elegir DISRUPTIVO. ¡Esperamos que disfrutes tu experiencia de aprendizaje con nosotros!</h3>
 
