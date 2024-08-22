@@ -368,6 +368,9 @@ class Wallet extends Orm
 			
 			foreach($transactions as $transaction) 
 			{
+				if(!isset($transaction['input'])) {
+					continue;
+				}
 				$mode = $transaction['input']->address == $this->public_key ? Transaction::OUTPUT : Transaction::INPUT;
 
 				foreach($transaction['output'] as $output)
