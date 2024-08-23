@@ -44,13 +44,12 @@ class SessionPerCourse extends Orm {
     {
         $SessionPerCourse = new self;
         
-        if(isset($data['session_per_course_id']))
-        {
+        if(isset($data['session_per_course_id'])) {
             $SessionPerCourse->loadWhere("session_per_course_id = ?", $data['session_per_course_id']);
         }
 
         $SessionPerCourse->title = isset($data['title']) ? $data['title'] : '';
-        $SessionPerCourse->order_number = isset($data['order']) ? $data['order'] : 0;
+        $SessionPerCourse->order_number = isset($data['order_number']) ? $data['order_number'] : 0;
         $SessionPerCourse->has_previsualization = isset($data['has_previsualization']) ? $data['has_previsualization'] : 0;
         $SessionPerCourse->course = isset($data['course']) ? $data['course'] : 0;
         $SessionPerCourse->catalog_multimedia_id = isset($data['catalog_multimedia_id']) ? $data['catalog_multimedia_id'] : 0;        
@@ -59,13 +58,11 @@ class SessionPerCourse extends Orm {
         $SessionPerCourse->course_id = isset($data['course_id']) ? $data['course_id'] : 0;
         $SessionPerCourse->status = Constants::AVIABLE;
         
-        if(isset($data['attach_session_per_course_id']))
-        {
+        if(isset($data['attach_session_per_course_id']) && $data['catalog_multimedia_id'] != CatalogMultimedia::MODULE) {
             $SessionPerCourse->attach_session_per_course_id = $data['attach_session_per_course_id'];
         }
 
-        if(!$SessionPerCourse->save())
-        {
+        if(!$SessionPerCourse->save()) {
             return false;
         }
 

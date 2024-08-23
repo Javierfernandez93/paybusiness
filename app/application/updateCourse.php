@@ -12,7 +12,7 @@ $data = HCStudio\Util::getHeadersForWebService();
 
 $data['user_support_id'] = 1;
 
-$data['tag'] = $data['tagsFormatted'];
+$data['tag'] = isset($data['tagsFormatted']) ? $data['tagsFormatted'] : null;
 unset($data['tagsFormatted']);
 
 $course_id = Site\Course::addCourse($data);

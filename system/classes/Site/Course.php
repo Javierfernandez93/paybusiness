@@ -66,19 +66,22 @@ class Course extends Orm {
 
         if($Course->save())
         {
-            foreach($data['sessions'] as $key => $session)
+            if(isset($data['sessions']))    
             {
-                $session['course_id'] = $Course->getId();
-                $session['order'] = $key+1;
-
-                SessionPerCourse::addSession($session);
-            }
-
-            if(isset($data['deleted_lessons']))
-            {
-                foreach($data['deleted_lessons'] as $lesson_id){
-                    if (!is_numeric($lesson_id)) {
-                        continue;
+                foreach($data['sessions'] as $key => $session)
+                {
+                    $session['course_id'] = $Course->getId();
+                    $session['order'] = $key+1;
+    
+                    SessionPerCourse::addSession($session);
+                }
+    
+                if(isset($data['deleted_lessons']))
+                {
+                    foreach($data['deleted_lessons'] as $lesson_id){
+                        if (!is_numeric($lesson_id)) {
+                            continue;
+                        }
                     }
                 }
             }
@@ -227,8 +230,7 @@ class Course extends Orm {
            
         $course = $this->_getCourse($course_id);
 
-        if(!$course)
-        {
+        if(!$course) {
             return false;
         }
 
