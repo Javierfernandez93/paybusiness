@@ -96,5 +96,8 @@
   "recover_password_mail": "Hemos enviado un correo a <b>%{email}</b> de que puedes ingresar a tu cuenta",
   "not_received_mail": "Si no recibiste el correo es que ya has recibido una notificación",
   "not_received_mail_mail": "Si no recibiste el correo, revisa tu bandeja de spam o correos no deseados",
-  "warning": "Aviso"
+  "warning": "Aviso",
+  "email.recover_password": "Recuperar contraseña",
+  "email.recover_password_text": "Hemos recibido una petición para recuperar contraseña de %{email}. Para continuar por favor da clic en el siguiente enlace",
+  "email.team" : "Equipo"
 }
