@@ -102,7 +102,6 @@ const ForgotpasswordViewer = {
                             </div>
                         </div>
                         <div class="card-footer pt-0">
-                            
                             <div v-show="feedback" class="alert alert-warning alert-dismissible fade show" role="alert">
                                 <span v-html="feedback"></span>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
