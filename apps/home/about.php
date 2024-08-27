@@ -7,7 +7,7 @@ $UserLogin = new Site\UserLogin;
 $Layout = JFStudio\Layout::getInstance();
 
 $route = JFStudio\Router::About;
-$Layout->init(JFStudio\Router::getName($route),'about',"index",'',TO_ROOT.'/');
+$Layout->init(JFStudio\Router::getName($route),'about',"index",'',TO_ROOT);
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([

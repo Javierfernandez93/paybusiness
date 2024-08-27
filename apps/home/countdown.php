@@ -6,7 +6,7 @@ $Layout = JFStudio\Layout::getInstance();
 
 $route = JFStudio\Router::Home;
 
-$Layout->init(JFStudio\Router::getName($route),'countdown',"countdown",'',TO_ROOT.'/');
+$Layout->init(JFStudio\Router::getName($route),'countdown',"countdown",'',TO_ROOT);
 
 $Translator = JFStudio\Translator::getInstance();
 $Translator->init();

@@ -43,7 +43,7 @@ class Mailer
             $data['view'] = isset($data['view']) ? $data['view'] : self::DEFAULT_VIEW;
 
             $Layout = Layout::getInstance();
-            $Layout->init("",$data['view'],$data['layout'],TO_ROOT.'/apps/mail/',TO_ROOT.'/');
+            $Layout->init("",$data['view'],$data['layout'],TO_ROOT.'/apps/mail/',TO_ROOT);
 
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
             $Layout->setScript(['']);

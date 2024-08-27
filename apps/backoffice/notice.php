@@ -13,7 +13,7 @@ $UserLogin->checkRedirection();
 $Layout = JFStudio\Layout::getInstance();
 
 $route = JFStudio\Router::Notice;
-$Layout->init(JFStudio\Router::getName($route),'notice',"backoffice",'',TO_ROOT.'/');
+$Layout->init(JFStudio\Router::getName($route),'notice',"backoffice",'',TO_ROOT);
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([

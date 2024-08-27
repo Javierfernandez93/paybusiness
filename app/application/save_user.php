@@ -118,7 +118,7 @@ function sendEmail(string $email = null,string $names = null,string $subject = n
 
         try {
             $Layout = JFStudio\Layout::getInstance();
-            $Layout->init("",$view,"mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
+            $Layout->init("",$view,"mail",TO_ROOT.'/apps/applications/',TO_ROOT);
 
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);

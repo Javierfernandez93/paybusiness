@@ -52,7 +52,7 @@ function sendEmail(array $data = null) : bool
 
         try {
             $Layout = JFStudio\Layout::getInstance();
-            $Layout->init("",'new-payment',"mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
+            $Layout->init("",'new-payment',"mail",TO_ROOT.'/apps/applications/',TO_ROOT);
 
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);

@@ -50,7 +50,7 @@ function sendEmail(array $data = null) : bool
 
         try {
             $Layout = JFStudio\Layout::getInstance();
-            $Layout->init("",'ati-welcome',"mail",TO_ROOT.'/apps/applications/',TO_ROOT.'/');
+            $Layout->init("",'ati-welcome',"mail",TO_ROOT.'/apps/applications/',TO_ROOT);
 
             $Layout->setScriptPath(TO_ROOT . '/apps/admin/src/');
     		$Layout->setScript(['']);

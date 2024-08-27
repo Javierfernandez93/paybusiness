@@ -11,7 +11,7 @@ if($UserLogin->logged === false) {
 $Layout = JFStudio\Layout::getInstance();
 
 $route = JFStudio\Router::WithdrawMethods;
-$Layout->init(JFStudio\Router::getName($route),'withdrawMethods','backoffice','',TO_ROOT.'/');
+$Layout->init(JFStudio\Router::getName($route),'withdrawMethods','backoffice','',TO_ROOT);
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([

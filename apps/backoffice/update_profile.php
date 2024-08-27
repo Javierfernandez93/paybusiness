@@ -10,7 +10,7 @@ if($UserLogin->logged === false) {
 	HCStudio\Util::redirectTo(TO_ROOT."apps/login/");
 }
 
-$Layout->init('Actualizar datos','update_profile','backoffice','',TO_ROOT.'/');
+$Layout->init('Actualizar datos','update_profile','backoffice','',TO_ROOT);
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript(['update_data.js','update_profile.css']);

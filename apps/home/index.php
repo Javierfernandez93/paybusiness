@@ -8,7 +8,7 @@ $Layout = JFStudio\Layout::getInstance();
 
 $route = JFStudio\Router::Home;
 
-$Layout->init(JFStudio\Router::getName($route),'index',"index",'',TO_ROOT.'/');
+$Layout->init(JFStudio\Router::getName($route),'index',"index",'',TO_ROOT);
 
 $Translator = JFStudio\Translator::getInstance();
 $Translator->init();

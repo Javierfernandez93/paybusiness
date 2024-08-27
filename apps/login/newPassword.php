@@ -11,7 +11,7 @@ if($UserLogin->logged === true) {
 $Layout = JFStudio\Layout::getInstance();
 
 $route = JFStudio\Router::NewPassword;
-$Layout->init(JFStudio\Router::getName($route),'newPassword',"one_columns",'',TO_ROOT.'/');
+$Layout->init(JFStudio\Router::getName($route),'newPassword',"one_columns",'',TO_ROOT);
 
 $Layout->setScriptPath(TO_ROOT . '/src/');
 $Layout->setScript([
