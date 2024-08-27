@@ -7,7 +7,7 @@ $Layout = JFStudio\Layout::getInstance();
 $UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === false) {
-	HCStudio\Util::redirectTo(TO_ROOT."/apps/login/");
+	HCStudio\Util::redirectTo(TO_ROOT."apps/login/");
 }
 
 $Layout->init('Actualizar datos','update_profile','backoffice','',TO_ROOT.'/');

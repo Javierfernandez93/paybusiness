@@ -5,7 +5,7 @@ require_once TO_ROOT . "system/core.php";
 $UserLogin = new Site\UserLogin;
 
 if($UserLogin->logged === false) {
-	HCStudio\Util::redirectTo(TO_ROOT."/apps/login/");
+	HCStudio\Util::redirectTo(TO_ROOT."apps/login/");
 }
 
 $Layout = JFStudio\Layout::getInstance();
