@@ -1,4 +1,4 @@
-import { ListViewer } from '../../src/js/listViewer.vue.js?v=1.0.5'
+import { ListViewer } from '../../src/js/listViewer.vue.js?v=1.0.6'
 
 Vue.createApp({
     components : { 

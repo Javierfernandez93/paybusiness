@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?v=1.0.5'   
+import { User } from '../../src/js/user.module.js?v=1.0.6'   
 
 const LessonViewer = {
     name : 'lesson-viewer',
@@ -72,9 +72,20 @@ const LessonViewer = {
             })
         },
         getSession(order_number) {
-            return this.sessions.find(session => {
+            let session = this.sessions.find(session => {
                 return session.order_number == order_number
             })
+
+            if(!session)
+            {
+                session = this.sessions.find(session => {
+                    return session.sessions.find(sessionInternal => {
+                        return sessionInternal.order_number == order_number
+                    })
+                })
+            }
+            
+            return session  
         },
         selectSession(session) {
             this.course.session = session
@@ -124,7 +135,13 @@ const LessonViewer = {
                 this.User.setSessionAsTaked({session_per_course_id:session.session_per_course_id,course_id:this.course.course_id}, (response) => {
                     if (response.s == 1) {
                         if(response.finished) {
-                            this.showCourseFinished(this.course)
+                            // this.showCourseFinished(this.course)
+
+                            toastInfo({
+                                message: this.t('course_finished',{
+                                    name : this.course.name
+                                }),
+                            })
                         }
 
                         resolve(response.sessionTaked)
@@ -189,9 +206,9 @@ const LessonViewer = {
             
             this.getSessionsCourse(course.course_id).then((sessions)=>{
                 this.sessions = sessions
-                
-                this.course.order_number = this.getLastOrder()
 
+                this.course.order_number = this.getLastOrder()
+                
                 this.selectSession(this.getSession(this.course.order_number))
 
                 this.getProgress()

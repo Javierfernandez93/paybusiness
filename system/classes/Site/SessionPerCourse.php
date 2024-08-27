@@ -81,10 +81,13 @@ class SessionPerCourse extends Orm {
         return true;
     }
 
-    public function getList(int $course_id = null) 
+    public function getList(int $course_id = null,int $session_per_course_id = null)
     {
         if(isset($course_id) === true)
         {
+            $session_per_course_id = isset($session_per_course_id) === true ? $session_per_course_id : 0;
+            $filter = "AND {$this->tblName}.attach_session_per_course_id = '{$session_per_course_id}'";
+
             $sql = "SELECT 
                         {$this->tblName}.{$this->tblName}_id,
                         {$this->tblName}.catalog_multimedia_id,
@@ -106,8 +109,7 @@ class SessionPerCourse extends Orm {
                         {$this->tblName}.course_id = '{$course_id}'
                     AND
                         {$this->tblName}.status = '1'
-                    AND
-                        {$this->tblName}.attach_session_per_course_id = '0'
+                        {$filter}
                     GROUP BY {$this->tblName}.{$this->tblName}_id
                     ORDER BY 
                         {$this->tblName}.order_number 

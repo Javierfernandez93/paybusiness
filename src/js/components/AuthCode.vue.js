@@ -1,5 +1,5 @@
-import { User } from '../../../src/js/user.module.js?v=1.0.5'   
-import Loader from '../../../src/js/components/Loader.vue.js?v=1.0.5'
+import { User } from '../../../src/js/user.module.js?v=1.0.6'   
+import Loader from '../../../src/js/components/Loader.vue.js?v=1.0.6'
 
 const AuthCode = {
     components : { Loader },

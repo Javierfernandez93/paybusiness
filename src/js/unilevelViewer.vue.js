@@ -1,4 +1,4 @@
-import { User } from '../../src/js/user.module.js?js?v=1.0.5';
+import { User } from '../../src/js/user.module.js?js?v=1.0.6';
 
 const UnilevelViewer = {
     name : 'unilevel-viewer',

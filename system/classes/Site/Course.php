@@ -235,7 +235,6 @@ class Course extends Orm {
         }
 
         $course['free'] = (int)($course['price']) <= 0 ? 1 : 0;
-        $course['tag'] = json_decode($course['tag'],true);
 
         $SessionPerCourse = new SessionPerCourse;
         
