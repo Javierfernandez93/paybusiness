@@ -1,6 +1,6 @@
 import { User } from '../../src/js/user.module.js?v=1.5.0'   
 
-const ForgotpasswordViewer = {
+const ForgotPasswordViewer = {
     data() {
         return {
             User : new User,
@@ -118,4 +118,4 @@ const ForgotpasswordViewer = {
     `
 }
 
-export { ForgotpasswordViewer }
+export { ForgotPasswordViewer }
