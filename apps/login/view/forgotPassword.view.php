@@ -1,3 +1,3 @@
 <div class="container" id="app">
-    <forgotpassword-viewer></forgotpassword-viewer>
+    <forgot-password-viewer></forgot-password-viewer>
 </div>
