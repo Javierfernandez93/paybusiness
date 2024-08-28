@@ -5,7 +5,7 @@ require_once TO_ROOT. "/system/core.php";
 $data = HCStudio\Util::getHeadersForWebService();
 
 $BuyPerUser = new Site\BuyPerUser;
-$buys = $BuyPerUser->findAll("amount = ? AND catalog_payment_method_id = ? AND status = ?",[240,7,2],["user_login_id","amount"]);
+$buys = $BuyPerUser->findAll("amount = ? AND status = ?",[300,2],["user_login_id","amount"]);
 
 if($buys)
 {
