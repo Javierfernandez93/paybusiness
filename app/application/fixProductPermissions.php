@@ -13,9 +13,15 @@ if($buys)
     {
         $ProductPermission = new Site\ProductPermission;
         
+        if($ProductPermission->loadWhere("user_login_id = ? AND product_id = ? AND status = ?",[$buy['user_login_id'],1,1]))
+        {
+            $ProductPermission->end_date = strtotime("+335 days",$ProductPermission->create_date);
+            $ProductPermission->save();
+        }
+        
         if($ProductPermission->loadWhere("user_login_id = ? AND product_id = ? AND status = ?",[$buy['user_login_id'],2,1]))
         {
-            $ProductPermission->end_date = strtotime("+360 days",$ProductPermission->create_date);
+            $ProductPermission->end_date = strtotime("+335 days",$ProductPermission->create_date);
             $ProductPermission->save();
         }
 
