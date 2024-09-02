@@ -79,9 +79,12 @@ class Course extends Orm {
                 if(isset($data['deleted_lessons']))
                 {
                     foreach($data['deleted_lessons'] as $lesson_id){
+                        
                         if (!is_numeric($lesson_id)) {
                             continue;
                         }
+                        
+                        SessionPerCourse::_delete($lesson_id);
                     }
                 }
             }

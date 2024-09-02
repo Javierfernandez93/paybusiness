@@ -81,6 +81,23 @@ class SessionPerCourse extends Orm {
         return true;
     }
 
+    public static function _delete(int $session_per_course_id = null)
+    {
+        if(!isset($session_per_course_id)) {
+            return false;
+        }
+            
+        $SessionPerCourse = new self;
+
+        if(!$SessionPerCourse->loadWhere("session_per_course_id = ?",$session_per_course_id)) {
+            return false;
+        }
+
+        $SessionPerCourse->status = Constants::DELETE;
+        
+        return $SessionPerCourse->save();
+    }
+
     public function getList(int $course_id = null,int $session_per_course_id = null)
     {
         if(isset($course_id) === true)
