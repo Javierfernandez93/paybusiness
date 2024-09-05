@@ -25,10 +25,11 @@
     <link rel="stylesheet" href="../../src/css/general.css?v=1.3.1" />
 
     <link id="pagestyle" href="../../src/css/admin.min.css?v=1.3.1" rel="stylesheet" />
+    <link id="pagestyle" href="../../src/css/admin-general.css?v=1.3.1" rel="stylesheet" />
     {{css_scripts}}
 </head>
 
-<body class="g-sidenav-show bg-light">
+<body class="g-sidenav-show bg-primary-soft">
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3" id="sidenav-main" data-color="danger">
         <div class="sidenav-header text-center">
             <i class="fas fa-times p-4 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>

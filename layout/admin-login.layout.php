@@ -21,7 +21,7 @@
         <link href="../../src/css/general.css?v=1-3-1" rel="stylesheet" type="text/css">
         {{css_scripts}}
     </head>
-    <body class="bg-light">
+    <body class="bg-white">
         {{content}}
         
         <script src="../../src/js/jquery-3.1.1.js" type="text/javascript"></script>

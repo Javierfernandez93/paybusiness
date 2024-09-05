@@ -464,7 +464,8 @@ class BuyPerUser extends Orm {
       );
     }
 
-    if($BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED && $data['items'][0]['catalog_package_type_id'] == CatalogPackageType::MEMBERSHIP) 
+    if($BuyPerUser->catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED 
+      && $data['items'][0]['catalog_package_type_id'] == CatalogPackageType::MEMBERSHIP) 
     { 
       // add points to binary
       MembershipPerUser::addPoint([

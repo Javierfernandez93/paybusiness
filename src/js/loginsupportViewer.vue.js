@@ -1,25 +1,29 @@
-import { UserSupport } from '../../src/js/userSupport.module.js?v=1.0.6'
+import { UserSupport } from '../../src/js/userSupport.module.js?v=1.0.0'
+import AlertDismiss from '../../src/js/components/AlertDismiss.vue.js?v=1.0.0'
+import Loader  from '../../src/js/components/Loader.vue.js?v=1.0.0'
 
 const LoginsupportViewer = {
-    name: 'loginsupport-viewer',
+    components : { AlertDismiss, Loader },
     data() {
         return {
             UserSupport : new UserSupport,
             user: {
-                email: null,
+                email: '',
                 password: null,
                 rememberMe: true,
             },
+            busy : false,
             feedback : false,
             isValidMail : false,
             fieldPasswordType : 'password',
-            userComplete : false,
+            filled : false,
         }
     },
     watch : {
         user : {
             handler() {
-                this.userComplete = this.user.email && this.user.password && isValidMail(this.user.email)
+                this.filled = this.user.email.isValidMail()
+                && this.user.password 
             },
             deep: true
         },
@@ -30,8 +34,11 @@ const LoginsupportViewer = {
         },
         doLogin() {
             this.feedback = false
+            this.busy = true
             
             this.UserSupport.doLoginSupport(this.user,(response)=>{
+                this.busy = false
+                
                 if(response.s == 1)
                 {
                     window.location.href = '../../apps/admin'
@@ -48,55 +55,61 @@ const LoginsupportViewer = {
         
     },
     template: `
-        <div class="card shadow-lg border-radius-2xl animation-fall-down" style="--delay:500ms">
-            <div class="card-header">
-                <div class="row justify-content-center">
-                    <div class="col-3">
-                        <img src="../../src/img/logo-dark.png" alt="logo" class="w-100"/>
-                    </div>
-                </div>
+        <div class="card shadow-none bg-transparent">
+            <div class="card-header bg-transparent fw-bold h2 text-dark text-center">
+                Sign in
             </div>
             <div class="card-body">
-                <div class="form-floating mb-3">
-                <input 
-                    :autofocus="true"
-                    :class="isValidMail ? 'is-valid' : ''"
-                    @keydown.enter.exact.prevent="$refs.password.focus()"
-                    ref="email"
-                    name="email"
-                    id="email"
-                    v-model="user.email"
-                    type="email" class="form-control" placeholder="name@example.com">
-                <label for="email">Correo electrónico</label>
+                <div class="mb-3">
+                    <label for="email">Correo electrónico</label>
+                    <input 
+                        :autofocus="true"
+                        :class="user.email.isValidMail() ? 'is-valid' : 'is-invalid'"
+                        @keydown.enter.exact.prevent="$refs.password.focus()"
+                        ref="email"
+                        v-model="user.email"
+                        type="email" class="form-control" placeholder="name@example.com">
+
+                    <div v-if="!user.email.isValidMail()" id="emailHelp" class="form-text text-warning">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        Ingresa un correo electrónico válido
+                    </div>
                 </div>
 
-                <div class="form-floating mb-3">
-                <input 
-                    :type="fieldPasswordType"
-                    :class="user.password ? 'is-valid' : ''"
-                    @keydown.enter.exact.prevent="doLogin"
-                    ref="password" 
-                    id="password"
-                    name="password"
-                    v-model="user.password" 
-                    type="password" class="form-control" placeholder="Password">
-                <label for="password">Contraseña</label>
+                <div class="mb-3">
+                    <label for="password">Contraseña</label>
+                    <input 
+                        :type="fieldPasswordType"
+                        :class="user.password ? 'is-valid' : 'is-invalid'"
+                        @keydown.enter.exact.prevent="doLogin"
+                        ref="password" 
+                        v-model="user.password" 
+                        type="password" class="form-control" placeholder="Password">
+                     
+                        <div v-if="!user.email" id="passwordHelp" class="form-text text-warning">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        Ingresa una contraseña
+                    </div>
                 </div>
 
-                <div class="form-check form-switch mb-3">
-                    <input class="form-check-input" v-model="user.rememberMe" type="checkbox" id="rememberMe">
-                    <label class="form-check-label" for="rememberMe">Recordarme</label>
-                </div>
+                <AlertDismiss v-if="feedback" title="Aviso" myClass="alert-danger text-white">
+                    <div>
+                        <i class="bi bi-exclamation-triangle-fill"></i>
 
-                <div v-show="feedback" class="alert alert-secondary text-white alert-dismissible fade show" role="alert">
-                    {{ feedback }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            
+                        {{feedback}}
+                    </div>
+                </AlertDismiss>
                 <button 
-                :disabled="!userComplete" 
-                @click="doLogin"
-                class="btn btn-primary shadow-none w-100 btn-block btn-lg badge-pill mb-0" type="button">Ingresar a Disruptivo</button>
+                    :disabled="!filled" 
+                    @click="doLogin"
+                    class="btn btn-success shadow-none w-100 btn-block btn-lg badge-pill mb-0" type="button">
+                    <span v-if="busy">
+                        <Loader busy="true"/>
+                    </span>
+                    <span v-else>
+                        Ingresar al Admin
+                    </span>
+                </button>
             </div>
         </div>        
     `
