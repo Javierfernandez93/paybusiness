@@ -1,7 +1,6 @@
 import { UserSupport } from '../../src/js/userSupport.module.js?t=5'
 
 const AdmintoolsViewer = {
-    name: 'admintools-viewer',
     data() {
         return {
             UserSupport : new UserSupport,
