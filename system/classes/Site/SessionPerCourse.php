@@ -18,8 +18,7 @@ class SessionPerCourse extends Orm {
     public static function removeSessions(int $course_id = null) : bool
     {
         
-        if(!isset($course_id))
-        {
+        if(!isset($course_id)) {
             return false;
         }
         
@@ -27,13 +26,11 @@ class SessionPerCourse extends Orm {
 
         $sessions = $SessionPerCourse->findAll("course_id = ?",$course_id,['session_per_course_id']);
 
-        if(!$sessions)
-        {
+        if(!$sessions) {
             return false;
         }
 
-        foreach($sessions as $session)
-        {
+        foreach($sessions as $session) {
             (new SessionPerCourse)->where("session_per_course_id","=",$session['session_per_course_id'])->updateStatus(Constants::DELETE);
         }
 

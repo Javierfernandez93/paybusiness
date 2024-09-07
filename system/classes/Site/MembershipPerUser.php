@@ -121,23 +121,20 @@ class MembershipPerUser extends Orm {
 
 	public static function addPoints(array $data = null) 
 	{
-		if(!$data)
-		{
+		if(!$data) {
 			return false;
 		}
 
 		$MembershipPerUser = new self;
 		
-		if(!$MembershipPerUser->loadWhere("user_login_id = ? AND status = ?",[$data['user_login_id'],1]))
-		{
+		if(!$MembershipPerUser->loadWhere("user_login_id = ? AND status = ?",[$data['user_login_id'],1])) {
 			return false;
 		}
 		
 		$CatalogMembership = new CatalogMembership;
 		$catalogMembership = $CatalogMembership->findRow("catalog_membership_id  = ?",$MembershipPerUser->catalog_membership_id);
 
-		if(!$catalogMembership)
-		{
+		if(!$catalogMembership) {
 			return false;
 		}
 

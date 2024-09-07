@@ -146,7 +146,7 @@ class CommissionPerUser extends Orm
 
 		$catalog_payment_method_id = (new BuyPerUser)->findField("buy_per_user_id = ?",$buy_per_user_id,"catalog_payment_method_id");
 
-		if($catalog_payment_method_id != CatalogPaymentMethod::EWALLET_PROTECTED && $sendCommissions) {
+		if($sendCommissions) {
 			MembershipPerUser::addPoints([
 				'user_login_id' => $user_login_id,
 				'addPointsToRange' => true,
@@ -175,10 +175,8 @@ class CommissionPerUser extends Orm
 
 		$force_pay = isset($data['force_pay']) ? $data['force_pay'] : false;
 
-		if(!$force_pay)
-		{
-			if($CommissionPerUser->loadWhere("buy_per_user_id = ? AND user_login_id = ? ", [$data['buy_per_user_id'], $data['user_login_id']]))
-			{
+		if(!$force_pay) {
+			if($CommissionPerUser->loadWhere("buy_per_user_id = ? AND user_login_id = ? ", [$data['buy_per_user_id'], $data['user_login_id']])) {
 				return false;
 			}
 		}
