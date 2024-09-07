@@ -1,6 +1,6 @@
 import { UserSupport } from '../../src/js/userSupport.module.js?t=5'
 
-const AdmintoolsViewer = {
+export default {
     data() {
         return {
             UserSupport : new UserSupport,
@@ -231,5 +231,3 @@ const AdmintoolsViewer = {
         </div>
     `
 }
-
-export { AdmintoolsViewer }
