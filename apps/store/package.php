@@ -15,7 +15,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::Products;
 $Layout->init(JFStudio\Router::getName($route),'package',"backoffice",'',TO_ROOT);
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'qrcode.js',
 	'store.css',

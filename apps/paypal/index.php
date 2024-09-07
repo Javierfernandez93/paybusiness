@@ -9,7 +9,7 @@ $Layout->init(JFStudio\Router::getName($route),"index","backoffice","",TO_ROOT."
 
 $UserLogin = new Site\UserLogin;
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['paypal.vue.js']);
 
 $Layout->setVar([

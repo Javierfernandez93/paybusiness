@@ -17,7 +17,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::AdminWallet;
 $Layout->init(JFStudio\Router::getName($route),"index","admin","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'adminwallet.vue.js',
 ]);

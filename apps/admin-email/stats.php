@@ -17,7 +17,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::AdminEmail;
 $Layout->init(JFStudio\Router::getName($route),"stats","admin","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'adminemailstats.vue.js'
 ]);

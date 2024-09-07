@@ -17,7 +17,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::AdminDeposits;
 $Layout->init(JFStudio\Router::getName($route),"deposits","admin","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'adminDeposits.vue.js',
 ]);

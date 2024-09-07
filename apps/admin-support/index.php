@@ -15,7 +15,7 @@ if($UserSupport->hasPermission('list_admin') === false) {
 	HCStudio\Util::redirectTo('../../apps/admin/invalid_permission');
 }
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['searcheable-object.js','admin-support-list.*']);
 
 $Layout->setVar([

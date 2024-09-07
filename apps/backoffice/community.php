@@ -15,7 +15,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::Community;
 $Layout->init(JFStudio\Router::getName($route),'community',"backoffice",'',TO_ROOT);
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'community.vue.js',
 ]);

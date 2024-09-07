@@ -7,7 +7,7 @@ $data = HCStudio\Util::getParam();
 $Layout = JFStudio\Layout::getInstance();
 $Layout->init((new Site\Landing)->getLandingTitleByPath($data['path']),'landings',"simple",'',TO_ROOT);
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'theme.min.css',
 	'landings.css',

@@ -15,7 +15,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::Team;
 $Layout->init(JFStudio\Router::getName($route),'unilevel',"backoffice",'',TO_ROOT);
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'unilevel.css',
 	'unilevel.vue.js',

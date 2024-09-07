@@ -19,7 +19,7 @@ $route = JFStudio\Router::AdminUserAdd;
 $Layout = JFStudio\Layout::getInstance();
 $Layout->init(JFStudio\Router::getName($route),"add","admin","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'jquery.mask.js',
 	'adminadduser.vue.js'

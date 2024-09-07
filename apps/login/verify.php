@@ -13,7 +13,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::Account;
 $Layout->init(JFStudio\Router::getName($route),'verify',"two_columns",'',TO_ROOT);
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
     'login.css',
     'verify.vue.js'

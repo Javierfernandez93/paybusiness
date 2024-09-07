@@ -12,7 +12,7 @@ if($UserSupport->logged === false) {
 	HCStudio\Util::redirectTo('../../apps/admin-login/');
 }
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['admin.css','animate.css','home.*','alertCtrl.js','http.js','settings.js']);
 
 $UserLogin = new Talento\UserLogin;

@@ -15,7 +15,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::Invoices;
 $Layout->init(JFStudio\Router::getName($route),'invoices',"backoffice",'',TO_ROOT);
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'store.css',
 	'invoices.vue.js',

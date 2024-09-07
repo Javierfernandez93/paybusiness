@@ -17,7 +17,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::AdminTrading;
 $Layout->init(JFStudio\Router::getName($route),"trading","admin","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'admintrading.vue.js',
 ]);

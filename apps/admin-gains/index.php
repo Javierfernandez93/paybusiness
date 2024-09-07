@@ -16,7 +16,7 @@ $route = JFStudio\Router::AdminMam;
 $Layout = JFStudio\Layout::getInstance();
 $Layout->init(JFStudio\Router::getName($route),"index","admin","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'admingains.vue.js'
 ]);

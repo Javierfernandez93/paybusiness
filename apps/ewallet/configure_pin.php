@@ -12,7 +12,7 @@ $Layout = JFStudio\Layout::getInstance();
 
 $Layout->init('Configurar código Pin','configure_pin','backoffice','',TO_ROOT);
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['animate.css','configure_pin.*']);
 
 $Layout->setVar([

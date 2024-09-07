@@ -22,7 +22,7 @@ if($UserSupport->hasPermission('list_client') === false) {
 	HCStudio\Util::redirectTo('../../apps/admin/invalid_permission');
 }
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['searcheable-object.js','comment-object.js','admin-client-list.*']);
 
 $Layout->setVar([

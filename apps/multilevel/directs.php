@@ -15,7 +15,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::Referrals;
 $Layout->init(JFStudio\Router::getName($route),'directs',"backoffice",'',TO_ROOT);
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'chart.js',
 	'directs.css',

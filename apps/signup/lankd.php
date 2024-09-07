@@ -13,7 +13,7 @@ $Session = new HCStudio\Session('sponsor');
 $Layout = JFStudio\Layout::getInstance();
 $Layout->init("Únete a Los talentos","index","blank","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['signup.*','theme.min.css'],true);
 
 $sponsor_id = $Session->get('sponsor_id');

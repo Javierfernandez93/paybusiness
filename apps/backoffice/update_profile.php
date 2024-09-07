@@ -12,7 +12,7 @@ if($UserLogin->logged === false) {
 
 $Layout->init('Actualizar datos','update_profile','backoffice','',TO_ROOT);
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['update_data.js','update_profile.css']);
 
 $Layout->setVar([

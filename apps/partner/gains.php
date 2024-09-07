@@ -12,7 +12,7 @@ $Layout = JFStudio\Layout::getInstance();
 
 $Layout->init("Ganancias","gains","backoffice","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['partner-gains.*']);
 
 $UserLogin = new Site\UserLogin;

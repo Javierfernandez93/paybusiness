@@ -14,7 +14,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::ViewAddress;
 $Layout->init(JFStudio\Router::getName($route),'viewAddress',"backoffice",'',TO_ROOT);
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'viewAddress.vue.js'
 ]);

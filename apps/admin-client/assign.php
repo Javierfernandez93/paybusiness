@@ -15,7 +15,7 @@ if($UserSupport->hasPermission('assign_seller_per_client') === false) {
 	HCStudio\Util::redirectTo('../../apps/admin/invalid_permission');
 }
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['admin-client-assign.js']);
 
 $Layout->setVar([

@@ -18,7 +18,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::AdminUsers;
 $Layout->init(JFStudio\Router::getName($route),"index","admin","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['admin-stats.js']);
 
 $Layout->setVar([

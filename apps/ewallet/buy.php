@@ -18,7 +18,7 @@ $UserLogin = new Umbrella\UserLogin();
 $BuyPerUser = new Umbrella\BuyPerUser();
 $ShippingShared = new Umbrella\ShippingShared();
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['carousel.css','backend.css','buy.css','home.css','bootstrap-datepicker.js','buy.js','home.js']);
 
 

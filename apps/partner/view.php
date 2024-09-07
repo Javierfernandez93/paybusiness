@@ -7,7 +7,7 @@ $key_name = HCStudio\Util::getParam("key_name");
 $Layout = JFStudio\Layout::getInstance();
 $Layout->init("Cursos","view","backoffice","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['courses.*','view-courses.css']);
 
 $UserLogin = new Site\UserLogin;

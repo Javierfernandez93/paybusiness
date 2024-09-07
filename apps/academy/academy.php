@@ -19,7 +19,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::Academy;
 $Layout->init(JFStudio\Router::getName($route),'academy',"backoffice",'',TO_ROOT);
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
 	'academy.css',
 	'academy.vue.js'

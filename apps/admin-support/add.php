@@ -15,7 +15,7 @@ if($UserSupport->hasPermission('add_admin') === false) {
 	HCStudio\Util::redirectTo('../../apps/admin/invalid_permission');
 }
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['jquery.mask.js','admin-object.js','admin-admin-add.js']);
 
 $Layout->setVar([

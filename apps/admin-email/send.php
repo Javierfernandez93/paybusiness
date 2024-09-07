@@ -18,7 +18,7 @@ $Layout = JFStudio\Layout::getInstance();
 $route = JFStudio\Router::AdminEmail;
 $Layout->init(JFStudio\Router::getName($route),"send","admin","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['adminemailsend.vue.js']);
 
 $Layout->setVar([

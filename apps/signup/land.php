@@ -12,7 +12,7 @@ if($UserLogin->logged === true) {
 $Layout = JFStudio\Layout::getInstance();
 $Layout->init("Únete ahora mismo","land","land","",TO_ROOT."/");
 
-$Layout->setScriptPath(TO_ROOT . '/src/');
+$Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript(['theme.min.css','home.css','land.*','header-transparent.css'],true);
 
 $Session = new HCStudio\Session('utm');
