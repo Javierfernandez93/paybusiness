@@ -19,7 +19,7 @@ $Layout->init(JFStudio\Router::getName($route),"index","admin","",TO_ROOT."/");
 
 $Layout->setScriptPath(TO_ROOT . 'src/');
 $Layout->setScript([
-	'admintools.vue.js'
+	'AdminTools.vue.js'
 ]);
 
 $Layout->setVar([
