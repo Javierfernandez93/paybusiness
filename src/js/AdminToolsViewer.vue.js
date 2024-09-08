@@ -70,7 +70,7 @@ export default {
             })
         },
         setToolAs(tool,status) {
-            this.UserSupport.setToolAs({tool_id:tool.tool_id},(response)=>{
+            this.UserSupport.setToolAs({tool_id:tool.tool_id,status:status},(response)=>{
                 tool.status = status
 
                 if(response.s == 1)
