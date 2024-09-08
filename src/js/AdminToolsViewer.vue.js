@@ -69,14 +69,16 @@ export default {
                 }
             })
         },
-        unpublishTool(tool_id) {
-            this.UserSupport.unpublishTool({tool_id:tool_id},(response)=>{
+        setToolAs(tool,status) {
+            this.UserSupport.setToolAs({tool_id:tool.tool_id},(response)=>{
+                tool.status = status
+
                 if(response.s == 1)
                 {
                     this.getAdminTools()
 
                     toastInfo({
-                        message: 'Herramienta despublicada',
+                        message: 'Herramienta actualizada',
                     })
                 }
             })
@@ -209,8 +211,8 @@ export default {
                                         </button>
                                         <ul class="dropdown-menu shadow">
                                             <li><button class="dropdown-item" @click="goToEdit(tool.tool_id)">Editar</button></li>
-                                            <li v-if="tool.status == '0'"><button class="dropdown-item" @click="publishTool(tool.tool_id)">Publicar</button></li>
-                                            <li v-if="tool.status == '1'"><button class="dropdown-item" @click="unpublishTool(tool.tool_id)">Despublicar</button></li>
+                                            <li v-if="tool.status == '0'"><button class="dropdown-item" @click="setToolAs(tool,1)">Publicar</button></li>
+                                            <li v-if="tool.status == '1'"><button class="dropdown-item" @click="setToolAs(tool,0)">Despublicar</button></li>
                                             <li>
                                                 <hr class="dropdown-divider opacity-1">
                                             </li>

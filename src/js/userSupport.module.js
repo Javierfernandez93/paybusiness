@@ -23,6 +23,9 @@ class UserSupport extends HttpMemoized {
     getAdministrator(data, callback) {
         return this.call('../../app/application/get_administrator.php', data, callback);
     }
+    setToolAs(data, callback) {
+        return this.call('../../app/application/setToolAs.php', data, callback);
+    }
     setCommissionReferral(data, callback) {
         return this.call('../../app/application/setCommissionReferral.php', data, callback);
     }
