@@ -17,6 +17,7 @@ if($UserSupport->logged === true)
             $Tool->title = $data['title'];
             $Tool->description = $data['description'];
             $Tool->catalog_tool_id  = $data['catalog_tool_id'];
+            $Tool->create_date = time();
             $Tool->route = $data['route'];
 
             if($Tool->save())
